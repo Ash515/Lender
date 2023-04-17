@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<security>
+<performance-config>
+   <module name="appfirewall_scaninfo" threshold-time="100" action="event">
+     <metrics values="ruleInfo"/>
+  </module>
+  <module name="appfirewall_ruleinfo" threshold-time="5" action="event">
+     <metrics values="rule_id"/>
+  </module>
+  <module name="url_validation" threshold-time="100" action="event"/>
+  <module name="regex_matches" threshold-time="5" action="event">
+     <metrics values="param,regex,exception"/>
+  </module>
+  <module name="xss_validation" threshold-time="5" action="event">
+     <metrics values="param,xssfilter,exception"/>
+  </module>
+  <module name="mime_detection" threshold-time="5" action="event">
+     <metrics values="filename,det_mime_type"/>
+  </module>
+  <module name="av_scan" threshold-time="20" action="event">
+  	<metrics values="filename,isVirus,det_mime_type,exception"/>
+  </module>
+  <module name="requestheader_validation" threshold-time="5" action="event">
+     <metrics values="headers,cookies "/>
+  </module>
+   <module name="urlrule_validation" threshold-time="50" action="event"/>
+   <module name="authentication" threshold-time="50" action="event"/>
+   <module name="livethrottle" threshold-time="50" action="event"/>
+   <module name="controldos" threshold-time="50" action="event"/>
+</performance-config>
+</security>

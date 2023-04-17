@@ -1,0 +1,72 @@
+<%-- $Id$ --%>
+
+<%String contentAreaName = viewContext.getModel().getFeatureValue("contentareaname");%>
+
+<%if(isLinkEnabled){%>
+
+<%
+while(fm.next())
+{ 
+  if(fm.isNewGroup())
+  { 
+   String groupTitle =  fm.getGroupTitle();
+   if(groupTitle != null)
+   {%>
+ <%=IAMEncoder.encodeHTML(I18N.getMsg(groupTitle))%><br>  
+  <% }} %>
+  
+  <div>
+      <ul style="list-style-type:none">
+         <li class="selected">
+            <img src="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/box_bg.gif" class="listitemImg"><%--NO OUTPUTENCODING --%>
+            <a href="javascript:selectFilter('<%=IAMEncoder.encodeJavaScript(linkedViewName)%>','<%=IAMEncoder.encodeJavaScript(fm.getFilterName())%>','<%=IAMEncoder.encodeJavaScript(viewContext.getModel().getViewName())%>','<%=IAMEncoder.encodeJavaScript(contentAreaName)%>')"><%=IAMEncoder.encodeHTML(I18N.getMsg(fm.getFilterTitle()))%></a> <br>
+		 </li>
+	   </ul>			 
+    </div>	   
+
+  
+<%}}else{%>
+
+<select name="selectedfilter" onChange="selectFilter('<%=IAMEncoder.encodeJavaScript(uniqueId)%>',this.value);">
+<%
+while(fm.next())
+{ 
+  if(fm.isNewGroup())
+  { 
+   String groupTitle =  fm.getGroupTitle();
+   if(groupTitle != null)
+   {%>
+  <optgroup label="<%=IAMEncoder.encodeHTMLAttribute(I18N.getMsg(groupTitle))%>"  class="select" style="border:none"> 
+  <% }} %>
+  <option value="<%=IAMEncoder.encodeHTMLAttribute(I18N.getMsg(fm.getFilterName()))%>" <%=(fm.isSelected())?"selected":""%>><%=IAMEncoder.encodeHTML(I18N.getMsg(fm.getFilterTitle()))%></option>
+
+<%}}%>
+
+
+<%
+Object tmp_fm = viewContext.getTransientState("EXTFILTERMODEL");
+boolean evaextfilter = false;
+if(tmp_fm != null)
+{
+	fm = (FilterModel)tmp_fm;
+	evaextfilter = true;
+}
+if(fm != null && evaextfilter)
+{
+while(fm.next())
+{ 
+  if(fm.isNewGroup())
+  { 
+   String groupTitle =  fm.getGroupTitle();
+   if(groupTitle != null)
+   {%>
+  <optgroup label="<%=IAMEncoder.encodeHTMLAttribute(I18N.getMsg(groupTitle))%>"  class="select" style="border:none"> 
+  <%}
+   } %>
+  <option value="<%=IAMEncoder.encodeHTMLAttribute(I18N.getMsg(fm.getFilterName()))%>" <%=(fm.isSelected())?"selected":""%>><%=IAMEncoder.encodeHTML(I18N.getMsg(fm.getFilterTitle()))%></option>
+<%
+}
+}
+%>
+</select>
+

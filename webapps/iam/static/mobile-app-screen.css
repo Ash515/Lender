@@ -1,0 +1,143 @@
+body {
+	margin: 0;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+	width: 400px;
+	display: block;
+	margin: auto;
+}
+
+.zlogo {
+	background-image: url(../images/Signinusing-Icons@2x.png);
+    background-position: -5px -140px;
+    width: 104px;
+    height: 38px;
+    margin: 30px auto;
+    margin-bottom: 40px;
+    background-size: 300px;
+}
+
+.profile_picture {
+	margin: 20px auto;
+	height: 100px;
+	width: 100px;
+	display: block;
+	/* background: url(pp1.jpg) no-repeat transparent; */
+	background-size: 100%;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.form {
+	display: block;
+	margin: 30px auto;
+	width: 300px;
+	margin-top: 40px;
+}
+
+input {
+	-moz-appearance: none;
+	-io-appearance: none;
+	-webkit-appearance: none;
+	font-size: 16px;
+	padding: 10px 5px;
+	padding-top: 16px;
+	display: block;
+	width: 300px;
+	border-radius: 0px;
+	border: none;
+	border-bottom: 1px solid #ccc;
+}
+
+input:focus {
+	outline: none;
+}
+
+label {
+	display: block;
+	height: 0px;
+	color: #333;
+	font-size: 14px;
+	font-weight: normal;
+	position: relative;
+	pointer-events: none;
+	left: 5px;
+	top: -30px;
+	transition: 0.5s ease all;
+	-moz-transition: 0.3s ease all;
+	-webkit-transition: 0.2s ease all;
+}
+
+.label-error {
+	color: red;
+}
+
+input:focus ~ label, input:valid ~ label {
+	top: -55px;
+	font-size: 14px;
+	color: #666;
+}
+
+input:focus {
+	border-bottom: 2px solid #4183d7;
+}
+
+.invite_user {
+	font-size: 20px;
+	display: block;
+	font-weight: 100;
+	text-align: center;
+	margin: 30px auto;
+}
+
+.invite_user b {
+	font-weight: 500;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: inline-block;
+	width: calc(100% - 80px);
+	white-space: nowrap;
+	margin: -6px 0px;
+}
+
+.primary_btn {
+	width: 300px;
+	display: block;
+	margin: 30px auto;
+	border: none;
+	background-color: #4183d7;
+	color: #fff;
+	font-size: 14px;
+	height: 40px;
+}
+
+.form_error {
+	display: none;
+	margin: auto;
+	color: red;
+	font-size: 14px;
+	text-align: center;
+}
+
+.link {
+	display: block;
+	font-size: 14px;
+	color: #4183d7;
+	text-align: center;
+	padding: 20px;
+}
+
+@media only screen and (max-width : 420px) {
+	.container {
+		width: 90%;
+	}
+	.primary_btn, .form, input, .bar {
+		width: 100%;
+	}
+	.primary_btn {
+		height: 50px;
+		font-size: 16px;
+	}
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id$ -->
+<chartkey>
+
+   <ChartPropKey ckey="CHART_BG_COLOR" description="CHART Bacgkgorund color"/>
+   <ChartPropKey ckey="CHART_TITLE" description="CHART_TITLE"/>
+   <ChartPropKey ckey="PLOT_BG_COLOR" description="PLOT_BG_COLOR"/>
+   <ChartPropKey ckey="PLOT_FG_ALPHA" description="PLOT_FG_ALPHA"/> 
+   <ChartPropKey ckey="PLOT_OUTLINE_COLOR" description="PLOT_OUTLINE_COLOR"/>
+   <ChartPropKey ckey="PLOT_OUTLINE_STROKE" description="PLOT_OUTLINE_STROKE"/>
+   <ChartPropKey ckey="CHART_X_LABEL" description="CHART_X_LABEL"/>
+   <ChartPropKey ckey="CHART_Y_LABEL" description="CHART_Y_LABEL"/>
+   <ChartPropKey ckey="WIDTH" description="Width of the chart"/>
+   <ChartPropKey ckey="HEIGHT" description="Height property of the chart"/>
+   <ChartPropKey ckey="PLOT_ORIENTATION" description="Allowed values are X For horizontal orientation and Y for vertical orientation"/>
+   <ChartPropKey ckey="HEAD_LABEL" description="Not a chart property used for table which holds the graph"/>
+  <ChartPropKey ckey="PDFWIDTH" description="Width property for PDF viw if not given width property will be taken"/>
+
+ <ChartPropKey ckey="PDFHEIGHT" description="Height property for for PDF viw if not given width property will be taken"/>
+ <ChartPropKey ckey="NODATA_MESSAGE" description="Message to be displayed when there is no data"/>
+ <ChartPropKey ckey="NODATA_FONT" description="Font to be used for no data message. Eg: name=Dialog,size=10,style=BOLD"/>
+ <ChartPropKey ckey="NODATA_PAINT" description="Color to be used for no data message in hexa decimal form. Eg: FF05F0"/>
+ <ChartPropKey ckey="CATEGORY_LABEL_POSITION" description="Angle between 0 to 180  Eg: 45"/>
+
+ <ChartPropKey ckey="SHOW_LEGEND" description="Whether to show the legend for the graph or not."/>
+
+ <ChartPropKey ckey="AXIS_LABEL_FONT" description="The font for the  axis label"/>
+
+ <ChartPropKey ckey="AXIS_TICK_LABEL_FONT" description="The font for the  axis tick label"/>
+
+ <ChartPropKey ckey="RANGE_AXIS_FORMAT" description="The format for the range axis. Can be either CURRENCY,PERCENT or NUMBER"/>
+
+<ChartPropKey ckey="XAXIS_LABEL_ANGLE" description="Angle between 0 to 180  Eg: 45"/>
+<ChartPropKey ckey="LABEL_FORMAT" description="The format for the graph label Eg: L_V"/>
+<ChartPropKey ckey="SHOW_TOOLTIP" description="Whether to show the tooptip for the graph or not"/>
+
+
+</chartkey>

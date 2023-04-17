@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: $ -->
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+  "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+
+	<package name="pauth" namespace="/" extends="struts-default">
+		<action name="una/unconfirmed" class="com.zoho.accounts.actions.pauth.UnConfirmed" method="showUnConfirmed">
+			<result name="success">/jsp/pauth/unconfirmed.jsp</result>
+		</action>
+		<action name="una/unconfirmed/resend" class="com.zoho.accounts.actions.pauth.UnConfirmed" method="resendConfirmation" />
+		<action name="una/unconfirmed/updateEmail" class="com.zoho.accounts.actions.pauth.UnConfirmed" method="changeEmailAddress" />
+		<action name="una/tfa/verifycode" class="com.zoho.accounts.actions.pauth.TFAAction" method="verifyCode" />
+		<action name="una/tfaauth" class="com.zoho.accounts.actions.pauth.TFAAction" method="showUnConfirmed" />
+		<action name="una/passwdexp" class="com.zoho.accounts.actions.pauth.PasswordExpAction" method="showPassExpiry" />
+		<action name="una/updatepass" class="com.zoho.accounts.actions.pauth.PasswordExpAction" method="updatePassExpiry" />
+	</package>
+</struts>

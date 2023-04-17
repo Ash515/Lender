@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: error-codes.xml,v 1.6 2007/02/01 07:33:39 vinod Exp $ -->
+<error-codes>
+    
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_DUP_ENTRY" errorcode="1001" errorstring="ER_DUP_ENTRY" errormessage="Duplicate entry for key">
+        <MySQLErrorCode errorcode="1062" errormessage="Duplicate entry '%s' for key %d"/>
+        <MsSQLErrorCode errorcode="2627" errormessage="Violation of key constraint '%s'"/>
+        <MsSQLErrorCode errorcode="2601" errormessage="Violation of unique index '%s'"/>
+        <PgSQLErrorCode errorcode="23505" errormessage="duplicate key violates unique constraint '%s'"/>
+    </AdventNetErrorCode>
+
+    <!--
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_DUP_UNIQUE" errorcode="1002" errorstring="ER_DUP_UNIQUE" errormessage="">
+        <MySQLErrorCode errorcode="1169" errormessage="Can't write, because of unique constraint, to table '%s'"/>
+    </AdventNetErrorCode>
+    -->
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_DUPLICATED_VALUE_IN_TYPE" errorcode="1003" errorstring="ER_DUPLICATED_VALUE_IN_TYPE" errormessage="Duplicate Value">
+        <MySQLErrorCode errorcode="1291" errormessage="Column '%s' has duplicated value '%s' in %s"/>
+    </AdventNetErrorCode>
+    
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_BAD_NULL_ERROR" errorcode="1004" errorstring="ER_BAD_NULL_ERROR" errormessage="Value cannot be null">
+        <MySQLErrorCode errorcode="1048" errormessage="Column '%s' cannot be null"/>
+        <MsSQLErrorCode errorcode="515" errormessage="Cannot insert the value NULL into column '%s'"/>
+        <PgSQLErrorCode errorcode="23502" errormessage="null value in column '%s'  violates not-null constraint"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_INVALID_USE_OF_NULL" errorcode="1005" errorstring="ER_INVALID_USE_OF_NULL" errormessage="Invalid use of NULL value">
+        <MySQLErrorCode errorcode="1138" errormessage="Invalid use of NULL value"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_WARN_NULL_TO_NOTNULL" errorcode="1006" errorstring="ER_WARN_NULL_TO_NOTNULL" errormessage="Data truncated; NULL supplied to NOT NULL column">
+        <MySQLErrorCode errorcode="1263" errormessage="Data truncated; NULL supplied to NOT NULL column '%s' at row %ld"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_PRIMARY_CANT_HAVE_NULL" errorcode="1007" errorstring="ER_PRIMARY_CANT_HAVE_NULL" errormessage="All parts of a PRIMARY KEY must be NOT NULL; if you need NULL in a key, use UNIQUE instead">
+        <MySQLErrorCode errorcode="1171" errormessage="All parts of a PRIMARY KEY must be NOT NULL; if you need NULL in a key, use UNIQUE instead"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_WRONG_VALUE_COUNT" errorcode="1008" errorstring="ER_WRONG_VALUE_COUNT" errormessage="Column count doesn't match value count">
+        <MySQLErrorCode errorcode="1058" errormessage="Column count doesn't match value count"/>
+        <MsSQLErrorCode errorcode="109" errormessage="There are more columns in the INSERT statement than values specified in the VALUES clause"/>
+        <MsSQLErrorCode errorcode="110" errormessage="There are fewer columns in the INSERT statement than values specified in the VALUES clause"/>
+        <PgSQLErrorCode errorcode="42601" errormessage="Column count doesn't match value count"/>
+    </AdventNetErrorCode>
+
+    <!--
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_WRONG_VALUE_COUNT_ON_ROW" errorcode="1009" errorstring="ER_WRONG_VALUE_COUNT_ON_ROW" errormessage="">
+        <MySQLErrorCode errorcode="1136" errormessage="Column count doesn't match value count at row %ld"/>
+    </AdventNetErrorCode>
+    -->
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_WRONG_FIELD_SPEC" errorcode="1010" errorstring="ER_WRONG_FIELD_SPEC" errormessage="Incorrect column specifier for column">
+        <MySQLErrorCode errorcode="1063" errormessage="Incorrect column specifier for column '%s'"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_WRONG_COLUMN_NAME" errorcode="1011" errorstring="ER_WRONG_COLUMN_NAME" errormessage="Incorrect column name">
+        <MySQLErrorCode errorcode="1166" errormessage="Incorrect column name '%s'"/>
+        <MsSQLErrorCode errorcode="207" errormessage="Invalid column name '%s'"/>
+        <PgSQLErrorCode errorcode="42703" errormessage=" column '%s' of relation '%s' does not exist"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_INVALID_DEFAULT" errorcode="1012" errorstring="ER_INVALID_DEFAULT" errormessage="Invalid default-value specified">
+        <MySQLErrorCode errorcode="1067" errormessage="Invalid default value for '%s'"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_NO_DEFAULT" errorcode="1013" errorstring="ER_NO_DEFAULT" errormessage="Variable doesn't have a default value">
+        <MySQLErrorCode errorcode="1230" errormessage="Variable '%s' doesn't have a default value"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_TOO_BIG_SET" errorcode="1014" errorstring="ER_TOO_BIG_SET" errormessage="Trying to set a too big value for a column">
+        <MySQLErrorCode errorcode="1097" errormessage="Too many strings for column %s and SET"/>
+        <MsSQLErrorCode errorcode="8115" errormessage="Arithmetic overflow error converting expression"/>
+        <PgSQLErrorCode errorcode="22003" errormessage="'%s' out of range"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_NO_REFERENCED_ROW" errorcode="1015" errorstring="ER_NO_REFERENCED_ROW" errormessage="Cannot add or update a child row [OR] Cannot delete or update a parent row: a foreign key constraint fails">
+        <MySQLErrorCode errorcode="1216" errormessage="Cannot add or update a child row: a foreign key constraint fails"/>
+		<MySQLErrorCode errorcode="1217" errormessage="Cannot delete or update a parent row: a foreign key constraint fails"/>
+		<MySQLErrorCode errorcode="1452" errormessage="Cannot add or update a child row: a foreign key constraint fails"/>
+        <MySQLErrorCode errorcode="1451" errormessage="Cannot delete or update a parent row: a foreign key constraint fails"/>
+        <MsSQLErrorCode errorcode="547" errormessage="INSERT/DELETE statement conflicted with COLUMN FOREIGN KEY constraint '%s'"/>
+        <PgSQLErrorCode errorcode="23503" errormessage="insert or update on table '%s' violates foreign key constraint '%s'"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_ROW_IS_REFERENCED" errorcode="1016" errorstring="ER_ROW_IS_REFERENCED" errormessage="Cannot add or update a child row [OR] Cannot delete or update a parent row: a foreign key constraint fails">
+        <MySQLErrorCode errorcode="1217" errormessage="Cannot delete or update a parent row: a foreign key constraint fails"/>
+        <MySQLErrorCode errorcode="1451" errormessage="Cannot delete or update a parent row: a foreign key constraint fails"/>
+		<MsSQLErrorCode errorcode="547" errormessage="INSERT/DELETE statement conflicted with COLUMN FOREIGN KEY constraint '%s'"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_WRONG_VALUE_FOR_VAR" errorcode="1017" errorstring="ER_WRONG_VALUE_FOR_VAR" errormessage="Wrong Data Type For The Variable">
+        <MySQLErrorCode errorcode="1231" errormessage="Variable '%s' can't be set to the value of '%s'"/>
+        <MsSQLErrorCode errorcode="8114" errormessage="Error converting data type varchar to bigint"/>
+        <PgSQLErrorCode errorcode="22P02" errormessage="invalid input syntax for integer: '%s'"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_WARN_DATA_OUT_OF_RANGE" errorcode="1018" errorstring="ER_WARN_DATA_OUT_OF_RANGE" errormessage="Out of range value provided for Column">
+        <MySQLErrorCode errorcode="1264" errormessage="Data truncated; out of range for column '%s' at row %ld"/>
+        <MsSQLErrorCode errorcode="8152" errormessage="String or binary data would be truncated"/>
+        <PgSQLErrorCode errorcode="22001" errormessage="value too long for type '%s' varying('%s')"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_WRONG_TYPE_FOR_VAR" errorcode="1019" errorstring="ER_WRONG_TYPE_FOR_VAR" errormessage="Incorrect argument type to variable">
+        <MySQLErrorCode errorcode="1232" errormessage="Incorrect argument type to variable '%s'"/>
+    </AdventNetErrorCode>
+
+    <!--
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_INVALID_CHARACTER_STRING"  errorcode="1020" errorstring="ER_INVALID_CHARACTER_STRING" errormessage="">
+        <MySQLErrorCode errorcode="1300" errormessage="Invalid %s character string: '%s'"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_TABLE_NOT_LOCKED_FOR_WRITE"  errorcode="1021" errorstring="ER_TABLE_NOT_LOCKED_FOR_WRITE" errormessage="">
+        <MySQLErrorCode errorcode="1099" errormessage="Table '%s' was locked with a READ lock and can't be updated"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_TABLE_NOT_LOCKED"  errorcode="1022" errorstring="ER_TABLE_NOT_LOCKED" errormessage="">
+        <MySQLErrorCode errorcode="1100" errormessage="Table '%s' was not locked with LOCK TABLES"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_DELAYED_INSERT_TABLE_LOCKED"  errorcode="1023" errorstring="ER_DELAYED_INSERT_TABLE_LOCKED" errormessage="">
+        <MySQLErrorCode errorcode="1165" errormessage="INSERT DELAYED can't be used with table '%s' because it is locked with LOCK TABLES"/>
+    </AdventNetErrorCode>
+    -->
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_LOCK_WAIT_TIMEOUT"  errorcode="1024" errorstring="ER_LOCK_WAIT_TIMEOUT" errormessage="Lock wait timeout exceeded; try restarting transaction">
+<MySQLErrorCode errorcode="1205" errormessage="Lock wait timeout exceeded; try restarting transaction"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_LOCK_TABLE_FULL"  errorcode="1025" errorstring="ER_LOCK_TABLE_FULL" errormessage="The total number of locks exceeds the lock table size">
+<MySQLErrorCode errorcode="1206" errormessage="The total number of locks exceeds the lock table size"/>
+    </AdventNetErrorCode>
+
+    <!--
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_READ_ONLY_TRANSACTION"  errorcode="1026" errorstring="ER_READ_ONLY_TRANSACTION" errormessage="">
+        <MySQLErrorCode errorcode="1207" errormessage="Update locks cannot be acquired during a READ UNCOMMITTED transaction"/>
+    </AdventNetErrorCode>
+    -->
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_LOCK_DEADLOCK"  errorcode="1027" errorstring="ER_LOCK_DEADLOCK" errormessage="DeadLock occured; try restarting the transaction">
+        <MySQLErrorCode errorcode="1213" errormessage="Can't execute the query because you have a conflicting read lock"/>
+    </AdventNetErrorCode>
+
+    <!--
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_CANT_UPDATE_WITH_READLOCK"  errorcode="1028" errorstring="ER_CANT_UPDATE_WITH_READLOCK" errormessage="">
+        <MySQLErrorCode errorcode="1223" errormessage="Can't execute the query because you have a conflicting read lock"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_WRONG_FIELD_WITH_GROUP"  errorcode="1029" errorstring="ER_WRONG_FIELD_WITH_GROUP" errormessage="">
+        <MySQLErrorCode errorcode="1055" errormessage="'%s' isn't in GROUP BY"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_WRONG_GROUP_FIELD"  errorcode="1030" errorstring="ER_WRONG_GROUP_FIELD" errormessage="">
+        <MySQLErrorCode errorcode="1056" errormessage="Can't group on '%s'"/>
+    </AdventNetErrorCode>
+    -->
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_INVALID_GROUP_FUNC_USE"  errorcode="1031" errorstring="ER_INVALID_GROUP_FUNC_USE" errormessage="Invalid use of group function">
+        <MySQLErrorCode errorcode="1111" errormessage="Invalid use of group function"/>
+    </AdventNetErrorCode>
+
+    <AdventNetErrorCode errorid="AdventNetErrorCode:errorid:ER_MIX_OF_GROUP_FUNC_AND_FIELDS"  errorcode="1032" errorstring="ER_MIX_OF_GROUP_FUNC_AND_FIELDS" errormessage="Mixing of GROUP columns (MIN(),MAX(),COUNT(),...) with no GROUP columns is illegal if there is no GROUP BY clause">
+        <MySQLErrorCode errorcode="1140" errormessage="Mixing of GROUP columns (MIN(),MAX(),COUNT(),...) with no GROUP columns is illegal if there is no GROUP BY clause"/>
+    </AdventNetErrorCode>
+
+</error-codes>
+

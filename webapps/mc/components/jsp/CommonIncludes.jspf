@@ -1,0 +1,27 @@
+<%-- $Id$ --%>
+<%@ page import = "com.adventnet.client.view.web.ViewContext,com.adventnet.client.util.web.WebClientUtil,com.adventnet.client.util.web.WebConstants, com.adventnet.client.themes.web.ThemesAPI "%>
+<%@ page import="com.adventnet.client.view.web.WebViewAPI"%>
+<%@ page import="com.adventnet.clientcomponents.*"%>
+<%@ page import="com.adventnet.clientframework.*"%>
+<%@ page import="com.adventnet.client.action.web.*"%>
+<%@ page import="com.adventnet.iam.xss.IAMEncoder"%>
+<%@ page import="org.apache.commons.lang3.StringUtils" %>
+<%@ taglib uri="http://www.adventnet.com/webclient/clientcomponents" prefix="components"%>
+<%@ taglib uri="http://www.adventnet.com/webclient/clientframework" prefix="client"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="act" %>
+<%@ page isELIgnored="false" %>
+
+<%
+	
+   
+   ViewContext viewContext = (ViewContext) request.getAttribute(WebConstants.VIEW_CTX);
+   String uniqueId = viewContext.getUniqueId();
+   String themeDir = ThemesAPI.getThemeDirForRequest(request);
+   String referenceId = viewContext.getReferenceId();
+	 if(request.getParameter("PERSONALIZE") != null && request.getParameter("PERSONALIZE").equals("TRUE")){
+		 session.setAttribute("PERSONALIZE", "TRUE");
+	 }
+	 if(request.getParameter("PERSONALIZE") != null && request.getParameter("PERSONALIZE").equals("FALSE")){
+		 session.setAttribute("PERSONALIZE", "FALSE");
+	 }
+%>

@@ -1,0 +1,451 @@
+# $Id: $
+# Configuration Sample Format :
+# ``` 
+#   - resource_name: {{ResourceName in PascalCase}} (Mandatory)
+#     identifier: {{identifier}}.
+#     path: "users/:zuid". Customize REST API Path. default : {resource}/:{identifier}  
+#     downloadable: Boolean.
+#     multipart: Boolean.
+#     derived: Boolean.
+#     resources: {{SubResources}
+#     access_control: {{false}} || {{Map}}
+#       {{method}}:  # (get | post | put | delete)
+#         roles: {{Role Name}}. # Single or Comma seprated User Role. Allowed to perform this operation. 
+#                                 If `ServiceAdmin` configured its parent Roles such as SuperAdmin, Admin can also perform the action based on the weigtage of the role. 
+#         role_hierarchy: {{Boolean}} # Don't consider Parent roles hierarchy, Verify given set of Roles alone. 
+#         password: {{Boolean}} # Default is false. If you required authentication check, give true.
+# ```
+---
+api_server_url: "http://localhost:8080"
+
+base_uri: "webclient"
+
+versions: "v1"
+ 
+handlers_package: "com.zoho.accounts.webclient.handlers"
+
+     
+icresturi_handler_api: "com.zoho.accounts.webclient.authorization.ICRESTUriHandlerImpl"
+
+default_access_control:
+  post:
+    roles: admin
+  get:
+    roles: user
+  put:
+    roles: admin
+  delete:
+    roles: admin
+
+resources:
+  #OAUTH
+  - resource_name: OAuthClient
+    identifier: client_id
+    fields: client_domain,status,client_id,client_zid,client_name
+    access_control:
+      get:
+        roles: user
+      post:
+        roles: admin
+      put:
+        roles: admin
+      delete:
+        roles: admin
+        password: true
+    resources:
+      - resource_name: MultiDC
+        identifier: location
+        access_control:
+           get:
+             roles: user
+           post:
+             roles: admin
+           put:
+             roles: admin
+           delete:
+             roles: admin
+             password: true
+   
+  - resource_name: SelfClient
+    identifier: client_id
+    access_control:
+      get:
+        roles: user
+      post:
+        roles: admin
+      put:
+        roles: admin
+      delete:
+        roles: admin
+        password: true
+    resources:
+     - resource_name: GrantToken
+       identifier : clientZid
+       access_control:
+         get:
+           roles: user
+         post:
+           roles: admin
+         put:
+           roles: admin
+         delete:
+           roles: admin
+           password: true
+            
+  - resource_name: Portal
+    identifier: zaid
+    resource_exist: false
+    access_control:
+      get:
+        roles: user
+      post:
+        roles: admin
+      put:
+        roles: admin
+      delete:
+        roles: admin
+        password: true
+    resources:
+      - resource_name: Clients
+        identifier: client_id
+        access_control:
+          get:
+            roles: user
+          post:
+            roles: admin
+          put:
+            roles: admin
+          delete:
+            roles: admin
+            password: true
+        
+  - resource_name: ChildOrg
+    identifier: childorg_id
+    access_control:
+      get:
+        roles: user
+      post:
+        roles: admin
+      put:
+        roles: admin
+      delete:
+        roles: admin
+        password: true
+    resources:
+      - resource_name: ChildOrgUser
+        identifier: user_id
+        access_control:
+          get:
+            roles: user
+          post:
+            roles: admin
+          put:
+            roles: admin
+          delete:
+            roles: admin
+            password: true
+        resources:
+          - resource_name: PrimaryEmail
+            derived: true
+  
+  - resource_name: ChildOrgMobile
+    identifier: mobilenumber
+    access_control:
+      post:
+        roles: admin
+    resources:
+      - resource_name: Verify
+        identifier: mobilenumber
+        access_control:
+          post:
+            roles: admin
+    
+  - resource_name: DemoOrg
+    identifier : org_id
+    access_control: false
+    
+  - resource_name: ResellerConvert
+    identifier : zuid
+    access_control: false
+
+  #MFA
+  - resource_name: Mobile
+    identifier: mobile
+    path: "/mfa/setup/mobile/:mobile"
+    access_control: false
+    resources:
+    - resource_name: Resend
+      derived: true
+      access_control: false
+    - resource_name: Verify
+      derived: true
+      access_control: false
+  - resource_name: TOTPSecret
+    path: "/mfa/setup/totp/secret"
+    access_control: false
+
+  - resource_name: TOTPDownload
+    path: "/mfa/setup/totp/download"
+    access_control: false
+
+  - resource_name: TOTPVerify
+    path: "/mfa/setup/totp/verify"
+    access_control: false
+
+  #Announcement
+  - resource_name: DCPolicy
+    path: "/dcpolicy"
+    access_control: false
+    
+  #SSOKIT
+  - resource_name: Email
+    path: "/ssokit/email"
+    identifier: emaildigest
+    access_control:
+      post:
+        roles: sso
+      put:
+        roles: sso
+
+  # new ui Announcement
+  - resource_name: Announcement
+    identifier: type
+    resource_exist: false
+    access_control: false
+    resources:
+      - resource_name: mfa
+        identifier: type
+        access_control: false
+        resources:
+        - resource_name: EnforcedMfaMobile
+          identifier : encryptedMobile
+          path: "/mobile/:encryptedMobile"
+          access_control: false
+        - resource_name: EnforcedMfaTOTP
+          identifier : encryptedSecretkey
+          path: "/totp/:encryptedSecretkey"
+          access_control: false
+        - resource_name: EnforcedMfaYubikey
+          identifier : yubikeyName
+          path: "/yubikey/:yubikeyName"
+          access_control: false
+      - resource_name: EnforcedLoginMobile
+        identifier : encryptedMobile
+        path: "/loginmobile/:encryptedMobile"
+        access_control: false
+  #Certificate
+  - resource_name: Certificate
+    identifier: certtype
+    access_control: false
+    downloadable: true
+
+  #User
+  - resource_name: Account
+    identifier: zaid
+    access_control: false
+    resource_exist: false
+    #virtual_identifier: self
+    #commented above to restrict taking zaid from the identifier instead of current user
+    resources:
+      - resource_name: DPA
+        access_control: false
+        derived: true
+      - resource_name: KYC
+        access_control: false
+      - resource_name: User
+        identifier: zuid
+        modules: profile
+        include: User,Policies,Email,Phone,Password,SecurityQuestion,AllowedIP,AppPasswords,DeviceLogins,ActiveSessions,LoginHistory,ConnectedApps,AppLogins,ActiveAuthtokens,CloseAccounts,AuthorizedWebsites,LinkedAccounts,SecurityNotification,Preferences,TFA,Privacy,KYC,Certificates
+        access_control: false
+        resources:
+          - resource_name: Photo
+            access_control: false
+            multipart: true
+          - resource_name: Email
+            identifier: emailid
+            access_control: false
+            resources:
+                - resource_name: MakePrimary
+                  derived: true
+                  access_control: false
+          - resource_name: Phone
+            identifier: phonenum
+            access_control: false
+            resources:
+                - resource_name: MakeRecovery
+                  derived: true
+                  access_control: false
+                - resource_name: MakeLoginNumber
+                  derived: true
+                  access_control: false
+          - resource_name: Password
+            access_control: false
+          - resource_name: SignOut
+            access_control: false
+          - resource_name: SecurityQuestion
+            access_control: false
+          - resource_name: AllowedIP
+            identifier: ip
+            access_control: false
+          - resource_name: AppPasswords
+            identifier: pass_id
+            access_control: false
+          - resource_name: DeviceLogins
+            identifier: device_id
+            access_control: false
+          - resource_name: MailClientLogins
+            identifier: device_id
+            access_control: false
+          - resource_name: ActiveSessions
+            identifier: ticket
+            access_control: false
+          - resource_name: ActiveAuthtokens
+            identifier: ticket
+            access_control: false
+          - resource_name: ConnectedApps
+            identifier: clientID
+            access_control: false
+          - resource_name: AppLogins
+            identifier: refreshToken
+            resource_exist : false
+            access_control: false
+            resources:
+                - resource_name: Devices
+                  identifier: clientID
+                  access_control: false
+          - resource_name: Preferences
+            derived: true
+            access_control: false
+          - resource_name: AuthorizedWebsites
+            identifier: domain
+            access_control: false
+          - resource_name: LinkedAccounts
+            identifier: emailID
+            access_control: false
+          - resource_name: CloseAccounts
+            identifier: zuid
+            access_control: false
+          - resource_name: Contacts
+            access_control: false
+          - resource_name: Groups
+            identifier: zgid
+            access_control: false
+            include: Members,PendingInvitations
+            resources:
+                - resource_name: Uploadphoto
+                  access_control: false
+                  multipart: true
+                  derived: true
+                - resource_name: Members
+                  derived: true
+                  identifier: member_zuid
+                  access_control: false
+                - resource_name: Invitation
+                  derived: true
+                  identifier: status
+                  access_control: false    
+          - resource_name: OneAuthSMS 
+            access_control: false 
+          - resource_name: BackupCodes
+            access_control: false
+            resources:
+                - resource_name: Download
+                  access_control: false
+                  derived: true
+                  downloadable: true
+                - resource_name: Print
+                  access_control: false
+                  derived: true
+          - resource_name: MFA
+            identifier: mode
+            access_control: false
+            resources:
+                - resource_name: MFABrowser
+                  path: /browser/:ticket
+                  access_control: false
+                  identifier: ticket
+                - resource_name: MFAOTP
+                  path: "/otp/:encryptedSecretkey"
+                  identifier : encryptedSecretkey
+                  access_control: false
+                - resource_name: MFAMobile
+                  path: "/mobile/:encryptedMobileNumber"
+                  identifier: encryptedMobileNumber
+                  access_control: false
+                  resources:
+                      - resource_name: Primary
+                        derived: true
+                        access_control: false
+                - resource_name: MFAEXOStar
+                  path: /exostar
+                  access_control: false
+                - resource_name: MFAYubikey
+                  path: /yubikey/:yubikey
+                  identifier: yubikey_id
+                  access_control: false
+                - resource_name: MFADevice
+                  path: /device/:device_token
+                  identifier: device_token
+                  access_control: false
+          - resource_name: TrustedDomain
+            derived: true
+            access_control: false
+  #Template
+  - resource_name: Template
+    identifier: screenname
+    access_control: false
+  #ResetPassword
+  - resource_name: ResetPassword
+    identifier: digest
+    access_control: false
+  #GroupInvitation
+  - resource_name: GInvitation
+    identifier: digest
+    access_control: false
+  #AccountConfirmation
+  - resource_name: Confirmation
+    identifier: digest
+    access_control: false
+  #Captcha
+  - resource_name: Captcha
+    identifier: digest
+    access_control: false
+    
+  #Signup backend api's
+  - resource_name: SignUp
+    path: "/register/initiate"
+  - resource_name: SignUpValidate
+    path: "/register/field/validate"
+  - resource_name: SignUpOTPVerify
+    path: "/register/otp/verify"
+    access_control:
+          post:
+            roles: self
+  - resource_name: SignUpOTPResend
+    path: "/register/otp/resend"
+    access_control:
+          post:
+            roles: self
+
+   #Organization tab
+  - resource_name: Org
+    identifier: zaid
+    #virtual_identifier: self
+    #commented above to restrict taking zaid from the identifier instead of current user
+    include: Domain,SAML
+    access_control:
+       get:
+        roles: admin
+    resources:
+      - resource_name: Domain
+        derived: true
+        identifier: domainName
+        access_control:
+              put:
+                 roles: admin
+              delete:
+                 roles: admin
+      - resource_name: SAML
+        multipart: true
+        access_control: false
+        derived: true

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$ -->
+<ClientComponents-personality-configuration>
+    <DominantTableConfig DOMINANTTABLEID="ACNavigationConfiguration">
+        <PersonalityConfiguration dominanttableid="ACNavigationConfiguration" description="" personalityname="NavigationConfig" personalityid="PersonalityConfiguration:personalityid:UVH@7839182" modulename="ClientComponents">
+            <ConstituentTable tableid="ACNavigationConfiguration" tableindex="0"/>
+            <ConstituentTable mandatory="false" tableid="ACPageLengthConfig" fkconstraint_id="ACPageLengthConfig_FK1" tableindex="1"/>
+        </PersonalityConfiguration>
+    </DominantTableConfig>
+    
+    <DominantTableConfig DOMINANTTABLEID="ACColumnConfigurationList">
+        <PersonalityConfiguration dominanttableid="ACColumnConfigurationList" description="" personalityname="ColumnConfiguration" personalityid="PersonalityConfiguration:personalityid:UVH@18435317" modulename="ClientComponents">
+            <ConstituentTable tableid="ACColumnConfigurationList" tableindex="0"/>
+            <ConstituentTable tableid="ACColumnConfiguration" fkconstraint_id="ACColumnConfiguration_FK1" tableindex="1"/>
+            <ConstituentTable mandatory="false" tableid="ACRendererConfiguration" fkconstraint_id="ACRendererConfiguration_FK1" tableindex="2"/>
+            <ConstituentTable mandatory="false" tableid="ACLinkParams" fkconstraint_id="ACLinkParams_FK1" tableindex="3"/>
+        </PersonalityConfiguration>
+    </DominantTableConfig>
+
+<!-- For FilterConfiguration  -->
+  <DominantTableConfig DOMINANTTABLEID="ACFilterConfigList">
+	  <PersonalityConfiguration dominanttableid="ACFilterConfigList" description="" personalityname="FilterConfiguration"  modulename="ClientComponents"
+	  personalityid="PersonalityConfiguration:personalityid:FilterConfiguration">
+        	    <ConstituentTable tableid="ACFilterConfigList" tableindex="0"/>
+          </PersonalityConfiguration>
+   </DominantTableConfig>
+    
+    
+    <DominantTableConfig DOMINANTTABLEID="ACElement">
+        <PersonalityConfiguration dominanttableid="ACElement" description="" personalityname="ElementConfig" personalityid="PersonalityConfiguration:personalityid:UVH@752339" modulename="ClientComponents">
+            <ConstituentTable tableid="ACElement" tableindex="0"/>
+            <ConstituentTable mandatory="false" tableid="ACElementAttr" fkconstraint_id="ACElementAttr_FK1" tableindex="1"/>
+            <ConstituentTable mandatory="false" tableid="ACPanelElement" fkconstraint_id="ACPanelElement_FK1" tableindex="2"/>
+        </PersonalityConfiguration>
+    </DominantTableConfig>
+    
+    <PersonalityConfiguration DOMINANTTABLEID="ViewConfiguration" personalityid="PersonalityConfiguration:personalityid:UVH@32459120" personalityname="ACCVTabConfig" modulename="ClientComponents" description="">
+        <ConstituentTable tableid="ViewConfiguration" tableindex="0"/>
+        <ConstituentTable tableid="ACCVTabParentConfig" fkconstraint_id="CVTABCC_CC_FK" tableindex="1"/>
+    </PersonalityConfiguration>
+    <PersonalityConfiguration DOMINANTTABLEID="ViewConfiguration" personalityid="PersonalityConfiguration:personalityid:UVH@12485142" personalityname="ACTabLayoutConfig" modulename="ClientComponents" description="">
+        <ConstituentTable tableid="ViewConfiguration" tableindex="0"/>
+        <ConstituentTable tableid="ACTabChildConfig" fkconstraint_id="TABCC_CC_FK" tableindex="1"/>
+    </PersonalityConfiguration>
+
+    <PersonalityConfiguration DOMINANTTABLEID="ViewConfiguration" personalityid="PersonalityConfiguration:personalityid:UVH@21925223" personalityname="TableViewConfig" modulename="ClientComponents" description="">
+        <ConstituentTable tableid="ViewConfiguration" tableindex="0"/>
+        <ConstituentTable tableid="ACTableViewConfig" fkconstraint_id="ACTableViewConfig_FK2" tableindex="1"/>
+        <ConstituentTable mandatory="false" tableid="ACTableColumns" fkconstraint_id="ACTableColumns_FK1" tableindex="2"/>
+        <ConstituentTable mandatory="false" tableid="ACGroupByColumns" fkconstraint_id="ACGroupByColumns_FK1" tableindex="3"/>
+        <ConstituentTable mandatory="false" tableid="ACFunctionColumns" fkconstraint_id="ACFunctionColumns_FK1" tableindex="4"/>
+        <ConstituentTable mandatory="false" tableid="ACTableFilterListRel" fkconstraint_id="ACTblFilterRel_CC_FK" tableindex="5"/>
+        <ConstituentTable mandatory="false" tableid="PIIRedactConfig" fkconstraint_id="PIIRedactConfig_FK1" tableindex="6"/>
+    </PersonalityConfiguration>
+
+    <PersonalityConfiguration DOMINANTTABLEID="ViewConfiguration" personalityid="PersonalityConfiguration:personalityid:UVH@2460099" personalityname="ACFormConfig" modulename="ClientComponents" description="">
+        <ConstituentTable tableid="ViewConfiguration" tableindex="0"/>
+        <ConstituentTable tableid="ACFormConfig" mandatory="false" fkconstraint_id="ACFormConfig_FK2" tableindex="1"/>
+        <ConstituentTable tableid="ACAjaxForm" fkconstraint_id="ACAjaxForm_FK1" tableindex="2" mandatory="false"/>
+        <ConstituentTable tableid="ACAjaxFormOption" fkconstraint_id="ACAjaxFormOption_FK" tableindex="3" mandatory="false"/>
+    </PersonalityConfiguration>
+
+    <PersonalityConfiguration dominanttableid="ViewConfiguration" personalityid="PersonalityConfiguration:personalityid:UVH@246002322" personalityname="ACLinkList" modulename="ClientComponents" description="">
+        <ConstituentTable tableid="ViewConfiguration" tableindex="0"/>
+        <ConstituentTable tableid="ACLink" fkconstraint_id="ACLink_VC_FK" tableindex="1"/>
+    </PersonalityConfiguration>
+
+
+    <PersonalityConfiguration DOMINANTTABLEID="ViewConfiguration" personalityid="PersonalityConfiguration:personalityid:UVH@28105913" personalityname="ACGridLayoutConfig" modulename="ClientComponents" description="">
+        <ConstituentTable tableid="ViewConfiguration" tableindex="0"/>
+        <ConstituentTable tableid="ACGridLayoutConfig" fkconstraint_id="GRID_VIEW_FK" tableindex="1"/>
+        <ConstituentTable mandatory="false" tableid="ACGridLayoutChildConfig" fkconstraint_id="GLC_VIEW_FK" tableindex="2"/>
+    </PersonalityConfiguration>
+    <PersonalityConfiguration DOMINANTTABLEID="ViewConfiguration" personalityid="PersonalityConfiguration:personalityid:UVH@30355190" personalityname="ACTableLayoutChildConfig" modulename="ClientComponents" description="">
+        <ConstituentTable tableid="ViewConfiguration" tableindex="0"/>
+        <ConstituentTable tableid="ACTableLayoutChildConfig" fkconstraint_id="TABLECC_CC_FK" tableindex="1"/>
+    </PersonalityConfiguration>
+    <PersonalityConfiguration DOMINANTTABLEID="ACDropDown" personalityid="PersonalityConfiguration:personalityid:UVH@30355290" personalityname="ACDropDown" modulename="ClientComponents" description="">
+        <ConstituentTable tableid="ACDropDown" tableindex="0"/>
+        <ConstituentTable tableid="ACDropDownParams" fkconstraint_id="ACDDParams_FK" tableindex="1" mandatory="false"/>
+    </PersonalityConfiguration>
+
+
+    <PersonalityConfiguration DOMINANTTABLEID="ACPSConfigList" personalityname="ACPSConfigList" personalityid="PersonalityConfiguration:personalityid:ACPSConfigList" modulename="ClientComponents" description="">
+        <ConstituentTable tableid="ACPSConfigList" tableindex="0" mandatory="true"/>
+        <ConstituentTable tableid="ACPSConfiguration" fkconstraint_id="ACPSConfiguration_FK" tableindex="1" mandatory="true"/>
+    </PersonalityConfiguration>
+    
+
+    <PersonalityConfiguration DOMINANTTABLEID="SelectQuery" personalityname="ACSQLString" personalityid="PersonalityConfiguration:personalityid:ACSQLString" modulename="ClientComponents" description="">
+        <ConstituentTable tableid="SelectQuery" tableindex="0" mandatory="true"/>
+        <ConstituentTable tableid="ACSQLString" fkconstraint_id="ACSQLString_FK" tableindex="1" mandatory="true"/>
+    </PersonalityConfiguration>
+
+    <PersonalityConfiguration DOMINANTTABLEID="ViewConfiguration" personalityid="PersonalityConfiguration:personalityid:100001" personalityname="ChartViewConfig" modulename="ClientComponents" description="">
+
+        <ConstituentTable tableid="ViewConfiguration" tableindex="0" mandatory="true"/>
+        <ConstituentTable tableid="ChartViewConfig" fkconstraint_id="ChartViewConfig_FK1" tableindex="1" mandatory="true"/>
+        <ConstituentTable tableid="AxisColumn" fkconstraint_id="AxisColumn_FK" tableindex="2" mandatory="true"/>
+        <ConstituentTable tableid="YSeriesColumn" fkconstraint_id="YSeriesColumn_FK" tableindex="3" mandatory="false"/>
+    </PersonalityConfiguration>
+
+</ClientComponents-personality-configuration>
+

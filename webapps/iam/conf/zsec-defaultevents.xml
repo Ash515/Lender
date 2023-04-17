@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventframework package="com.zoho.security.eventfw.pojos">
+    <statistics transfer-api="AppsenseAPI">
+	   <statistic name="requeststats" data-template="request_uri"  dispatcher-template="BatchTemplate"/>
+	   <statistic name="fileuploadstats" data-template="file_stats" dispatcher-template="BatchTemplate" />
+	   <statistic name="exceptionstats" data-template="exception_stats" dispatcher-template="BatchTemplate"/> 
+	</statistics>
+
+	<anomalies> 
+		<anomaly-group name="performance_anomaly" transfer-api="SinglePointLogger">
+              	<anomaly name="BWAFScaninfo" data-template="afw_scaninfo_dt" dispatcher-template="100msTimer"/>
+              	<anomaly name="BWAFRuleinfo" data-template="afw_ruleinfo_dt" dispatcher-template="5msTimer"/>
+              	<anomaly name="urlValidation" data-template="uv_dt" dispatcher-template="200msTimer"/> 
+              	<anomaly name="regexMatches" data-template="regex_dt" dispatcher-template="5msTimer"/>
+              	<anomaly name="xssValidation" data-template="xssvalidation_dt" dispatcher-template="5msTimer"/>
+              	<anomaly name="mimeDetection" data-template="mimedetection_dt" dispatcher-template="5msTimer"/>
+              	<anomaly name="avScan" data-template="avscandt" dispatcher-template="75msTimer"/>
+              	<anomaly name="reqheaderValidation" data-template="reqh_dt" dispatcher-template="10msTimer"/>
+              	<anomaly name="urlruleValidation" data-template="uv_dt" dispatcher-template="100msTimer"/>
+              	<anomaly name="authentication" data-template="uv_dt" dispatcher-template="100msTimer"/>
+              	<anomaly name="livethrottle" data-template="uv_dt" dispatcher-template="50msTimer"/>
+              	<anomaly name="controlDos" data-template="uv_dt" dispatcher-template="50msTimer"/>   	
+		</anomaly-group>
+		<!-- <anomaly-group name="logAPI_Performance_Anomaly">
+			Note transfer api for this event should be JAVALogs Only
+			<anomaly name="logapi"  dispatcher-template="1000msTimer" transfer-api="JavaLogs"/>
+		</anomaly-group> -->
+		<anomaly-group name="exception_anomaly" transfer-api="ZohoLogs" >
+	    	   	<anomaly name="anomalousException" data-template="exception_metrics"/>
+		</anomaly-group>
+	</anomalies>
+
+	<infos>
+		<info name="request_info" transfer-api="ZSecAccessLogs" data-template="reqres_info"></info>
+	</infos>
+	
+	<debug-infos transfer-api="SinglePointLogger">
+	   <debug-info name="path_info" data-template="path_info"/>
+	   <debug-info name="ghostcat_vulnerability" data-template="ghostcat_dt"/>
+	   <debug-info name="inStream_urlformencoded_usage" data-template="path_dt"/>
+	   <debug-info name="xfo_referrer" data-template="xfo_dt" />
+	   <debug-info name="redoscheck" data-template="redos_dt" />
+	   <debug-info name="super_ParamConsumption" data-template="spc_dt" />
+	   <debug-info name="super_InStreamConsumption" data-template="path_dt" />
+	   <debug-info name="secretParam_QSConsumption" data-template="spc_dt" />
+	   <debug-info name="errpage_unconfigured_paramAccess" data-template="spc_dt" />
+	   <debug-info name="errpage_unValidated_paramAccess" data-template="spc_dt" />
+	   <debug-info name="errpage_attribute_notset" data-template="pathtype_dt" />
+       <debug-info name="samesite_strict_csrfcookie_verifier" data-template="samesite_dt"/>
+       <debug-info name="csrfParam_QSConsumption" data-template="csrfqs_dt"/>   
+       <debug-info name="req_attr_violation" data-template="rav_dt"/> 
+       <debug-info name="req_dispatcher_uri_violation" data-template="rduv_dt"/>   
+	</debug-infos>
+
+	<events>
+		<event name="app_register" transfer-api="ZohoLogs" >
+             <success-events>
+             	 <event  name="success" data-template="app_reg_sdt" />
+             </success-events>
+		 	 <exceptions>
+				<exception name="exception" data-template="app_reg_exdt"/>
+			 </exceptions>
+			 <fatalerrors>
+			 	<error name="error" data-template="app_reg_erdt"/> 
+			 </fatalerrors>
+		</event>
+		<event name="appsense_notification" transfer-api="ZohoLogs" >
+			<success-events>
+             	 <event name="success" data-template="as_notification_sdt" />
+             </success-events>
+             <exceptions>
+				<exception name="servicenameMistmatch" data-template="as_notification_exdt"/>
+				<exception name="exception" data-template="exception"/>
+				<exception name="exceptionWithComponent" data-template="as_notification_exdt1"/>
+
+			 </exceptions>
+		</event>
+		<event name="afw_rule_fetch" transfer-api="ZSecZohoLogs,JavaLogs">
+             <success-events>
+             	 <event  name="ruleFetchSuccess" data-template="ruleFetch"  />
+             </success-events>
+		 	 <exceptions>
+				<exception name="exception" data-template="exceptionwithmsg"/>
+				<exception name="fetchXMLexception" data-template="exceptionwithmsg" transfer-api="JavaLogs"/>
+			 </exceptions>
+			 <fatalerrors>
+			 	<error name="ruleFetchError" data-template="app_reg_erdt"/> 
+			 </fatalerrors>
+		</event>
+		<event name="afw_rule_conversion" transfer-api="ZSecZohoLogs,JavaLogs">
+		 	 <exceptions>
+				<exception name="exception" data-template="afw_convert_exceptionwithmsg" />
+			</exceptions>
+			 <fatalerrors>
+				<error name="error" data-template="afw_convert_error"/>
+			</fatalerrors>
+		</event>
+		<event name="afw_rule_match"  transfer-api="ZSecZohoLogs,JavaLogs" >
+			 <success-events>
+             	 <event  name="blockedRequestStatus" data-template="ruleMatch"  />
+             </success-events>
+              <exceptions>
+				<exception name="jsonException" data-template="exceptionwithmsg" />
+			 </exceptions>
+		</event>
+		<event name="csp_status_fetch" transfer-api="ZSecZohoLogs,JavaLogs">
+             <success-events>
+             	 <event  name="success" data-template="cspFetch"/>
+             </success-events>
+		 	 <exceptions>
+				<exception name="exception" data-template="exceptionwithmsg"/>
+			 </exceptions>
+			 <fatalerrors>
+			 	<error name="statusFetchError" data-template="app_reg_erdt"/> 
+			 </fatalerrors>
+		</event>
+		<event name="appsense_localwrite" >
+			 <success-events>
+             	 <event  name="localwriteSuccess" data-template="local_write" transfer-api="JavaLogs"  />
+             </success-events>
+		 	<exceptions>
+				<exception name="exception" data-template="exception" transfer-api="ZSecZohoLogs,JavaLogs"/>
+				<exception name="exceptionWithMsg" data-template="exceptionwithmsg" transfer-api="ZSecZohoLogs,JavaLogs" />
+			 </exceptions>
+			 <fatalerrors>
+			 	<error name="ruleFetchError" data-template="loadfailure" transfer-api="ZSecZohoLogs,JavaLogs"/> 
+			 </fatalerrors>
+		</event>
+		<event name="afw_rule_expiry" >
+			 <success-events>
+             	 <event  name="success" data-template="expiredruledt" transfer-api="ZSecZohoLogs,JavaLogs"  />
+             </success-events>
+		</event>
+		<event name="config_push" >
+			 <success-events>
+             	 <event  name="success" data-template="message" transfer-api="JavaLogs"  />
+             </success-events>
+			 <fatalerrors>
+			 	<error name="configPushError" data-template="error" transfer-api="ZSecZohoLogs,JavaLogs"/> 
+			 </fatalerrors>
+		</event>
+		<event name="tls_erropage_redirection" >
+			 <success-events>
+             	 <event  name="redirectionSuccess" data-template="tls_redirection" transfer-api="ZohoLogs"  />
+             </success-events>
+		</event>
+
+	</events>
+
+    <transfer-apis>
+        <transfer-api name="ZohoLogs" impl="com.zoho.security.eventfw.logImpl.ZohoLogsImplProvider">
+             <type type="statistic" value="zsecstats"/>
+             <type type="default" value="zsecevents"/>
+        </transfer-api>
+       <transfer-api name="JavaLogs" impl="com.zoho.security.eventfw.logImpl.JavaLogsImplProvider">
+        	 <type type="statistic" value="info"/>
+             <type type="default" value="severe"/>
+        </transfer-api>
+        <transfer-api name="ZSecZohoLogs" impl="com.zoho.security.eventfwimpl.ZSecZohoLogsImplProvider">
+             <type type="statistic" value="zsecstats"/>
+             <type type="default" value="zsecevents"/>
+        </transfer-api>
+        <transfer-api name="SinglePointLogger" impl="com.zoho.security.eventfwimpl.ZSecSinglePointLoggerImplProvider"/>
+        <transfer-api name="ZSecAccessLogs" impl="com.zoho.security.eventfwimpl.ZSecAccessLogsCustomFieldsImplProvider"/>
+        <transfer-api name="AppsenseAPI" impl="com.zoho.security.eventfwimpl.AppSenseLogImplProvider" />
+    </transfer-apis>
+
+     <dispatcher-templates>
+
+         <dispatcher-template name="BatchTemplate" type="batch">
+         	<threshold type="time" value="10m"/>
+         	<threshold type="count" value="200"/>
+         </dispatcher-template>        
+         <dispatcher-template name="5msTimer" type="timer">
+         	<threshold type="execution_time" value="5"/>
+         </dispatcher-template>  
+         <dispatcher-template name="10msTimer" type="timer">
+         	<threshold type="execution_time" value="10"/>
+         </dispatcher-template> 
+          <dispatcher-template name="20msTimer" type="timer">
+         	<threshold type="execution_time" value="20"/>
+         </dispatcher-template> 
+           <dispatcher-template name="50msTimer" type="timer">
+         	<threshold type="execution_time" value="50"/>
+         </dispatcher-template> 
+         <dispatcher-template name="75msTimer" type="timer">
+         	<threshold type="execution_time" value="75"/>
+         </dispatcher-template>    
+         <dispatcher-template name="100msTimer" type="timer">
+         	<threshold type="execution_time" value="100"/>
+         </dispatcher-template>
+          <dispatcher-template name="200msTimer" type="timer">
+         	<threshold type="execution_time" value="200"/>
+         </dispatcher-template>
+         <dispatcher-template name="default" type="distinct"/>
+ 		<!-- 
+ 		<dispatcher-template name="singlePointDispatcher" type="custom" impl="com.zoho.security.eventfwimpl.ZSecSinglePointDispatcher">
+         	<threshold type="execution_time" value="5"/>
+         </dispatcher-template>   
+         -->
+    </dispatcher-templates>
+
+	<data-templates>
+		  <builtin-fields impl="com.zoho.security.eventfwimpl.ZSecBuiltInFieldsImplProvider">
+		  	   <data-template name="rid_timetaken_dt">
+			  	 	<field ref="req_dt"/>
+			  	 	<field ref="timetaken_dt"/>
+		   	   </data-template>
+		   	    <data-template name="timetaken_dt">
+			  	 	<field name="time-taken" type="long"/>
+		   	   </data-template>
+		   	   <data-template name="req_dt">
+   					<field name="req_id" type="String"/>
+      			</data-template>
+		  </builtin-fields>
+		  <data-template name="logapi_dt">
+		  		<field name="data" type="Map&lt;String,Object&gt;"/>
+		  </data-template>
+		  <data-template name="path_dt">
+		 	<field ref="request_uri"/>
+		 	<field name="path" type="String"/>
+		 </data-template>
+
+         <data-template name="pathtype_dt">
+		 	<field ref="path_dt"/>
+		 	<field name="dispatcher_type" type="String"/>
+		 </data-template>
+
+		 <data-template name="spc_dt">
+		 	<field ref="pathtype_dt"/>
+		 	<field name="param" type="String"/>
+		 	
+		 </data-template>
+            
+		 <data-template name="redos_dt">
+		 	<field name="regex" type="String"/>
+		 	<field name="value" type="CharSequence"/>
+		 	<field name="violation_type" type="String"/>
+		 	<field name="max_timeout" type="int"/>
+		 	<field name="max_iter_count" type="long"/>
+		 </data-template>
+		 <data-template name="xhmo_dt">
+		 	<field name="req_method" type="String"/>
+		 	<field name="req_header_method" type="String"/>
+		 	<field ref="path_dt"/>
+		 </data-template>
+		  <data-template name="uv_dt">
+		  	    <field ref="rid_timetaken_dt"/>
+		  	 	<field ref="request_uri"/>
+		   </data-template>
+		  <data-template name="afw_scaninfo_dt">
+		  	    <field ref="uv_dt"/>
+		  	 	<field name="ruleInfo" type="List&lt;HashMap&lt;String,Object&gt;&gt;"/>
+		   </data-template>
+		   <data-template name="afw_ruleinfo_dt">
+		  	    <field ref="uv_dt"/>
+		  	 	<field name="ruleid" type="String"/>
+		   </data-template>   
+		   <data-template name="regex_dt">
+		   		<field ref="uv_dt"/>
+		   		<field name="param" type="String"/>
+		   		<field name="regex" type="String"/>
+		   		<field name="exception" type="String"/>
+		   </data-template>
+		    <data-template name="xssvalidation_dt">
+		   	    <field ref="uv_dt"/>
+		   		<field name="param" type="String"/>
+		   		<field name="filter" type="String"/>
+		   		<field name="exception" type="String"/>
+		   </data-template>
+		    <data-template name="mimedetection_dt">
+		   		<field ref="uv_dt"/>
+		   		<field name="filename" type="String"/>
+		   		<field name="dtmimetype" type="String"/>
+		   </data-template>
+		   
+		    <data-template name="avscandt">
+		   		<field ref="uv_dt"/>
+		   		<field name="filename" type="String"/>
+		   		<field name="isVirus" type="boolean"/>
+		   		<field name="dtmimetype" type="String"/>
+		   		<field name="exception" type="String"/>
+		   </data-template>
+
+		    <data-template name="reqh_dt">
+		   		<field ref="uv_dt"/>
+		   		<field name="headers" type="String"/>
+		   		<field name="cookies" type="String"/>
+		   </data-template>
+
+		  <data-template name="request_uri">
+		  	 	<field name="req_uri" type="String"/>
+		   </data-template>
+		   <data-template name="param">
+		  	 	<field name="param" type="String"/>
+		   </data-template>
+		  <data-template name="xfo_dt">
+		  	 	<field ref="request_uri"/>
+		  	 	<field name="fo_domain" type="String"/>
+		  	 	<field name="referrer" type="String"/>
+		  	 	<field name="case" type="String"/>
+		  	 	<field name="ua" type="String"/>
+		   </data-template>
+		  <data-template name="ruleMatch">
+		  	 	<field name="status" type="String"/>
+		  	 	<field ref="request_uri"/>
+		  	 	<field name="remote_address" type="String"/>
+		  	 	<field name="rule_info" type="List&lt;HashMap&lt;String,Object&gt;&gt;"/>
+		  	 	<field name="rule_match_info" type="Map&lt;String,Object&gt;"/>
+		  	 	<field name="rule_id" type="String"/>
+		   </data-template>
+		    <data-template name="tls_redirection">
+		  	 	<field name="domain" type="String"/>
+		  	 	<field name="tls_version" type="String"/>
+		   </data-template>
+			<data-template name="cspFetch">
+		  	 	<field name="type" type="String"/>
+		  	 	<field name="status" type="String"/>
+		   </data-template>
+			<data-template name="as_notification_sdt">
+		  	 	<field name="component" type="String"/>
+		  	 	<field name="comp-key" type="String"/>
+		   </data-template>
+		   <data-template name="as_notification_exdt">
+		  	 	<field ref="exception"/>
+		  	 	<field name="actual-service" type="String"/>
+		  	 	<field name="received-service" type="String"/>
+		   </data-template>
+		    <data-template name="as_notification_exdt1">
+		    	<field name="component" type="String"/>
+		  	 	<field ref="exception"/>
+		   </data-template>
+			<data-template name="app_reg_sdt">
+				<field name="url" type="String"/>
+            	<field ref="message"/>
+            </data-template>
+            <data-template name="app_reg_erdt">
+				<field name="status_code" type="int"/>
+            	<field name="cause" type="String"/>
+            </data-template>
+             <data-template name="app_reg_exdt">
+            	<field name="url" type="String"/>
+            	<field ref="exception"/>
+            </data-template>
+			<data-template name="expiredruledt">
+            		<field ref="message"/>
+            		<field name="expired_ruleids" type="List&lt;String>"/>
+            </data-template>
+		   <data-template name="local_write">
+            		<field ref="message"/>
+            		<field name="fileDetails" type="String"/>
+            </data-template>
+             <data-template name="makedirectory">
+            		<field ref="message"/>
+            		<field name="userhome" type="String"/>
+            </data-template>
+	       <data-template name="cookie_info">
+            		<field ref="request_uri"/>
+            		<field name="ar_path" type="String"/>
+            </data-template>
+          
+            <data-template name="csrf_stats">
+            		<field name="len" type="int"/>
+            </data-template>
+			
+			<data-template name="file_stats">
+            		 <field name="filetype" type="String"/>
+            </data-template>
+            <data-template name="exception_stats">
+            		<field name="exception_name" type="String"/>
+            </data-template>
+			<data-template name="exception_metrics">
+            		<field name="error_code" type="String" />
+					<field name="cause" type="String" />
+					<field name="remote_ip" type="String" />
+					<field name="status" type="int" />
+					<field name="user_agent" type="String" />	
+            </data-template>
+           <data-template name="performance_metrics">
+            		 <field name="module" type="String" />
+	   				 <field name="req_id" type="String" />
+	   				 <field name="key" type="String"/>
+	   				 <field name="elapsed_time" type="long" />
+	   				 <field name="metrics" type="Map&lt;String,Object&gt;" />
+            </data-template>
+ 		   <data-template name="path_info">
+ 		   	        <field name="servletPath" type="String" />
+ 		   	        <field name="pathInfo" type="String" />
+ 		   	        <field ref="request_uri" />
+            		<field name="lookUpUri" type="String" />
+					<field name="lookUpStdPath" type="String" />
+					<field name="path" type="String" />
+            </data-template>
+             <data-template name="ghostcat_dt">
+ 		   	        <field name="servletPath" type="String" />
+ 		   	        <field name="pathInfo" type="String" />
+ 		   	        <field ref="request_uri" />
+            		<field name="lookUpUri" type="String" />
+            		<field name="incAttrPath" type="String" />
+					<field name="path" type="String" />
+            </data-template>
+            <data-template name="rav_dt">
+            		<field name="servletPath" type="String" />
+ 		   	        <field name="pathInfo" type="String" />
+ 		   	        <field ref="request_uri" />
+ 		   	        <field name="attribute_name" type="String"/>
+ 		   	        <field name="cause" type="String"/>
+            </data-template>
+            <data-template name="reqres_info">
+            		 <field name="reqInfo" type="Map&lt;String,Object&gt;" />
+            		 <field name="resInfo" type="Map&lt;String,Object&gt;" />
+            </data-template>
+
+			<data-template name="ruleFetch">
+				<field name="no_of_rules" type="int" />
+				<field name="rulefetch_type" type="String" />
+			</data-template>
+
+			<data-template name="afwexception">
+				<field name="fetch_type" type="String" />
+				<field ref="exception" />
+			</data-template>
+
+            
+            <data-template name="message">
+				<field name="message" type="String" />
+			</data-template>
+			
+			<data-template name="loadfailure">
+				<field ref="error"/>
+				<field name="fetch_type" type="String" />
+			</data-template>
+
+			<data-template name="exception">
+				<field name="exception" type="String" />
+			</data-template>
+			<data-template name="exceptionwithmsg">
+				<field ref="message" />
+				<field name="exception" type="String" />			
+			</data-template>
+			
+			<data-template name="error">
+				<field name="error" type="String" />
+				<field ref="message" />
+			</data-template>	
+			<data-template name="afw_convert_exceptionwithmsg">
+				<field name="source" type="String" />
+				<field name="rule_key_value" type="String" />
+				<field ref="exceptionwithmsg" />
+			</data-template>	
+			<data-template name="afw_convert_error">
+				<field name="source" type="String" />
+				<field name="rule_key_value" type="String" />
+				<field ref="error" />
+			</data-template>
+			<data-template name="samesite_dt">
+				<field ref="xhmo_dt" />
+				<field name="referer" type="String" />
+			</data-template>
+			<data-template name="csrfqs_dt">
+				<field ref="xhmo_dt" />
+				<field ref="req_dt"/>
+			</data-template>
+			<data-template name="rduv_dt">
+ 		   	    <field name="servletPath" type="String" />
+ 		   	    <field name="pathInfo" type="String" />
+ 		   	    <field ref="request_uri" />
+				<field name="reqdispatchUri" type="String"/>
+				<field name="configDispatchUriPattern" type="String"/>
+			</data-template>
+</data-templates>
+</eventframework>

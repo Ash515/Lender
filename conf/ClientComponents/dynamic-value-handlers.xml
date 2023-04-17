@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+
+<dynamic-value-handlers>
+    <DynamicValueHandler tablename="EmptyTableMessage" columnname="MENU_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="MENUID"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="Menu"/>
+            <DVPHParameter name="referred-column" value="MENUID_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>
+    <DynamicValueHandler tablename="ACTableViewConfig" columnname="CVNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="CVNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="CustomViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="CVID"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>
+
+    <DynamicValueHandler tablename="ACFormConfig" columnname="CVNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="CVNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="CustomViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="CVID"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>
+    
+    <DynamicValueHandler tablename="ACTableViewConfig" columnname="COLUMNCHOOSERMENUITEM" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="MENUITEMID"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="MenuItem"/>
+            <DVPHParameter name="referred-column" value="MENUITEMID_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>    
+
+    <DynamicValueHandler tablename="ACLink" columnname="MENUITEMID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="MENUITEMID"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="MenuItem"/>
+            <DVPHParameter name="referred-column" value="MENUITEMID_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>    
+        
+    <DynamicValueHandler tablename="ChartViewConfig" columnname="CVNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="CVNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="CustomViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="CVID"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>
+    
+    <DynamicValueHandler tablename="ViewCustomizer" columnname="UICOMPNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="UIComponent"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>      
+    
+    <DynamicValueHandler tablename="ACTableViewConfig" columnname="NAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>      
+    
+    <DynamicValueHandler tablename="ACTabChildConfig" columnname="VIEWNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>    
+    
+    <DynamicValueHandler tablename="ACTabChildConfig" columnname="CHILDVIEWNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler> 
+    <DynamicValueHandler tablename="ACTabChildConfig" columnname="DROPDOWNVIEW" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>       
+    <DynamicValueHandler tablename="ACTabChildConfig" columnname="DROPDOWNTAB" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>     
+     <DynamicValueHandler tablename="ACTabChildConfig" columnname="DROPDOWNMENU" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="MENUID"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="Menu"/>
+            <DVPHParameter name="referred-column" value="MENUID_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler> 
+    
+    <DynamicValueHandler tablename="ACCVTabParentConfig" columnname="VIEWNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>       
+    
+    
+    <DynamicValueHandler tablename="ACCVTabParentConfig" columnname="PARENTVIEWNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>  
+    
+    <DynamicValueHandler tablename="ACTableViewConfig" columnname="NAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>        
+    
+    <DynamicValueHandler tablename="ACGridLayoutChildConfig" columnname="VIEWNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>    
+    
+    <DynamicValueHandler tablename="ACGridLayoutChildConfig" columnname="CHILDVIEWNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>    
+    
+    <DynamicValueHandler tablename="ACGridLayoutConfig" columnname="VIEWNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>     
+    
+    <DynamicValueHandler tablename="ACTableLayoutChildConfig" columnname="VIEWNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>     
+    
+    <DynamicValueHandler tablename="ACTableLayoutChildConfig" columnname="CHILDVIEWNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>    
+    
+    <DynamicValueHandler tablename="ACFormConfig" columnname="NAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>
+    
+    <DynamicValueHandler tablename="ViewCustomizer" columnname="CUSTOMIZERVIEW" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>       
+    
+   <DynamicValueHandler tablename="ACTableFilterListRel" columnname="VIEWNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>                      
+
+    <DynamicValueHandler tablename="ACTableFilterListRel" columnname="FILTERLISTID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="LISTNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACFilterList"/>
+            <DVPHParameter name="referred-column" value="LISTID"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>
+
+    
+   <DynamicValueHandler tablename="ACLink" columnname="VIEWNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>  
+    
+  <DynamicValueHandler tablename="ChartViewConfig" columnname="VIEWNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>    
+    
+  <DynamicValueHandler tablename="ACAjaxForm" columnname="VIEWNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ViewConfiguration"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>   
+                   
+  <DynamicValueHandler tablename="ACTableViewConfig" columnname="NAVIGATIONCONFIG" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACNavigationConfiguration"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>          
+
+  <DynamicValueHandler tablename="ACPageLengthConfig" columnname="NAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACNavigationConfiguration"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>     
+
+      <DynamicValueHandler tablename="ACTableViewConfig" columnname="COLUMNCONFIGLIST" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACColumnConfigurationList"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>     
+
+      <DynamicValueHandler tablename="ACColumnConfiguration" columnname="CONFIGNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACColumnConfigurationList"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler> 
+
+      <DynamicValueHandler tablename="ACFormConfig" columnname="COLUMNCONFIGLIST" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACColumnConfigurationList"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>     
+                           
+      <DynamicValueHandler tablename="ACTableViewConfig" columnname="PSCONFIGLIST" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACPSConfigList"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>  
+    
+      <DynamicValueHandler tablename="ACPSConfiguration" columnname="CONFIGNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACPSConfigList"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>     
+    
+      <DynamicValueHandler tablename="ACFormConfig" columnname="LAYOUTCONFIGLIST" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACPSConfigList"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>       
+
+      <DynamicValueHandler tablename="ChartProperty" columnname="PROPSET" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ChartPropertySet"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>       
+    
+      <DynamicValueHandler tablename="ChartViewConfig" columnname="PROPSET" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ChartPropertySet"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>        
+    
+      <DynamicValueHandler tablename="ACFeedBackProperties" columnname="MESSAGETIME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="MESSAGETIME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACInstantFeedBack"/>
+            <DVPHParameter name="referred-column" value="MESSAGETIME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>    
+    
+      <DynamicValueHandler tablename="TmpViewCriteria" columnname="VIEWNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="VIEWNAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="TmpViewDetails"/>
+            <DVPHParameter name="referred-column" value="VIEWNAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>        
+    
+      <DynamicValueHandler tablename="ACDropDownParams" columnname="NAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACDropDown"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>       
+    
+     <DynamicValueHandler tablename="ACElementAttr" columnname="NAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACElement"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>    
+    
+      <DynamicValueHandler tablename="ACColumnConfiguration" columnname="CREATORCONFIG" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACElement"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>    
+
+      <DynamicValueHandler tablename="ACPanelElement" columnname="NAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACElement"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>    
+
+    
+      <DynamicValueHandler tablename="ACPanelElement" columnname="CHILDELEMENT" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACElement"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>    
+
+      <DynamicValueHandler tablename="ACPSConfiguration" columnname="CREATORCONFIG" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACElement"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>  
+
+ <DynamicValueHandler tablename="ChartProperty" columnname="NAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="CKEY"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ChartPropKey"/>
+            <DVPHParameter name="referred-column" value="CKEY_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>
+    <DynamicValueHandler tablename="ChartPropertySet" columnname="PARENTSET" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ChartPropertySet"/>
+            <DVPHParameter name="referred-column" value="NAME_NO"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>
+    <DynamicValueHandler tablename="ACTableFilterListRel" columnname="FILTERCONFIGLISTNAME" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="ACFilterConfigList"/>
+            <DVPHParameter name="referred-column" value="ID"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>
+
+	<RowTransformer tablename="ACSQLString" classname="com.adventnet.client.components.xml.ACSQLTableRowTransformer" />
+
+	<DynamicValueHandler tablename="ACColumnConfiguration" columnname="PROPERTIES" class="com.zoho.mickeyclient.validation.JSONValidator" />
+
+  </dynamic-value-handlers>

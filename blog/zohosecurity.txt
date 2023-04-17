@@ -1,0 +1,10 @@
+Module=ZOHOSECURITY
+SourceCoLabel=M2_26_PATCH
+BuildDate=Oct_15_2021
+BuildTime=14:43:01
+#BuildLabel=M2_26_PATCH_Oct_15_2021_1
+build-timestamp= 1634289191
+StaticVersion=v4.4
+Source_Changeset=0464fbcf304bd76347b197c045afb2f886a3ffe4
+Build_Comment=
+BuildLabel=ZOHOSECURITY_M2_26_6

@@ -1,0 +1,21 @@
+api_server_url: "http://localhost:8080"
+
+base_uri: "ssokit"
+
+versions: "v1"
+
+handlers_package: "com.zoho.accounts.ssokit.handlers"
+
+icresturi_handler_api: "com.zoho.accounts.api.authorization.ICRESTUriHandlerImpl"
+#If access_control requires enable the below and use it.
+#icresturi_handler_api: "com.zoho.accounts.ssokit.authorization.ICRESTUriHandlerImpl"
+
+resources:
+  - resource_name: User
+    identifier: zuid
+    resource_exist: false
+    access_control: false
+    resources:
+      - resource_name: Mobile
+        identifier: mobile
+        access_control: false

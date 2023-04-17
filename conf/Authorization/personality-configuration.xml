@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id: personality-configuration.xml,v 1.5 2005/06/10 06:18:14 vinod Exp 
+	$ -->
+<personality-configuration>
+	<DominantTableConfig DOMINANTTABLEID="AaaUser"
+		isindexed="false" nonindexlimit="31">
+		<PersonalityConfiguration personalityid="PersonalityConfiguration:personalityid:1"
+			personalityname="AaaUserDetails" dominanttableid="AaaUser"
+			modulename="Authorization" description="to fetch complete user details">
+			<ConstituentTable tableid="AaaUser" mandatory="true"
+				tableindex="0" />
+			<ConstituentTable tableid="AaaUserStatus"
+				tableindex="1" fkconstraint_id="AaaUserStatus_FK" />
+			<ConstituentTable tableid="AaaUserProfile"
+				tableindex="2" fkconstraint_id="AaaUserProfile_FK1" />
+			<ConstituentTable tableid="AaaGenderHonorific"
+				tableindex="3" fkconstraint_id="AaaUserProfile_FK2" />
+			<ConstituentTable tableid="AaaUserContactInfo"
+				tableindex="4" fkconstraint_id="AaaUserContactInfo_FK1" />
+			<ConstituentTable tableid="AaaContactInfo"
+				tableindex="5" fkconstraint_id="AaaUserContactInfo_FK2" />
+			<ConstituentTable tableid="AaaUserPostalAddr"
+				tableindex="6" fkconstraint_id="AaaUserPostalAddr_FK1" />
+			<ConstituentTable tableid="AaaPostalAddress"
+				tableindex="7" fkconstraint_id="AaaUserPostalAddr_FK2" />
+		</PersonalityConfiguration>
+	</DominantTableConfig>
+
+	<DominantTableConfig DOMINANTTABLEID="AaaAccount"
+		isindexed="false" nonindexlimit="31">
+		<PersonalityConfiguration personalityid="PersonalityConfiguration:personalityid:2"
+			personalityname="AaaAccountDetails" dominanttableid="AaaAccount"
+			modulename="Authorization" description="to fetch complete account details">
+			<ConstituentTable tableid="AaaAccount" mandatory="true"
+				tableindex="0" />
+			<ConstituentTable tableid="AaaLogin" mandatory="true"
+				tableindex="1" fkconstraint_id="AaaAccount_FK1" />
+			<ConstituentTable tableid="AaaAccountStatus"
+				mandatory="true" tableindex="2" fkconstraint_id="AaaAccount_FK" />
+			<ConstituentTable tableid="AaaService" mandatory="true"
+				tableindex="3" fkconstraint_id="AaaAccount_FK2" />
+			<ConstituentTable tableid="AaaAccPassword"
+				mandatory="true" tableindex="4" fkconstraint_id="AaaAccPassword_FK1" />
+			<ConstituentTable tableid="AaaPassword" mandatory="true"
+				tableindex="5" fkconstraint_id="AaaAccPassword_FK2" />
+			<ConstituentTable tableid="AaaPasswordStatus"
+				mandatory="true" tableindex="6" fkconstraint_id="AaaPasswordStatus_FK" />
+			<ConstituentTable tableid="AaaPasswordRule"
+				mandatory="true" tableindex="7" fkconstraint_id="AaaPassword_FK2" />
+			<ConstituentTable tableid="AaaPasswordProfile"
+				mandatory="true" tableindex="8" fkconstraint_id="AaaPassword_FK1" />
+			<ConstituentTable tableid="AaaAccAdminProfile"
+				mandatory="true" tableindex="9" fkconstraint_id="AaaAccount_FK3" />
+			<ConstituentTable tableid="AaaAccUserProfile"
+				tableindex="10" fkconstraint_id="AaaAccUserProfile_FK" />
+			<ConstituentTable tableid="AaaAuthorizedRole"
+				mandatory="true" tableindex="11" fkconstraint_id="AaaAuthorizedRole_FK" />
+			<ConstituentTable tableid="AaaRole" mandatory="true"
+				tableindex="12" fkconstraint_id="AaaAuthorizedRole_FK1" />
+		</PersonalityConfiguration>
+
+		<PersonalityConfiguration personalityid="PersonalityConfiguration:personalityid:3"
+			personalityname="AaaAccSessionDetails" dominanttableid="AaaAccount"
+			modulename="Authorization" description="to fetch complete account details">
+
+			<ConstituentTable tableid="AaaAccount" mandatory="true"
+				tableindex="0" />
+			<ConstituentTable tableid="AaaLogin" mandatory="true"
+				tableindex="1" fkconstraint_id="AaaAccount_FK1" />
+			<ConstituentTable tableid="AaaService" mandatory="true"
+				tableindex="2" fkconstraint_id="AaaAccount_FK2" />
+			<ConstituentTable tableid="AaaAccSession" mandatory="true"
+				tableindex="3" fkconstraint_id="AaaAccSession_FK" />
+			<ConstituentTable tableid="AaaAccSessionAudit"
+				mandatory="false" tableindex="4" fkconstraint_id="AaaAccSessionAudit_FK" />
+			<ConstituentTable tableid="AuditRecord" mandatory="false"
+				tableindex="5" fkconstraint_id="AaaAccSessionAudit_FK1" />
+			<ConstituentTable tableid="OperationAuditRecord"
+				mandatory="false" tableindex="6" fkconstraint_id="OperationAuditRecord_FK" />
+		</PersonalityConfiguration>
+	</DominantTableConfig>
+</personality-configuration>
+
+

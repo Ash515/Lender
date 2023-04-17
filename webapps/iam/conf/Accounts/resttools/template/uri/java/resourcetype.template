@@ -1,0 +1,12 @@
+package com.zoho.$modulenamelowercase;
+import com.zoho.resource.*;
+$import
+public class $classname extends com.zoho.$modulenamelowercase.base.$superclassname {
+
+	public static class RESOURCE {
+    	$enums;
+    }
+    
+    $uritypeclassdefinitions
+}
+

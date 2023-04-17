@@ -1,0 +1,20 @@
+<%--$Id$--%>
+<%@page import="com.adventnet.mfw.bean.*,com.adventnet.persistence.*,com.adventnet.authentication.*"%>
+<%@page import="java.util.*"%>
+<select tabindex=4 <%=(loginName != null && loginName.equals("admin"))? "disabled" : "" %> name="roles" class="selectbox">
+<%
+ReadOnlyPersistence roPersistence = (ReadOnlyPersistence) BeanUtil.lookup("CachedPersistence");
+List tableList = new ArrayList();
+tableList.add(AAAROLE.TABLE);
+tableList.add(AAAAUTHORIZEDROLE.TABLE);
+DataObject authRolesDO = roPersistence.get(tableList,(Row)null);
+Iterator itr = authRolesDO.getRows(AAAROLE.TABLE);
+while(itr.hasNext())
+{
+Row roleRow = (Row)itr.next();%>
+
+<option><%=roleRow.get(AAAROLE.NAME_IDX)%></option>
+<%
+}
+%>
+</select>

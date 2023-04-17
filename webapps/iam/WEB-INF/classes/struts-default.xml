@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- $Id: $ -->
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="default" namespace="/accounts" extends="struts-default">
+		<action name="{announcementType:announcement|preannouncement}/{announcementName:[a-zA-Z\-]+}" class="com.zoho.accounts.internal.announcement.AnnouncementService">
+			<result name="redirect" type="redirect">${redirectUrl}</result>
+			<result name="forward">${redirectUrl}</result>
+		</action>
+		<action name="announcement/{announcementName:[a-zA-Z\-]+}/next" class="com.zoho.accounts.internal.announcement.AnnouncementService" method="updateAnnouncementStatus">
+		</action>
+		<action name="preannouncement/{announcementName:[a-zA-Z\-]+}/next" class="com.zoho.accounts.internal.announcement.AnnouncementService" method="nextPreAnnouncementUrl">
+		</action>
+		<action name="configurations/{appName:[a-zA-Z]+}" class="com.zoho.accounts.actions.internal.SystemConfigurationsAction" method="getSystemConfigurations" />
+		<action name="oauthscopes" class="com.zoho.accounts.actions.internal.SystemConfigurationsAction" method="getOAuthScopes" />
+		<action name="secretkeys" class="com.zoho.accounts.actions.internal.SystemConfigurationsAction" method="getSecretkeys" />
+	    <action name="samlsp/metadata" class="com.zoho.accounts.internal.SamlSpMetadata" method="getSamlSPmetadata" />
+	    <action name="samlsp/certificate" class="com.zoho.accounts.internal.SamlSpMetadata" method="getSamlSPCertificate" />
+	</package>
+</struts>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE conf-files [
+	<!ENTITY cache-configs SYSTEM "../Cache/conf-files.xml"> 
+]>
+<!-- $Id$ -->
+<conf-files>
+	<ConfFile url="bean.xml" />
+	<ConfFile url="service.xml" />
+    &cache-configs;
+</conf-files>

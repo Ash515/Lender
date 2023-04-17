@@ -1,0 +1,2323 @@
+<?xml version="1.0"?>
+<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd">
+<!--<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd"> -->
+<!-- $Id$ -->
+<data-dictionary name="Accounts">
+    <table name="IAMAppAccount" display-name="AppAccount">
+        <description>Root entity within a Zoho App, for an Account. All data, belong to a user or a group of users is stored under this AppAccount. An Account can have any number of AppAccounts each uniquely identified by it's own screen name </description>
+        <columns>
+            <column name="APP_ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAppAccount.APP_ACCOUNT_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="APP_NAME">
+                <description>Unique identifier of this APP.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&appname;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DISPLAY_NAME">
+                <description>Display name of this APPAccount.</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+            </column>
+            <column name="SCREEN_NAME">
+                <description>Unique identifier of this APP Account.</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&screenname;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZUID">
+                <description>The creator of this account</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZAAID">
+                <description>
+                    Zoho App Account ID. The data space in which the App stores the data in its grid.
+                    The ZAAID versus actual dburl will be present in SASAccounts/CustomerDatabase tables.
+                    It is also used to exnternalize the DB cluster, Appservers and other components to independent Data-center of Customer/Partner.
+                    The SAS OS and App GRID provisioning will be done by downloading builds from Zoho.com
+                </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RESOURCE_HIERARCHY_ID">
+                <description>
+                    The Hierarchy to be used to get the ACP/ACEs for all resources within this App Account
+                </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ROLE_HIERARCHY_ID">
+                <description>
+                    The AppAccountGroup Hierarchy which represents the Role tree for all roles within this App Account
+                </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DESCRIPTION">
+                <description>A short description about this account. Used for display purpose</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ACCOUNT_STATUS">
+                <description>Current status of the account Active - 1, Inactive - 0, Closed - 2</description>
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+            </column>
+			<column name="PARENT_ZAAID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DIRECTORY_ZAAID">
+				<description>ZAAID of Directory Account.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IS_EXPOSED">
+				<description>1 - External, 2 - Internal</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="ENVIRONMENT">
+				<description>1 - Production, 2 - Sandbox, 3- Development</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="SERVICE_TYPE">
+				<description>Type of the Service created ORG. Equivalent to Sorgtype. The type is differentiated per service</description>
+				<data-type>INTEGER</data-type>
+				<!-- <nullable>false</nullable> -->
+			</column>
+			<column name="PARENT_ORG_TYPE">
+				<description>Type of the SOID / AppAccount. Value `16` represents AppAccount or org type of respective SOID services.</description>
+				<data-type>INTEGER</data-type>
+			</column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppAccount_PK">
+            <primary-key-column>APP_ACCOUNT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppAccount_FK1" reference-table-name="IAMAccount">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMAppAccount_UK1">
+                <unique-key-column>ZAAID</unique-key-column>
+            </unique-key>
+            <unique-key name="IAMAppAccount_UK2">
+                <unique-key-column>ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>APP_NAME</unique-key-column>
+                <unique-key-column>SCREEN_NAME</unique-key-column>
+            </unique-key>
+            <unique-key name="IAMAppAccount_UK3">
+                <unique-key-column>ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>SERVICE_TYPE</unique-key-column>
+                <unique-key-column>SCREEN_NAME</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMAppAccount_ZAAIDndx">
+                <index-column>ZAAID</index-column>
+            </index>
+            <index name="IAMAppAccount_ZUIDndx">
+                <index-column>ZUID</index-column>
+            </index>
+        </indexes>
+    </table>
+    
+    <table name="IAMAppAccountService" display-name="AppAccountService">
+        <description>This will conatin Zoho App for which the members are belongs. </description>
+        <columns>
+            <column name="APP_ACCOUNT_SERV_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAppAccountService.APP_ACCOUNT_SERV_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="APP_ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="APP_NAME">
+                 <description>Unique identifier of this APP.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&appname;</pattern>
+                </allowed-values>
+            </column>
+            <column name="SUB_SERVICE_TYPE">
+				<description>Type of the Service created ORG. Equivalent to Sorgtype. The type is differentiated per service</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+			</column>
+            <column name="ZUID">
+                <description>The creator of this account</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RESOURCE_HIERARCHY_ID">
+                <description>
+                    The Hierarchy to be used to get the ACP/ACEs for all resources within this App Account
+                </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ROLE_HIERARCHY_ID">
+                <description>
+                    The AppAccountGroup Hierarchy which represents the Role tree for all roles within this App Account
+                </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DESCRIPTION">
+                <description>A short description about this account. Used for display purpose</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ACCOUNT_STATUS">
+                <description>Current status of the account Active - 1, Inactive - 0, Closed - 2</description>
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+            </column>
+            <column name="PARENT_ZAAID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DIRECTORY_ZAAID">
+				<description>ZAAID of Directory Account.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IS_EXPOSED">
+				<description>1 - External, 2 - Internal</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="ENVIRONMENT">
+				<description>1 - Production, 2 - Sandbox, 3- Development</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="PARENT_ORG_TYPE">
+				<description>Type of the SOID / AppAccount. Value `16` represents AppAccount or org type of respective SOID services.</description>
+				<data-type>INTEGER</data-type>
+			</column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccAppS_PK">
+        	<primary-key-column>APP_ACCOUNT_SERV_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccAppS_FK1" reference-table-name="IAMAppAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMAccAppS_UK2">
+                <unique-key-column>APP_ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>SUB_SERVICE_TYPE</unique-key-column>
+            </unique-key>
+            <unique-key name="IAMAccAppS_UK1">
+                <unique-key-column>APP_ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>APP_NAME</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+        	<index name="IAMAccAppS_SNidx2">
+                <index-column>SUB_SERVICE_TYPE</index-column>
+            </index>
+            <index name="IAMAccAppS_SNidx">
+                <index-column>APP_NAME</index-column>
+            </index>
+        </indexes>
+    </table>
+    
+    <table name="IAMAccountOAuthAccessGrant" display-name="AccountOAuthAccessGrant">
+        <description>Appaccount member granting access to third party apps to use an OrgOAuthToken on behalf of him/her appaccount</description>
+        <columns>
+			<column name="APP_ACCOUNT_SERV_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ACCESS_GRANT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMAccountOAuthAccessGrant.ACCESS_GRANT_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="CLIENT_ZID">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&clientzid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IP_ADDRESS">
+                <description>The IP Address of the user at the time of this access grant.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_AGENT">
+                <description>Using which browser or device the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <description>The time at which the grant is given</description>
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccountOAuthAccessGrant_PK">
+            <primary-key-column>ACCESS_GRANT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccountOAuthAccessGrant_FK1" reference-table-name="IAMAppAccountService" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_SERV_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_SERV_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMAccountOAuthAccessGrant_UK1">
+                <unique-key-column>APP_ACCOUNT_SERV_AUTO_ID</unique-key-column>
+                <unique-key-column>CLIENT_ZID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+    
+     <table name="IAMAccountOAuthAccessGrantScopes" display-name="AccountOAuthAccessGrantScopes">
+		<description> This table will contain default/allowed scopes for the particular appaccount.
+		</description>
+		<columns>
+			<column name="ACCESS_GRANT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SCOPE_ID">
+				<description>
+					ID of the scope required. Will have from App.SCOPE_ID
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ALLOWED_OPERATIONS">
+                <data-type>INTEGER</data-type>
+            </column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAccountOAuthAccessGrantScopes_PK">
+			<primary-key-column>ACCESS_GRANT_AUTO_ID</primary-key-column>
+			<primary-key-column>SCOPE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAccountOAuthAccessGrantScopes_FK" reference-table-name="IAMAccountOAuthAccessGrant">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ACCESS_GRANT_AUTO_ID</fk-local-column>
+						<fk-reference-column>ACCESS_GRANT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+    
+    <table name="IAMAccountMember" display-name="AccountMember">
+        <description>User versus AppAccount association. A user has to be a AppAccountMember in this to access a Zoho App</description>
+        <columns>
+            <column name="ACCOUNT_MEMBER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAccountMember.ACCOUNT_MEMBER_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="APP_ACCOUNT_SERV_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ZID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZID_TYPE">
+                <description>User , Group , Account </description>
+                <data-type>CHAR</data-type>
+                <default-value>User</default-value>
+                <allowed-values>
+                    <value>User</value>
+                    <value>Group</value>
+                    <value>Account</value>
+                </allowed-values>
+            </column>
+            <column name="ZARID">
+                <description>Assigns the Role for the given user from IAMAppRole.ZARID</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IS_ACTIVE">
+                <data-type>INTEGER</data-type>
+                <max-size>2</max-size>
+                <default-value>1</default-value>
+            </column>
+            <column name="USER_TYPE">
+				<description>1 - Normal, 2 - Free User</description>
+				<data-type>INTEGER</data-type>
+			</column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccpM_PK">
+        	<primary-key-column>ACCOUNT_MEMBER_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccM_FK1" reference-table-name="IAMAppAccountService" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_SERV_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_SERV_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+	        <unique-key name="IAMAccpM_UK1">
+	            <unique-key-column>APP_ACCOUNT_SERV_AUTO_ID</unique-key-column>
+	            <unique-key-column>ZID</unique-key-column>
+	        </unique-key>
+        </unique-keys>
+    </table>
+    
+    <table name="IAMAccountMemberRole" display-name="AccountMemberRole">
+	<description>Role for accessing custom acl check</description>
+	<columns>
+		<column name="ACCOUNT_MEMBER_AUTO_ID">
+			<data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ZARID">
+                <description>Assigns the Role for the given user from IAMAppRole.ZARID</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+    	</columns>
+    	<primary-key name="IAMAppMRole_PK">
+            <primary-key-column>ACCOUNT_MEMBER_AUTO_ID</primary-key-column>
+            <primary-key-column>ZARID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppMRole_FK1" reference-table-name="IAMAccountMember">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_MEMBER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_MEMBER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMAppAccountConfiguration" display-name="AppAccountConfiguration">
+        <description>User versus AppAccount association. A user has to be a AppAccountMember in this to access a Zoho App</description>
+        <columns>
+            <column name="APP_ACCOUNT_SERV_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+           <column name="CONFIG_NAME">
+                <description>Name of the configuration in dot notation format. For example, {feature}.{parameter}</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&config-name;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CONFIG_VALUE">
+                <description>Value of the configuration. The value can be set during deployment and can be changed in run time from Zoho Accounts Admin Console</description>
+                <data-type>CHAR</data-type>
+                <max-size>260</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppAccConf_PK">
+            <primary-key-column>APP_ACCOUNT_SERV_AUTO_ID</primary-key-column>
+            <primary-key-column>CONFIG_NAME</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppAccConf_FK1" reference-table-name="IAMAppAccountService" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_SERV_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_SERV_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+
+    <table name="IAMAppAccountMember" display-name="AppAccountMember">
+        <description>User versus AppAccount association. A user has to be a AppAccountMemberin this to access a Zoho App</description>
+        <columns>
+            <column name="APP_ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ZID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZID_TYPE">
+                <description>User , Group , Account </description>
+                <data-type>CHAR</data-type>
+                <default-value>User</default-value>
+                <allowed-values>
+                    <value>User</value>
+                    <value>Group</value>
+                    <value>Account</value>
+                </allowed-values>
+            </column>
+            <column name="ZARID">
+                <description>Assigns the Role for the given user from IAMAppRole.ZARID</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IS_ACTIVE">
+                <data-type>INTEGER</data-type>
+                <max-size>2</max-size>
+                <default-value>1</default-value>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppM_PK">
+            <primary-key-column>APP_ACCOUNT_AUTO_ID</primary-key-column>
+            <primary-key-column>ZID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppM_FK1" reference-table-name="IAMAppAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMAppAccountRebrand" display-name="Rebrand">
+        <description>Users can customize the App (UI, Email/SMS communication, etc.,) based on their business need. All rebrandable attributes of an App is defined in "AppRebrand"</description>
+        <columns>
+            <column name="APP_ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="REBRAND_ATTRIBUTE_KEY">
+                <description>Defined in AppRebrand entity. Identifies a rebrand attribute, for example, share email template, of the App </description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&config-name;</pattern>
+                </allowed-values>
+            </column>
+            <column name="REBRAND_ATTRIBUTE_VALUE">
+                <description>Value of the rebrand attribute selected by the account admin</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppAccountRebrand_PK">
+            <primary-key-column>APP_ACCOUNT_AUTO_ID</primary-key-column>
+            <primary-key-column>REBRAND_ATTRIBUTE_KEY</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppAccountRebrand_FK1" reference-table-name="IAMAppAccount">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+   <table name="IAMAppAccountServiceLicense" display-name="AppAccountLicense">
+        <description>Values of the attributes that control the usage of a Zoho App based on the choosen licensing plan</description>
+        <columns>
+            <column name="APP_ACCOUNT_SERV_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="LICENSE_ATTRIBUTE_KEY">
+                <description>Generated in the System space. Identifies a license attribute, for example, number of users / amount of data space, of the App </description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="LICENSE_ATTRIBUTE_VALUE">
+                <description>The value of the license attribute selected by account admin</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppAccountSerLicense_PK">
+            <primary-key-column>APP_ACCOUNT_SERV_AUTO_ID</primary-key-column>
+            <primary-key-column>LICENSE_ATTRIBUTE_KEY</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppAccountSerLicense_FK1" reference-table-name="IAMAppAccountService">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_SERV_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_SERV_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMAppAccountLicense" display-name="License">
+        <description>Values of the attributes that control the usage of a Zoho App based on the choosen licensing plan</description>
+        <columns>
+            <column name="APP_ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="LICENSE_ATTRIBUTE_KEY">
+                <description>Generated in the System space. Identifies a license attribute, for example, number of users / amount of data space, of the App </description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="LICENSE_ATTRIBUTE_VALUE">
+                <description>The value of the license attribute selected by account admin</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppAccountLicense_PK">
+            <primary-key-column>APP_ACCOUNT_AUTO_ID</primary-key-column>
+            <primary-key-column>LICENSE_ATTRIBUTE_KEY</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppAccountLicense_FK1" reference-table-name="IAMAppAccount">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMAppAccountUserAttribute" display-name="Attribute">
+        <description>App specific user attributes. User can have different attribute value for different Apps. For example, nick name, photo</description>
+        <columns>
+            <column name="APP_ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="ZUID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="USER_ATTRIBUTE_KEY">
+                <description>Identifies a user attribute, for example, display name, specific to a App</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&config-name;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_ATTRIBUTE_VALUE">
+                <description>Value of the user attribute</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppAccountUserAttr_PK">
+            <primary-key-column>APP_ACCOUNT_AUTO_ID</primary-key-column>
+            <primary-key-column>USER_ATTRIBUTE_KEY</primary-key-column>
+            <primary-key-column>ZUID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppAccountUserAttr_FK1" reference-table-name="IAMAppAccount">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+            <foreign-key name="IAMAppAccountUserAttr_FK2" reference-table-name="IAMUser">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                    <fk-column>
+                        <fk-local-column>ZUID</fk-local-column>
+                        <fk-reference-column>ZUID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMAppAccountAttribute" display-name="AccountAttribute">
+        <description>App specific user attributes, that are required for functioning of the App, to be collected from the user at the time of registration. For example, nick name, photo</description>
+        <columns>
+            <column name="APP_ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="ATTRIBUTE_KEY">
+                <description>Identifies a app account attribute</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&config-name;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ATTRIBUTE_VALUE">
+                <description>Value of the attribute</description>
+                <data-type>CHAR</data-type>
+                <max-size>256</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppAccountAttr_PK">
+            <primary-key-column>APP_ACCOUNT_AUTO_ID</primary-key-column>
+            <primary-key-column>ATTRIBUTE_KEY</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppAccountAttr_FK1" reference-table-name="IAMAppAccount">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="IAMAppAccountResource" display-name="AccountResource">
+        <columns>
+            <column name="APP_ACCOUNT_RESOURCE_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMAppAccountResource.APP_ACCOUNT_RESOURCE_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ZRID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZAAID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RESOURCE_NAME">
+                <description>Name of the resource</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RESOURCE_LABEL">
+                <description>Resource label to identify the type of label</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PARENT_ZRID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PATH_FROM_ROOT">
+                <description>Holds the path from the root element.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>true</nullable>
+                <allowed-values>
+                    <pattern>&config-name;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MOVE_WITH_PARENT">
+                <description>Transient data that can be used for UI</description>
+                <data-type>BOOLEAN</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppAccountResource_PK">
+            <primary-key-column>APP_ACCOUNT_RESOURCE_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppAccountResource_FK1" reference-table-name="IAMAppAccount">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ZAAID</fk-local-column>
+                        <fk-reference-column>ZAAID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMAppAccountResource_UK1">
+                <unique-key-column>ZRID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMAppAccResource_PZRIDIdx">
+                <index-column>PARENT_ZRID</index-column>
+            </index>
+        </indexes>
+    </table>
+
+    <table name="IAMAppAccountResourceProps" display-name="ResourceProperties">
+        <columns>
+            <column name="ZRID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RESOURCE_PROP_NAME">
+                <description>Name of the resource</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&config-name;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RESOURCE_PROP_VALUE">
+                <description>Value of the resource</description>
+                <data-type>CHAR</data-type>
+                <max-size>256</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppAccountResourceProps_PK1">
+            <primary-key-column>ZRID</primary-key-column>
+            <primary-key-column>RESOURCE_PROP_NAME</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppAccountResourceProps_FK1" reference-table-name="IAMAppAccountResource">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ZRID</fk-local-column>
+                        <fk-reference-column>ZRID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMAppAccountTemplate" display-name="Template">
+        <description>Contains HTML of the Sign In, Sign Up pages, Invitation, etc</description>
+        <columns>
+            <column name="APP_ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="TEMPLATE_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAppAccountTemplate.TEMPLATE_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="TEMPLATE_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DESCRIPTION">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="SUBJECT">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="FROM_ADDRESS">
+            	<description>Will be used for Mail templates.</description>
+                <data-type>CHAR</data-type>
+                <max-size>150</max-size>
+                <allowed-values>
+                    <pattern>&email;</pattern>
+                </allowed-values>
+            </column>
+            <column name="REPLY_TO_ADDRESS">
+            	<description>Will be used for Mail templates.</description>
+                <data-type>CHAR</data-type>
+                <max-size>150</max-size>
+                <allowed-values>
+                    <pattern>&email;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TEMPLATE_HTML">
+                <data-type>CHAR</data-type>
+                <max-size>-1</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>dontdisturb</pattern>
+                </allowed-values>
+            </column>
+            <column name="PLAIN_TEXT">
+            	<data-type>CHAR</data-type>
+            	<max-size>-1</max-size>
+            	<allowed-values>
+            		<pattern>dontdisturb</pattern>
+            	</allowed-values>
+            </column>
+            <column name="OVERRIDABLE">
+                <data-type>BOOLEAN</data-type>
+                <default-value>true</default-value>
+            </column>
+            <column name="TEMPLATE_TYPE">
+                <data-type>INTEGER</data-type>
+                <max-size>2</max-size>
+                <default-value>0</default-value>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppAccountTemplate_PK">
+            <primary-key-column>TEMPLATE_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppAccountTemplate_FK" reference-table-name="IAMAppAccount">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+        <unique-key name="IAMAppAccountTemplate_uk">
+        	<unique-key-column>APP_ACCOUNT_AUTO_ID</unique-key-column>
+        	<unique-key-column>TEMPLATE_NAME</unique-key-column>
+        </unique-key>
+        </unique-keys>
+    </table>
+	
+	 <table name="IAMAppAccountTemplateImage" display-name="TemplateImage">
+		<description>contains images of the templates</description>
+		<columns>
+	 		 <column name="TEMPLATE_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="IMAGE_NAME_APL">
+            <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&apl;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DFS_LOCATION">
+            <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TRANSMAIL_ID">
+            <data-type>CHAR</data-type>
+            	<max-size>100</max-size>
+            	<nullable>false</nullable>
+            	<allowed-values>
+            		<pattern>&simple-string;</pattern>
+            	</allowed-values>
+            </column>
+            <column name="TRANSMAIL_STATUS">
+            	<description>Current status of the transmail Active - 1, Inactive - 0</description>
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+            </column>
+		</columns>
+		<primary-key name="IAMAppAccountTemplateImage_PK">
+            <primary-key-column>TEMPLATE_AUTO_ID</primary-key-column>
+            <primary-key-column>IMAGE_NAME_APL</primary-key-column>
+        </primary-key>
+         <foreign-keys>
+            <foreign-key name="IAMAppAccountTemplateImage_FK" reference-table-name="IAMAppAccountTemplate">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>TEMPLATE_AUTO_ID</fk-local-column>
+                        <fk-reference-column>TEMPLATE_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+	</table> 
+    <table name="IAMAppAccountLang" display-name="Lang">
+        <columns>
+            <column name="LANG_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAppI18n.I18N_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="APP_ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="LANGUAGE_CODE">
+                <description>Language code contains lower case of two letter code defined as following format language_country_localevariant </description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppAccountLang_PK">
+            <primary-key-column>LANG_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppAccountLang_FK" reference-table-name="IAMAppAccount">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMAppAccountLang_UK">
+                <unique-key-column>APP_ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>LANGUAGE_CODE</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+
+    <table name="IAMAppAccountI18n" display-name="I18n">
+        <description>
+            Localization of UI components of a Zoho App.
+        </description>
+        <columns>
+            <column name="I18N_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAppAccountI18n.I18N_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="LANG_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="I18N_ATTRIBUTE_NAME">
+                <description>Internationalized Attribute Name as per the I18n Guidelines http://i18n/</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IS_FILE">
+                <description>If the i18n attribute is of type file, then the value will FILE_ID issued by ZFS.</description>
+                <data-type>BOOLEAN</data-type>
+            </column>
+            <column name="I18N_ATTRIBUTE_VALUE">
+                <description>The localized value of the I18N key</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppAccountI18n_PK">
+            <primary-key-column>I18N_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppAccountI18n_FK" reference-table-name="IAMAppAccountLang">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>LANG_AUTO_ID</fk-local-column>
+                        <fk-reference-column>LANG_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMAppAccountI18n_UK">
+                <unique-key-column>LANG_AUTO_ID</unique-key-column>
+                <unique-key-column>I18N_ATTRIBUTE_NAME</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+
+	<table name="IAMAppAccountRebrandL10n" display-name="RebrandL10n">
+        <description>For rebrandable attributes that can be localized are defined here.</description>
+        <columns>
+            <column name="REBRANDL10N_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAppAccountRebrandL10n.REBRANDL10N_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="LANG_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="REBRAND_ATTRIBUTE_NAME">
+                <description>Defined in AppRebrand entity. Identifies a rebrand attribute, for example, share email template, of the App </description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&config-name;</pattern>
+                </allowed-values>
+            </column>
+            <column name="REBRAND_ATTRIBUTE_VALUE">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppAccountRebrandL10n_PK">
+            <primary-key-column>REBRANDL10N_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppAccountRebrandL10n_FK" reference-table-name="IAMAppAccountLang">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>LANG_AUTO_ID</fk-local-column>
+                        <fk-reference-column>LANG_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMAppAccountRebrandL10n_UK">
+                <unique-key-column>LANG_AUTO_ID</unique-key-column>
+                <unique-key-column>REBRAND_ATTRIBUTE_NAME</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+
+    <table name="IAMAppAccountAddress" display-name="AppAccountAddress">
+        <description>The address of the AppAccount.</description>
+        <columns>
+            <column name="APP_ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ADDRESS_TYPE">
+                <description>1 - Work (2^0), 2 - Residential current(2^1), 4 - Residential permanent(2^2)</description>
+                <data-type>INTEGER</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="NAME">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="LOCATION_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="POST_BOX">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="STREET_ADDRESS">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="CITY">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="STATE">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="COUNTRY">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&country-code;</pattern>
+                </allowed-values>
+            </column>
+            <column name="POSTAL_CODE">
+                <data-type>CHAR</data-type>
+                <max-size>20</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="LATITUDE">
+                <data-type>CHAR</data-type>
+                <max-size>20</max-size>
+                <allowed-values>
+                    <pattern>&float;</pattern>
+                </allowed-values>
+            </column>
+            <column name="LONGITUDE">
+                <data-type>CHAR</data-type>
+                <max-size>20</max-size>
+                <allowed-values>
+                    <pattern>&float;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PHONE">
+                <data-type>CHAR</data-type>
+                <max-size>30</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="EXTENSION">
+                <data-type>CHAR</data-type>
+                <max-size>30</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="MOBILE">
+                <data-type>CHAR</data-type>
+                <max-size>30</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="FAX">
+                <data-type>CHAR</data-type>
+                <max-size>30</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="TIMEZONE">
+                <data-type>CHAR</data-type>
+                <max-size>30</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="LANGUAGE">
+                <data-type>CHAR</data-type>
+                <max-size>30</max-size>
+                <allowed-values>
+                    <pattern>&language-code;</pattern>
+                </allowed-values>
+            </column>
+            <column name="WEBSITE_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="BLOG_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TWITTER_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="LINKEDIN_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="FLICKR_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DELICIOUS_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="AMAZON_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppAccountAddress_PK">
+            <primary-key-column>APP_ACCOUNT_AUTO_ID</primary-key-column>
+            <primary-key-column>ADDRESS_TYPE</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppAccountAddress_FK1" reference-table-name="IAMAppAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMAppAccountPolicy" display-name="AppAccountPolicy">
+        <description>This will conatin policy of the Appaccount </description>
+        <columns>
+            <column name="APP_ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="POLICY_KEY">
+                 <description>Unique identifier of this APP.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="POLICY_VALUE">
+                <description>The creator of this account</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccAppPol_PK">
+        	<primary-key-column>APP_ACCOUNT_AUTO_ID</primary-key-column>
+        	<primary-key-column>POLICY_KEY</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccAppPol_FK1" reference-table-name="IAMAppAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+	<table name="IAMAppAccountPreference" display-name="AppAccountPreference">
+		<columns>
+			<column name="APP_ACCOUNT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="DAYLIGHT_SAVING_ENABLED">
+				<data-type>BOOLEAN</data-type>
+			</column>
+			<column name="WEEK_STARTS_ON">
+				<description>1 = Sunday, 2 = Monday, 3 = Tuesday, 4 = Wednesday, 5 = Thrusday, 6 = Friday, 7 = Saturday</description>
+				<data-type>TINYINT</data-type>
+			</column>
+			<column name="NAME_FORMAT">
+				<description>1 = (First_Name Last_Name), 2 = (Last_Name, First_Name), 3 = First_Name, 4 = Last_Name</description>
+				<data-type>TINYINT</data-type>
+			</column>
+			<!-- Data / Time Formats starts -->
+			<column name="SHORT_DATE_FORMAT">
+				<description>MM.dd.yy, dd-MM-yy, yy/MM/dd, etc. Supported Separater [ . - / ]</description>
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+			</column>
+			<column name="MEDIUM_DATE_FORMAT">
+				<description>MM.dd.yyyy, dd-MM-yyyy, yyyy/MM/dd, etc. Supported Separater [ . - / ]</description>
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+			</column>
+			<column name="LONG_DATE_FORMAT">
+				<description>dd MMM yyyy, (EEE, MMMM dd, yyyy), ()MMM dd, yyyy) etc. No Separater.</description>
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+			</column>
+			<column name="SHORT_TIME_FORMAT">
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+			</column>
+			<column name="MEDIUM_TIME_FORMAT">
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+			</column>
+			<column name="LONG_TIME_FORMAT">
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+			</column>
+			<column name="USE_24HR_TIME">
+				<data-type>BOOLEAN</data-type>
+			</column>
+			<!-- Data / Time Formats Ends -->
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAppAccountPreference_PK">
+			<primary-key-column>APP_ACCOUNT_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppAccountPreference_FK" reference-table-name="IAMAppAccount">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_ACCOUNT_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_ACCOUNT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="IAMAppAccountFinancialSettings" display-name="AppAccountFinancialSettings">
+		<description></description>
+		<columns>
+			<column name="APP_ACCOUNT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="FISCAL_YEAR_START_MONTH">
+				<description>Month index from January (1) to December (12)</description>
+				<data-type>TINYINT</data-type>
+			</column>
+			<column name="TAX_BASIS">
+				<description>Tax payment done on Accrual basis(false) or Cash basis(true) </description>
+				<data-type>BOOLEAN</data-type>
+			</column>
+			<column name="CURRENCY_CODE">
+				<description>INR, USD, EUR, etc</description>
+				<data-type>CHAR</data-type>
+				<max-size>3</max-size>
+			</column>
+			<column name="CURRENCY_SYMBOL">
+				<description>Rs., $, EUR, etc</description>
+				<data-type>CHAR</data-type>
+				<max-size>15</max-size>
+			</column>
+			<column name="CURRENCY_FORMAT">
+				<description>Ex: "#,###.###", "#.###", "#,##,###.##", "#,###.##", etc</description>
+				<data-type>CHAR</data-type>
+				<max-size>15</max-size>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAppAccFinancialSettings_PK">
+			<primary-key-column>APP_ACCOUNT_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppAccFinancialSettings_FK" reference-table-name="IAMAppAccount">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_ACCOUNT_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_ACCOUNT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	
+	<table name="IAMCPortalAdmin" display-name="CPortalAdmin">
+		<description>The zuid of the users with roles</description>
+		<columns>
+			<column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+			<column name="ZUID">
+                <description>Unique ID of the user across Zoho</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ROLE">
+            	<description>The corressponding role of the user</description>
+            	<data-type>INTEGER</data-type>
+            	<default-value>0</default-value>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+		</columns>
+		<primary-key name="IAMCPortalAdmin_PK">
+            <primary-key-column>ACCOUNT_AUTO_ID</primary-key-column>
+            <primary-key-column>ZUID</primary-key-column>
+        </primary-key>
+         <foreign-keys>
+            <foreign-key name="IAMCPortalAdmin_FK" reference-table-name="IAMAccount">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+	</table>
+	
+	<table name="IAMSAMLSpApp" display-name="SAMLSpApp">
+		<description>Used to store other third party apps, that are using zoho as saml ID provider</description>
+		<columns>
+			<column name="APP_ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="SAML_APP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMSAMLSpApp.SAML_APP_AUTO_ID</generator-name>
+                   <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="APP_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+              <column name="DESCRIPTION">
+                <description>A short description about this App. Used for display purpose</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ACS_URL">
+                <description>Saml Acs url of the app.</description>
+                 <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IDENTIFIER">
+                <description>Identify the app.</description>
+                 <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="APP_ID">
+              <description>Random ID to identify app.</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+			<column name="NAME_ID_FIELD">
+				<description>Used to store whcih field should be returned in NameId. 1 - Email</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="NAME_ID">
+				<description>Used to store NameId attribute which is send in SAML Response</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+			</column>
+			<column name="SIGN_IN_URL">
+                <description>Url to initiate the signin request.</description>
+                 <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DEFAULT_RELAY_STATE">
+                <description>Url to provide default relay state.</description>
+                 <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PUBLIC_KEY">
+				<description>
+					Public key to share to user.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>850</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&digest;</pattern>
+				</allowed-values>
+			</column>
+			<column name="PRIVATE_KEY">
+				<description>
+					Private key to sign.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>850</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&digest;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CERTIFICATE_EXPIRY_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="IDP_MODE_SUPPORTED">
+				<description>used to specify wheather IDP mode is supported or not. If not SIGN_IN_URL is mandatory for IDP initiate.</description>
+				<data-type>BOOLEAN</data-type>
+                <default-value>true</default-value>
+			</column>
+            <column name="IS_ENABLED">
+                <data-type>BOOLEAN</data-type>
+                <default-value>true</default-value>
+            </column>
+            <column name="ENABLE_LOGOUT">
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="LOGOUT_URL">
+                <description>logout URL of service.</description>
+                 <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>true</nullable>
+                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IDP_ISSUER">
+                <description>Zoho Issuer Details.</description>
+                 <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+		</columns>
+		<primary-key name="IAMSAMLSpApp_PK">
+            <primary-key-column>SAML_APP_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMSAMLSpApp_FK" reference-table-name="IAMAppAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+		<unique-keys>
+		    <unique-key name="IAMSAMLSpApp_UK1">
+		        <unique-key-column>APP_ID</unique-key-column>
+		    </unique-key>
+		</unique-keys>
+	</table>
+	
+	<table name="IAMSAMLSpAppAttribute" display-name="SAMLSpAppAttribute">
+		<description>Used to store other third party apps, that are using zoho as saml ID provider</description>
+		<columns>
+            <column name="SAML_APP_ATTRIBUTE_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMSAMLSpAppAttribute.SAML_APP_ATTRIBUTE_AUTO_ID</generator-name>
+                   <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="SAML_APP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ATTRIBUTE_NAME_APL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&apl;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ATTRIBUTE_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+			<column name="ATTRIBUTE_VALUE">
+				<description>Used to store whcih field should be returned in Attribute. 1 - Email, 2 - Firstname, 3 - LastName, 4 - FullName, 5 - UserName</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="CUSTOM_ATTRIBUTE_VALUE">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+			</column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+		</columns>
+		<primary-key name="IAMSAMLSpAppAttr_PK">
+            <primary-key-column>SAML_APP_ATTRIBUTE_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMSAMLSpAppAttr_FK" reference-table-name="IAMSAMLSpApp">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>SAML_APP_AUTO_ID</fk-local-column>
+                        <fk-reference-column>SAML_APP_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+	        <unique-key name="IAMSAMLSpAppAttr_UK1">
+	            <unique-key-column>SAML_APP_AUTO_ID</unique-key-column>
+	            <unique-key-column>ATTRIBUTE_NAME_APL</unique-key-column>
+	        </unique-key>
+        </unique-keys>
+	</table>
+
+	<table name="IAMSAMLSpUser" display-name="SAMLSpUser">
+        <description>permit SAML flow if the user is an SAML user</description>
+        <columns>
+            <column name="SAML_APP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ZID">
+                <description>Unique ID of the saml user across Zoho</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZID_TYPE">
+                <description>1 - User, 2 - Group</description>
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+            </column>
+            <column name="IS_ENABLED">
+                <data-type>BOOLEAN</data-type>
+                <default-value>true</default-value>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMSAMLSpUser_PK">
+            <primary-key-column>SAML_APP_AUTO_ID</primary-key-column>
+            <primary-key-column>ZID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMSAMLSpUser_FK" reference-table-name="IAMSAMLSpApp" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>SAML_APP_AUTO_ID</fk-local-column>
+                        <fk-reference-column>SAML_APP_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    <table name="IAMClientPortalOrgType" display-name="ClientPortalOrgType">
+        <description>OrgTypes under a client portal</description>
+        <columns>
+            <column name="CLIENT_PORTAL_ORG_TYPE_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMClientPortalOrgType.CLIENT_PORTAL_ORG_TYPE_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="ORG_TYPE">
+                <description>Orgtype of the service added in client portal</description>
+                <data-type>INTEGER</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMClientPortalOrgType_PK">
+            <primary-key-column>CLIENT_PORTAL_ORG_TYPE_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMClientPortalOrgType_FK" reference-table-name="IAMAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+			<unique-key name="IAMClientPortalOrgType_UK">
+				<unique-key-column>ACCOUNT_AUTO_ID</unique-key-column>
+				<unique-key-column>ORG_TYPE</unique-key-column>
+			</unique-key>
+		</unique-keys>
+    </table>
+    <table name="IAMPortalMapping" display-name="PortalMapping">
+        <description>Mapping of ServiceOrgDomain, ServiceOrgZAID in client portal</description>
+        <columns>
+        	<column name="PORTAL_MAPPING_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMPortalMapping.PORTAL_MAPPING_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="CLIENT_PORTAL_ORG_TYPE_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="ZAAID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+            <column name="MAPPING_TYPE">
+            	<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+                    <value>DOMAIN</value>
+                    <value>ZAID</value>
+                </allowed-values>
+            </column>
+            <column name="MAPPING_KEY">
+            	<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+            </column>
+            <column name="MAPPING_VALUE">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMPortalMapping_PK">
+            <primary-key-column>PORTAL_MAPPING_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+        	<foreign-key name="IAMPortalMapping_FK1" reference-table-name="IAMClientPortalOrgType" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>CLIENT_PORTAL_ORG_TYPE_AUTO_ID</fk-local-column>
+                        <fk-reference-column>CLIENT_PORTAL_ORG_TYPE_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+			<unique-key name="IAMPortalMapping_UK">
+				<unique-key-column>ZAAID</unique-key-column>
+				<unique-key-column>MAPPING_TYPE</unique-key-column>
+				<unique-key-column>MAPPING_KEY</unique-key-column>
+			</unique-key>
+			<unique-key name="IAMPortalMapping_UK1">
+				<unique-key-column>CLIENT_PORTAL_ORG_TYPE_AUTO_ID</unique-key-column>
+				<unique-key-column>MAPPING_TYPE</unique-key-column>
+				<unique-key-column>MAPPING_KEY</unique-key-column>
+			</unique-key>
+			<unique-key name="IAMPortalMapping_UK2">
+				<unique-key-column>MAPPING_TYPE</unique-key-column>
+				<unique-key-column>MAPPING_VALUE</unique-key-column>
+				<unique-key-column>MAPPING_KEY</unique-key-column>
+			</unique-key>
+		</unique-keys>
+		<indexes>
+            <index name="IAMPortalMappingndx">
+                <index-column>MAPPING_KEY</index-column>
+            </index>
+        </indexes>
+    </table>
+    <table name="IAMPortalAccountMapping" display-name="PortalAccountMapping">
+        <description>Mapping of ServiceOrgDomain, ServiceOrgZAID in client portal</description>
+        <columns>
+            <column name="APP_ACCOUNT_SERV_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+			<column name="ACCOUNT_ID">
+				<description>Unique Identifier</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ACCOUNT_TYPE">
+				<description>Constants defined by Service to identify the Account.</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ACCOUNT_NAME">
+				<description>Uniuqe Account Name such as Facebook App Id, Twitter Profile ID, etc.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&config-name;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+        </columns>
+        <primary-key name="IAMPortalAccountMapping_PK">
+			<primary-key-column>APP_ACCOUNT_SERV_AUTO_ID</primary-key-column>
+			<primary-key-column>ACCOUNT_TYPE</primary-key-column>
+			<primary-key-column>ACCOUNT_NAME</primary-key-column>
+		</primary-key>
+        <foreign-keys>
+        	<foreign-key name="IAMPortalAccountMapping_FK1" reference-table-name="IAMAppAccountService" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_SERV_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_SERV_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+			<unique-key name="IAMPortalAccountMapping_UK">
+				<unique-key-column>ACCOUNT_ID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+    </table>
+    <table name="IAMAccountScheduleDetails" display-name="AccountScheduleDetails">
+		<description>Maintains the scheduling info related to account</description>
+		<columns>
+			<column name="ACCOUNT_SCHEDULE_DETAILS_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAccountScheduleDetails.ACCOUNT_SCHEDULE_DETAILS_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+			<column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+			<column name="JOBID">
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="OPERATION_DATA">
+                <data-type>BLOB</data-type>
+            </column>
+            <column name="SCHEDULER_TYPE">
+            	<description>Type of the scheduler</description>
+            	<data-type>INTEGER</data-type>
+            </column>
+            <column name="STATUS">
+            	<description>The status of the scheduling job; Inited -0,processed-1 or error-2</description>
+            	<data-type>INTEGER</data-type>
+            	<default-value>0</default-value>
+            </column>
+            <column name="EXPIRY_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+		</columns>
+		<primary-key name="IAMAccountScheduleDetails_PK">
+            <primary-key-column>ACCOUNT_SCHEDULE_DETAILS_AUTO_ID</primary-key-column>
+        </primary-key>
+         <foreign-keys>
+            <foreign-key name="IAMAccountScheduleDetails_FK" reference-table-name="IAMAccount">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMAccountScheduleDetails_UK1">
+                <unique-key-column>ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>JOBID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+	</table>
+</data-dictionary>

@@ -1,0 +1,5 @@
+<!-- $Id$ -->
+<script src="<%out.print(request.getContextPath());//NO OUTPUTENCODING%>/components/javascript/chart.js"></script><%--NO OUTPUTENCODING --%>
+<div id="ZDBToolTip_<%out.print(uniqueId);//NO OUTPUTENCODING%>" class="GraphToolTip" style="display:none"></div><%--NO OUTPUTENCODING --%>
+<div toolTipId="ZDBToolTip_<%out.print(uniqueId);//NO OUTPUTENCODING%>"/><%--NO OUTPUTENCODING --%>
+

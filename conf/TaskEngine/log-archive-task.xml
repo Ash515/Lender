@@ -1,0 +1,15 @@
+<!-- $Id: $ -->
+<task>
+
+<Schedule schedule_id="Schedule:schedule_id:archiveSchedule1" schedule_name="archive-schedule1">
+        <Calendar repeat_frequency="Daily" time_of_day="1" unit_of_time="Hours"/>
+</Schedule>
+
+<TaskEngine_Task task_id="TaskEngine_Task:task_id:logArchiveTask" task_name="archive-task1" class_name="com.adventnet.taskengine.logging.LogArchiveScheduler">
+   <Scheduled_Task schedule_id="Schedule:schedule_id:archiveSchedule1">
+    <Task_Input instance_id="Task_Input:instance_id:1"/>
+   </Scheduled_Task>
+</TaskEngine_Task>
+
+</task>
+

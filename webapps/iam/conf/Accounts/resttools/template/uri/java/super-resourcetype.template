@@ -1,0 +1,16 @@
+package com.zoho.$modulenamelowercase.base;
+import com.zoho.resource.*;
+public class $classname {
+    public static class RESOURCE {
+        public final static String DOT = ".";
+    }
+    
+    public static URI getInstance(String selfUrl) {
+        return URI.getInstance("$restContext", null, selfUrl);
+    }
+
+    public static URI setPath(Object... nodes) {
+        return URI.setPath("$restContext", nodes);
+    }
+}
+

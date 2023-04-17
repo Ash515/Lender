@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id $ -->
+<IAMAccounts>
+    <IAMAuditListener NAME="PEOPLEUSERDETAILSLISTENER" RESOURCE_TYPE_PATTERN="useremail_put|useremail_post|screenname_put|screenname_post"/>
+    <IAMAuditListener NAME="SDPOnDemand_listener" RESOURCE_TYPE_PATTERN="user_put|account_put|account_delete"/>
+    <IAMAuditListener NAME="sync-org-contacts" RESOURCE_TYPE_PATTERN="^user_.*|^useremail_.*|^screenname_.*|^address_.*"/>
+    <!-- IAMAuditListener NAME="USERUPDATELISTENER" RESOURCE_TYPE_PATTERN="user_put|appaccountmember_post|appaccountmember_put"/-->
+</IAMAccounts>

@@ -1,0 +1,8 @@
+zchar.advanced.meta = com.adventnet.db.persistence.metadata.CharDataTypeMetaInfo
+zchar.advanced.dttransformer = com.adventnet.db.adapter.CharDTTransformer
+zchar.advanced.dtadapter = com.adventnet.db.adapter.CharDTAdapter
+zchar.advanced.dtresultsetadapter = com.adventnet.db.adapter.CharDTResultSetAdapter
+
+zchar.advanced.postgres.dtsqlgenerator = com.adventnet.db.adapter.postgres.PostgresCharDTSQLGenerator
+zchar.advanced.mysql.dtsqlgenerator = com.adventnet.db.adapter.mysql.MysqlCharDTSQLGenerator
+zchar.advanced.mssql.dtsqlgenerator = com.adventnet.db.adapter.mssql.MssqlCharDTSQLGenerator

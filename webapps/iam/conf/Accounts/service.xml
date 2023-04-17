@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: $ -->
+<services>
+    <Service service_id="Service:service_id:AccountsService" service_name="AccountsService" module_id="Accounts" classname="com.zoho.accounts.onpremise.AccountsService">
+    </Service>
+</services>

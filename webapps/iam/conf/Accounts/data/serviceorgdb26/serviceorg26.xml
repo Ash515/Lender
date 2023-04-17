@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="routeiqsorgzaid" account_name="RouteIQ Service Org">
+		<IAMAccountDomain domain="routeiqsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="zohogcsorgzaid" account_name="ZOHOGC Service Org">
+		<IAMAccountDomain domain="zohogcsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="ziapipelinessorgzaid" account_name="ZIAPipelines Service Org">
+		<IAMAccountDomain domain="ziapipelinessorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="zohopossorgzaid" account_name="ZohoPOS Service Org">
+		<IAMAccountDomain domain="zohopossorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="docufillersorgzaid" account_name="DocuFiller Service Org">
+		<IAMAccountDomain domain="docufillersorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

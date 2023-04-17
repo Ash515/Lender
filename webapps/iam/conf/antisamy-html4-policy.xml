@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Zoho Enhancement :
+		* This policy file contains upto HTML4 tags and attribites
+		* If teams need to extend antisamy policy file please refer -> https://intranet.wiki.zoho.com/security/How-to-extend-antisamy-policy-file.html     
+	-->
+<anti-samy-rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="antisamy.xsd">
+	<include href="antisamy-common-rules.xml" />
+	<!--
+	Some attributes are common to all (or most) HTML tags. There aren't many that qualify for this. You have to make sure there's no
+	collisions between any of these attribute names with attribute names of other tags that are for different purposes.
+	-->
+	<common-attributes>
+		<!-- Common to all HTML tags  -->
+		<attribute name="id" description="The 'id' of any HTML attribute should not contain anything besides letters and numbers">
+			<regexp-list>
+				<regexp name="htmlId" />
+			</regexp-list>
+		</attribute>
+		<attribute name="class" description="The 'class' of any HTML attribute is usually a single word, but it can also be a list of class names separated by spaces">
+			<regexp-list>
+				<regexp name="htmlClass" />
+			</regexp-list>
+		</attribute>
+		<attribute name="lang" description="The 'lang' attribute tells the browser what language the element's attribute values and content are written in">
+			<regexp-list description="Customized:Regex-Based on the 'w3schools.com', character ',' and '-' added in the existing 'lang' regex.Reference:https://www.w3schools.com/tags/ref_language_codes.asp">
+				<regexp value="[a-zA-Z\-,]{2,20}" />
+			</regexp-list>
+		</attribute>
+		<attribute name="title" description="The 'title' attribute provides text that shows up in a 'tooltip' when a user hovers their mouse over the element">
+			<regexp-list>
+				<regexp name="htmlTitle" />
+			</regexp-list>
+		</attribute>
+		<attribute name="alt" description="The 'alt' attribute provides alternative text to users when its visual representation is not available">
+			<regexp-list>
+				<regexp name="paragraph" />
+			</regexp-list>
+		</attribute>
+		<!-- the "style" attribute will be validated by an inline stylesheet scanner, so no need to define anything here - i hate having to special case this but no other choice -->
+		<attribute name="style" description="The 'style' attribute provides the ability for users to change many attributes of the tag's contents using a strict syntax" />
+		<attribute name="media">
+			<regexp-list>
+				<regexp value="[a-zA-Z0-9,\-\s]+" />
+			</regexp-list>
+			<literal-list>
+				<literal value="screen" />
+				<literal value="tty" />
+				<literal value="tv" />
+				<literal value="projection" />
+				<literal value="handheld" />
+				<literal value="print" />
+				<literal value="braille" />
+				<literal value="aural" />
+				<literal value="all" />
+			</literal-list>
+		</attribute>
+		<!-- Anchor related -->
+		<!--  onInvalid="filterTag" has been removed as per suggestion at OWASP SJ 2007 - just "name" is valid -->
+		<attribute name="href">
+			<regexp-list>
+				<regexp name="onsiteURL" />
+				<regexp name="offsiteURL" />
+			</regexp-list>
+		</attribute>
+		<attribute name="name">
+			<regexp-list>
+				<regexp value="[a-zA-Z0-9\-_\$]+" />
+				<!--
+		 		have to allow the $ for .NET controls - although,
+		 		will users be supplying input that has server-generated
+		 		.NET control names? methinks not, but i want to pass my
+		 		test cases
+		 		-->
+			</regexp-list>
+		</attribute>
+		<attribute name="shape" description="The 'shape' attribute defines the shape of the selectable area">
+			<literal-list>
+				<literal value="default" />
+				<literal value="rect" />
+				<literal value="circle" />
+				<literal value="poly" />
+			</literal-list>
+		</attribute>
+		<!--  Table attributes  -->
+		<attribute name="border">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="cellpadding">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="cellspacing">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="colspan">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="rowspan">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="background">
+			<regexp-list>
+				<regexp name="onsiteURL" />
+			</regexp-list>
+		</attribute>
+		<attribute name="bgcolor">
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+			</regexp-list>
+		</attribute>
+		<attribute name="abbr">
+			<regexp-list>
+				<regexp name="paragraph" />
+			</regexp-list>
+		</attribute>
+		<attribute name="headers" description="The 'headers' attribute is a space-separated list of cell IDs">
+			<regexp-list>
+				<regexp value="[a-zA-Z0-9\s*]*" />
+			</regexp-list>
+		</attribute>
+		<attribute name="charoff">
+			<regexp-list>
+				<regexp name="numberOrPercent" />
+			</regexp-list>
+		</attribute>
+		<attribute name="char">
+			<regexp-list>
+				<regexp value=".{0,1}" />
+			</regexp-list>
+		</attribute>
+		<attribute name="axis" description="The 'headers' attribute is a comma-separated list of related header cells">
+			<regexp-list>
+				<regexp value="[a-zA-Z0-9\s*,]*" />
+			</regexp-list>
+		</attribute>
+		<attribute name="nowrap" description="The 'nowrap' attribute tells the browser not to wrap text that goes over one line">
+			<regexp-list>
+				<regexp name="anything" />
+				<!-- <regexp value="(nowrap){0,1}"/>  -->
+			</regexp-list>
+		</attribute>
+		<!--  Common positioning attributes  -->
+		<attribute name="width">
+			<regexp-list>
+				<regexp name="numberOrPercent" />
+				<!-- ZOHO UPDATE : Based on the creator log, 'width' attribute with the lexical unit px is valid. -->
+				<regexp name="length" description="Customized:Regex-Based on the creator log, 'width' attribute with the lexical unit 'px' and float numbers is valid.Reference:https://intranet.wiki.zoho.com/security/HTML---and---CSS---Antisamy---behaviour---creator---log---analysis---6---march---2017.html" />
+			</regexp-list>
+		</attribute>
+		<attribute name="height">
+			<regexp-list>
+				<!-- ZOHO UPDATE : Based on the creator log, 'height' attribute with the lexical unit px is valid. -->
+				<regexp name="numberOrPercent" />
+				<regexp name="length" />
+			</regexp-list>
+		</attribute>
+		<attribute name="align" description="The 'align' attribute of an HTML element is a direction word, like 'left', 'right' or 'center'">
+			<literal-list>
+				<literal value="center" />
+				<literal value="middle" />
+				<literal value="left" />
+				<literal value="right" />
+				<literal value="justify" />
+				<literal value="char" />
+			</literal-list>
+		</attribute>
+		<attribute name="valign" description="The 'valign' attribute of an HTML attribute is a direction word, like 'baseline','bottom','middle' or 'top'">
+			<literal-list>
+				<literal value="baseline" />
+				<literal value="bottom" />
+				<literal value="middle" />
+				<literal value="top" />
+			</literal-list>
+		</attribute>
+		<!-- Intrinsic JavaScript Events -->
+		<attribute name="onFocus" description="The 'onFocus' event is executed when the control associated with the tag gains focus">
+			<literal-list>
+				<literal value="javascript:void(0)" />
+				<literal value="javascript:history.go(-1)" />
+			</literal-list>
+		</attribute>
+		<attribute name="onBlur" description="The 'onBlur' event is executed when the control associated with the tag loses focus">
+			<literal-list>
+				<literal value="javascript:void(0)" />
+				<literal value="javascript:history.go(-1)" />
+			</literal-list>
+		</attribute>
+		<attribute name="onClick" description="The 'onClick' event is executed when the control associated with the tag is clicked">
+			<literal-list>
+				<literal value="javascript:void(0)" />
+				<literal value="javascript:history.go(-1)" />
+			</literal-list>
+		</attribute>
+		<attribute name="onDblClick" description="The 'onDblClick' event is executed when the control associated with the tag is clicked twice immediately">
+			<literal-list>
+				<literal value="javascript:void(0)" />
+				<literal value="javascript:history.go(-1)" />
+			</literal-list>
+		</attribute>
+		<attribute name="onMouseDown" description="The 'onMouseDown' event is executed when the control associated with the tag is clicked but not yet released">
+			<literal-list>
+				<literal value="javascript:void(0)" />
+				<literal value="javascript:history.go(-1)" />
+			</literal-list>
+		</attribute>
+		<attribute name="onMouseUp" description="The 'onMouseUp' event is executed when the control associated with the tag is clicked after the button is released">
+			<literal-list>
+				<literal value="javascript:void(0)" />
+				<literal value="javascript:history.go(-1)" />
+			</literal-list>
+		</attribute>
+		<attribute name="onMouseOver" description="The 'onMouseOver' event is executed when the user's mouse hovers over the control associated with the tag">
+			<literal-list>
+				<literal value="javascript:void(0)" />
+				<literal value="javascript:history.go(-1)" />
+			</literal-list>
+		</attribute>
+		<attribute name="scope" description="The 'scope' attribute defines what's covered by the header cells">
+			<literal-list>
+				<literal value="row" />
+				<literal value="col" />
+				<literal value="rowgroup" />
+				<literal value="colgroup" />
+			</literal-list>
+		</attribute>
+		<!-- If you want users to be able to mess with tabindex, uncomment this -->
+		<!--
+		 <attribute name="tabindex" description="...">
+		 	<regexp-list>
+		 		<regexp name="number"/>
+		 	</regexp-list>
+		 </attribute>
+		  -->
+		<!-- Input/form related common attributes -->
+		<attribute name="disabled">
+			<regexp-list>
+				<regexp name="anything" />
+			</regexp-list>
+		</attribute>
+		<attribute name="readonly">
+			<regexp-list>
+				<regexp name="anything" />
+			</regexp-list>
+		</attribute>
+		<attribute name="accesskey">
+			<regexp-list>
+				<regexp name="anything" />
+			</regexp-list>
+		</attribute>
+		<attribute name="size">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="autocomplete">
+			<literal-list>
+				<literal value="on" />
+				<literal value="off" />
+			</literal-list>
+		</attribute>
+		<attribute name="rows">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="cols">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="datetime" description="HTML5:The datetime attribute represent the machine-readable date/time of the &amp;lt;time&amp;gt; element">
+			<regexp-list>
+				<regexp value="[\w-\s.:\-+]*" />
+			</regexp-list>
+		</attribute>
+	</common-attributes>
+	<tag-rules>
+			<!-- Tags related to JavaScript -->
+
+		<tag name="script" action="remove"/>
+		<tag name="noscript" action="validate"/> <!-- although no javascript can fire inside a noscript tag, css is still a viable attack vector -->
+                <!-- Zoho Fix: Unknown tags marked to be dropped including content . 
+                     Neko parser treats them as "SPECIAL" tags resulting in antisamy not removing the content which may have XSS-->
+                <tag name="plaintext" action="remove"/>
+		<tag name="comment" action="remove"/>
+                <tag name="xmp" action="remove"/>
+		
+		<!-- Frame & related tags -->
+
+		<tag name="iframe" action="remove"/>
+		<tag name="frameset" action="remove"/>
+		<tag name="frame" action="remove"/>
+
+
+
+		<!-- Form related tags -->
+
+		<tag name="label" action="validate">
+			<attribute name="for">
+				<regexp-list>
+					<regexp name="htmlId"/>
+				</regexp-list>
+			</attribute>
+		</tag>
+
+
+		<!--
+			If you wish to enable any of the form related tags, change the tag's action below from "filter" or "remove" to "validate". The attributes have been
+			hardened so this is safe to do, if it's something you want to allow. Beware the <><ing possibilities!
+		 -->
+
+		<tag name="form" action="validate">
+
+			<attribute name="action">
+				<regexp-list>
+					<regexp name="onsiteURL"/>
+					<regexp name="offsiteURL"/>
+				</regexp-list>
+			</attribute>
+
+			<attribute name="name"/>
+
+			<attribute name="autocomplete"/>
+
+			<attribute name="method">
+				<literal-list>
+					<literal value="post"/>
+					<literal value="get"/>
+				</literal-list>
+			</attribute>
+
+		</tag>
+
+		<tag name="button" action="validate">
+			<attribute name="name"/>
+			<attribute name="value">
+				<regexp-list>
+					<regexp name="anything"/>
+				</regexp-list>
+			</attribute>
+
+			<attribute name="disabled"/>
+			<attribute name="accesskey"/>
+			<attribute name="type">
+				<literal-list>
+					<literal value="submit"/>
+					<literal value="reset"/>
+					<literal value="button"/>
+				</literal-list>
+			</attribute>
+		</tag>
+		<tag name="input" action="validate">
+
+			<attribute name="name"/>
+
+			<attribute name="size"/>
+
+			<attribute name="maxlength">
+				<regexp-list>
+					<regexp name="number"/>
+				</regexp-list>
+			</attribute>
+
+			<attribute name="autocomplete"/>
+
+			<attribute name="checked">
+				<regexp-list>
+					<regexp name="anything"/>
+				</regexp-list>
+			</attribute>
+
+			<attribute name="alt"/>
+
+			<attribute name="src">
+				<regexp-list>
+					<regexp name="onsiteURL"/>
+					<regexp name="offsiteURL"/>
+				</regexp-list>
+			</attribute>
+
+			<attribute name="usemap">
+				<regexp-list>
+					<regexp name="onsiteURL"/>
+				</regexp-list>
+			</attribute>
+
+			<attribute name="type">
+				<literal-list>
+					<literal value="hidden"/>
+					<literal value="text"/>
+					<!-- <literal value="password"/>  --> <!--  no user profiles should have password fields -->
+					<literal value="radio"/>
+					<literal value="checkbox"/>
+					<literal value="submit"/>
+					<literal value="button"/>
+					<literal value="image"/>
+					<literal value="file"/>
+					<literal value="reset"/>
+				</literal-list>
+			</attribute>
+
+			<attribute name="value">
+				<regexp-list>
+					<regexp name="anything"/>
+				</regexp-list>
+			</attribute>
+
+			<attribute name="disabled"/>
+			<attribute name="readonly"/>
+			<attribute name="accesskey"/>
+
+			<attribute name="border"/>
+
+		</tag>
+
+		<tag name="select" action="validate">
+
+			<attribute name="name"/>
+			<attribute name="disabled"/>
+
+			<attribute name="multiple">
+				<regexp-list>
+					<regexp name="anything"/>
+				</regexp-list>
+			</attribute>
+
+			<attribute name="size"/>
+
+		</tag>
+
+		<tag name="option" action="validate">
+
+			<attribute name="disabled"/>
+
+			<attribute name="value">
+				<regexp-list>
+					<regexp name="anything"/>
+				</regexp-list>
+			</attribute>
+
+			<attribute name="label">
+				<regexp-list>
+					<regexp name="anything"/>
+				</regexp-list>
+			</attribute>
+
+			<attribute name="selected">
+				<regexp-list>
+					<regexp name="anything"/>
+				</regexp-list>
+			</attribute>
+		</tag>
+
+		<tag name="textarea" action="validate">
+			<attribute name="rows"/>
+			<attribute name="cols"/>
+			<attribute name="name"/>
+			<attribute name="disabled"/>
+			<attribute name="readonly"/>
+			<attribute name="maxlength" description="Customized:Based on the w3schools.com, the maxlength attribute added.Refer:https://www.w3schools.com/tags/att_maxlength.asp">
+				<regexp-list>
+					<regexp name="positiveInteger"/>
+				</regexp-list>
+			</attribute>
+		</tag>
+
+		<!-- All formatting tags -->
+		<!-- Customized: Based on w3schools.com and logs, 'align' attribute added for headline tags -->
+
+		<tag name="h1" action="validate">
+			<attribute name="align" description="Customized: Based on w3schools.com and logs, 'align' attribute added for headline tags"/>
+		</tag>
+		<tag name="h2" action="validate">
+			<attribute name="align" description="Customized: Based on w3schools.com and logs, 'align' attribute added for headline tags"/>
+		</tag>
+		<tag name="h3" action="validate">
+			<attribute name="align" description="Customized: Based on w3schools.com and logs, 'align' attribute added for headline tags"/>
+		</tag>
+		<tag name="h4" action="validate">
+			<attribute name="align" description="Customized: Based on w3schools.com and logs, 'align' attribute added for headline tags"/>
+		</tag>
+		<tag name="h5" action="validate">
+			<attribute name="align" description="Customized: Based on w3schools.com and logs, 'align' attribute added for headline tags"/>
+		</tag>
+		<tag name="h6" action="validate">
+			<attribute name="align" description="Customized: Based on w3schools.com and logs, 'align' attribute added for headline tags"/>
+		</tag>
+
+		<tag name="p" action="validate">
+			<attribute name="align"/>
+		</tag>
+
+		<tag name="i" action="validate"/>
+		<tag name="b" action="validate"/>
+		<tag name="u" action="validate"/>
+		<tag name="strong" action="validate"/>
+
+		<tag name="em" action="validate"/>
+		<tag name="small" action="validate"/>
+		<tag name="big" action="validate"/>
+		<tag name="pre" action="validate"/>
+		<tag name="code" action="validate"/>
+		<tag name="cite" action="validate"/>
+		<tag name="samp" action="validate"/>
+		<tag name="sub" action="validate"/>
+		<tag name="sup" action="validate"/>
+		<tag name="strike" action="validate"/>
+		<tag name="center" action="validate"/>
+		<tag name="blockquote" action="validate"/>
+
+		<tag name="ins" action="validate" description="Customized: Based on w3schools.com and logs, ins tag is using to insert text in HTML document. Refer:https://www.w3schools.com/tags/tag_ins.asp">
+			<attribute name="datetime"/>
+			<!-- The 'cite' attribute has no visual effect. But, it can be used by screen readers -->
+			<attribute name="cite">
+				<regexp-list>
+					<regexp name="onsiteURL"/>
+					<regexp name="offsiteURL"/>
+				</regexp-list>
+			</attribute>
+		</tag>
+
+		<tag name="caption" action="validate" description="Customized:Based on the creatro log, this is valid and it define the caption for the table. It is a HTML4.01 tag.">
+			<attribute name="align">
+				<literal-list>
+					<literal value="top"/>
+					<literal value="bottom"/>
+					<literal value="left"/>
+					<literal value="right"/>
+				</literal-list>
+			</attribute>
+		</tag>
+
+		<tag name="hr" action="validate"/>
+		<tag name="br" action="validate"/>
+
+		<tag name="col" action="validate"/>
+
+		<tag name="font" action="validate">
+			<attribute name="color">
+				<regexp-list>
+					<regexp name="colorName"/>
+					<regexp name="colorCode"/>
+				</regexp-list>
+			</attribute>
+
+			<attribute name="face">
+				<regexp-list>
+					<!-- regexp value="[\w;, \-]+"/-->
+					<regexp value="[0-9a-zA-Z\s\P{InBasicLatin}_;,\-]+"/>
+				</regexp-list>
+			</attribute>
+
+			<attribute name="size"/>
+		</tag>
+
+
+		<!-- Anchor and anchor related tags -->
+
+		<tag name="a" action="validate">
+
+			<!--  onInvalid="filterTag" has been removed as per suggestion at OWASP SJ 2007 - just "name" is valid -->
+			<attribute name="href"/>
+			<attribute name="onFocus"/>
+			<attribute name="onBlur"/>
+			<attribute name="nohref">
+				<regexp-list>
+					<regexp name="anything"/>
+				</regexp-list>
+			</attribute>
+			<attribute name="rel">
+				<literal-list>
+					<literal value="nofollow"/>
+				</literal-list>
+			</attribute>
+			<attribute name="name"/>
+			<attribute name="target" description="Customized:Based on the both creator and crm log analysis, 70% user content contains 'target=_blank' attribute. And others attributes values (_self,_parent,_top) are not has any propblems.Refer:https://intranet.wiki.zoho.com/security/Antisamy---addressing---target---blank.html">
+				<literal-list>
+					<literal value="_blank"/>
+				</literal-list>
+			</attribute>
+			<insert-attribute name="rel" description="Customized:To allow 'target=_blank' safely, add rel='noopener noreferrer' attribute in &lt;a&gt; atg.Refer: https://intranet.wiki.zoho.com/security/Antisamy---addressing---target---blank.html">
+				<literal-list>
+					<literal value="noopener"/>
+					<literal value="noreferrer"/>
+				</literal-list>
+				<criteria-attributes>
+					<criteria-attribute name="target">
+						<literal-list>
+							<literal value="_blank"/>
+						</literal-list>
+					</criteria-attribute>
+				</criteria-attributes>	
+			</insert-attribute>
+		</tag>
+
+		<!-- base tag removed per demo - this could be enabled with literal-list values you allow -->
+		<!--
+		<tag name="base" action="validate">
+			<attribute name="href"/>
+		</tag>
+		-->
+		<!-- Stylesheet Tags -->
+
+		<tag name="style" action="validate">
+			<attribute name="type">
+				<literal-list>
+					<literal value="text/css"/>
+				</literal-list>
+			</attribute>
+			<attribute name="media"/>
+		</tag>
+
+		<tag name="span" action="validate"/>
+
+		<tag name="div" action="validate">
+			<attribute name="align"/>
+		</tag>
+
+
+		<!-- Image & image related tags -->
+
+		<tag name="img" action="validate">
+			<attribute name="src" onInvalid="removeTag">
+				<regexp-list>
+					<regexp name="onsiteURL"/>
+					<regexp name="offsiteURL"/>
+				</regexp-list>
+			</attribute>
+			<attribute name="name"/>
+			<attribute name="alt"/>
+			<attribute name="height"/>
+			<attribute name="width"/>
+			<attribute name="border"/>
+			<attribute name="align"/>
+
+			<attribute name="hspace">
+				<regexp-list>
+					<regexp name="number"/>
+				</regexp-list>
+			</attribute>
+
+			<attribute name="vspace">
+				<regexp-list>
+					<regexp name="number"/>
+				</regexp-list>
+			</attribute>
+		</tag>
+
+		<!-- no way to do this safely without hooking up the same code to @import to embed the remote stylesheet (malicious user could change offsite resource to be malicious after validation -->
+		<!-- <attribute name="href" onInvalid="removeTag"/>  -->
+
+		<tag name="link" action="validate">
+
+			<!-- <attribute name="href" onInvalid="removeTag"/>  -->
+
+			<attribute name="media"/>
+
+			<attribute name="type" onInvalid="removeTag">
+				<literal-list>
+					<literal value="text/css"/>
+					<literal value="application/rss+xml"/>
+					<literal value="image/x-icon"/>
+				</literal-list>
+			</attribute>
+
+			<attribute name="rel">
+				<literal-list>
+					<literal value="stylesheet"/>
+					<literal value="shortcut icon"/>
+					<literal value="search"/>
+					<literal value="copyright"/>
+					<literal value="top"/>
+					<literal value="alternate"/>
+				</literal-list>
+			</attribute>
+		</tag>
+
+		<!-- List tags -->
+
+		<tag name="ul" action="validate"/>
+		<tag name="ol" action="validate">
+			<attribute name="start">
+				<regexp-list>
+					<regexp name="integer"/>
+				</regexp-list>
+			</attribute>
+			<attribute name="type">
+				<literal-list>
+					<literal value="1"/>
+					<literal value="A"/>
+					<literal value="a"/>
+					<literal value="I"/>
+					<literal value="i"/>
+				</literal-list>
+			</attribute>
+			<attribute name="reversed">
+				<regexp-list>
+					<regexp name="anything"/>
+				</regexp-list>
+			</attribute>
+		</tag>
+		<tag name="li" action="validate">
+			<attribute name="value" description="HTML5:New in HTML5. But deprecated in HTML4.01">
+				<regexp-list>
+					<regexp name="integer"/>
+				</regexp-list>
+			</attribute>
+			<attribute name="type" description="Deprecated:Deprecated in HTML5, but support in all modern browser. Specifies which kind of bullet point will be used">
+				<regexp-list>
+					<regexp value="(1|A|a|I|i)"/>
+				</regexp-list>
+			</attribute>
+			<literal-list>
+					<literal value="disc"/>
+					<literal value="circle"/>
+					<literal value="square"/>
+			</literal-list>
+		</tag>
+		<!-- Dictionary tags -->
+
+		<tag name="dd" action="truncate"/>
+		<tag name="dl" action="truncate"/>
+		<tag name="dt" action="truncate"/>
+
+
+
+
+		<!-- Table tags (tbody, thead, tfoot)-->
+
+		<tag name="thead" action="validate">
+			<attribute name="align"/>
+			<attribute name="char"/>
+			<attribute name="charoff"/>
+			<attribute name="valign"/>
+		</tag>
+
+		<tag name="tbody" action="validate">
+			<attribute name="align"/>
+			<attribute name="char"/>
+			<attribute name="charoff"/>
+			<attribute name="valign"/>
+		</tag>
+
+		<tag name="tfoot" action="validate">
+			<attribute name="align"/>
+			<attribute name="char"/>
+			<attribute name="charoff"/>
+			<attribute name="valign"/>
+		</tag>
+
+		<tag name="table" action="validate">
+			<attribute name="height"/>
+			<attribute name="width"/>
+			<attribute name="border"/>
+			<attribute name="bgcolor"/>
+			<attribute name="cellpadding"/>
+			<attribute name="cellspacing"/>
+			<attribute name="background"/>
+			<attribute name="align"/>
+			<attribute name="noresize">
+				<literal-list>
+					<literal value="noresize"/>
+					<literal value=""/>
+				</literal-list>
+			</attribute>
+		</tag>
+
+		<tag name="td" action="validate">
+			<attribute name="background"/>
+			<attribute name="bgcolor"/>
+			<attribute name="abbr"/>
+			<attribute name="axis"/>
+			<attribute name="headers"/>
+			<attribute name="scope"/>
+			<attribute name="nowrap"/>
+			<attribute name="height"/>
+			<attribute name="width"/>
+			<attribute name="align"/>
+			<attribute name="char"/>
+			<attribute name="charoff"/>
+			<attribute name="valign"/>
+			<attribute name="colspan"/>
+			<attribute name="rowspan"/>
+		</tag>
+
+		<tag name="th" action="validate">
+			<attribute name="abbr"/>
+			<attribute name="axis"/>
+			<attribute name="headers"/>
+			<attribute name="scope"/>
+			<attribute name="nowrap"/>
+			<attribute name="bgcolor"/>
+			<attribute name="height"/>
+			<attribute name="width"/>
+			<attribute name="align"/>
+			<attribute name="char"/>
+			<attribute name="charoff"/>
+			<attribute name="valign"/>
+			<attribute name="colspan"/>
+			<attribute name="rowspan"/>
+		</tag>
+
+		<tag name="tr" action="validate">
+			<attribute name="height"/>
+			<attribute name="width"/>
+			<attribute name="align"/>
+			<attribute name="valign"/>
+			<attribute name="char"/>
+			<attribute name="charoff"/>
+			<attribute name="background"/>
+		</tag>
+
+		<tag name="colgroup" action="validate">
+
+			<attribute name="span">
+				<regexp-list>
+					<regexp name="number"/>
+				</regexp-list>
+			</attribute>
+			<attribute name="width"/>
+			<attribute name="align"/>
+			<attribute name="char"/>
+			<attribute name="charoff"/>
+			<attribute name="valign"/>
+		</tag>
+
+		<tag name="col" action="validate">
+			<attribute name="align"/>
+			<attribute name="char"/>
+			<attribute name="charoff"/>
+			<attribute name="valign"/>
+			<attribute name="span">
+				<regexp-list>
+					<regexp name="number"/>
+				</regexp-list>
+			</attribute>
+			<attribute name="width"/>
+		</tag>
+
+		<tag name="fieldset" action="validate"/>
+		<tag name="legend" action="validate"/>
+	</tag-rules>
+</anti-samy-rules>

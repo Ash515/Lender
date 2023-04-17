@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<config>
+
+ <ACTemplateHandler handlername="USER" classname="com.adventnet.client.components.tpl.UserInfoHandler"/>
+
+ <ACTemplateHandler handlername="USERPREF" classname="com.adventnet.client.components.tpl.UserPreferenceHandler"/>    
+ 
+  <ACTemplateHandler handlername="REQUEST" classname="com.adventnet.client.components.tpl.HttpRequestHandler"/>
+  
+  <ACTemplateHandler handlername="STATE" classname="com.adventnet.client.components.tpl.StateVariableHandler"/>
+
+  <ACTemplateHandler handlername="FEATURE" classname="com.adventnet.client.components.tpl.FeatureParamHandler"/>  
+  
+  <ACTemplateHandler handlername="COOKIE" classname="com.adventnet.client.components.tpl.CookieInfoHandler"/>
+
+  <ACTemplateHandler handlername="CSRSTATE" classname="com.adventnet.client.components.tpl.CSRStateHandler"/>
+
+</config>

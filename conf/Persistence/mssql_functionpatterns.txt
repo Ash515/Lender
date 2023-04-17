@@ -1,0 +1,47 @@
+##### date functions
+
+#0-date 1-number 2-date_part
+DATEADD=DATEADD({2},{1},{0})
+
+#0-date 1-number 2-date_part
+ADDDATE=DATEADD({2},{1},{0})
+
+#0-date1 1-date2
+DATEDIFF=DATEDIFF(DAY,{1},{0})
+
+#0-date, 1-datepart(unit)
+EXTRACT=DATEPART({1},{0})
+
+SYSDATE=SYSDATETIME()
+
+#### String functions
+
+#0-expression_to_find 1-expression_to_search
+CHARINDEX=CHARINDEX({0},{1})
+
+LENGTH=LEN({0})
+
+NAME_OF_DAY=DATENAME('dw',{0})
+
+CAST=CAST({0} AS {1})
+
+CAST_AS_INT=CAST({0} AS 'INTEGER')
+
+CAST_AS_FLOAT=CAST({0} AS 'FLOAT')
+
+CAST_AS_TIMESTAMP=CAST({0} AS 'DATETIME')
+
+CONCAT={0} + {1}
+
+#Bit Operation
+AND=({0} '&' {1})
+
+#### Conditional sum
+
+#0-criteria 1-column 2-integer
+SUM_IF=SUM(CASE WHEN {0} THEN {1} ELSE {2} END)
+
+CEIL=CEILING({0})
+
+# dummy column
+DUMMY_COL={0}

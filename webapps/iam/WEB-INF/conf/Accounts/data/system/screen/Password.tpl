@@ -1,0 +1,2 @@
+<html><head><!--ZOHO_ACCOUNTS_TEMPLATE--></head>
+<div id="passworddiv"></div></html>

@@ -1,0 +1,71 @@
+/*$Id$*/
+.service_icon {
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	float: left;
+    background: url(../images/ProductLogos24.png) no-repeat transparent;
+    background-size: 24px auto;
+    background-position: 0px -1595px;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2) , not all , not all, not all , only screen and (min-resolution: 192dpi) , only screen and (min-resolution: 2dppx) {
+.service_icon {
+    background: url(../images/ProductLogos48.png) no-repeat transparent;
+    background-size: 24px auto;
+}
+.zohoassist_icon { background-position: 0px 0px; }
+.zohobooks_icon { background-position: 0px -29px; }
+.zohobugtracker_icon { background-position: 0px -58px; }
+.zohocampaigns_icon { background-position: 0px -87px; }
+.zohopulse_icon { background-position: 0px -116px; }
+.zohocontactmanager_icon { background-position: 0px -145px; }
+.zohocreator_icon { background-position: 0px -174px; }
+.zohocrm_icon { background-position: 0px -203px; }
+.Zohopc_icon { background-position: 0px -232px; }
+.zohoinvoice_icon { background-position: 0px -261px; }
+.virtualoffice_icon { background-position: 0px -290px; }
+.zohomeeting_icon { background-position: 0px -319px; }
+.zohopeople_icon { background-position: 0px -348px; }
+.zohoprojects_icon { background-position: 0px -377px; }
+.zohorecruit_icon { background-position: 0px -406px; }
+.zohoreports_icon { background-position: 0px -435px; }
+.livedesk_icon { background-position: 0px -464px; }
+.zohosheet_icon { background-position: 0px -493px; }
+.zohoshow_icon { background-position: 0px -522px; }
+.site24x7_icon { background-position: 0px -551px; }
+.zohosites_icon { background-position: 0px -580px; }
+.zohosocial_icon { background-position: 0px -609px; }
+.zohosubscriptions_icon { background-position: 0px -638px; }
+.zohosupport_icon,.desk_icon { background-position: 0px -667px; }
+.zohosurvey_icon { background-position: 0px -696px; }
+.zohovault_icon { background-position: 0px -725px; }
+.zohowriter_icon { background-position: 0px -754px; }
+.zohoexpense_icon { background-position: 0px -783px; }
+.zohoshowtime_icon { background-position: 0px -812px; }
+.zohocalendar_icon { background-position: 0px -841px; }
+.zohoforms_icon { background-position: 0px -870px; }
+.zohowiki_icon { background-position: 0px -899px; }
+.zohomotivator_icon {  background-position: 0px -928px; }
+.zohochat_icon { background-position: 0px -957px; }
+.icon48-unknown1 { background-position: 0px -986px; }
+.zohoinventory_icon { background-position: 0px -1015px; }
+.zohomcreator_icon { background-position: 0px -1044px; }
+.salesinbox_icon { background-position: 0px -1073px; }
+.mdmondemand_icon  { background-position: 0px -1102px; }
+.zohocheckout_icon { background-position: 0px -1131px; }
+.zohosign_icon { background-position: 0px -1160px; }
+.zohosprints_icon { background-position: 0px -1189px; }
+.notebook_icon { background-position: 0px -1218px; }
+.pagesense_icon { background-position: 0px -1247px; }
+.zohoflow_icon { background-position: 0px -1276px; }
+.zohobackstage_icon { background-position: 0px -1305px; }
+.teamdrive_icon { background-position: 0px -1334px; }
+.zohocommerce_icon { background-position: 0px -1363px; }
+.orchestly_icon { background-position: 0px -1392px; }
+.zohoworkerly_icon { background-position: 0px -1421px; }
+.officeapi_icon { background-position: 0px -1450px; }
+.zohomarketinghub_icon { background-position: 0px -1479px; }
+.zohopayroll_icon { background-position: 0px -1508px; }
+.zohoink_icon { background-position: 0px -1537px; }
+.zohobookings_icon { background-position: 0px -1566px; }
+}

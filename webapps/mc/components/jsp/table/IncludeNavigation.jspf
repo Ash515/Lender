@@ -1,0 +1,51 @@
+<!-- $Id$ -->
+
+<%@ page import = "java.util.List, com.adventnet.client.components.rangenavigator.web.NavigationConfig" %>
+
+<%
+if(viewModel.getNavigationConfig() != null)
+{
+        NavigationConfig navConfig = viewModel.getNavigationConfig();
+        String orientation = navConfig.getOrientation();        
+	String navigType = navConfig.getNavigationType();
+        String curPos = "BOTTOM";
+        if(viewContext.getTransientState("NVPOS") == null)
+        {
+           viewContext.setTransientState("NVPOS","TOPGEN");
+           curPos ="TOP";
+        }
+	if(curPos.equals(orientation) || "BOTH".equals(orientation)){
+%>
+  <div id="<%=IAMEncoder.encodeHTMLAttribute(uniqueId)%>_Navig">
+<%
+if(navigType.equals("NORMAL")){
+	%><%@ include file="/components/jsp/rangenavigator/NavigateByPageX.jspf"%><%
+}
+else if(navigType.equals("SELECT")){
+	%><%@ include file="/components/jsp/rangenavigator/NavigatorSelectType.jspf"%><%
+}
+else if(navigType.equals("BACKNEXT")){
+	%><%@ include file="/components/jsp/rangenavigator/BackNextNavigation.jspf"%><%
+}
+else if(navigType.equals("SHOWBACKNEXT")){
+	%><%@ include file="/components/jsp/rangenavigator/ShowBackNextNavigation.jspf"%><%
+}else if(navigType.equals("COMPACTSELECT")){
+    %><%@ include file="/components/jsp/rangenavigator/CompactSelectNavigator.jspf"%><%
+}else if(navigType.equals("NOCOUNT")){
+    %><%@ include file="/components/jsp/rangenavigator/NoCountNavigator.jspf"%><%
+}else if(navigType.equals("SCROLL")){
+    %><%@ include file='/components/jsp/table/ScrollNavigation.jspf'%><%
+}else if(navigType.equals("SLIDEBAR")){
+    %><%
+
+}
+
+else if(navigType.equals("NOCOUNTONDEMAND")){ %>
+<%@ include file='/components/jsp/rangenavigator/NoCountNavigatorWithCountOnDemand.jspf'%>
+<%}%>
+</div>
+
+<%
+}
+}
+%>

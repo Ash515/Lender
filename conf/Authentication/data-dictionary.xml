@@ -1,0 +1,2743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: data-dictionary.xml,v 1.68 2011/08/20 11:33:55 parthibanp Exp $ -->
+
+<!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd">
+<!--?xml-stylesheet type="text/xsl" href="./data-dictionary-transform.xsl"? -->
+
+<data-dictionary name="Authentication">
+	<description>Data model of Authentication module</description>
+
+	<table name="AaaPostalAddress">
+		<description>Address for User / Organization</description>
+		<columns>
+			<column name="POSTALADDR_ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>AaaPostalAddress.POSTALADDR_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="DOOR_NO">
+				<description>Door number of address</description>
+				<data-type>CHAR</data-type>
+				<max-size>10</max-size>
+			</column>
+			<column name="STREET">
+				<description>Name of street</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="LOCATION">
+				<description>Nearby location / Area</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="LANDMARK">
+				<description>Landmark nearby</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="CITY">
+				<description>Name of city</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="POSTALCODE">
+				<description>Postal code / PIN code</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+			</column>
+			<column name="STATE">
+				<description>Name of the state</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="COUNTRY">
+				<description>Name of the country</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+		</columns>
+		<primary-key name="AaaPostalAddress_PK">
+			<primary-key-column>POSTALADDR_ID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="AaaContactInfo">
+		<description>Contact information of User / Organization</description>
+		<columns>
+			<column name="CONTACTINFO_ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>AaaContactInfo.CONTACTINFO_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="EMAILID">
+				<description>Email id</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+			</column>
+			<column name="LANDLINE">
+				<description>Landline phone number</description>
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+			</column>
+			<column name="MOBILE">
+				<description>Mobile phone number</description>
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+			</column>
+			<column name="FAX">
+				<description>Fax number</description>
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+			</column>
+			<column name="WEB_URL">
+				<description>Web URL</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="RES_PHONE">
+				<description>Residence phone number</description>
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+			</column>
+		</columns>
+		<primary-key name="AaaContactInfo_PK">
+			<primary-key-column>CONTACTINFO_ID</primary-key-column>
+		</primary-key>
+        <indexes>
+		    <index name="AaaContactInfo_IDX1">
+		    	<index-column>EMAILID</index-column>
+	   	    </index>
+		</indexes>
+	</table>
+
+	<table name="AaaGenderHonorific">
+		<description>Represents possible gender to honorific combinations</description>
+		<columns>
+			<column name="GH_ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>AaaGenderHonorific.GH_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="GENDER">
+				<description>Represents the sex</description>
+				<data-type>CHAR</data-type>
+				<max-size>10</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>Male</value>
+					<value>Female</value>
+					<value>Other</value>
+				</allowed-values>
+			</column>
+			<column name="HONORIFIC">
+				<description>Represents the honorific</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>Mr</value>
+					<value>Ms</value>
+					<value>Mrs</value>
+					<value>Dr</value>
+					<value>Sir</value>
+				</allowed-values>
+			</column>
+		</columns>
+		<primary-key name="AaaGenderHonorific_PK">
+			<primary-key-column>GH_ID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="AaaOrganization">
+		<description>Organization entity</description>
+		<columns>
+			<column name="ORG_ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>AaaOrganization.ORG_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="NAME">
+				<description>Name of the Organization</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<unique>true</unique>
+			</column>
+			<column name="CREATEDTIME">
+				<description>Organization added / created time</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="DESCRIPTION">
+				<description>Description about the Organization</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<default-value>No Description</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaOrganization_PK">
+			<primary-key-column>ORG_ID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="AaaOrgDetail">
+		<description>Details about the Organization</description>
+		<columns>
+			<column name="ORG_ID">
+				<description>Identifier of Organization</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="LEGALNAME">
+				<description>Legal name of the Organization</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<unique>true</unique>
+			</column>
+			<column name="ALIAS">
+				<description>Alias name for the organization</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="EMP_COUNT">
+				<description>Total number of employees</description>
+				<data-type>BIGINT</data-type>
+				<default-value>1</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaOrgDetail_PK">
+			<primary-key-column>ORG_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaOrgDetail_FK" reference-table-name="AaaOrganization"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ORG_ID</fk-local-column>
+						<fk-reference-column>ORG_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaOrgStatus">
+		<description>Status of the Organization</description>
+		<columns>
+			<column name="ORG_ID">
+				<description>Identifier of AaaOrganization</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="STATUS">
+				<description>Status of the Organization</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<default-value>ACTIVE</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>ACTIVE</value>
+					<value>INACTIVE</value>
+				</allowed-values>
+			</column>
+			<column name="UPDATEDTIME">
+				<description>Status updated time</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaOrgStatus_PK">
+			<primary-key-column>ORG_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaOrgStatus_FK" reference-table-name="AaaOrganization"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ORG_ID</fk-local-column>
+						<fk-reference-column>ORG_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaOrgPostalAddr">
+		<description>Postal address of the Organization</description>
+		<columns>
+			<column name="ORG_ID">
+				<description>Identifier of AaaOrganization</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="POSTALADDR_ID">
+				<description>Unique identifier of Postal address</description>
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="AaaOrgPostalAddr_PK">
+			<primary-key-column>ORG_ID</primary-key-column>
+			<primary-key-column>POSTALADDR_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaOrgPostalAddr_FK1"
+				reference-table-name="AaaOrganization" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ORG_ID</fk-local-column>
+						<fk-reference-column>ORG_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaOrgPostalAddr_FK2"
+				reference-table-name="AaaPostalAddress" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>POSTALADDR_ID</fk-local-column>
+						<fk-reference-column>POSTALADDR_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaOrgContactInfo">
+		<description>Contact information of Organization</description>
+		<columns>
+			<column name="ORG_ID">
+				<description>Identifier of Organization</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CONTACTINFO_ID">
+				<description>Identifier of AaaContactInfo</description>
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="AaaOrgContactInfo_PK">
+			<primary-key-column>ORG_ID</primary-key-column>
+			<primary-key-column>CONTACTINFO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaOrgContactInfo_FK1"
+				reference-table-name="AaaOrganization" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ORG_ID</fk-local-column>
+						<fk-reference-column>ORG_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaOrgContactInfo_FK2"
+				reference-table-name="AaaContactInfo" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CONTACTINFO_ID</fk-local-column>
+						<fk-reference-column>CONTACTINFO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaUser">
+		<description>User</description>
+		<columns>
+			<column name="USER_ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>AaaUser.USER_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="FIRST_NAME">
+				<description>First name of user</description>
+				<data-type>NCHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="MIDDLE_NAME">
+				<description>Middle name of user</description>
+				<data-type>NCHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="LAST_NAME">
+				<description>Last name of user</description>
+				<data-type>NCHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="CREATEDTIME">
+				<description>Create time of user</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="DESCRIPTION">
+				<description>Description message about user</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<default-value>No Description</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaUser_PK">
+			<primary-key-column>USER_ID</primary-key-column>
+		</primary-key>
+        <indexes>
+		    <index name="AaaUser_IDX1">
+		    	<index-column>FIRST_NAME</index-column>
+	   	    </index>
+		</indexes>
+	</table>
+
+
+	<table name="AaaUserTwoFactorDetails">
+		<description>User two factor auth details</description>
+		<columns>
+			<column name="USER_ID">
+				<description>Identifier of AaaUser</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="ENABLED">
+				<description>two factor authentication enabled or not.</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="TWOFACTORAUTHIMPL">
+				<description>two factor authentication implementation class name.</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+			</column>
+			<column name="TWOFACTORPASSWORD">
+				<description>two factor authentication password</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+
+		</columns>
+		<primary-key name="AaaUserTwoFactor_PK">
+			<primary-key-column>USER_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaUserTwoFactor_FK1"
+				reference-table-name="AaaUser" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>USER_ID</fk-local-column>
+						<fk-reference-column>USER_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+
+		</foreign-keys>
+	</table>
+
+
+	<table name="AaaUserProfile">
+		<description>User Profile</description>
+		<columns>
+			<column name="USER_ID">
+				<description>Identifier of AaaUser</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="ALIAS">
+				<description>Alias name of user</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="DOB">
+				<description>Data of birth user</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="GH_ID">
+				<description>Identifier of gender and honorific</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="TIMEZONE">
+				<description>Identifier of Timezone to which the user belongs to</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<default-value>GMT</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="LANGUAGE_CODE">
+				<description>Language code representing locale</description>
+				<data-type>CHAR</data-type>
+				<max-size>2</max-size>
+				<default-value>en</default-value>
+			</column>
+			<column name="COUNTRY_CODE">
+				<description>Country code representing Locale</description>
+				<data-type>CHAR</data-type>
+				<max-size>2</max-size>
+				<default-value>US</default-value>
+			</column>
+		</columns>
+		<primary-key name="AaaUserProfile_PK">
+			<primary-key-column>USER_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaUserProfile_FK1"
+				reference-table-name="AaaUser" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>USER_ID</fk-local-column>
+						<fk-reference-column>USER_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaUserProfile_FK2"
+				reference-table-name="AaaGenderHonorific" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>GH_ID</fk-local-column>
+						<fk-reference-column>GH_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaUserStatus">
+		<description>User Status details</description>
+		<columns>
+			<column name="USER_ID">
+				<description>Identifier of AaaUser</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="STATUS">
+				<description>Status of User</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<default-value>ACTIVE</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>ACTIVE</value>
+					<value>DISABLED</value>
+				</allowed-values>
+			</column>
+			<column name="UPDATEDTIME">
+				<description>Last updated time</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaUserStatus_PK">
+			<primary-key-column>USER_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaUserStatus_FK"
+				reference-table-name="AaaUser" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>USER_ID</fk-local-column>
+						<fk-reference-column>USER_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaUserProperty">
+		<description>User Property</description>
+		<columns>
+			<column name="USER_ID">
+				<description>Identifier of AaaUser</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="PROP_NAME">
+				<description>User property name</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="PROP_VALUE">
+				<description>User property value</description>
+				<data-type>CHAR</data-type>
+				<max-size>1000</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaUserProperty_PK">
+			<primary-key-column>USER_ID</primary-key-column>
+			<primary-key-column>PROP_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaUserProperty_FK"
+				reference-table-name="AaaUser" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>USER_ID</fk-local-column>
+						<fk-reference-column>USER_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaOrgUser">
+		<description>This entity maps the user to Organization to which they
+			belong</description>
+		<columns>
+			<column name="ORG_ID">
+				<description>Identifier of AaaOrganization</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="USER_ID">
+				<description>Identifier of AaaUser</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="TYPE">
+				<description>User role in Organization</description>
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<default-value>CONSULTANT</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaOrgUser_PK">
+			<primary-key-column>ORG_ID</primary-key-column>
+			<primary-key-column>USER_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaOrgUser_FK1" reference-table-name="AaaOrganization"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ORG_ID</fk-local-column>
+						<fk-reference-column>ORG_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaOrgUser_FK2" reference-table-name="AaaUser"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>USER_ID</fk-local-column>
+						<fk-reference-column>USER_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaOrgContactUser">
+		<description>This entity maps the user i.e, contact person for the
+			organization</description>
+		<columns>
+			<column name="ORG_ID">
+				<description>Identifier of AaaOrganization</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="USER_ID">
+				<description>Identifier of AaaUser</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaOrgContactUser_PK">
+			<primary-key-column>ORG_ID</primary-key-column>
+			<primary-key-column>USER_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaOrgContactUser_FK1"
+				reference-table-name="AaaOrganization" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ORG_ID</fk-local-column>
+						<fk-reference-column>ORG_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaOrgContactUser_FK2"
+				reference-table-name="AaaUser" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>USER_ID</fk-local-column>
+						<fk-reference-column>USER_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaUserPostalAddr">
+		<description>Postal address of the User</description>
+		<columns>
+			<column name="USER_ID">
+				<description>Identifier of AaaUser</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="POSTALADDR_ID">
+				<description>Unique identifier of Postal address</description>
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="AaaUserPostalAddr_PK">
+			<primary-key-column>USER_ID</primary-key-column>
+			<primary-key-column>POSTALADDR_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaUserPostalAddr_FK1"
+				reference-table-name="AaaUser" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>USER_ID</fk-local-column>
+						<fk-reference-column>USER_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaUserPostalAddr_FK2"
+				reference-table-name="AaaPostalAddress" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>POSTALADDR_ID</fk-local-column>
+						<fk-reference-column>POSTALADDR_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaUserContactInfo">
+		<description>Contact information of User</description>
+		<columns>
+			<column name="USER_ID">
+				<description>Identifier of User</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CONTACTINFO_ID">
+				<description>Identifier of AaaContactInfo</description>
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="AaaUserContactInfo_PK">
+			<primary-key-column>USER_ID</primary-key-column>
+			<primary-key-column>CONTACTINFO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaUserContactInfo_FK1"
+				reference-table-name="AaaUser" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>USER_ID</fk-local-column>
+						<fk-reference-column>USER_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaUserContactInfo_FK2"
+				reference-table-name="AaaContactInfo" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CONTACTINFO_ID</fk-local-column>
+						<fk-reference-column>CONTACTINFO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaUserConfigRecord">
+		<description>Record used to capture User configuration information</description>
+		<columns>
+			<column name="USER_ID">
+				<description>User identity</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<!--column name="CRID"> <description>Unique reference of configuration 
+				record</description> <data-type>BIGINT</data-type> <nullable>false</nullable> 
+				</column -->
+		</columns>
+		<primary-key name="AaaUserConfigRecord_PK">
+			<primary-key-column>USER_ID</primary-key-column>
+			<!--primary-key-column>CRID</primary-key-column -->
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaUserConfigRecord_FK1"
+				reference-table-name="AaaUser" isbidirectional="true">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>USER_ID</fk-local-column>
+						<fk-reference-column>USER_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<!--foreign-key name="AaaUserConfigRecord_FK2" reference-table-name="ConfigurationRecord" 
+				isbidirectional="true"> <fk-columns> <fk-column> <fk-local-column>CRID</fk-local-column> 
+				<fk-reference-column>CRID</fk-reference-column> </fk-column> </fk-columns> 
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints> </foreign-key -->
+		</foreign-keys>
+	</table>
+	<description>Data Dictionary definition for Authentication Module</description>
+
+	<table name="AaaService">
+		<description>A service is an entity, that is secured by
+			authentication. All the configurations are based on this service.</description>
+		<columns>
+			<column name="SERVICE_ID">
+				<description>An unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>AaaService.SERVICE_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="NAME">
+				<description>Name of the service</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>true</unique>
+			</column>
+			<column name="DESCRIPTION">
+				<description>Description message about the service</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<default-value>No Description</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaService_PK">
+			<primary-key-column>SERVICE_ID</primary-key-column>
+		</primary-key>
+	</table>
+
+
+	<table name="AaaModuleService" system="false">
+		<description>To map the application to service. This couples the Aaa
+			data to Application name and hence facilitates cleanup of data.</description>
+		<columns>
+			<column name="ID">
+				<description>An unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>AaaModuleService.ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+
+			<column name="MODULE_ID">
+				<description>ID of the module</description>
+				<data-type>BIGINT</data-type>
+				<max-size>19</max-size>
+			</column>
+			<column name="SERVICE_ID">
+				<description>Identifier of AaaService</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaModuleService_PK">
+			<primary-key-column>ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaModuleService_FK1"
+				reference-table-name="Module" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>MODULE_ID</fk-local-column>
+						<fk-reference-column>MODULE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaModuleService_FK2"
+				reference-table-name="AaaService" isbidirectional="true">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaPamModule">
+		<description>Contains all available Pluggable Authentication Module
+			(PAM) in the system</description>
+		<columns>
+			<column name="PAMMODULE_ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>AaaPamModule.PAMMODULE_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="NAME">
+				<description>Name to identify the PAM module</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>true</unique>
+			</column>
+			<column name="TYPE">
+				<description>This indicates the type of the PAM functional module.
+					It can be one of auth (authentication), account (account
+					validation), password (password validation) or session (session
+					management).</description>
+				<data-type>CHAR</data-type>
+				<max-size>10</max-size>
+				<default-value>auth</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>auth</value>
+					<value>account</value>
+					<value>password</value>
+					<value>session</value>
+				</allowed-values>
+			</column>
+			<column name="CLASSNAME">
+				<description>PAM module implemented class name</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<unique>true</unique>
+			</column>
+			<column name="DESCRIPTION">
+				<description>Description message for the PAM module</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<default-value>No Description</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaPamModule_PK">
+			<primary-key-column>PAMMODULE_ID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="AaaPamModuleOption">
+		<description>Contains the list of arguments that are to be passed to
+			the PAM module</description>
+		<columns>
+			<column name="PAMMODULE_ID">
+				<description>Identifier of the PAM module</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="PROP_NAME">
+				<description>Attribute name</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="PROP_VALUE">
+				<description>Attribute value</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaPamModuleOption_PK">
+			<primary-key-column>PAMMODULE_ID</primary-key-column>
+			<primary-key-column>PROP_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaPamModuleOption_FK"
+				reference-table-name="AaaPamModule" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PAMMODULE_ID</fk-local-column>
+						<fk-reference-column>PAMMODULE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaPamConf">
+		<description>This maps the list of AaaPamModules to the AaaService.
+			i.e, it specifies the PAM modules to be used while authenticating
+			users to access the service</description>
+		<columns>
+			<column name="SERVICE_ID">
+				<description>Identifier of AaaService</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="PAMMODULE_ID">
+				<description>Identifier of AaaPamModule</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CONTROL_FLAG">
+				<description>This determines the behavior of stacking multiple
+					modules by specifying whether any particular module is required,
+					sufficient, or optional.</description>
+				<data-type>CHAR</data-type>
+				<max-size>10</max-size>
+				<default-value>required</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>REQUIRED</value>
+					<value>REQUISITE</value>
+					<value>OPTIONAL</value>
+					<value>SUFFICIENT</value>
+				</allowed-values>
+			</column>
+			<column name="EXECORDER">
+				<description>Just to maintain the order in which the pam modules get
+					invoked</description>
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaPamConf_PK">
+			<primary-key-column>SERVICE_ID</primary-key-column>
+			<primary-key-column>PAMMODULE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaPamConf_FK1" reference-table-name="AaaService"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaPamConf_FK2" reference-table-name="AaaPamModule"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PAMMODULE_ID</fk-local-column>
+						<fk-reference-column>PAMMODULE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaPasswordRule">
+		<description>The defines the rule to be used to govern the password or
+			to strengthen the password</description>
+		<columns>
+			<column name="PASSWDRULE_ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>AaaPasswordRule.PASSWDRULE_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="NAME">
+				<description>Name of the password rule</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>true</unique>
+			</column>
+			<column name="MIN_LENGTH">
+				<description>Governs the minimum length of the password</description>
+				<data-type>INTEGER</data-type>
+				<default-value>6</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="MAX_LENGTH">
+				<description>Governs the maximum length of the password</description>
+				<data-type>INTEGER</data-type>
+				<default-value>10</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="REQ_MIXEDCASE">
+				<description>Governs whether the password should contain mixed case</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="NUMOF_SPLCHAR">
+				<description>Governs the number of special characters to be used. If
+					the value is -1 then, it is not considered for validation</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="BEGINWITH_LETTER">
+				<description>Governs whether the password should begin with a
+					alphabet</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="LOGINNAME_INDEPNDT">
+				<description>Governs if password can be same as loginname</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaPasswordRule_PK">
+			<primary-key-column>PASSWDRULE_ID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="AaaServicePasswordRule">
+		<description>This specifies the PasswordRule that validates the
+			password created to access the service.</description>
+		<columns>
+			<column name="SERVICE_ID">
+				<description>Identifier of AaaService</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="PASSWDRULE_ID">
+				<description>Identifier of AaaPasswordRule</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaServicePasswordRule_PK">
+			<primary-key-column>SERVICE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaServicePasswordRule_FK1"
+				reference-table-name="AaaService" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaServicePasswordRule_FK2"
+				reference-table-name="AaaPasswordRule" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PASSWDRULE_ID</fk-local-column>
+						<fk-reference-column>PASSWDRULE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaAccAdminProfile">
+		<description>The profile used to manage account by restricting login,
+			simultaneous login etc</description>
+		<columns>
+			<column name="ACCOUNTPROFILE_ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>AaaAccAdminProfile.ACCOUNTPROFILE_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="NAME">
+				<description>Name of the account profile</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>true</unique>
+			</column>
+			<column name="EXP_AFTER">
+				<description>Relative value mentioning the expiry of the account.
+					Based on this relative value and account create time, the
+					AccountStatus table will be updated with the absolute value of
+					expiry</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="DELETEON_EXPIRY">
+				<description> it is the number of additional login attempts required
+					to automatically delete expired user accounts. The value of '0'
+					means immediate deletion upon expiry.</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="NVRLOGIN_EXPLT">
+				<description>it is the number of minutes after which the maiden
+					account will be expired</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="IDLE_SESSION">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<default-value>-1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="EXPEW_THRES">
+				<description>it is the number of days before account expiry to send
+					an early warning message to the user.</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="FORCEOUT_ONEXP">
+				<description>it says whether the user sessions should be
+					disconnected/cleaned when the currently logged in account is
+					expired.</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="SIMUL_LOGIN">
+				<description>Number of simultaneous login allowed. The value '0'
+					means no simultaneous login</description>
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="ALLOWED_BADLOGIN">
+				<description>It is the number of simultaneous bad login attempts
+					that can be allowed before the status is set as LoginFailed.</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="LOCK_PERIOD">
+				<description>It is the time duration for which the user account
+					cannot be accessed after being set as LoginFailed.</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="LOGIN_CRITERIA">
+				<description>it is used to restrict user login based on a criteria /
+					condition</description>
+				<data-type>CHAR</data-type>
+				<max-size>200</max-size>
+				<default-value>None</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaAccAdminProfile_PK">
+			<primary-key-column>ACCOUNTPROFILE_ID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="AaaPasswordProfile">
+		<description>The profile used to manage password by controlling
+			password expiry etc</description>
+		<columns>
+			<column name="PASSWDPROFILE_ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>AaaPasswordProfile.PASSWDPROFILE_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="NAME">
+				<description>Name of Password profile</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>true</unique>
+			</column>
+			<column name="EXP_AFTER">
+				<description>It is a relative value mentioning the number of days
+					after which the password should expire from the creatime of current
+					password</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="EXPEW_THRES">
+				<description>The number of days before password expiry to send an
+					early warning message to the user</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="LOGIN_AFTEREXP">
+				<description>it is the additional number of times the password
+					expired user is allowed to login.</description>
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="UPDATE_INTERVAL">
+				<description>it is the number of days required to change the newly
+					configured password.</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="CHPASSWD_ONFL">
+				<description>Indicates whether the user should change password on
+					first login</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="NUMOF_OLDPASSWD">
+				<description>The number of old password to be remembered. '0' means
+					that no old (recycled) passwords</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="FACTOR">
+				<description>workFactor needed for bcrypt</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="PASSWORD_MIN_AGE">
+				<description>It is the number of days till which reuse of same password is restricted</description>
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaPasswordProfile_PK">
+			<primary-key-column>PASSWDPROFILE_ID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="AaaLogin">
+		<description>Login name used to access accounts</description>
+		<columns>
+			<column name="LOGIN_ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>AaaLogin.LOGIN_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="USER_ID">
+				<description>Identifier of AaaUser who owns the loginname</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="NAME">
+				<description>Login name to be used to access accounts owned by user</description>
+				<data-type>NCHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="DOMAINNAME">
+				<description>Domain name to be used to access accounts owned by user
+					based on the domain.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>-</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaLogin_PK">
+			<primary-key-column>LOGIN_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaLogin_FK" reference-table-name="AaaUser"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>USER_ID</fk-local-column>
+						<fk-reference-column>USER_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="AaaLogin_UK10">
+				<unique-key-column>NAME</unique-key-column>
+				<unique-key-column>DOMAINNAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="AaaAccount">
+		<description>Is is the main entity where the loginname is mapped to
+			service and allowed to login.</description>
+		<columns>
+			<column name="ACCOUNT_ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>AaaAccount.ACCOUNT_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="LOGIN_ID">
+				<description>Identifier of AaaLogin</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="SERVICE_ID">
+				<description>Identifier of AaaService to which the account has
+					access to</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ACCOUNTPROFILE_ID">
+				<description>Identifier of AccountProfile that manages the validity
+					of the account</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CREATEDTIME">
+				<description>Time at which the account was created</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaAccount_PK">
+			<primary-key-column>ACCOUNT_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaAccount_FK1" reference-table-name="AaaLogin"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>LOGIN_ID</fk-local-column>
+						<fk-reference-column>LOGIN_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaAccount_FK2" reference-table-name="AaaService"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaAccount_FK3" reference-table-name="AaaAccAdminProfile"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ACCOUNTPROFILE_ID</fk-local-column>
+						<fk-reference-column>ACCOUNTPROFILE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="AaaAccount_UK">
+				<unique-key-column>LOGIN_ID</unique-key-column>
+				<unique-key-column>SERVICE_ID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="AaaAccountOwner">
+		<description>This entity captures the account owner details, i.e, who
+			created the account</description>
+		<columns>
+			<column name="ACCOUNT_ID">
+				<description>Identifier of account that is created</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="OWNERACCOUNT_ID">
+				<description>Identifier of account who created the account referred
+					in Account_id</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaAccountOwner_PK">
+			<primary-key-column>ACCOUNT_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaAccountOwner_FK1"
+				reference-table-name="AaaAccount" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ACCOUNT_ID</fk-local-column>
+						<fk-reference-column>ACCOUNT_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaAccountOwner_FK2"
+				reference-table-name="AaaAccount" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OWNERACCOUNT_ID</fk-local-column>
+						<fk-reference-column>ACCOUNT_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaAccountStatus">
+		<description>This maintains the status of the account</description>
+		<columns>
+			<column name="ACCOUNT_ID">
+				<description>Identifier of account to which this info belongs to</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="EXPIREAT">
+				<description>Absolute value specifying the time at which the account
+					expires</description>
+				<data-type>BIGINT</data-type>
+				<default-value>0</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="AFTEREXP_LOGIN">
+				<description>It specifies the number of times the user has tried to
+					login to this account after expiry</description>
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="STATUS">
+				<description>It specifies the current status of the account</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<default-value>NEW</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>NEW</value>
+					<value>ACTIVE</value>
+					<value>INACTIVE</value>
+					<value>DEACTIVATED</value>
+					<value>EXPIRED</value>
+					<value>LOCKED</value>
+					<value>FORCEDOUT</value>
+				</allowed-values>
+			</column>
+			<column name="UPDATEDTIME">
+				<description>Time at which the status was updated</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaAccountStatus_PK">
+			<primary-key-column>ACCOUNT_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaAccount_FK" reference-table-name="AaaAccount"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ACCOUNT_ID</fk-local-column>
+						<fk-reference-column>ACCOUNT_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaAccBadLoginStatus">
+		<description>This maintains the status of user account bad login
+			attempts</description>
+		<columns>
+			<column name="ACCOUNT_ID">
+				<description>Identifier of account to which this info belongs to</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="NUMOF_BADLOGIN">
+				<description>This indicates the number of times he has logged in
+					with bad password</description>
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="HOST">
+				<description>It specifies the IPAddress of the host from where the
+					attempts was made</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="UPDATEDTIME">
+				<description>Time at which the status was updated</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="HOST_NAME">
+				<description>It specifies the name of the host from where the
+					attempts was made</description>
+				<data-type>CHAR</data-type>
+				<max-size>200</max-size>
+			</column>
+		</columns>
+		<primary-key name="AaaAccBadLoginStatus_PK">
+			<primary-key-column>ACCOUNT_ID</primary-key-column>
+			<primary-key-column>HOST</primary-key-column>
+			<primary-key-column>UPDATEDTIME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaAccBadLoginStatus_FK"
+				reference-table-name="AaaAccount" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ACCOUNT_ID</fk-local-column>
+						<fk-reference-column>ACCOUNT_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaAccOwnerProfile">
+		<description>This entity captures parameters like number of accounts
+			an existing account can create, etc</description>
+		<columns>
+			<column name="ACCOUNT_ID">
+				<description>Identifier of AaaAccount</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ALLOWED_SUBACCOUNT">
+				<description>It is the number of subaccounts that owner of this
+					profile can create. value of -1 specifies he can create any number
+					of subaccounts</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaAccOwnerProfile_PK">
+			<primary-key-column>ACCOUNT_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaAccOwnerProfile_FK"
+				reference-table-name="AaaAccount" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ACCOUNT_ID</fk-local-column>
+						<fk-reference-column>ACCOUNT_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaAccUserProfile">
+		<description>This entity captures parameters that can be modified by
+			account user</description>
+		<columns>
+			<column name="ACCOUNT_ID">
+				<description>Identifier of AaaAccount</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="SESSION_TIMEOUT">
+				<description>It indicates the number of minutes after which the
+					session should be timedout. Value of -1 specifies no time out set
+					and will be the same as in server server.xml</description>
+				<data-type>INTEGER</data-type>
+				<default-value>10</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaAccUserProfile_PK">
+			<primary-key-column>ACCOUNT_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaAccUserProfile_FK"
+				reference-table-name="AaaAccount" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ACCOUNT_ID</fk-local-column>
+						<fk-reference-column>ACCOUNT_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaAccSession">
+		<description>This entiry captures the session created when any user
+			login to the system.</description>
+		<columns>
+			<column name="SESSION_ID">
+				<description>Unique identifier of the session</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>AaaAccSession.SESSION_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="ACCOUNT_ID">
+				<description>Identifier of account to which the account belongs</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="USER_HOST">
+				<description>IP Address of the host from where the user is accessing
+					the application</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>Unknown</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="APPLICATION_HOST">
+				<description>host name where the application is running</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="OPENTIME">
+				<description>Time of session open, i.e, account login time</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CLOSETIME">
+				<description>Time of session close, i.e, account logout or timeout
+					time</description>
+				<data-type>BIGINT</data-type>
+				<default-value>0</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="STATUS">
+				<description>Status of the session</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<default-value>ACTIVE</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>ACTIVE</value>
+					<value>CLOSED</value>
+					<value>TIMEOUT</value>
+					<value>FAILED</value>
+				</allowed-values>
+			</column>
+			<column name="USER_HOST_NAME">
+				<description>Host name from where the user connects the application.</description>
+				<data-type>CHAR</data-type>
+				<max-size>200</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="AUTHENTICATOR">
+				<description>Which authenticator is used</description>
+				<data-type>CHAR</data-type>
+				<max-size>200</max-size>
+				<default-value>UNKNOWN</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaAccSession_PK">
+			<primary-key-column>SESSION_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaAccSession_FK"
+				reference-table-name="AaaAccount" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ACCOUNT_ID</fk-local-column>
+						<fk-reference-column>ACCOUNT_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaAccSessionProp">
+		<description>Record's used to capture properties for user account
+			session</description>
+		<columns>
+			<column name="SESSION_ID">
+				<description>Identifier of AaaAccSession to which this property
+					belongs to</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="PROP_NAME">
+				<description>Attribute name</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="PROP_VALUE">
+				<description>Attribute value</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaAccSessionProperty_PK">
+			<primary-key-column>SESSION_ID</primary-key-column>
+			<primary-key-column>PROP_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaAccSessionProperty_FK"
+				reference-table-name="AaaAccSession" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SESSION_ID</fk-local-column>
+						<fk-reference-column>SESSION_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaAccHttpSession">
+		<description>This entity maps the SingleSignId to AaaAccSession
+			SESSION_ID</description>
+		<columns>
+			<column name="SESSION_ID">
+				<description>Identifier of AaaAccSession</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="SSO_ID">
+				<description>SingleSignon Id generated and set in th cookie</description>
+				<data-type>SCHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaAccHttpSession_PK">
+			<primary-key-column>SESSION_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaAccHttpSession_FK"
+				reference-table-name="AaaAccSession" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SESSION_ID</fk-local-column>
+						<fk-reference-column>SESSION_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaAccSessionAudit">
+		<description>This is used to capture all operations performed by a
+			user via a particular login session.</description>
+		<columns>
+			<column name="SESSION_ID">
+				<description>Identifier of AaaAccSession</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="AUDITID">
+				<description>Identifier of audit record</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaAccSessionAudit_PK">
+			<primary-key-column>SESSION_ID</primary-key-column>
+			<primary-key-column>AUDITID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaAccSessionAudit_FK"
+				reference-table-name="AaaAccSession" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SESSION_ID</fk-local-column>
+						<fk-reference-column>SESSION_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaAccSessionAudit_FK1"
+				reference-table-name="AuditRecord" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>AUDITID</fk-local-column>
+						<fk-reference-column>AUDITID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaPassword">
+		<description>This entity captures the password details that is used to
+			login to user account</description>
+		<columns>
+			<column name="PASSWORD_ID">
+				<description>Unique identifier of AaaPassword</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>AaaPassword.PASSWORD_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="PASSWORD">
+				<description>Password that is used to login to account</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="ALGORITHM">
+				<description>Algorithm that is supported to encrypt the password</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<default-value>bcrypt</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="SALT">
+				<description>Salt is a string that is used to encrypt the password.</description>
+				<data-type>SCHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="PASSWDPROFILE_ID">
+				<description>Identifier of AaaPasswordProfile that manages the
+					password</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="PASSWDRULE_ID">
+				<description>Identifier of password rule that is used to strengthen
+					the password</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CREATEDTIME">
+				<description>Createtime of password</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="FACTOR">
+				<description>workFactor needed for bcrypt</description>
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="AaaPassword_PK">
+			<primary-key-column>PASSWORD_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaPassword_FK1" reference-table-name="AaaPasswordProfile"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PASSWDPROFILE_ID</fk-local-column>
+						<fk-reference-column>PASSWDPROFILE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+			</foreign-key>
+			<foreign-key name="AaaPassword_FK2" reference-table-name="AaaPasswordRule"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PASSWDRULE_ID</fk-local-column>
+						<fk-reference-column>PASSWDRULE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaPasswordStatus">
+		<description>This maintains the status of the password</description>
+		<columns>
+			<column name="PASSWORD_ID">
+				<description>Identifier of password to which this info belongs to</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="EXPIREAT">
+				<description>Absolute value specifying the time at which the
+					password expires</description>
+				<data-type>BIGINT</data-type>
+				<default-value>9223372036854775807</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="AFTEREXP_LOGIN">
+				<description>It specifies the number of times the user has tried to
+					login using this password after expiry</description>
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="STATUS">
+				<description>It specifies the current status of the password</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<default-value>NEW</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>NEW</value>
+					<value>ACTIVE</value>
+					<value>BADLOGIN</value>
+					<value>EXPIRED</value>
+					<value>OLD</value>
+				</allowed-values>
+			</column>
+			<column name="UPDATEDTIME">
+				<description>Time at which the status was updated</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CHANGE_PWD_ON_LOGIN">
+				<description>Indicates whether the user should change password on subsequent login</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaPasswordStatus_PK">
+			<primary-key-column>PASSWORD_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaPasswordStatus_FK"
+				reference-table-name="AaaPassword" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PASSWORD_ID</fk-local-column>
+						<fk-reference-column>PASSWORD_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaPasswordHint">
+		<description>This entity contains the hint to identify passwords</description>
+		<columns>
+			<column name="PASSWORD_ID">
+				<description>Identifier of password to whcih the password hint
+					belongs to</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="QUESTION">
+				<description>Question which is to be asked to user before resetting
+					password</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="ANSWER">
+				<description>The answer which is to be verified with user input for
+					the question above</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaPasswordHint_PK">
+			<primary-key-column>PASSWORD_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaPasswordHint_FK"
+				reference-table-name="AaaPassword" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PASSWORD_ID</fk-local-column>
+						<fk-reference-column>PASSWORD_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaAccPassword">
+		<description>This maps the account to the password that is to be used
+			to login to account</description>
+		<columns>
+			<column name="ACCOUNT_ID">
+				<description>Identifier of Account</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="PASSWORD_ID">
+				<description>Identifier of Password</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaAccPassword_PK">
+			<primary-key-column>ACCOUNT_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaAccPassword_FK1"
+				reference-table-name="AaaAccount" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ACCOUNT_ID</fk-local-column>
+						<fk-reference-column>ACCOUNT_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaAccPassword_FK2"
+				reference-table-name="AaaPassword" isbidirectional="true">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PASSWORD_ID</fk-local-column>
+						<fk-reference-column>PASSWORD_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaAccOldPassword">
+		<description>This maps the account to the old password that were used</description>
+		<columns>
+			<column name="ACCOUNT_ID">
+				<description>Identifier of Account</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="OLDPASSWORD_ID">
+				<description>Identifier of Old Password</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaAccOldPassword_PK">
+			<primary-key-column>ACCOUNT_ID</primary-key-column>
+			<primary-key-column>OLDPASSWORD_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaAccOldPassword_FK1"
+				reference-table-name="AaaAccount" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ACCOUNT_ID</fk-local-column>
+						<fk-reference-column>ACCOUNT_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaAccOldPassword_FK2"
+				reference-table-name="AaaPassword" isbidirectional="true">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OLDPASSWORD_ID</fk-local-column>
+						<fk-reference-column>PASSWORD_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaRole">
+		<description>It defines the role defined for an application in order
+			to access resources, or perform business function provided by the
+			application.</description>
+		<columns>
+			<column name="ROLE_ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>AaaRole.ROLE_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="NAME">
+				<description>Name of the role</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="SERVICE_ID">
+				<description>Identifier of Service to which the role belongs to</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="DESCRIPTION">
+				<description>Description about the role</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<default-value>No Description</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaRole_PK">
+			<primary-key-column>ROLE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaRole_FK" reference-table-name="AaaService"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="AaaRole_UK">
+				<unique-key-column>NAME</unique-key-column>
+				<unique-key-column>SERVICE_ID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="AaaRoleCategory">
+		<description>It defines category this role has privilege to, for
+			example it can be tab roles, administration roles, etc. Category can
+			be predefined by the applications and used to map the roles to the
+			category.</description>
+		<columns>
+			<column name="CATEGORY_ID">
+				<description>Unique identifier of role category</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>AaaRoleCategory.ROLE_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="NAME">
+				<description>Name of the role category</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>true</unique>
+			</column>
+		</columns>
+		<primary-key name="AaaRoleCategory_PK">
+			<primary-key-column>CATEGORY_ID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="AaaRoleToCategory">
+		<description>It maps the role to category</description>
+		<columns>
+			<column name="CATEGORY_ID">
+				<description>Unique identifier of role category</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ROLE_ID">
+				<description>Identifier of aaarole</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaRoleToCategory_PK">
+			<primary-key-column>CATEGORY_ID</primary-key-column>
+			<primary-key-column>ROLE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaRoleToCategory_FK"
+				reference-table-name="AaaRoleCategory" isbidirectional="true">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CATEGORY_ID</fk-local-column>
+						<fk-reference-column>CATEGORY_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaRoleCategory_FK1"
+				reference-table-name="AaaRole" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ROLE_ID</fk-local-column>
+						<fk-reference-column>ROLE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaRoleOwner">
+		<description>Entity that captures the ownership of roles. A
+			SalesAdministrator (role) may create roles like SalesUserGrpA,
+			SalesUserGrpB. When role SalesAdministrator is deleted, the roles
+			SalesUserGrpA and SalesUserGroupB will also be deleted</description>
+		<columns>
+			<column name="ROLE_ID">
+				<description>Identifier of Role</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="OWNERROLE_ID">
+				<description>Identifier of Role that owns it</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaRoleOwner_PK">
+			<primary-key-column>ROLE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaRoleOwner_FK" reference-table-name="AaaRole"
+				isbidirectional="true">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ROLE_ID</fk-local-column>
+						<fk-reference-column>ROLE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaRoleOwner_FK1"
+				reference-table-name="AaaRole" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OWNERROLE_ID</fk-local-column>
+						<fk-reference-column>ROLE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaImpliedRole">
+		<description>Entity that captures the hierachy of roles. This help
+			administrator to define policy easily. i.e if the administrator
+			chooses top role for a user then all the implied role will be
+			systematically assigned to that user</description>
+		<columns>
+			<column name="ROLE_ID">
+				<description>Identifier of Role that implies</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="IMPLIEDROLE_ID">
+				<description>Identifier of Role that is being implied</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaImpliedRole_PK">
+			<primary-key-column>ROLE_ID</primary-key-column>
+			<primary-key-column>IMPLIEDROLE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaImpliedRole_FK"
+				reference-table-name="AaaRole" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ROLE_ID</fk-local-column>
+						<fk-reference-column>ROLE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaImpliedRole_FK1"
+				reference-table-name="AaaRole" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>IMPLIEDROLE_ID</fk-local-column>
+						<fk-reference-column>ROLE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaAuthorizedRole">
+		<description>This entity defines the privilege of an account by
+			mapping account to roles</description>
+		<columns>
+			<column name="ACCOUNT_ID">
+				<description>Identifier of AaaAccount to which the roles are mapped</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ROLE_ID">
+				<description>Identifier of role which is mapped to account</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaAuthorizedRole_PK">
+			<primary-key-column>ACCOUNT_ID</primary-key-column>
+			<primary-key-column>ROLE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaAuthorizedRole_FK"
+				reference-table-name="AaaAccount" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ACCOUNT_ID</fk-local-column>
+						<fk-reference-column>ACCOUNT_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaAuthorizedRole_FK1"
+				reference-table-name="AaaRole" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ROLE_ID</fk-local-column>
+						<fk-reference-column>ROLE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ActiveDirectoryInfo">
+		<description>Information of the Active directory</description>
+		<columns>
+			<column name="AD_ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>ActiveDirectoryInfo.AD_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="SERVERNAME">
+				<description>The machine name in which AD is running</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+			</column>
+			<column name="DEFAULTDOMAIN">
+				<description>The default domain to be used when none is specified by
+					the user</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="USERNAME">
+				<description>The user name to be used for logging into the active
+					directory</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="PASSWORD">
+				<description>The password for logging into the active directory</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="SECONDARYSERVERNAME">
+				<description>The secondary domain controllers in csv format</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+			</column>
+			<column name="ISSSL">
+				<description>is ssl enabled.</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="port">
+				<description>LDAP or LDAPS port</description>
+				<data-type>INTEGER</data-type>
+			</column>
+		</columns>
+		<primary-key name="ActiveDirectoryInfo_PK">
+			<primary-key-column>AD_ID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="AAARadiusConfig">
+		<description>RADIUS Configurations</description>
+		<columns>
+			<column name="SERVER_NAME">
+				<description>Server NAME or IP Address</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="SERVER_PORT">
+				<description>Server Port</description>
+				<data-type>INTEGER</data-type>
+				<max-size>10</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="SERVER_PROTOCOL">
+				<description>Server Protocol</description>
+				<data-type>CHAR</data-type>
+				<max-size>10</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="SERVER_SECRET">
+				<description>Server Secret</description>
+				<data-type>SCHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="RETRIES">
+				<description>Retries</description>
+				<data-type>INTEGER</data-type>
+				<max-size>20</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="TIMEOUT">
+                <description>socket timeout value in milliseconds</description>
+                <data-type>INTEGER</data-type>
+            </column>
+		</columns>
+		<primary-key name="AAARadiusConfig_PK">
+			<primary-key-column>SERVER_NAME</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="SAMLSP">
+		<description>SAML configurations of Service Provider</description>
+		<columns>
+			<column name="ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>SAMLSP.ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="ENTITY_ID">
+				<description>Identifier of the SP entity</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>me.com</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="ACS_URL">
+				<description>Assertion Consumer Service URL - servelt mappin is
+					needed </description>
+				<data-type>CHAR</data-type>
+				<max-size>255</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="SLS_URL">
+				<description>Single Logout Service URL</description>
+				<data-type>CHAR</data-type>
+				<max-size>255</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="CERTIFICATE">
+				<description>X509 certificate to sign request/response</description>
+				<data-type>SCHAR</data-type>
+				<max-size>-1</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="PRIVATE_KEY">
+				<description>X509 certificate to sign request/response</description>
+				<data-type>SCHAR</data-type>
+				<max-size>-1</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="AUTH_REQUEST_SIGNED">
+				<description>Whether AuthnRequest sent from SP to IDP needs to be signed</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+		</columns>
+		<primary-key name="SAMLSP_PK">
+			<primary-key-column>ID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="SAMLIDP">
+		<description>SAML configurations of Identity Provider</description>
+		<columns>
+			<column name="ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>SAMLIDP.ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="DOMAIN">
+				<description>Domain of the IDP entity</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="SSO_URL">
+				<description>URL Target of the IdP where the SP will send the
+					Authentication Request Message</description>
+				<data-type>CHAR</data-type>
+				<max-size>255</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="SLO_URL">
+				<description>URL Location of the IdP where the SP will send the SLO
+					Request</description>
+				<data-type>CHAR</data-type>
+				<max-size>255</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="SLO_RESPONSE_URL">
+				<description>URL Location of the IdP where the SP will send the SLO
+					response, if this is null, SLO_URL will considered to send response</description>
+				<data-type>CHAR</data-type>
+				<max-size>255</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="SIGNED">
+				<description>whether logout request and response should be signed.
+					If signed is true, SP's certificate should be uploaded in IDP
+					portal</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="VALIDATE_SIGNATURE">
+				<description>whether the signature of logout request or response from IDP should be validated.
+				This is added as some IDPs are not signing the request but sending signature parameter.</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+			</column>
+			<column name="CERTIFICATE">
+				<description>X509 certificate to sign request/response</description>
+				<data-type>SCHAR</data-type>
+				<max-size>-1</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="ALGORITHM">
+				<description>Algorithm used to sign logout request or response</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+				<allowed-values>
+					<value>DSA_SHA1</value>
+					<value>RSA_SHA1</value>
+					<value>RSA_SHA256</value>
+					<value>RSA_SHA384</value>
+					<value>RSA_SHA512</value>
+				</allowed-values>
+			</column>
+			<column name="ENABLED">
+				<description>IDP enabled or not.</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="NAME_ID_FORMAT">
+				<description>Name Id format of login name</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="NAME_ID">
+				<description>Name_ID of login name</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="SAMLIDP_PK">
+			<primary-key-column>ID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="AUTHCONFIG">
+		<description>Stores information about which authentication mode is
+			enabled</description>
+		<columns>
+			<column name="ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>AUTHCONFIG.ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="AUTH_MODE">
+				<description>authentication mode. GENERAL can be LOCAL/AD/RADIUS
+					which user chooses during login. OTHERS are SSO modes</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>GENERAL</default-value>
+				<unique>true</unique>
+				<allowed-values>
+					<value>SAML</value>
+					<value>NTLM</value>
+					<value>GENERAL</value>
+				</allowed-values>
+			</column>
+		</columns>
+		<primary-key name="AUTHCONFIG_PK">
+			<primary-key-column>ID</primary-key-column>
+		</primary-key>
+	</table>
+	
+	<table name="AAARememberMeInfo">
+		<description>Stores information about which authentication mode is
+			enabled</description>
+		<columns>
+			<column name="ID">
+				<description>Unique identifier</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>AAARememberMeInfo.ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="USER_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="TOKEN">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="CREATEDTIME">
+                <description>Created time of token</description>
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="UPDATEDTIME">
+                <description>Created time of token</description>
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="EXPIRETIME">
+                <description>expiry time of token</description>
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+		</columns>
+		<primary-key name="AAARememberMeInfo_PK">
+			<primary-key-column>ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+            <foreign-key name="AAARememberMeInfo_FK" reference-table-name="AaaUser">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_ID</fk-local-column>
+                        <fk-reference-column>USER_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="AAARememberMeInfo_UK">
+                <unique-key-column>TOKEN</unique-key-column>
+            </unique-key>
+        </unique-keys>
+	</table>
+
+</data-dictionary>

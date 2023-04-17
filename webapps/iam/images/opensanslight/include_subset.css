@@ -1,0 +1,79 @@
+/*$Id$*/
+/* latin */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src:url('font_latin.eot');
+    src:url('font_latin.eot?#iefix') format('eot'),
+        url('font_latin.woff2') format('woff2'), 
+        url('font_latin.woff') format('woff'), 
+        url('font_latin.ttf') format('truetype'),
+        url('font.svg#OpenSans-Light') format('svg');
+    unicode-range: U+20-7E, U+A0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-200B, U+2013-2015, U+2017-201E, U+2020-2022, U+2026, U+2030, U+2032-2033, U+2039-203A, U+203C, U+2044, U+2074, U+20AC, U+2212;
+}
+/* latin_ext */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src:url('font_latin_ext.eot');
+    src:url('font_latin_ext.eot?#iefix') format('eot'),
+        url('font_latin_ext.woff2') format('woff2'), 
+        url('font_latin_ext.woff') format('woff'), 
+        url('font_latin_ext.ttf') format('truetype'),
+        url('font.svg#OpenSans-Light') format('svg');
+    unicode-range: U+100-130, U+132-151, U+154-17F, U+192, U+1A0-1A1, U+1AF-1B0, U+1F0, U+1FA-1FF, U+218-21B, U+237, U+1E00-1E01, U+1E3E-1E3F, U+1E80-1E85, U+1EA0-1EF9, U+20A3-20A4, U+20A7, U+20AB;
+}
+/* cyrillic */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src:url('font_cyrillic.eot');
+    src:url('font_cyrillic.eot?#iefix') format('eot'),
+        url('font_cyrillic.woff2') format('woff2'), 
+        url('font_cyrillic.woff') format('woff'), 
+        url('font_cyrillic.ttf') format('truetype'),
+        url('font.svg#OpenSans-Light') format('svg');
+    unicode-range: U+400-45F, U+490-491, U+4B0-4B1, U+2116;
+}
+/* greek */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src:url('font_greek.eot');
+    src:url('font_greek.eot?#iefix') format('eot'),
+        url('font_greek.woff2') format('woff2'), 
+        url('font_greek.woff') format('woff'), 
+        url('font_greek.ttf') format('truetype'),
+        url('font.svg#OpenSans-Light') format('svg');
+    unicode-range: U+384-38A, U+38C, U+38E-3A1, U+3A3-3CE, U+3D1-3D2, U+3D6;
+}
+/* others */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src:url('font_others.eot');
+    src:url('font_others.eot?#iefix') format('eot'),
+        url('font_others.woff2') format('woff2'), 
+        url('font_others.woff') format('woff'), 
+        url('font_others.ttf') format('truetype'),
+        url('font.svg#OpenSans-Light') format('svg');
+    unicode-range: U+2BC, U+2C7, U+2C9, U+2D8-2D9, U+2DB, U+2DD, U+2F3, U+300-301, U+303, U+309, U+30F, U+323, U+1F4D, U+2070, U+2075-2079, U+207F, U+2105, U+2113, U+2120, U+2122, U+2126, U+212E, U+215B-215E, U+2202, U+2206, U+220F, U+2211, U+221A, U+221E, U+222B, U+2248, U+2260, U+2264-2265, U+25CA, U+FB00-FB04, U+FEFF, U+FFFC-FFFD;
+}
+/* cyrillic_ext */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src:url('font_cyrillic_ext.eot');
+    src:url('font_cyrillic_ext.eot?#iefix') format('eot'),
+        url('font_cyrillic_ext.woff2') format('woff2'), 
+        url('font_cyrillic_ext.woff') format('woff'), 
+        url('font_cyrillic_ext.ttf') format('truetype'),
+        url('font.svg#OpenSans-Light') format('svg');
+    unicode-range: U+460-486, U+488-48F, U+492-4AF, U+4B2-513;
+}

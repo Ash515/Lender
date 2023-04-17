@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!-- Supported datatypes in xml schema(xsd) for xml param validation. throwerror, htmlfilter and antisamyfilter validation is handled in SecurityFilter -->
+
+	<xs:simpleType name="cleartextpattern">
+        	<xs:restriction base="xs:string">
+                	<xs:pattern value="[0-9a-zA-Z_\-.$@?,:'/!\P{IsBasicLatin}\s]+"/>
+	        </xs:restriction>
+	</xs:simpleType>
+
+	<!-- Configured string datatype since regex pattern .* will not match Line terminators - https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html#lt -->
+	<xs:simpleType name="throwerror">
+                <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+
+	<xs:simpleType name="htmlfilter">
+       		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+
+	<xs:simpleType name="antisamyfilter">
+        	<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="JSONObject">
+        	<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="JSONArray">
+        	<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+</xs:schema>

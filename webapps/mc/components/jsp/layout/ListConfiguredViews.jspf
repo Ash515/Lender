@@ -1,0 +1,42 @@
+<%-- $Id$ --%>
+<%@ page import = "java.util.List"%>
+<%@ page import = "com.adventnet.persistence.*"%>
+
+<link href="<%out.print(themeDir);//NO OUTPUTENCODING%>/styles/box.css" rel="stylesheet" type="text/css"><%--NO OUTPUTENCODING --%>
+<form name="mainFrm" onSubmit="return selectAll(document.mainFrm.selectedViewList)">
+	<table border="0" cellspacing="2" cellpadding="2">
+    	<tr>
+        	<td style="vertical-align: top;"><span>Selected Views</span></td>
+		</tr>
+		<tr>
+        	<td>
+				<select multiple size="7" name="selectedViewList" style="width:175">
+					<components:row javaScriptRow = "false">
+    					<components:column>
+        					<components:cell>
+								<%
+				                props = transformerContext.getRenderedAttributes();
+					            %>
+								<option value = '<%=transformerContext.getAssociatedPropertyValue("ChildViewName")%>'><%=transformerContext.getPropertyValue()%></option>
+        					</components:cell>
+    					</components:column>
+					</components:row>
+		        </select>
+				<input type="hidden" name="VIEWNAME" value='<%=request.getParameter("VIEWNAME")%>'/>
+				<input type="hidden" name="CUSTOMIZE_TYPE" value='<%=request.getParameter("TYPE")%>'/>
+	        </td>
+			<td style="vertical-align: middle;">
+				<a href="javascript:moveUp(document.forms[0].selectedViewList)"><img src="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/columnchooser/up.png" alt="" style="border: 0px solid ; width: 30px; height: 26px;"></a><br><%--NO OUTPUTENCODING --%>
+				<a href="javascript:moveDown(document.forms[0].selectedViewList)"><img src="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/columnchooser/down.png" style="border: 0px solid ; width: 30px; height: 26px;"></a><%--NO OUTPUTENCODING --%>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align: middle;" align="center">
+				<a href="javascript:addItems('ListViewConfigurations',document.forms[0].selectedViewList,'ListViewConfigurations','ACViewToGroupMapping')"><img src="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/columnchooser/up.png" border="0"></a><%--NO OUTPUTENCODING --%>
+				<a href="javascript:removeItems(document.forms[0].selectedViewList)"><img align="top" src="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/columnchooser/down.png" border="0"></a><%--NO OUTPUTENCODING --%>
+				<input type="submit" name="SaveView" value="save"/>
+			</td>
+		</tr>
+	</table>
+</form>
+

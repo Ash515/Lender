@@ -1,0 +1,19 @@
+<!-- $Id$ -->
+<task>
+    <Schedule schedule_id="Schedule:schedule_id:TestDeleteExpiredRememberMeTokens" schedule_name="DeleteExpiredRememberMeTokens">
+        <Scheduled_Task retry_handler="com.adventnet.taskengine.internal.DefaultScheduleRetryHandler" task_id="TaskEngine_Task:task_id:TaskDeleteExpiredRememberMeTokens">
+            <Task_Input instance_id="Task_Input:instance_id:InstanceDeleteExpiredRememberMeTokens" />
+            <ScheduledTask_Retry retry_count="3" retry_time_period="5"/>
+        </Scheduled_Task>
+        <Periodic time_period="6" unit_of_time="hours"/>
+    </Schedule>
+    <TaskEngine_Task class_name="com.adventnet.authentication.scheduler.DeleteExpiredRememberMeTokens" task_id="TaskEngine_Task:task_id:TaskDeleteExpiredRememberMeTokens" task_name="DeleteExpiredRememberMeTokens"/>
+	
+	<Schedule schedule_id="Schedule:schedule_id:TestDeleteUnusedRememberMeTokens" schedule_name="DeleteUnusedRememberMeTokens">
+        <Scheduled_Task task_id="TaskEngine_Task:task_id:TaskDeleteUnusedRememberMeTokens">
+            <Task_Input instance_id="Task_Input:instance_id:InstanceDeleteUnusedRememberMeTokens" admin_status="4"/>
+        </Scheduled_Task>
+        <Periodic time_period="3" unit_of_time="hours"/>
+    </Schedule>
+    <TaskEngine_Task class_name="com.adventnet.authentication.scheduler.DeleteUnusedRememberMeTokens" task_id="TaskEngine_Task:task_id:TaskDeleteUnusedRememberMeTokens" task_name="DeleteUnusedRememberMeTokens"/>
+</task>

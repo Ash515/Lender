@@ -1,0 +1,1112 @@
+<?xml version="1.0"?>
+<!-- $Id $ -->
+<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd">
+<!--<!DOCTYPE data-dictionary PUBLIC "-//ZOHO Corp.//DTD Data Dictionary 1.0//EN" "http://cm/cgi-bin2/cvsweb.cgi/~checkout~/internal_packages/mickeylite/dd2html/data-dictionary.dtd">-->
+<data-dictionary name="Accounts">
+    <description>These are all the tables that contains lookup information. That is, similar to DNS Server which is having mapping of Domain Name versus IP Addresses, these tables have external Domain Name / Auth Token versus  internal data space ids.</description>
+
+    <table name="IAMZAID" display-name="ZAID">
+        <description>A valid Zoho Account Identifier, ZAID, available in Zoho's space. It is mainly to capture FK relationship with children, such as, Email, Mobile, User and Group</description>
+        <columns>
+            <column name="ZAID">
+                <description>The Account ID for which this group belongs to. </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="AUTH_TYPE">
+                <description>
+                    Identifies the authentication type. The value may be ZOHO, PORTAL etc.
+                    If ZOHO, the password validation will be done against the default ZOHO account.
+                    If portal, the it will happen against the portal. User can specify the AUTH_TYPE which can be overriden here.
+                    If the allows only the PORTAL authentication then the user setting will not be taken care.
+                </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <default-value>ZOHO</default-value>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+        </columns>
+        <primary-key name="IAMAccountSpace_PK">
+            <primary-key-column>ZAID</primary-key-column>
+        </primary-key>
+    </table>
+
+    <table name="IAMAccountName" display-name="AccountName">
+        <description>The Account Name versus Zoho Account mapping. The Account Name should be compliant to http://www.ietf.org/rfc/rfc1034.txt. If the character "." is present in the account name, the it will be considered the DNS domain name and the ownership needs to be verified before use.</description>
+        <columns>
+            <column name="ACCOUNT_NAME">
+                <description>The name of the account compliant to http://www.ietf.org/rfc/rfc1034.txt or the screen name which is unique within Zoho.</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&accountname;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZAID">
+                <description>The Account ID for which this name belongs to. This table will be the entry point to Zoho, during Sign In, to find out the "data space" in which information  of an Account is stored.</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+        </columns>
+        <primary-key name="IAMAccountName_PK">
+            <primary-key-column>ACCOUNT_NAME</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccountName_FK1" reference-table-name="IAMZAID" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ZAID</fk-local-column>
+                        <fk-reference-column>ZAID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <indexes>
+            <index name="IAMAccountName_ZAIDndx">
+                <index-column>ZAID</index-column>
+            </index>
+        </indexes>
+    </table>
+
+    <table name="IAMZUID" display-name="ZUID">
+        <description>User Identifier, ZUID, versus the Account in which the User's personal information, such as Photo, and Contacts are stored </description>
+        <columns>
+            <column name="ZUID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZAID">
+                <description>The Account ID in which the user's personal details are stored.</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PRIMARY_ZUID">
+                <description>The primary account for this ZUID</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_DELETED_TIME">
+                <data-type>BIGINT</data-type>
+                <default-value>-1</default-value>
+            </column>
+            <column name="AUTH_TYPE">
+                <description>
+                    Identifies the authentication type. The value may be ZOHO, PORTAL etc.
+                    If ZOHO, the password validation will be done against the default ZOHO account.
+                    If PORTAL, the it will happen against the portal
+                </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <default-value>ZOHO</default-value>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+        </columns>
+        <primary-key name="IAMZUID_PK">
+            <primary-key-column>ZUID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMZUID_FK1" reference-table-name="IAMZAID" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ZAID</fk-local-column>
+                        <fk-reference-column>ZAID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <indexes>
+            <index name="IAMZUID_ZAIDndx">
+                <index-column>ZAID</index-column>
+            </index>
+            <index name="IAMZUID_PRIMARY_ZUIDndx">
+                <index-column>PRIMARY_ZUID</index-column>
+            </index>
+        </indexes>
+    </table>
+
+    <table name="IAMZGID" display-name="ZGID">
+        <description>Group Identifier, ZGID, versus the Account in which the Group details are stored </description>
+        <columns>
+            <column name="ZGID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZAID">
+                <description>The Account ID for which this group belongs to. </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+        </columns>
+        <primary-key name="IAMZGID_PK">
+            <primary-key-column>ZGID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMZGID_FK1" reference-table-name="IAMZAID" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ZAID</fk-local-column>
+                        <fk-reference-column>ZAID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMZAAID" display-name="ZAAID">
+        <columns>
+            <column name="ZAAID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZAID">
+                <description>The Account ID in which the app account details are stored.</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+        </columns>
+        <primary-key name="IAMZAAID_PK">
+            <primary-key-column>ZAAID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMZAAID_FK1" reference-table-name="IAMZAID" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ZAID</fk-local-column>
+                        <fk-reference-column>ZAID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMEmail" display-name="Email">
+        <description>Email versus ZUID mapping. This table will be used for email authentication. If a user (ex - yeskumar@gmail.com), authenticated by the email address provider (gmail.com), via Open Id, accessing Zoho, then the user will be posed with the list of Zoho Accounts he has mapped with this email address. However, allowing the user to access a particular Zoho Account, using this Email authentication is based on the security descriptor of that particular Zoho Account. Some critical Zoho Account may restrict user access only from a particular VPN network.</description>
+        <columns>
+            <column name="EMAIL_ID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&email;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZUID">
+                <description>Unique Identifier of the User for which this email address is associated</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+        </columns>
+        <primary-key name="IAMEmail_PK">
+            <primary-key-column>ZUID</primary-key-column>
+            <primary-key-column>EMAIL_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMEmail_FK1" reference-table-name="IAMZUID" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ZUID</fk-local-column>
+                        <fk-reference-column>ZUID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <indexes>
+            <index name="IAMEmail_IDX_ZUID">
+                <index-column>ZUID</index-column>
+            </index>
+            <index name="IAMEmail_IDX_Email">
+                <index-column>EMAIL_ID</index-column>
+            </index>
+        </indexes>
+    </table>
+
+    <table name="IAMUserName" display-name="UserName">
+        <description>ScreenName versus ZUID mapping.</description>
+        <columns>
+            <column name="USER_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&screenname;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZUID">
+                <description>Unique Identifier of the User for which this screen name is associated</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+        </columns>
+        <primary-key name="IAMUserName_PK">
+            <primary-key-column>USER_NAME</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserName_FK1" reference-table-name="IAMZUID" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ZUID</fk-local-column>
+                        <fk-reference-column>ZUID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+	<table name="IAMUniqueIDRange" display-name="UniqueIdRange">
+		<description>This table will hold the unique id ranges. For ex: ZID will be used for both zoho users [ZID] and client users [CLIENTZID].</description>
+		<columns>
+            <column name="UNIQUE_ID_RANGE_NAME">
+     	        <description>Unique name of the range</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RANGE_SIZE">
+            	<description>Batch Size of the range</description>
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="RANGE_RESET_THRESHOLD">
+            	<description>The unique ID generator will be assigned a new range if the the difference between max and the current value is lesser that range_reset_threshold</description>
+                <data-type>BIGINT</data-type>
+                <default-value>10</default-value>
+                <nullable>false</nullable>
+            </column>
+            <column name="RESERVED_UPTO">
+            	<description>Max reserved value</description>
+                <data-type>BIGINT</data-type>
+                <default-value>-1</default-value>
+            </column>
+                <column name="DC_RANGE_RESET_THRESHOLD">
+            	<description>The unique ID generator for this DC will be assigned a new range if the the difference between max and the current value is lesser that dc_range_reset_threshold</description>
+                <data-type>BIGINT</data-type>
+                <default-value>50</default-value>
+                <nullable>false</nullable>
+            </column>
+            <column name="DC_RESERVED_UPTO">
+            	<description>Max reserved value for the DC</description>
+                <data-type>BIGINT</data-type>
+                <default-value>-1</default-value>
+            </column>
+        </columns>
+        <primary-key name="IAMUniqueIDRange_PK">
+            <primary-key-column>UNIQUE_ID_RANGE_NAME</primary-key-column>
+        </primary-key>
+	</table>
+    <table name="IAMUniqueIDGeneration" display-name="UniqueId">
+        <columns>
+            <column name="NAME">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="BATCH_SIZE">
+                <data-type>INTEGER</data-type>
+                <max-size>4</max-size>
+                <default-value>1000</default-value>
+                <nullable>false</nullable>
+            </column>
+            <column name="RESERVED_UPTO">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="RESERVED_BY_IP">
+                <data-type>CHAR</data-type>
+                <max-size>15</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="UNIQUE_ID_RANGE_NAME">
+            	<description>Unique name of the range</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>true</nullable>
+            </column>
+            <column name="CURRENT_RANGE_MAX_VALUE">
+            	<description>max value assigned to this range</description>
+                <data-type>BIGINT</data-type>
+                <default-value>-1</default-value>
+            </column>
+        </columns>
+        <primary-key name="IAMUniqueIDGeneration_PK">
+            <primary-key-column>NAME</primary-key-column>
+        </primary-key>
+    </table>
+
+	<table name="IAMUIDRangeGenerationAudit" display-name="UniqueIdRangeGenerationAudit">
+		<columns>
+			<column name="UNIQUE_ID_RANGE_NAME">
+				<description>Unique name of the range</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="UNIQUE_ID_NAME">
+            	<description>Unique name of the generator</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RESERVED_FROM">
+            	<description>Range start</description>
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="RESERVED_TO">
+            	<description>Range end</description>
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="RESERVED_BY_IP">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+        </columns>
+        <primary-key name="IAMUIDRangeAudit_PK">
+            <primary-key-column>UNIQUE_ID_RANGE_NAME</primary-key-column>
+            <primary-key-column>RESERVED_FROM</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUIDRangeAudit_FK1" reference-table-name="IAMUniqueIDRange" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>UNIQUE_ID_RANGE_NAME</fk-local-column>
+                        <fk-reference-column>UNIQUE_ID_RANGE_NAME</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+	</table>
+
+    <table name="IAMDomainVsAuthSecret" display-name="DomainVsAuthSecret">
+        <description>The Account Name versus Auth Secret mapping.</description>
+        <columns>
+            <column name="AUTH_SECRET">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&digest;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ACCOUNT_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&accountname;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZAID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+        </columns>
+        <primary-key name="IAMDomainVsAuthSecret_PK">
+            <primary-key-column>AUTH_SECRET</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMDomainVsAuthSecret_FK1" reference-table-name="IAMAccountName" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_NAME</fk-local-column>
+                        <fk-reference-column>ACCOUNT_NAME</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <indexes>
+            <index name="IAMDomainVsAuthSecret_AN_Idx">
+                <index-column>ACCOUNT_NAME</index-column>
+            </index>
+        </indexes>
+    </table>
+
+    <table name="IAMPartner" display-name="Partner">
+        <columns>
+            <column name="PARTNER_DOMAIN">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&domain;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PARTNER_ZUID">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PARTNER_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PARTNER_EMAILID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&email;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PARTNER_STATUS">
+                <description>0 for active and 1 for inactive</description>
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMPartner_PK">
+            <primary-key-column>PARTNER_DOMAIN</primary-key-column>
+        </primary-key>
+    </table>
+ 
+    <table name="IAMISCUserTicket" display-name="ISCTicket">
+        <columns>
+            <column name="ISC_TICKET">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&iamticket;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CS_TICKET">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&csticket;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZUID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DISPLAY_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="INTERNAL">
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+            </column>
+            <column name="IS_ENABLED">
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="VALIDITY_PERIOD">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="IP_ADDRESS">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="IP_AUDIT_INFO">
+                <description>iplocation info will be stored as JSON object.</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+            </column>
+        </columns>
+        <primary-key name="IAMISCUserTicket_PK">
+            <primary-key-column>ISC_TICKET</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMISCUserTicket_FK1" reference-table-name="IAMZUID" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ZUID</fk-local-column>
+                        <fk-reference-column>ZUID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <indexes>
+            <index name="IAMISCUserTicket_ZUIDndx">
+                <index-column>ZUID</index-column>
+            </index>
+        </indexes>
+    </table>
+    
+    <table name="IAMISCUserTicketScope" display-name="ISCTicketScope">
+        <columns>
+            <column name="ISC_TICKET">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&iamticket;</pattern>
+                </allowed-values>
+            </column>
+            <column name="SCOPE_ID">
+                <data-type>INTEGER</data-type>
+                <nullable>false</nullable>
+            </column>
+        </columns>
+        <primary-key name="IAMISCUserTicketScope_PK">
+            <primary-key-column>ISC_TICKET</primary-key-column>
+            <primary-key-column>SCOPE_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMISCUserTicketScope_FK1" reference-table-name="IAMISCUserTicket" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ISC_TICKET</fk-local-column>
+                        <fk-reference-column>ISC_TICKET</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMOrgUPAuthToken" display-name="OrgUPAuthToken">
+        <columns>
+            <column name="ZUID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="AUTH_TOKEN">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&iamticket;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CS_AUTH_TOKEN">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&csticket;</pattern>
+                </allowed-values>
+            </column>
+            <column name="VALIDITY_UPTO">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMOrgUPAuthToken_PK">
+            <primary-key-column>AUTH_TOKEN</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMOrgUPAuthToken_FK2" reference-table-name="IAMZUID" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ZUID</fk-local-column>
+                        <fk-reference-column>ZUID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    <table name="IAMSystemOpenId" display-name="SystemOpenId">
+        <description>added this table for IAM Backward Compatibility OpenID</description>
+        <columns>
+            <column name="OPEN_ID_APL">
+                <description>Unique ID from the OpenID provider</description>
+                <data-type>CHAR</data-type>
+                <max-size>150</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&apl;</pattern>
+                </allowed-values>
+            </column>
+            <column name="OPEN_ID">
+                <description>Unique ID from the OpenID provider</description>
+                <data-type>CHAR</data-type>
+                <max-size>150</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZUID">
+                <description>Unique ID of the user</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="EMAIL_ID">
+                <description>Email address associated with the OpenID</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&email;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IDP">
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMSystemOpenID_PK">
+            <primary-key-column>OPEN_ID_APL</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMSystemOpenID_FK1" reference-table-name="IAMZUID" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ZUID</fk-local-column>
+                        <fk-reference-column>ZUID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <indexes>
+            <index name="IAMSystemOpenID_Emailndx">
+                <index-column>EMAIL_ID</index-column>
+            </index>
+            <index name="IAMSystemOpenID_Zuidndx">
+                <index-column>ZUID</index-column>
+            </index>
+        </indexes>
+    </table>
+	<table name="IAMISDCode" display-name="ISDCode">
+		<description>Country codes, Dialing codes for TFA</description>
+		<columns>
+			<column name="COUNTRY_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="COUNTRY_CODE">
+                <data-type>CHAR</data-type>
+                <max-size>5</max-size>
+                <nullable>false</nullable>
+            <allowed-values>
+                    <pattern>&country-code;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DIALING_CODE">
+				<data-type>INTEGER</data-type>
+				<max-size>5</max-size>
+				<allowed-values>
+					<pattern>&dialing-code;</pattern>
+				</allowed-values>
+			</column>
+			<column name="NEWSLETTER_SUBSCRIPTION_MODE">
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+            </column>
+            <column name="IS_EXCLUDED">
+                <data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+            </column>
+			<column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+		</columns>
+		<primary-key name="IAMISDCode_PK">
+            <primary-key-column>COUNTRY_CODE</primary-key-column>
+        </primary-key>
+	</table>
+	<table name="IAMTelesignLanguage" display-name="TelesignLanguage">
+		<description>Country codes, Dialing codes for TFA</description>
+		<columns>
+			<column name="LANG_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="LANG_CODE">
+                <data-type>CHAR</data-type>
+                <max-size>6</max-size>
+                <nullable>false</nullable>
+            <allowed-values>
+                    <pattern>&country-code;</pattern>
+                </allowed-values>
+            </column>
+			<column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+		</columns>
+		<primary-key name="IAMTelesignLanguage_PK">
+            <primary-key-column>LANG_CODE</primary-key-column>
+        </primary-key>
+	</table>
+	<table name="IAMParentZAID" display-name="ParentZAID">
+        <description>User Identifier, ZUID, versus the Account in which the User's personal information, such as Photo, and Contacts are stored </description>
+        <columns>
+            <column name="PARENT_ZAID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZAID">
+                <description>The Account ID in which the user's personal details are stored.</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+        </columns>
+        <primary-key name="IAMParentZAID_PK">
+        	<primary-key-column>ZAID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMParentZAID_FK1" reference-table-name="IAMZAID" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ZAID</fk-local-column>
+                        <fk-reference-column>ZAID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMParentZAID_UK">
+                <unique-key-column>ZAID</unique-key-column>
+                <unique-key-column>PARENT_ZAID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMParentZAID_ZAIDndx">
+                <index-column>ZAID</index-column>
+            </index>
+            <index name="IAMParentZAID_prnZAIDndx">
+                <index-column>PARENT_ZAID</index-column>
+            </index>
+        </indexes>
+    </table>
+    <table name="IAMDCLocations" display-name="DCLocation">
+        <description>Holds different data centers that Zoho has at any given time </description>
+        <columns>
+         	<column name="DCLOCATION_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMDCLocations.DCLOCATION_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="LOCATION">
+                <data-type>CHAR</data-type>
+                <max-size>20</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="BASEDOMAIN">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="EQUIVALENT_BASEDOMAINS">
+                <data-type>CHAR</data-type>
+                <max-size>1000</max-size>
+                <nullable>false</nullable>              
+            </column>
+            <column name="IS_PREFIXED">
+                <data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+            </column>
+            <column name="DESCRIPTION">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="SERVER_URL">
+                <description>The server base URL of the deployment</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="SALT">
+                <description>The salt assigned for the deployment</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+            </column>
+            <column name="SYMMETRIC_KEY">
+                <description>The key for the deployment [others-public our-private]</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+            </column>
+            <column name="TIME_ZONES">
+                <description>Different timezones of this dclocation</description>
+                <data-type>CHAR</data-type>
+                <max-size>1000</max-size>
+            </column>
+        </columns>
+        <primary-key name="IAMDCLocations_PK">
+        	<primary-key-column>DCLOCATION_AUTO_ID</primary-key-column>
+        </primary-key>
+        <unique-keys>
+            <unique-key name="IAMDCLocations_UK">
+                <unique-key-column>LOCATION</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        
+    </table>
+     <table name="IAMDCDigest" display-name="DCDigest">
+        <description>Holds digests that help authenticate openid/oauth users across different data centers </description>
+        <columns>
+       		 <column name="DCLOCATION_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="DIGEST">
+                <description>The digest generated for this particular open id</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="LOCATION">
+                <description>The location returned from DL server</description>
+                <data-type>CHAR</data-type>
+                <max-size>20</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="EMAIL_ID">
+                <description>The email returned in the jwt</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <nullable>false</nullable>
+            </column>
+			<column name="VALID_UPTO">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+			<column name="IS_VALIDATED">
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+        </columns>
+        <primary-key name="IAMDCDigest_PK">
+        	<primary-key-column>DIGEST</primary-key-column>
+        </primary-key> 
+        <foreign-keys>
+            <foreign-key name="IAMDCDigest_FK" reference-table-name="IAMDCLocations" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>DCLOCATION_AUTO_ID</fk-local-column>
+                        <fk-reference-column>DCLOCATION_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+        <table name="IAMDCCustomDomains" display-name="DCCustomDomains">
+        <description>Holds custom domain mapping for URL parser in GeoDCHandler </description>
+        <columns>
+        	<column name="DCLOCATION_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ENTITY_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="ORIGINAL_BASEDOMAIN">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="TRANSFORMED_BASEDOMAIN">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <default-value>.*</default-value>
+                <nullable>false</nullable>              
+            </column>
+        </columns>
+        <primary-key name="IAMDCCustomDomains_PK">
+        	<primary-key-column>ENTITY_NAME</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMDCCustomDomains_FK" reference-table-name="IAMDCLocations" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>DCLOCATION_AUTO_ID</fk-local-column>
+                        <fk-reference-column>DCLOCATION_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMDCCustomDomains_UK">
+                <unique-key-column>ORIGINAL_BASEDOMAIN</unique-key-column>
+                <unique-key-column>ENTITY_NAME</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+    <table name="IAMMobileCount" display-name="MobileCount">
+        <description>It keeps the count of same mobile number used accross different account with zuids</description>
+        <columns>
+           <column name="MOBILE">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="COUNT">
+            <data-type>INTEGER</data-type>
+            	<default-value>0</default-value>
+            </column>
+            <column name="ZUIDS">
+                <description>zuids of the mobile mapped accounts</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+            </column>
+        </columns>
+        <primary-key name="IAMUserMobileCount_PK">
+            <primary-key-column>MOBILE</primary-key-column>
+        </primary-key>
+    </table>
+    <table name="IAMBreachedPassword" display-name="BreachedPassword">
+		<description>Hold TroyHunt passwords given by Zoho Security</description>
+		<columns>
+			<column name="PASSWORD">
+				<description>Password in SHA-1 Format</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+                    <pattern>&password;</pattern>
+                </allowed-values>
+           </column>
+           <column name="COUNT">
+                <description>Number Of Times Password Pwned</description>
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+            </column>
+        </columns>
+        <primary-key name="IAMBreachedPassword_PK">
+            <primary-key-column>PASSWORD</primary-key-column>
+        </primary-key>
+    </table>
+</data-dictionary>

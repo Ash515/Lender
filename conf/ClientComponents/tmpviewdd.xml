@@ -1,0 +1,386 @@
+<!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd">
+<?xml-stylesheet type="text/xsl" href="data-dictionary-transform.xsl"?>
+<!--$Id$ -->
+
+<data-dictionary name="ClientComponents">
+
+	<table name="TmpViewDetails">
+		<columns>
+			<column name="VIEWNAME_NO">
+				<description>Unique ID to identify the TmpViewDetails</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>TmpViewDetails.VIEWNAME_NO</generator-name>
+					<name-column>VIEWNAME</name-column>
+				</uniquevalue-generation>
+			</column>
+			<column name="VIEWNAME">
+				<description>Unique name to identify a particular view.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="TITLE">
+				<description>Title associated with the view.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+			</column>
+			<column name="ICON">
+				<description>Icon associated with the view</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+			</column>
+			<column name="IMAGE">
+				<description>Image associated with the view</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+			</column>
+			<column name="DESCRIPTION">
+				<description>Description associated with the view</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+			</column>
+			<column name="DISPLAYTYPE">
+				<description>Type of display whether vertical/horizontal/property
+					sheet</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+			</column>
+			<column name="EMPTY_TABLE_MESSAGE">
+				<description>Message to be displayed when the table is empty</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+			</column>
+			<column name="COLUMNCHOOSERMENUITEM">
+				<description>Indicates whether the ColumnChooser component should be
+					visible or not. A ColumnChooser component is one where the user can
+					select his own columns and display order</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ENABLEROWSELECTION">
+				<description>Indicates whether the check box for selecting rows
+					should be rendered in the view.</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<default-value>CHECKBOX</default-value>
+			</column>
+			<column name="OPERATOR">
+				<description>The operator to be applied to all criterias</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="NAVIGATION">
+				<description>Choose from any of the existing Navigation
+					Configuration</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+			</column>
+			<column name="COMPONENTNAME">
+				<description>Component name associated with the view </description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+			</column>
+			<!-- Assumption display name is unique or make the DISPLAYNAME column 
+				unique -->
+			<column name="MENUNAME">
+				<description>Display name associated with the menu</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+			</column>
+		</columns>
+		<primary-key name="TmpViewDetails_PK">
+			<primary-key-column>VIEWNAME_NO</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="TmpViewDetails_UK1">
+				<unique-key-column>VIEWNAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="TmpViewColumn">
+		<columns>
+			<column name="COLUMNID">
+				<description>Unique ID for each column</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>ViewColumn.COLUMNID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="VIEWNAME">
+				<description>View name to which the column belongs</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="TABLENAME">
+				<description>Table to which the column belongs</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="COLUMNNAME">
+				<description>Column name</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="COLUMNALIAS">
+				<description>Column Alias</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="COLUMNINDEX">
+				<description>Indicates the order of the column in which it should be
+					displayed in the view</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="DISPLAYNAME">
+				<description>Indicates the name which should ne displayed as the
+					header for this column</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="VISIBLE">
+				<description>Indicates whether the column should be visible during
+					the initial construction of the client. The visibility can later be
+					changed using the ColumnChooser component.</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="SORTENABLED">
+				<description>States whether column should be sortable</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="SEARCHENABLED">
+				<description>States whether column should be searchable</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="ACTIONNAME">
+				<description>Indicates the action that should be performed when
+					clicked on a value present in this column</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="CREATORCONFIG">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<default-value>DefaultUICreator</default-value>
+			</column>
+			<column name="DEFAULT_TEXT">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="DATE_FORMAT">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="TRIM_LENGTH">
+				<data-type>INTEGER</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="TRIM_MSG_LINK">
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+				<nullable>true</nullable>
+			</column>
+			<column name="PREFIX_TEXT">
+				<data-type>CHAR</data-type>
+				<max-size>75</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="SUFFIX_TEXT">
+				<data-type>CHAR</data-type>
+				<max-size>75</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="SUFFIX_ICON">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ICON">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="TABLEALIAS">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="LINKVIEWNAME">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="STATIC_TEXT">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ISNULLABLE">
+				<description>Specifies whether the column can be nullable or not.
+					This is used in forms where this value will be used during
+					validation to determine whether the column is mandatory or not.</description>
+				<data-type>BOOLEAN</data-type>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="CSSCLASS">
+				<description>Specifies the css class name that should be set
+					additionally for the column.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="MENUID">
+				<description>Specifies the id of the menu whose menuitems are to be
+					shown in the column as links for performing various actions on the
+					corresponding row.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ISHEADERVISIBLE">
+				<description>Specifies whether the header name for the corresponding
+					column should be displayed or not. If false mepty string will be
+					shown instead. In the column chooser the display name will always
+					be visible.</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="TmpViewColumn_PK">
+			<primary-key-column>COLUMNID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="TmpColumnRenderer">
+		<columns>
+			<column name="COLUMNID">
+				<description>The column whose configurations are stored here</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="PROPERTYNAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="PROPERTYVALUE">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="TmpColumnRenderer_PK">
+			<primary-key-column>COLUMNID</primary-key-column>
+			<primary-key-column>PROPERTYNAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="TmpColumnRenderer_FK"
+				reference-table-name="TmpViewColumn">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>COLUMNID</fk-local-column>
+						<fk-reference-column>COLUMNID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="TmpViewCriteria">
+		<columns>
+			<column name="VIEWCRITERIA_ID_NO">
+				<description>Unique name to identify a particular view.</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>ViewCriteria.VIEWCRITERIA_ID_NO</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="VIEWNAME">
+				<description>Unique name to identify a particular view.</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="TABLENAME">
+				<description>Table to which the column belongs</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="COLUMNNAME">
+				<description>Column name</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="OPERATOR">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="VALUE">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="TmpViewCriteria_PK">
+			<primary-key-column>VIEWCRITERIA_ID_NO</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="TmpViewCriteria_FK"
+				reference-table-name="TmpViewDetails">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+</data-dictionary>

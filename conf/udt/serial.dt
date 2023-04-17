@@ -1,0 +1,10 @@
+serial.advanced.meta = com.adventnet.db.persistence.metadata.SerialDataType
+serial.advanced.dttransformer = com.adventnet.db.adapter.SerialDTTransformer
+serial.advanced.dtadapter = com.adventnet.db.adapter.SerialDTAdapter
+serial.advanced.dtresultsetadapter = com.adventnet.db.adapter.SerialDTResultSetAdapter
+
+serial.advanced.postgres.dtsqlgenerator = com.adventnet.db.adapter.postgres.PostgresSerialDTSQLGenerator
+
+serial.advanced.mysql.dtsqlgenerator = com.adventnet.db.adapter.mysql.MysqlSerialDTSQLGenerator
+
+serial.advanced.mssql.dtsqlgenerator = com.adventnet.db.adapter.mssql.MssqlSerialDTSQLGenerator

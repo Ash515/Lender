@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id: $ -->
+<security name="Zoho Accounts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security-accounts.xsd">
+	<urls>
+		<url path="/accounts" authentication="required" />
+		<url path="/accounts/resource/accounts(/(((account)|(app)|(operation)|(deploymentconfig)|(cachecluster)|(dclocation))((/.*)|(\..+))?)?)?" internal="true" scoped-services="all"  method="get,put,post,delete">
+			<param-group name="restapi_params" />
+		</url>
+		<url path="/accounts/resource/accounts/serviceorgtype((/.*)|(\..+))?" internal="true" scoped-services="ZohoDirectory,ZohoOne,ZBSM"  method="get,put,post,delete">
+			<param-group name="restapi_params" />
+		</url>
+		<url path="/accounts/api/.*" authentication="required" trusted="true" roles="IAMAdmininistrator,IAMRestViewer" https="true" method="get">
+ 	 		<param-group name="restapi_params" />
+ 	 	</url>
+		<url path="/accounts/logout" authentication="optional" method="get,options">
+			<param name="redirect_uri" regex="url" max-len="1000" />
+			<param name="zaid" regex="zid" max-len="100" />
+			<param name="client_portal" type="boolean" />
+		</url>
+		
+		<url path="/accounts/handleuserdata.ac" sl_auth="fs_required">
+			<param name="digest" regex="digest" max-len="1000" />
+		</url>
+		<url path="/accounts/handleinvitation.ac" sl_auth="fs_required">
+			<param name="digest" regex="digest" max-len="1000" />
+		</url>
+
+        <url path="/accounts/fsrequest" sl_auth="fs_optional" method="post" csrf="true">
+        	<param-group name="fsrequestparams"/>
+        </url>
+
+		<url path="/accounts/sl/relogin/fs" method="post" csrf="true" authentication="required">
+			<param-group name="fsrequestparams"/>
+        </url>
+
+        <url path="/accounts/fsr" sl_auth="fs_optional" method="post,get">
+            <response disable-safe-headers="X-Frame-Options" />        
+        	<param name="provider" regex="idpProviders"/>
+        	<param name="digest" regex="digest" max-len="1000" />
+        	<param name="ZSService" regex="[a-zA-Z0-9]+" max-len="20" />
+        	<param name="blockSignup" regex="true|false"/>
+        	<param name="hideDC" regex="true|false"/>
+      		<param name="scopes" regex="scope_with_servicename" split="," max-occurrences="20" />
+        	<param name="getticket" type="boolean" />
+      		<param name="appname" regex="iamcleartextpattern" />
+      		<param name="domain" regex="domain" />
+      		<param name="nup" type="boolean" />      	
+      		<param name="identifier" regex="url" />
+        </url>
+
+        <url path="/accounts/oauthcallback" sl_auth="fs_optional" authentication="optional" method="get,post">
+        	<response disable-safe-headers="X-Frame-Options" />
+        	<param-group name="fsresponseparams"/>
+        </url>
+        
+        <url path="/accounts/preannouncement/[a-z\-A-Z]+/next" sl_auth="pa_required">
+         <param name="announcementName" regex="simplestring" />
+         </url>
+        
+         <url path="/accounts/preannouncement/[a-z\-A-Z]+" sl_auth="pa_required">
+         <param name="prev" regex="([0-9,]+)" />
+         </url>
+
+        <url path="/accounts/announcement/[a-z\-A-Z]+" authentication="required">
+        	<param name="prev" regex="([0-9,]+)" />
+        </url>
+        
+    	<url path="/accounts/announcement/[a-z\-A-Z]+/next" authentication="required">
+      		<param name="status" type="int" />
+      		<param name="prev" regex="([0-9,]+)" />
+    	</url>
+    	
+    	 <url path="/accounts/announcement/add-recovery" authentication="required" reauth="true"/>
+    	 <url path="/accounts/announcement/tfa-banner"  authentication="required" reauth="true"/>
+    	
+    	<url path="/accounts/configurations/[a-zA-Z]+" authentication="required" roles="IAMAdmininistrator,IAMOperator" oauthscope="sysconfig" duration="1" threshold="10"  user="true" lock-period="5" trusted="true" description="to get system configurations using Oauth token." operation-type="READ" />
+	
+	    <url path="/accounts/oauthscopes" authentication="required" method="get,post" trusted="true" roles="IAMAdmininistrator,IAMOperator" oauthscope="sysconfig" operation-type="READ" description="to get OAuthScopes of all services in JSON" />
+	
+	    <url path="/accounts/secretkeys" authentication="required" method="get,post" trusted="true" roles="IAMAdmininistrator,IAMOperator" oauthscope="sysconfig" operation-type="READ" description="to get Secretkeys in JSON" />
+	    
+		<url path="/gdpr/ppStatus/update" sl_auth="pa_required" method="post" csrf="true">
+      		<param name="nl_opted" type="boolean" />
+    	</url>
+	
+	    <url path="/webclient/v1/dcpolicy" sl_auth="pa_required" method="post" csrf="true" duration="5" threshold="50" lock-period="60">
+      	</url>
+	
+	</urls>
+
+	<content-types>
+		<content-type name="image" content-types="image/.*" />
+		<content-type name="csv" content-types="text/csv|application/x-unknown-mime-type" />
+		<content-type name="properties" content-types="application/x-unknown-mime-type" />
+		<content-type name="tpl" content-types="text/html|application/x-unknown-mime-type" />
+	</content-types>
+
+	<regexes>
+		<regex name="language" value="^[a-zA-Z-]{2,5}$" />
+		<regex name="country" value="^[a-zA-Z]{2}$" />
+		<regex name="simplestring" value="^([A-Za-z0-9_.\-]+)$" />
+		<regex name="zid" value="^[a-zA-Z0-9_\-]+$" />
+		<regex	name="urlwithdigest" value="^(ht|f)tp(s?)\:\/\/[-.\w]*(\/?)([a-zA-Z0-9\*\-\.\?\,\:\'\/\\\+=&amp;%\$#_@]*)?$"/>
+		<regex	name="iamcleartextpattern" value="[0-9a-zA-Z_\-\+\.\$@\?\,\:\'\/\!\[\]\|&amp;\P{InBasicLatin}\s]+"/>
+	</regexes>
+
+	<param-groups>
+		<param-group name="restapi_params">
+			<param name="subresources" type="cleartext:check" max-len="1000" />
+			<param name="criteria" type="cleartext:check" max-len="100000" />
+			<param name="orderby" type="cleartext:check" />
+			<param name="asc" type="boolean" />
+			<param name="limit" regex="[0-9]+,[0-9]+" />
+			<param name="_hascriteria" type="boolean" />
+			<param name="rsreq" regex="plain_str"/>
+			<param name="api-ver" regex="[0-9]\.[0-9]"/>
+		</param-group>
+
+	<param-group name="fsresponseparams">
+		<param name="code" regex="iamcleartextpattern" max-len="2000" />
+		<param name="state" regex="^([a-zA-Z0-9\._\*\-%\/=+])+$" max-len="1000" />
+		<param name="oauth_token" regex="digest" max-len="100" />
+		<param name="oauth_verifier" regex="digest" max-len="100" />
+		<param name="token" regex="digest" max-len="100" />
+		<param name="uid" regex="digest" max-len="100" />
+		<param name="session_state" regex="plain_str" />
+		<param name="error" regex="iamcleartextpattern" />
+		<param name="error_description" regex="iamcleartextpattern" max-len="500" />
+		<param name="error_code" regex="iamcleartextpattern" />
+		<param name="error_reason" regex="iamcleartextpattern" />
+		<param name="openid.realm" regex="url" />
+		<param name="openid.mode" regex="([a-zA-Z_]+)" />
+		<param name="openid.return_to" regex="urlwithdigest" max-len="300" />
+		<param name="openid.assoc_handle" regex="([A-Za-z0-9_\.\-]+)" max-len="300" />
+		<param name="openid.signed" regex="([a-zA-Z0-9=\.,_]+)" max-len="1000" />
+		<param name="openid.identity" regex="url" />
+		<param name="openid.claimed_id" regex="url" />
+		<param name="openid.pape.auth_level.nist" type="int" />
+		<param name="openid.ns.ax" regex="url" />
+		<param name="openid.ax.mode" regex="([a-z_]+)" />
+		<param name="openid.ax.value.language" regex="([a-zA-Z-]+)" />
+		<param name="openid.ax.value.email" regex="email" />
+		<param name="id_token" type="String" max-len="-1" />
+		<param name="user" type="String" max-len="-1" />
+	</param-group>
+
+	<param-group name="fsrequestparams">
+		<param name="provider" regex="idpProviders" />
+		<param name="digest" regex="digest" max-len="1000" />
+		<param name="ZSService" regex="[a-zA-Z0-9]+" max-len="20" />
+		<param name="blockSignup" regex="true|false" />
+		<param name="scopes" regex="scope_with_servicename" split="," max-occurrences="20" />
+		<param name="getticket" type="boolean" />
+		<param name="appname" regex="iamcleartextpattern" />
+		<param name="domain" regex="domain" />
+		<param name="nup" type="boolean" />
+		<param name="identifier" regex="url" />
+		<param name="hideprompt" type="boolean" />
+	</param-group>
+	</param-groups>
+	
+</security>

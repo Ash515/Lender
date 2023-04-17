@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE repetition-job SYSTEM '../Scheduler/schedule.dtd'>
+<repetition-job>
+	
+	<ThreadPool name="com.zoho.accounts.iam3scheduler" isdefault="true" max-threads="10" />
+
+	<PeriodicRepetition name="IAM2PeriodicTicketCleaner" time-period="10800" is-common="true" />
+	<PeriodicRepetition name="VerificationCodeCleaner" time-period="10800" is-common="true" />
+	<PeriodicRepetition name="NewsletterSubscribtionUpdate" time-period="3600" is-common="true" />
+	<PeriodicRepetition name="TokenPairCleanerJob" time-period="10800" is-common="true" />
+	<PeriodicRepetition name="PeriodicTicketCleanerScheduler" time-period="10800" is-common="true" />
+	<PeriodicRepetition name="OAuthTokenCleanerJob" time-period="7200" is-common="true" />
+	<PeriodicRepetition name="UserAuditTaskRunnableRejectionScheduler" time-period="600" is-common="true" />
+	
+	<CalendarRepetition name="TicketCleanerSchedule" time-of-day="3600" repeat-frequency="&daily;" is-common="true" />
+	<CalendarRepetition name="PasswordExpiryNotification" time-of-day="7200" repeat-frequency="&daily;" is-common="true" />
+	<CalendarRepetition name="UnconfirmedEmailNotification" time-of-day="7200" repeat-frequency="&daily;" is-common="true" />
+	<CalendarRepetition name="DailyUnconfirmedEmailNotification" time-of-day="7200" repeat-frequency="&daily;" is-common="true" />
+	<CalendarRepetition name="DBJunkDataCleaner" time-of-day="18000" repeat-frequency="&daily;" is-common="true" />
+	<CalendarRepetition name="RoleCleaner" time-of-day="7200" repeat-frequency="&weekly;" day-of-week="7" is-common="true" />
+	<CalendarRepetition name="DailyRoleCleaner" time-of-day="18000" repeat-frequency="&daily;" is-common="true" />
+	<CalendarRepetition name="WeeklyRoleCleaner" time-of-day="7200" repeat-frequency="&weekly;" day-of-week="7" is-common="true" />
+	<!--CalendarRepetition name="CacheCleaner" time-of-day="7200" repeat-frequency="&weekly;"  day-of-week="7" is-common="true" /-->
+	<CalendarRepetition name="AuditTemplateTableIDRotationJob" date-of-month="1" time-of-day="10" repeat-frequency="&monthly;" is-common="true" />
+	<CalendarRepetition name="UpdateExpiredUserStatus" time-of-day="18000" repeat-frequency="&daily;" is-common="true" />
+	<CalendarRepetition name="AccountSecretKeyRotationJob" time-of-day="7200" repeat-frequency="&weekly;" day-of-week="5" is-common="true" />
+	<CalendarRepetition name="SuspiciousLocationCleaner" time-of-day="14400" repeat-frequency="&daily;"  is-common="true"/>
+	<CalendarRepetition name="UnverifiedDomainCleaner" date-of-month="3" time-of-day="21600" repeat-frequency="&monthly;" is-common="true"/>
+	<CalendarRepetition name="OAuthMonthlyCleaner" date-of-month="5" time-of-day="21600" repeat-frequency="&monthly;" is-common="true"/>
+	
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.TicketCleanerJob" repetition-name="TicketCleanerSchedule" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.TicketCleanerJob" repetition-name="PeriodicTicketCleanerScheduler" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.TFACodeCleaner" repetition-name="VerificationCodeCleaner" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.DBJunkDataCleaner" repetition-name="DBJunkDataCleaner" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.PasswordExpiryNotification" repetition-name="PasswordExpiryNotification" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.UnconfirmedEmailNotification" repetition-name="UnconfirmedEmailNotification" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.UnconfirmedEmailNotification" repetition-name="DailyUnconfirmedEmailNotification" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.NewsletterSubscribtionUpdate" repetition-name="NewsletterSubscribtionUpdate" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.TokenPairCleanerJob" repetition-name="TokenPairCleanerJob" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.OAuthTokenCleaner" repetition-name="OAuthTokenCleanerJob" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.UserAuditTaskRunnableRejectionScheduler" repetition-name="UserAuditTaskRunnableRejectionScheduler" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.RoleCleaner" repetition-name="RoleCleaner" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.RoleCleaner" repetition-name="DailyRoleCleaner" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.RoleCleaner" repetition-name="WeeklyRoleCleaner" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.UpdateExpiredUserStatus" repetition-name="UpdateExpiredUserStatus" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<!--RepetitiveJob class-name="com.zoho.accounts.cache.impl.CacheCleaner" repetition-name="CacheCleaner" transaction-timeout="-1" admin-status="false" schema-job="true"/-->
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.AuditTemplateTableIDSwitcher" repetition-name="AuditTemplateTableIDRotationJob" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.AccountSecretKeyRotation" repetition-name="AccountSecretKeyRotationJob" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.SuspiciousLocationCleaner" repetition-name="SuspiciousLocationCleaner" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+	<RepetitiveJob class-name="com.zoho.accounts.scheduler.UnverifiedDomainCleaner" repetition-name="UnverifiedDomainCleaner" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+    <RepetitiveJob class-name="com.zoho.accounts.scheduler.OAuthMonthlyCleaner" repetition-name="OAuthMonthlyCleaner" transaction-timeout="-1" admin-status="false" schema-job="true"/>
+    
+</repetition-job>
+<!-- $Id$ -->

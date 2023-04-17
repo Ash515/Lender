@@ -1,0 +1,62 @@
+################### Numeric Functions
+CEILING=CEIL({0})
+
+
+
+#################### String Functions
+
+
+CHARINDEX=POSITION({0} IN {1})
+
+LENGTH=CHAR_LENGTH({0})
+
+
+###################### Date Functions
+
+#0-date, 1-datepart(unit)
+EXTRACT=EXTRACT({1} FROM {0})
+
+SYSDATE=NOW()
+
+#0-date , 1-interval_number 2-type(day/month/year/hour/minute)
+DATEADD=({0} + INTERVAL ''{1}{2}'')
+
+
+# Refer https://www.sqlines.com/postgresql/how-to/dateadd to know more about below function in detail.
+#0-date , 1-interval_number 2-type(day/month/year/hour/minute)
+# When argument {1} is a varying variable i.e column ADDDATE should be used, if it is constant DATEADD can be used.
+ADDDATE = ({0} :: TIMESTAMP + {1} * INTERVAL ''1 {2}'')
+
+# dummy column
+DUMMY_COL={0}
+
+#0-date
+DAY=DATE_PART(''DAY'',{0})
+
+MONTH=DATE_PART(''MONTH'',{0})
+
+YEAR=DATE_PART(''YEAR'',{0})
+
+DATEDIFF=({0} - {1})
+
+NAME_OF_DAY=TO_CHAR({0},''DAY'')
+
+CAST=CAST({0} AS {1})
+
+CAST_AS_INT=CAST({0} AS 'INTEGER')
+
+CAST_AS_FLOAT=CAST({0} AS 'FLOAT')
+
+CAST_AS_TIMESTAMP=CAST({0} AS 'TIMESTAMP')
+
+
+#Bit Operation
+AND=({0} '&' {1})
+
+
+# conditional sum
+# 0-criteria 1-column 2-Integer
+SUM_IF=SUM(CASE WHEN {0} THEN {1} ELSE {2} END)
+
+# For jsondc Dynamic Columns
+JSONB_UPDATE = jsonb_strip_nulls({0} || {1})

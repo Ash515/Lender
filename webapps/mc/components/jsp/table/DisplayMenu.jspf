@@ -1,0 +1,58 @@
+<%-- $Id$ --%>
+
+<%@ page import="com.adventnet.clientframework.MENU"%>
+<%@ page import="com.adventnet.client.action.web.MenuVariablesGenerator"%>
+<%
+if(request.getAttribute(uniqueId+"/menu_id") != null || viewContext.getModel().getViewConfiguration().getFirstValue("ViewConfiguration","MENUID") != null)
+{
+    String menuId =  null;
+    Boolean rendererMenu=null;
+    DataObject menuObj=null;
+    String displayStyle="null";
+    String templatename="null";
+    if(request.getAttribute(uniqueId+"/menu_id") != null)
+    {
+             menuId =(String)request.getAttribute(uniqueId+"/menu_id");
+             rendererMenu = true;
+    }
+    else
+    {
+        menuId =  (String)viewContext.getModel().getViewConfiguration().getFirstValue("ViewConfiguration","MENUID");
+    }
+  if(menuId!=null)
+  {
+          menuObj = MenuVariablesGenerator.getCompleteMenuData(menuId);
+          if(rendererMenu == null)
+          {
+            rendererMenu =  (Boolean)viewContext.getModel().getViewConfiguration().getFirstValue("ACTableViewConfig","RENDERMENU");
+          }
+	  if(menuObj.getFirstValue("Menu",MENU.DISPLAYSTYLE_IDX)!=null)
+          {
+                displayStyle=(String) menuObj.getFirstValue("Menu",MENU.DISPLAYSTYLE_IDX);
+          }
+          if(menuObj.getFirstValue("Menu",MENU.MENUTEMPLATE_IDX)!=null)
+          {
+                templatename=(String) menuObj.getFirstValue("Menu",MENU.MENUTEMPLATE_IDX);
+          }
+
+  }
+  if((menuId != null) && (rendererMenu != null) && (rendererMenu.booleanValue()) && ("NORMAL").equals(displayStyle))
+  {
+%>
+<table class='tableMenu'><tr><td><act:ShowMenu menuId="<%=menuId%>" uniqueId='<%=uniqueId%>' type="button" menuButtonItem="true"/></td></tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" table_el="COMMONDETAILS"><tr rowidx="-1" style="display:none"><td></td></tr></table>
+<%
+ }
+  else if(displayStyle.equals("DROPDOWN"))
+  {%>
+	 <act:ShowMenuAsDropDown menuId='<%=menuId%>' uniqueId='<%=uniqueId%>' />
+<%}
+  else if(displayStyle.equals("TEMPLATEDROPDOWN"))
+  {
+	  %>
+	<act:ShowDropDownTemplateMenu menuId='<%=menuId%>' menuTemplate='<%=templatename%>' uniqueId='<%=uniqueId%>' />
+	<%
+  }
+}
+%>

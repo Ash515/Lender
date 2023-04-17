@@ -1,0 +1,3 @@
+<services>
+<Service service_id="Service:service_id:PatchUpdaterService" service_name="PatchUpdaterService" module_id="Persistence" classname="com.zoho.mickey.tools.PatchUpdaterService"/>
+</services>

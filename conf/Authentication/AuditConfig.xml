@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<AuditConfigConf>
+
+	<AuditConfig id="AuditConfig:id:1" module_id="Authentication"
+		currentlevel="FINE_GRAINED" disableallaudit="false">
+		<AuditLevel levelname="COARSE_GRAINED" />
+		<AuditLevel levelname="FINE_GRAINED" />
+		<AuditTableConfig audittablename="OperationAuditRecord"
+			buffersize="0" batchsize="0" />
+	</AuditConfig>
+
+</AuditConfigConf>

@@ -1,0 +1,2 @@
+//$Id$
+window.isAccountsUp='true';

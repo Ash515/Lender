@@ -1,0 +1,13 @@
+<%-- $Id$ --%>
+<%@page import="com.adventnet.client.tpl.TemplateAPI,com.adventnet.client.components.table.template.CellRenderer" %>
+<%
+   if(props.size() == 0){
+%>
+ &nbsp; 
+<% 
+}
+else{
+	  out.println(CellRenderer.getHTML(props, viewModel));//NO OUTPUTENCODING%>
+	<%}%> 
+
+

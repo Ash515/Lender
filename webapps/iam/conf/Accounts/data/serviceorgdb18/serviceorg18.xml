@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="teaminboxsorgzaid" account_name="Zoho TeamInbox Service Org">
+		<IAMAccountDomain domain="teaminboxsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="marketplacesorgzaid" account_name="Zoho ZohoMarketplace Service Org">
+		<IAMAccountDomain domain="marketplacesorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="zossorgzaid" account_name="Zoho ZOS Service Org">
+		<IAMAccountDomain domain="zossorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="showsorgzaid" account_name="Zoho Show Service Org">
+		<IAMAccountDomain domain="showsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="catalystsorgzaid" account_name="Zoho Catalyst Service Org">
+		<IAMAccountDomain domain="catalystsorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

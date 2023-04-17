@@ -1,0 +1,31 @@
+<%-- $Id$ --%>
+<%if(PersonalizationUtil.isCustomizable(request, viewContext)) {
+if(model.getViewType().equals("verticaltab")){
+%>
+								</tr>
+								<tr>
+								<td>
+								<span id="MC-Customization" class="customize">
+								&nbsp;<button onClick="javascript:window.open('TabCustomization.cc?COUNT=<%out.print(model.getChildConfigList().size());//NO OUTPUTENCODING%>&TYPE=VTab&VIEWNAME=<%out.print(viewContext.getModel().getViewName());//NO OUTPUTENCODING%>&UNIQUEID=<%out.print(uniqueId);//NO OUTPUTENCODING%>&DefaultGroup=Reports&DisplayName=Links', null, 'height=550,width=1000,scrollbars=1,resizable=1')" class="customizeButton">Add / Remove Links</button><%--NO OUTPUTENCODING --%>
+								</span>	
+								</td>
+								<%
+						}
+						else {
+							%>
+							<td>
+								<table cellspacing="0" cellpadding="0" border="0" align='right'>
+									<tr>
+										<td>
+											<button class="customizeButton" id="ICMTab<%=IAMEncoder.encodeHTMLAttribute(referenceId)%>" onClick="showCustomizeLinks('TabCustomizationLinks','ICMTab<%=IAMEncoder.encodeHTMLAttribute(referenceId)%>',event, '<%=IAMEncoder.encodeHTMLAttribute(referenceId)%>')" onMouseOver="return showBorder('<%=IAMEncoder.encodeHTMLAttribute(referenceId)%>')" onMouseOut="return hideBorder('<%=IAMEncoder.encodeHTMLAttribute(referenceId)%>')">&nbsp;Customize&nbsp;</button>
+										</td>
+										<td align='left'>
+											<button class="customizeButtonPull" id="ICMT" onClick="showCustomizeLinks('TabCustomizationLinks','ICMTab<%=IAMEncoder.encodeJavaScript(referenceId)%>',event, '<%=IAMEncoder.encodeJavaScript(referenceId)%>')" onMouseOver="return showBorder('<%=IAMEncoder.encodeJavaScript(referenceId)%>')" onMouseOut="return hideBorder('<%=IAMEncoder.encodeJavaScript(referenceId)%>')">&nbsp;</button>
+										</td>	
+									</tr>
+								</table><br>	
+							</td>
+<%
+	}
+}
+%>

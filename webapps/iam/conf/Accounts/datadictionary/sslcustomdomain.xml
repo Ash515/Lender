@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!-- $Id $ -->
+<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd">
+<data-dictionary name="Accounts">
+<table name="IAMSSLCustomDomain" display-name="SSLCustomDomain">
+        <description>Holds domain details for adding ssl certificates</description>
+        <columns>
+        <column name="DOMAIN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMSSLCustomDomain.DOMAIN_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>        
+            <column name="DOMAIN">
+                <description>Domain name and port configurations to add certificate</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+            </column>
+            <column name="REQUESTED_MAILID">
+                <description>Email address of the requested user</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+               </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="APPROVER">
+                <description>Email address of the approver (admin).</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+            </column>
+        </columns>
+        <primary-key name="IAMSSLCustomDomain_PK">
+            <primary-key-column>DOMAIN_AUTO_ID</primary-key-column>
+        </primary-key>       
+        <unique-keys>
+            <unique-key name="IAMSSLCustomDomain_UK1">
+                <unique-key-column>DOMAIN</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+    <table name="IAMSSLNotifyServices" display-name="SSLNotifyServices">
+        <description>Cacerts update notified services</description>
+        <columns> 
+               <column name="APP_AUTO_ID">
+                <data-type>BIGINT</data-type>                
+            </column>                             
+            <column name="STATUS">
+                <description>Notification status</description>
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>                               
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+           </columns>
+           <primary-key name="IAMSSLNotifyServices_PK">
+               <primary-key-column>APP_AUTO_ID</primary-key-column>
+          </primary-key>
+          <foreign-keys>
+            <foreign-key name="IAMSSLNotifyServices_FK1" reference-table-name="IAMApp" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+          </foreign-keys>
+          <unique-keys>
+            <unique-key name="IAMSSLNotifyServices_UK1">
+                <unique-key-column>APP_AUTO_ID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+</table>
+</data-dictionary>

@@ -1,0 +1,10 @@
+Module=MICKEYLITE
+SourceCoLabel=MICKEYLITE_DBUILD_REVIEWED
+BuildDate=Nov_24_2021
+BuildTime=19:00:00
+#BuildLabel=MICKEYLITE_DBUILD_REVIEWED_Nov_24_2021
+build-timestamp= 1637760631
+StaticVersion=
+Source_Changeset=5a817608ce7a
+Build_Comment=
+BuildLabel=MICKEYLITE_4270

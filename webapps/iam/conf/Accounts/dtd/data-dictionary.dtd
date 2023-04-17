@@ -1,0 +1,172 @@
+<!-- $Id: data-dictionary.dtd,v 1.1 2010/08/04 12:02:25 lokeshkumar.e Exp $ -->
+<!--
+    Typical usage:
+
+    <?xml version="1.0"?>
+
+    <!DOCTYPE data-dictionary
+         PUBLIC "-//AdventNet , Inc.//DTD Data Dictionary 1.0//EN"
+         "http://www.adventnet.com/products/persistence/data-dictionary.dtd" >
+
+    <data-dictionary>
+    ...
+    </data-dictionary>
+-->
+
+<!-- The data dictionary defintion consists of the table definition and the Entity
+defintions.The Entity defintions are primarily the list of tables which constitues an 
+Entity!. -->
+<!ELEMENT data-dictionary (description?,table)+>
+<!ATTLIST data-dictionary
+    name CDATA #REQUIRED>
+    
+<!ELEMENT description (#PCDATA)>
+
+<!-- Starts with the table defintion. -->
+<!ELEMENT table (description?,columns,primary-key,foreign-keys?, unique-keys?, indexes?)>
+<!ATTLIST table
+    name CDATA #REQUIRED
+    display-name CDATA #IMPLIED
+    system  CDATA "false"
+  >
+
+<!-- The column definitions are defined under the table defintion. -->
+<!ELEMENT columns (column)+>
+
+<!-- The column defintion contains the data type and other constraints if any-->
+<!ELEMENT column (description?,data-type,max-size?,precision?,default-value?,nullable?,unique?,allowed-values?,uniquevalue-generation?)>
+<!ATTLIST column
+    name CDATA #REQUIRED
+    display-name CDATA #IMPLIED
+  >
+
+<!ELEMENT uniquevalue-generation (generator-name, name-column?)>
+
+ <!ELEMENT generator-name ( #PCDATA ) >
+ <!ELEMENT name-column ( #PCDATA ) >
+
+<!--
+The data type for this column. Allowed values for this are:
+Character types
+    <data-type>CHAR</data-type>
+Numeric types
+    <data-type>INTEGER</data-type>
+    <data-type>BIGINT</data-type>
+Boolean type
+    <data-type>BOOLEAN</data-type>
+-->
+<!ELEMENT data-type (#PCDATA)>
+
+<!-- The max length for the data type for this column. -->
+<!ELEMENT max-size (#PCDATA)>
+
+<!-- The precision for the data type for this column. -->
+<!ELEMENT precision (#PCDATA)>
+
+<!-- The default value for this column. -->
+<!ELEMENT default-value (#PCDATA)>
+
+<!-- Whether "Null" value is allowed for this column.
+ If this element is not specified, this value defaults to "true". -->
+<!ELEMENT nullable (#PCDATA)>
+
+<!-- Whether this column is a unique key.
+ If  this element is not specified, this value defaults to "false". -->
+<!ELEMENT unique (#PCDATA)>
+
+<!ELEMENT allowed-values ( (from? , to?) | value+ | pattern) >
+
+<!--
+The from element specifies the minimum value, which this numeric
+attribute can have.
+-->
+<!ELEMENT from ( #PCDATA ) >
+
+<!--
+The to element specifies the maximum value, which this numeric
+attribute can have.
+-->
+<!ELEMENT to ( #PCDATA ) >
+
+<!--
+The value element specifies the enumerated values, one of which the
+attribute can have.
+-->
+<!ELEMENT value ( #PCDATA ) >
+
+<!--
+The value element specifies the pattern, which this string
+attribute can have.
+-->
+
+<!ELEMENT pattern ( #PCDATA) >
+
+<!-- Some column constraints can be defined here!. This can be one of the length,
+Allowed Values, Default value etc,.. 
+<!ELEMENT CONSTRAINTS EMPTY>
+-->
+
+<!-- A table definition is not complete without a Primary key definition-->
+<!ELEMENT primary-key (primary-key-column)+>
+<!ATTLIST primary-key
+    name CDATA #REQUIRED
+  >
+
+ <!-- This holds the name of the column which "forms" the primary key for this 
+table. -->
+<!ELEMENT primary-key-column (#PCDATA)>
+
+
+<!-- Unlike Primary Key, there can be "n" number of Foreign Keys defined for a 
+table. -->
+<!ELEMENT foreign-keys (foreign-key)+>
+
+<!-- A Foreign Key is defined interms of the "Referring column", "Referred table"
+"Referred column" and the "Foreign key constraints". -->
+<!ELEMENT foreign-key (description?,fk-columns,fk-constraints?)>
+<!ATTLIST foreign-key
+    name CDATA #REQUIRED
+    reference-table-name CDATA #REQUIRED
+    isbidirectional CDATA #IMPLIED
+  >
+<!--This holds the list of unique keys defined for this table -->
+<!ELEMENT unique-keys ( unique-key+)>
+
+<!-- This holds the list of columns that forms the unique key for this table. Each unique key is identified by a name -->
+<!ELEMENT unique-key ( unique-key-column+)>
+<!ATTLIST unique-key
+	name CDATA #REQUIRED
+>
+<!-- This holds the name of the column that participates in this unique key. -->
+<!ELEMENT unique-key-column (#PCDATA)>
+
+<!-- List of columns which defines this Foriegn Key. -->
+<!ELEMENT fk-columns (fk-column)+>
+
+<!-- Participating fk-column Name. -->
+<!ELEMENT fk-column (fk-local-column,fk-reference-column)>
+
+<!-- The foreign key column from the local table-->
+<!ELEMENT fk-local-column (#PCDATA)>
+
+<!-- The column from the referred table-->
+<!ELEMENT fk-reference-column (#PCDATA)>
+
+<!--
+The foreign Key constraints can be one of ON-DELETE-RESTRICT,
+ON-DELETE-CASCADE, ON-DELETE-DEFAULT, ON-DELETE-SET-NULL. If this element
+is not specified, ON-DELETE-RESTRICT will be assumed. 
+-->
+<!ELEMENT fk-constraints (#PCDATA)>
+
+<!--This holds the list of indexes defined for this table -->
+<!ELEMENT indexes ( index+)>
+
+<!-- This holds the list of columns that are indexed for this table. Each index is identified by a name -->
+<!ELEMENT index ( index-column+)>
+<!ATTLIST index
+	name CDATA #REQUIRED
+>
+<!-- This holds the name of the column that participates in this index definition. -->
+<!ELEMENT index-column (#PCDATA)>
+

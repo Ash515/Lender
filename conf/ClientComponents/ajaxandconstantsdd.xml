@@ -1,0 +1,162 @@
+<!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd">
+<?xml-stylesheet type="text/xsl" href="data-dictionary-transform.xsl"?>
+
+<!--$Id$ -->
+
+<data-dictionary name="ClientComponents">
+
+
+	<table name="ACAjaxForm">
+		<description>The table used for configuring a form which uses Ajax
+			for
+			submission.</description>
+		<columns>
+			<column name="VIEWNAME">
+				<description>The viewname to which this form is associated.</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="FORMNAME">
+				<description>The name of the form as defined in the JSP</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="ACTION">
+				<description>The action url to be invoked.Incase the same
+					view's
+					viewcontroller is to be called, then don't specify
+					any value. By
+					default "uniqueId.ve" is used. </description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+			</column>
+			<column name="METHOD">
+				<data-type>CHAR</data-type>
+				<max-size>10</max-size>
+				<default-value>POST</default-value>
+				<allowed-values>
+					<value>GET</value>
+					<value>POST</value>
+				</allowed-values>
+			</column>
+			<column name="ONSUCCESSFUNC">
+				<description>Specify the client function to call on success.Some of
+					the predefined
+					apis are
+					AjaxAPI.closeView,AjaxAPI.refreshView,AjaxAPI.forwardView etc.
+					The
+					custom options for these functions can be specified in
+					ACAjaxFormOption</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>AjaxAPI.closeView</default-value>
+			</column>
+			<column name="VALIDATEFUNC">
+				<description>Specify the validate function to use. For
+					example
+					'validateForm' can be specified.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+			</column>
+			<column name="ALERTTYPE">
+				<description>Specify the type of validation alert to be
+					shown.Usefull only incase it is the framework's
+					'validateForm' is
+					specified in validatefunc column.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<default-value>Custom</default-value>
+				<allowed-values>
+					<value>Complete</value>
+					<value>Custom</value>
+					<value>Default</value>
+				</allowed-values>
+			</column>
+			<column name="VIEWTOFORWARD">
+				<description>Specify the view to forward incase the
+					operation is
+					successfull. ONSUCCESSFUNC column should be AjaxAPI.forwardView</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="STATUSFUNC">
+				<description>Specify the status function to use.It is
+					better not to
+					specify this.Rather the default
+					implementation itself would suffice.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>AjaxAPI.showRespMsg</default-value>
+			</column>
+		</columns>
+		<primary-key name="ACAjaxForm_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+			<primary-key-column>FORMNAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="ACAjaxForm_FK1" reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACAjaxFormOption">
+		<description>Use this table to declare the various options that are
+			needed for the javascript apis. Will be usefull for
+			reusable apis. For
+			the options that can be provided, please view the
+			corresponding APIs.
+		</description>
+		<columns>
+			<column name="VIEWNAME">
+				<description>The viewname to which this form is associated.</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="FORMNAME">
+				<description>The name of the form as defined in the JSP</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="NAME">
+				<description>The name of the option.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="VALUE">
+				<description>Specify the value for the option</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACAjaxFormOption_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+			<primary-key-column>FORMNAME</primary-key-column>
+			<primary-key-column>NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACAjaxFormOption_FK"
+				reference-table-name="ACAjaxForm">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME</fk-reference-column>
+					</fk-column>
+					<fk-column>
+						<fk-local-column>FORMNAME</fk-local-column>
+						<fk-reference-column>FORMNAME</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+</data-dictionary>

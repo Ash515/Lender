@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="codeminesorgzaid" account_name="Codemine Service Org">
+		<IAMAccountDomain domain="codeminesorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="suppliermanagementsorgzaid" account_name="SupplierManagement Service Org">
+		<IAMAccountDomain domain="suppliermanagementsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="commandcentersorgzaid" account_name="CommandCenter Service Org">
+		<IAMAccountDomain domain="commandcentersorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="signalssorgzaid" account_name="Signals Service Org">
+		<IAMAccountDomain domain="signalssorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="zohoaegissorgzaid" account_name="ZohoAEGIS Service Org">
+		<IAMAccountDomain domain="zohoaegissorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

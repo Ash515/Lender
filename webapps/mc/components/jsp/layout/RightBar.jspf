@@ -1,0 +1,80 @@
+<%-- $Id$ --%>
+<td width='10px' id='_HIDEPANE' class="paneBg show"><input type='button' class='hideSideBar' onClick='hidePane()'></td>
+<td width='10px' id='_SHOWPANE' class="paneBg hide"><input type='button' class='showSideBar' onclick='showPane()'></td>
+<td id = '_PANE' width="250" valign="top" class="rightBg"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+<table width='100%' cellspacing="0" cellpadding='0'>
+  <tr>
+    <td class="sideBarHdr"> <input type='button' class='collapse' onclick="expandCollapse('_SearchTab', 'srcImg')" id='srcImg'> 
+      <a href="javascript:expandCollapse('_SearchTab', 'srcImg')">Search 
+      for Components</a> </td>
+  </tr>
+  <tr id='_SearchTab' class='hide'>
+    <td align="center" nowrap valign='middle'> <br>
+      <form name='viewSearch' onSubmit='return searchViews(document.viewSearch.Title)'>
+        Search:
+		<input name='Title' value=''>
+        <button class='btn'>Go</button>
+        <br>
+        <br>
+        <input type="hidden" name="VIEWNAME" value='<%=IAMEncoder.encodeHTMLAttribute(request.getParameter("VIEWNAME"))%>'/>
+      </form></td>
+  </tr>
+  <tr id='orgTab1' class='show'>
+    <td class="sideBarHdr"> <input type='button' class='collapse' onclick="expandCollapse('_RmTab', 'rmImg')" id='rmImg'> 
+      <a href="javascript:expandCollapse('_RmTab', 'rmImg')">Recently Removed 
+      Components</a> </td>
+  </tr>
+  <tr id='_RmTab' class='hide'>
+    <td nowrap align='center'> <br>
+      <input type='button' class='warning'> No components removed recently<br>
+      <br></td>
+  </tr>
+  <tr id='orgTab2' class='show'>
+    <td class="sideBarHdr"> <input type='button' class='expand'onClick="expandCollapse('_AvlTab', 'avlImg')" id='avlImg'> 
+      <a href="javascript:expandCollapse('_AvlTab', 'avlImg')">Available 
+      Components</a> </td>
+  </tr>
+  <tr id='_AvlTab' class='show'>
+    <td nowrap class="toolbarBg">View Category : 
+      <select id='groupSearch' name="GroupName" class="selectStyle" onchange="return updateSearchData('ListViewConfigurations', this)">
+        <option value="*">All</option>
+        <% ArrayList list = (ArrayList) request.getAttribute("AvailableGroups"); String defaultGroup = request.getParameter("DefaultGroup"); int size = list.size(); for(int i=0; i< size; i++){ String columnValue = (String) list.get(i); if(defaultGroup != null && columnValue.equals(defaultGroup)){%>
+        <option value="<%=columnValue%>" selected><%=columnValue%></option>
+        <% } else{%>
+        <option value="<%=columnValue%>"><%=columnValue%></option>
+        <% } }%>
+      </select> </td>
+  </tr>
+  <tr class='show' id='views'>
+    <td> <client:showView viewName="ListViewConfigurations"/></td>
+  </tr>
+  <tr id='dummyTab1' class='hide'>
+    <td class="sideBarHdr"> <input type='button' class='collapse'onClick="expandCollapse('_RmTab', 'rmImg')"> 
+      <a href="javascript:expandCollapse('_RmTab', 'rmImg')">Recently Removed 
+      Components</a> </td>
+  </tr>
+  <tr id='dummyTab2' class='hide'>
+    <td class="sideBarHdr"> <input type='button' class='collapse' onclick="expandCollapse('_AvlTab', 'avlImg')"> 
+      <a href="javascript:expandCollapse('_AvlTab', 'avlImg')">Available 
+      Components</a> </td>
+  </tr>
+  <!-- New Additions -->
+  <!--tr id='orgTab4' class='show'>
+    <td class="sideBarHdr"> <input type='button' class='collapse' onclick="expandCollapse('_NewTab', 'newImg')" id='newImg'> 
+      <a href="javascript:expandCollapse('_NewTab', 'newImg')">Create New 
+      Views</a> </td>
+  </tr>
+  <tr id='_NewTab' class='hide'>
+    <td align="center" nowrap valign='middle'> 
+      <form name='newViewForm' action="ACPlaceHolderMI.ma" target="newViewFrame">
+	  	<br>
+        View Name: <input id="newViewText" name="TITLE" value='' size="20">
+		<input type="submit" class='btn' value='Go'>
+      </form>
+      <br>
+      <div id="newViewPH"></div>
+      <iframe src="about:blank" onLoad="addNewView()" style="display:none" name="newViewFrame"></iframe> 
+    </td>
+  </tr-->
+</table></td>
+<div id='timeToLoad' class='hide'></div>

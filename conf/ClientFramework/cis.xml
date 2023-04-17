@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<cis>
+    <ConfigurationMetaData modulename="ClientFramework" citype="ClientFrameworkCI">
+        <ConfigurationTableInfoList>
+            <ConfigurationTableInfo configurationtablename="UIComponent"/>
+            <ConfigurationTableInfo configurationtablename="ViewConfiguration"/>
+			      <ConfigurationTableInfo configurationtablename="ACBoxConfig"/>									
+            <!-- Menu related table :: START -->
+            <ConfigurationTableInfo configurationtablename="Menu"/>
+            <ConfigurationTableInfo configurationtablename="MenuItem"/>
+            <!-- Menu related table :: END -->
+        </ConfigurationTableInfoList>
+    </ConfigurationMetaData>
+    <CITypeConstraint modulename="ClientFramework" citype="ClientFrameworkCI" scope="GLOBAL"/>
+</cis>

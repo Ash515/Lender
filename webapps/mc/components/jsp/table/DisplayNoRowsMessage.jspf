@@ -1,0 +1,103 @@
+<%-- $Id$ --%>
+<%@page contentType="text/html; charset=UTF-8" import="com.adventnet.i18n.I18N, com.adventnet.persistence.*,com.adventnet.mfw.bean.BeanUtil,com.adventnet.client.components.filter.web.*" %><%@page import="java.util.regex.*"%>
+
+<%
+int rowCount = tableModel.getRowCount();
+
+if((tableModel instanceof TableNavigatorModel) &&  rowCount<=0){
+%>
+	<table class="table" cellspacing="0px"  cellpadding="0px" width="100%" align="center">
+	<%
+		String titleText="";
+		String messageText="";
+		String iconUrl="";
+		String menu_id="";
+		StringBuffer message_text = new StringBuffer();
+                Row empty_message_row = null;
+	Object empty_message_id = viewModel.getTableViewConfigRow().get("EMPTY_MESSAGE_ID");
+        FilterModel filterModel = (FilterModel)viewContext.getTransientState("FILTERMODEL");
+        if(filterModel != null && filterModel.getSelectedFilter() != null)
+        {
+            empty_message_row = filterModel.getEmptyTableMessageRow();
+	    menu_id = 	filterModel.getMenuNameForEmptyTableMessage();
+
+
+        }
+        if(empty_message_id != null && empty_message_row == null)
+        {
+                empty_message_row = viewModel.getEmptyTableMessageRow();
+		menu_id = 	viewModel.getMenuNameForEmptyTableMessage();
+        }
+        
+    if(viewContext.getStateParameter("SEARCH_COLUMN") == null && empty_message_row != null){
+        	messageText = (String)empty_message_row.get("MESSAGE_TEXT");
+		if(messageText != null)
+		{
+			messageText = I18N.getMsg(messageText);
+		}
+		titleText = (String) empty_message_row.get("TITLE_TEXT");
+		if(titleText != null)
+		{
+			titleText = I18N.getMsg(titleText);
+		}
+		iconUrl= (String)empty_message_row.get("ICON_URL");
+
+		request.setAttribute(uniqueId+"/menu_id",menu_id);
+
+
+	      Pattern regex = Pattern.compile("\\{.*?\\}");
+	      Matcher m = regex.matcher(messageText);
+
+		while (m.find()){
+		 String match_pattern = m.group();
+		 String prop_name = match_pattern.substring(1,match_pattern.length()-1);
+		 String prop_value =  (String)viewContext.getStateParameter(prop_name);
+		 if(prop_value != null){
+		       	m.appendReplacement(message_text,prop_value);
+		}
+	        else{
+		       m.appendReplacement(message_text,prop_name);
+	       }
+      	}
+     	 m.appendTail(message_text);
+
+
+%>
+		<tr ><%
+			if(iconUrl != null)
+			{
+			%>
+			<td rowspan="3" width="30%" class="emptyRowMsg" ><span class="icon"><img src="<%=IAMEncoder.encodeHTMLAttribute(iconUrl)%>"></span></td>
+			<%}
+			if(titleText != null){%>
+				<td class="emptyRowMsg" ><span class="title"><%=IAMEncoder.encodeHTML(titleText)%></span></td>
+			<%}%>
+
+		</tr>
+		<tr >
+			<td class="emptyRowMsg" ><span class="empty_message"><%out.print(message_text);//NO OUTPUTENCODING%></span></td><%--NO OUTPUTENCODING --%>
+
+		</tr>
+		<%if(menu_id != null){%>
+		<tr><td class="emptyRowMsg"><%@ include file='DisplayMenu.jspf'%></td></tr>
+		<%}%></table>
+<%
+}
+else{
+	String noRowMsg = (String)viewModel.getTableViewConfigRow().get("EMPTY_TABLE_MESSAGE");
+        if(noRowMsg == null)
+	{
+		noRowMsg = "mc.component.table.No_Rows_found";
+	}
+%>
+
+		<tr ><td class="emptyRowMsg"><span ><%=IAMEncoder.encodeHTML(I18N.getMsg(noRowMsg))%></span></td></tr></table>
+	<%
+   }
+   if(rowtrans != null)
+   {
+	rowtrans.canSelectRow(transformerContext);
+   }
+}
+%>
+

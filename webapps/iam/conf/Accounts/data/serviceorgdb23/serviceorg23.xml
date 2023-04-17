@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="creatorplussorgzaid" account_name="Zoho CreatorPlus Service Org">
+		<IAMAccountDomain domain="creatorplussorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="publishsorgzaid" account_name="Zoho Publish Service Org">
+		<IAMAccountDomain domain="publishsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="tablessorgzaid" account_name="Zoho Tables Service Org">
+		<IAMAccountDomain domain="tablessorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="shortenurlsorgzaid" account_name="Zoho ShortenUrl Service Org">
+		<IAMAccountDomain domain="shortenurlsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="zvoicesorgzaid" account_name="Zoho Voice Service Org">
+		<IAMAccountDomain domain="zvoicesorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

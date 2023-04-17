@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="searchsorgzaid" account_name="Zoho Search Service Org">
+		<IAMAccountDomain domain="searchsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="zohoofficesorgzaid" account_name="Zoho Office Service Org">
+		<IAMAccountDomain domain="zohoofficesorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="jproxysorgzaid" account_name="Zoho jproxy Service Org">
+		<IAMAccountDomain domain="jproxysorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="iotsorgzaid" account_name="Zoho IOT Service Org">
+		<IAMAccountDomain domain="iotsorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

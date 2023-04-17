@@ -1,0 +1,29 @@
+<!-- $Id$ -->
+<task>
+    <Schedule schedule_id="Schedule:schedule_id:BackupSchedule" schedule_name="FWBackupSchedule">
+        <Calendar repeat_frequency="Daily" time_of_day="2" unit_of_time="Hours"/>
+    </Schedule>
+
+    <TaskEngine_Task task_id="TaskEngine_Task:task_id:BackupTask" task_name="FWBackupTask" class_name="com.adventnet.taskengine.backup.DbBackupTask">
+        <Scheduled_Task schedule_id="Schedule:schedule_id:BackupSchedule" transaction_time="-1" retry_handler="com.adventnet.taskengine.internal.DefaultScheduleRetryHandler">    
+            <ScheduledTask_Retry schedule_id="Schedule:schedule_id:BackupSchedule" task_id="TaskEngine_Task:task_id:BackupTask" retry_count="5" retry_time_period="15" retry_unit_of_time="minutes" retry_factor="1"/>
+            <Task_Input instance_id="Task_Input:instance_id:BackupTaskInstance" admin_status="4">
+                <!-- Configuration-1 -->
+                <Default_Task_Input variable_name="backup.directory" variable_value="../Backup"/>
+                <!-- Configuration-2 -->
+                <Default_Task_Input variable_name="fullbackup.interval" variable_value="6"/>
+                <!-- Configuration-3 -->
+                <Default_Task_Input variable_name="fullbackup.intervaltype" variable_value="days"/>
+                <!-- Configuration-4 -->
+                <Default_Task_Input variable_name="fullbackup.retaincount" variable_value="5"/>
+                <!-- Configuration-5 --><!-- dump / binary (default) -->
+                <Default_Task_Input variable_name="backup.content.type" variable_value="binary"/>
+                <!-- Configuration-6 --><!-- variable_value in seconds -->
+                <Default_Task_Input variable_name="backuplabel.waitduration" variable_value="20"/>
+                <!-- Compulsory Configuration -->
+                <Default_Task_Input variable_name="framework.online.backup" variable_value=""/>
+            </Task_Input>
+        </Scheduled_Task>
+    </TaskEngine_Task>
+</task>
+

@@ -1,0 +1,191 @@
+<%-- $Id$ --%>
+<%@page import="com.zoho.accounts.AccountsConstants.SignInPrimaryModes"%>
+<%@page import="com.zoho.accounts.AccountsConstants.UserOperation"%>
+<%@page import="com.zoho.accounts.internal.signin.SignInParams"%>
+<%@page import="com.zoho.accounts.internal.IAMResponse"%>
+<%@page import="com.zoho.accounts.internal.signin.SigninUtil"%>
+<%@page import="org.json.JSONObject"%>
+<%@page import="com.adventnet.iam.Service"%>
+<%@page import="com.adventnet.iam.User"%>
+<%@page import="com.adventnet.iam.UserEmail"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.util.regex.Pattern"%>
+<%@page import="com.adventnet.iam.internal.Util"%>
+<%@page import="com.adventnet.iam.IAMUtil"%>
+<%@page import="com.zoho.accounts.AccountsProto.Account"%>
+<%@page import="com.zoho.iam2.rest.*"%>
+<%@page import="com.zoho.resource.*"%>
+<%@page import="com.zoho.accounts.*"%>
+<%@page import="com.adventnet.iam.IAMProxy"%>
+<%@page import="java.util.logging.Logger"%>
+<%@page import="java.util.logging.Level"%>
+<%!Logger logger = Logger.getLogger("internal.centraldesktop.zp");%>
+<%!static Pattern userNamePattern = Pattern.compile("\\w+");%>
+<%
+    String operation = request.getParameter("OPERATION");
+    // Check if matches expected ipaddress
+    String ipAddress = request.getRemoteAddr();
+    if (!"authenticate".equals(operation) && !Util.isCentralDesktopIP(ipAddress)) {
+        response.getWriter().println("ERROR:IP Not Allowed :" + ipAddress);
+        return;
+    }
+
+    if (!Util.getCentralDesktopAPIKey().equals(request.getParameter("apikey"))) {
+        response.getWriter().println("ERROR:Invalid API Key");
+        return;
+    }
+    
+    String referer = AccountsConfiguration.getConfigurationTyped("api.centraldesktop.referrer.domain", "centraldesktop.com");	//No I18N
+    if (!Util.isValid(operation)) {
+        response.getWriter().println("ERROR:No Operation Specified");
+        return;
+    } else if (operation.equals("register")) {
+        String firstName = request.getParameter("FIRST_NAME");
+        String loginId = request.getParameter("LOGIN_ID");
+        String password = request.getParameter("PASSWORD");
+        String emailId = request.getParameter("EMAIL_ID");
+
+        if (!Util.isValid(loginId) || !Util.isValid(password) || !Util.isValid(emailId) && !Util.isValid(firstName)) {
+            response.getWriter().println("Error:Insufficient or null Parameters");
+            return;
+        }
+        
+        int userPasswordMinLen = Util.getUserPasswordDefaultMinLength();
+        int userPasswordMaxLen = Util.getUserPasswordDefaultMaxLength();
+        if(password.length() < userPasswordMinLen) {
+			response.getWriter().println("Error:Password cannot be less than " + userPasswordMinLen + " characters");	//NO OUTPUTENCODING	//No I18N
+            return;
+        } else if(password.length() > userPasswordMaxLen){
+            response.getWriter().println("Error:Password cannot be more than " + userPasswordMaxLen + " characters");	//NO OUTPUTENCODING	//No I18N
+            return;
+        }
+        
+        //Note: Do not use IAMUtil.isValidUserName as dot will be allowed
+        if (!userNamePattern.matcher(loginId).matches()) {
+            response.getWriter().println("Error:Invalid LOGIN_ID Only word chars allowed A-Za-z0-9_");
+            return;
+        }
+
+        if (!IAMUtil.isValidEmailId(emailId)) {
+            response.getWriter().println("Error:Invalid EMAIL_ID format");
+            return;
+        }
+
+        String username = loginId;
+        Locale l = request.getLocale();
+        String language = l.getLanguage();
+        String country = l.getCountry();
+        String timezone = Calendar.getInstance(l).getTimeZone().getID();
+
+        try {
+            if (Util.USERAPI.isEmailExist(emailId)) {
+                response.getWriter().println("Error:EmailId already registered");
+                return;
+            }
+            if (Util.USERAPI.isEmailExist(username)) {
+                response.getWriter().println("Error:User already exists");
+                return;
+            }
+
+            String res = Util.addPersonalUser(emailId, username, password, firstName, firstName, country, language, timezone, ipAddress, referer, null);
+            if (!res.startsWith("SUCCESS")) {
+                response.getWriter().println("Error:" + res);
+                return;
+            }
+
+            //Confirm the user's email
+            CSPersistenceAPIImpl.changeUserEmailStatus(emailId, UserEmail.CONFIRMED_PRIMARY);
+            response.getWriter().println("SUCCESS");
+            return;
+        } catch (Exception e) {
+            String message = e.getMessage();
+            String error = Util.encode(message);
+            response.getWriter().println("Error:" + error);
+        }
+    } else if (operation.equals("validate")) {
+        try {
+            String ticket = request.getParameter("TICKET");
+            User t = ticket == null ? null : Util.USERAPI.getTicketUser(ticket);
+
+            if (t != null && !referer.equals(t.getReferer())) {
+                response.getWriter().println("ERROR:Not a Centraldesktop user");
+                return;
+            }
+            if (t != null) {
+                t.toV1Properties().store(response.getOutputStream(), "");
+                out.clear();
+                out = pageContext.pushBody();
+            } else {
+                response.getWriter().println("ERROR:Invalid ticket");
+            }
+        } catch (Exception e) {
+            response.getWriter().println("ERROR:Exception:" + e.getMessage());
+        }
+    } else if(operation.equals("signin")) {
+    	String password = request.getParameter("PASSWORD");
+        String emailId = request.getParameter("EMAIL_ID");
+        if (!Util.isValid(password) || !Util.isValid(emailId)) {
+            response.getWriter().println("Error:Invalid Email address or password");
+            return;
+        }
+        User user = Util.USERAPI.getUser(emailId);
+        if(user != null) {
+        	if(!user.getReferer().equals(referer)) {
+        		response.getWriter().println("Error:Not a Centraldesktop user");
+        		return;
+        	}
+	        String redirectURL = request.getParameter("redirecturl");
+	        String redirectInputDomain;
+	        if(Util.isValid(redirectURL) && Util.isValid(redirectInputDomain = IAMUtil.getDomain(redirectURL)) && AccountsConfiguration.CENTRALDESKTOP_REDIRECT_DOMAIN_PATTERN.checkCommaSpearatedList(redirectInputDomain, false)) {
+	        	Account account = Accounts.getAccountURI(user.getZaid()).GET();
+	        	String serviceName = AccountsConfiguration.getConfigurationTyped("api.centraldesktop.service", "ZohoPC");	//No I18N
+	        	CSPersistenceAPIImpl.handleAccountSignIn(request, response, emailId, password, account, null, serviceName, redirectInputDomain, false, true);
+	        	return;
+	        }
+	        response.getWriter().println("Error:Not a valid Redirect URL");
+    		return;
+        }
+		response.getWriter().println("ERROR:Not a valid user");
+    } else if(operation.equals("authenticate")) {
+    	String ticket = request.getParameter("TICKET");
+    	if(IAMUtil.isValid(ticket)) {
+    		String serviceName = AccountsConfiguration.getConfigurationTyped("api.centraldesktop.service", "ZohoPC");	//No I18N
+    		String redirectURL = request.getParameter("redirecturl");
+	        String redirectInputDomain;
+	        if(!Util.isValid(redirectURL) || !Util.isValid(redirectInputDomain = IAMUtil.getDomain(redirectURL)) || !AccountsConfiguration.CENTRALDESKTOP_REDIRECT_DOMAIN_PATTERN.checkCommaSpearatedList(redirectInputDomain, false)) {
+	        	response.getWriter().println("Error:Not a valid Redirect URL");
+	    		return;
+	        }
+    			String tokenPair = IAMProxy.getInstance().getAuthAPI().validateTokenPairTempTicket(ticket, redirectInputDomain);
+    			if(IAMUtil.isValid(tokenPair)) {
+    				String[] ids = tokenPair.split(":");
+    				if(ids.length > 2) {
+				User user = Util.USERAPI.getUserFromZUID(ids[1]);
+				if(user != null) {
+					if(!user.getReferer().equals(referer)) {
+						response.getWriter().println("Error:Not a Centraldesktop user");
+						return;
+					}
+					SignInParams params = new SignInParams();
+					params.setServiceName(serviceName);
+					params.setServiceUrl(redirectURL);
+					params.setModeOfSignin(SigninUtil.toModeofSigninString(null, UserOperation.SIGNUP.getValue(), SignInPrimaryModes.PASSWORD.getPrimaryMode()));
+					JSONObject json = SigninUtil.handleSessionGeneration(user, params, request, new IAMResponse(response));
+					if(json != null && json.has("redirect_uri")) {
+						response.sendRedirect(json.getString("redirect_uri"));
+						return;
+					}
+					response.getWriter().println("ERROR:Problem while signing in. Try after some time.");
+					return;
+				}
+				response.getWriter().println("ERROR:Not a valid user");
+				return;
+			}
+    		}
+		}
+		response.getWriter().println("ERROR:Not a valid ticket");
+	} else {
+		response.getWriter().println("ERROR:Not a valid Operation");
+	}
+%>

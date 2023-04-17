@@ -1,0 +1,50 @@
+<%-- $Id$ --%>
+<components:row viewContext="<%=viewContext%>" javaScriptRow = "true">
+<%
+boolean isEven = false;
+%>
+<tr>
+	<td>
+		<table cellspacing='0' class="propertySheetTable">
+			<components:column viewContext="<%=viewContext%>">
+				<%
+					String cssName = "";
+				  if(!isEven){
+						cssName = "oddRow";
+						isEven = true;
+					}
+					else {
+						cssName = "evenRow";
+						isEven = false;
+					}
+				%>
+				<tr>
+					<components:cell viewContext="<%=viewContext%>" type="Header">
+						<% 
+						String columnName = transformerContext.getPropertyName(); 
+						props = transformerContext.getRenderedAttributes(); 
+						%>
+						<td class="<%=IAMEncoder.encodeHTMLAttribute(cssName)%> tableHeader">
+							<%=IAMEncoder.encodeHTML((String)props.get("VALUE"))%>
+						</td>
+					</components:cell>
+					<components:cell viewContext="<%=viewContext%>">
+						<% 
+						props = transformerContext.getRenderedAttributes();
+						%>
+						<td class="<%=cssName%>">
+							<%@ include file='CellRenderer.jspf'%>
+						</td>
+					</components:cell>
+				</tr>
+			</components:column>
+		</table>
+	</td>
+</tr>	
+	<% 
+	if(tableIter.hasNextRow())
+	{
+	%>
+<tr><td style="width:100%;height:5px;">  </td></tr>
+	<%} %>
+</components:row> 

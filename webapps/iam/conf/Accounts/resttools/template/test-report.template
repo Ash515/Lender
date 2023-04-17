@@ -1,0 +1,244 @@
+<html>
+<title>REST Test cases</title>
+<head>
+<style type='text/css'>
+body,td {
+	font-size: 10pt;
+	font-family: sans-serif;
+}
+
+h1 {
+	font-size: 24;
+}
+
+table.summary thead td {
+	border-bottom: 1px solid #B0B0B0;
+	padding: 2px 8px 0;
+	white-space: no-wrap;
+	text-align: left;
+	width: 140px;
+}
+
+table.summary tbody td {
+	border-bottom: 1px solid #D6D3CE;
+	padding: 2px 8px;
+	vertical-align: top;
+	text-align: left;
+	width: 140px;
+}
+
+table.summary {
+	border-collapse: collapse;
+	empty-cells: show;
+}
+
+table.summary thead {
+	background-color: #E0E0E0;
+}
+
+table.summary tbody tr:hover {
+	background: none repeat scroll 0 0 #F0F0D0 !important;
+	border: 1px solid #E8E8E8;
+}
+table.fail {
+	border-collapse: collapse;
+	empty-cells: show;
+}
+table.fail tbody td {
+	border-bottom: 1px solid #D6D3CE;
+	padding: 4px 46px;
+	vertical-align: top;
+	text-align: left;
+	width: 140px;
+}
+table.fail thead {
+	background-color: #E0E0E0;
+}
+table.fail thead td {
+	border-bottom: 1px solid #B0B0B0;
+	padding: 6px 46px 0;
+	white-space: no-wrap;
+	text-align: left;
+	width: 140px;
+}
+
+table.fail tbody tr:hover {
+	background: none repeat scroll 0 0 #F0F0D0 !important;
+	border: 1px solid #E8E8E8;
+}
+
+
+</style>
+</head>
+<body>
+<div id='content'>
+		<h1>REST Test Results</h1>
+		<h5>Time : @@@@@@DateANDTime@@@@@@</h5>
+		<a name='top'></a>
+		<h2>Summary</h2>
+		<table class='summary'>
+			<thead>
+				<tr valign='top'>
+					<td>Tests</td>
+					<td>Success</td>
+					<td>Failures</td>
+					<td>Errors</td>
+					<td>Success Rate</td>
+					<td>Failure Rate</td>
+					<td>Error Rate</td>
+					<td>Time(s)</td>
+				</tr>
+			</thead>
+			<tr valign='top'>
+				<td>@@@@@@@@@@TotalTest@@@@@@@@</td>
+				<td style="color:#059705;font-weight:bold">@@@@@@@Success@@@@@@@@@</td>
+				<td><a href="#failonly" style="color:#FF0000;text-decoration:none;font-weight:bold">@@@@@@failures@@@@@@@</a></td>
+				<td><a href="#erroronly" style="color:#B20202;text-decoration:none;font-weight:bold">@@@@@@@@errors@@@@@@@</a></td>
+				<td style="color:#059705;font-weight:bold">@@@@@@@@@SuccessRate@@@@@@</td>
+				<td style="color:#FF0000;font-weight:bold">@@@@@@@@@FailureRate@@@@@@</td>
+				<td style="color:#B20202;font-weight:bold">@@@@@@@@@ErrorRate@@@@@@</td>
+				<td>@@@@@@@@Time@@@@@@@@</td>
+			</tr>
+		</table>
+	<h2>Packages</h2>
+			<table class='summary'>
+			<thead>
+				<tr>
+					<td>Name</td>
+					<td>Tests</td>
+				</tr>
+			</thead>
+			@@@@@@@packagesList@@@@@@@@
+			</table>
+						
+			@@@@@@@@@PackageClassTables@@@@@@@@
+			@@@@@@@@@@@@@TestMethods@@@@@@@@@@@
+			<p>
+				<a name='failonly'><h2>Failure TestCases</h2></a>
+				<table class='fail'>
+					<thead>
+						<tr>
+							<td>Package</td>
+							<td>Class Name</td>
+							<td>Method Name</td>
+							<td>Status</td>
+							</tr>
+					</thead>
+					@@@@@@@@FailureTests@@@@@@@@@@@@
+				</table>
+			</p>
+
+			<p>
+				<a name='erroronly'><h2>Error TestCases</h2></a>
+					<table class='fail'>
+						<thead>
+							<tr>
+								<td>Package</td>
+								<td>Class Name</td>
+								<td>Method Name</td>
+								<td>Status</td>
+								</tr>
+						</thead>
+						@@@@@@@@ErrorTests@@@@@@@@@@@@
+					</table>
+		</p>
+					</div>
+		<a href="#top" style="position: fixed; right: 100px; color: blue; bottom: 15px; text-decoration: none;"><span style="text-decoration: none; text-indent: inherit; position: relative; top: -1px;">&#x25B2;</span> top</a>
+</body>
+<script src='https://js.zohostatic.com/common/js/jquery/1.3.2/jquery.min.js'></script>
+<script>
+	var efJson=@@@@@@@@@@@@@FailureJSONArray@@@@@@@@;
+	jQuery.each(efJson,function(i,val){
+		if(val.status=="Failure"){
+			$("."+val.className+":contains("+val.methodName+")").next('td').html(val.status).css({"color":"#FF0000","font-weight":"bold"});
+		}
+		else if(val.status=="Error"){
+			$("."+val.className+":contains("+val.methodName+")").next('td').html(val.status).css({"color":"#B20202","font-weight":"bold"});
+		}
+		else{
+			$("td:contains('"+val.className+"')").parents(".summary").append("<tr  valign='top'><td style='width:24em;'><a   href='#"+val.methodName+"'>"+val.methodName+"</a></td><td>"+val.status+"</td></tr>");
+		}
+});
+</script>
+</html>
+@@@@@@@@@@@HTML_ENDS@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@PackageClassTableStarts@@@@@@@@@@@@@@@@@@
+				@@@@@@@@@@@PackageClassHeader@@@@@@@@@@@@@@@@@@
+				<table class="summary">
+					<thead>
+						<tr valign='top'>
+							<td style='width:24em;'>Name</td>
+							<td>Tests</td>
+							<td>Time(s)</td>
+						</tr>
+					</thead>
+				@@@@@@@@@PackageClass@@@@@@@@		
+				</table>
+				@@@@@@@@@@@@@@@@@PackageClassTableEnds@@@@@@@@@@@@
+						
+				
+				@@@@@@@@@@@@@PackageClassHeaderStarts@@@@@@@@@@@@@@@@
+					<a name="@@@@@@@@PackageName@@@@@@@@"><p></p><h3>Package @@@@@@@@PackageName@@@@@@@@</h3></a>
+				@@@@@@@@@@@@@PackageClassHeaderEnds@@@@@@@@@@@@@@@@
+				
+			@@@@@@@PackageClassStarts@@@@@@@@	
+				<tr valign='top'>
+						<td style='width:24em'>
+							<a  href="#@@@@@@@className@@@@@@@@">@@@@@@@className@@@@@@@@</a>
+						</td>
+						<td>@@@@@@@@TestCaseCount@@@@@@@@@</td>
+						<td>@@@@@@@testTime@@@@@@@</td>
+					</tr>
+			@@@@@@@PackageClassEnds@@@@@@@@@@
+			
+				@@@@@@@@@@@@@@MethodTableStarts@@@@@@@@@@@@@@@@@@
+					@@@@@@@@@@@MethodHeader@@@@@@@@@@@@@@@@@@
+						<table class="summary">
+							<thead>
+								<tr valign='top'>
+									<td style='width:24em;'>Name</td>
+									<td>Status</td>
+								</tr>
+							</thead>
+						@@@@@@@@@Method@@@@@@@@		
+						</table>
+				@@@@@@@@@@@@@@@@@MethodTableEnds@@@@@@@@@@@@
+			
+			
+				@@@@@@@@@@@@@MethodHeaderStarts@@@@@@@@@@@@@@@@
+					<a name="@@@@@@@className@@@@@@@@">
+						<p></p>
+						<h3>TestCase @@@@@@@className@@@@@@@@</h3>
+					</a>
+				@@@@@@@@@@@@@MethodHeaderEnds@@@@@@@@@@@@@@@@
+				
+			@@@@@@@@@@@@@MethodStarts@@@@@@@@@@
+			<tr valign="top"  >
+				<td  class="@@@@@@@className@@@@@@@@">@@@@@@@MethodName@@@@@@@@</td>
+				<td style="color:#059705;font-weight:bold">Success</td>
+			</tr>
+			@@@@@@@@@@@@@MethodEnds@@@@@@@@@@@@			
+			
+			@@@@@@@@@@PackageListStarts@@@@@@@@@@@@
+				<tr class='' valign='top'>
+					<td style='width: 24em;'><a class='test_success' href="#@@@@@@@@@@@PackageName@@@@@@@">@@@@@@@@@@@PackageName@@@@@@@</a></td>
+				<td>@@@@@@TestCaseCount@@@@@@@@</td>
+				</tr>
+			@@@@@@@@@PackageListEnds@@@@@@@@@@@@@@
+			
+			@@@@@@@@@@FailedTestStarts@@@@@@@@
+					<tr>
+						<td style="padding-left:5px">@@@@@@@@FailedTestPackageName@@@@@@@@@@</a></td>
+						<td><a href="#@@@@@@@@@@@FailedTestClassName@@@@@@@@@@">@@@@@@@@@@@FailedTestClassName@@@@@@@@@@</a></td>
+						<td>@@@@@@@@@@@FailedTestMethodName@@@@@@@@</td>
+						<td style="color:#FF0000;font-weight:bold">Failure</td>
+					</tr>
+			@@@@@@@@@FailedTestEnds@@@@@@@@@
+			@@@@@@@@@@ErrorTestStarts@@@@@@@@
+					<tr>
+						<td style="padding-left:5px"> @@@@@@@@ErrorTestPackageName@@@@@@@@@@</td>
+						<td>@@@@@@@@@@@ErrorTestClassName@@@@@@@@@@</td>
+						<td>@@@@@@@@@@@ErrorTestMethodName@@@@@@@@</td>
+						<td style="color:#B20202;text-decoration:none;font-weight:bold">Error</td>
+					</tr>
+			@@@@@@@@@ErrorTestEnds@@@@@@@@@

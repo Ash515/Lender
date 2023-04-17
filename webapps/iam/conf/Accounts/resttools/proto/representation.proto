@@ -1,0 +1,35 @@
+syntax = "proto2";
+package resource;
+
+option java_package = "com.zoho.resource";
+option java_outer_classname = "RepresentationProto";
+
+//Represents a resource on transit
+message PBRepresentation {
+
+    //Required while fetching collection URI
+    message Range {
+        required int32 start = 1;
+        required int32 noOfResults = 2;
+    }
+    message ResponseHeader {
+        required string headerName = 1;
+        required string headerValue = 2;
+    }
+    required string resourceType = 1;
+    optional int32 httpResponseCode = 2;
+    optional string errorCause = 3;
+    repeated ResponseHeader responseHeader = 4 ; // in case of resource update or creation location header will be present; cache settings, etc.,
+    optional Range currentRange = 5;
+    optional int64 totalCount = 6;
+    repeated bytes representation = 7;
+    optional string errorCode = 8;
+    repeated string errorColumn = 9;
+    optional string hitFrom = 10; // To track whether the PBRepresentation is returned from "DB" or "MEMCACHE"
+    optional int32 timeTaken = 11; // Time Taken to construct Representation in milliseconds
+    optional string errorResource = 12;
+    optional string response = 13;
+    optional string localizedMessage = 14;
+    optional string exceptionClass = 15;
+    optional string errorClass = 16;
+}

@@ -1,0 +1,168 @@
+## localcontext - Resource Name, mandatory field. To identify the local resource. So that, the result will be returned from DB.
+## connectors - Map, Resource Context vs Resource Server URL without protocol. Request for the given resource context will be routed/proxied to the mentioned resource URL.
+#               If not configured, Resource Server configured in the IAMApp will be used.
+## do_wrapper - Qualified Class Name of the generated DO Wrapper.
+---
+localcontext: accounts
+connectors:
+    accounts: "http://localhost:8080/accounts/resource"
+segment_resource: account
+do_wrapper: com.zoho.data.AccountsDataObject
+memcache:
+    enable: false
+    audit: false
+    audit_cache: false
+    compare_with_db: false
+    disabled_resources: AccountAudit|RegistrationAudit|AccountUpdateAudit|AccountCloseAudit|ResourceAudit|Listener|APIAudit|UniqueIdRange|UniqueId|UniqueIdRangeGenerationAudit|MailStatusQueue|ZAIDSMSAudit|TFAAudit|appannouncementaudit|SignInFailedAudit|MailClientAudit|WebSignInFailedAudit
+    personality:
+      account: [domain, location]
+      user: [useremail, screenname, address, preference, properties, usermobile, userauthorizedip]
+      app: [configuration, appsystemrole]
+      acp : [ace]
+
+redis:
+    enable: false
+    exclude: auditdb.*|referenceaccount
+    exclude_resources: AccountAudit|RegistrationAudit|AccountUpdateAudit|AccountCloseAudit|ResourceAudit|Listener|APIAudit|UniqueIdRange|UniqueId|UniqueIdRangeGenerationAudit|MailStatusQueue|ZAIDSMSAudit|TFAAudit|appannouncementaudit|SignInFailedAudit|ServiceOrgType|ISCUserTicketUsage|MailClientAudit
+    exclude_resources: AccountAudit|RegistrationAudit|AccountUpdateAudit|AccountCloseAudit|ResourceAudit|Listener|APIAudit|UniqueIdRange|UniqueId|UniqueIdRangeGenerationAudit|MailStatusQueue|ZAIDSMSAudit|TFAAudit|appannouncementaudit|SignInFailedAudit|ServiceOrgType|ISCUserTicketUsage|MailClientAudit|WebSignInFailedAudit
+    audit: false
+    comparedb: false
+    iam3.redis.cache.delta.ignore: 1000
+    iam3.redis.cache.delta.exceptioncount: 20
+    iam3.redis.cache.backupdbid: 2
+    iam3.redis.cache.cachewarm: false
+    comparision.disabled.fields: timetaken
+    redis.delkeylog.limit: 100000
+    iam3.redis.locking: true
+    iam3.redis.sleeptime: 6	  
+    rediscache.populate.uncanonicalized: false
+    primary.storage:
+      enable: false
+      resources: authtoken
+    restcache.instance.class: com.zoho.resource.redis.JedisPoolUtil
+    iam3.redis.cluster.enable: true
+
+agent:
+    transferer: com.zoho.iam2.rest.IAMTransferer
+    enable: false
+    disabled_resources: AccountAudit|RegistrationAudit|AccountUpdateAudit|AccountCloseAudit|ResourceAudit|Listener|APIAudit|UniqueIdRange|UniqueId|UniqueIdRangeGenerationAudit|MailStatusQueue|appannouncementaudit|SignInFailedAudit|MailClientAudit|WebSignInFailedAudit
+rest_handler: com.zoho.accounts.internal.AccountsRESTHandlerImpl
+input_validator_type: rest
+input_validator_ignore_errors: true
+### input_validator_type --> allowed values are mickey, rest, none. 1. mickey ---> Let mickey do the allowed values check. 2. rest ---> The input validaton check will happen on the rest framework. 3. none : The input validation will not be done by either mickey or rest-framework
+searchable_column_level: 0
+readonly_resource_pattern: authtoken|uniqueid|uniqueidrange|uniqueidrangegenerationaudit|userverificationcode|authtokendetails|accountaudit|apiaudit|useralldomainstoken|userbasedomaintoken|usertokenpairdetails|tokenpairauthtoken|oauthaccesstoken|oauthaccesstokenorginfo|oauthaccesstokenscopes|samlappsessionindex
+enable_get_handler: false
+enable_uri_log: false
+urilog_time_threshold: 5000
+throw_post_action_exception: true
+webapp:
+    - accounts
+    - photo
+resource_spaces:
+    system:
+        - app
+        - zaid
+        - uniqueid
+        - uniqueidrange
+        - partner
+        - memcachedkey
+        - memcacheduri
+        - operation
+        - isdcode
+        - telesignlanguage
+        - sslcustomdomain
+        - deploymentconfig
+        - cachecluster
+        - dclocation
+        - dcdigest
+        - shortenurl
+        - roleaccesscheck
+        - listener
+        - userapp
+        - mobilecount
+        - breachedpassword
+    auditdb:
+        - accountaudit
+        - resourceaudit
+        - registrationaudit
+        - accountcloseaudit
+        - accountupdateaudit
+        - apiaudit
+        - mailstatusqueue
+        - appannouncementaudit
+        - signinfailedaudit
+        - websigninfailedaudit
+        - oauthaudit
+        - mfaaudit
+        - zidaudit
+        - tfaaudit
+        - zaidsmsaudit
+        - mailclientaudit
+        - mailclientaudittemplate
+        - accountaudittemplate
+        - resourceaudittemplate
+        - registrationaudittemplate
+        - accountupdateaudittemplate
+        - apiaudittemplate
+        - zaidsmsaudittemplate
+        - tfaaudittemplate
+        - mfaaudittemplate
+        - signinfailedaudittemplate
+        - oauthaudittemplate
+        - privacycertificateaudit
+    iamsub:
+        - userannouncementstatus
+        - iscuserticketusage
+        - inviteduserdetails
+        - oauthtokenusage
+        - userexpiry
+        - cachedatastore
+    oauth:
+        - oauthkeys
+        - oauthmobileappdetails
+        - oauthmobileaudience
+        - oauthmobileappservice
+        - authtooauth
+        - authtokendeletion
+    oauthzid:
+        - oauthzid
+    oauthmobileuserdevice:
+        - oauthmobileuserdevice
+allow_gets_for_root_resource:
+    - app
+    - partner
+    - uniqueid
+    - uniqueidrange
+    - listener
+    - mailstatusqueue
+    - isdcode
+    - telesignlanguage
+    - sslcustomdomain
+    - deploymentconfig 
+    - cachecluster
+    - dclocation
+    - oauthkeys
+    - oauthmobileappdetails
+    - oauthmobileaudience
+    - roleaccesscheck
+    - oauthzid
+    - oauthmobileappservice
+    - breachedpassword
+runtime.config: 
+    redis.redis: stringcontent
+    exclude: auditdb.*|referenceaccount
+template_table_impl:
+    MailClientAuditTemplate: com.zoho.accounts.internal.AuditTemplateTableInterface
+    AccountAuditTemplate: com.zoho.accounts.internal.AuditTemplateTableInterface
+    ResourceAuditTemplate: com.zoho.accounts.internal.AuditTemplateTableInterface
+    RegistrationAuditTemplate: com.zoho.accounts.internal.AuditTemplateTableInterface
+    AccountUpdateAuditTemplate: com.zoho.accounts.internal.AuditTemplateTableInterface
+    APIAuditTemplate: com.zoho.accounts.internal.AuditTemplateTableInterface
+    ZAIDSMSAuditTemplate: com.zoho.accounts.internal.AuditTemplateTableInterface
+    TFAAuditTemplate: com.zoho.accounts.internal.AuditTemplateTableInterface
+    MFAAuditTemplate: com.zoho.accounts.internal.AuditTemplateTableInterface
+    SignInFailedAuditTemplate: com.zoho.accounts.internal.AuditTemplateTableInterface
+    OAuthAuditTemplate: com.zoho.accounts.internal.AuditTemplateTableInterface
+audit_config:
+    resource.exclude.audit: listener_.*|uniqueid_.*|accountaudit_.*|resourceaudit_.*|registrationaudit_.*|accountcloseaudit_.*|accountupdateaudit_.*|appaccountmemberaudit_.*|mailstatusqueue_.*|authtoken_.*|apiaudit_.*|iscticket_.*|authtokenscope_.*|iscticketscope_.*|usage_.*|captcha_.*|tfaaudit_.*|zaidsmsaudit_.*|authtokendetails_.*|userannouncementstatus_.*|signinfailedaudit_.*|iscuserticketusage_.*|useralldomainstoken_.*|userbasedomaintoken_.*|tokenpairauthtoken_.*|oauthaccesstokenscopes_.*|oauthaccesstoken_.*|oauthgranttokenscopes_.*|oauthgranttoken_.*|oauthrefreshtokenscopes_.*|oauthrefreshtoken_.*|oauthrefreshtokenkey_.*|oauthdevicetokenscopes_.*|oauthinternaltoken_.*|oauthdevicetoken_.*|oauthapitokenscopes_.*|oauthapitoken_.*|oauthaudit_.*|mfaaudit_.*|zidaudit_.*|mailclientaudittemplate_.*|accountaudittemplate_.*|resourceaudittemplate_.*|registrationaudittemplate_.*|accountupdateaudittemplate_.*|apiaudittemplate_.*|zaidsmsaudittemplate_.*|tfaaudittemplate_.*|mfaaudittemplate_.*|signinfailedaudittemplate_.*|oauthaudittemplate_.*|mailclientaudit_.*|oauthinternalapitoken_.*|privacycertificateaudit_.*|cachedatastore_.*|usertokenpairdetails_.*|oauthgranttokenorginfo_.*|oauthrefreshtokenorginfo_.*|oauthaccesstokenorginfo_.*|oauthdevicetokenorginfo_.*

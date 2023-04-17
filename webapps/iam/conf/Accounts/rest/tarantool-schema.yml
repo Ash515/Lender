@@ -1,0 +1,158 @@
+iam3_data :
+  is_pattern : false
+  fields :
+    - name : sha
+      type : STR
+    - name : runkey 
+      type : STR
+    - name : root_id
+      type : STR
+    - name : root_type
+      type : STR
+    - name : proto
+      type : BINARY
+    - name : timestamp
+      type : NUM
+  indices :
+    - primary :
+       type : HASH
+       unique : true
+       fields : 
+             - 1
+             - 4
+    - rootid_change :         
+        type : TREE
+        unique : false
+        fields :
+              - 3
+              - 4
+    - runkey_idx :
+       type : HASH
+       unique : true
+       fields : 
+             - 2
+
+iam3_meta :
+  is_pattern : true
+  pattern : s[0-9]+
+  fields :
+     - name : rootid
+       type : STR
+     - name : runkey
+       type : STR
+     - name : timestamp
+       type : NUM
+  indices :
+     - primary :
+         type : TREE
+         unique : true
+         fields : 
+                - 1
+                - 2
+
+mapping :
+  is_pattern : false
+  fields :
+    - name : mapped_name
+      type : STR
+    - name : original_name
+      type : STR
+    - name : resource_type
+      type : STR
+  indices :
+    - primary :
+       type : TREE
+       unique : true
+       fields : 
+             - 1
+    - name_idx :         
+        type : TREE
+        unique : true
+        fields :
+              - 2
+    - type_idx :         
+        type : TREE
+        unique : false
+        fields :
+              - 3
+
+iam_counters :
+  is_pattern : false
+  fields :
+    - name : counter_name
+      type : STR
+    - name : value
+      type : STR
+  indices :
+    - primary :
+       type : TREE
+       unique : true
+       fields : 
+             - 1
+
+invalidation_space :
+  is_pattern : false
+  fields :
+    - name : space_id
+      type : STR
+    - name : root_id
+      type : STR
+    - name : status
+      type : NUM
+    - name : timestamp
+      type : NUM
+  indices :
+    - primary :
+       type : HASH
+       unique : true
+       fields : 
+             - 1
+             - 2
+    - time_status:
+       type : TREE
+       unique : false
+       fields : 
+             - 3
+             - 4
+
+invalidateAll_space :
+  is_pattern : false
+  fields :
+    - name : root_id
+      type : STR
+    - name : root_type
+      type : STR
+    - name : status
+      type : NUM
+    - name : timestamp
+      type : NUM
+  indices :
+    - primary :
+       type : HASH
+       unique : true
+       fields : 
+             - 1
+             - 2
+    - time_status:
+       type : TREE
+       unique : false
+       fields : 
+             - 3
+             - 4
+
+data_invalidation_space :
+  is_pattern : false
+  fields :
+    - name : root_id
+      type : STR
+    - name : type
+      type : STR
+    - name : timestamp
+      type : NUM
+  indices :
+    - primary :
+       type : HASH
+       unique : true
+       fields : 
+             - 1
+             - 2

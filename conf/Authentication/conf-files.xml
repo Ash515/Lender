@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: conf-files.xml,v 1.5 2009/10/06 06:45:25 suresh Exp $ -->
+<conf-files>
+	<ConfFile url="service.xml" />
+	<ConfFile url="pam-conf.xml" />
+	<ConfFile url="AuditConfig.xml" />
+	<ConfFile url="auth-conf.xml" populatorclass="com.adventnet.authentication.AuthPopulator" />
+</conf-files>
+
+

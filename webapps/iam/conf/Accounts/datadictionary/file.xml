@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd">
+<!--<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd"> -->
+<data-dictionary name="Accounts">
+    <description>All un-structured data handled by Zoho Accounts will be stored in DFS and directly served by a dedicated photo server which runs on Node.JS</description>
+    <table name="IAMAccountLogo" display-name="Logo">
+        <description>Account Logo. To upload a account logo, make a HTTP POST with the image to this URL along with the view permission</description>
+        <columns>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="VIEW_PERMISSION">
+                <description>1 - Zoho Registered Users, 2 - Org Users, 3 - Public</description>
+                <data-type>INTEGER</data-type>
+                <max-size>2</max-size>
+                <default-value>3</default-value>
+            </column>
+            <column name="MODIFIED_TIME">
+                <description>The time at which the logo is modified.</description>
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <description>The time at which the file is created</description>
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccountLogo_PK">
+            <primary-key-column>ACCOUNT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccountFile_FK1" reference-table-name="IAMAccount">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMUserPhoto" display-name="UserPhoto">
+        <description>User Photo. To upload a group logo, make a HTTP POST with the image to this URL along with the view permission</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="VIEW_PERMISSION">
+                <description>0 - None, 1 - Zoho Registered Users, 2 - Org Users, 3 - Public, 4 - My Buddies</description>
+                <data-type>INTEGER</data-type>
+                <max-size>2</max-size>
+                <default-value>1</default-value>
+            </column>
+            <column name="IS_PHOTO_EXISTS">
+                <description>Will be set to true only if upload photo</description>
+                <data-type>BOOLEAN</data-type>
+                <default-value>0</default-value>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserPhoto_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserPhoto_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMGroupLogo" display-name="GroupLogo">
+        <description>Group Logo. To upload a group logo, make a HTTP POST with the image to this URL along with the view permission</description>
+        <columns>
+            <column name="GROUP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="VIEW_PERMISSION">
+                <description>1 - Zoho Registered Users, 2 - Org Users, 3 - Public, 5 - With In Group</description>
+                <data-type>INTEGER</data-type>
+                <max-size>3</max-size>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMGroupLogo_PK">
+            <primary-key-column>GROUP_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMGroupLogo_FK1" reference-table-name="IAMGroup" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>GROUP_AUTO_ID</fk-local-column>
+                        <fk-reference-column>GROUP_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    <table name="IAMAppAccountLogo" display-name="AppAccountLogo">
+        <description>AppAccount Logo.</description>
+        <columns>
+            <column name="APP_ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="VIEW_PERMISSION">
+                <description>1 - Zoho Registered Users, 2 - Org Users, 3 - Public, 5 - With In AppAccount</description>
+                <data-type>INTEGER</data-type>
+                <max-size>3</max-size>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAppAccountLogo_PK">
+            <primary-key-column>APP_ACCOUNT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAppAccountLogo_FK1" reference-table-name="IAMAppAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="IAMServiceOrgLogo" display-name="ServiceOrgLogo">
+        <description>ServiceOrg. To upload a ServiceOrg logo, make a HTTP POST with the image to this URL along with the view permission</description>
+        <columns>
+            <column name="SERVICE_ORG_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="VIEW_PERMISSION">
+                <description>1 - Zoho Registered Users, 2 - Servce Org Users, 3 - Public</description>
+                <data-type>INTEGER</data-type>
+                <max-size>3</max-size>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMServiceOrgLogo_PK">
+            <primary-key-column>SERVICE_ORG_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMServiceOrgLogo_FK1" reference-table-name="IAMServiceOrg">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>SERVICE_ORG_AUTO_ID</fk-local-column>
+                        <fk-reference-column>SERVICE_ORG_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    <table name="IAMSAMLAppLogo" display-name="SAMLAppLogo">
+        <description>To upload a SAML ServiceProvider logo, make a HTTP POST with the image to this URL</description>
+        <columns>
+            <column name="SAML_APP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMSAMLAppLogo_PK">
+            <primary-key-column>SAML_APP_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMSAMLAppLogo_FK1" reference-table-name="IAMSAMLApp">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>SAML_APP_AUTO_ID</fk-local-column>
+                        <fk-reference-column>SAML_APP_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+     <table name="IAMSAMLSpAppLogo" display-name="SAMLSpAppLogo">
+        <description>To upload a SAML ServiceProvider logo, make a HTTP POST with the image to this URL</description>
+        <columns>
+            <column name="SAML_APP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMSAMLSpAppLogo_PK">
+            <primary-key-column>SAML_APP_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMSAMLSpAppLogo_FK1" reference-table-name="IAMSAMLSpApp">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>SAML_APP_AUTO_ID</fk-local-column>
+                        <fk-reference-column>SAML_APP_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+</data-dictionary>

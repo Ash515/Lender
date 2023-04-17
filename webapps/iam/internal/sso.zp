@@ -1,0 +1,99 @@
+<%-- $Id$--%>
+<%-- Please refer the wiki https://intranet.wiki.zoho.com/accounts/DomainAuthenticationDelegation.html for more details --%>
+<%@page import="com.adventnet.iam.IAMUtil"%>
+<%@page import="com.adventnet.iam.security.IPUtil"%>
+<%@page import="com.adventnet.iam.internal.Util"%>
+<%@page import="com.zoho.iam2.rest.CSPersistenceAPIImpl"%>
+<%@page import="com.adventnet.iam.internal.EnterpriseUtil"%>
+<%@page import="com.adventnet.iam.EnterpriseDomain"%>
+<%@page import="com.adventnet.iam.IPRange"%>
+<%@page import="java.util.logging.Logger"%>
+<%@page import="java.util.logging.Level"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="org.json.JSONObject"%>
+<%!Logger logger = Logger.getLogger("internal.sso.zp");%>
+<%
+	String responseType = request.getParameter("responsetype");
+	if ("json".equalsIgnoreCase(responseType)) {
+		response.setContentType("application/json;charset=UTF-8"); //No I18N
+	} else {
+		response.setContentType("text/html;charset=UTF-8"); //No I18N
+	}
+
+	String apikey = request.getParameter("apikey");
+	String operation = request.getParameter("operation");
+	if (!Util.isValid(apikey) && !"adddomain".equals(operation)) {
+		sendError("APIKey parameter missing", response);
+		return;
+	}
+
+	if (!Util.isValid(operation)) {
+		sendError("Operation parameter missing", response);
+		return;
+	}
+
+	EnterpriseDomain etrDomain = EnterpriseUtil.getEnterpriseDomainByApikey(apikey.trim());
+	if (etrDomain == null || etrDomain.getEDType() != EnterpriseDomain.SSO) {
+		sendError("Invalid APIKey", response);
+		return;
+	}
+
+	if (!etrDomain.isActive()) {
+		sendError("APIKey not active", response);
+		return;
+	}
+
+	String domainName = etrDomain.getDomainName();
+	String remoteIPAddress = IAMUtil.getRemoteUserIPAddress(request);
+
+	// Check if matches expected ipaddress
+	//if allowedIPs is null or 127.0.0.1 only, then it should allow for all the ips where it access from.
+	boolean isAllowed = IAMUtil.isPrivateIP(remoteIPAddress);
+	if (!isAllowed) {
+		List<IPRange> allowedIPs = etrDomain.getIPRangeList();
+		if (allowedIPs != null && !allowedIPs.isEmpty()) {
+			long remoteIPAddressAsLong = IPUtil.IP_LONG(remoteIPAddress);
+			for (IPRange ipRange : allowedIPs) {
+				if (ipRange.isWithinRange(remoteIPAddressAsLong)) {
+					isAllowed = true;
+					break;
+				}
+			}
+		}
+	}
+
+	if (!isAllowed) {
+		sendError("IP Not Allowed :" + remoteIPAddress, response);
+		return;
+	}
+
+	try {
+		String clientZaid = request.getParameter("client"); /* Will be passed for client users. If sent the user will be added in the client space*/
+		if(clientZaid != null && !clientZaid.isEmpty()) {
+			String acpSecret = request.getParameter("acpsecret");
+			CSPersistenceAPIImpl.ssoHandleClientUser(clientZaid, request, response, acpSecret, etrDomain);
+			return;
+		}
+	} finally {
+	}
+%>
+<%!
+
+	public void sendError(String cause, HttpServletResponse response) {
+		Map m = new HashMap();
+		m.put("result", "failure");
+		m.put("cause", cause);
+		sendResult(m, response);
+	}
+
+	public void sendResult(Map m, HttpServletResponse response) {
+		try {
+			response.getWriter().println(new JSONObject(m).toString());
+		} catch (Exception e) {
+			logger.log(Level.WARNING, null, e);
+		}
+		return;
+	}
+%>

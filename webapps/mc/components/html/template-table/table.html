@@ -1,0 +1,608 @@
+$Id$
+
+<html><title>Table Template</title>
+	
+<div  viewname="TemplatisedTable" componentname="ACTable">
+	
+<table cellspacing="0" cellpadding="0" border="0" align="center" class="tableComponent">
+
+<tr mc:row="header">	
+
+<th mc:columnName="mc:toggle" nowrap="" align="center" class="tableHeader" width=1%><input type="checkbox" onclick="TableDOMModel.toggleAll(this)" title="Select all" value="checkbox" table_el="TOGGLEALL" class="toggleAll" name="toggleAll"></input></th>
+
+<th mc:columnName="ID" class="tableHeader" align="left"><a href=# onclick="return sortData_template(this)"><span mc:value="true" class="tableHeader">header 1 </span></a><input mc:sortButton="true"  type="button" class="sortButtonASC" onclick="return sortData_template(this)"/></th>
+
+
+
+<th mc:columnName="MESSAGE"  	class="tableHeader" align="left"><span mc:value="true" class="tableHeader"> header 4</span></th>
+<th mc:columnName="STATUS" class="tableHeader"	align="left"> <a href=# onclick="return sortData_template(this)"> <span mc:value="true" class="tableHeader">header 2</span></a> <input mc:sortButton="true" type="button" class="sortButtonASC" onclick="return sortData_template(this)"/> </th>
+
+<th mc:columnName="CATEGORY"  	class="tableHeader" align="left"> <span mc:value="true" class="tableHeader">header 3</span></th>
+<th mc:columnName="SOURCE" class="tableHeader" align="left"><a href=# onclick="return sortData_template(this)"><span mc:value="true" class="tableHeader">header 1 </span></a><input mc:sortButton="true"  type="button" class="sortButtonASC" onclick="return sortData_template(this)"/></th>
+<th mc:columnName="TIME"  	class="tableHeader" align="left"><a href=# onclick="return sortData_template(this)"><span mc:value="true" class="tableHeader"> header 4</span></a><input mc:sortButton="true"  type="button" class="sortButtonASC" onclick="return sortData_template(this)"/></th>
+
+
+<th mc:columnName="mc:lastColumn" width="1%" valign="middle" nowrap="" align="right"  class="tableHeader"><input type="button" onclick="return openSearch_template(this)" class="tableSearchButton" table_el="OSBTN"/><input class="hide" type="button" onclick="return closeSearch_template(this)" table_el="CSBTN"/>
+
+
+	<input mc:columnChooserType="CCListInline" type="button" onclick="invokeMenuAction_template(this)" class="columnEditButton" /></th>
+
+
+</tr>
+
+
+
+
+
+<tr mc:row="searchRow" class="searchRow hide" table_el="SEARCHROW">
+
+<td class="TableHeader"></td>
+
+<td class="TableHeader"><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+
+<td class="TableHeader"><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+
+<td class="TableHeader"><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+
+<td class="TableHeader"><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+	
+<td class="TableHeader"><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+
+<td class="TableHeader"><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+
+<td class="TableHeader"	><input type="button" onclick="fetchSpotSearchData(this);" class="tableSearchGoButton" name="searchSubmit"></input></td>
+</tr>
+
+
+
+
+
+
+<tr mc:row="reference">
+
+	<td><input type="checkbox" onclick="TableDOMModel.toggle(this);" name="rowSelection" class="radiobutton"></input></td>
+
+	<td><span  mc:value="true" >row 1, cell 1</span></td>
+
+	<td><span  mc:value="true" >row 2, cell 2</span></td>
+
+	<td><span  mc:value="true" >row 2, cell 2</span></td>
+
+	<td><span  mc:value="true" >row 1, cell 2</span></td>
+	
+	<td><span  mc:value="true" >row 1, cell 2</span></td>
+	
+	<td><span mc:value="true" >row 1, cell 2</span></td>
+	
+</tr>
+<tr mc:row="Dummy">
+
+	<td><input  type="checkbox" TCid="rowselect"></input></td>
+
+	<td>row 1, cell 1</td>
+
+	<td><span mc>row 2, cell 2</span></td>
+
+	<td><span mc>row 1, cell 2</span></td>
+	
+	<td colspan=2><span mc>row 1, cell 2</span></td>
+	
+</tr>
+
+<tr mc:Row="Dummy">
+
+	<td><input  type="checkbox" TCid="rowselect"></input></td>
+
+	<td><span mc>row 1, cell 1</span></td>
+
+	<td><span mc>row 2, cell 2</span></td>
+
+	<td><span mc>row 1, cell 2</span></td>
+	
+	<td colspan=2><span mc>row 1, cell 2</span></td>
+	
+</tr>
+
+<tr mc:Row="Dummy">
+
+	<td><input  type="checkbox" TCid="rowselect"></input></td>
+
+	<td><span mc>row 1, cell 1</span></td>
+
+	<td><span mc>row 2, cell 2</span></td>
+
+	<td><span mc>row 1, cell 2</span></td>
+	
+	<td colspan=2><span mc>row 1, cell 2</span></td>
+	
+</tr>
+
+</table>
+
+</div>
+
+<pre>
+
+
+
+
+</pre>
+
+<div  viewname="TemplatisedTable2" componentname="ACTable">
+
+<Table  cellspacing="0" cellpadding="0" class="navigatorTable" align="center">
+<tr mc:row="mc:navigator">
+	
+		<td mc:navigatorDetailsColumn="true" width="25%" nowrap align="left" class="navigatorDetailsColumn">Showing : ${startRow}&nbsp;to&nbsp;		     	${lastRow}&nbsp;of&nbsp;${totalRows}
+		</td>
+	
+	
+		<td mc:navigatorLinksColumn="true" nowrap class="navigatorLinksColumn"> 
+		<img mc:firstLink="true" src="/mc/themes/wifi/images/navigator/first_link.png" alt="First" border="0" align="ABSMIDDLE"/>
+		<img mc:previousLink="true" src="/mc/themes/wifi/images/navigator/previous_link.png" alt="Previous" border="0" align="ABSMIDDLE"/>
+		<span mc:pageLinks="5">Page: </span>
+		<img mc:nextLink="true" src="/mc/themes/wifi/images/navigator/next_link.png" alt="Next" border="0" align = "ABSMIDDLE">
+		<img mc:lastLink="true" src="/mc/themes/wifi/images/navigator/last_link.png" alt="Last" border="0" align = "ABSMIDDLE">
+		</td>
+
+		<td mc:navigatorRangeColumn="true" width="25%" nowrap class="navigatorRangeColumn" mc:viewPerPageLinks="5"> 
+		View per page :
+		</td>
+
+
+	</tr>
+	</Table>
+	
+<table cellspacing="0" cellpadding="0" border="0" align="center" class="tableComponent">
+
+<tr mc:row="header">	
+
+<th mc:columnName="mc:toggle" nowrap="" align="center" class="tableHeader" width=1%><input type="checkbox" onclick="TableDOMModel.toggleAll(this)" title="Select all" value="checkbox" table_el="TOGGLEALL" class="toggleAll" name="toggleAll"></input></th>
+
+<th mc:columnName="View_Name" class="tableHeader" align="left"><a href=# onclick="return sortData_template(this)"><span mc:value="true" class="tableHeader">header 1 </span></a><input mc:sortButton="true"  type="button" class="sortButtonASC" onclick="return sortData_template(this)"/></th>
+
+<th mc:columnName="Component_Name" class="tableHeader"	align="left"> <a href=# onclick="return sortData_template(this)"> <span mc:value="true" class="tableHeader">header 2</span> </a><input mc:sortButton="true" type="button" class="sortButtonASC" onclick="return sortData_template(this)"/> </th>
+
+<th mc:columnName="Role_Name"  	class="tableHeader" align="left"> <span mc:value="true" class="tableHeader">header 3</span></th>
+
+<th mc:columnName="Title"  	class="tableHeader" align="left"><span mc:value="true" class="tableHeader"> header 4</span></th>
+
+<th mc:columnName="mc:lastColumn" width="1%" valign="middle" nowrap="" align="right"  class="tableHeader"><input type="button" onclick="return openSearch_template(this)" class="tableSearchButton" table_el="OSBTN"/><input class="hide" type="button" onclick="return closeSearch_template(this)" table_el="CSBTN"/>
+
+<input type="button" mc:columnChooserType="CCSelectInline" onclick="invokeMenuAction_template(this)" class="columnEditButton" /></th>
+
+</tr>
+
+
+
+
+
+<tr mc:row="searchRow" class="searchRow hide" table_el="SEARCHROW">
+
+<td class="tableHeader"></td>
+
+<td class="tableHeader"><input  class="tableSpotSearch" type="text"  onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+
+<td class="tableHeader"></td>
+
+<td class="tableHeader"></td>
+	
+<td class="tableHeader"></td>
+
+<td class="tableHeader"><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input>
+
+	<span align="right">	<input type="button" onclick="fetchSpotSearchData(this);" class="tableSearchGoButton" name="searchSubmit" align="right"></input></span></td>
+</tr>
+
+
+
+
+
+
+<tr mc:row="reference">
+
+	<td><input type="checkbox" onclick="TableDOMModel.toggle(this);" name="rowSelection" class="radiobutton"></input></td>
+
+	<td><span  mc:value="true" >row 1, cell 1</span></td>
+
+	<td><span  mc:value="true" >row 2, cell 2</span></td>
+
+	<td><span  mc:value="true" >row 1, cell 2</span></td>
+	
+	<td><span mc:value="true" >row 1, cell 2</span></td>
+	
+</tr>
+<tr mc:row="Dummy">
+
+	<td><input  type="checkbox" TCid="rowselect"></input></td>
+
+	<td>row 1, cell 1</td>
+
+	<td><span mc>row 2, cell 2</span></td>
+
+	<td><span mc>row 1, cell 2</span></td>
+	
+	<td colspan=2><span mc>row 1, cell 2</span></td>
+	
+</tr>
+
+<tr mc:Row="Dummy">
+
+	<td><input  type="checkbox" TCid="rowselect"></input></td>
+
+	<td><span mc>row 1, cell 1</span></td>
+
+	<td><span mc>row 2, cell 2</span></td>
+
+	<td><span mc>row 1, cell 2</span></td>
+	
+	<td colspan=2><span mc>row 1, cell 2</span></td>
+	
+</tr>
+
+<tr mc:Row="Dummy">
+
+	<td><input  type="checkbox" TCid="rowselect"></input></td>
+
+	<td><span mc>row 1, cell 1</span></td>
+
+	<td><span mc>row 2, cell 2</span></td>
+
+	<td><span mc>row 1, cell 2</span></td>
+	
+	<td colspan=2><span mc>row 1, cell 2</span></td>
+	
+</tr>
+
+</table>
+
+</div>
+
+<pre>
+
+</pre>
+
+<div  viewname="TemplatisedTable3" componentname="ACTable">
+
+
+
+<Table  cellspacing="0" cellpadding="0" class="navigatorTable" align="center">
+<tr mc:row="mc:navigator">
+	
+		<td mc:navigatorDetailsColumn="true" width="25%" nowrap align="left" class="navigatorDetailsColumn">Showing : ${startRow}&nbsp;to&nbsp;		     	${lastRow}&nbsp;of&nbsp;${totalRows}
+		</td>
+	
+		<td>select columns<input mc:columnChooserType="CCListInline" type="button" onclick="invokeMenuAction_template(this)" class="columnEditButton" /></td>
+		<td mc:navigatorLinksColumn="true" nowrap class="navigatorLinksColumn"> 
+		<img mc:firstLink="true" src="/mc/themes/wifi/images/navigator/first_link.png" alt="First" border="0" align="ABSMIDDLE"/>
+		<img mc:previousLink="true" src="/mc/themes/wifi/images/navigator/previous_link.png" alt="Previous" border="0" align="ABSMIDDLE"/>
+		<span mc:pageLinks="5">Page: </span>
+		<img mc:nextLink="true" src="/mc/themes/wifi/images/navigator/next_link.png" alt="Next" border="0" align = "ABSMIDDLE">
+		<img mc:lastLink="true" src="/mc/themes/wifi/images/navigator/last_link.png" alt="Last" border="0" align = "ABSMIDDLE">
+		</td>
+
+		<td>Search Table
+			<input type="button" onclick="return openSearch_template(this)" class="tableSearchButton" table_el="OSBTN"/><input class="hide" type="button" onclick="return closeSearch_template(this)" table_el="CSBTN"/>
+		</td>
+
+		<td mc:navigatorRangeColumn="true" width="25%" nowrap class="navigatorRangeColumn" mc:viewPerPageLinks="5"> 
+		View per page :
+		</td>
+	
+
+	</tr>
+	</Table>
+
+
+
+
+
+	
+<table cellspacing="0" cellpadding="0" border="0" align="center" class="tableComponent">
+
+<tr mc:row="header">	
+
+<th mc:columnName="mc:toggle" nowrap="" align="center" class="tableHeader" width=1%><input type="checkbox" onclick="TableDOMModel.toggleAll(this)" title="Select all" value="checkbox" table_el="TOGGLEALL" class="toggleAll" name="toggleAll"></input></th>
+
+<th mc:columnName="ID" class="tableHeader" align="left"><a href=# onclick="return sortData_template(this)"><span mc:value="true" class="tableHeader">header 1 </span></a><input mc:sortButton="true"  type="button" class="sortButtonASC" onclick="return sortData_template(this)"/></th>
+
+
+<th mc:columnName="SOURCE" class="tableHeader" align="left"><a href=# onclick="return sortData_template(this)"><span mc:value="true" class="tableHeader">header 1 </span></a><input mc:sortButton="true"  type="button" class="sortButtonASC" onclick="return sortData_template(this)"/></th>
+
+<th mc:columnName="STATUS" class="tableHeader"	align="left"> <a href=# onclick="return sortData_template(this)"> <span mc:value="true" class="tableHeader">header 2</span></a> <input mc:sortButton="true" type="button" class="sortButtonASC" onclick="return sortData_template(this)"/> </th>
+
+<th mc:columnName="CATEGORY"  	class="tableHeader" align="left"> <span mc:value="true" class="tableHeader">header 3</span></th>
+
+<th mc:columnName="TIME"  	class="tableHeader" align="left"><a href=# onclick="return sortData_template(this)"><span mc:value="true" class="tableHeader"> header 4</span></a><input mc:sortButton="true"  type="button" class="sortButtonASC" onclick="return sortData_template(this)"/></th>
+
+<th mc:columnName="MESSAGE"  	class="tableHeader" align="left"><span mc:value="true" class="tableHeader"> header 4</span></th>
+
+
+
+</tr>
+
+
+
+
+
+<tr mc:row="searchRow" class="searchRow hide" table_el="SEARCHROW" mc:onSearchClass="TableHeader3">
+
+<td></td>
+
+<td><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+
+<td><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+
+<td><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+
+<td><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+	
+<td><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+
+<td><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input>
+
+	<span align="right">	<input type="button" onclick="fetchSpotSearchData(this);" class="tableSearchGoButton" name="searchSubmit" align="right"></input></span></td>
+</tr>
+
+
+
+
+
+
+<tr mc:row="reference">
+
+	<td mc:oddClass="TableHeader1" mc:evenClass="TableHeader2"><input type="checkbox" onclick="TableDOMModel.toggle(this);" name="rowSelection" class="radiobutton"></input></td>
+
+	<td mc:oddClass="TableHeader1" mc:evenClass="TableHeader2"><span  mc:value="true" >row 1, cell 1</span></td>
+
+	<td mc:evenClass="TableHeader1" mc:oddClass="TableHeader2"><span  mc:value="true" >row 2, cell 2</span></td>
+
+	<td mc:oddClass="TableHeader1" mc:evenClass="TableHeader2"><span  mc:value="true" >row 2, cell 2</span></td>
+
+	<td mc:evenClass="TableHeader1" mc:oddClass="TableHeader2"><span  mc:value="true" >row 1, cell 2</span></td>
+	
+	<td mc:oddClass="TableHeader1" mc:evenClass="TableHeader2"><span  mc:value="true" >row 1, cell 2</span></td>
+	
+	<td mc:evenClass="TableHeader1" mc:oddClass="TableHeader2"><span mc:value="true" >row 1, cell 2</span></td>
+	
+</tr>
+<tr mc:row="Dummy">
+
+	<td><input  type="checkbox" TCid="rowselect"></input></td>
+
+	<td>row 1, cell 1</td>
+
+	<td><span mc>row 2, cell 2</span></td>
+
+	<td><span mc>row 1, cell 2</span></td>
+	
+	<td colspan=2><span mc>row 1, cell 2</span></td>
+	
+</tr>
+
+<tr mc:Row="Dummy">
+
+	<td><input  type="checkbox" TCid="rowselect"></input></td>
+
+	<td><span mc>row 1, cell 1</span></td>
+
+	<td><span mc>row 2, cell 2</span></td>
+
+	<td><span mc>row 1, cell 2</span></td>
+	
+	<td colspan=2><span mc>row 1, cell 2</span></td>
+	
+</tr>
+
+<tr mc:Row="Dummy">
+
+	<td><input  type="checkbox" TCid="rowselect"></input></td>
+
+	<td><span mc>row 1, cell 1</span></td>
+
+	<td><span mc>row 2, cell 2</span></td>
+
+	<td><span mc>row 1, cell 2</span></td>
+	
+	<td colspan=2><span mc>row 1, cell 2</span></td>
+	
+</tr>
+
+</table>
+
+</div>
+
+<div  viewname="TemplatisedTable4" componentname="ACTable">
+	
+<table cellspacing="0" cellpadding="0" border="0" align="center" class="tableComponent">
+
+<tr mc:row="header" class="hide">	
+
+<th mc:columnName="mc:toggle" nowrap="" align="center" class="tableHeader" width=1%><input type="checkbox" onclick="TableDOMModel.toggleAll(this)" title="Select all" value="checkbox" table_el="TOGGLEALL" class="toggleAll" name="toggleAll"></input></th>
+
+<th mc:columnName="ID" class="tableHeader" align="left"><a href=# onclick="return sortData_template(this)"><span mc:value="true" class="tableHeader">header 1 </span></a><input mc:sortButton="true"  type="button" class="sortButtonASC" onclick="return sortData_template(this)"/></th>
+
+
+
+<th mc:columnName="MESSAGE"  	class="tableHeader" align="left"><span mc:value="true" class="tableHeader"> header 4</span></th>
+<th mc:columnName="STATUS" class="tableHeader"	align="left"> <a href=# onclick="return sortData_template(this)"> <span mc:value="true" class="tableHeader">header 2</span></a> <input mc:sortButton="true" type="button" class="sortButtonASC" onclick="return sortData_template(this)"/> </th>
+
+<th mc:columnName="CATEGORY"  	class="tableHeader" align="left"> <span mc:value="true" class="tableHeader">header 3</span></th>
+<th mc:columnName="SOURCE" class="tableHeader" align="left"><a href=# onclick="return sortData_template(this)"><span mc:value="true" class="tableHeader">header 1 </span></a><input mc:sortButton="true"  type="button" class="sortButtonASC" onclick="return sortData_template(this)"/></th>
+<th mc:columnName="TIME"  	class="tableHeader" align="left"><a href=# onclick="return sortData_template(this)"><span mc:value="true" class="tableHeader"> header 4</span></a><input mc:sortButton="true"  type="button" class="sortButtonASC" onclick="return sortData_template(this)"/></th>
+
+
+<th mc:columnName="mc:lastColumn" width="1%" valign="middle" nowrap="" align="right"  class="tableHeader"><input type="button" onclick="return openSearch_template(this)" class="tableSearchButton" table_el="OSBTN"/><input class="hide" type="button" onclick="return closeSearch_template(this)" table_el="CSBTN"/>
+
+
+	<input mc:columnChooserType="CCListInline" type="button" onclick="invokeMenuAction_template(this)" class="columnEditButton" /></th>
+
+
+</tr>
+
+
+
+
+
+<tr mc:row="searchRow" class="searchRow hide" table_el="SEARCHROW">
+
+<td class="TableHeader"></td>
+
+<td class="TableHeader"><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+
+<td class="TableHeader"><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+
+<td class="TableHeader"><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+
+<td class="TableHeader"><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+	
+<td class="TableHeader"><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+
+<td class="TableHeader"><input class="tableSpotSearch" type="text" onkeypress="return TableDOMModel.searchEnterKeyLis(this,event);" ></input></td>
+
+<td class="TableHeader"	><input type="button" onclick="fetchSpotSearchData(this);" class="tableSearchGoButton" name="searchSubmit"></input></td>
+</tr>
+
+
+
+
+
+
+<tr mc:row="reference">
+
+	<td><input type="checkbox" onclick="TableDOMModel.toggle(this);" name="rowSelection" class="radiobutton"></input></td>
+
+	<td><span  mc:value="true" >row 1, cell 1</span></td>
+
+	<td><span  mc:value="true" >row 2, cell 2</span></td>
+
+	<td><span  mc:value="true" >row 2, cell 2</span></td>
+
+	<td><span  mc:value="true" >row 1, cell 2</span></td>
+	
+	<td><span  mc:value="true" >row 1, cell 2</span></td>
+	
+	<td><span mc:value="true" >row 1, cell 2</span></td>
+	
+</tr>
+<tr mc:row="Dummy">
+
+	<td><input  type="checkbox" TCid="rowselect"></input></td>
+
+	<td>row 1, cell 1</td>
+
+	<td><span mc>row 2, cell 2</span></td>
+
+	<td><span mc>row 1, cell 2</span></td>
+	
+	<td colspan=2><span mc>row 1, cell 2</span></td>
+	
+</tr>
+
+<tr mc:Row="Dummy">
+
+	<td><input  type="checkbox" TCid="rowselect"></input></td>
+
+	<td><span mc>row 1, cell 1</span></td>
+
+	<td><span mc>row 2, cell 2</span></td>
+
+	<td><span mc>row 1, cell 2</span></td>
+	
+	<td colspan=2><span mc>row 1, cell 2</span></td>
+	
+</tr>
+
+<tr mc:Row="Dummy">
+
+	<td><input  type="checkbox" TCid="rowselect"></input></td>
+
+	<td><span mc>row 1, cell 1</span></td>
+
+	<td><span mc>row 2, cell 2</span></td>
+
+	<td><span mc>row 1, cell 2</span></td>
+	
+	<td colspan=2><span mc>row 1, cell 2</span></td>
+	
+</tr>
+
+</table>
+
+</div>
+
+<div viewname="TemplatisedTable5" componentname="ACTable">
+<table cellspacing="0" cellpadding="0" border="0" align="center"
+	class="tableComponent">
+	<tr>
+		<th nowrap="" align="center"
+			class="tableHeader" width=1%><input type="checkbox"
+			onclick="TableDOMModel.toggleAll(this)" title="Select all"
+			value="checkbox" table_el="TOGGLEALL" class="toggleAll"
+			name="toggleAll"></input></th>
+
+		<th class="tableHeader" align="left"><a href=#
+			onclick="return sortData_template(this)"><span 
+			class="tableHeader">SOURCE</span></a><input 
+			type="button" class="sortButtonASC"
+			onclick="return sortData_template(this)" /></th>
+
+		<th class="tableHeader" align="left"><a href=#
+			onclick="return sortData_template(this)"> <span 
+			class="tableHeader">STATUS</span></a> <input 
+			type="button" class="sortButtonASC"
+			onclick="return sortData_template(this)" /></th>
+
+		<th  class="tableHeader" align="left"><span
+			 class="tableHeader">CATEGORY</span></th>
+
+		<th  class="tableHeader" align="center" colspan="2"><a
+			href=# onclick="return sortData_template(this)"><span 
+			class="tableHeader">TIME & MESSAGE</span></a><input 
+			type="button" class="sortButtonASC"
+			onclick="return sortData_template(this)" /></th>
+	</tr>
+	<tr mc:row="header" class="hide">
+		<th mc:columnName="mc:toggle" nowrap="" align="center"
+			class="tableHeader" width=1%><input type="checkbox"
+			onclick="TableDOMModel.toggleAll(this)" title="Select all"
+			value="checkbox" table_el="TOGGLEALL" class="toggleAll"
+			name="toggleAll"></input></th>
+
+		<th mc:columnName="SOURCE" class="tableHeader" align="left"><a href=#
+			onclick="return sortData_template(this)"><span mc:value="true"
+			class="tableHeader">header 1 </span></a><input mc:sortButton="true"
+			type="button" class="sortButtonASC"
+			onclick="return sortData_template(this)" /></th>
+
+		<th mc:columnName="STATUS" class="tableHeader" align="left"><a href=#
+			onclick="return sortData_template(this)"> <span mc:value="true"
+			class="tableHeader">header 2</span></a> <input mc:sortButton="true"
+			type="button" class="sortButtonASC"
+			onclick="return sortData_template(this)" /></th>
+
+		<th mc:columnName="CATEGORY" class="tableHeader" align="left"><span
+			mc:value="true" class="tableHeader">header 3</span></th>
+
+		<th mc:columnName="TIME" class="tableHeader" align="left"><a href=#
+			onclick="return sortData_template(this)"><span mc:value="true"
+			class="tableHeader"> header 4</span></a><input mc:sortButton="true"
+			type="button" class="sortButtonASC"
+			onclick="return sortData_template(this)" /></th>
+
+		<th mc:columnName="MESSAGE" class="tableHeader" align="left"><span
+			mc:value="true" class="tableHeader"> header 4</span></th>
+
+	</tr>
+	<tr mc:row="reference">
+		<td><input type="checkbox" onclick="TableDOMModel.toggle(this);"
+			name="rowSelection" class="radiobutton"></input></td>
+		<td><span mc:value="true">row 1, cell 1</span></td>
+		<td><span mc:value="true">row 2, cell 2</span></td>
+		<td><span mc:value="true">row 1, cell 2</span></td>
+		<td><span mc:value="true">row 1, cell 2</span></td>
+		<td colspan="1"><span mc:value="true">row 2, cell 2</span></td>
+	</tr>
+</table>
+</div>
+</html>

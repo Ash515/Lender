@@ -1,0 +1,92 @@
+<%-- $Id$ --%>
+<%
+int rowIndex = 0;
+%>
+<components:column viewContext="<%=viewContext%>">
+	<tr>
+		<%
+		rowIndex++;
+		String tcClass = "oddRow";
+		if(rowIndex%2 == 0){
+			tcClass = "evenRow";
+		}
+		%>
+		<components:cell viewContext="<%=viewContext%>" type="Header">
+					<%
+					String columnName = null;
+					String headerClass = "tableHeader";
+					if(transformerContext.isSortEnabled() || transformerContext.isSearchEnabled())
+					{
+						columnName = transformerContext.getPropertyName();
+						if(columnName.equals(viewModel.getSortedColumn())){
+							headerClass = "sortedTableHeader";
+						}
+					}
+					props = transformerContext.getRenderedAttributes();
+					%>
+			<th valign="top" class='<%out.print(headerClass);//NO OUTPUTENCODING%>'><%--NO OUTPUTENCODING --%>
+				<table cellspacing = "0" cellpadding = "0" border = "0" class="<%out.print(headerClass);//NO OUTPUTENCODING%>" width="100%" height="100%"><%--NO OUTPUTENCODING --%>
+					<tr>
+						<td class="<%out.print(headerClass);//NO OUTPUTENCODING%>" valign="top"><%--NO OUTPUTENCODING --%>
+							<%
+							if(transformerContext.isSortEnabled())
+							{
+								%>
+								<a href="javascript:sortData('<%out.print(uniqueId);//NO OUTPUTENCODING%>', '<%out.print(columnName);//NO OUTPUTENCODING%>')"><%out.print(props.get("VALUE"));//NO OUTPUTENCODING%></a><%--NO OUTPUTENCODING --%>
+								<%
+							}
+							else 
+							{
+								%>
+								<%out.print(props.get("VALUE"));//NO OUTPUTENCODING%><%--NO OUTPUTENCODING --%>
+								<%
+							}
+							if(transformerContext.isSearchEnabled())
+							{
+								%>
+								<img src="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/search.gif" onClick="showText('<%out.print(columnName);//NO OUTPUTENCODING%>')" align="absmiddle"/><%--NO OUTPUTENCODING --%>
+								<%
+							}
+							%>
+						</td>
+						<%
+						if(transformerContext.isSortEnabled())
+						{
+							%>
+							<td align="right" valign="top" class='<%out.print(headerClass);//NO OUTPUTENCODING%>'><button class="sortButtonASC" onClick="sortData('<%out.print(uniqueId);//NO OUTPUTENCODING%>', '<%out.print(columnName);//NO OUTPUTENCODING%>')">&nbsp;</button></td><%--NO OUTPUTENCODING --%>
+							<%
+						}
+						%>
+					</tr>
+					<%
+					if(transformerContext.isSearchEnabled())
+					{
+						String trClass = "hideInput hide";
+						if(!transformerContext.getSearchValue().equals("")){
+							trClass = " ";
+						}
+						%>
+						<tr class="<%=trClass%>">
+							<td colspan="2" class="<%out.print(headerClass);//NO OUTPUTENCODING%>"><%--NO OUTPUTENCODING --%>
+								<input type="text" name="<%out.print(columnName);//NO OUTPUTENCODING%>" value = "<%out.print(transformerContext.getSearchValue());//NO OUTPUTENCODING%>" id="<%out.print(columnName);//NO OUTPUTENCODING%>"/><%--NO OUTPUTENCODING --%>
+							</td>
+						</tr>
+						<%
+					}
+					%>
+				</table>
+			</th>
+		</components:cell>
+		<components:row viewContext="<%=viewContext%>" javaScriptRow = "true">
+			<components:cell>
+				<%
+                	props = transformerContext.getRenderedAttributes();
+	            %>
+    	        <td class="<%=tcClass%>">
+                      <%@ include file='CellRenderer.jspf'%>
+            	</td>
+		</components:cell>
+ 	</components:row>
+	</tr>
+</components:column>
+

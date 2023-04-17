@@ -1,0 +1,34 @@
+<%-- $Id$ --%>
+<%	if(PersonalizationUtil.isCustomizable(request, viewContext)){
+		if(model.getViewType().equals("verticaltab")){
+			%>
+				<tr>
+				<td align="center" valign="middle">
+				<span class="subTitle">[&nbsp;<%=IAMEncoder.encodeHTML((String)viewContext.getModel().getViewConfiguration().getFirstValue("ViewConfiguration", "TITLE"))%>&nbsp;]</span> <br>
+				&nbsp;<button onClick="javascript:window.open('TabCustomization.cc?TYPE=VTab&VIEWNAME=<%out.print(viewContext.getModel().getViewName());//NO OUTPUTENCODING%>&UNIQUEID=<%out.print(uniqueId);//NO OUTPUTENCODING%>&DefaultGroup=Reports&DisplayName=Links', null, 'height=550,width=1000,scrollbars=1,resizable=1')" class="customizeButton">Add / Remove Links</button><%--NO OUTPUTENCODING --%>
+				</td>
+				<%
+		}
+		else {
+			%>
+			<td align="center" valign="middle">
+				<table cellspacing="0" cellpadding="0" border="0" align='right'>
+					<tr>
+						<td colspan='2'>
+							<span class="subTitle">[&nbsp;<%=IAMEncoder.encodeHTML((String)viewContext.getModel().getViewConfiguration().getFirstValue("ViewConfiguration", "TITLE"))%>&nbsp;]</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button class="customizeButton" id="ICMTab<%=IAMEncoder.encodeHTMLAttribute(referenceId)%>" onClick="showCustomizeLinks('TabCustomizationLinks','ICMTab<%=IAMEncoder.encodeJavaScript(referenceId)%>',event, '<%=IAMEncoder.encodeJavaScript(referenceId)%>')" onMouseOver="return showBorder('<%=IAMEncoder.encodeJavaScript(referenceId)%>')" onMouseOut="return hideBorder('<%=IAMEncoder.encodeJavaScript(referenceId)%>')">&nbsp;Customize&nbsp;</button>
+						</td>
+						<td align='left'>
+							<button class="customizeButtonPull" id="ICMT" onClick="showCustomizeLinks('TabCustomizationLinks','ICMTab<%=IAMEncoder.encodeJavaScript(referenceId)%>',event, '<%=IAMEncoder.encodeJavaScript(referenceId)%>')" onMouseOver="return showBorder('<%=IAMEncoder.encodeJavaScript(referenceId)%>')" onMouseOut="return hideBorder('<%=IAMEncoder.encodeJavaScript(referenceId)%>')">&nbsp;</button>
+						</td>	
+					</tr>
+				</table><br>	
+			</td>	
+			<%
+		}
+	}
+%>

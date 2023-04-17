@@ -1,0 +1,4 @@
+<%-- $Id$ --%>
+<input name="Submit" type="button" class="btn" value="Reset" onclick="return resetGrid();"> 
+<input name="Submit" type="button" class="btn" value="Save Changes" onclick="submitValuesForTabAndGrid(document.TableLayoutForm);">
+<input name="Submit2" type="button" class="btn" value="Exit" onclick="closeView('<%=IAMEncoder.encodeJavaScript(uniqueId)%>');">

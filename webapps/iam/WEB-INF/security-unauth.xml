@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id$ -->
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security-accounts.xsd">
+<param-groups>
+   <param-group name="samlresponseparams">
+     <param name="SAMLResponse" max-len="50000" type="String" />
+      <param name="RelayState" max-len="50000" type="String" />
+    </param-group>
+    <param-group name="samlrequestparams">
+        <param name="scopes" regex="scope_with_servicename" split="," max-occurrences="20" />
+        <param name="ZOID" type="long" />
+        <param name="woID" regex="app_id" />
+        <param name="appid" regex="app_id" />
+        <param name="uname" regex="email" />
+    </param-group>
+    <param-group name="loginparams">
+      <param name="LOGIN_ID" regex="username_or_email" />
+      <param name="email_readonly" type="boolean" description="To set readonly mode to loginId field"/>
+      <param name="PASSWORD" regex="oldpassword" max-len="250" min-len="1" secret="true" />
+      <param name="backtourl" regex="serviceurl" max-len="50000" />
+      <param name="PARTNER_DOMAIN" regex="domain" />
+      <param name="IS_AJAX" type="boolean" />
+      <param name="is_org" type="boolean" />
+      <param name="idpfwd" type="boolean" />
+      <param name="SERVICE_NAME" regex="servicename" />
+      <param name="lid" regex="username_or_email" />
+      <param name="pwd" regex="oldpassword" max-len="250" secret="true" />
+      <param name="submit" regex="plain_str" />
+      <param name="hide_signup" type="boolean" />
+      <param name="hidesignup" type="boolean" />
+      <param name="hide_gsignup" type="boolean" />
+      <param name="hidegsignup" type="boolean" />
+      <param name="hide_title" type="boolean" />
+      <param name="hide_fp" type="boolean" />
+      <param name="signup_bgcolor" regex="colorcode" />
+      <param name="username_label" regex="iamcleartextpattern" />
+      <param name="partner_domain" regex="domain" />
+      <param name="load_ifr" type="boolean" />
+      <param name="h" type="boolean" />
+      <param name="css" regex="serviceurl" max-len="500" />
+      <param name="ga" type="boolean" description="Boolean to show only the GoogleApps login box" />
+      <param name="fbuid" type="long" />
+      <param name="action" regex="plain_str" max-len="20" />
+      <param name="hidefbconnect" type="boolean" />
+      <param name="emailid" regex="email" />
+      <param name="dcc" type="boolean" description="Disable cookie check" />
+      <param name="hidegooglesignin" type="boolean" />
+      <param name="hidegappsignup" type="boolean" />
+      <param name="hideyahoosignin" type="boolean" />
+      <param name="showsignupbutton" type="boolean" />
+      <param name="hip" type="boolean" />
+      <param name="errtype" type="int" />
+      <param name="captcha" regex="hipstring" max-len="8" />
+      <param name="cdigest" regex="digest" max-len="500" />
+      <param name="scopes" regex="scope_with_servicename" split="," max-occurrences="20" />
+      <param name="getticket" type="boolean" />
+      <param name="appname" regex="iamcleartextpattern" />
+      <param name="override_css" type="boolean" />
+      <param name="hide_logo" type="boolean" />
+      <param name="appinfo" regex="serviceurl" />
+      <param name="hide_remember" type="boolean" />
+      <param name="go" regex="google|facebook|yahoo" />
+      <param name="iamcsrcoo" regex="iamcleartextpattern" max-len="500" />
+      <param name="iamdccsrf" regex="iambase64" max-len="500" />
+      <param name="hide_reg_link" type="boolean" description="To show or hide SignUp link for non registered email login error message" />
+      <param name="remove_temp_token" regex="false" />
+      <param name="newtheme" type="boolean" />
+      <param name="thirdpartydomain" type="boolean" description="To redirect iframe url to parent window when csrf cookie unavailable"/>
+      <param name="showfs" type="boolean" description="To show/hide federated signin option"/>
+      <param name="portal_zid" type="long" description="Portal/Org id to display the logo"/>
+      <param name="portal_id" type="long" description="Portal/Org id to display the logo"/>
+      <param name="portal_name" regex="[a-zA-Z0-9]+" description="manageengine/site24x7 to display their logo"/>
+      <param name="portal_domain" regex="domain" description="Org domain to display the org logo"/>
+      <param name="autofocus_disable" type="boolean" />
+      <param name="client_auth" type="boolean" />
+      <param name="dsrc" regex="iamcleartextpattern"/>
+      <param name="hidelinkedin" type="boolean" />
+      <param name="hidetwitter" type="boolean" />
+      <param name="hideweibo" type="boolean" />
+      <param name="hidebaidu" type="boolean" />
+      <param name="hidedouban" type="boolean" />
+      <param name="hideqq" type="boolean" />
+      <param name="hideazure" type="boolean" />
+      <param name="msignup" type="boolean" />
+      <param name="IAM_CID" regex="^[0-9\.a-zA-Z]+$" max-len="512" />
+      <param name="vdigest" regex="digest" max-len="5000" description="digest for associating fs user with remote account"/>
+      <param name="signupurl" regex="serviceurl" max-len="500" />
+      <param name="cli_time" type="long" />
+    </param-group>
+    
+	</param-groups>
+
+  <urls>
+    <url path="/" authentication="optional" method="get,post">
+      <param name="monitor" regex="true" />
+      <param name="LOGIN_ID" regex="username_or_email" />
+    </url>
+    <url path="/static/index.jsp">
+      <param name="LOGIN_ID" regex="username_or_email" />
+    </url>
+    <url path="/mfaerror">
+    	<param name="lockapp" type="boolean"/>
+    	<param name="css" regex="serviceurl" max-len="500" />
+    </url>
+    <url path="/ui/unauth/orguserinvite.jsp">
+      <param name="DIGEST" regex="digest" max-len="500" />
+    </url>
+    <url path="/login" redirect="/signin" />
+    <url path="/authorize" https="true" authentication="optional" description="Temp page to set cookie">
+    	<param name="tptt" regex="iamticket" secret="true" max-len="1000"/>
+    	<param-group name="loginparams"/>
+    </url>
+    <url path="/apiauthtoken/nb/create" https="true" duration="1" threshold="5" lock-period="15" description="Create APIAuthToken via Non-Browser/API (NB)" method="post,get">
+      <param name="EMAIL_ID" regex="username_or_email" />
+      <param name="PASSWORD" regex="oldpassword" max-len="250" min-len="1" secret="true" />
+      <param name="SCOPE" regex="scope_with_servicename" split="," max-occurrences="20" />
+      <param name="DISPLAY_NAME" regex="iamcleartextpattern" />
+    </url>
+    <url path="/password" https="true" description="Change password" method="post,get" block-referrer="true">
+      <param name="DIGEST" regex="digest" max-len="500" mask="partial" preserve-chars="2,5" preserve-chars-limit="30"/>
+      <param name="email" regex="username_or_email" />
+      <param name="demail" regex="email" />
+      <param name="captcha" regex="hipstring" />
+      <param name="cdigest" regex="digest" max-len="500" />
+      <param name="dcdigest" regex="iambase64" max-len="500" />
+      <param name="verify" type="boolean" />
+      <param name="code" type="int" />
+      <param name="css" regex="serviceurl" max-len="500" />
+      <param name="override_css" type="boolean" />
+      <param name="count" regex="([0-9,]+)" />
+      <param name="resetoptiondigest" regex="digest" max-len="10000" />
+      <param name="ispasswordOption" type="boolean" />
+      <param name="hide_reg_link" type="boolean" description="To show or hide SignUp link for non registered email request error message" />
+      <param name="portal_name" regex="[a-zA-Z0-9]+" description="manageengine/site24x7 to display their logo"/>
+      <param name="portal_domain" regex="domain" description="Org domain to display the org logo"/>
+      <param name="portal_id" type="long" description="Portal/Org id to display the logo"/>
+      <param name="crossdcDigest" regex="digest" max-len="500" />
+    </url>
+    <url path="/password/reset" https="true" method="post" csrf="true" lock-period="15" duration="10" threshold="10" description="Change password">
+      <param name="pwd" regex="password" max-len="250" secret="true" />
+      <param name="ans" regex="iamcleartextpattern" />
+      <param name="uid" regex="digest" max-len="500" />
+      <param name="removewebsessions" type="boolean" />
+      <param name="removedevicesessions" type="boolean" />
+      <param name="cpwd" regex="password" max-len="250" secret="true" />
+     </url>
+    <url path="/password/verifyotp" method="post" sl_auth="fp_required" csrf="true" lock-period="15" duration="1" threshold="10" https="true" description="Change password">
+   	  <param name="mobile" regex="phone" decrypt="true" decrypt-label="tfasecret"/>
+   	  <param name="otpcode" type="int"  />
+   	  <param name="DIGEST" regex="digest" max-len="500" />
+   	  <param name="scopes" regex="scope_with_servicename" split="," max-occurrences="20" />
+      <param name="getticket" type="boolean" />
+      <param name="appname" regex="iamcleartextpattern" />
+    </url>
+    <url path="/password/resendcode" method="post" sl_auth="fp_required" csrf="true" lock-period="15" duration="1" threshold="5"  https="true" description="Change password">
+   	  <param name="mobile" regex="phone" decrypt="true" decrypt-label="tfasecret" />
+   	  <param name="DIGEST" regex="digest" max-len="500" />
+    </url>    
+	<url path="/password/selectpref" method="post" csrf="true"  sl_auth="fp_required" https="true" description="Change password">
+   	  <param name="mobile" regex="phone" decrypt="true" decrypt-label="tfasecret"  max-len="500" />
+   	  <param name="email" regex="email" decrypt="true" decrypt-label="tfasecret" max-len="500" />
+   	  <param name="prefOption" regex="iamcleartextpattern"  />
+   	  <param name="portal_name" regex="[a-zA-Z0-9]+" description="manageengine/site24x7 to display their logo"/>
+   	  <param name="portal_domain" regex="domain" description="Org domain to display the org logo"/>
+      <param name="portal_id" type="long" description="Portal/Org id to display the logo"/>
+    </url>
+    <url path="/confirm" https="true" description="Email address confirmation" method="get,post">
+      <param name="DIGEST" regex="digest" min-occurrences="1" max-len="500" />
+      <param name="PASSWORD" regex="oldpassword" max-len="250" secret="true" />
+      <param name="password" regex="oldpassword" max-len="250" secret="true" />
+      <param name="sch" max-len="5" type="String" />
+    </url>
+    <url path="/oia" https="true" duration="60" threshold="40" lock-period="30" description="Accept an org invitation" method="get,post">
+      <param name="DIGEST" regex="digest" min-occurrences="1" max-len="500" />
+      <param name="PASSWORD" regex="oldpassword" max-len="250" secret="true" />
+    </url>
+    <url path="/oir" https="true" duration="60" threshold="40" lock-period="30" description="Reject an org invitation" method="get,post">
+      <param name="DIGEST" regex="digest" min-occurrences="1" max-len="500" />
+      <param name="PASSWORD" regex="oldpassword" max-len="250" secret="true" />
+    </url>
+    <url path="/g/nia" https="true" description="New User Accept invitation">
+      <param name="DIGEST" regex="digest" min-occurrences="1" max-len="500" />
+    </url>
+    <url path="/g/nir" https="true" description="New User Reject invitation">
+      <param name="DIGEST" regex="digest" min-occurrences="1" max-len="500" />
+    </url>
+    <url path="/g/eia" https="true" duration="60" threshold="40" lock-period="30" description="Existing user Accept Invitation" method="get,post">
+      <param name="DIGEST" regex="digest" min-occurrences="1" max-len="500" />
+      <param name="PASSWORD" regex="oldpassword" max-len="250" secret="true" />
+    </url>
+    <url path="/g/eir" https="true" duration="60" threshold="40" lock-period="30" description="Existing user Reject Invitation" method="get,post">
+      <param name="DIGEST" regex="digest" min-occurrences="1" max-len="500" />
+      <param name="PASSWORD" regex="oldpassword" max-len="250" secret="true" />
+    </url>
+    <!--
+        unsupported url configuration commented below
+        <url path="/g/pnia" description="New User Reject invitation">
+            <param name="DIGEST" regex="digest" min-occurrences="1" max-len="500"/>
+        </url>
+
+        <url path="/g/pnir" description="New User Reject invitation">
+            <param name="DIGEST" regex="digest" min-occurrences="1" max-len="500"/>
+		</url>
+
+        <url path="/g/peia" description="Existing user Accept Invitation">
+            <param name="DIGEST" regex="digest" min-occurrences="1" max-len="500"/>
+            <param name="PASSWORD" regex="oldpassword"/>
+		</url>
+
+        <url path="/g/peir" description="Existing user Reject Invitation">
+            <param name="DIGEST" regex="digest" min-occurrences="1" max-len="500"/>
+            <param name="PASSWORD" regex="oldpassword"/>
+        </url-->
+    <url path="/noia" https="true" description="Accept an org invitation for a unregistered zoho user">
+      <param name="DIGEST" regex="digest" min-occurrences="1" max-len="500" />
+    </url>
+    <url path="/noir" https="true" description="Reject an org invitation for a unregistered zoho user">
+      <param name="DIGEST" regex="digest" min-occurrences="1" max-len="500" />
+    </url>
+  	<url path="/samlresponse/.*" description="process the saml authentication response" authentication="optional" method="get,post">
+       <param-group name="samlresponseparams"/>
+    </url>
+    <url path="/iam/samlresponse/.*" description="process the saml authentication response" authentication="optional" method="get,post">
+      <response>
+       <headers>
+       <header name="X-Frame-Options" value="trusted" />  
+        </headers>
+	 </response>
+     <param-group name="samlresponseparams"/>
+    </url>
+    <url path="/samlauthrequest.*" description="post's the SAML Authentication request." authentication="optional" method="get,post">
+      <param-group name="samlrequestparams"/>
+    </url>
+    <url path="/samlDoLogout" description="Forces the user to logout. The IDP has sent a logout request" authentication="optional" method="post,get">
+      <param name="SAMLRequest" max-len="50000" type="String" />
+      <param name="SAMLResponse" max-len="50000" type="String" />
+      <param name="RelayState" max-len="50000" type="String" />
+    </url>
+
+
+    <url path="/signin/samlsp/.*" description="process the saml authentication response" authentication="optional" method="post">
+       <param-group name="samlresponseparams"/>
+    </url>
+    <url path="/iam/signin/samlsp/.*" description="process the saml authentication response" authentication="optional" method="post">
+      <response>
+       <headers>
+       <header name="X-Frame-Options" value="trusted"/>
+        </headers>
+	 </response>
+     <param-group name="samlresponseparams"/>
+    </url>
+    <url path="/logout/samlsp/.*" description="Forces the user to logout. The IDP has sent a logout request" authentication="optional" method="post,get">
+      <param name="SAMLRequest" max-len="50000" type="String" />
+      <param-group name="samlresponseparams"/>
+      <param name="Signature" max-len="400" type="String" />
+      <param name="SigAlg" max-len="100" type="String"/>
+    </url>
+
+	<url path="/signin/jwt/.*" description="process the jwt authentication response" authentication="optional" method="get,post">
+       <param name="jwt" max-len="500" type="String"/>
+       <param name="return_to" regex="serviceurl" max-len="500"/>
+    </url>
+
+    <url path="/p/setup" sl_auth="tfatemp_required" method="post" csrf="true" duration="30" lock-period="100" threshold="10" user="true" description="Setup TFA with Mobile">
+      <param name="mobile" regex="phone" />
+      <param name="countrycode" regex="countrycode" />
+      <param name="verifytype" type="int" />
+    </url>
+    <url path="/goauth" description="Url for sign in using google Oauth" https="true" method="post" csrf="false" authentication="optional">
+      <param name="digest" regex="digest" max-len="512" />
+      <param name="redirecturl" regex="url" max-len="50000" />
+      <param name="domain" regex="domain" />
+      <param name="ZSService" regex="iamcleartextpattern" />
+      <param name="scopes" regex="scope_with_servicename" split="," max-occurrences="20" />
+      <param name="appname" regex="iamcleartextpattern" />
+      <param name="getticket" type="boolean" />
+      <param name="account" regex="zid" max-len="100" />
+      <param name="g_source" regex="iamcleartextpattern" />
+      <param name="hide_signup" type="boolean" />
+      <param name="nup" type="boolean" />
+      <param name="identifier" regex="url" />
+    </url>
+    <url path="/goauthresponse" description="Url to handle google Oauth response" sl_auth="fs_required" method="post,get">
+      <param name="state" regex="digest" max-len="50000" />
+      <param name="redirecturl" regex="url" max-len="50000" />
+      <param name="prompt" regex="iamcleartextpattern" />
+      <param name="authuser" regex="iamcleartextpattern" />
+      <param name="code" regex="iamcleartextpattern" max-len="1000" />
+      <param name="hd" regex="domain" />
+      <param name="scopes" regex="scope_with_servicename" split="," max-occurrences="20" />      
+    </url>
+    <url path="/ui/settings/verifyMobileSignup.jsp" sl_auth="ms_optional" authentication="optional" />
+    <url path="/ui/unauth/verifyMobile.jsp" sl_auth="fp_required">
+    	<param name="portal_name" regex="[a-zA-Z0-9]+" description="manageengine/site24x7 to display their logo"/>
+    	<param name="portal_domain" regex="domain" description="Org domain to display the org logo"/>
+    	<param name="portal_id" type="long" description="Portal/Org id to display the logo"/>
+    </url>
+    <url path="/ui/unauth/confirmedUserSuccessPage.jsp" />    
+    <url path="/clx/audit" description="used for auditing clx transaction">
+    <param name="dr-msg" regex="([a-zA-Z0-9:\s]+)" max-len="500" />
+    <param name="type" regex="([0-9]+)" max-len="10" />
+    </url>
+    <url path="/gdpr/dpastatus/update" method="post" csrf="false">
+    	<param name="data" regex="iamjson"/>
+    </url>
+    
+    <url path="/googlec600844700329b5c.html" description="Google webmasters domain verify url">
+    </url>
+    
+    <url path="/role/renew" authentication="required" https="true" trusted="true" description="Role expiry notification" method="get">
+    	<param name="DIGEST" regex="digest" min-occurrences="1" max-len="500" />
+    </url>
+    
+     <url path="/accounts/widget/ticket" https="true" authentication="required" description="Create widget ticket" api="true" method="post" internal="true" scoped-services="all" >
+    	<param name="portal_client_id" regex="client_id"/>
+    </url>
+     <url path="/accounts/widget/validate" https="true"  method="get">
+    	<param name="user_token" regex="iambase64" max-len="1000" secret="true" />
+    </url>
+    
+
+    <url path="/api/public/v1/geodetails" description="To get timezone(includes compressed),country,language list " method="get" >
+    	<response>
+    	<!-- This is defined for cors request. if this is configured no need to configure option method in url attribute, security team will handle it
+    		 below header will be set for cors request.
+    		 refere:https://intranet.wiki.zoho.com/security/Cross-Origin-Resource-Sharing-Guidelines.html-->
+	    	<headers>
+	               <header name="Access-Control-Allow-Origin" value="trusted">
+	               <!-- coheader only will get set if the origin is trusted. check AccountsSecurityProvider.isTrusted() -->
+		               <coheader>
+		               	 <header name="Access-Control-Allow-Credentials" value="true"/>
+	              		 <header name="Access-Control-Allow-Methods" value="get"/>
+	               		 <header name="Access-Control-Max-Age" value="172800"/><!-- 172800 means allowing the browser to send request for 2 day -->
+		               </coheader>
+	               </header>
+	        </headers>
+        </response>
+    	<param name="get" regex="timezones|languages|countries" split="," max-occurrences="3"/>
+		<param name="service_language" regex="en|ja|zh|tr|hu|de|es|fr|it|nl|pt|sv"/>
+		<param name="isjs" type="boolean"/>
+		<param name="compress" type="boolean"/>
+	</url>
+   <url path="/ssokit/addemail" description="Add Secondary email option for sso kit">
+   		<param name="temp_token" regex="iamcleartextpattern" max-len="1500"/>
+   </url>
+   
+   <url path="/.well-known/apple-developer-domain-association.txt" description="To verify domain in apple side." />
+   
+    <url path="/register" method="get" description="new user SignUp page">
+	  <param name="newsignup" type="boolean" />
+      <param name="mode" max-len="100" regex="iamcleartextpattern" trim="true" max-occurrences="1"/>
+      <param name="service_language" regex="en|ja|zh|tr|hu|de|es|fr|it|nl|pt|sv"/>
+      <response disable-safe-headers="X-Frame-Options" />
+    </url>
+    <url path="/register/script" method="get" description="to load register script plugin and constants">
+      <param name="portalname" max-len="100" regex="iamcleartextpattern" trim="true" />
+      <param name="portal" max-len="100" regex="iamcleartextpattern" trim="true" />
+      <param name="mode" max-len="100" regex="iamcleartextpattern" trim="true" max-occurrences="1"/>
+		<response disable-safe-headers="X-Frame-Options">
+			<!-- This is defined for cors request. if this is configured no need to configure option method in url attribute, security team will handle it
+				 below header will be set for cors request.
+				 refere:https://intranet.wiki.zoho.com/security/Cross-Origin-Resource-Sharing-Guidelines.html-->
+		 	<headers>
+		            <header name="Access-Control-Allow-Origin" value="trusted">
+		            <!-- coheader only will get set if the origin is trusted. check AccountsSecurityProvider.isTrusted() -->
+		             <coheader>
+		             	 <header name="Access-Control-Allow-Credentials" value="true"/>
+		           		 <header name="Access-Control-Allow-Methods" value="get"/>
+		             </coheader>
+		            </header>
+		     </headers>
+		    </response>
+    </url>
+    <url path="/register/session" method="get" description="new user SignUp session creation">
+      <response disable-safe-headers="X-Frame-Options" />
+    </url>
+  </urls>
+  <urls prefix="(/accounts/p/[0-9]+)?" path-regex="true">
+    <url path="/signin" authentication="optional" description="SignIn page">
+		<param name="LOGIN_ID" regex="username_or_email" />
+		<param name="email_readonly" type="boolean" description="To set readonly mode to loginId field"/>
+		<param name="go" regex="google|facebook|yahoo" />
+		<param name="m_redirect" type="boolean" description="To display mobile optimized page" />
+		<param name="appinfo" regex="serviceurl" />
+		<param name="scopes" regex="scope_with_servicename" split="," max-occurrences="20" />
+		<param name="appname" regex="iamcleartextpattern" />
+		<param name="getticket" type="boolean" />
+		<param name="signupurl" regex="urloruriwithparams" max-len="500" />
+		<param name="portal_id" type="long" description="Portal/Org id to display the logo"/>
+		<param name="portal_name" regex="[a-zA-Z0-9]+" description="manageengine/site24x7 to display their logo"/>
+		<param name="portal_domain" regex="domain" description="Org domain to display the org logo"/>
+		<param name="portal_logo_src" regex="url" max-len="500" description="To display custom org logo via external website src"/>
+		<param name="partner_domain" regex="domain" />
+		<param name="hide_signup" type="boolean" />
+		<param name="hide_remember" type="boolean" />
+		<param name="hide_fp" type="boolean" />
+		<param name="hide_fs" type="boolean" description="To show/hide federated signin option"/>
+		<param name="fs_action" regex="plain_str" />
+		<param name="dcc" type="boolean" />
+		<param name="hidegooglesignin" type="boolean" />
+		<param name="hideyahoosignin" type="boolean" />
+		<param name="hidefbconnect" type="boolean" />
+		<param name="hidelinkedin" type="boolean" />
+		<param name="hidetwitter" type="boolean" />
+		<param name="hideweibo" type="boolean" />
+		<param name="hidebaidu" type="boolean" />
+		<param name="hidedouban" type="boolean" />
+		<param name="hideqq" type="boolean" />
+		<param name="hideazure" type="boolean" />
+		<param name="hidewechat" type="boolean" />
+		<param name="hide_title" type="boolean" />
+		<param name="hide_logo" type="boolean" />
+		<param name="loadchosen" type="boolean" />
+		<param name="context" regex="[/a-zA-Z]+" />
+		<param name="hide_smartbanner" type="boolean" description="To show/hide oneauth app header"/>
+		<param name="idp" regex="digest" max-len="500" />
+		<param name="darkmode" type="boolean" />
+		<param name="IAM_CID" regex="^[0-9\.a-zA-Z]+$" max-len="512" />
+		<param name="token" regex="digest" max-len="500" max-occurrences="1"/>
+    </url>
+    <url path="/clogin" https="true" authentication="required" description="Client Signin"/>
+  </urls>
+</security>

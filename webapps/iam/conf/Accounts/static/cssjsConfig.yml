@@ -1,0 +1,336 @@
+##  Used to configure all the static css and js files used in template.
+##  compresed will be used when use.static.compressedfiles is set to true
+##  else local will be used.
+## za.config.js_condent will be replace by js files
+## za.config.css_condent will be replace by css  files
+##
+
+tplibs:
+  - &jquery1_12_2 tplibs/jquery/jquery-1.12.2.min.js
+  - &passwordstrength tplibs/password_strength.js
+  - &jqueryvalidate tplibs/jquery/jquery.validate.min.js
+  - &mailcheck tplibs/jquery/jquery.mailcheck.min.js
+  - &chosenjs tplibs/chosen.jquery.min.js
+  - &chosencss tplibs/chosen.css
+  - &xregexpjs tplibs/xregexp-all.js
+
+templates:
+  za_signin_static: &za_signin_static
+    js:
+        compressed:
+            - *jquery1_12_2
+            - *xregexpjs
+            - signin.min.js
+        local:
+            - html5.js
+            - *jquery1_12_2
+            - common.js
+            - ajax.js
+            - cors-app.js
+            - form.js
+            - *xregexpjs
+            - validator.js
+            - signin.js
+    css:
+        compressed:
+            - signin.min.css
+        local:
+            - common.css
+            - signin.css
+            - form.css
+  za_signup: 
+    js: &za_signup_js
+        compressed:
+            - *jquery1_12_2
+            - *jqueryvalidate
+            - *chosenjs
+            - *xregexpjs
+            - signup.min.js
+        local:
+            - *jquery1_12_2
+            - *jqueryvalidate
+            - *passwordstrength
+            - *mailcheck
+            - common.js
+            - ajax.js
+            - cors-app.js
+            - form.js
+            - *xregexpjs
+            - validator.js
+            - register.js
+            - *chosenjs
+            - zdtoken.js
+    css:
+        compressed:
+            - *chosencss
+            - signup.min.css
+        local:
+            - common.css
+            - form.css
+            - register.css
+            - *chosencss
+  za_signup_mobile_new: 
+    js: *za_signup_js
+    css:
+        compressed:
+            - signup-mobile-new.min.css
+        local:
+            - mobilesignupnew.css
+  za_signup_new:
+    js: &za_signup_new_js
+        compressed:
+            - *jquery1_12_2
+            - *jqueryvalidate
+            - *chosenjs
+            - *xregexpjs
+            - signup-new.min.js
+        local:
+            - *jquery1_12_2
+            - *jqueryvalidate
+            - *passwordstrength
+            - *mailcheck
+            - common.js
+            - ajax.js
+            - cors-app.js
+            - formnew.js
+            - *xregexpjs
+            - validator.js
+            - registernew.js
+            - *chosenjs
+            - zdtoken.js
+    css:
+        compressed:
+            - signup-new.min.css
+        local:
+            - signupnew.css
+  za_signup_mobile: 
+    js: *za_signup_js
+    css:
+        compressed:
+            - signup-mobile.min.css
+        local:
+            - common.css
+            - form.css
+            - register.css
+            - mobilesignup.css  
+  signup_alone: # Used while show sign in and sign up page combinedly in single page. 
+    css:
+      compressed:
+          - signup-alone.min.css
+      local:
+          - register.css
+          - *chosencss
+    js: 
+      compressed:
+        - signup-alone.min.js 
+      local:
+        - *jqueryvalidate
+        - *passwordstrength
+        - register.js 
+        - *chosenjs
+
+  za_signin_mobile:
+    js:
+        compressed:
+            - *jquery1_12_2
+            - *xregexpjs
+            - signin-mobile.min.js
+        local:
+            - *jquery1_12_2
+            - common.js
+            - ajax.js
+            - form.js
+            - *xregexpjs
+            - validator.js
+            - signin.js
+  za_accept_invitation_static: &za_accept_invitation_static
+    js:
+        compressed:
+            - *jquery1_12_2
+            - *xregexpjs
+            - acceptinvitation.min.js
+        local:
+            - html5.js
+            - *jquery1_12_2
+            - common.js
+            - ajax.js
+            - form.js
+            - *xregexpjs
+            - validator.js
+            - accountinvitation.js
+            - *passwordstrength
+    css:
+        compressed:
+            - acceptinvitation.min.css
+        local:
+            - invitation.css
+            
+  za_accept_account_merge_invitation_static: &za_accept_account_merge_invitation_static
+    js:
+        compressed:
+            - *jquery1_12_2
+            - *xregexpjs
+            - acceptinvitation.min.js
+        local:
+            - html5.js
+            - *jquery1_12_2
+            - common.js
+            - ajax.js
+            - form.js
+            - *xregexpjs
+            - validator.js
+            - accountmergeinvite.js
+            - *passwordstrength
+    css:
+        compressed:
+            - acceptinvitation.min.css
+        local:
+            - mergeinvitation.css
+
+  za_account_invitation_expired:
+    css:
+        compressed:
+            - expiredinvitation.min.css
+        local:
+            - common.css
+            - invitation.css
+  za_add_password: &za_add_password
+    js:
+        compressed:
+            - *jquery1_12_2
+            - *xregexpjs
+            - addpassword.min.js
+        local:
+            - html5.js
+            - *jquery1_12_2
+            - *passwordstrength
+            - common.js
+            - ajax.js
+            - form.js
+            - *xregexpjs
+            - validator.js
+            - addpassword.js
+    css:
+        compressed:
+            - addpassword.min.css
+        local:
+            - common.css
+            - form.css
+            - addpassword.css
+  za_forgotpwd_static: &za_forgotpwd_static
+    js:
+        compressed:
+            - *jquery1_12_2
+            - *xregexpjs
+            - forgotpwd.min.js
+        local:
+            - html5.js
+            - *jquery1_12_2
+            - common.js
+            - ajax.js
+            - form.js
+            - *xregexpjs
+            - validator.js
+            - forgotpassword.js
+    css:
+        compressed:
+            - forgotpwd.min.css
+        local:
+            - common.css
+            - form.css
+            - forgotpassword.css
+  za_reject_invitation_static: &za_reject_invitation_static
+    js:
+        compressed:
+            - *jquery1_12_2
+            - accountinvitation.min.js
+        local:
+            - html5.js
+            - *jquery1_12_2
+            - common.js
+            - ajax.js
+            - form.js
+            - rejectinvitation.js
+    css:
+        compressed:
+            - accountinvitation.min.css
+        local:
+            - invitation.css
+  za_reset_password_static: &za_reset_password_static
+    js:
+        compressed:
+            - *jquery1_12_2
+            - *xregexpjs
+            - resetpassord.min.js
+        local:
+            - html5.js
+            - *jquery1_12_2
+            - *passwordstrength
+            - common.js
+            - ajax.js
+            - form.js
+            - *xregexpjs
+            - validator.js
+            - resetpassword.js
+    css:
+        compressed:
+            - resetpassord.min.css
+        local:
+            - common.css
+            - form.css
+            - resetpassword.css
+  za_confirm_static: &za_confirm_static
+    js:
+        compressed:
+            - *jquery1_12_2
+            - *xregexpjs
+            - confirm.min.js
+        local:
+            - html5.js
+            - *jquery1_12_2
+            - common.js
+            - ajax.js
+            - form.js
+            - *xregexpjs
+            - validator.js
+            - confirm.js
+    css:
+        compressed:
+            - confirm.min.css
+        local:
+            - common.css
+            - form.css
+            - confirm.css
+  za_signin: *za_signin_static
+  za_signin_mobile_client: *za_signin_static
+  za_accept_account_invitation: *za_accept_invitation_static
+  za_accept_account_invitation_existing: *za_accept_invitation_static
+  za_accept_account_merge_invitation: *za_accept_account_merge_invitation_static
+  za_forgotpwd: *za_forgotpwd_static
+  za_reject_account_invitation: *za_reject_invitation_static
+  za_reset_password_frame : *za_reset_password_static
+  za_reset_password: *za_reset_password_static
+  za_add_user_invitation: *za_add_password
+  za_confirm: *za_confirm_static
+  za_client_confirm: *za_confirm_static
+  za_sorg_invitation_signup: &za_sorg_invitation_static
+    js:
+        compressed:
+            - *jquery1_12_2
+            - *xregexpjs
+            - sorginvitation.min.js
+        local:
+            - html5.js
+            - *jquery1_12_2
+            - common.js
+            - ajax.js
+            - form.js
+            - *xregexpjs
+            - validator.js
+            - sorginvitation.js
+            - *passwordstrength
+    css:
+        compressed:
+            - acceptinvitation.min.css
+        local:
+            - invitation.css

@@ -1,0 +1,1127 @@
+/*$Id$*/
+body,table,a,input,p {
+	font-family:"Open sans";
+	font-size: 11px;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* Android Specific Style TO avoid highlight of input box */
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+#tls-banner-container {
+	background: #ffe9e9;
+	border: 1px solid #ffe9e9;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	box-shadow: none;
+	position: static;
+	top: 0px;
+	left: 0px;
+	-webkit-transition: all .3s ease;
+	-webkit-font-smoothing: antialiased;
+	overflow: hidden;
+	z-index: 9999;
+	padding: 5px 5px;
+	margin: 0 auto;
+	display: none;
+}
+
+#tls-banner-container span, #tls-banner-container a {
+	font-size:13px;
+	color:#e83140;
+}
+
+.label,.desctd,.old_button,.passexpsubtitle {
+	display: none !important;
+}
+
+.form-box {
+	background-color: #fff;
+	border: #e2e2e2 solid 1px;
+	border-radius: 4px;
+	width: 97%;
+	height: 90px;
+	margin-left: 10px;
+	margin-top: 4px;
+}
+
+.change-captcha-icon {
+	background: transparent url(../images/register.gif) no-repeat -47px
+		-177px;
+	height: 28px;
+	width: 28px;
+	cursor: pointer;
+}
+
+.loadingVerify{
+	width: 37px;
+    height: 34px;
+    background: url('../images/indicator.gif')no-repeat 0px 0px;
+    position: absolute;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.mobile-login,.for-mobile,.errtbl,.respwd-mobile {
+	margin: 0px auto;
+	overflow: hidden;
+}
+
+.ver-mobile,.rec-mobile,.for-mobile,.errtbl,.respwd-mobile {
+	margin: 0px auto;
+	-webkit-text-size-adjust: none;
+}
+.errmaindiv,.abusetxt {
+	padding:10px;
+}
+.signninusingspan {
+	margin-top:-8px;
+	background-color: #EEEEEE;
+	display: inline-block;
+	font-size: 12px;
+	color: #666;
+}
+
+.forgotpassCode{
+	text-align: left;
+	margin-top:10px
+}
+.selectspanforgot
+{
+	font-size:14px !important;	
+}
+@media only screen and (min-width : 650px) {
+	.mobile-login,.ver-mobile,.rec-mobile,.for-mobile,.errtbl,.respwd-mobile {
+		width: 332px;
+		border:1px solid #cdcdcd;
+		margin-top:6%;
+		height: 500px;
+		-webkit-box-shadow: :0px 10px 29px 10px #d1d1d1;
+		-moz-box-shadow:0px 10px 29px 10px #d1d1d1;
+		box-shadow:0px 10px 29px 10px #d1d1d1;
+		border-radius: 10px;
+		-moz-border-radius: 10px;
+		background-color: #f7f7f7;	
+	}
+	.bodycolor {
+		background: url("../images/mobile-bg.jpg") !important;
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* Android Specific Style TO avoid highlight of input box */
+	}
+	.signninusingspan {
+		background-color: #f7f7f7;
+	}
+	.logoadjust{
+		margin-left: 7px;
+	}
+}
+
+.mob_width {
+	width: 98%;
+	margin: 0px auto;
+}
+
+.mar_left {
+	margin-left: 16px;
+}
+
+.input,.gappfield,.input_tfaverify,.input_forgot,.input_res_pass {
+	padding: 13px;
+	background-color: #fff;
+	font-size: 14px;
+	opacity: 0.9;
+	border: none;
+	width: 100%;
+	-webkit-appearance: none;
+	border: 1px solid #CCC;
+	border-radius: 0px;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+.selectspanforgot{
+	font-size:14px !important;
+}
+.gappfield {
+	padding: 10px !important;
+	border-radius : 4px;
+	width: 80% !important;
+	padding: 9px 0px !important;
+	margin: 0px;
+	font-size:13px;
+}
+
+.input_tfaverify {
+	border-radius: 4px;
+	width: 60%;
+	float: left;
+	padding: 7px;
+}
+
+.input_forgot {
+	border-radius: 4px;
+	padding: 10px;
+}
+
+.input_res_pass {
+	border-radius : 4px;
+	padding-left: 35px;	
+}
+
+.newbox{
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom: none;
+	-webkit-text-size-adjust: none;
+}
+
+.reenter_pass {
+	margin-top: -6px;
+	border-top-right-radius: 0px;
+	border-top-left-radius: 0px;
+	border-top: 1px solid #e8e8e8;
+	-webkit-text-size-adjust: none;
+}
+
+.usrbx {
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	border-bottom: none;
+	padding-left: 32px;
+	-webkit-text-size-adjust: none;
+}
+
+.passbx {
+	margin-top: -3px;
+	border-bottom-right-radius: 4px;
+	border-bottom-left-radius: 4px;
+	border-top: 1px solid #e8e8e8;
+	padding-left: 32px;
+	-webkit-text-size-adjust: none;
+}
+
+.forgotpasslink {
+	display: none;
+}
+#rem,#sec,.securetxt {
+	position: relative;
+	top: -15px;
+	cursor: pointer;
+	vertical-align: middle;
+	font-size: 12px;
+}
+
+.sectxt {
+	top: 9px;
+	position: relative;
+	float: left;
+}
+
+.clearfloat {
+	clear: both;
+	margin-top: 25px;
+}
+
+.submit_mobile,.bluebutton,.whitebutton,.submit_mobile_dummy,.res_btn {
+	background-color:#4c9ac7;
+	border: 1px solid #3681ad;
+	border-radius: 4px;
+	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
+	height: 40px;
+	cursor: pointer;
+	position: relative;
+	padding: 0px 20px;
+	-webkit-appearance: none;
+	clear:both;
+	margin-top: 10px;
+}
+.res_btn {
+	margin-top: 26px !important;	
+}
+.submit_mobile_dummy {
+	background-color:#82adc6;
+	border: 1px solid #3681ad;
+}
+
+.resendbutton{
+    display: inline-block;
+    height: auto;
+    background-color: #776974;
+    border: 1px solid #270B0B;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    height: 22px;
+    cursor: pointer;
+    position: relative;
+    -webkit-appearance: none;
+    clear: both;
+    margin-top: 10px;
+    padding: 4px 13px 0px 13px;
+    margin-left: 10px;
+}
+
+#forgotpassmobiletxt{
+    font-size: 16px;
+    margin-top: 10px;
+    padding-left: 5px;
+    text-align: left;
+    margin-bottom: 10px;
+	}
+
+.bluebutton {
+	display: inline-block;
+    height: auto;
+	padding: 7px 13px 6px 9px;
+}
+
+
+.whitebutton {
+	background-color: #ccc;
+    border: 1px solid #bbb;
+    color: #333333;
+    font-weight: bold;
+    margin-left: 4px;
+    padding : 7px 12px 7px 12px;
+    
+}
+
+.bluebutt_ver {
+	clear: both;
+	display: inline-block;
+	margin-left: 7px;
+	background: -moz-linear-gradient(center top, #FAFAFA, #EEEEEE) repeat
+		scroll 0 0 transparent;
+	background: -webkit-linear-gradient(#FAFAFA, #EEEEEE) repeat scroll 0 0
+		transparent;
+	border: 1px solid #D9D9D9;
+	border-radius: 4px 4px 4px 4px;
+	color: #333333;
+	font-size: 16px;
+	font-weight: bold;
+	-webkit-appearance: none;
+	cursor: pointer;
+	padding: 6px;
+}
+
+.td_hor_line {
+	border-bottom: 1px solid #E2E2E2;
+	padding-bottom: 26px;
+}
+
+.border_bottom {
+	border-bottom: 1px solid #E2E2E2;
+	padding: 0px;
+}
+
+.oldsignup,.hidedomian,.signintxt,.emptytd,.hide_mob {
+	display: none;
+}
+
+.pagenotesdiv {
+	text-align: left;
+	padding-left: 20px;
+	line-height: 30px;
+}
+
+.forgotpassposition {
+	float: right;
+	position: relative;
+	top:-7px;
+}
+
+.mobile-height {
+	height: auto !important;
+}
+
+.otheracc-main {
+	text-align: center;
+	margin-top: 15px;
+}
+
+.otheracc-topborder {
+	text-align: center;
+	color: #999;
+	margin-top: 25px;
+	-webkit-text-size-adjust: none;
+	font-size: 12px;
+}
+
+.GIcon,.GAppsIcon,.YIcon,.FIcon {
+	background: url("../images/mob_sprite.png") no-repeat -32px -193px;
+	display: inline-block;
+	height: 21px;
+}
+
+.GIcon {
+	cursor: pointer;
+	width: 17px;
+}
+
+.GAppsIcon {
+	cursor: pointer;
+	background-position: -75px -194px;
+	width: 51px;
+}
+
+.FIcon {
+	cursor: pointer;
+	background-position: -206px -193px;
+	width: 35px;
+}
+
+.YIcon {
+	cursor: pointer;
+	background-position: -151px -195px;
+	width: 23px;
+}
+
+.TWTIcon, .LIcon, .AZUREIcon {
+	cursor: pointer;
+	background: url("../images/THIRDPARTY-ICONS.png") no-repeat -313px -89px;
+	display: inline-block;
+	height:21px;
+}
+
+.WEIBOIcon {
+	cursor: pointer;
+	background: url("../images/weibo.jpg") no-repeat -3px -5px;
+	display: inline-block;
+	height:21px;
+}
+
+.BAIDUIcon {
+	cursor: pointer;
+	background: url("../images/baidu.jpg") no-repeat -3px -5px;
+	display: inline-block;
+	height:21px;
+}
+
+.QQIcon {
+	cursor: pointer;
+	background: url("../images/qq.jpg") no-repeat -3px -5px;
+	display: inline-block;
+	height:21px;
+}
+
+.DOUBANIcon {
+	cursor: pointer;
+	background: url("../images/douban.jpg") no-repeat -3px -5px;
+	display: inline-block;
+	height:21px;
+}
+
+	
+.TWTIcon {
+	cursor: pointer;
+	background-position: -315px -89px;
+	width: 24px;
+}
+	
+.LIcon {
+	cursor: pointer;
+	background-position: -255px -89px;
+	width: 24px;
+}
+
+.AZUREIcon {
+	cursor: pointer;
+	background-position: -372px -89px;
+	width: 24px;
+}
+
+.WEIBOIcon {
+	cursor: pointer;
+	background-position: -3px -2px;
+	width: 24px;
+}
+
+.BAIDUIcon {
+	cursor: pointer;
+	background-position: -3px -2px;
+	width: 24px;
+}
+
+.QQIcon {
+	cursor: pointer;
+	background-position: -10px -2px;
+	width: 24px;
+}
+
+.DOUBANIcon {
+	cursor: pointer;
+	background-position: -3px -2px;
+	width: 24px;
+}
+
+
+.usrbx {
+	background: url("../images/mob_sprite.png") no-repeat -22px -290px;
+	background-color: #FFF;
+}
+
+.emailicon {
+	background: url("../images/mob_sprite.png") no-repeat scroll -20px -292px #FFFFFF;
+    padding-left: 34px;
+	background-color: #FFF;
+}
+
+.passbx,.curbx {
+	background: url("../images/mob_sprite.png") no-repeat -20px -128px;
+	background-color: #FFF;
+}
+
+.mobilelogo,.zohologo {
+	background: url("../images/rebrand-logos.png") no-repeat scroll -5px -3px transparent;
+    display: inline-block;
+    height: 50px;
+    padding-top: 5px;
+    width: 130px;
+}
+
+.newbox {
+	background: url("../images/mob_sprite.png") no-repeat scroll -23px -342px #FFFFFF;
+	background-color: #FFF;
+}
+
+.reenter_pass {
+	background: url("../images/mob_sprite.png") no-repeat scroll -21px -388px #FFFFFF;
+	background-color: #FFF;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) , only screen and
+		(min--moz-device-pixel-ratio: 2) , only screen and
+		(-o-min-device-pixel-ratio: 2/1) , only screen and
+		(min-device-pixel-ratio: 2) , only screen and (min-resolution: 192dpi)
+		, only screen and (min-resolution: 2dppx) {
+		
+	.GIcon,.GAppsIcon,.YIcon,.FIcon {
+		background: url("../images/mob_sprite_2x.png") no-repeat -13px -120px;
+		background-size: 193px;
+		display: inline-block;
+		height: 19px;
+	}
+	.GIcon {
+		cursor: pointer;
+		width: 17px;
+	}
+	.GAppsIcon {
+		background-position: -42px -120px;
+		width: 46px;
+	}
+	.FIcon {
+		background-position: -127px -120px;
+		width: 35px;
+	}
+	.YIcon {
+		background-position: -97px -120px;
+		width: 23px;
+	}
+	.usrbx {
+		background: url("../images/mob_sprite_2x.png") no-repeat scroll -10px -236px;
+		background-size: 266px;
+		background-color: #FFF;
+	}
+	.emailicon {
+		background: url("../images/mob_sprite_2x.png") no-repeat -8px -240px;
+		background-size: 266px;
+		background-color: #FFF;
+	}
+	.passbx,.curbx {
+		background: url("../images/mob_sprite_2x.png") no-repeat -7px -114px;
+		background-size: 266px;
+		background-color: #FFF;
+	}
+	.mobilelogo,.zohologo {
+		background: url("../images/rebrand-logos.png") no-repeat -2px -24px;
+		background-size: 100%;
+		height: 50px;
+		width: 100px;
+		display: inline-block;
+	}
+	.newbox {
+		background: url("../images/mob_sprite_2x.png") no-repeat scroll -4px -251px;
+		background-size: 238px;
+		background-color: #FFF;
+	}
+	.reenter_pass {
+		background: url("../images/mob_sprite_2x.png") no-repeat scroll -4px -288px;
+		background-size: 238px;
+		background-color: #FFF;
+	}
+}
+
+.separator {
+	width: 1px;
+	height: 20px;
+	margin: 0px 6px 0px 6px;
+	background-color: #cecece;
+	display: inline-block;
+}
+
+.check {
+	float: left;
+}
+
+.hideold,.mob_hide {
+	display: none;
+}
+
+.signupbutton_m {
+	height: 42px;
+	font-size: 16px;
+	font-weight: bold;
+	margin-top: 9px;
+	background-color: #878787;
+	border: 1px solid #707070;
+	border-radius: 4px;
+	text-align: center;
+	color: #fff;
+	line-height: 35px;
+	cursor: pointer;
+	padding: 0 12px;
+}
+
+.googleAppsIcon {
+	margin-bottom: 27px;
+}
+
+.www_m {
+	font-size: 14px;
+    font-weight: bold;
+    margin-left: 5px;
+   	padding: 10px 4px !important;
+   	border: 1px solid #ccc;
+   	border-top-left-radius: 4px;
+   	border-bottom-left-radius: 4px;
+   	border-right: none;
+   	background-color: #fff;
+   	display: inline-block;
+}
+
+.gappbtn {
+	clear: both;
+	padding-top: 40px;
+}
+
+.gappsub_button {
+	background-color: #4c9ac7;
+    border: 1px solid #3681ad;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    height: 40px;
+    margin-left: 7px;
+    padding: 0 31px;
+    -webkit-appearance: none;
+}
+
+.msg {
+	font-size: 12px;
+	color: #F62217;
+	float: left;
+}
+
+a.hyperlink:link,a.hyperlink:visited {
+	text-decoration: underline;
+	font-size: 12px;
+	margin-left: 0px !important;
+	line-height: 21px;
+}
+
+a.hyperlink_cancel:link,a.hyperlink_cancel:visited {
+	text-decoration: underline;
+	font-size: 11px;
+	margin-left: 0px !important;
+}
+
+.bodycolor {
+	background-color: #EEE;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* Android Specific Style TO avoid highlight of input box */
+}
+
+#msgpanel-apps {
+	margin-left: 42px;
+}
+
+.gappfield-main {
+	margin-top: 0px;
+}
+
+.gapptitle {
+	margin-top: 24px;
+	padding: 0 0 11px 7px;
+	text-align: left;
+	font-size: 16px;
+}
+
+.innerheading {
+	margin-top: 13px;
+	padding-left: 15px;
+	text-align: left;
+	font-size: 16px;
+}
+
+.passexptitle {
+	text-align: left;
+	font-size: 16px;
+	margin: 10px 0px;
+}
+
+.linkcolor {
+	color: #333;	
+}
+
+.tfa_message {
+	text-align: left;
+	padding-left: 15px;
+	line-height: 18px;
+	margin-top: 5px;
+}
+
+.trustmsg {
+	margin-left: 23px;
+	font-weight: bold;
+}
+
+#tfaremember_field {
+	float: left;
+}
+
+.trustinfo {
+	margin-left: 22px;
+	padding-right: 20px;
+	line-height: 17px;
+}
+
+.ele_position {
+	padding-left: 15px;
+}
+
+.td_position {
+	padding-top: 10px;
+}
+
+.td_top_space {
+	padding-top: 11px;
+}
+
+.innertable {
+	margin: 0;
+	padding: 0;
+}
+
+.newposition {
+	padding-left: 0px !important;
+}
+
+.outertbl_verify {
+	transition: width 0.5s ease;
+	-webkit-transition: width 0.5s ease;
+}
+
+.logocolor {
+	width: 100%;
+	background-color: transparent;
+	height: 3px;
+	white-space: nowrap;
+}
+
+.logocolor span {
+	width: 24%;
+	float: left;
+	margin-right:1px;
+	height: 1px;
+}
+
+.mlogin {
+	margin-top: -3px;	
+}
+
+.logocolor .colorred {
+	background-color: #f17a75;
+}
+
+.logocolor .colorgreen {
+	background-color: #6c9a5e;
+}
+
+.logocolor .colorblue {
+	background-color: #4b7fab;
+}
+
+.logocolor .coloryellow {
+	background-color: #FED100;
+	float: left;
+}
+
+.bottom-line {
+	border-top: 1px solid #d1d1d1;
+	width: 70%;
+	margin: 0px auto;
+}
+.signupdiv {
+	text-align: center;
+	margin-top:25px;
+}
+.forgot_sub {
+	font-size: 12px;
+    line-height: 16px;
+     padding: 5px 10px 10px 16px;
+    text-align: left;
+}
+#password {
+padding: 0 13px;
+}
+.txtalignlft {
+	text-align: left;
+}
+
+.captchadiv {
+	background-color: white;
+	border: 1px solid #CCCCCC;
+	border-radius: 4px 4px 4px 4px;
+	padding: 9px 9px 0;
+}
+.captchatd {
+	padding: 14px;
+}
+.captcharectd {
+	padding: 6px;
+}
+.insidecaptcha {
+	border-radius : 0px;
+	padding: 5px;
+}
+.rempadding {
+	 margin: 0 0 8px;
+    padding: 0px !important;
+    font-size: 12px;
+}
+.errormsg {
+	color: red;
+    font-size: 12px;
+    margin-bottom: 6px;
+    padding-left: 14px;
+    text-align: left;
+}
+.successmsg_forgot {
+	font-size: 12px;
+	margin-top: 20px;
+	padding-left: 14px;
+	padding-right:14px;
+	text-align: left;
+}
+.mob_but_head {
+	margin-top: 34px;
+}
+.mob_but {
+	background-color: #4C9AC7;
+	border: 1px solid #3681AD;
+	border-radius: 4px 4px 4px 4px;
+	color: #FFFFFF !important;
+	font-weight: bold;
+	padding: 8px 20px;
+	text-decoration: none;
+}
+.hip {
+	height: 70px;
+}
+.successmsg-main-popup {
+	background-color: #63b951;
+    color: #FFFFFF;
+    left: 45%;
+    position: absolute;
+    z-index: 417;
+    font-size: 14px;
+    top:16%;
+    border-radius:4px;
+}
+.tickicon {
+    background: url("../images/acc-icons.png") no-repeat scroll -2px -50px transparent;
+    cursor: pointer;
+    float: left;
+    height: 16px;
+    width: 17px;
+}
+#hipdiv {
+	border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    background-color: #fff;
+    padding: 10px;
+}
+.logincaptcha {
+    padding: 6px 7px;
+    width: 211px;
+    margin-top: 3px;
+}
+.maintpl_rstpass{
+	padding: 10px;
+	width: 100%;
+}
+.rst_pass_format {
+	margin-top: 23px !important;
+}
+.errmsg {
+	color: red;
+	margin:8px 0px;
+	font-size: 12px;
+}
+.ul_resetpass {
+	line-height: 19px;
+	margin: 7px 0;
+}
+.err-reason ul{
+	list-style: none;
+}
+.spinner {
+	position: relative;
+	width: 14px;
+	height: 16px;
+	display: inline-block;
+}
+
+@-webkit-keyframes fade {from {opacity: 1;}to {opacity: 0;}}
+@-moz-keyframes fade {from {opacity: 1;}to {opacity: 0;}}
+@-0-keyframes fade {from {opacity: 1;}to {opacity: 0;}}
+@keyframes fade {from {opacity: 1;}to {opacity: 0;}}
+
+.spinner div {
+	width: 2px;
+	height: 4px;
+	background: white;
+	position: absolute;
+	top: 8px;
+	opacity: 0;
+	-webkit-animation: fade 1s infinite;
+	-moz-animation: fade 1s infinite;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+	-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+.spinner div.bar1 {
+	-webkit-transform: rotate(0deg) translate(0, -142%);
+	-moz-transform: rotate(0deg) translate(0, -142%);
+	transform: rotate(0deg) translate(0, -142%);
+	-webkit-animation-delay: 0s;
+	-moz-animation-delay: 0s;
+	animation-delay: 0s;
+}
+.spinner div.bar2 {
+	-webkit-transform: rotate(40deg) translate(0, -142%);
+	-moz-transform: rotate(40deg) translate(0, -142%);
+	transform: rotate(40deg) translate(0, -142%);
+	-webkit-animation-delay: -0.8884s;
+	-moz-animation-delay: -0.8884s;
+	animation-delay: -0.8884s;
+}
+.spinner div.bar3 {
+	-webkit-transform: rotate(80deg) translate(0, -142%);
+	-moz-transform: rotate(80deg) translate(0, -142%);
+	transform: rotate(80deg) translate(0, -142%);
+	-webkit-animation-delay: -0.7768s;
+	-moz-animation-delay: -0.7768s;
+	animation-delay: -0.7768s;
+}
+.spinner div.bar4 {
+	-webkit-transform: rotate(120deg) translate(0, -142%);
+	-moz-transform: rotate(120deg) translate(0, -142%);
+	transform: rotate(120deg) translate(0, -142%);
+	-webkit-animation-delay: -0.6652s;
+	-moz-animation-delay: -0.6652s;
+	animation-delay: -0.6652s;
+}
+.spinner div.bar5 {
+	-webkit-transform: rotate(160deg) translate(0, -142%);
+	-moz-transform: rotate(160deg) translate(0, -142%);
+	transform: rotate(160deg) translate(0, -142%);
+	-webkit-animation-delay: -0.5536s;
+	-moz-animation-delay: -0.5536s;
+	animation-delay: -0.5536s;
+}
+.spinner div.bar6 {
+	-webkit-transform: rotate(200deg) translate(0, -142%);
+	-moz-transform: rotate(200deg) translate(0, -142%);
+	transform: rotate(200deg) translate(0, -142%);
+	-webkit-animation-delay: -0.442s;
+	-moz-animation-delay: -0.442s;
+	animation-delay: -0.442s;
+}
+.spinner div.bar7 {
+	-webkit-transform: rotate(240deg) translate(0, -142%);
+	-moz-transform: rotate(240deg) translate(0, -142%);
+	transform: rotate(240deg) translate(0, -142%);
+	-webkit-animation-delay: -0.3304s;
+	-moz-animation-delay: -0.3304s;
+	animation-delay: -0.3304s;
+}
+.spinner div.bar8 {
+	-webkit-transform: rotate(280deg) translate(0, -142%);
+	-moz-transform: rotate(280deg) translate(0, -142%);
+	transform: rotate(280deg) translate(0, -142%);
+	-webkit-animation-delay: -0.2188s;
+	-moz-animation-delay: -0.2188s;
+	animation-delay: -0.2188s;
+}
+.spinner div.bar9 {
+	-webkit-transform: rotate(320deg) translate(0, -142%);
+	-moz-transform: rotate(320deg) translate(0, -142%);
+	transform: rotate(320deg) translate(0, -142%);
+	-webkit-animation-delay: -0.1072s;
+	-moz-animation-delay: -0.1072s;
+	animation-delay: -0.1072s;
+}
+.infolink{
+	text-decoration: none;
+	color:#333;
+	display:inline-block;
+	float: right;
+	margin-right:10px;
+	font-style: italic;
+	font-weight: bolder;
+	background: transparent;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 1px solid #333;
+}
+.secmail{
+	text-decoration: underline;
+	margin: 2% auto;
+	text-align: left;
+	font-weight: bold;
+}
+.primary_email{
+	margin-top:5%;
+}
+
+.hintdiv {
+	text-align: center;
+	background-color:#FEFF99;
+	border:1px solid #EFED02;
+	padding: 10px;
+	display: none;
+}
+
+.hintdivheader {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.signinusingtxt {
+	display: none;
+}
+@media only screen and (min-width : 400px) and (max-width : 650px)  {
+.securetxt{
+	font-size : 16px;
+}
+.signupbutton_m{
+	height : 60px;
+	width : 165px;
+	font-size: 19px;
+}
+.signninusingspan{
+	font-size : 20px;
+	margin-top : -12px;
+}
+.sectxt{
+	font-size : 55px;
+}
+.forgotpassposition{
+	top : 7px;
+}
+.otheracc-topborder{
+	font-size : 16px;
+}
+.otheracc-main{
+	margin-top : 30px;
+	font-size : 55px;
+}
+.input, .gappfield, .input_tfaverify, .input_forgot, .input_res_pass{
+	padding : 11px;
+	padding-left : 40px;
+	font-size : 18px;
+}
+.selectspanforgot{
+	font-size: 18px !important;
+}
+
+.forgotpassposition {
+top: 21px;
+font-size: 19px;
+}
+a.hyperlink:link{
+	font-size : 16px;
+}
+.mobilelogo{
+	height : 45px;
+}
+.signupdiv{
+	margin-top : 35px;
+}
+.submit_mobile{
+	font-size : 19px;
+	margin-left : 7px;
+}
+}
+@font-face {
+    font-family: 'Open Sans';
+	font-weight: 300;
+	font-style: normal;
+	src :local('Open Sans'),url('../images/opensans/font.woff') format('woff');
+}
+#msg_div {
+	background: #4CB0D9;
+	padding: 10px;
+	display: none;
+}
+.customportalimage {
+	background-position: center top;
+    display: inline-block;
+    margin-top:9%;
+	width: 230px;
+	height: 46px;
+}
+.Site24x7 {
+	background: url("../images/site24x7-logo.png") no-repeat 0 0 / contain;
+	background-position: center top;
+	width: 230px;
+	height: 46px;
+    display: inline-block;
+}
+.alarmsone {
+	background: url("../images/alarmsone.png") no-repeat 0 0 / contain;
+	width: 230px;
+	height: 46px;
+	background-position: center top;
+    display: inline-block;
+}
+.SDPOnDemand {
+	background: url("../images/SDPOnDemand.png") no-repeat 0 0 / contain;
+	width: 230px;
+	height: 46px;
+	background-position: center top;
+    display: inline-block;
+}
+.MDMOnDemand {
+	background: url("../images/MDMOnDemand.png") no-repeat 0 0 / contain;
+	width: 230px;
+	height: 46px;
+	background-position: center top;
+    display: inline-block;
+}
+.ManageEngine {
+	background: url("../images/manageengine-logo.png") no-repeat 0 0 / contain;
+	background-position: center top;
+	width: 230px;
+	height: 46px;
+    display: inline-block;
+}

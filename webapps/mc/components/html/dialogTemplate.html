@@ -1,0 +1,334 @@
+$Id$
+
+
+<!--TPL-start-DialogBox1_Prefix--> 
+<TABLE  cellspacing='0' class='DialogBox'><TR><TD class='boxTL'>&nbsp;</TD>
+<TD class="boxHeader drag" onmousedown="captureDialog(event,this)"><div>${TITLE}</div></TD>
+<TD class='boxCtrlButtonPane' nowrap><input class="closeButton" type="button" onclick="closeDialog(null,this)"/></TD>
+<TD class='boxTR'>&nbsp;</TD></TR><TR><TD colspan='4' class="content boxContent" style="cursor: e-resize;" childtype='content' onmousedown="resizeDialogR(event,this)">
+
+<!--TPL-end-DialogBox1_Prefix--> 
+
+
+
+
+<!--TPL-start-DialogBox1_Suffix--> 
+</TD></TR><TR><TD class='boxBL'>&nbsp;</td><TD style="cursor: n-resize;" onmousedown="resizeDialogB(event,this)" class='boxBC' colspan='2' >&nbsp;</TD><TD id="resize" class='boxBR boxCorner' onmousedown="resizeDialogRB(event,this)"></TD></TR></TABLE>
+<!--TPL-end-DialogBox1_Suffix--> 
+
+
+<!--TPL-start-DialogBox2_Prefix--> 
+
+<TABLE  cellspacing='0' cellpadding='0' class='DialogBox'><TR><td class="dragOutlineHorizontal" id="top" onmousedown="resizeDialogT(event,this)" colspan="3"></TD></TD><TR>
+<TD id="left" class="dragOutlineVertical" onmousedown="resizeDialogL(event,this)"></TD><TD><TABLE  height="100%" cellspacing='0' cellpadding='0'><TR><TD class="boxHeaderType2 drag" onmousedown="captureDialog(event,this)"><div  class='dialogBoxTitleDiv' id="title">${TITLE}</div></TD>
+<TD class='boxCtrlButtonPaneType2' nowrap><input class="minButtonType2" type="button" onclick="minimise(this)"/><input class="maxButtonType2" type="button" onclick="toggleDialogState(this)"/><input class="closeButtonType2" type="button" onclick="closeDialog(null,this)"/></TD>
+</TR><TR><TD  width="100%" height="100%" colspan="2" class="boxContent" childtype='content' id="content" onclick="checkBoxAndAdjustZIndex(this)">
+<!--TPL-end-DialogBox2_Prefix--> 
+
+
+
+
+<!--TPL-start-DialogBox2_Suffix--> 
+</TD></TR></TABLE></TD><TD id="right" class="dragOutlineVertical" onmousedown="resizeDialogR(event,this)"></TD></TR><TR><TD id="bottom" class='dragOutlineHorizontalBottom' onmousedown="resizeDialogB(event,this)" colspan='3' ></TD></TR></TABLE>
+<!--TPL-end-DialogBox2_Suffix--> 
+
+
+
+<!--TPL-start-ErrorDialog_Prefix-->
+<table width="80%" border="0" align="center" cellpadding="0"
+	cellspacing="0" class="errorBg">
+	<tr>
+		<td>
+		<table width="100%" border="0" cellspacing="0" cellpadding="4">
+			<tr>
+				<td rowspan="2" valign="top" class="errorImage">&nbsp;</td>
+				<td nowrap class="errorTitle">Error Occurred !</td>
+			</tr>
+			<tr>
+				<td height="60" valign="top" class="errorContent">An error when
+				processing the request...</td>
+			</tr>
+			<tr>
+				<td valign="top">&nbsp;</td>
+				<td align="right" nowrap><input type="button" name="Submit"
+					value="&lt; Go Back" onClick="window.history.back()">
+				&nbsp;&nbsp;&nbsp; <input type="button" name="Submit3"
+					value="Show Details &gt;&gt;" onClick="showDiv('errorData')">
+				&nbsp;</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr id="errorData" class="hide">
+		<td class="errorDetails">
+		<table width="100%" border="0" cellpadding="2" cellspacing="0"
+			class="errorTrace">
+			<tr>
+				<td class="errorTraceHdr">Details :</td>
+			</tr>
+			<tr>
+				<td>
+<!--TPL-end-ErrorDialog_Prefix--> 
+<!--TPL-start-ErrorDialog_Suffix-->
+				</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+</table>
+<!--TPL-end-ErrorDialog_Suffix-->
+
+
+<!--TPL-start-ConfirmDialogBox_Prefix-->
+<TABLE cellspacing='0' class='DialogBox'>
+	<TR>
+		<TD class='boxTL'>&nbsp;</TD>
+		<TD class="boxHeader drag" onmousedown="captureDialog(event,this)">
+		<div>${TITLE}</div>
+		</TD>
+		<TD class='boxCtrlButtonPane' nowrap><input class="closeButton"
+			type="button" onclick="closeDialog(null,this)" /></TD>
+		<TD class='boxTR'>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD class="content boxContent" style="cursor: e-resize;"
+			childtype='content' onmousedown="resizeDialogR(event,this)" colspan="4">
+			<img src="themes/wifi/images/confirm.png"/>
+<!--TPL-end-ConfirmDialogBox_Prefix-->
+
+
+
+
+<!--TPL-start-ConfirmDialogBox_Suffix-->
+		</TD>
+	</TR>
+	<tr>
+		<td colspan="4" onmousedown="resizeDialogR(event,this)"
+			class="content boxContent" style="cursor: e-resize;text-align:right;"><input
+			type="button" value="Ok" onclick="${OKHANDLER}()">
+			 <input type="button" value="Cancel" onclick="${CANCELHANDLER}()"></td>
+	</tr>
+	<TR>
+		<TD class='boxBL'>&nbsp;</td>
+		<TD style="cursor: n-resize;" onmousedown="resizeDialogB(event,this)"
+			class='boxBC' colspan='2'>&nbsp;</TD>
+		<TD id="resize" class='boxBR'
+			onmousedown="resizeDialogRB(event,this)"></TD>
+	</TR>
+</TABLE>
+<!--TPL-end-ConfirmDialogBox_Suffix-->
+
+
+<!--TPL-start-AlertDialogBox_Prefix-->
+<TABLE cellspacing='0' class='DialogBox'>
+	<TR>
+		<TD class='boxTL'>&nbsp;</TD>
+		<TD class="boxHeader drag" onmousedown="captureDialog(event,this)">
+		<div>${TITLE}</div>
+		</TD>
+		<TD class='boxCtrlButtonPane' nowrap><input class="closeButton"
+			type="button" onclick="closeDialog(null,this)" /></TD>
+		<TD class='boxTR'>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD class="content boxContent" style="cursor: e-resize;"
+			childtype='content' onmousedown="resizeDialogR(event,this)" colspan="4">
+			<img src="themes/wifi/images/info_big.gif"/>
+<!--TPL-end-AlertDialogBox_Prefix-->
+
+
+
+
+<!--TPL-start-AlertDialogBox_Suffix-->
+		</TD>
+	</TR>
+	<tr>
+		<td colspan="4" onmousedown="resizeDialogR(event,this)"
+			class="content boxContent" style="cursor: e-resize;text-align:right;"><input
+			type="button" value="Ok" onclick="${OKHANDLER}()"></td>
+	</tr>
+	<TR>
+		<TD class='boxBL'>&nbsp;</td>
+		<TD style="cursor: n-resize;" onmousedown="resizeDialogB(event,this)"
+			class='boxBC' colspan='2'>&nbsp;</TD>
+		<TD id="resize" class='boxBR'
+			onmousedown="resizeDialogRB(event,this)"></TD>
+	</TR>
+</TABLE>
+<!--TPL-end-AlertDialogBox_Suffix-->
+
+
+<!--TPL-start-PromptDialogBox_Prefix-->
+<TABLE cellspacing='0' class='DialogBox'>
+	<TR>
+		<TD class='boxTL'>&nbsp;</TD>
+		<TD class="boxHeader drag" onmousedown="captureDialog(event,this)">
+		<div>${TITLE}</div>
+		</TD>
+		<TD class='boxCtrlButtonPane' nowrap><input class="closeButton"
+			type="button" onclick="closeDialog(null,this)" /></TD>
+		<TD class='boxTR'>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD class="content boxContent" style="cursor: e-resize;"
+			childtype='content' onmousedown="resizeDialogR(event,this)" colspan="4">
+			<img src="themes/wifi/images/confirm.png"/>
+			<form name="promptform" onsubmit="return ${PROMPTHANDLER}(promptform.promptfield.value);">
+<!--TPL-end-PromptDialogBox_Prefix-->
+
+
+
+
+<!--TPL-start-PromptDialogBox_Suffix-->
+			<input type="text" name="promptfield"/>
+			</form>
+		</TD>
+	</TR>
+	<tr>
+		<td colspan="4" onmousedown="resizeDialogR(event,this)"
+			class="content boxContent" style="cursor: e-resize;text-align:right;"><input
+			type="button" value="Ok" onclick="${PROMPTHANDLER}(promptform.promptfield.value)">
+			<input type="button" value="Cancel" onclick="${CANCELHANDLER}()">
+			</td>
+	</tr>
+	<TR>
+		<TD class='boxBL'>&nbsp;</td>
+		<TD style="cursor: n-resize;" onmousedown="resizeDialogB(event,this)"
+			class='boxBC' colspan='2'>&nbsp;</TD>
+		<TD id="resize" class='boxBR'
+			onmousedown="resizeDialogRB(event,this)"></TD>
+	</TR>
+</TABLE>
+<!--TPL-end-PromptDialogBox_Suffix-->
+
+<!--TPL-start-ShadowDialogBox_Prefix-->
+<table border="0" cellspacing="0" cellpadding="0" class="DialogBox">
+ <tr>
+ <TD class='boxTL'>&nbsp;</TD>
+<TD class="boxHeader drag" onmousedown="captureDialog(event,this)"><div>&nbsp;${TITLE}&nbsp;</div></TD>
+<TD class='boxCtrlButtonPane' nowrap><input class="closeButton" type="button" onclick="closeDialog(null,this)"/></TD>
+<TD class='boxTR'>&nbsp;</TD>
+   <td  class="dialogTR">&nbsp;</td>
+ </tr>
+ <tr>
+ <td class="boxContent" colspan="4">
+<!--TPL-end-ShadowDialogBox_Prefix-->   
+
+
+<!--TPL-start-ShadowDialogBox_Suffix-->   
+</td>
+   <td class="dialogMid">
+   </td>
+ </tr>
+ <tr>
+<td class="dialogBL" width="10">&nbsp;</td>
+   <td  class="dialogBM" colspan="3">&nbsp;</td>
+   <td class="dialogBR">&nbsp;</td>
+ </tr>
+</table>
+<!--TPL-end-ShadowDialogBox_Suffix-->
+
+
+<!--TPL-start-NoDragShadowDialogBox_Prefix-->
+<table border="0" cellspacing="0" cellpadding="0" class="DialogBox">
+ <tr>
+ <TD class='boxTL'>&nbsp;</TD>
+<TD class="boxHeader"><div>&nbsp;${TITLE}&nbsp;</div></TD>
+<TD class='boxCtrlButtonPane' nowrap><input class="closeButton" type="button" onclick="closeDialog(null,this)"/></TD>
+<TD class='boxTR'>&nbsp;</TD>
+   <td  class="dialogTR">&nbsp;</td>
+ </tr>
+ <tr>
+ <td class="boxContent" colspan="4">
+<!--TPL-end-NoDragShadowDialogBox_Prefix-->   
+
+
+<!--TPL-start-NoDragShadowDialogBox_Suffix-->   
+</td>
+   <td class="dialogMid">
+   </td>
+ </tr>
+ <tr>
+<td class="dialogBL" width="10">&nbsp;</td>
+   <td  class="dialogBM" colspan="3">&nbsp;</td>
+   <td class="dialogBR">&nbsp;</td>
+ </tr>
+</table>
+<!--TPL-end-NoDragShadowDialogBox_Suffix-->
+
+
+<!--TPL-start-EmptyDialogBox_Prefix-->
+<div class="emptydialog">
+<!--TPL-end-EmptyDialogBox_Prefix-->
+
+<!--TPL-start-EmptyDialogBox_Suffix-->
+</div>
+<!--TPL-end-EmptyDialogBox_Suffix--> 
+
+
+
+<!--TPL-start-ShadowDialogBoxNoCloseButton_Prefix-->
+<table border="0" cellspacing="0" cellpadding="0" class="DialogBox">
+ <tr>
+ <TD class='boxTL'>&nbsp;</TD>
+<TD class="boxHeader drag" onmousedown="captureDialog(event,this)"><div>&nbsp;${TITLE}&nbsp;</div></TD>
+<TD class='boxCtrlButtonPane' nowrap></TD>
+<TD class='boxTR'>&nbsp;</TD>
+   <td  class="dialogTR">&nbsp;</td>
+ </tr>
+ <tr>
+ <td class="boxContent" colspan="4">
+<!--TPL-end-ShadowDialogBoxNoCloseButton_Prefix-->   
+
+
+<!--TPL-start-ShadowDialogBoxNoCloseButton_Suffix-->   
+</td>
+   <td class="dialogMid">
+   </td>
+ </tr>
+ <tr>
+<td class="dialogBL" width="10">&nbsp;</td>
+   <td  class="dialogBM" colspan="3">&nbsp;</td>
+   <td class="dialogBR">&nbsp;</td>
+ </tr>
+</table>
+<!--TPL-end-ShadowDialogBoxNoCloseButton_Suffix-->
+
+
+<!--TPL-start-NoDragShadowDialogBoxNoCloseButton_Prefix-->
+<table border="0" cellspacing="0" cellpadding="0" class="DialogBox">
+ <tr>
+ <TD class='boxTL'>&nbsp;</TD>
+<TD class="boxHeader"><div>&nbsp;${TITLE}&nbsp;</div></TD>
+<TD class='boxCtrlButtonPane' nowrap></TD>
+<TD class='boxTR'>&nbsp;</TD>
+   <td  class="dialogTR">&nbsp;</td>
+ </tr>
+ <tr>
+ <td class="boxContent" colspan="4">
+<!--TPL-end-NoDragShadowDialogBoxNoCloseButton_Prefix-->   
+
+
+<!--TPL-start-NoDragShadowDialogBoxNoCloseButton_Suffix-->   
+</td>
+   <td class="dialogMid">
+   </td>
+ </tr>
+ <tr>
+<td class="dialogBL" width="10">&nbsp;</td>
+   <td  class="dialogBM" colspan="3">&nbsp;</td>
+   <td class="dialogBR">&nbsp;</td>
+ </tr>
+</table>
+<!--TPL-end-NoDragShadowDialogBoxNoCloseButton_Suffix-->
+
+
+
+
+
+
+
+
+
+
+

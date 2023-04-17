@@ -1,0 +1,1131 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd">
+<!--<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd"> -->
+<data-dictionary name="Accounts">
+    <description>Users can be registered and authenticated differently based on their roles within an Organization. For example, All "Employees" should be authenticated using the corporate AD server. All "Customers" can be authenticated using a simple password.</description>
+    <table name="IAMAuthDomain" display-name="AuthDomain">
+        <description>This table holds how users have to be authenticated before accessing the Resources belong to an Organization, Community or any kind of group</description>
+        <columns>
+            <column name="AUTH_DOMAIN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMAuthDomain.AUTH_DOMAIN_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ACCOUNT_AUTO_ID">
+                <description>The Organization for which this User Domain is to be applied</description>
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="DOMAIN_NAME">
+                <description>Unique identifier of this auth domain</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&domain;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DISPLAY_NAME">
+                <description>Unique identifier of this auth domain</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+            </column>
+            <column name="ALLOWED_AUTH_TYPES">
+                <description>
+                    Allowed auth types for this domain users.
+                    Corresponding bits will be set for enabling PASSWORD, FEDERATED SIGNIN, SAML authtypes.
+                    0 - Allows PASSWORD, FEDERATED SIGNIN
+                </description>
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+                <nullable>false</nullable>
+            </column>
+            <column name="ALLOWED_FAILED_LOGIN_ATTEMPTS">
+                <description>Number of failed login attempts allowed.</description>
+                <data-type>INTEGER</data-type>
+                <default-value>-1</default-value>
+            </column>
+            <column name="LOCK_PERIOD">
+                <description>Number of minutes the user has to be locked on exceeding the failure login attemptsk. Human interactive proof mechanism : CAPTCHA will be shown if the LOCK_PERIOD is set to zero</description>
+                <data-type>INTEGER</data-type>
+            </column>
+           <column name="DURATION">
+           		<description>The duration(in minutes) for which the user's failed login attempts are monitored.</description>
+           		<data-type>INTEGER</data-type>
+           </column>
+            <column name="IS_ENABLED">
+                <description>This User Domain can be disabled (set to false) temporarily without affecting the whole configurations</description>
+                <data-type>BOOLEAN</data-type>
+                <default-value>true</default-value>
+            </column>
+            <column name="CREATED_TIME">
+                <description>The time at which the user domain is created</description>
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAuthDomain_PK">
+            <primary-key-column>AUTH_DOMAIN_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAuthDomain_FK" reference-table-name="IAMAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMAuthDomain_UK">
+                <unique-key-column>ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>DOMAIN_NAME</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+
+    <table name="IAMAuthDomainSignup" display-name="AuthDomainSignup">
+        <description>How users should be registered for this account.</description>
+        <columns>
+            <column name="AUTH_DOMAIN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="PROVISION_TYPE">
+                <description>
+                    Self : They can  create and customize a signup form for the clients to signup into the organization.
+                    This will include the google, yahoo, openid signups 
+                    Admin : The  admin can directly provision their users into the organization by entering manually or by importing thro files
+                    Auto : Auto provisioning of users from directory services like AD, LDAP or by cloud services like GApps.
+                    self -> the last bit will be set
+                    admin -> the last but one bit will be set
+                    auto -> the last bit will be set
+                </description>
+                <data-type>INTEGER</data-type>
+                <max-size>10</max-size>
+            </column>
+            <column name="SEND_WELCOME_MAIL">
+                <description>If true a welcome mail will be sent on provision. The template of this welcome mail should be configured.</description>
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="EMAIL">
+                <description>
+                    Value less than 0 Indicates email is not mandatory.
+                    value equal to 0 indicates that only after confirmation the user can login
+                    Value greater than 0 indicates the grace period for email confirmation.
+                </description>
+                <data-type>INTEGER</data-type>
+                <max-size>10</max-size>
+            </column>
+            <column name="MOBILE">
+                <description>
+                    Value less than 0 indicates mobile number is not mandatory.
+                    value equal to 0 indicates that only after confirmation the user can login
+                    Value greater than 0 indicates the grace period for mobile confirmation.
+                </description>
+                <data-type>INTEGER</data-type>
+                <max-size>10</max-size>
+            </column>
+            <column name="FIRST_NAME">
+                <description>
+                    0 - Dont include the first name field in the signup form
+                    1 - Include the first name field in the signup form but not mandatory
+                    2 - Include the first name field in the signup form it is mandatory
+                </description>
+                <data-type>INTEGER</data-type>
+                <max-size>10</max-size>
+            </column>
+            <column name="LAST_NAME">
+                <description>
+                    0 - Dont include the first name field in the signup form
+                    1 - Include the first name field in the signup form but not mandatory
+                    2 - Include the first name field in the signup form it is mandatory
+                </description>
+                <data-type>INTEGER</data-type>
+                <max-size>10</max-size>
+            </column>
+            <column name="LOCALE">
+                <description>
+                    0 - Dont include the locale field in the signup form
+                    1 - Include the locale field in the signup form but not mandatory
+                    2 - Include the locale field in the signup form it is mandatory
+                </description>
+                <data-type>INTEGER</data-type>
+                <max-size>10</max-size>
+            </column>
+            <column name="FORGOT_PASSWORD">
+                <description>
+                    1th bit - Admin
+                    2nd bit - Email
+                    3rd bit - Mobile
+                </description>
+                <data-type>INTEGER</data-type>
+                <max-size>10</max-size>
+            </column>
+            <column name="TERMS_OF_SERVICE">
+                <description>Either it can be a URL or complete text. URL's will start with http or https</description>
+                <data-type>CHAR</data-type>
+                <max-size>300</max-size>
+                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PRIVACY_POLICY">
+                <description>Either it can be a URL or complete text. URL's will start with http or https</description>
+                <data-type>CHAR</data-type>
+                <max-size>300</max-size>
+                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <description>The time at which the user domain is created</description>
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAuthDomainSignup_PK">
+            <primary-key-column>AUTH_DOMAIN_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAuthDomainSignup_FK" reference-table-name="IAMAuthDomain" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>AUTH_DOMAIN_AUTO_ID</fk-local-column>
+                        <fk-reference-column>AUTH_DOMAIN_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMAccountAuthSecret" display-name="AuthSecret">
+        <description>Users with the previously shared secret will be authenticated without any further challenges. This is useful, if the Organization has authenticated the user already in its own environment applications and just want re-use the authentication in this Account .</description>
+        <columns>
+            <column name="AUTH_SECRET_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAccountAuthSecret.AUTH_SECRET_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="AUTH_DOMAIN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="AUTH_SECRET">
+                <description>Un-guessable string. Either generated by System or given by the Organization</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&digest;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IS_INTERNAL">
+                <description>to identify from internal(1) or external(0), for BC ip check purpose</description>
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+            </column>
+            <column name="SERVICE_NAME">
+				<description>Name of the Service Type which will be used just for the reference (ex: CRM, ContactManager, Support, etc.) </description>
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<nullable>false</nullable>
+			</column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccountAuthSecret_PK">
+            <primary-key-column>AUTH_SECRET_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccountAuthSecret_FK" reference-table-name="IAMAuthDomain" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>AUTH_DOMAIN_AUTO_ID</fk-local-column>
+                        <fk-reference-column>AUTH_DOMAIN_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMAccountAuthSecret_UK">
+                <unique-key-column>AUTH_DOMAIN_AUTO_ID</unique-key-column>
+                <unique-key-column>AUTH_SECRET</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+    
+    <table name="IAMAccountAuthSAML" display-name="Saml">
+        <description>Existing authentication mechanism in the user environment can be re-used using SAML for this Zoho Account</description>
+        <columns>
+            <column name="AUTH_DOMAIN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="SAML_LOGIN_URL">
+                <description>The Login URL to which the user has to be redirected for authentication. This URL mostly will be accessible only within the Organization's intranet.</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="SAML_LOGOUT_URL">
+                <description>The Logout URL to which the user has to be redirected on Logout. This URL mostly will be accessible only within the Organization's intranet.</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="SAML_PASSWORD_URL">
+                <description>The Change Password URL to which the user has to be redirected on Change Password. This URL mostly will be accessible only within the Organization's intranet.</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PUBLIC_KEY">
+                <description>The Organization's Public Key which will be used to sign the SAML Data</description>
+                <data-type>CHAR</data-type>
+                <max-size>2000</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>dontdisturb</pattern>
+                </allowed-values>
+            </column>
+            <column name="ALGORITHM">
+                <description>The encryption algorithm to be used in the SAML communications</description>
+                <data-type>CHAR</data-type>
+                <max-size>5</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="CERT_TYPE">
+                <description>Type of the certificate. It might be a RSA public key, DSA key, Base 64 encoded DER certificate, finger-print etc. It will be computed based on the input</description>
+                <data-type>CHAR</data-type>
+                <max-size>15</max-size>
+                <allowed-values>
+                    <value>BASE64_CERT</value>
+                    <value>BINARY_CERT</value>
+                    <value>BASE64_KEY</value>
+                    <value>BINARY_KEY</value>
+                    <value>FINGERPRINT</value>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="IS_SAML_LOGOUT_ENABLED">
+				<description>used to specify whether to enable saml logout or not</description>
+				<data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+			</column>
+			<column name="IS_SAML_ENABLED">
+				<description>used to enable/disable saml flow</description>
+				<data-type>BOOLEAN</data-type>
+                <default-value>true</default-value>
+			</column>
+			<column name="IS_DOMAINLESS">
+				<description>set when uses accounts ui for configuring SAML</description>
+				<data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+			</column>
+			<column name="SAML_SERVICE">
+                <description>The default service to which user should be redirected after authentication</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+             </column>
+             <column name="SP_CERTIFICATE">
+				<description>
+					Public key to share to user.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>2000</max-size>
+				<allowed-values>
+					<pattern>&digest;</pattern>
+				</allowed-values>
+			</column>
+			<column name="SP_PRIVATE_KEY">
+				<description>
+					Private key to sign.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>2000</max-size>
+				<allowed-values>
+					<pattern>&digest;</pattern>
+				</allowed-values>
+			</column>
+			<column name="SP_CERTIFICATE_EXPIRY_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="ISSUER">
+                <data-type>CHAR</data-type>
+                <max-size>150</max-size> <!-- For portal, custom issuer-->
+                <nullable>true</nullable>
+            </column>
+            <column name="JIT_ATTRIBUTES">
+                <data-type>CHAR</data-type>
+                <max-size>2000</max-size>
+                <nullable>true</nullable>
+            </column>
+            <column name="IS_NEW_SAML_CONFIG">
+				<description>If true NEW ACS url sent in saml request</description>
+				<data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+			</column>
+			<column name="OTHER_SIGNIN_ALLOWED">
+				<description>If 1 other signins like Zoho Signin, Federated signin allowed</description>
+				<data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+			</column>
+        </columns>
+        <primary-key name="IAMAccountAuthSAML_PK">
+            <primary-key-column>AUTH_DOMAIN_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccountAuthSAML_FK1" reference-table-name="IAMAuthDomain" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>AUTH_DOMAIN_AUTO_ID</fk-local-column>
+                        <fk-reference-column>AUTH_DOMAIN_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMAccountAuthDomainIP" display-name="AuthorizedIp">
+        <description>IP based authentication. Using this, users  access can be restricted from a certain range of IP Addresses</description>
+        <columns>
+            <column name="AUTH_DOMAIN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="IPID">
+                <description>For IAM BC added. Unique representation of ip range.</description>
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="NAME">
+                <description>Name of the IP / IP Range. Ex: Chennai Office, US Office, IAN Network, etc</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+            </column>
+            <column name="FROM_IP">
+                <description>From IP Address of the range.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TO_IP">
+                <description>To IP Address of the range. In case of single IP Address, this column will be null.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccountAuthDomainIP_PK">
+            <primary-key-column>AUTH_DOMAIN_AUTO_ID</primary-key-column>
+            <primary-key-column>FROM_IP</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccountAuthDomainIP_FK" reference-table-name="IAMAuthDomain" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>AUTH_DOMAIN_AUTO_ID</fk-local-column>
+                        <fk-reference-column>AUTH_DOMAIN_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMAccountPasswordPolicy" display-name="PasswordPolicy">
+        <description>How passwords has to be controlled in order keep them secure</description>
+        <columns>
+            <column name="AUTH_DOMAIN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="MIN_LEN">
+                <data-type>INTEGER</data-type>
+                <default-value>3</default-value>
+            </column>
+            <column name="MAX_LEN">
+                <data-type>INTEGER</data-type>
+                <default-value>60</default-value>
+            </column>
+            <column name="MIN_SPECIAL_CHARS">
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+            </column>
+            <column name="MIN_NUMERIC_CHARS">
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+            </column>
+            <column name="MIXED_CASE">
+                <data-type>INTEGER</data-type>
+                <max-size>4</max-size>
+                <default-value>0</default-value>
+            </column>
+            <column name="PASS_EXPIRY">
+                <data-type>INTEGER</data-type>
+                <default-value>-1</default-value>
+            </column>
+            <column name="PASSWORD_HISTORY">
+                <data-type>INTEGER</data-type>
+                <default-value>-1</default-value>
+            </column>
+            <column name="PASSWORD_MINIMUM_AGE">
+               <data-type>BIGINT</data-type>
+               <default-value>0</default-value>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccountPasswordPolicy_PK">
+            <primary-key-column>AUTH_DOMAIN_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccountPasswordPolicy_FK" reference-table-name="IAMAuthDomain">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>AUTH_DOMAIN_AUTO_ID</fk-local-column>
+                        <fk-reference-column>AUTH_DOMAIN_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMAccountSecretKey" display-name="SecretKey">
+        <description>Secret key for encryption while transit as well as persist, for data within an Account</description>
+        <columns>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="KEY_LABEL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="SECRET_KEY">
+                <data-type>BLOB</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="PREVIOUS_SECRET_KEY">
+                <data-type>BLOB</data-type>
+            </column>
+            <column name="VALIDITY_PERIOD">
+                <data-type>INTEGER</data-type>
+                <default-value>30</default-value>
+                <nullable>false</nullable>
+            </column>
+            <column name="KEY_ALGORITHM">
+                <data-type>CHAR</data-type>
+                <max-size>20</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="KEY_LENGTH">
+                <data-type>INTEGER</data-type>
+                <default-value>128</default-value>
+                <nullable>false</nullable>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccountSecretKey_PK">
+            <primary-key-column>ACCOUNT_AUTO_ID</primary-key-column>
+            <primary-key-column>KEY_LABEL</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccountSecretKey_FK1" reference-table-name="IAMAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+ 
+    <table name="IAMAccountCaptchaDigest" display-name="Captcha">
+        <description>Captcha image code and the digest used to verify whether a request is originated by a human or automated programs. Internal usage only.</description>
+        <columns>
+            <column name="CAPTCHA_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMAccountCaptchaDigest.CAPTCHA_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="CAPTCHA_DIGEST">
+                <data-type>CHAR</data-type>
+                <max-size>255</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&hexadecimal;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CAPTCHA_TEXT">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DIFFICULTY_LEVEL">
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccountCaptchaDigest_PK">
+            <primary-key-column>CAPTCHA_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccountCaptchaDigest_FK" reference-table-name="IAMAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+
+        <unique-keys>
+            <unique-key name="IAMAccountCaptchaDigest_UK">
+                <unique-key-column>CAPTCHA_DIGEST</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+    
+    <table name="IAMAccountDigest" display-name="Digest">
+        <description>Captcha image code and the digest used to verify whether a request is originated by a human or automated programs. Internal usage only.</description>
+        <columns>
+            <column name="DIGEST_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMAccountDigest.DIGEST_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="DIGEST">
+                <data-type>CHAR</data-type>
+                <max-size>150</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&digest;</pattern>
+                </allowed-values>
+            </column>
+            <column name="URI">
+                <description>Request uri of the digest request urls for digest validation</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZID">
+                 <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DIGEST_TYPE">
+                <description>Digest type like ORG Invitation, RESET Password, etc.,</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+            </column>
+            <column name="SERVICE_URL">
+                <description>The url to be redirected after sucessfull confirmation.</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+                <allowed-values>
+                    <pattern>&serviceurl;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ARGS_DATA">
+                <description>Other data used in digest is stored as JSON object.</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+            </column>
+            <column name="APP_NAME">
+                <description>Requested App Name</description>
+                <data-type>CHAR</data-type>
+                <max-size>25</max-size>
+            </column>
+            <column name="ZID_TYPE">
+                <description>ZID type like ZUID, ZGID, ZAID etc</description>
+                <data-type>CHAR</data-type>
+                <max-size>8</max-size>
+            </column>
+            <column name="EMAIL_ID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&email;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IS_VALIDATED">
+            	<data-type>BOOLEAN</data-type>
+            	<default-value>false</default-value>
+            </column>
+            <column name="EXPIRY_TIME">
+            	<description>Digest Validity time.</description>
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccountDigest_PK">
+            <primary-key-column>DIGEST_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccountDigest_FK" reference-table-name="IAMAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+
+        <unique-keys>
+            <unique-key name="IAMAccountDigest_UK">
+                <unique-key-column>DIGEST</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+        	<index name="IAMAccountDigest_indx">
+                <index-column>EMAIL_ID</index-column>
+                <index-column>ZID</index-column>
+                <index-column>APP_NAME</index-column>
+			</index>
+            <index name="IAMAccountDigest_EMindx">
+                <index-column>DIGEST_TYPE</index-column>
+                <index-column>ZID</index-column>
+                <index-column>EMAIL_ID</index-column>
+            </index>
+            <index name="IAMAccountDigest_Zindx">
+                <index-column>DIGEST_TYPE</index-column>
+                <index-column>ZID</index-column>
+            </index>
+       	</indexes>
+    </table>
+    
+    <table name="IAMAuthUserDomain" display-name="UserDomain">
+        <description>Auth domain vs User mapping</description>
+        <columns>
+            <column name="AUTH_DOMAIN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ZUID">
+                <description>ZUID of the user</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZID_TYPE">
+                <description>User, Group</description>
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+                <allowed-values>
+                    <value>1</value>
+                    <value>2</value>
+                </allowed-values>
+            </column>
+            <column name="IS_EXCLUDED">
+                <description>Status of the user whether he is excluded or included</description>
+                <data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAuthUserDomain_PK">
+            <primary-key-column>AUTH_DOMAIN_AUTO_ID</primary-key-column>
+            <primary-key-column>ZUID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAuthUserDomain_FK1" reference-table-name="IAMAuthDomain" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>AUTH_DOMAIN_AUTO_ID</fk-local-column>
+                        <fk-reference-column>AUTH_DOMAIN_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="IAMAuthDomainPolicy" display-name="AuthDomainPolicy">
+        <description>Authdomain specific value for policies defined by an App which is available at "App/[app-name]/PolicyConfig". For example, tfaSetup.</description>
+        <columns>
+            <column name="AUTH_DOMAIN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="POLICY_KEY">
+                <description>
+                    Identifies a policy attribute, for example, share to external users, of the App.
+                    The meta data (Data Type: FILE, INTEGER, BOOLEAN, etc.,) about this attribute key will only be present in the System space.
+                </description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="POLICY_VALUE">
+                <description>Value of the policy attribute</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAuthDomainPolicy_PK">
+            <primary-key-column>AUTH_DOMAIN_AUTO_ID</primary-key-column>
+            <primary-key-column>POLICY_KEY</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAuthDomainPolicy_FK1" reference-table-name="IAMAuthDomain">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>AUTH_DOMAIN_AUTO_ID</fk-local-column>
+                        <fk-reference-column>AUTH_DOMAIN_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="IAMAuthDomainMFAPolicy" display-name="MFAPolicy">
+        <description>How passwords has to be controlled in order keep them secure</description>
+        <columns>
+            <column name="AUTH_DOMAIN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ENABLE">
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+            </column>
+            <column name="ALLOWED_MODES">
+                <description>allowed modes in int data type values with comma splitted eg: 1,2,5</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RESTRICT_BACKUP">
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="RESTRICT_CHANGE_MODE">
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="RESTRICT_TRUST_MFA_SESSION">
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="IS_PASSWORD_LESS_ENABLED">
+                <data-type>BOOLEAN</data-type>
+                <default-value>true</default-value>
+            </column>
+             <column name="TRUST_MFA_SESSION_VALIDITY">
+            	<description>0 => Disable; -1 => Default(180 days); 1-180 => Trusted for specified number of days</description>
+                <data-type>INTEGER</data-type>
+                <default-value>-1</default-value>
+            </column>
+        </columns>
+        <primary-key name="IAMAuthDomainMFAPolicy_PK">
+            <primary-key-column>AUTH_DOMAIN_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAuthDomainMFAPolicy_FK" reference-table-name="IAMAuthDomain">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>AUTH_DOMAIN_AUTO_ID</fk-local-column>
+                        <fk-reference-column>AUTH_DOMAIN_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="IAMAccountAuthDomainDevices" display-name="AuthorizedDevices">
+        <description>IP based authentication. Using this, users  access can be restricted from a certain range of IP Addresses</description>
+        <columns>
+            <column name="AUTH_DOMAIN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="AUTH_DOMAIN_DEVICES_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMAccountAuthDomainDevices.AUTH_DOMAIN_DEVICES_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="API_TOKEN">
+            	<description>Token generated For our Apps/Browser to With server </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="MDM_TOKEN">
+                <description>MDM Servers identifier to do action with MDM server if needed. </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+            </column>
+            <column name="ZUID">
+                <description>ZUID of user if Device is assigned to an single user. Default value will be -1 if not.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <default-value>-1</default-value>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+             <column name="STATUS">
+                <description>Current status of the Device.  Active - 1, Temp Blocked - 2, Permanently Bocked- 3</description>
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccountAuthDomainDevs_PK">
+            <primary-key-column>AUTH_DOMAIN_AUTO_ID</primary-key-column>
+            <primary-key-column>API_TOKEN</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccountAuthDomainDevs_FK" reference-table-name="IAMAuthDomain" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>AUTH_DOMAIN_AUTO_ID</fk-local-column>
+                        <fk-reference-column>AUTH_DOMAIN_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+         <unique-keys>
+         	<unique-key name="IAMAccountAuthDomainDevs_UK1">
+                <unique-key-column>AUTH_DOMAIN_DEVICES_AUTO_ID</unique-key-column>
+                <unique-key-column>API_TOKEN</unique-key-column>
+            </unique-key>
+            <unique-key name="IAMAccountAuthDomainDevs_UK2">
+                <unique-key-column>AUTH_DOMAIN_AUTO_ID</unique-key-column>
+                <unique-key-column>MDM_TOKEN</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+
+    <table name="IAMJWTConfiguration" display-name="JWTConfiguration">
+		<description>Authenticate user using JWT for this Zoho Account</description>
+		<columns>
+            <column name="AUTH_DOMAIN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="JWT">
+            	<description>Just to support IAM3 identifer for JWTParams.</description>
+                <data-type>TINYINT</data-type>
+                <default-value>0</default-value>
+				<nullable>false</nullable>
+            </column>
+            <column name="IS_ENABLED">
+				<description>Used to enable/disable JWT Flow</description>
+				<data-type>BOOLEAN</data-type>
+                <default-value>true</default-value>
+			</column>
+            <column name="LOGIN_URL">
+                <description>The Login URL to which the user has to be redirected for authentication.</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="LOGOUT_URL">
+                <description>The Logout URL to which the user has to be redirected on Logout.</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+            </column>
+            <column name="ALGORITHM">
+                <description>
+					The algorithm to be used in the JWT communications
+					0 - HS256
+					1 - RS256
+                </description>
+                <data-type>TINYINT</data-type>
+				<nullable>false</nullable>
+            </column>
+            <column name="KEY">
+                <description>
+					The key which is used to sign the JWT
+					0 - Secret Key (HS256)
+					1 - Public Key (RS256)
+                </description>
+                <data-type>CHAR</data-type>
+                <max-size>2000</max-size>
+                <nullable>false</nullable>
+            </column>
+			<column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMJWTConfiguration_PK">
+            <primary-key-column>AUTH_DOMAIN_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMJWTConfiguration_FK" reference-table-name="IAMAuthDomain" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>AUTH_DOMAIN_AUTO_ID</fk-local-column>
+                        <fk-reference-column>AUTH_DOMAIN_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMJWTConfiguration_UK">
+                <unique-key-column>AUTH_DOMAIN_AUTO_ID</unique-key-column>
+                <unique-key-column>JWT</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+
+    <table name="IAMJWTParams" display-name="JWTParams">
+		<description>Customized params will be append with JWT request </description>
+		<columns>
+			<column name="AUTH_DOMAIN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="REQUEST_TYPE">
+				<description>
+					To differentiate params to be used in login/logout request
+					0 - LOGIN_REQUEST
+					1 - LOGOUT_REQUEST
+				</description>
+                <data-type>TINYINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="PARAM_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>30</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="PARAM_VALUE">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+             <nullable>false</nullable>
+		</column>
+        </columns>
+        <primary-key name="IAMJWTParams_PK">
+            <primary-key-column>AUTH_DOMAIN_AUTO_ID</primary-key-column>
+            <primary-key-column>REQUEST_TYPE</primary-key-column>
+            <primary-key-column>PARAM_NAME</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMJWTParams_FK" reference-table-name="IAMJWTConfiguration">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>AUTH_DOMAIN_AUTO_ID</fk-local-column>
+                        <fk-reference-column>AUTH_DOMAIN_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+</data-dictionary>

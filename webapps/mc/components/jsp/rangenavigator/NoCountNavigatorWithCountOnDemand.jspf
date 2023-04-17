@@ -1,0 +1,106 @@
+
+<%--$Id$--%>
+
+
+<%@ page import = "java.util.List, com.adventnet.client.components.rangenavigator.web.NavigationConfig" %>
+<%@ page import = "com.adventnet.i18n.I18N" %>
+<%@ page import = "javax.swing.table.*"%>
+
+<% 
+   String Link1="";
+   String Link2="";
+   String Link3="";
+   String Link4="";
+   NavigationConfig navigationConfig = viewModel.getNavigationConfig();
+   long n = navigationConfig.getFromIndex();
+	if(navigationConfig.getPageNumber() == 1)
+	{
+		if(!(navigationConfig.getToIndex() < navigationConfig.getPageNumber()))
+		{
+   	 		n=navigationConfig.getFromIndex();
+		}
+		else
+		{
+			n = 0;
+		}
+	}
+		
+
+   String NoCountNavigHtml="";
+   int ToIndex=(int)navigationConfig.getToIndex();
+   int pageNo=navigationConfig.getPageNumber()-1;   
+
+  boolean showNext = false;
+  if(navigationConfig.getPageLength() < navigationConfig.getActualPageLength())
+  {
+	showNext = true;
+  }
+	Link1="<a href=\"javascript:showRange('"+uniqueId+"','"+navigationConfig.getPreviousPageIndex()+"','"+pageNo+"')\">";
+  if(navigationConfig.getPageNumber() <= 1)
+   {
+   
+	Link1=Link1+"</a>";
+   }
+  else
+   {
+	Link2="</a>";
+   }
+
+  if(navigationConfig.getPageLength() < tableModel.getRowCount() )
+   {
+   	
+	Long sum=navigationConfig.getPageLength() + navigationConfig.getFromIndex();
+	Link3="<a href=\"javascript:showRange('"+uniqueId+"','" + sum + "')\">";  
+	Link4="</a>";
+   }
+ 
+  	List rangeList = navigationConfig.getRangeList();
+	String ComboBox="<form name=\"navigation\"><select name=\"combobox\" onchange=\"return showRangeForLength('"+uniqueId+"', this.value)\">";
+
+
+	if(rangeList != null)
+	{                
+	    	int size = rangeList.size();
+		ComboBox+=rangeList;
+		for(int i = 0; i < size; i++)
+		{ 
+                                        int previous = 0;
+                                        if(i > 0)
+                                        {
+                                                previous = ((Integer)rangeList.get(i-1)).intValue();
+                                        }
+                                        int length = ((Integer) rangeList.get(i)).intValue();
+                                        
+					if(previous !=0 && previous >= (tableModel.getRowCount() * i))
+                                        {
+						ComboBox+="<option value='" + length + "'><font color='#000000'>" + length +"</font></option>";
+
+					}
+					else
+                                        {
+                                                if(length == navigationConfig.getPageLength())
+						{
+
+							ComboBox+="<option selected  value='"+ length + "'>" + length + "</option>";
+
+						}
+						else
+						{
+							ComboBox+="<option value='" + length + "'><font color='#000000'>" + length +"</font></option>";
+						}
+					}
+		}
+		ComboBox+="</select>";
+	}
+	
+
+
+   NoCountNavigHtml=com.adventnet.client.tpl.TemplateAPI.givehtml("NavigationOfNoCountTableWithCountOnDemand",null,new Object[][] {{"FromIndex",n},{"ToIndex",ToIndex},{"totalCount", "<a id=\""+uniqueId+"_fetchCount\" href=\"javascript:getCount('"+uniqueId+"')\">TotalCount</a>"},{"Link1",Link1},{"Link2",Link2},{"Link3",Link3},{"Link4",Link4},{"ComboBox",ComboBox},{"themeDir",themeDir}});
+  
+
+%>
+
+<%out.print(NoCountNavigHtml);//NO OUTPUTENCODING%><%--NO OUTPUTENCODING --%>
+			
+
+

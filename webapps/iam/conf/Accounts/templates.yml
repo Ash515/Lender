@@ -1,0 +1,66 @@
+---
+mail:
+  w_account: welcome_account_confirm_mail
+  w_c_account: welcome_account_confirm_mail
+  w_pl_account: welcome_account_confirm_mail
+  w_c_user: welcome_account_confirm_mail
+  w_pl_user: welcome_account_confirm_mail
+  partner_w_c_account: partner_welcome_account_confirm_mail
+  partner_w_pl_account: partner_welcome_account_confirm_mail
+  partner_w_c_user: partner_welcome_account_confirm_mail
+  partner_w_pl_user: partner_welcome_account_confirm_mail
+  reset_password: reset_password_mail
+  invite_account: account_invite_mail
+  invite_sorg_account: account_invite_mail
+  invite_account_merge: account_merge_invite_mail
+  tfa_status_notification: tfa_status_mail
+  invite_personalaccount: personal_account_invite_mail
+  tfa_update_notification: tfa_update_mail
+  tfa_backup_codes: tfa_backupcodes_mail
+  password_change_notification: password_change_notification_mail
+  tfa_backup_warning_user: tfa_backup_warn_mail
+  mfa_status_notification: mfa_status_mail
+  mfa_update_notification: mfa_update_mail
+  password_change_notify: password_change_notify_mail
+  confirmation_reminder: confirmation_reminder_mail
+  suspicious_login_alert: suspicious_login_alert_mail
+  suspicious_mail_fetch_alert: suspicious_mail_fetch_alert_mail
+  new_login_alert_org_admin: new_login_alert_org_admin_mail
+  confirm_email: confirm_email_mail
+  myzoho_device_link_notification: myzoho_device_link_notification_mail
+  group_invitation: group_invitation_mail
+  privacy_certificates_nda: privacy_certificates_nda_mail
+sms:
+  reset_password_sms: reset_password_sms
+mail_subject:
+  welcome_account_confirm_mail: <@i18n key="IAM.USER.MAIL.CONFIRMATION.SUBJECT" />
+  gapps_welcome_account_confirm_mail: <@i18n key="IAM.USER.MAIL.CONFIRMATION.SUBJECT" />
+  account_invite_mail: <@i18n key="IAM.TPL.ORG.INVITE.SUBJECT" arg0="${ztpl.ADMIN_EMAIL_ID}" arg1="${ztpl.ACCOUNT_NAME}"/>
+  account_merge_invite_mail: <@i18n key="IAM.TPL.ORG.MERGE.SUBJECT" arg0="${ztpl.ADMIN_EMAIL_ID}" arg1="${ztpl.ACCOUNT_NAME}"/>
+  password_change_notify_mail: <@i18n key="IAM.PASSWORD.EXPIRY.REMINDER"/>
+  tfa_status_mail: <@i18n key="IAM.TPL.TFA.STATUS.SUBJECT"/>
+  tfa_update_mail: <@i18n key="IAM.TPL.TFA.EDIT.SUBJECT"/>
+  mfa_status_mail: <@i18n key="IAM.TPL.MFA.STATUS.SUBJECT"/>
+  mfa_update_mail: <@i18n key="IAM.TPL.MFA.EDIT.SUBJECT"/>
+  password_change_notification_mail: <@i18n key="IAM.PASSWORD.CHANGED.SUBJECT"/>
+  confirmation_reminder_mail: <@i18n key="IAM.NEW.EMAIL.CONFIRMATION.REMINDER"/>
+  tfa_backupcodes_mail: <@i18n key="IAM.EMAIL.BACKUPCODES.SUBJECT"/>
+  partner_welcome_account_confirm_mail: <@i18n key="IAM.USER.MAIL.CONFIRMATION.SUBJECT"/>
+  reset_password_mail: <@i18n key="IAM.RESET.PASSWORD.MAIL.SUBJECT"/>
+  personal_account_invite_mail: <@i18n key="IAM.PERSONAL.ACCOUNT.INVITE.MAIL.SUBJECT"/>
+  tfa_backup_warn_mail: <@i18n key="IAM.TFA.BACKUP.WARN.MAIL.SUBJECT"/>
+  secondary_email_code_confirmation_mail: <@i18n key="IAM.NEW.EMAIL.SECONDARY.CODE.CONFIRMATION"/>
+  signup_email_code_confirmation_mail: <@i18n key="IAM.ADD.RECOVERY.USER.ACTIONS.MAIL.SUBJECT"/>
+  notify_email_update_mail: <@i18n key="IAM.NOTIFY.MAIL.EMAIL.DELETED"/>
+  suspicious_login_alert_mail: <@i18n key="IAM.ALERT.TITLE" arg0="${ztpl.SERVICE_NAME}"/>
+  notify_role_expiry_mail: <@i18n key="IAM.ROLE.EXPIRY.SUBJECT" arg0="${ztpl.DEPLOYMENT}" arg1="${ztpl.ALERT_NUMBER}"/>
+  suspicious_mail_fetch_alert_mail: <@i18n key="IAM.MAIL.FETCH.ALERT.TITLE" />
+  new_login_alert_org_admin_mail: <@i18n key="IAM.ALERT.SUSPICIOUS.TITLE"/>
+  confirm_email_mail: <@i18n key="IAM.USER.MAIL.CONFIRMATION.SUBJECT" />
+  cross_org_invitation_mail: <@i18n key="IAM.OAUTH.CROSS.ORG.INV.SUB" arg0="${ztpl.FROM_SER}" arg1="${ztpl.TO_SER}" />
+  cross_user_invitation_mail: <@i18n key="IAM.OAUTH.CROSS.USER.INVITATION.SUBJECT" arg0="${ztpl.INVITED_DISPLAY_NAME}" />
+  myzoho_device_link_notification_mail: <@i18n key="IAM.TPL.MFA.DEVICE.LINKED.SUBJECT"/>
+  group_invitation_mail: <@i18n key="IAM.TPL.GROUP.INVITATION.SUBJECT"/>
+  privacy_certificates_nda_mail: <@i18n key="IAM.PRIVACY.CERTIFICATES.MAIL.SUBJECT" arg0="${ztpl.CTYPE}" arg1="${ztpl.CNAME}"/>
+...
+

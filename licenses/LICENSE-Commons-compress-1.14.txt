@@ -1,0 +1,137 @@
+The newest version of nomos license scanner found:
+Apache-2.0 (#1)Legend:
+license relevant text
+1 2 [Next][Last]
+
+/*
+* Licensed to the Apache Software Foundation (ASF) under one
+* or more contributor license agreements. See the NOTICE file
+* distributed with this work for additional information
+* regarding copyright ownership. The ASF licenses this file
+* to you under the Apache License, Version 2.0 (the
+* "License"); you may not use this file except in compliance
+* with the License. You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing,
+* software distributed under the License is distributed on an
+* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+* KIND, either express or implied. See the License for the
+* specific language governing permissions and limitations
+* under the License.
+*/
+
+
+
+The newest version of nomos license scanner found:
+Apache-2.0 (#1)
+BSD (#1)Legend:
+license relevant text
+1 2 3 4 [Next][Last]
+
+/*
+* Licensed to the Apache Software Foundation (ASF) under one
+* or more contributor license agreements. See the NOTICE file
+* distributed with this work for additional information
+* regarding copyright ownership. The ASF licenses this file
+* to you under the Apache License, Version 2.0 (the
+* "License"); you may not use this file except in compliance
+* with the License. You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+* 
+* Some portions of this file Copyright (c) 2004-2006 Intel Corportation
+* and licensed under the BSD license.
+*/
+
+
+The newest version of nomos license scanner found:
+EPL-1.0 (#1)Legend:
+license relevant text
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<title>About</title>
+</head>
+<body lang="EN-US">
+<h2>About This Content</h2>
+
+<p>June 5, 2006</p>	
+<h3>License</h3>
+
+<p>The Eclipse Foundation makes available all content in this plug-in (&quot;Content&quot;). 
+Unless otherwise indicated below, the Content is provided to you under the terms and conditions of the
+Eclipse Public License Version 1.0 (&quot;EPL&quot;). A copy of the EPL is available 
+at <a href="http://www.eclipse.org/org/documents/epl-v10.php">http://www.eclipse.org/legal/epl-v10.html</a>.
+For purposes of the EPL, &quot;Program&quot; will mean the Content.</p>
+
+<p>If you did not receive this Content directly from the Eclipse Foundation, the Content is 
+being redistributed by another party (&quot;Redistributor&quot;) and different terms and conditions may
+apply to your use of any object code in the Content. Check the Redistributor&rsquo;s license 
+that was provided with the Content. If no such license exists, contact the Redistributor. Unless otherwise
+indicated below, the terms and conditions of the EPL still apply to any source code in the Content
+and such source code may be obtained at <a href="http://www.eclipse.org/">http://www.eclipse.org</a>.</p>
+
+
+
+
+The newest version of nomos license scanner found:
+MPL-1.1 (#1)Legend:
+license relevant text
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html>
+<head>
+<title>About</title>
+<meta http-equiv=Content-Type content="text/html; charset=ISO-8859-1">
+</head>
+<body lang="EN-US">
+<h2>About This Content</h2>
+
+<p>March 27, 2006</p>	
+<h3>License</h3>
+
+<p>The Eclipse Foundation has included the following package for your convenience:</p> 
+
+<h4>Cairo 1.0.2 for Linux</h4>
+
+<p>Cairo for Linux (&quot;Cairo&quot;) is developed by The Cairo Project (<a href="http://www.cairographics.org" target="_blank">http://www.cairographics.org</a>):</p>
+
+<p>Cairo is delivered in the following file (&quot;Cairo Library&quot;):</p>
+<ul>
+<li>libcairo-swt.so</li>
+</ul>
+
+<p>which was compiled from Cairo source code available at <a href="http://www.cairographics.org/snapshots" target="_blank">http://www.cairographics.org/snapshots</a>.</p>
+
+<p>Your use of the Cairo code in binary form is subject to
+the terms and conditions of Mozilla Public License Version 1.1 (&quot;MPL&quot;). A copy of the MPL is provided (<a href="mpl-v11.txt" target="blank">mpl-v11.txt</a>)
+and is also available at <a href="http://www.mozilla.org/MPL/MPL-1.1.html" target="_blank">http://www.mozilla.org/MPL/MPL-1.1.html.</a>
+
+<h4>pixman 0.1.6</h4>
+
+<p>pixman (&quot;pixman&quot;) is packaged within the Cairo Library and was compiled from source code available at
+<a href="http://www.cairographics.org/snapshots" target="_blank">http://www.cairographics.org/snapshots</a>.
+pixman includes the following packages:</p>
+
+<ul>
+<li>libpixregion</li>
+<li>libic</li>
+<li>slim</li>
+</ul>
+
+Your use of pixman is subject to the terms and conditions of the licenses in <a href="pixman-licenses.txt" target="blank">pixman-licenses.txt</a>.</p>
+
+<p>If you did not receive the Cairo Library directly from the Eclipse Foundation, the package is being redistributed by another party (&quot;Redistributor&quot;) and different terms and conditions may
+apply its use. Check the Redistributor's license that was provided with the content. If no such license exists, contact the Redistributor.</p>
+
+
+

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- $Id: $ -->
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+  "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+ 	<package name="oauth" namespace="/oauth" extends="struts-default">
+		<action name="v2/auth" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelGetRequest">
+			<result name="success">/oauth/jsp/ui/showGrantPage.jsp</result>
+			<result name="error">/oauth/jsp/ui/showErrorPage.jsp</result>
+			<result name="redirect">/oauth/jsp/ui/redirectToPage.jsp</result>
+		</action>
+		
+		<action name="v2/mobile/auth" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="handelMobileAppGetRequest">
+			<result name="success">/oauth/jsp/ui/showGrantPage.jsp</result>
+			<result name="error">/oauth/jsp/ui/showErrorPage.jsp</result>
+			<result name="redirect">/oauth/jsp/ui/redirectToPage.jsp</result>
+		</action>
+		
+		<action name="v2/token/relogin" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="handelMobileLoggedInSessionRequest" />
+
+		<action name="v2/token/relogin/show" >
+			<result>/oauth/jsp/ui/showConfirmPasswdForMobile.jsp</result>
+		</action>
+
+		<action name="v2/int/file" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="getPhotoForToken" />
+		<action name="v2/approve" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelAppove" />
+		<action name="v2/org/approve" class="com.zoho.accounts.actions.oauth2.OAuthOrgAction" method="handelAppove" />
+		<action name="v2/reject" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelReject" />
+		<action name="v2/token" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelAccessTokenRequest" />
+		<action name="v2/token/access" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="handelInternalClientRequest" />
+		<action name="user/info" class="com.zoho.accounts.actions.oauth2.OAuthUserProfile" method="getProfileInfo" />
+		<action name="v2/approve/internal" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="approveAddExtraScopeInternalClientRequest"/>
+		<action name="v2/token/internal/getextrascopes" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="handelGetExtraScopeInternalClientRequest" />
+		<action name="v2/token/addscope" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="handelAddExtraScopeInternalClientRequest" >
+			<result name="success">/oauth/jsp/ui/showConfirmPasswd.jsp</result>
+			<result name="error">/oauth/jsp/ui/showErrorPage.jsp</result>
+			<result name="redirect">/oauth/jsp/ui/redirectToPage.jsp</result>
+		</action>
+		<action name="v2/getcertificates" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="getCertificate" />
+		<action name="v2/mob/getdetails" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="handelGetSecredForInternalOldClients" />
+		<action name="v2/token/revoke" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="revokeToken" />
+		<action name="v2/self/token/generate" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelSelfGrantTokenRequest" />
+		<action name="v2/apitoken/revoke" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="revokeApiToken" />
+		
+		<action name="v3/device">
+			<result>/oauth/jsp/ui/showdevice.jsp</result>
+		</action>
+		<action name="v3/device/approve/sucess">
+			<result>/oauth/jsp/ui/showapprovesucess.jsp</result>
+		</action>
+		<action name="v3/device/reject/sucess">
+			<result>/oauth/jsp/ui/showrejectsucess.jsp</result>
+		</action>
+		<!-- <action name="v3/device/code" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelDeviceRequest" /> -->
+		<action name="v3/device/code" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelDeviceRequest" />
+		<action name="v3/device/verify" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelDeviceGetRequest">
+			<result name="success">/oauth/jsp/ui/showGrantPage.jsp</result>
+			<result name="error">/oauth/jsp/ui/showErrorPage.jsp</result>
+		</action>
+		<action name="v3/device/setCode" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelDeviceGetRequest">
+			<result name="success">/oauth/jsp/ui/showGrantPage.jsp</result>
+			<result name="error">/oauth/jsp/ui/showErrorPage.jsp</result>
+		</action>
+		<action name="v3/device/approve" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelDeviceAppove" />
+		<action name="v3/device/reject" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelDeviceReject" />
+		<action name="v3/device/token" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelPollResponse" />
+		
+		
+		<action name="dc/addclient" class="com.zoho.accounts.actions.oauth2.OAuthDCHandling" method="addRemoteClient" />
+		<action name="dc/getRemoteSecret" class="com.zoho.accounts.actions.oauth2.OAuthDCHandling" method="getRemoteClientSecret" />
+		<action name="dc/deleteClient" class="com.zoho.accounts.actions.oauth2.OAuthDCHandling" method="removeRemoteClient" />
+		
+		<action name="v2/token/self/authtooauth" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="generateSelfOAuthForAuthToken" />
+		<action name="v2/token/external/authtooauth" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="generateExternalOAuthForAuthToken" />
+		<action name="v2/token/internal/web/authtooauth" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="generateExternalOAuthForAuthToken" />
+		<action name="v2/token/internal/authtooauth" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="generateOAuthForAuthToken" />
+		<action name="v2/mobile/internal/getremoteloginkey" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="handelGetRemoteLoginTokenForMobileApp" />
+		<action name="v2/mobile/internal/{pid:[0-9A-Za-z\.]+}/getremoteuser" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="handelGetRemoteUserForToken" />
+		
+		<!--  OAuth Restricted Clients -->
+		<action name="v2/create/restrictedclient" class="com.zoho.accounts.actions.oauth2.OAuthUserProfile" method="createOAuthClient" />
+		<action name="create/client">
+			<result>/oauth/jsp/ui/oauthrestrictedclientcreation.jsp</result>
+		</action>
+		<action name="v2/auth/refresh">
+			<result>/oauth/jsp/ui/showImplicitTokenRefresh.jsp</result>
+		</action>
+		<action name="access/oauthclient/user" class="com.zoho.accounts.actions.oauth2.OAuthUserProfile" method="addRestrictedClientToUser"/>
+		<action name="remove/oauthclient/user" class="com.zoho.accounts.actions.oauth2.OAuthUserProfile" method="removeRestrictedClient"/>
+		<action name="v2/getClientDetails" class="com.zoho.accounts.actions.oauth2.OAuthUserProfile" method="getClientDetails"/>
+		<action name="v2/add/redirecturl" class="com.zoho.accounts.actions.oauth2.OAuthUserProfile" method="addRedirectUrl"/>
+		<!-- end -->
+		<action name="serverinfo" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="getDCLMetadata" />
+		
+		<action name="v2/native/init" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="handelNativeAppRequest" />
+		<action name="v2/mobile/unconfirmed" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="handelUnConfirmedUser" />
+		
+		<!-- External scope enhancement -->
+		<action name="v2/token/scopeenhance" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelUserUpdateScopeRequest"/>
+		<action name="v2/token/addextrascope" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="enhanceUserTokenScopes">
+			<result name="success">/oauth/jsp/ui/showGrantPage.jsp</result>
+			<result name="error">/oauth/jsp/ui/showErrorPage.jsp</result>
+			<result name="redirect">/oauth/jsp/ui/redirectToPage.jsp</result>
+		</action>
+		<action name="v2/mobile/scopeenhancement" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="updateTokenScopeForMobile">
+			<result name="redirect">/oauth/jsp/ui/redirectToPage.jsp</result>
+		</action>
+		<!-- end -->
+		
+		<!-- OAuth Restricted External Clients for DRE based clients -->
+		<action name="prompt/createClient">
+			<result>/oauth/jsp/ui/promptCreateOAuthClient.jsp</result>
+		</action>
+		
+		<action name="v2/create/OAuthClient" class="com.zoho.accounts.actions.oauth2.OAuthUserProfile" method="createExtForIntOAuthClient"/>
+		
+		<action name="v2/updateAndGetOAuthClient" class="com.zoho.accounts.actions.oauth2.OAuthUserProfile" method="updateAndGetOAuthClientDetails"/>
+		
+		<action name="v2/mobile/inactive/token" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="handleGetInActiveTokenRequest">
+			<result name="success">/oauth/jsp/ui/showInActivePage.jsp</result>
+			<result name="error">/oauth/jsp/ui/showInActiveErrorPage.jsp</result>	
+		</action>
+		<action name="v2/mobile/inactive/token/activate" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="handlActivateRefTokenRequest" />
+		
+		<action name="v2/internal/inactive/token" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="handleGetInternalInActiveTokenRequest">
+			<result name="success">/oauth/jsp/ui/showInternalMobileActivatePage.jsp</result>
+			<result name="error">/oauth/jsp/ui/showInActiveErrorPage.jsp</result>	
+		</action>
+		<action name="v2/internal/inactive/token/activate" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="handleInternalActivateRefTokenRequest" />
+		
+		<action name="inactivetoken/handshakeId" class="com.zoho.accounts.actions.oauth2.OAuthUserProfile" method="generateHandShakeId"/>
+		
+		<action name="crossorg/invitation" class="com.zoho.accounts.actions.oauth2.OAuthUserProfile" method="handleCrossOrgInvitation">
+			<result name="success">/oauth/jsp/ui/showCrossOrgInvitation.jsp</result>
+			<result name="error">/oauth/jsp/ui/showCrossOrgInvitation.jsp</result>
+		</action>
+		<action name="crossorg/invitation/action" class="com.zoho.accounts.actions.oauth2.OAuthUserProfile" method="handleCrossOrgInvitationUserAction" />
+		<action name="fetch/application" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="getApplicationBased"/>
+		<action name="sso/userSignOut" class="com.zoho.accounts.actions.oauth2.OAuthUserProfile" method="ssoUserSignOutAction"/>
+		<action name="device/modify" class="com.zoho.accounts.actions.oauth2.OAuthUserProfile" method="modifyDeviceDetails"/>
+		<action name="dc/sync/mobileappcategory" class="com.zoho.accounts.actions.oauth2.OAuthDCHandling" method="syncMobileAppCategory"/>
+		<action name="dc/sync/interdcsignature" class="com.zoho.accounts.actions.oauth2.OAuthDCHandling" method="syncInterDcSignature"/>
+	    <action name="v2/org/auth" class="com.zoho.accounts.actions.oauth2.OAuthOrgAction" method="handelGetRequest">
+			<result name="success">/oauth/jsp/ui/showGrantPage.jsp</result>
+			<result name="error">/oauth/jsp/ui/showErrorPage.jsp</result>
+			<result name="redirect">/oauth/jsp/ui/redirectToPage.jsp</result>
+		</action>
+	</package>
+</struts>

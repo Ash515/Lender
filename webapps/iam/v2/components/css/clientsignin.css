@@ -1,0 +1,302 @@
+/*$Id$*/
+ @font-face {
+	font-family: 'Roboto';
+	font-weight: 400;
+	src:url('../images/robotoregular/font.eot');
+    src:url('../images/robotoregular/font.eot?#iefix') format('eot'),
+        url('../images/robotoregular/font.woff2') format('woff2'),
+        url('../images/robotoregular/font.woff') format('woff'), 
+        url('../images/robotoregular/font.ttf') format('truetype'),
+        url('../images/robotoregular/font.svg#Roboto-Regular') format('svg');
+	
+}
+@font-face {
+	font-family: 'Roboto';
+	src:url('../images/robotolight/font.eot');
+    src:url('../images/robotolight/font.eot?#iefix') format('eot'),
+        url('../images/robotolight/font.woff2') format('woff2'),
+        url('../images/robotolight/font.woff') format('woff'), 
+        url('../images/robotolight/font.ttf') format('truetype'),
+        url('../images/robotolight/font.svg#Roboto-Light') format('svg');
+	font-weight: 100;
+}
+@font-face {
+	font-family: 'Roboto';
+	src:url('../images/robotomedium/font.eot');
+    src:url('../images/robotomedium/font.eot?#iefix') format('eot'),
+        url('../images/robotomedium/font.woff2') format('woff2'),
+        url('../images/robotomedium/font.woff') format('woff'), 
+        url('../images/robotomedium/font.ttf') format('truetype'),
+        url('../images/robotomedium/font.svg#Roboto-Medium') format('svg');
+	font-weight: 500;
+}
+@font-face {
+	font-family: 'Roboto';
+	src:url('../images/robotobold/font.eot');
+    src:url('../images/robotobold/font.eot?#iefix') format('eot'),
+        url('../images/robotobold/font.woff2') format('woff2'),
+        url('../images/robotobold/font.woff') format('woff'), 
+        url('../images/robotobold/font.ttf') format('truetype'),
+        url('../images/robotobold/font.svg#Roboto-Bold') format('svg');
+	font-weight: 700;
+}
+body {
+	font-family: 'Roboto';
+	margin: 0;
+}
+.bg_one {
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: url('../images/bg.svg') transparent;
+	background-size: auto 100%;
+	z-index: -1;
+}
+.signin_container {
+	display: block;
+	width: 520px;
+	min-height: 520px;
+	background-color: #fff;
+	box-shadow: 0px 2px 30px #ccc6;
+	margin: auto;
+	position: relative;
+	z-index: 1;
+	margin-top: 7%;
+	overflow: hidden;
+}
+.signin_box {
+	width: 520px;
+	min-height: 520px;
+	height: auto;
+	background: #fff;
+	box-sizing: border-box;
+	padding: 50px 50px;
+	border-radius: 2px;
+	transition: all .1s ease-in-out;
+	float: left;
+	overflow-y: auto;
+	display: table-cell;
+	border-right: 2px solid #f1f1f1;
+}
+.portal_logo{
+	display: block;
+	height: 30px;
+	width: auto;
+	margin-bottom: 20px;
+	background-size: auto 100%;
+}
+.signin_head {
+	display: block;
+	font-size: 24px;
+	font-weight: 500;
+	margin-bottom: 30px;
+	line-height: 30px;
+	transition: all .1s ease-in-out;
+}
+.service_name,.backup_desc,.pass_name {
+	display: block;
+	font-size: 16px;
+	color: #000;
+	font-weight: 400;
+}
+.titlename {
+    display: block;
+    font-size: 24px;
+    color: #000;
+    font-weight: 400;
+    text-align: center;
+    line-height: 24px;
+    text-transform: capitalize;
+    margin: 11px;
+}
+.textbox_div {
+	display: block;
+	margin-bottom: 30px;
+	position: relative;
+}
+.textbox_label {
+	display: block;
+	font-size: 14px;
+	color: #626262;
+	padding-bottom: 10px;
+}
+.textbox {
+	display: block;
+	width: 100%;
+	height: 44px;
+	box-sizing: border-box;
+	border-radius: 2px;
+	text-indent: 12px;
+	font-size: 16px;
+	outline: none;
+	border: none;
+	padding-right: 12px;
+	transition: all .2s ease-in-out;
+	background: #F1F1F1;
+    border: 1px solid #E4E4E4;
+}
+.textbox:valid {
+	border: 2px solid #F4F6F8;
+}
+.textindent42 {
+	text-indent: 36px;
+}
+.textindent62 {
+	text-indent: 56px;
+}
+.textintent52 {
+	text-indent: 46px;
+}
+::-webkit-credentials-auto-fill-button {
+    visibility: hidden;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+}
+input[type="text"],input[type="password"],input[type="email"],input[type="number"] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+.errorborder {
+	border: 2px solid #ff8484;
+}
+.btn {
+	cursor: pointer;
+	display: block;
+	width: 100%;
+	height: 44px;
+	border-radius: 4px;
+	letter-spacing: .5;
+	font-size: 14px;
+	font-weight: 600;
+	outline: none;
+	border: none;
+	margin: auto;
+	text-transform: uppercase;
+	margin-bottom: 30px;
+	transition: all .2s ease-in-out;
+}
+.signupbtn {
+	width: 250px;
+	margin-left: 0px;
+}
+.blue {
+	box-shadow: 0px 2px 2px #fff;
+	background-color: #159AFF;
+	color: #fff;
+}
+.grey {
+	background-color: #F3F3F3;
+	color: #3a3a3a;
+	letter-spacing: 0;
+}
+.green {
+	box-shadow: 0px 2px 2px #fff;
+	background-color: #00C573;
+	color: #fff;
+}
+.blue:hover {
+	box-shadow: 0px 2px 2px rgba(90, 183, 254, 0.2);
+}
+.changeloadbtn {
+	display: block;
+	height: 44px;
+	width: 44px;
+	border-radius: 22px;
+	padding: 0px;
+}
+.changeloadbtn:before {
+	content: "";
+	height: 20px;
+	width: 20px;
+	display: inline-block;
+	margin: 9px;
+	border: 3px solid #fff;
+	border-top: 3px solid #5AB7FE;
+	border-radius: 50%;
+	animation: spin .5s linear infinite;
+}
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+.hellouser {
+	margin-bottom: 30px;
+}
+.username {
+	display: inline-block;
+	max-width: 100%;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding-right: 10px;
+	float: left;
+}
+.Notyou {
+	display: inline-block;
+	font-size: 16px;
+	line-height: 24px;
+}
+.signup_text {
+	text-align: center;
+	margin: 20px 0px;
+	font-size: 16px;
+}
+.backbtn {
+	display: none;
+	float: left;
+	height: 28px;
+	width: 28px;
+	border-radius: 50%;
+	position: absolute;
+	padding: 0px 5px;
+	cursor: pointer;
+	overflow: hidden;
+	transition: all .1s ease;
+}
+.zeroheight{
+	width:0;
+	height:0;
+	overflow: hidden;
+	display: block;
+}
+#captcha,#bcaptcha{background: #fff;width:60%;display: inline-block;}
+#captcha_img,#bcaptcha_img{width: 40%;float: right;background-color: #FFFFFF;border-left: none;}
+#captcha_img img,#bcaptcha_img img{height: 40px;}
+.reloadcaptcha{
+	float: right;
+	clear: both;
+	margin-top: -37px;
+	height: 30px;
+	width: 30px;
+	border-radius: 50px;
+	background: url(../images/reload.png) no-repeat transparent 5px;
+	background-size: 50%;
+	display: inline-block;
+	cursor: pointer;
+}
+#captcha_container{
+	display: none;
+}
+.errorlabel {
+    color: #E92B2B;
+}
+.fielderror{
+	display:none;
+	font-size: 14px;
+	margin-top: 10px;
+}
+.fielderror a {
+    text-decoration: none;
+    color: #309FF4;
+}
+.bluetext {
+	color: #309FF4;
+	cursor: pointer;
+}

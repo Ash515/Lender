@@ -1,0 +1,43 @@
+<!-- $Id: bean.xml,v 1.22 2007/03/30 10:20:12 saranbabu Exp $ -->
+<beans>
+
+    <Bean bean_id="Bean:bean_id:Persistence" bean_name="Persistence" module_id="Persistence" transaction_type="1" classname="com.adventnet.persistence.PersistenceBean">
+        <BeanInterceptor bean_incp_id="BeanInterceptor:bean_incp_id:Persistence-NPI" order_no="2" incp_name="NPI" classname="com.adventnet.persistence.interceptor.NotificationPersistenceInterceptor"/>
+        <BeanInterceptor bean_incp_id="BeanInterceptor:bean_incp_id:Persistence-AI" order_no="1" incp_name="AI" classname="com.adventnet.authorization.interceptor.AuthorizationInterceptor"/>
+    </Bean>  
+
+    <Bean bean_id="Bean:bean_id:PersistenceLite"  bean_name="PersistenceLite" module_id="Persistence" classname="com.adventnet.persistence.PersistenceBean">
+        <BeanInterceptor bean_incp_id="BeanInterceptor:bean_incp_id:PersistenceLite-AI" order_no="1" incp_name="AI" classname="com.adventnet.authorization.interceptor.AuthorizationInterceptor"/>
+    </Bean>
+    
+    <Bean bean_id="Bean:bean_id:Persistence-NT" bean_name="Persistence-NT" module_id="Persistence" transaction_type="2" classname="com.adventnet.persistence.PersistenceBean">
+        <BeanInterceptor bean_incp_id="BeanInterceptor:bean_incp_id:Persistence-NT-NPI" order_no="2" incp_name="NPI" classname="com.adventnet.persistence.interceptor.NotificationPersistenceInterceptor"/>
+        <BeanInterceptor bean_incp_id="BeanInterceptor:bean_incp_id:Persistence-NT-AI" order_no="1" incp_name="AI" classname="com.adventnet.authorization.interceptor.AuthorizationInterceptor"/>
+    </Bean>
+    
+    <Bean bean_id="Bean:bean_id:CachedPersistence" bean_name="CachedPersistence" module_id="Persistence" classname="com.adventnet.persistence.ReadOnlyPersistenceBean" transaction_type="3">
+        <BeanInterceptor bean_incp_id="BeanInterceptor:bean_incp_id:CachedPersistence-CI" order_no="2" incp_name="CI"  classname="com.adventnet.persistence.interceptor.CacheInterceptor"/>
+        <BeanInterceptor bean_incp_id="BeanInterceptor:bean_incp_id:CachedPersistence-AI" order_no="1" incp_name="AI" classname="com.adventnet.authorization.interceptor.AuthorizationInterceptor"/>
+    </Bean>
+    
+    <!-- NON AUTHORIZED BEANS -->
+    <Bean bean_id="Bean:bean_id:PurePersistence" bean_name="PurePersistence" module_id="Persistence" transaction_type="1" classname="com.adventnet.persistence.PersistenceBean">
+        <BeanInterceptor bean_incp_id="BeanInterceptor:bean_incp_id:PurePersistence-NPI" order_no="1" incp_name="NPI" classname="com.adventnet.persistence.interceptor.NotificationPersistenceInterceptor"/>
+    </Bean>
+    
+    <Bean bean_id="Bean:bean_id:PurePersistenceLite" bean_name="PurePersistenceLite" module_id="Persistence" classname="com.adventnet.persistence.PersistenceBean">
+        <BeanInterceptor bean_incp_id="BeanInterceptor:bean_incp_id:PurePersistenceLite-DAEI" order_no="1" incp_name="DAEI" classname="com.adventnet.persistence.interceptor.DAEInterceptor"/>
+    </Bean>
+    
+    <Bean bean_id="Bean:bean_id:PureCachedPersistence" bean_name="PureCachedPersistence" module_id="Persistence" classname="com.adventnet.persistence.ReadOnlyPersistenceBean" transaction_type="3">
+        <BeanInterceptor bean_incp_id="BeanInterceptor:bean_incp_id:PureCachedPersistence-CI" order_no="1" incp_name="CI" classname="com.adventnet.persistence.interceptor.CacheInterceptor"/>
+    </Bean>
+
+    <Bean bean_id="Bean:bean_id:ReadOnlyPersistence" bean_name="ReadOnlyPersistence" module_id="Persistence" classname="com.adventnet.persistence.ReadOnlyPersistenceBean" transaction_type="3">
+        <BeanInterceptor bean_incp_id="BeanInterceptor:bean_incp_id:ReadOnlyPersistence-AI" order_no="1" incp_name="AI" classname="com.adventnet.authorization.interceptor.AuthorizationInterceptor"/>
+    </Bean>
+
+    <Bean bean_id="Bean:bean_id:PureReadOnlyPersistence" bean_name="PureReadOnlyPersistence" module_id="Persistence" classname="com.adventnet.persistence.ReadOnlyPersistenceBean" transaction_type="3">
+    </Bean>
+</beans>
+

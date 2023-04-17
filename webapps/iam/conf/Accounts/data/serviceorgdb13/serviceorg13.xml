@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="aspsorgzaid" account_name="Zoho ASP -Account- Service Org">
+		<IAMAccountDomain domain="aspsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="nameserversorgzaid" account_name="Zoho NameServer -Account- Service Org">
+		<IAMAccountDomain domain="nameserversorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="inksorgzaid" account_name="Zoho INK -Account- Service Org">
+		<IAMAccountDomain domain="inksorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="startwithsorgzaid" account_name="Zoho Startwith -Account- Service Org">
+		<IAMAccountDomain domain="startwithsorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

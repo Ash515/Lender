@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: pam-conf.xml,v 1.31 2008/09/25 15:46:01 subin Exp $ -->
+<pam-conf>
+
+	<AaaService service_id="AaaService:service_id:0" name="System"
+		description="Represents the complete server, all applications installed in the server" />
+
+	<AaaPamModule pammodule_id="AaaPamModule:pammodule_id:0"
+		name="Authenticator" type="auth"
+		classname="com.adventnet.authentication.lm.Authenticator" description="To authenticate the user" />
+	<AaaPamModule pammodule_id="AaaPamModule:pammodule_id:5"
+		name="ADAuthenticator" type="auth"
+		classname="com.adventnet.authentication.lm.ADAuthenticator"
+		description="To authenticate the user using Active Directory" />
+	<AaaPamModule pammodule_id="AaaPamModule:pammodule_id:ldap"
+		name="LDAPAuthenticator" type="auth"
+		classname="com.zoho.authentication.lm.LDAPAuthenticator"
+		description="To authenticate the user using LDAP server" />
+
+	<AaaPamModule pammodule_id="AaaPamModule:pammodule_id:1"
+		name="AccountValidator" type="auth"
+		classname="com.adventnet.authentication.lm.AccountValidator"
+		description="To validate account expiry" />
+	<AaaPamModule pammodule_id="AaaPamModule:pammodule_id:2"
+		name="PasswordValidator" type="auth"
+		classname="com.adventnet.authentication.lm.PasswordValidator"
+		description="To validate password expiry" />
+	<AaaPamModule pammodule_id="AaaPamModule:pammodule_id:3"
+		name="SessionAuditor" type="auth"
+		classname="com.adventnet.authentication.lm.SessionAuditor"
+		description="To create audit record of login and logout" />
+	<AaaPamModule pammodule_id="AaaPamModule:pammodule_id:4"
+		name="RadiusAuthenticator" type="auth"
+		classname="com.adventnet.authentication.radius.RadiusAuthenticator"
+		description="To use radius authentication" />
+	<!-- <AaaPamConf service_id="AaaService:service_id:0" pammodule_id="AaaPamModule:pammodule_id:0" 
+		control_flag="REQUIRED" execorder="1"/> -->
+	<AaaPamConf service_id="AaaService:service_id:0"
+		pammodule_id="AaaPamModule:pammodule_id:1" control_flag="REQUIRED"
+		execorder="2" />
+	<AaaPamConf service_id="AaaService:service_id:0"
+		pammodule_id="AaaPamModule:pammodule_id:2" control_flag="REQUIRED"
+		execorder="3" />
+	<AaaPamConf service_id="AaaService:service_id:0"
+		pammodule_id="AaaPamModule:pammodule_id:3" control_flag="OPTIONAL"
+		execorder="4" />
+
+</pam-conf>

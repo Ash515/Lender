@@ -1,0 +1,98 @@
+<!--$Id$-->
+  <%  
+      NavigationConfig navigConfig = viewModel.getNavigationConfig();
+      if(navigConfig!=null){
+      String naType = navigConfig.getNavigationType();
+  	  double slidervalue;
+  	  boolean isFirstPage=(navigConfig.getPageNumber() > 1)? false:true;
+  	  boolean isLastPage=(navigConfig.getPageNumber() < navigConfig.getTotalPages())? false:true;
+  	  if(navigConfig.getPageNumber()>=navigConfig.getTotalPages())
+  	  {
+  		 slidervalue=1;
+  	  }
+  	  else
+  	  {
+  	  	 slidervalue=(double)(navigConfig.getPageNumber()-1)/(double)navigConfig.getTotalPages();	
+  	  }
+  	  
+  	  
+  	  if(naType!=null && naType.equals("SLIDEBAR")&& navigConfig.getTotalPages()>1){%>
+  	  
+	  </td><td width="2%" style="height:100%"  id="scroll">
+      <table height="100%" cellspacing="0" border="0" cellpadding="0"><tr><td valign="top" height="22px" class="navigatorDown">
+		<%if(!isFirstPage){%>
+		<a href=# onclick="showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>','<%out.print(navigConfig.getPreviousPageIndex());//NO OUTPUTENCODING%>','<%out.print(navigConfig.getPageNumber() - 1);//NO OUTPUTENCODING%>')"><%--NO OUTPUTENCODING --%>
+		<%} %>
+		<input type="button" class="upwardButton">
+		<%if(!isFirstPage){%>
+		</a>
+	<%} %>
+	</td></tr>
+
+	<tr><td height="100%">
+	<div class="slidertrack" id="<%=IAMEncoder.encodeHTMLAttribute(uniqueId)%>_track" DivId="track" style="height: 100%; width: 22px;">
+	<div class="sliderhandle" id="<%out.print(IAMEncoder.encodeHTMLAttribute(uniqueId));//NO OUTPUTENCODING%>_handle" style="display: none;width: 20px; height: 15%; cursor: move; top: 30px; position: relative;" OnMouseUp="divhide('<%out.print(uniqueId);//NO OUTPUTENCODING%>')" OnMouseDown="divPositioning(event,'<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>','<%out.print(navigConfig.getPageNumber() );//NO OUTPUTENCODING%>')"><%--NO OUTPUTENCODING --%>
+	</div>
+	<div  class="tablediv" id="<%=IAMEncoder.encodeHTMLAttribute(uniqueId)%>_page_div" style="display: none; z-index: 1000; position: absolute ;left: 1200px; top: 0px">
+	</div>  
+	</div>
+	<script>
+	    document.getElementById("<%=IAMEncoder.encodeJavaScript(uniqueId)%>_handle").style.display="block";
+		var heightOfHandle;
+		if(150/(<%out.print(navigConfig.getTotalPages());//NO OUTPUTENCODING%>)< 10){<%--NO OUTPUTENCODING --%>
+	 	heightOfHandle=10+"%";
+		}
+		else{
+ 			heightOfHandle=(100/(<%out.print(navigConfig.getTotalPages());//NO OUTPUTENCODING%>))+"%";<%--NO OUTPUTENCODING --%>
+		}
+			document.getElementById("<%out.print(uniqueId);//NO OUTPUTENCODING%>_handle").style.height=heightOfHandle;<%--NO OUTPUTENCODING --%>
+	</script>
+
+	<%String cp=request.getContextPath(); %>
+	</td></tr>
+	<tr><td valign="bottom" height="22px" class="navigatorUp">
+	<%if(!isLastPage){ %>
+	<a href=# onclick="showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>', '<%out.print(navigConfig.getNextPageIndex());//NO OUTPUTENCODING%>','<%out.print(navigConfig.getPageNumber() + 1);//NO OUTPUTENCODING%>')"><%--NO OUTPUTENCODING --%>
+	<%} %>
+	<input height="100%" type="button" class="downButton">
+	<%if(!isLastPage){ %>
+	</a>
+	<%} %>
+	</td></tr></table>
+	</td></tr></table>
+	<script>
+	if(window["slider.js"] == null)
+		{
+		    
+			includeJS(CONTEXT_PATH + "/framework/javascript/slider.js");
+			window["slider.js"] = true;
+		 }
+	function divPositioning(event,uniqueId,pageno){
+		var xpos=event.clientX;
+		var ypos=event.clientY;
+		var el=document.getElementById(uniqueId+"_page_div");
+		el.innerHTML="page: "+(pageno)+"";
+		el.style.left=(xpos-80)+"px";
+		el.style.top=(ypos)+"px";
+		el.style.display="block";
+		}
+
+	function divhide(uniqueId)
+		{
+		var el=document.getElementById(uniqueId+"_page_div");
+		el.style.display="none";
+		}
+	function initailiseSlider()
+	{
+	     var slider = new Control.Slider('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>_handle','<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>_track', {axis:'vertical', minimum: 1, maximum:5 , alignX: -28, alignY: 0, disabled: false,onChange:function(v){navigationSliderOnChange(v,'<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>',<%out.print(navigConfig.getTotalPages());//NO OUTPUTENCODING%>);},onSlide:function(v){navigationSliderOnSlide(v,'<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>',<%out.print(navigConfig.getTotalPages());//NO OUTPUTENCODING%>);},sliderValue:<%out.print(slidervalue);//NO OUTPUTENCODING%>});<%--NO OUTPUTENCODING --%>
+		
+	}
+	
+	addToOnLoadScripts("initailiseSlider",window);
+    
+	
+		
+    </script>
+	
+         
+	<%}}%>

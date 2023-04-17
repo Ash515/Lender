@@ -1,0 +1,6 @@
+## This file is used when deploying server in localDC where only one Mysql grid will be used. 
+
+ClientPortal.db.cluster: Default
+ServiceOrg.db.cluster: Default
+Audit.db.cluster: Default
+OAuth.db.cluster: Default

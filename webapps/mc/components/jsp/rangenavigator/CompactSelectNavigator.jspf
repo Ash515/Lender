@@ -1,0 +1,71 @@
+<%-- $Id$ --%>
+
+<%@ page import = "java.util.List, com.adventnet.client.components.rangenavigator.web.NavigationConfig" %>
+<%@ page import = "com.adventnet.idioms.tablenavigator.TableNavigatorModel,com.adventnet.client.components.table.web.*,java.util.HashMap,javax.swing.table.TableModel, com.adventnet.persistence.*,java.util.*"%>
+<%
+NavigationConfig navigationConfig = viewModel.getNavigationConfig();
+if(navigationConfig != null)
+{
+	%>
+		<table class="compactSelectNav" cellspacing="1">
+		<tr>
+		<td width="90%"></td>
+		<td nowrap class="fontBlack"><%out.print(navigationConfig.getFromIndex());//NO OUTPUTENCODING%> - <%out.print(navigationConfig.getToIndex());//NO OUTPUTENCODING%> of <%out.print(navigationConfig.getTotalRecords());//NO OUTPUTENCODING%>&nbsp;</td><%--NO OUTPUTENCODING --%>
+		<%
+
+		if(navigationConfig.getPageNumber() > 1)
+		{%>
+			<td> <button onClick="javascript:showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>','<%out.print(navigationConfig.getFirstPageIndex());//NO OUTPUTENCODING%>','1')" name="First" class="compactSelectFirst"> </button> </td><%--NO OUTPUTENCODING --%>
+			<td> <button onClick="javascript:showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>','<%out.print(navigationConfig.getPreviousPageIndex());//NO OUTPUTENCODING%>','<%out.print(navigationConfig.getPageNumber() - 1);//NO OUTPUTENCODING%>')" name="Previous" class="compactSelectPrevious"> </button> </td><%--NO OUTPUTENCODING --%>
+			<%
+		}
+		else
+		{%>
+			<td> <button class="compactSelectFirstDis" name="First"> </button> </td>
+			<td> <button class="compactSelectPreviousDis" name="Previous"> </button> </td><%
+		}
+
+	List rangeList = navigationConfig.getRangeList();
+	if(rangeList != null)
+	{
+		int size = rangeList.size();
+		%>
+			<td>
+			<select name="pageLength" class="compactSelectBox" onchange="return showRangeForLength('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>', this.value)"><%--NO OUTPUTENCODING --%>
+			<%
+
+			for(int rlIndex = 0; rlIndex < size; rlIndex++)
+			{
+				int length = ((Integer) rangeList.get(rlIndex)).intValue();
+				if(length == navigationConfig.getPageLength())
+				{
+					%><option value='<%=length%>' selected><%=length%></option><%
+				}
+				else
+				{
+					%><option value='<%=length%>'><%=length%></option><%
+				}
+			}
+		%>
+			</select>
+			</td>
+			<%
+	}
+	if(navigationConfig.getPageNumber() < navigationConfig.getTotalPages())
+	{%>
+		<td><button name="Next" class="compactSelectNext" onClick="javascript:showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>', '<%out.print(navigationConfig.getNextPageIndex());//NO OUTPUTENCODING%>','<%out.print(navigationConfig.getPageNumber() + 1);//NO OUTPUTENCODING%>')"> </button> </td><%--NO OUTPUTENCODING --%>
+		<td><button name="Last" class="compactSelectLast" onClick="javascript:showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>', '<%out.print(navigationConfig.getLastPageIndex());//NO OUTPUTENCODING%>','<%out.print(navigationConfig.getTotalPages());//NO OUTPUTENCODING%>')"> </button> </td><%--NO OUTPUTENCODING --%>
+		<%
+	}
+	else
+	{%>
+		<td> <button name="Next" class="compactSelectNextDis"> </button> </td>
+		<td> <button name="Last" class="compactSelectLastDis"> </button> </td><%
+	}
+	%>	
+		</tr>
+		</table>
+		<%
+}%>
+
+

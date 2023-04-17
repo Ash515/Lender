@@ -1,0 +1,50 @@
+<%-- $Id$ --%>
+<%@page import="com.adventnet.iam.internal.PartnerAccountUtil"%>
+<%
+boolean is_static = "true".equals(AccountsConfiguration.getConfiguration("iam.static", "false"));
+String imgURL = is_static ? Util.getIMGURL(request) : request.getContextPath()+"/images";//No I18N
+%>
+<script>
+    <%if ("true".equals(AccountsConfiguration.getConfiguration("use.https", "true"))) {%>
+        var loc_port = window.location.port;
+        if(loc_port =="" || loc_port == "80") {
+            var iurl=window.location.href;if(iurl.indexOf("http://")==0){iurl=iurl.replace("http://", "https://");window.location.href=iurl;}
+        }
+    <%}%>
+</script>
+<div style="height:40px;margin:0px auto;border-bottom:1px solid #c5c8ca;box-shadow:0px 3px 0px #e8ebee;">
+<% 
+String referer = request.getParameter("IAM_REFERER");
+referer = referer == null ? request.getParameter("partner_domain") : referer;
+String backtourl = null;
+if(referer != null && !referer.equals("") && !referer.endsWith(".zoho.com")){
+	backtourl =  "http://" + referer; //No I18N
+}
+PartnerAccount partnerAccount = PartnerAccountUtil.getCurrentPartnerAccount();
+boolean partnerLogoExists = partnerAccount != null && PartnerAccountUtil.isPartnerLogoExists(partnerAccount.getPartnerID());
+%>
+    <div style="width:50%;float:left;padding:0px;margin:6px 0px;">
+<% if(partnerLogoExists) {%>
+	<a href="/"><img src="<%=request.getContextPath()%>/static/file?t=org&ID=<%=partnerAccount.getPartnerID()%>" style="width:200px; height:30px; border:none;" title="<%=Util.getI18NMsg(request,"IAM.ZOHO.ACCOUNTS")%>" alt="<%=Util.getI18NMsg(request,"IAM.ZOHO.ACCOUNTS")%>"/></a><%-- NO OUTPUTENCODING --%>
+<%}else if(referer == null || referer.equals("") || referer.endsWith(".zoho.com")){%>
+	<a href="/"><img src="<%=imgURL%>/spacer.gif" style="background:transparent url('<%=imgURL%>/rebrand.gif') no-repeat -11px -200px;height:26px;width:210px;margin:2px 0px 0px 5px; border:none;" title="<%=Util.getI18NMsg(request,"IAM.ZOHO.ACCOUNTS")%>" alt="<%=Util.getI18NMsg(request,"IAM.ZOHO.ACCOUNTS")%>"/></a><%-- NO OUTPUTENCODING --%>
+<% }else{
+String enreferer = CryptoUtil.encryptWithSalt("photo", referer, ":", true);%> <%-- No I18N --%>
+        <a href="<%=IAMEncoder.encodeHTMLAttribute(backtourl)%>"><img src="<%=imgURL%>/spacer.gif" style="background: url('<%=request.getContextPath()%>/static/file?t=partner&ID=<%=IAMEncoder.encodeCSS(enreferer)%>') no-repeat; width:135px; height:25px;margin:2px 0px 0px 2px; border:0;" title="<%=Util.getI18NMsg(request,"IAM.ZOHO.ACCOUNTS")%>" alt="<%=Util.getI18NMsg(request,"IAM.ZOHO.ACCOUNTS")%>"/></a><%-- NO OUTPUTENCODING --%>
+<% } %>
+    </div>
+    <div style="float:right;padding:0px;margin:0px;">
+	<div style="font-size:11px;color:#000;text-decoration:none;">
+	    <ul style="list-style: none; float: right; *padding-top:10px;">
+		<li style="float: left; margin-right: 20px;"><a href="<%=Util.getI18NMsg(request,"IAM.HOME.LINK")%>" title="<%=Util.getI18NMsg(request,"IAM.HOME")%>" style="color:#085DDC;text-decoration:none;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';"><%=Util.getI18NMsg(request,"IAM.HOME")%></a></li><%-- NO OUTPUTENCODING --%>
+	<%if(!"true".equals(AccountsConfiguration.getConfiguration("hide.headerlinks", "false"))) {%>
+	<%if(!Util.isHidePartnerHeader()){ %>
+		<li style="float: left; margin-right: 20px;"><a href="<%=Util.getI18NMsg(request,"IAM.BLOGS.LINK")%>" title="<%=Util.getI18NMsg(request,"IAM.BLOGS")%>" style="color:#085DDC;text-decoration:none;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';"><%=Util.getI18NMsg(request,"IAM.BLOGS")%></a></li><%-- NO OUTPUTENCODING --%>
+		<li style="float: left; margin-right: 20px;"><a href="<%=Util.getI18NMsg(request,"IAM.FORUMS.LINK")%>" title="<%=Util.getI18NMsg(request,"IAM.FORUMS")%>" style="color:#085DDC;text-decoration:none;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';"><%=Util.getI18NMsg(request,"IAM.FORUMS")%></a></li><%-- NO OUTPUTENCODING --%>
+	<%} %>
+	<%}%>
+		<li style="float: left; margin-right: 20px;"><a href="<%=Util.getI18NMsg(request,"IAM.FAQ.LINK")%>" title="<%=Util.getI18NMsg(request,"IAM.TITLE.FAQ.EXPAND")%>" style="color:#085DDC;text-decoration:none;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';"><%=Util.getI18NMsg(request,"IAM.FAQ")%></a></li><%-- NO OUTPUTENCODING --%>
+	    </ul>
+	</div>
+    </div>
+</div>

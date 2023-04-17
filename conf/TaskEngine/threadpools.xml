@@ -1,0 +1,6 @@
+<!-- $Id: threadpools.xml,v 1.1 2009/10/08 15:29:12 vinod Exp $ -->
+<threadpools>
+    <ThreadPool threadpool_id="ThreadPool:threadpool_id:default" threadpool_name="default" threadpool_size="5"/>
+    <ThreadPool threadpool_id="ThreadPool:threadpool_id:asynchThreadPool" threadpool_name="asynchThreadPool" threadpool_size="2"/>
+</threadpools>
+

@@ -1,0 +1,161 @@
+#$Id: $
+# Configuration Sample Format :
+# ``` 
+#   - resource_name: {{ResourceName in PascalCase}} (Mandatory)
+#     identifier: {{identifier}}.
+#     path: "users/:zuid". Customize REST API Path. default : {resource}/:{identifier}  
+#     downloadable: Boolean.
+#     multipart: Boolean.
+#     derived: Boolean.
+#     resources: {{SubResources}
+#     access_control: {{false}} || {{Map}}
+#       {{method}}:  # (get | post | put | delete)
+#         roles: {{Role Name}}. # Single or Comma seprated User Role. Allowed to perform this operation. 
+#                                 If `ServiceAdmin` configured its parent Roles such as SuperAdmin, Admin can also perform the action based on the weigtage of the role. 
+#         role_hierarchy: {{Boolean}} # Don't consider Parent roles hierarchy, Verify given set of Roles alone. 
+#         password: {{Boolean}} # Default is false. If you required authentication check, give true.
+# ```
+---
+api_server_url: "http://localhost:8080"
+
+prefix_uri: "accounts/p"
+
+base_uri: "signin"
+
+versions: "v2"
+ 
+handlers_package: "com.zoho.accounts.internal.signin"
+
+     
+icresturi_handler_api: "com.zoho.accounts.webclient.authorization.ICRESTUriHandlerImpl"
+
+default_access_control:
+  post:
+    roles: admin
+  get:
+    roles: user
+  put:
+    roles: admin
+  delete:
+    roles: admin
+
+resources:
+ #New Sign-in
+  - resource_name: Lookup
+    identifier: login_id
+    access_control: false
+    fields: login_id
+  - resource_name: PrimaryAuth
+    identifier: zuid
+    path: "/primary/:zuid"
+    resource_exist: false
+    access_control: false
+    resources:
+      - resource_name: PasswordAuth
+        path: "/password"
+        fields: password
+        access_control:
+          post:
+            roles: self
+      - resource_name: MobileAuth
+        identifier: emobile
+        path: "/otp/:emobile"
+        fields: mdigest,code
+        access_control:
+          post:
+            roles: self
+          put:
+            roles: self
+      - resource_name: DeviceAuth
+        identifier: deviceid
+        path: "/device/:deviceid"
+        fields: code
+        access_control:
+          post:
+            roles: self
+          put:
+            roles: self
+  - resource_name: SecondaryAuth
+    identifier: zid
+    path: "/secondary/:zid"
+    resource_exist: false
+    access_control: false
+    resources:
+      - resource_name: MobileSecAuth
+        identifier: emobile
+        path: "/otp/:emobile"
+        fields: mdigest,code
+        access_control:
+          post:
+            roles: self
+          put:
+            roles: self
+      - resource_name: OneAuthSec
+        identifier: deviceid
+        path: "/oneauth/:deviceid"
+        fields: code
+        access_control:
+          post:
+            roles: self
+          put:
+            roles: self
+      - resource_name: DeviceSecAuth
+        identifier: deviceid
+        path: "/device/:deviceid"
+        fields: code
+        access_control:
+          post:
+            roles: self
+          put:
+            roles: self
+      - resource_name: TOTPSecAuth
+        path: "/totp"
+        fields: code
+        access_control:
+          post:
+            roles: self
+      - resource_name: TrustMFA
+        path: "/trust"
+        fields: trust
+        access_control:
+          post:
+            roles: self
+      - resource_name: YubikeySecAuth
+        identifier: yubikey_id
+        path: "/yubikey"
+        access_control:
+          post:
+            roles: self
+          put:
+            roles: self
+      - resource_name: RecoveryCodeSecAuth
+        path: "/recovery"
+        fields: code
+        access_control:
+          post:
+            roles: self
+      - resource_name: ExoStarSecAuth
+        path: "/exostar"
+        fields: code,type
+        access_control:
+          post:
+            roles: self
+      - resource_name: PassPhraseSecAuth
+        path: "/passphrase"
+        fields: pass_phrase
+        access_control:
+          post:
+            roles: self
+  - resource_name: Password
+    identifier: zuid
+    path: "/password/:zuid"
+    resource_exist: false
+    access_control: false
+    resources:
+      - resource_name: Expiry
+        path: "/expiry"
+        derived: true
+        fields: newpwd,rmdevses,rmwebses
+        access_control:
+          post:
+            roles: self

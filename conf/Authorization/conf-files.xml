@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: conf-files.xml,v 1.2 2005/09/05 13:53:22 vaseekaranb Exp $ -->
+<conf-files>
+	<ConfFile url="service.xml" />
+	<ConfFile url="auth-policy.xml" />
+</conf-files>
+
+

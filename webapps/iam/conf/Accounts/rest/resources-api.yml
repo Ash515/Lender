@@ -1,0 +1,195 @@
+# $Id: $
+# Configuration Sample Format :
+# ``` 
+#   - resource_name: {{ResourceName in PascalCase}} (Mandatory)
+#     identifier: {{identifier}}.
+#     path: "users/:zuid". Customize REST API Path. default : {resource}/:{identifier}  
+#     downloadable: Boolean.
+#     multipart: Boolean.
+#     derived: Boolean.
+#     resources: {{SubResources}
+#     access_control: {{false}} || {{Map}}
+#       {{method}}:  # (get | post | put | delete)
+#         roles: {{Role Name}}. # Single or Comma seprated User Role. Allowed to perform this operation. 
+#                                 If `ServiceAdmin` configured its parent Roles such as SuperAdmin, Admin can also perform the action based on the weigtage of the role. 
+#         role_hierarchy: {{Boolean}} # Don't consider Parent roles hierarchy, Verify given set of Roles alone. 
+#         password: {{Boolean}} # Default is false. If you required authentication check, give true.
+# ```
+---
+api_server_url: "http://localhost:8080"
+
+base_uri: "api"
+
+versions: "v1"
+
+handlers_package: "com.zoho.accounts.api.handlers"
+
+icresturi_handler_api: "com.zoho.accounts.api.authorization.ICRESTUriHandlerImpl"
+
+default_access_control:
+  post:
+    roles: admin
+  get:
+    roles: user
+  put:
+    roles: admin
+  delete:
+    roles: admin
+
+resources:
+  #SSOKIT
+  - resource_name: Token
+    path: "/ssokit/token"
+    access_control:
+       post:
+        roles: sso
+  #User
+  - resource_name: Account
+    identifier: zaid
+    path: "/account/:zaid"
+    resource_exist: false
+    access_control: false
+    #virtual_identifier: self
+    #commented above to restrict taking zaid from the identifier instead of current user
+    resources:
+      - resource_name: User
+        identifier: zuid
+        path: "/user/:zuid"
+        include : WebSessions,TPAppSessions,ZohoAppSessions
+        access_control:
+          get:
+            roles: device
+        resources:
+          - resource_name: ResetPassword
+            access_control:
+              put:
+                roles: device
+          - resource_name: Profile
+            access_control:
+              put:
+                roles: device
+              get:
+                roles: device
+          - resource_name: BackupCodes
+            access_control:
+              put:
+                roles: device
+          - resource_name: WebSessions
+            identifier: wticket
+            access_control:
+              delete:
+                roles: device
+          - resource_name: TPAppSessions
+            identifier: clientZid
+            access_control:
+              delete:
+                roles: device
+          - resource_name: ZohoApps
+            identifier: clientid
+            resource_exist: false
+            access_control: false
+            resources:
+               - resource_name: ZohoAppSessions
+                 identifier: token
+                 access_control:
+                   delete:
+                     roles: device
+          - resource_name: PassPhrase
+            derived: true
+            access_control:
+              post:
+                roles: device
+              delete:
+                roles: device
+          - resource_name: TPSecret
+            derived: true
+            access_control:
+              post:
+                roles: device
+              put:
+                roles: device
+              get:
+                roles: device
+              delete:
+                roles: device
+          - resource_name: Reauth
+            derived: true
+            access_control:
+              put:
+                roles: device
+              post:
+                roles: device
+          - resource_name: Device
+            identifier: device_token
+            access_control:
+              put:
+                roles: device
+              delete:
+                roles: device
+              get:
+                roles: device
+            resources:
+                - resource_name: LaunchSync
+                  derived: true
+                  access_control:
+                    get:
+                      roles: device
+                - resource_name: ModeUpdate
+                  derived: true
+                  access_control:
+                    put:
+                      roles: device
+                - resource_name: PushStatus
+                  derived: true
+                  access_control:
+                    put:
+                      roles: device
+                - resource_name: Primary
+                  derived: true
+                  access_control:
+                    put:
+                      roles: device
+                - resource_name: Logout
+                  derived: true
+                  access_control:
+                    delete:
+                      roles: device
+          - resource_name: MFAMobile
+            identifier: mobile_number
+            access_control:
+              post:
+                roles: device
+              put:
+                roles: device
+              delete:
+                roles: device
+              get:
+                roles: device
+            resources:
+                - resource_name: Primary
+                  derived: true
+                  access_control:
+                    put:
+                      roles: device
+  - resource_name: ExtensionAuth
+    identifier: zuid
+    path: "/extension/:zuid"
+    resource_exist: false
+    access_control: false
+    resources:
+      - resource_name: DeviceExtension
+        identifier: deviceid
+        path: "/device/:deviceid"
+        resource_exist: false
+        access_control: false
+        resources:
+         - resource_name: SendPushNotify
+           path: "/push"
+           access_control:
+             put:
+               roles: self
+         - resource_name: VerifyPushNotify
+           path: "/poll"
+           access_control:
+             put:
+               roles: self

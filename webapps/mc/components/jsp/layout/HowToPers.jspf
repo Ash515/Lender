@@ -1,0 +1,87 @@
+<%-- $Id$ --%>
+<script>function hideHelp() {
+document.getElementById("Layer1").parentNode.removeChild(document.getElementById("Layer1"));//className = 'hide';
+}
+function closeHelp() {
+if(document.getElementById("ckbox").checked){
+handleSubRequest('UpdateUserPreference.ma?PREFNAME=HelpPref&PREFVALUE=Acknowledged',null,true);
+}
+document.getElementById("Layer1").parentNode.removeChild(document.getElementById("Layer1"));//className = 'hide';
+}</script>
+<table width="100%"  border="0" cellpadding="0" cellspacing="0" class="notesBg" align="center">
+  <tr>
+    <td height="50" valign="top"> <table width="90%"  border="0" cellpadding="3" cellspacing="1" align="center" class="notesHeading">
+        <tr>
+          <td valign="top" width="22"><img src="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/clip.gif" width="22" height="28"></td><%--NO OUTPUTENCODING --%>
+          <td class="notesContent" id='_ViewDesc'> <p>Drag and Drop the components 
+              to the Layout Area. Rearrange them and build your own page layout.</p></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+<% String value = UserPersonalizationAPI.getUserPreference("HelpPref",WebClientUtil.getAccountId()); if(value == null){%>
+<div id="Layer1" style="position:absolute; left:30%; top:30%; z-index:1;">
+  <table width="350" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><img src="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/tp_leftTop.gif" width="9" height="28"></td><%--NO OUTPUTENCODING --%>
+      <td background="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/tp_topBg.gif"><%--NO OUTPUTENCODING --%><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td><strong>Did you know? </strong></td>
+            <td align="right" nowrap><a href="javascript:hideHelp();">[x]</a></td>
+          </tr>
+        </table></td>
+      <td align="right"><img src="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/tp_rightTop.gif" width="9" height="28"></td><%--NO OUTPUTENCODING --%>
+    </tr>
+    <tr>
+      <td background="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/tp_leftBg.gif">&nbsp;</td><%--NO OUTPUTENCODING --%>
+      <td height="150" valign="top" bgcolor="#f5f5f5"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+          <tr valign="top">
+            <td height="10" colspan="2" class="notesContent">&nbsp;</td>
+          </tr>
+          <tr>
+            <td valign="top"><img src="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/help.gif" width="100" height="50" style="border-top:2px solid #999999;border-left:2px solid #999999;border-bottom:2px solid #FFFFFF;border-right:2px solid #FFFFFF; padding:5px; margin:5px"></td><%--NO OUTPUTENCODING --%>
+            <td><table width="100%"  border="0" cellspacing="0" cellpadding="3">
+                <tr>
+                  <td colspan="2" valign="top">Use <strong>Drag and Drop</strong> 
+                    to </td>
+                </tr>
+                <tr>
+                  <td width="8" align="right" valign="top"><img src="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/tp_bullet.gif" width="8" height="8"></td><%--NO OUTPUTENCODING --%>
+                  <td valign="top" class="notesContent">rearrange 
+                    the Layout.</td>
+                </tr>
+                <tr>
+                  <td width="8" align="right" valign="top"><img src="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/tp_bullet.gif" width="8" height="8"></td><%--NO OUTPUTENCODING --%>
+                  <td valign="top" class="notesContent">add <strong>New </strong>components 
+                    to Layout from <strong>Sidebar</strong>. </td>
+                </tr>
+              </table></td>
+          </tr>
+          <tr>
+            <td valign="top" nowrap>&nbsp;</td>
+            <td align="right" valign="top">&nbsp;</td>
+          </tr>
+          <tr>
+            <td valign="top" nowrap>&nbsp;</td>
+            <td valign="top"><input type="button" name="Button" class="btn" style="width:80px" value="Close" onClick='closeHelp()'></td>
+          </tr>
+          <tr>
+            <td valign="top" nowrap>&nbsp;</td>
+            <td align="right" valign="top">&nbsp;</td>
+          </tr>
+          <tr>
+            <td colspan="2" valign="top" nowrap><input type="checkbox" name="checkbox" value="checkbox" id='ckbox'>
+              Dont Show this Again. </td>
+          </tr>
+        </table></td>
+      <td background="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/tp_rightBg.gif"></td><%--NO OUTPUTENCODING --%>
+    </tr>
+    <tr>
+      <td width="9" height="8"><img src="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/tp_leftBottom.gif" width="9" height="8"></td><%--NO OUTPUTENCODING --%>
+      <td background="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/tp_bottomBg.gif"><img src="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/tp_bottomBg.gif" width="9" height="8"></td><%--NO OUTPUTENCODING --%>
+      <td width="9" height="8"><img src="<%out.print(themeDir);//NO OUTPUTENCODING%>/images/tp_rightBottom.gif" width="9" height="8"></td><%--NO OUTPUTENCODING --%>
+    </tr>
+  </table>
+</div>
+<% }%>
+

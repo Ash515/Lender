@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<IAMOAuthAppGroups>
+<IAMOAuthAppGroup OAUTH_APP_GROUP_AUTO_ID="1000" OAUTH_APP_GROUP_ID="1000" OAUTH_APP_GROUP_NAME="oauth" DESCRIPTION="Default oauth group space" >
+	<IAMOAuthClient CLIENT_ZID="1000.001" CLIENT_NAME="Default Client" CLIENT_ID="1000.GMB0YULZHJK411284S8I5GZ4CHUEX0" CLIENT_SECRET="122c324d3496d5d7773ceeebc129470715fbb856b7"
+				CLIENT_DOMAIN="zylker.com" ZID="system" CLIENT_TYPE="1" HOME_PAGE_URL="https://zylker.com" DESCRIPTION="Default Client">
+	<IAMOAuthClientRedirectURL REDIRECT_URL="https://iam" />
+	</IAMOAuthClient>
+</IAMOAuthAppGroup>
+</IAMOAuthAppGroups>

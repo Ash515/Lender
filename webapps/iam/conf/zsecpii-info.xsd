@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="pii-detector">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="piis"></xs:element>
+				<xs:element ref="models"></xs:element>
+				<xs:element ref="regexes"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="models">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="model"></xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="model">
+		<xs:complexType>
+			<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+			<xs:attribute name="model-type" type="type" use="required"></xs:attribute>
+			<xs:attribute name="class-name" type="xs:string" use="required"></xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="piis">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="pii"></xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="pii">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="datas"></xs:element>
+			</xs:choice>
+			<xs:attribute ref="category" use="required"></xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="datas">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="data"></xs:element>
+			</xs:choice>
+			<xs:attribute ref="sensitivity" use="required"></xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="data">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute ref="detectionType" use="required"></xs:attribute>
+					<xs:attribute name="value" type="xs:string" use="required"></xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- IDENTITY, PERSONAL, ACCOUNT, INTERNET_AND_TELECOMMUNICATION, AUTHENTICATION_AND_AUTHORIZATION, FINANCIAL, PLACE, EDUCATION_AND_WORK, SOCIAL, MEDICAL, DEVICE_INFORMATION, OTHERS, -->
+	<xs:attribute name="category">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Personal"></xs:enumeration>
+				<xs:enumeration value="Identity"></xs:enumeration>
+				<xs:enumeration value="Place"></xs:enumeration>
+				<xs:enumeration value="Education_And_Work"></xs:enumeration>
+				<xs:enumeration value="Account"></xs:enumeration>
+				<xs:enumeration value="Financial"></xs:enumeration>
+				<xs:enumeration value="Authentication_And_Authorization"></xs:enumeration>
+				<xs:enumeration value="Internet_And_Telecommunication"></xs:enumeration>
+				<xs:enumeration value="Social"></xs:enumeration>
+				<xs:enumeration value="Medical"></xs:enumeration>
+				<xs:enumeration value="Device_Information"></xs:enumeration>
+				<xs:enumeration value="Others"></xs:enumeration>
+				<xs:enumeration value="ZOHOPII"></xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="sensitivity">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="High"></xs:enumeration>
+				<xs:enumeration value="Medium"></xs:enumeration>
+				<xs:enumeration value="Low"></xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="detectionType" type="type">
+	</xs:attribute>
+	
+	<xs:simpleType name="type">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Regex"></xs:enumeration>
+				<xs:enumeration value="Dictionary"></xs:enumeration>
+				<xs:enumeration value="Regex_And_Dictionary"></xs:enumeration>
+				<xs:enumeration value="Machine_Learning"></xs:enumeration>
+				<xs:enumeration value="Common"></xs:enumeration>
+			</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="regexes">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="regex"></xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="regex">
+		<xs:complexType>
+			<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+			<xs:attribute name="value" type="xs:string" use="required"></xs:attribute>
+			<xs:attribute name="score" type="xs:float" use="required"></xs:attribute>
+			<xs:attribute name="min-len" type="xs:decimal" use="required"></xs:attribute>
+			<xs:attribute name="max-len" type="xs:decimal" use="required"></xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

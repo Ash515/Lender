@@ -1,0 +1,61 @@
+---
+resources:
+  - name: Register
+    description: To provide an API to Sign Up
+    handler: com.zoho.accounts.internal.SignUpHandler
+    attrs: 
+      - name: portal
+        dataType: char
+      - name: account_type
+        dataType: char
+      - name: first_name
+        dataType: char
+      - name: last_name
+        dataType: char
+      - name: username
+        dataType: char
+      - name: email
+        dataType: char
+      - name: password
+        dataType: char
+      - name: country
+        dataType: char
+      - name: language
+        dataType: char
+      - name: timezone
+        dataType: char
+      - name: accept_tos
+        dataType: boolean
+      - name: newsletter
+        dataType: boolean
+      - name: resource_params
+        description: JSONObject, Resource Field is not a predefined field but it will be stored in IAM DB itself. Field names will be like <resource-name>.<column-name>
+        dataType: char
+        # Response 
+      - name: zaid
+        dataType: char
+      - name: zuid
+        dataType: char
+      - name: authtoken
+        dataType: char
+      - name: token_type
+        dataType: char
+      - name: redirect_uri
+        dataType: char
+      - name: token_params
+        dataType: char
+      - name: oauthorize_uri
+        dataType: char
+      - name: mobile
+        description: mobile screen name is used for mobile number signup
+        dataType: char
+      - name: recovery_mobile
+        description: recovery mobile number signup used for spam signup with username
+        dataType: char
+      - name: showconfirmpage
+        description: wheather to show the confirmation page 
+        dataType: boolean
+      - name: country_state
+        description: locale state used for store user country state
+        dataType: char
+...

@@ -1,0 +1,37 @@
+$resourceName = function() {
+    var _formprefix = "";
+    $attributes_def
+    this.json = undefined;
+    this.initFromJson = function(json) {
+	this.json = json;
+$attributes_set
+	return this;
+    }
+    this.toJSON = function() {
+	var json = "{";
+$attributes_to_json
+	json = removeLastComma(json);
+	json += "}";
+	return json;
+    }
+    this.initFromForm = function(form, index) {
+	_formprefix = URI._formPrefix($resourceName.path, index);
+	URI._initFromForm(form, this, _formprefix);
+	return this;
+    }
+    this.getReferences = function() {
+	if(this.json) {
+	    return this.json["reference"];
+	}
+	return this.json; //undefined
+    }
+    this.validate = function() {
+	var i = 0;
+	$attribute_validation
+	return this;
+    }
+}
+$resourceName.path = "$resourcePath";
+$resourceName.newBuilder = function() {
+    return new $resourceName();
+};

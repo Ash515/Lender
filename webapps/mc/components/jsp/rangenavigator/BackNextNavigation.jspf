@@ -1,0 +1,53 @@
+<%-- $Id$ --%>
+
+<%@ page import = "java.util.List, com.adventnet.client.components.rangenavigator.web.NavigationConfig" %>
+<%@ page import = "com.adventnet.i18n.I18N" %>
+<%@ page import = "com.adventnet.client.util.web.WebClientUtil" %>
+<% 
+NavigationConfig nc = viewModel.getNavigationConfig();
+if(nc != null) 
+{%>
+	<table cellspacing="0" width="100%" cellpadding="2" class="botNavBg">
+	<tr>
+	<td width="55%" nowrap align="left"><span class="botNavText">
+	<%out.print(nc.getFromIndex());//NO OUTPUTENCODING%>-<%out.print(nc.getToIndex());//NO OUTPUTENCODING%>&nbsp;<%out.print(IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.of")));//NO OUTPUTENCODING%>&nbsp;<%out.print(nc.getTotalRecords());//NO OUTPUTENCODING%></span></td><%--NO OUTPUTENCODING --%>
+	<td nowrap align="right">
+ <% if(nc.getPageNumber() > 1){
+	 if(WebClientUtil.isRestful(request) && (1 == 0))
+	 {
+	 
+	 String navigurl = nc.getNavigURLForPrevious(viewContext,request, uniqueId);
+ %>
+<span class="topnavilinks"><a href="javascript:showRangewithStateURL('<%=IAMEncoder.encodeJavaScript(uniqueId)%>','<%=IAMEncoder.encodeJavaScript(navigurl)%>')"><%=IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.Back"))%></a> |</span>
+<% 
+	 }
+	 else
+	 {
+		 %>
+<span class="topnavilinks"><a href="javascript:showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>','<%out.print(nc.getPreviousPageIndex());//NO OUTPUTENCODING%>','<%out.print(nc.getPageNumber() - 1);//NO OUTPUTENCODING%>')"><%out.print(IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.Back")));//NO OUTPUTENCODING%></a> |</span><%--NO OUTPUTENCODING --%>		 
+		 <%
+	 }
+	 } else {%>
+<span class="topnavilinks"><%=IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.Back"))%> |</span>
+<% } %>
+<% if(nc.getPageNumber() < nc.getTotalPages()){
+	 if(WebClientUtil.isRestful(request) && (1 == 0))
+	 {	
+	String navigurl = nc.getNavigURLForNext(viewContext,request, uniqueId);
+%>
+<span class="topnavilinks"><a href="javascript:showRangewithStateURL('<%=IAMEncoder.encodeJavaScript(uniqueId)%>','<%=IAMEncoder.encodeJavaScript(navigurl)%>')"><%=IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.Next"))%></a></span>
+<% }
+	 else
+	 {
+		 %>
+<span class="topnavilinks"><a href="javascript:showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>', '<%out.print(nc.getNextPageIndex());//NO OUTPUTENCODING%>','<%out.print(nc.getPageNumber() + 1);//NO OUTPUTENCODING%>')"><%out.print(IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.Next")));//NO OUTPUTENCODING%></a></span><%--NO OUTPUTENCODING --%>
+		 <%
+	 }
+} else { %>
+<span class="topnavilinks"><%=IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.Next"))%></span>
+<% } %></span>
+ </td>
+</tr>
+</table>
+<% }%>
+

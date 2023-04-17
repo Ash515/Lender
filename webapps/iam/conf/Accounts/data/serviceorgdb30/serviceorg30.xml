@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="zbaassorgzaid" account_name="ZBAAS Service Org">
+		<IAMAccountDomain domain="zbaassorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="quartzsorgzaid" account_name="Quartz Service Org">
+		<IAMAccountDomain domain="quartzsorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--$Id$ -->
+<extended-configurations>
+	<configuration name="DBName" value="mysql" />
+	<configuration name="DSAdapter" value="mysql" />
+	<configuration name="StartDBServer" value="false" />
+</extended-configurations>

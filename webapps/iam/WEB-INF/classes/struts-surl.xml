@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+  "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="surl" namespace="/i" extends="struts-default">
+		<action name="{hashId:[a-zA-Z0-9]+}" class="com.zoho.accounts.actions.unauth.ShortenUrlAction" method="redirect"/>
+	</package>
+</struts>

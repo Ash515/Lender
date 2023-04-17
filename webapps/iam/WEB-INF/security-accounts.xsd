@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:redefine schemaLocation="conf/security.xsd">
+		<xs:attributeGroup name="urlGroup">
+			<xs:attributeGroup ref="urlGroup"/>
+     		<xs:attribute name="sl_auth">
+				<xs:simpleType>
+       				<xs:restriction base="xs:string">
+	       				<xs:pattern value="fs_required|passexp_required|fs_optional|mfaauth_required|fp_required|ms_optional|pa_required|pa_optional|tfatemp_required|tfatemp_optional|tfaauth_optional|tfaauth_required|invite_required|invite_optional|smartsignin_optional|smartsignin_required|customauth_required|customauth_optional|signup_required|actrefToken_optional|oauth_required|mobileLogin_required"/>
+        			</xs:restriction>
+     			</xs:simpleType>
+     		</xs:attribute>
+     		<xs:attribute name="reauth-response">
+				<xs:simpleType>
+       				<xs:restriction base="xs:string">
+	       				<xs:pattern value="code"/>
+        			</xs:restriction>
+     			</xs:simpleType>
+     		</xs:attribute>
+     		<xs:attribute name="pauth" type="xs:boolean"/>
+     		<xs:attribute name="captcha-threshold" type="xs:integer"/>
+     		<xs:attribute name="block-threshold" type="xs:integer"/>
+     		<xs:attribute name="update-validationcount" type="xs:boolean"/>     		
+     		<xs:attribute name="iam-operation">
+				<xs:simpleType>
+       				<xs:restriction base="xs:string">
+	       				<xs:pattern value="unconfirmed|tfa-verify|pass-expired"/>
+        			</xs:restriction>
+     			</xs:simpleType>
+     		</xs:attribute>
+     		<xs:attribute name="https" type="xs:boolean"/>
+     		<xs:attribute name="time" type="xs:string"/>
+     		<xs:attribute name="mobile" type="xs:boolean"/>     
+     		<xs:attribute name="user-needed" type="xs:boolean"/>
+     		<xs:attribute name="reauth" type="xs:boolean"/>		
+			<xs:attribute name="block-referrer" type="xs:boolean"/>
+		</xs:attributeGroup>
+	</xs:redefine>
+</xs:schema>
+

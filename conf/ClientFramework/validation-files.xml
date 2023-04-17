@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<data>
+	<ValidationFiles FILE_NO="ValidationFiles:FILE_NO:validator_rules" FILE_NAME="/framework/conf/validator-rules.xml"/>
+</data>

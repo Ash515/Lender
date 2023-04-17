@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id$ -->
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security.xsd">
+
+	<!-- Default Request Headers (including Cookies)-->
+	<default-request-headers>
+	 	<headers>
+	 			<header name="origin" regex="url" />
+	        	<header name="host" regex="host_regex" />
+               	<header name="accept" regex="accept_regex" split=","/>
+               	<header name="accept-encoding" regex="accept_encoding_regex" split=","/>
+               	<header name="accept-language" regex="accept_language_regex" split=","/>
+               	<header name="accept-datetime" regex="date_regex" />
+               	<header name="content-type" regex="content_type_regex" />
+               	<header name="content-length" type="int" />
+               	<header name="if-match" regex="if-match_regex" />
+               	<header name="if-none-match" regex="if-match_regex" />
+                <header name="connection" regex="connection_regex" />
+                <header name="authorization" regex="authorization_regex" secret="true" />
+                <header name="z-authorization" regex="authorization_regex" secret="true" />
+                <header name="proxy-authorization" regex="authorization_regex" secret="true"/>
+                <header name="if-modified-since" regex="date_regex" />
+                <header name="if-unmodified-since" regex="date_regex" />
+                <header name="referer" regex="serviceurl" />
+                <header name="upgrade" regex="upgrade_regex" />
+                <header name="pragma" regex="pragma_regex" />
+                <header name="cache-control" regex="cache_control_regex" />
+                <header name="transfer-encoding" regex="transfer_encoding_regex" />
+                <header name="remote_user_ip" regex="ipaddress" />
+                                <!-- CORS -->
+                <header name="access-control-request-method" regex="http_method" />
+                				<!-- SAS -->
+                <header name="lb_ssl_remote_ip" regex="ipaddress" />
+                <header name="lb_ssl_ciphers" regex="ciphertext" />
+                <header name="lb_http_version" regex="http_version" />
+                <header name="lb_sni" regex="host_regex" />
+                                <!--  web sockets -->
+                <header name="sec-websocket-key" regex="websocket_key_regex" />
+                <header name="sec-websocket-extensions" regex="websocket_extensions_regex"/>
+                <header name="sec-websocket-accept" regex="websocket_key_regex" />
+                <header name="sec-websocket-version" type="int" />
+
+                <cookies>
+                			<!-- IAM -->
+                	<cookie name="cookie-uid" regex="alphanumeric" secret="true" />
+                	<cookie name="_iamadt" regex="hexvalue" secret="true" max-len="128"/>
+                	<cookie name="ZAID_iamadt" regex="hexvalue" secret="true"/>
+                	<cookie name="_iambdt" regex="hexvalue" secret="true" max-len="128"/>
+                	<cookie name="_imtrem" type="long" secret="true"/>
+                	<cookie name="_ceg.s" regex="alphanumeric" />
+                	<cookie name="_ceg.u" regex="alphanumeric" />
+                	<cookie name="IAMAGENTTICKET" regex="iamagent_ticket_regex" secret="true"/>
+                	<cookie name="LOCALZOHOIAMAGENTTICKET" regex="iamagent_ticket_regex" secret="true"/>
+                	<cookie name="IAMEU1AGENTTICKET" regex="iamagent_ticket_regex" secret="true" />
+                	<cookie name="IAMAGENTTICKET_secureonly" type="boolean" />
+                	<cookie name="IAMAGENTTICKET_securedomain" type="boolean" />
+                	<cookie name="is_pfx" type="boolean" />
+                	<cookie name="dcl_pfx" regex="country_code" />
+                	<cookie name="dcl_bd" regex="domain" />
+                			<!-- WMS / chat --> 
+                	<cookie name="wmsown" type="long" />
+                	<cookie name="com_chat_owner" type="long" secret="true" />
+                	<cookie name="CT_CSRF_TOKEN" regex="csrf_cookie_value" secret="true" max-len="128" />
+                	<cookie name="x-tkp-domain" regex="domain" />
+                	<cookie name="x-tkp-token" regex="tokenpair" secret="true" /> 
+                	<cookie name="VOcon" regex="nullstring" />
+                	<cookie name="VOwmsuihide" regex="nullstring" />
+                	 		<!-- google analytics -->
+                	<cookie name="_utma" regex="google_utma_regex" />
+                	<cookie name="_utmz" regex="google_utmz_regex" max-len="300" />
+              	</cookies>
+                
+   	 	</headers>
+	 </default-request-headers>
+
+</security>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+
+<!DOCTYPE extended-conf-files [
+<!ENTITY product-config SYSTEM "${product.config}">
+<!ENTITY customer-config SYSTEM "${customer.config}">
+]>
+
+<persistence-configurations>
+
+   <!--
+    * The below attribute enables configuring the class to be used for
+    * Sequence generations. 
+    -->
+    <configuration name="SeqGenTypeVsClass" value="">
+        <property name="INTEGER" value="com.adventnet.db.persistence.IntegerSequenceGenerator"/>
+        <property name="BIGINT" value="com.adventnet.db.persistence.LongSequenceGenerator"/>
+    </configuration>
+    <configuration name="onSAS" value="false"/>
+    <configuration name="TablesWithoutUVGColsInPK" value="">
+        <data value="SeqGenState"/>
+        <data value="TableDSMap"/>
+    </configuration>
+    <configuration name="DBName" value="postgres"/>
+    <configuration name="StartDBServer" value="false"/>
+    <configuration name="CaseSensitiveInCriteria" value="true"/>
+
+    <configuration name="CacheRepository" value="com.adventnet.persistence.cache.CacheRepositoryImpl"/>
+    <configuration name="TransactionTimeOut" value="300"/>
+    <configuration name="Preprocessor" value=""/>
+    
+    <configuration name="cryptAlgo" value="aes256"/> 
+   	<configuration name="cryptClass" value="">
+	   	<property name="aes128" value="com.zoho.framework.utils.crypto.EnDecryptAES128Impl"/>		
+    	   	<property name="aes256" value="com.zoho.framework.utils.crypto.EnDecryptAES256Impl"/>		
+   		<property name="blowfish" value="com.zoho.framework.utils.crypto.EnDecryptBlowfishImpl"/>
+    	</configuration>
+    
+    <configuration name="domainName" value="domainName"/>
+
+	<!-- This is for Backup and Restore -->
+    <configuration name="BackupRestore" value="">
+    	<property name="BackupRestoreListener" value=""/>
+		<property name="BackupRestoreSanityChecker" value=""/>
+		<property name="backup.nonmickey.tables" value="false"/>
+    </configuration>
+    
+    <!-- This is for applications using simple MickeyLite -->
+	
+    <configuration name="DataSourcePlugIn" value="com.adventnet.ds.DefaultDataSourcePlugIn"/>
+    <configuration name="DSAdapter" value="postgres"/>
+
+    <!-- This is for applications using MDS Enabled MickeyLite -->
+    <!--
+    <configuration name="DataSourcePlugIn" value="com.adventnet.ds.adapter.mds.MDSDataSourcePlugIn">
+        <property name="DefaultDSAdapter" value="mysql"/>
+    </configuration>
+    <configuration name="DSAdapter" value="mds"/>
+    -->
+	
+	<!-- This is for applications using MultiWriteSingleRead enabled MickeyLite -->
+   	
+	<configuration name="EnableMWSR" value="false"/>
+    <configuration name="MWSRDataSourcePlugIn" value="com.adventnet.ds.MWSRDataSourcePlugIn"/>
+    
+    <configuration name="mds" value="">
+        <property name="dbadapter" value="com.adventnet.ds.adapter.mds.MDSAdapter"/>
+        <property name="sqlgenerator" value=""/>
+    </configuration>
+    
+    <configuration name="CustomAttributeValidator" value="">
+        <property name="pii" value="com.adventnet.db.persistence.metadata.extended.PIIValidator"/>
+        <property name="maxsize" value="com.adventnet.db.persistence.metadata.extended.MaxSizeValidator"/>
+        <property name="defaultvalue" value="com.adventnet.db.persistence.metadata.extended.DefaultValueValidator"/>
+		<property name="defaultvalidator" value="com.adventnet.db.persistence.metadata.extended.DefaultCAValidator"/>
+    </configuration>
+    
+    <configuration name="piivaluehandler" value="com.adventnet.db.persistence.metadata.extended.DefaultPiiValueHandler"/>
+
+    <configuration name="mysql" value="">
+        <property name="dbadapter" value="com.adventnet.db.adapter.mysql.MysqlDBAdapter"/>
+        <property name="sqlgenerator" value="com.adventnet.db.adapter.mysql.MysqlSQLGenerator"/>
+        <!--property name="sqlgenerator" value="com.adventnet.db.adapter.mysql.Mysql5v6xSQLGenerator"/-->
+        <property name="sqlmodifier" value="com.zoho.mickey.db.mysql.MysqlSQLModifier"/>
+        <property name="backuphandler" value="com.adventnet.db.adapter.mysql.MysqlBackupHandler"/>
+        <property name="restorehandler" value="com.adventnet.db.adapter.mysql.MysqlRestoreHandler"/>
+	<sql_function_pattern_file value="conf/Persistence/mysql_functionpatterns.txt"/>
+    </configuration>
+    
+    <configuration name="mysql4-1-x" value="">
+        <property name="dbadapter" value="com.adventnet.db.adapter.mysql.MysqlDBAdapter"/>
+        <property name="sqlgenerator" value="com.adventnet.db.adapter.mysql.Mysql4_1xSQLGenerator"/>
+        <property name="backuphandler" value="com.adventnet.db.adapter.mysql.MysqlBackupHandler"/>
+        <property name="restorehandler" value="com.adventnet.db.adapter.mysql.MysqlRestoreHandler"/>
+    </configuration>
+    
+    <configuration name="oracle" value="">
+        <property name="dbadapter" value="com.adventnet.db.adapter.oracle.OracleDBAdapter"/>
+        <property name="sqlgenerator" value="com.adventnet.db.adapter.oracle.OracleSQLGenerator"/>
+        <property name="backuphandler" value=""/>
+        <property name="restorehandler" value=""/>
+    </configuration>
+    
+    <configuration name="firebird" value="">
+        <property name="dbadapter" value="com.adventnet.db.adapter.firebird.FireBirdDBAdapter"/>
+        <property name="sqlgenerator" value="com.adventnet.db.adapter.firebird.FireBirdSQLGenerator"/>
+        <property name="backuphandler" value=""/>
+        <property name="restorehandler" value=""/>
+    </configuration>
+    
+    <configuration name="postgres" value="">
+        <property name="dbusercreator" value="com.zoho.mickey.tools.postgres.CreatePostgresDBUser"/>
+        <property name="dbadapter" value="com.adventnet.db.adapter.postgres.PostgresDBAdapter"/>
+        <property name="sqlgenerator" value="com.adventnet.db.adapter.postgres.PostgresSQLGenerator"/>
+        <property name="sqlmodifier" value="com.zoho.mickey.db.postgres.PostgresSQLModifier"/>
+        <property name="backuphandler" value="com.adventnet.db.adapter.postgres.PostgresBackupHandler"/>
+        <property name="restorehandler" value="com.adventnet.db.adapter.postgres.PostgresRestoreHandler"/>
+	<sql_function_pattern_file value="conf/Persistence/postgres_functionpatterns.txt"/>
+    </configuration>
+    
+    <configuration name="mssql" value="">
+    		<property name="masterkey.password" value="01a8ac542a6c6ed0d694f2ade3448b5f0ae54ca6a2f25b421e83de3e41b66951383aeff7"/>
+		<property name="symmetrickey.name" value="f798e3deb03e9811f8aa0e3ac8752c85c5d91bc73601137bcb63fc8c6cf6972286d1069e"/>
+		<property name="certificate.subject" value="e5ae65819de4aa92f19005c844cf85be5298291b14ca869bfb743ab805723115b4c57fde"/>
+		<property name="certificate.name" value="835d8a4c730a21626ae913faec3848b43849d6d2d95d5a900a6df9d2767f00c4bd9d5afe"/> 
+        <property name="dbadapter" value="com.adventnet.db.adapter.mssql.MssqlDBAdapter"/>
+        <property name="sqlgenerator" value="com.adventnet.db.adapter.mssql.MssqlSQLGenerator"/>
+        <property name="sqlmodifier" value="com.zoho.mickey.db.mssql.MssqlSQLModifier"/>
+        <property name="backuphandler" value="com.adventnet.db.adapter.mssql.MssqlBackupHandler"/>
+        <property name="restorehandler" value="com.adventnet.db.adapter.mssql.MssqlRestoreHandler"/>
+        <sql_function_pattern_file value="conf/Persistence/mssql_functionpatterns.txt"/>
+    </configuration>
+    <configuration name="CryptTag" value="MLITE_ENCRYPT_DECRYPT"/>	
+	<configuration name="ECTag" value="befd53716aeec51ad81e2839213e5a4d374ad1dd50428a04e1d48106391e19e138f0d547"/>
+    
+    <configuration name="OperationHandler" value="com.adventnet.persistence.DefaultOperationHandler">
+        <property name="max-rows-per-operation" value="1000"/>
+        <property name="max-rows-per-table" value="50"/>
+</configuration>
+    <configuration name="StreamingResultSet" value="true"/>
+    <configuration name="CalcNextTimeBasedOnPrevExec" value="false"/>
+	
+	<configuration name="AutoUpgrade" value="">
+		<!--TimerTask-->
+        <property name="ScheduleTimeUnit" value="minutes/hours"/>
+        <property name="SchedulePeriodicity" value="10"/>
+        <!-- Remainder Task schedule Customization -->
+        <property name="RemainderTaskPeriodicity" value="10"/>
+        <!--Handlers-->
+		<property name="PatchInfoProvider" value=""/>
+        <property name="PatchInfoValidator" value=""/>
+		<property name="PatchStatusListener" value=""/>
+        <property name="PatchInstaller" value=""/>
+        <property name="PatchRemainder" value=""/>
+
+        <!--Threshold-->
+		<property name="PatchRetryDownloadCount" value="2"/>
+		<property name="AutoUpgradeThreshold" value="5"/>
+		<property name="PatchRetryValidateCount" value="2"/>
+	</configuration>
+    
+    <!-- This configuration holds control class name used for loading i18n resource bundles -->
+    <!--  
+    <configuration name="resourcebundlecontrol" value="com.adventnet.i18n.HierarchicalResourceBundleControl"/>
+    -->
+    
+   <!--configuration name="DataSourcePlugIn" value="com.zoho.mickey.datasource.MultiDataSourcePlugIn"/-->
+	
+ &product-config;
+ &customer-config;
+    
+</persistence-configurations>
+

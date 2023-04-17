@@ -1,0 +1,528 @@
+/* $Id$ */
+body,table,a,input,p {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* Android Specific Style TO avoid highlight of input box */
+	font-family:"Open sans";
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src:url('../images/opensans/font.eot');
+    src:local('Open Sans'),
+    	url('../images/opensans/font.eot?#iefix') format('eot'),
+        url('../images/opensans/font.woff') format('woff'), 
+        url('../images/opensans/font.ttf') format('truetype'),
+        url('../images/opensans/font.svg#OpenSans-Light') format('svg');
+}
+body {
+	margin: 0px;
+	font-family:"Open sans";
+    font-weight: 400;
+	padding: 0px;
+}
+.bg_one {
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: url('../images/bg.png') transparent;
+	background-size: auto 100%;
+	z-index: -1;
+}
+#main-all {
+	margin: 3% 0px;
+}
+#mainlayout {
+    width: 500px;
+    margin-top: 0px !important;
+    box-sizing: border-box;
+    padding: 50px;
+    margin: 0px auto;
+    background: #fff;
+}
+@media only screen and (max-width : 420px) {
+	#mainlayout {
+		width: 100%;
+	}
+}
+.zlogo {
+    background-image: url(../images/zoho.png);
+	display: block;
+	height: 28px;
+	width: 75px;
+	margin: initial;
+    background-repeat: no-repeat;
+	background-position: 0px;
+	background-size: contain;
+}
+.otheracc-topborder {
+	display: none;
+}
+.title-1 {
+	font-size: 25px;
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: left;
+}
+.title-2 {
+	display:inline-table;
+	margin:15px auto 10px;
+	font-size: 15px;
+    line-height: 24px;
+    text-align: left;
+}
+strong {
+	font-size: 16px;
+}
+.bdre2{
+	display: none;
+	border-bottom:2px solid #000;
+	height:1px;
+	margin:1% auto;
+	width:10%;
+}
+#form-main2 {
+	padding:0px;
+	margin-top:2%;
+}
+.forms {
+	font-family: "Open Sans";
+	width: 100%;
+    background: transparent;
+    height: 36px;
+    outline: none;
+    font-size: 15px;
+    border: none;
+    border-bottom: 2px solid #EFEFEF;
+    margin-bottom: 15px;
+}
+.forms-input {
+	height: 40px;
+    border: none;
+    width: 100%;
+    background: transparent;
+    margin-left: 0px;
+    outline: none;
+    font-size: 16px;
+    color: #000;
+    font-weight: 500;
+    top: 10px;
+}
+#signup-main {
+	display: inline-block;
+}
+#signup-main-3 {
+	background:none repeat scroll 0 0 #f04b2f;
+	color:#FFF;
+	font-size:13px;
+	line-height:36px;
+	height:34px;
+	text-align:center;
+	border-radius:2px;
+	padding: 0px 15px 0px 15px;
+	text-decoration:none;
+	margin-left: 0%;
+	font-weight: 600;
+	margin: 0px auto;
+	text-transform: uppercase;
+}
+#signup-main-3:hover {
+	background-color:#e9452a;
+	cursor:pointer;
+}
+.errmsg {
+	font-size:13px;
+	display: none;
+	padding: 2px;
+	border: 0px none transparent;
+	color: #F62217;
+	margin-top:15px;
+	text-align: left;
+}
+.assoc_div {
+	font-size: 15px;
+	margin-top: 35px;
+	text-align: center;
+}
+.profile-img{
+	padding-right: 15px;
+}
+.ortext {
+	display: table;
+	margin: 0px auto;
+	color: #888;
+    font-size: 13px;
+    font-weight: normal;
+    height: 0;
+    padding: 0 15px;
+    text-transform: uppercase;
+    background-color: #fff;
+}
+.openidcontainer {
+    border-bottom: 3px solid #d5d5d5;
+    clear: both;
+    margin: 0% auto;
+    width: 25%;
+	height:20px;
+}
+.orelement {
+	display: none;
+    border-bottom: 3px solid #d5d5d5;
+    clear: both;
+    margin: 0% auto;
+    width: 20%;
+	height:9px;
+}
+#agree {
+    display: inline-block;
+    float: left;
+    height: 18px;
+    width: 18px;
+    margin: 0px;
+    margin-right: 10px;
+    opacity: 0;
+}
+.change_dc
+{
+	font-size: 13px;
+    line-height: 24px;
+    margin-top: 20px;
+}
+.change_dc_btn
+{
+	color:#0097fa;
+	cursor:pointer;
+}
+#createremote {
+	margin: 2% auto;
+}
+#sub-title{
+	font-size: 13px;
+	color:#000;
+	margin-top: 15px;
+	text-align: center;
+	line-height: 20px;
+}
+.signup-country {
+	font-family: "Open Sans";
+	width: 100%;
+    background: transparent;
+    height: 36px;
+    outline: none;
+    font-size: 15px;
+    border: none;
+    border-bottom: 2px solid #EFEFEF;
+}
+.news-signup, .tos-signup {
+    -moz-user-select: none;
+    cursor: pointer;
+    outline-style: none;
+}
+.za-country-container {
+	margin-top:10px;
+}
+.za-newsletter-container label ,.za-tos-container label{
+	color: #000;
+	font-size: 13px;
+    display: block;
+    cursor: pointer;
+}
+.za-tos-container, .za-newsletter-container {
+    margin-top: 20px;
+    font-size: 13px;
+    text-align: left;
+    position: relative;
+    line-height: 20px;
+}
+.za-tos-container a, .za-newsletter-container a {
+	text-decoration: none;
+    color: #0097fa;
+}
+.or_text_container {
+	border-bottom: 2px solid #d5d5d5;
+    clear: both;
+    width: 100%;
+    height: 9px;
+    margin: 20px 0px 0px 0px;
+    border-top: 0px none transparent;
+}
+.agree_check {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #EFEFEF;
+    border-radius: 1px;
+    box-sizing: border-box;
+    position: absolute;
+    left: 2px;
+    top: 3px;
+}
+.agree_check:after{
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 3px;
+    border: 2px solid #000;
+    border-right: none;
+    border-top: none;
+    transform: rotate(-45deg);
+    position: relative;
+    top: -8px;
+    left: 1px;
+    border-radius: 2px;
+    opacity:0;
+}
+#agree:checked ~ .agree_check:after {
+	opacity:1;
+}
+#create {
+	cursor: pointer;
+	display: block;
+	width: 100%;
+	border-radius: 4px;
+	font-size: 14px;
+	font-weight: 600;
+	outline: none;
+	border: none;
+	margin: auto;
+	text-transform: uppercase;
+	transition: all .2s ease-in-out;
+	margin-top:25px;
+	box-shadow: 0px 2px 2px #fff;
+	background-color: #159AFF;
+	color: #fff;
+	text-align: center;
+	padding: 10px 0px;
+}
+#create:hover {
+	box-shadow: 0px 2px 2px rgba(90, 183, 254, 0.2);
+}
+.signin_frame {
+	border: none;
+    width: 100%;
+    margin: 0px auto;
+    box-sizing: border-box;
+    padding: 0px 18px;
+}
+#assoc_btn {
+	display: inline-block;
+    line-height: 36px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 2px;
+    font-size: 13px;
+    padding: 0px 10px;
+    margin-top: 20px;
+    font-weight: 600;
+    background: #eeeeee;
+    outline: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    width:100%;
+    color: #717171;
+    margin-bottom: 0px;
+    text-align: center;
+}
+#create_div_button {
+	display: none;
+    line-height: 36px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-size: 13px;
+    padding: 0px 0px;
+    font-weight: 600;
+    border: none;
+    background: #eeeeee;
+    outline: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: #717171;
+    width: 70%;
+    margin: 0px auto;
+    text-align: center;
+}
+/* associate page css start */
+.signin_head, .zoho_logo, .rightside_box, .line {
+	display: none !important;
+}
+.signin_container {
+	width: auto !important;
+	box-shadow: none !important;
+	height: auto !important;
+}
+.signin_box {
+	width: 100% !important;
+	min-height: auto !important;
+	padding: 0px !important;
+}
+
+
+.select2-container {
+	box-sizing: border-box;
+	display: inline-block;
+	margin: 0;
+	z-index:2;
+	position: relative;
+	vertical-align: middle;
+}
+.select2-hidden-accessible {
+    border: 0!important;
+    clip: rect(0 0 0 0)!important;
+    -webkit-clip-path: inset(50%)!important;
+    clip-path: inset(50%)!important;
+    height: 1px!important;
+    overflow: hidden!important;
+    padding: 0!important;
+    position: absolute!important;
+    width: 1px!important;
+    white-space: nowrap!important;
+}
+.select2-results__option--highlighted {
+	background: #F4F6F8;
+	color: #000000;
+	cursor: pointer;
+}
+
+.select2-results__option {
+	list-style-type: none;
+	height: 40px;
+	box-sizing: border-box;
+	line-height: 16px;
+	font-family: Roboto, sans-serif;
+	font-size: 14px;
+	overflow: hidden;
+  	padding: 12px 18px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.select2-results__options[aria-multiselectable*="true"] .select2-results__option
+{
+	white-space: normal;
+    text-overflow: unset;
+}
+#select2-invite_more_member-results .select2-results__option,#select2-select_member_email-results .select2-results__option
+{
+	height: 60px;
+	padding:12px 15px;
+}
+.select2-dropdown {
+	display: inline-block;
+}
+
+.select2-search__field {
+    width: calc(100% - 20px);
+    height: 32px;
+    border: none;
+    outline: none;
+    background: #F7F7F7;
+    border-radius: 2px;
+    margin: 10px;
+    font-size: 14px;
+    padding: 10.5px 8px;
+}
+
+.select2-selection__rendered {
+	max-width: calc(100% - 30px);
+	overflow: hidden;
+	display: block;
+	text-overflow: ellipsis;
+	font-size: 15px;
+	color: #000000;
+	line-height: 28px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow
+	{
+	height: 26px;
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	width: 20px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b
+	{
+	border-color: transparent #E6E6E6 #E6E6E6 transparent;
+	border-style: solid;
+	transform: rotate(45deg);
+	border-width: 2px;
+	height: 5px;
+	width: 5px;
+	position: relative;
+	top: 9px;
+	border-radius: 1px;
+	display: inline-block;
+	margin-top: 6px;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered
+{
+	display: block;
+    padding-right: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 44px;
+    padding-left:12px;
+}
+
+.select2-container .select2-selection--single {
+	cursor: pointer;
+	display: block;
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+.select2-selection__arrow {
+	float: right;
+	height: 100%;
+	width: 10px;
+	position: relative;
+	top: -18px;
+}
+
+.select2-selection:hover {
+	cursor: pointer;
+}
+
+.selection {
+	-webkit-user-select: none;
+	display: block;
+	white-space: nowrap;
+}
+
+.select2-results__options {
+	padding-left: 0px;
+	max-height: 200px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	background: white;
+}
+
+.select2-container--open .select2-selection {
+	z-index: 10;
+}
+
+.select2-container--open {
+    z-index: 10;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+    width: auto;
+    box-sizing: border-box;
+}
+
+.select2-container .select2-selection--single {
+    height: 44px;
+    font-size: 14px;
+    outline:none;
+	background: #F2F5F7;
+}
+.select2-search--hide
+{
+	display:none;
+}
+/* associate page css end */

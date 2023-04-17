@@ -1,0 +1,232 @@
+<IAMISDCodes>
+<IAMISDCode country_name="Afghanistan" country_code="AF" dialing_code="93" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Albania" country_code="AL" dialing_code="355" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Algeria" country_code="DZ" dialing_code="213" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="American Samoa" country_code="AS" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Andorra" country_code="AD" dialing_code="376" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Angola" country_code="AO" dialing_code="244" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Anguilla" country_code="AI" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Antigua and Barbuda" country_code="AG" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Argentina" country_code="AR" dialing_code="54" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Armenia" country_code="AM" dialing_code="374" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Aruba" country_code="AW" dialing_code="297" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Ascension" country_code="AC" dialing_code="247" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Australia" country_code="AU" dialing_code="61" newsletter_subscription_mode="3"/>
+<IAMISDCode country_name="Australian External Territories" country_code="AX" dialing_code="672" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Austria" country_code="AT" dialing_code="43" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Azerbaijan" country_code="AZ" dialing_code="994" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Bahamas" country_code="BS" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Bahrain" country_code="BH" dialing_code="973" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Bangladesh" country_code="BD" dialing_code="880" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Barbados" country_code="BB" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Belarus" country_code="BY" dialing_code="375" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Belgium" country_code="BE" dialing_code="32" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Belize" country_code="BZ" dialing_code="501" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Benin" country_code="BJ" dialing_code="229" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Bermuda" country_code="BM" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Bhutan" country_code="BT" dialing_code="975" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Bolivia" country_code="BO" dialing_code="591" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Bosnia and Herzegovina" country_code="BA" dialing_code="387" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Botswana" country_code="BW" dialing_code="267" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Brazil" country_code="BR" dialing_code="55" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="British Virgin Islands" country_code="VG" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Brunei Darussalam" country_code="BN" dialing_code="673" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Bulgaria" country_code="BG" dialing_code="359" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Burkina Faso" country_code="BF" dialing_code="226" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Burundi" country_code="BI" dialing_code="257" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Cambodia" country_code="KH" dialing_code="855" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Cameroon" country_code="CM" dialing_code="237" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Canada" country_code="CA" dialing_code="1" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Cape Verde" country_code="CV" dialing_code="238" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Cayman Islands" country_code="KY" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Central African Republic" country_code="CF" dialing_code="236" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Chad" country_code="TD" dialing_code="235" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Chile" country_code="CL" dialing_code="56" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="China" country_code="CN" dialing_code="86" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Colombia" country_code="CO" dialing_code="57" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Comoros" country_code="KM" dialing_code="269" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Congo" country_code="CG" dialing_code="242" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Cook Islands" country_code="CK" dialing_code="682" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Costa Rica" country_code="CR" dialing_code="506" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Cote d'Ivoire" country_code="CI" dialing_code="225" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Croatia" country_code="HR" dialing_code="385" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Cuba" country_code="CU" dialing_code="53" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Cyprus" country_code="CY" dialing_code="357" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Czech Republic" country_code="CZ" dialing_code="420" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Democratic Republic of the Congo" country_code="CD" dialing_code="243" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Denmark" country_code="DK" dialing_code="45" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Diego Garcia" country_code="DG" dialing_code="246" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Djibouti" country_code="DJ" dialing_code="253" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Dominica" country_code="DM" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Dominican Republic" country_code="DO" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="East Timor" country_code="TL" dialing_code="670" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Ecuador" country_code="EC" dialing_code="593" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Egypt" country_code="EG" dialing_code="20" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="El Salvador" country_code="SV" dialing_code="503" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Equatorial Guinea" country_code="GQ" dialing_code="240" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Eritrea" country_code="ER" dialing_code="291" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Estonia" country_code="EE" dialing_code="372" newsletter_subscription_mode="1"/>
+<IAMISDCode country_name="Ethiopia" country_code="ET" dialing_code="251" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Falkland Islands" country_code="FK" dialing_code="500" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Faroe Islands" country_code="FO" dialing_code="298" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Fiji" country_code="FJ" dialing_code="679" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Finland" country_code="FI" dialing_code="358" newsletter_subscription_mode="1"/>
+<IAMISDCode country_name="France" country_code="FR" dialing_code="33" newsletter_subscription_mode="1"/>
+<IAMISDCode country_name="French Guiana" country_code="GF" dialing_code="594" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="French Polynesia" country_code="PF" dialing_code="689" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Gabon" country_code="GA" dialing_code="241" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Gambia" country_code="GM" dialing_code="220" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Georgia" country_code="GE" dialing_code="995" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Germany" country_code="DE" dialing_code="49" newsletter_subscription_mode="3"/>
+<IAMISDCode country_name="Ghana" country_code="GH" dialing_code="233" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Gibraltar" country_code="GI" dialing_code="350" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Greece" country_code="GR" dialing_code="30" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Greenland" country_code="GL" dialing_code="299" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Grenada" country_code="GD" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Guadeloupe" country_code="GP" dialing_code="590" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Guam" country_code="GU" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Guatemala" country_code="GT" dialing_code="502" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Guinea" country_code="GN" dialing_code="224" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Guinea-Bissau" country_code="GW" dialing_code="245" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Guyana" country_code="GY" dialing_code="592" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Haiti" country_code="HT" dialing_code="509" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Honduras" country_code="HN" dialing_code="504" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Hong Kong" country_code="HK" dialing_code="852" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Hungary" country_code="HU" dialing_code="36" newsletter_subscription_mode="1"/>
+<IAMISDCode country_name="Iceland" country_code="IS" dialing_code="354" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="India" country_code="IN" dialing_code="91" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Indonesia" country_code="ID" dialing_code="62" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Iran" country_code="IR" dialing_code="98" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Iraq" country_code="IQ" dialing_code="964" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Ireland" country_code="IE" dialing_code="353" newsletter_subscription_mode="1"/>
+<IAMISDCode country_name="Israel" country_code="IL" dialing_code="972" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Italy" country_code="IT" dialing_code="39" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Jamaica" country_code="JM" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Japan" country_code="JP" dialing_code="81" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Jordan" country_code="JO" dialing_code="962" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Kazakhstan" country_code="KZ" dialing_code="7" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Kenya" country_code="KE" dialing_code="254" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Kiribati" country_code="KI" dialing_code="686" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Kosovo" country_code="XK" dialing_code="383" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Kuwait" country_code="KW" dialing_code="965" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Kyrgyzstan" country_code="KG" dialing_code="996" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Laos" country_code="LA" dialing_code="856" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Latvia" country_code="LV" dialing_code="371" newsletter_subscription_mode="1"/>
+<IAMISDCode country_name="Lebanon" country_code="LB" dialing_code="961" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Lesotho" country_code="LS" dialing_code="266" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Liberia" country_code="LR" dialing_code="231" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Libya" country_code="LY" dialing_code="218" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Liechtenstein" country_code="LI" dialing_code="423" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Lithuania" country_code="LT" dialing_code="370" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Luxembourg" country_code="LU" dialing_code="352" newsletter_subscription_mode="1"/>
+<IAMISDCode country_name="Macao" country_code="MO" dialing_code="853" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Macedonia" country_code="MK" dialing_code="389" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Madagascar" country_code="MG" dialing_code="261" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Malawi" country_code="MW" dialing_code="265" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Malaysia" country_code="MY" dialing_code="60" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Maldives" country_code="MV" dialing_code="960" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Mali" country_code="ML" dialing_code="223" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Malta" country_code="MT" dialing_code="356" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Marshall Islands" country_code="MH" dialing_code="692" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Martinique" country_code="MQ" dialing_code="596" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Mauritania" country_code="MR" dialing_code="222" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Mauritius" country_code="MU" dialing_code="230" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Mexico" country_code="MX" dialing_code="52" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Micronesia" country_code="FM" dialing_code="691" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Moldova" country_code="MD" dialing_code="373" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Monaco" country_code="MC" dialing_code="377" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Mongolia" country_code="MN" dialing_code="976" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Montenegro" country_code="ME" dialing_code="382" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Montserrat" country_code="MS" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Morocco" country_code="MA" dialing_code="212" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Mozambique" country_code="MZ" dialing_code="258" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Myanmar" country_code="MM" dialing_code="95" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Namibia" country_code="NA" dialing_code="264" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Nauru" country_code="NR" dialing_code="674" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Nepal" country_code="NP" dialing_code="977" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Netherlands" country_code="NL" dialing_code="31" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Netherlands Antilles" country_code="AN" dialing_code="599" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="New Caledonia" country_code="NC" dialing_code="687" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="New Zealand" country_code="NZ" dialing_code="64" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Nicaragua" country_code="NI" dialing_code="505" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Niger" country_code="NE" dialing_code="227" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Nigeria" country_code="NG" dialing_code="234" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Niue" country_code="NU" dialing_code="683" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="North Korea" country_code="KP" dialing_code="850" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Northern Mariana Islands" country_code="MP" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Norway" country_code="NO" dialing_code="47" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Oman" country_code="OM" dialing_code="968" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Pakistan" country_code="PK" dialing_code="92" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Palau" country_code="PW" dialing_code="680" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Palestine" country_code="PS" dialing_code="970" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Panama" country_code="PA" dialing_code="507" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Papua New Guinea" country_code="PG" dialing_code="675" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Paraguay" country_code="PY" dialing_code="595" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Peru" country_code="PE" dialing_code="51" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Philippines" country_code="PH" dialing_code="63" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Poland" country_code="PL" dialing_code="48" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Portugal" country_code="PT" dialing_code="351" newsletter_subscription_mode="1"/>
+<IAMISDCode country_name="Puerto Rico" country_code="PR" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Qatar" country_code="QA" dialing_code="974" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Reunion" country_code="RE" dialing_code="262" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Romania" country_code="RO" dialing_code="40" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Russia" country_code="RU" dialing_code="7" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Rwanda" country_code="RW" dialing_code="250" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Saint Helena" country_code="SH" dialing_code="290" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Saint Kitts and Nevis" country_code="KN" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Saint Lucia" country_code="LC" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Saint Pierre and Miquelon" country_code="PM" dialing_code="508" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Saint Vincent and Grenadines" country_code="VC" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Samoa" country_code="WS" dialing_code="685" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="San Marino" country_code="SM" dialing_code="378" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Sao Tome and Principe" country_code="ST" dialing_code="239" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Saudi Arabia" country_code="SA" dialing_code="966" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Senegal" country_code="SN" dialing_code="221" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Serbia" country_code="RS" dialing_code="381" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Seychelles" country_code="SC" dialing_code="248" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Sierra Leone" country_code="SL" dialing_code="232" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Singapore" country_code="SG" dialing_code="65" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Slovakia" country_code="SK" dialing_code="421" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Slovenia" country_code="SI" dialing_code="386" newsletter_subscription_mode="1"/>
+<IAMISDCode country_name="Solomon Islands" country_code="SB" dialing_code="677" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Somalia" country_code="SO" dialing_code="252" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="South Africa" country_code="ZA" dialing_code="27" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="South Korea" country_code="KR" dialing_code="82" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Spain" country_code="ES" dialing_code="34" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Sri Lanka" country_code="LK" dialing_code="94" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Sudan" country_code="SD" dialing_code="249" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Suriname" country_code="SR" dialing_code="597" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Swaziland" country_code="SZ" dialing_code="268" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Sweden" country_code="SE" dialing_code="46" newsletter_subscription_mode="1"/>
+<IAMISDCode country_name="Switzerland" country_code="CH" dialing_code="41" newsletter_subscription_mode="2"/>
+<IAMISDCode country_name="Syria" country_code="SY" dialing_code="963" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Taiwan" country_code="TW" dialing_code="886" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Tajikistan" country_code="TJ" dialing_code="992" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Tanzania" country_code="TZ" dialing_code="255" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Thailand" country_code="TH" dialing_code="66" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Togo" country_code="TG" dialing_code="228" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Tokelau" country_code="TK" dialing_code="690" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Tonga" country_code="TO" dialing_code="676" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Trinidad and Tobago" country_code="TT" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Tunisia" country_code="TN" dialing_code="216" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Turkey" country_code="TR" dialing_code="90" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Turkmenistan" country_code="TM" dialing_code="993" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Turks and Caicos Islands" country_code="TC" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Tuvalu" country_code="TV" dialing_code="688" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="US Virgin Islands" country_code="VI" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Uganda" country_code="UG" dialing_code="256" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Ukraine" country_code="UA" dialing_code="380" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="United Arab Emirates" country_code="AE" dialing_code="971" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="United Kingdom" country_code="GB" dialing_code="44" newsletter_subscription_mode="1"/>
+<IAMISDCode country_name="United States" country_code="US" dialing_code="1" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Uruguay" country_code="UY" dialing_code="598" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Uzbekistan" country_code="UZ" dialing_code="998" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Vanuatu" country_code="VU" dialing_code="678" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Vatican City" country_code="VA" dialing_code="379" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Venezuela" country_code="VE" dialing_code="58" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Vietnam" country_code="VN" dialing_code="84" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Wallis and Futuna" country_code="WF" dialing_code="681" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Yemen" country_code="YE" dialing_code="967" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Zambia" country_code="ZM" dialing_code="260" newsletter_subscription_mode="0"/>
+<IAMISDCode country_name="Zimbabwe" country_code="ZW" dialing_code="263" newsletter_subscription_mode="0"/>
+</IAMISDCodes>

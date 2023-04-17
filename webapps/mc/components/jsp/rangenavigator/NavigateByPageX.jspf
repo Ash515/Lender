@@ -1,0 +1,276 @@
+<%-- $Id$ --%>
+<%@ page import = "java.util.List, com.adventnet.client.components.rangenavigator.web.NavigationConfig" %>
+<%@ page import = "com.adventnet.i18n.I18N" %>
+<%@ page import = "javax.swing.table.*"%>
+<%@ page import = "com.adventnet.client.util.web.WebClientUtil" %>
+
+<%
+NavigationConfig navigationConfig = viewModel.getNavigationConfig();
+
+
+if(navigationConfig != null)
+{
+%>
+<table cellspacing="0" cellpadding="0" class="navigatorTable" align="center">
+	<tr>
+	<%if(navigationConfig.getNocount(viewContext).equals("true")){%>
+		
+					<!-- This is for nocount -->
+	
+	<%		
+   String Link1="";
+   String Link2="";
+   String Link3="";
+   String Link4="";
+  
+   long n = navigationConfig.getFromIndex();
+	if(navigationConfig.getPageNumber() == 1)
+	{
+		if(!(navigationConfig.getToIndex() < navigationConfig.getPageNumber()))
+		{
+   	 		n=navigationConfig.getFromIndex();
+		}
+		else
+		{
+			n = 0;
+		}
+	}
+		
+
+   String NoCountNavigHtml="";
+   int ToIndex=(int)navigationConfig.getToIndex();
+   int pageNo=navigationConfig.getPageNumber()-1;   
+ 
+  // Commented the upcoming block. Since the ToIndex has been calculated while constructing the tableModel itself, so it is not necessary to handle in all jsp. 
+   
+/*    if(navigationConfig.getPageNumber() != 1)
+	{
+		 if(navigationConfig.getPageLength() < tableModel.getRowCount() )
+			{
+				ToIndex=(int)navigationConfig.getToIndex()-1;
+			}
+	}
+ */ 
+
+
+  boolean showNext = false;
+  if(navigationConfig.getPageLength() < navigationConfig.getActualPageLength())
+  {
+	showNext = true;
+  }
+	Link1="<a href=\"javascript:showRange('"+uniqueId+"','"+navigationConfig.getPreviousPageIndex()+"','"+pageNo+"')\">";
+  if(navigationConfig.getPageNumber() == 1)
+   {
+   
+	Link1=Link1+"</a>";
+   }
+  else
+   {
+	Link2="</a>";
+   }
+
+  if(navigationConfig.getPageLength() < tableModel.getRowCount() )
+   {
+   	
+	Long sum=navigationConfig.getPageLength() + navigationConfig.getFromIndex();
+	Link3="<a href=\"javascript:showRange('"+uniqueId+"','" + sum + "')\">";  
+	Link4="</a>";
+   }
+ 
+   NoCountNavigHtml=com.adventnet.client.tpl.TemplateAPI.givehtml("NavigationOfNoCountTable2",null,new Object[][] {{"FromIndex",n},{"ToIndex",ToIndex},{"Link1",Link1},{"Link2",Link2},{"Link3",Link3},{"Link4",Link4},{"themeDir",themeDir}});
+
+%>
+  <%out.print(NoCountNavigHtml);//NO OUTPUTENCODING%><%--NO OUTPUTENCODING --%>
+
+			<!--upto this-->
+	
+	<%}else{%>
+				<td width="25%" nowrap align="left" class="navigatorDetailsColumn"><%out.print(IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.Showing")));//NO OUTPUTENCODING%> : <%out.print(navigationConfig.getFromIndex());//NO OUTPUTENCODING%>&nbsp;<%out.print(IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.to")));//NO OUTPUTENCODING%>&nbsp;<%out.print(navigationConfig.getToIndex());//NO OUTPUTENCODING%>&nbsp;<%out.print(IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.of")));//NO OUTPUTENCODING%>&nbsp;<%out.print(navigationConfig.getTotalRecords());//NO OUTPUTENCODING%></td><%--NO OUTPUTENCODING --%>
+				
+			<td nowrap class="navigatorLinksColumn"> 
+			<%if(navigationConfig.getPageNumber() > 1){
+				if(WebClientUtil.isRestful(request) && (1 == 0))
+				{
+				String navigurl = navigationConfig.getNavigURLForFirst(viewContext, request, uniqueId);
+				%>
+				<a  class="navigate_icon" href="javascript:showRangewithStateURL('<%=IAMEncoder.encodeJavaScript(uniqueId)%>','<%=IAMEncoder.encodeJavaScript(navigurl)%>')">
+				<span class="firstButton" alt="First" border="0" align = "ABSMIDDLE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				</a>
+				<%
+				navigurl = navigationConfig.getNavigURLForPrevious(viewContext,request, uniqueId);
+				%>
+				<a class="navigate_icon" href="javascript:showRangewithStateURL('<%=IAMEncoder.encodeJavaScript(uniqueId)%>','<%=IAMEncoder.encodeJavaScript(navigurl)%>')">
+				<span class="previousButton" alt="Previous" border="0" align = "ABSMIDDLE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				</a>|
+			<%
+				}
+				else
+				{
+					%>
+				<a class="navigate_icon" href="javascript:showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>','<%out.print(navigationConfig.getFirstPageIndex());//NO OUTPUTENCODING%>','1')"><span class="firstButton" alt="First" border="0" align = "ABSMIDDLE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a><%--NO OUTPUTENCODING --%>
+				<a class="navigate_icon" href="javascript:showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>','<%out.print(navigationConfig.getPreviousPageIndex());//NO OUTPUTENCODING%>','<%out.print(navigationConfig.getPageNumber() - 1);//NO OUTPUTENCODING%>')"><span class="previousButton" alt="Previous" border="0" align = "ABSMIDDLE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a><%--NO OUTPUTENCODING --%>|
+					<%
+					
+				}
+			}
+			if(navigationConfig.getPageNumber() > 0){
+			%>
+				<%=IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.Page"))%> :
+				<%
+				for(int i = navigationConfig.getStartLinkIndex();  i <= navigationConfig.getEndLinkIndex(); i++){
+					if(navigationConfig.getPageNumber() == i){
+						%><span>[<%=i%>]</span><%
+					}
+					else {
+							if(WebClientUtil.isRestful(request) && (1 == 0))
+									{
+								String navigurl = navigationConfig.getNavigURLForPageNumber(viewContext,request, uniqueId, i);								
+						%>
+						<a href="javascript:showRangewithStateURL('<%=IAMEncoder.encodeJavaScript(uniqueId) %>','<%=IAMEncoder.encodeJavaScript(navigurl)%>')"><%=i%></a>
+						<%
+									}
+							else
+							{
+								%>
+						<a href="javascript:showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>','<%out.print(((navigationConfig.getPageLength() * (i - 1)) + 1));//NO OUTPUTENCODING%>', '<%out.print(i);//NO OUTPUTENCODING%>')"><%out.print(i);//NO OUTPUTENCODING%></a><%--NO OUTPUTENCODING --%>								
+								<%
+							}
+					}
+				}
+			}
+			if(navigationConfig.getPageNumber() < navigationConfig.getTotalPages()){
+				if(WebClientUtil.isRestful(request) && (1 == 0))
+						{
+				String navigurl = navigationConfig.getNavigURLForNext(viewContext,request, uniqueId);
+				%>
+				|<a class="navigate_icon" href="javascript:showRangewithStateURL('<%=IAMEncoder.encodeJavaScript(uniqueId)%>','<%=IAMEncoder.encodeJavaScript(navigurl)%>')">
+				<span class="nextButton" alt="Next" border="0" align = "ABSMIDDLE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+				<%
+					navigurl = navigationConfig.getNavigURLForLast(viewContext,request, uniqueId);
+				%>
+				<a class="navigate_icon" href="javascript:showRangewithStateURL('<%=IAMEncoder.encodeJavaScript(uniqueId)%>','<%=IAMEncoder.encodeJavaScript(navigurl)%>')">
+				<span class="lastButton" alt="Last" border="0" align = "ABSMIDDLE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				</a>
+				<%
+						}
+				else
+				{
+				%>
+				|<a class="navigate_icon" href="javascript:showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>', '<%out.print(navigationConfig.getNextPageIndex());//NO OUTPUTENCODING%>','<%out.print(navigationConfig.getPageNumber() + 1);//NO OUTPUTENCODING%>')"><span class="nextButton" alt="Next" border="0" align = "ABSMIDDLE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a><%--NO OUTPUTENCODING --%>
+				<a class="navigate_icon" href="javascript:showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>', '<%out.print(navigationConfig.getLastPageIndex());//NO OUTPUTENCODING%>','<%out.print(navigationConfig.getTotalPages());//NO OUTPUTENCODING%>')"><span class="lastButton" alt="Last" border="0" align = "ABSMIDDLE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a><%--NO OUTPUTENCODING --%>
+				<%
+				}
+			}
+			%>
+		</td>
+		
+		<%}%>
+		
+		
+	<%if(navigationConfig.getNocount(viewContext).equals("true")){%>	
+		
+		<%
+		List rangeList = navigationConfig.getRangeList();
+		if(rangeList != null){
+			int size = rangeList.size();
+		%>
+		<td width="25%" nowrap class="navigatorRangeColumn"> 
+			<%=IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.View_per_page"))%> :
+			<%
+			for(int i = 0; i < size; i++){
+					int previous = 0;
+					if(i > 0)
+					{
+						previous = ((Integer)rangeList.get(i-1)).intValue();
+					}
+					int length = ((Integer) rangeList.get(i)).intValue();
+					long totalRecords = navigationConfig.getTotalRecords();
+					if(previous !=0 &&  !(tableModel.getRowCount()+navigationConfig.getPageLength() > navigationConfig.getPageLength()))
+					{%>
+						<font color="#000000"><%=length%></font>	
+					<%}
+					else
+					{
+						if(length == navigationConfig.getPageLength()){
+						%><span>[<%=length%>]</span><%
+						}
+						else {
+							if(WebClientUtil.isRestful(request) && (1 == 0))
+							{
+							String navigurl = navigationConfig.getNavigURLForPageLength(viewContext,request, uniqueId, length);
+							%>
+								<a href="javascript:showRangewithStateURL('<%=IAMEncoder.encodeJavaScript(uniqueId)%>','<%=IAMEncoder.encodeJavaScript(navigurl)%>')"><%=length%></a>
+							<%
+							}
+							else
+							{
+								%>
+								<a href="javascript:showRangeForLength('<%=IAMEncoder.encodeJavaScript(uniqueId)%>', '<%=length%>')"><%=length%></a>
+								<%
+							}
+						}
+					}
+			}
+			%>
+		</td>
+		<%
+		}
+		%>
+		
+		<%}else{%>
+			
+		<%
+		List rangeList = navigationConfig.getRangeList();
+		if(rangeList != null){
+			int size = rangeList.size();
+		%>
+		<td width="25%" nowrap class="navigatorRangeColumn"> 
+			<%=IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.View_per_page"))%> :
+			<%
+			for(int i = 0; i < size; i++){
+					int previous = 0;
+					if(i > 0)
+					{
+						previous = ((Integer)rangeList.get(i-1)).intValue();
+					}
+					int length = ((Integer) rangeList.get(i)).intValue();
+					long totalRecords = navigationConfig.getTotalRecords();
+					if(previous !=0 && previous >= totalRecords)
+					{%>
+						<font color="#000000"><%=length%></font>	
+					<%}
+					else
+					{
+						if(length == navigationConfig.getPageLength()){
+						%><span>[<%=length%>]</span><%
+						}
+						else {
+							if(WebClientUtil.isRestful(request) && (1 == 0))
+							{
+							String navigurl = navigationConfig.getNavigURLForPageLength(viewContext,request, uniqueId, length);
+							%>
+								<a href="javascript:showRangewithStateURL('<%=IAMEncoder.encodeJavaScript(uniqueId)%>','<%=IAMEncoder.encodeJavaScript(navigurl)%>')"><%=length%></a>
+							<%
+							}
+							else
+							{
+								%>
+								<a href="javascript:showRangeForLength('<%=IAMEncoder.encodeJavaScript(uniqueId)%>', '<%=length%>')"><%=length%></a>
+								<%
+							}
+						}
+					}
+			}
+			%>
+		</td>
+		<%
+		}
+		%>
+		<%}%>
+	</tr>
+</table>
+
+<%
+}
+%>
+

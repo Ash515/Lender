@@ -1,0 +1,1920 @@
+<!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd" >
+<?xml-stylesheet type="text/xsl" href="data-dictionary-transform.xsl"?>
+<!-- $Id$ -->
+<data-dictionary name="ClientFramework">
+	<!-- Menu Tables definition :: START -->
+<table name="Menu">
+    <description>A collection of view/column based functionalities. It can be displayed in various forms like dropdown/toolbar.</description>
+    <columns>
+        <column name="MENUID_NO">
+            <description>Auto generated unique ID to identify the menu.</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+            <uniquevalue-generation>
+                <generator-name>MENU.MENUID_NO</generator-name>
+                <name-column>MENUID</name-column>
+            </uniquevalue-generation>
+        </column>
+        <column name="MENUID">
+            <description> Unique name to identify a menu.</description>
+            <data-type>CHAR</data-type>
+            <max-size>50</max-size>
+            <nullable>false</nullable>
+        </column>
+        <column name="ROLENAME">
+            <description>Authorization role assigned to the menu</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+        </column>
+        <column name="DISPLAYNAME">
+            <description> Name displayed in the UI.</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <unique>false</unique>
+        </column>
+        <column name="HANDLER">
+            <description>Fully qualified name of the handler class which manages the menu item functionalities.
+            It must be a child of {@link com.adventnet.client.action.web.MenuHandler} class</description>
+            <data-type>CHAR</data-type>
+            <max-size>150</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="DESCRIPTION">
+            <description> About the menu.</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="DISPLAYTYPE">
+            <description> Type of the menu to be displayed</description>
+            <data-type>CHAR</data-type>
+            <max-size>25</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+            <allowed-values>
+                <value>IMAGE</value>
+                <value>TEXT</value>
+                <value>BOTH</value>
+            </allowed-values>
+        </column>
+        <column name="DISPLAYSTYLE">
+            <description> Orientation of the menu in the UI. Default: NORMAL</description>
+            <data-type>CHAR</data-type>
+            <max-size>50</max-size>
+            <default-value>NORMAL</default-value>
+            <unique>false</unique>
+            <allowed-values>
+                <value>NORMAL</value>
+                <value>DROPDOWN</value>
+                <value>TEMPLATEDROPDOWN</value>
+            </allowed-values>
+        </column>
+        <column name="MENUTEMPLATE">
+            <description>Template name, if 'DISPLAYSTYLE' is 'TEMPLATEDROPDOWN'</description>
+            <data-type>CHAR</data-type>
+            <max-size>50</max-size>
+            <nullable>true</nullable>
+        </column>
+    </columns>
+    <primary-key name="Menu_PK">
+        <primary-key-column>MENUID_NO</primary-key-column>
+    </primary-key>
+    <unique-keys>
+        <unique-key name="Menu_UK1">
+            <unique-key-column>MENUID</unique-key-column>
+        </unique-key>
+    </unique-keys>
+</table>
+
+<table name="MenuItem">
+    <description>Contains details about how a menu-item is displayed in UI.</description>
+    <columns>
+        <column name="MENUITEMID_NO">
+            <description> Auto generated unique ID of the menu-item.</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+            <uniquevalue-generation>
+                <generator-name>MENUITEM.MENUITEMID_NO</generator-name>
+                <name-column>MENUITEMID</name-column>
+            </uniquevalue-generation>
+        </column>
+        <column name="MENUITEMID">
+            <description> Unique name of the menu-item </description>
+            <data-type>CHAR</data-type>
+            <max-size>50</max-size>
+            <nullable>false</nullable>
+        </column>
+        <column name="ROLENAME">
+            <description>Authorization role assigned to the menu-item</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+        </column>
+        <column name="DISPLAYNAME">
+            <description> Name displayed in the UI</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <unique>false</unique>
+        </column>
+        <column name="DESCRIPTION">
+            <description> About the menu-item </description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="IMAGE">
+            <description>Relative path of the image to be shown as/in menu-item </description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="CONFIRMSTRING">
+            <description> Customizable message to be shown, to confirm the chosen action.</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="IMAGECSSCLASS">
+            <description>CSS class inplace of image</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="ATLEASTSELECTONESTRING">
+            <description> Customizable message to be shown, when no rows are selected while invoking the menu-item</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="TITLE">
+            <description> Customizable message to be shown for the onmouseover event of the menu item </description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="LINKOPTION">
+            <description> By default the menu-item invocation will call a javascript function.
+             If given as 'LINK' then menu-item action is triggered using the link.</description>
+            <data-type>CHAR</data-type>
+            <max-size>50</max-size>
+            <default-value>JAVASCRIPT</default-value>
+            <unique>false</unique>
+            <allowed-values>
+                <value>JAVASCRIPT</value>
+                <value>LINK</value>
+            </allowed-values>
+        </column>
+        <column name="CSSCLASS">
+            <description> CSS class for the menu-item </description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="TITLEFORDISABLE">
+            <description> Customizable message to be shown for the onmouseover event of the disabled menu item </description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="IMAGECSSCLASSFORDISABLE">
+            <description> CSS class inplace of image which is used for disabled menu-item. </description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+        </column>
+        <column name="IMAGEFORDISABLE">
+            <description> Image to be shown along with the disabled menu item.</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>true</nullable>
+        </column>
+        <column name="CSSCLASSFORDISABLE">
+            <description> CSS class for disabled menu-item </description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+        </column>
+    </columns>
+    <primary-key name="MenuItem_PK">
+        <primary-key-column>MENUITEMID_NO</primary-key-column>
+    </primary-key>
+    <unique-keys>
+        <unique-key name="MenuItem_UK1">
+            <unique-key-column>MENUITEMID</unique-key-column>
+        </unique-key>
+    </unique-keys>
+</table>
+
+<table name="WebMenuItem">
+    <description>It provides the way/option to render the response of a menu-action into a given target in web-client.</description>
+    <columns>
+        <column name="MENUITEMID">
+            <description> ID to refer the table MenuItem.</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="ACTIONLINK">
+            <description> Specifies the Action link URL associated with the menu item.
+            It should be configured only if the action link is not a struts action.
+            </description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="TARGET">
+            <description> Specifies the target to render the response either in the new window or the same window. Default target is '_self'.</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <default-value>_self</default-value>
+            <nullable>false</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="WINPARAMS">
+            <description> Specifies the new window parameters that controlls the size, ablility to resize, maximize, etc.</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="IS_SCRIPTGENERATED">
+            <description></description>
+            <data-type>BOOLEAN</data-type>
+            <default-value>false</default-value>
+            <nullable>false</nullable>
+        </column>
+        <column name="ACTIONTYPE">
+            <description>Type of the request method. Default: GET</description>
+            <data-type>CHAR</data-type>
+            <max-size>50</max-size>
+            <default-value>GET</default-value>
+            <nullable>false</nullable>
+            <unique>false</unique>
+            <allowed-values>
+                <value>GET</value>
+                <value>POST</value>
+                <value>AJAXGET</value>
+                <value>AJAXPOST</value>
+            </allowed-values>
+        </column>
+    </columns>
+    <primary-key name="WebMenuItem_PK">
+        <primary-key-column>MENUITEMID</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="WebMenuItem_MenuItem_FK" reference-table-name="MenuItem" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>MENUITEMID</fk-local-column>
+                    <fk-reference-column>MENUITEMID_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="Action">
+    <description>Maps the struts-action configuration with menu-item</description>
+        <columns>
+        <column name="MENUITEMID">
+            <description>Refers to the menu-item ID defined in {@link MENUITEM}</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="FORWARD">
+            <description>View/URL to which this action is forwarded. Refer com.apache.struts.action.ActionForward</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>true</nullable>
+        </column>
+        <column name="TYPE">
+            <description>Fully Qualified name of the action class, which must be a child of com.apache.struts.action.Action</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>true</nullable>
+        </column>
+        <column name="NAME">
+            <description>Name of the action</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>true</nullable>
+        </column>
+        <column name="INPUT">
+            <description>Relative path of the input form to which control is returned, if a validation error occurs.</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>true</nullable>
+        </column>
+        <column name="VALIDATED">
+            <description>If value is 'true', Action will be validated. </description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>true</nullable>
+        </column>
+    </columns>
+    <primary-key name="Action_PK">
+        <primary-key-column>MENUITEMID</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="Action_WebMenuItem_FK" reference-table-name="MenuItem" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>MENUITEMID</fk-local-column>
+                    <fk-reference-column>MENUITEMID_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="ACJSOption">
+    <description>Various custom options, available as attributes of menu-items, needed for the Javascript APIs</description>
+    <columns>
+            <column name="MENUITEMID">
+                <description>Refers to the menuitem ID defined in {@link MENUITEM}</description>
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="NAME">
+                <description>Name of the option.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+            </column>      
+            <column name="VALUE">
+                <description>Value for the given option</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+            </column>      
+    </columns>
+    <primary-key name="ACJSOption_PK">
+        <primary-key-column>MENUITEMID</primary-key-column>
+        <primary-key-column>NAME</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="ACJSOption_FK" reference-table-name="MenuItem" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>MENUITEMID</fk-local-column>
+                    <fk-reference-column>MENUITEMID_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="ACAjaxOptions">
+    <description>Various options applicable for actiontypes AJAXGET and AJAXPOST</description>
+    <columns>
+        <column name="MENUITEMID">
+            <description>Refers to the menuitem ID defined in {@link MENUITEM}</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="ONSUCCESSFUNC">
+        <description>Name of the function to be invoked on response, if the AJAX request succeeds. Default: AjaxAPI.refreshView</description>
+            <data-type>CHAR</data-type>
+            <max-size>50</max-size>
+            <default-value>AjaxAPI.refreshView</default-value>
+        </column>
+        <column name="STATUSFUNC">
+            <description>Name of the function to be invoked for showing response status. Default: AjaxAPI.showRespMsg</description>
+            <data-type>CHAR</data-type>
+            <max-size>50</max-size>
+            <default-value>AjaxAPI.showRespMsg</default-value>
+        </column>
+    </columns>
+    <primary-key name="ACAjaxOptions_PK">
+        <primary-key-column>MENUITEMID</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="ACAjaxOptions_FK" reference-table-name="MenuItem" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>MENUITEMID</fk-local-column>
+                    <fk-reference-column>MENUITEMID_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="Forward">
+    <description>A representation of struts forward element configured for an Action Mapping</description>
+    <columns>
+        <column name="MENUITEMID">
+            <description>Refers to the menuitem ID defined in {@link MENUITEM}</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="NAME">
+            <description>Name of the forward</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+        </column>
+        <column name="PATH">
+            <description>URL Path for the forward element</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>true</nullable>
+        </column>
+        <column name="REDIRECT">
+            <description>If true, control of the action is redirected. Otherwise, forwarded.</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>true</nullable>
+        </column>
+    </columns>
+    <primary-key name="Forward_PK">
+        <primary-key-column>MENUITEMID</primary-key-column>
+        <primary-key-column>NAME</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="Forward_Action_FK" reference-table-name="Action" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>MENUITEMID</fk-local-column>
+                    <fk-reference-column>MENUITEMID</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="JavaScriptAction">
+    <description>Javascript functions details, which can be invoked for a given menu item. A Javascript file can be included by its name.</description>
+    <columns>
+        <column name="MENUITEMID">
+            <description>Refers to the menuitem ID defined in {@link MENUITEM}</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="JSFILENAME">
+        <description>Path/Name of the JavaScript file to be included.</description>
+            <data-type>CHAR</data-type>
+            <max-size>255</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="JSMETHODNAME">
+        <description>Name of the method/function to be invoked for the given menuitem. In order to pass custom options to this javascript, Use {@link ACJSOPTION}</description>
+            <data-type>CHAR</data-type>
+            <max-size>255</max-size>
+            <default-value>invokeEmberMenuAction</default-value>
+            <nullable>false</nullable>
+            <unique>false</unique>
+        </column>
+    </columns>
+    <primary-key name="JavaScriptAction_PK">
+        <primary-key-column>MENUITEMID</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="JSAction_WebMenuItem_FK" reference-table-name="MenuItem" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>MENUITEMID</fk-local-column>
+                    <fk-reference-column>MENUITEMID_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="ACParams">
+    <description>It contains details of parameters like name, index, value and scope for a given menu-item.</description>
+    <columns>
+        <column name="MENUITEMID">
+            <description>ID to refer the 'MENUITEMID_NO' of the table 'MenuItem'</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="NAME">
+            <description>The name of the parameter passed </description>
+            <data-type>CHAR</data-type>
+            <max-size>50</max-size>
+            <nullable>false</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="PARAMINDEX">
+            <description>Order of the parameter, applicable only if the parameter has multiple values </description>
+            <data-type>INTEGER</data-type>
+            <default-value>0</default-value>
+            <nullable>false</nullable>
+        </column>
+        <column name="VALUE">
+            <description>Value of the parameter specified if SCOPE is 'STATIC',
+            otherwise values taken as per defined 'SCOPE'.</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="SCOPE">
+            <description>Data will be fetched for the parameter according to the given scope.
+            if 'SCOPE' is 'STATIC'      then 'VALUE' will be considered,
+            if 'SCOPE' is 'STATE'       then value will be fetched from state param,
+            if 'SCOPE' is 'REQUEST'     then value will be from request,
+            if  'SCOPE' is 'DATAMODEL'  then value will be fetched from tablemodel
+            Default 'SCOPE' is 'STATIC'</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <default-value>STATIC</default-value>
+            <nullable>true</nullable>
+            <allowed-values>
+                <value>STATIC</value>
+                <value>REQUEST</value>
+                <value>STATE</value>
+                <value>DATAMODEL</value>
+            </allowed-values>
+        </column>
+    </columns>
+    <primary-key name="ACParams_PK">
+        <primary-key-column>MENUITEMID</primary-key-column>
+        <primary-key-column>NAME</primary-key-column>
+        <primary-key-column>PARAMINDEX</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="ACParams_FK" reference-table-name="MenuItem" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>MENUITEMID</fk-local-column>
+                    <fk-reference-column>MENUITEMID_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="MenuAndMenuItem">
+    <description>A mapping between Menu and MenuItem configurations</description>
+    <columns>
+        <column name="MENUID">
+            <description>Refers to the MENUID_NO in {@link MENU} table</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="MENUITEMID">
+            <description>Refers to the MENUITEMID_NO in {@link MENUITEM} table</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="MENUITEMINDEX">
+            <description>Order of the menu-item in the menu</description>
+            <data-type>INTEGER</data-type>
+        </column>
+    </columns>
+    <primary-key name="MenuAndMenuItem_PK">
+        <primary-key-column>MENUID</primary-key-column>
+        <primary-key-column>MENUITEMID</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="MenuAndMI_Menu_FK" reference-table-name="Menu" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>MENUID</fk-local-column>
+                    <fk-reference-column>MENUID_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+        <foreign-key name="MenuAndMI_MenuItem_FK" reference-table-name="MenuItem" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>MENUITEMID</fk-local-column>
+                    <fk-reference-column>MENUITEMID_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+    <!--table name="MenuTreeMapper">
+    <description>Internal Table. </description>
+    <columns>
+	    <column name="NODEID">
+		    <description>Unique ID to identify the node</description>
+		    <data-type>BIGINT</data-type>
+		    <nullable>false</nullable>
+		    <unique>true</unique>
+		    <uniquevalue-generation>
+			    <generator-name>MENUTREEMAPPER_NODEID</generator-name>
+		    </uniquevalue-generation>
+	    </column>
+	    <column name="ISLEAF">
+		    <description>Boolean valule ot state if the current node is a leaf or not.</description>
+		    <data-type>BOOLEAN</data-type>
+		    <unique>false</unique>
+	    </column>
+	    <column name="NODEINDEX">
+		    <description>Index value of the node.</description>
+		    <data-type>INTEGER</data-type>
+	    </column>
+	    <column name="TREETYPE">
+		    <description>The treetype of the currently sondiered node.</description>
+		    <data-type>CHAR</data-type>
+		    <nullable>false</nullable>		
+		    <unique>false</unique>
+		    <allowed-values>
+			    <value>MenuBar</value>
+			    <value>Menu</value>
+		    </allowed-values>
+	    </column>
+	    <column name="TREEID">
+		    <description>ID of the Tree to which this node is to be linked to. TODO</description>
+		    <data-type>CHAR</data-type>
+		    <nullable>false</nullable>		
+		    <unique>false</unique>
+	    </column>
+    </columns>
+    <primary-key name="MenuTreeMapper_PK">
+	    <primary-key-column>NODEID</primary-key-column>
+    </primary-key>
+    </table>
+
+    <table name="MenuTreeInfo">
+	    <description>Internal Table. No descriptions provided.</description>
+	    <columns>
+		    <column name="ANCESTORID">
+			    <description>States the ancestor ID </description>
+			    <data-type>BIGINT</data-type>
+		    </column>
+		    <column name="DESCENDANTID">
+			    <description>States the descendant ID</description>
+			    <data-type>BIGINT</data-type>
+			    <nullable>false</nullable>
+		    </column>
+		    <column name="NODELEVEL">
+			    <description>States the level of the node.TODO</description>
+			    <data-type>INTEGER</data-type>
+			    <nullable>false</nullable>
+		    </column>
+	    </columns>
+	    <primary-key name="MenuTreeInfo_PK">
+		    <primary-key-column>DESCENDANTID</primary-key-column>
+		    <primary-key-column>NODELEVEL</primary-key-column>
+	    </primary-key>
+	    <foreign-keys>
+		    <foreign-key name="MBTreeInfo_MBTMapper_FK" reference-table-name="MenuTreeMapper" isbidirectional="false">							
+			    <fk-columns>
+				    <fk-column>
+					    <fk-local-column>DESCENDANTID</fk-local-column>
+					    <fk-reference-column>NODEID</fk-reference-column>
+				    </fk-column>
+			    </fk-columns>
+			    <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+		    </foreign-key>
+	    </foreign-keys>
+    </table>
+
+    <table name="MenuMapper">
+	    <description>Internal Table. No descriptions provided.</description>
+	    <columns>
+		    <column name="MENUID">
+			    <data-type>CHAR</data-type>
+			    <max-size>50</max-size>
+			    <nullable>false</nullable>		
+			    <unique>false</unique>
+		    </column>
+		    <column name="NODEID">
+			    <data-type>BIGINT</data-type>
+			    <nullable>false</nullable>
+		    </column>
+	    </columns>
+	    <primary-key name="MenuMapper_PK">
+		    <primary-key-column>NODEID</primary-key-column>
+	    </primary-key>
+	    <foreign-keys>
+		    <foreign-key name="MenuMapper_Menu_FK" reference-table-name="Menu" isbidirectional="false">
+			    <fk-columns>
+				    <fk-column>
+					    <fk-local-column>MENUID</fk-local-column>
+					    <fk-reference-column>MENUID</fk-reference-column>
+				    </fk-column>
+			    </fk-columns>
+			    <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+		    </foreign-key>
+		    <foreign-key name="MenuMapper_MTMapper_FK" reference-table-name="MenuTreeMapper" isbidirectional="true">
+			    <fk-columns>
+				    <fk-column>
+					    <fk-local-column>NODEID</fk-local-column>
+					    <fk-reference-column>NODEID</fk-reference-column>
+				    </fk-column>
+			    </fk-columns>
+			    <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+		    </foreign-key>
+	    </foreign-keys>
+    </table>
+
+    <table name="MenuItemMapper">
+	    <description>Internal Table. No descriptions provided.</description>
+	    <columns>
+		    <column name="MENUITEMID">
+			    <data-type>CHAR</data-type>
+			    <max-size>50</max-size>
+			    <nullable>false</nullable>		
+			    <unique>false</unique>
+		    </column>
+		    <column name="NODEID">
+			    <data-type>BIGINT</data-type>
+			    <nullable>false</nullable>
+		    </column>
+	    </columns>
+	    <primary-key name="MenuItemMapper_PK">
+		    <primary-key-column>NODEID</primary-key-column>
+	    </primary-key>
+	    <foreign-keys>
+		    <foreign-key name="MBMIMapper_MenuItem_FK" reference-table-name="MenuItem" isbidirectional="false">
+			    <fk-columns>
+				    <fk-column>
+					    <fk-local-column>MENUITEMID</fk-local-column>
+					    <fk-reference-column>MENUITEMID</fk-reference-column>
+				    </fk-column>
+			    </fk-columns>
+			    <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+		    </foreign-key>
+		    <foreign-key name="MBMIMapper_MBTMapper_FK" reference-table-name="MenuTreeMapper" isbidirectional="true">
+			    <fk-columns>
+				    <fk-column>
+					    <fk-local-column>NODEID</fk-local-column>
+					    <fk-reference-column>NODEID</fk-reference-column>
+				    </fk-column>
+			    </fk-columns>
+			    <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+		    </foreign-key>
+	    </foreign-keys>
+    </table-->
+    <!-- Menu Tables definition :: END -->
+
+<table name="UIComponent">
+    <description>Captures the properties of an UIComponent.</description>
+    <columns>
+        <column name="NAME_NO">
+            <description>Unique ID to identify the UIComponent</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+            <uniquevalue-generation>
+                <generator-name>UIComponent.NAME_NO</generator-name>
+                <name-column>NAME</name-column>
+            </uniquevalue-generation>
+        </column>
+        <column name="NAME">
+            <description>Name of the UIComponent</description>
+            <data-type>CHAR</data-type>
+            <max-size>50</max-size>
+            <nullable>false</nullable>
+        </column>
+        <column name="DESCRIPTION">
+            <description>Description of the UIComponent</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+        </column>
+        <column name="STATE">
+            <description>Fully qualified name of a class that represents the view state retrieved from the request (or) Constructed for API Model. This API
+                must be the child of {@link com.adventnet.client.view.State}</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+        </column>
+    </columns>
+    <primary-key name="UIComponent_PK">
+        <primary-key-column>NAME_NO</primary-key-column>
+    </primary-key>
+    <unique-keys>
+        <unique-key name="UIComponent_UK1">
+            <unique-key-column>NAME</unique-key-column>
+        </unique-key>
+    </unique-keys>
+</table>
+
+<table name="CSRMenuItem">
+    <description>Contains action name and argument of action for CSR Components</description>
+    <columns>
+        <column name="MENUITEMID">
+            <description>Refers to the 'MENUITEMID' in {@link MENUITEM} table</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="ACTIONNAME">
+            <description>Name of the JS function to be invoked</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <default-value>invokeMenuAction</default-value>
+            <nullable>true</nullable>
+        </column>
+        <column name="ACTIONARG">
+            <description>Argument for the action</description>
+            <data-type>CHAR</data-type>
+            <max-size>-1</max-size>
+            <nullable>true</nullable>
+        </column>
+        <column name="ROUTETO">
+            <data-type>CHAR</data-type>
+            <max-size>-1</max-size>
+            <nullable>true</nullable>
+        </column>
+    </columns>
+    <primary-key name="CSRMenuItem_PK">
+        <primary-key-column>MENUITEMID</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="CSRMenuItem_FK" reference-table-name="MenuItem" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>MENUITEMID</fk-local-column>
+                    <fk-reference-column>MENUITEMID_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="WebUIComponent">
+    <description>Captures the Web client specific properties of an UIComponent.</description>
+    <columns>
+        <column name="NAME">
+            <description>Refers to the 'NAME' in the {@link UICOMPONENT} table</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="URL">
+            <description>TRelative path for rendering the views associated with the UIComponent</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <unique>false</unique>
+        </column>
+        <column name="VIEWCONTROLLER">
+            <description>Fully qualified name of a class that creates/updates the view model and passes to the client. This API must be the child of {@link com.adventnet.client.view.web.ViewController}</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+        </column>
+        <column name="TEMPLATENAME">
+            <description>Template name used for rendering the UIComponent. A view-specific template can be given to override this using {@link VIEWCONFIGURATION#TEMPLATENAME}</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <unique>false</unique>
+        </column>
+        <column name="ISCSRCOMPONENT">
+            <description>Boolean to state, whether the component is Client Side Rendering Type Component or not. Default : false</description>
+            <data-type>BOOLEAN</data-type>
+            <default-value>false</default-value>
+        </column>
+    </columns>
+    <primary-key name="WCC_COM_PROPS_PK">
+        <primary-key-column>NAME</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="WCC_COM_PROPS_FK" reference-table-name="UIComponent" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>NAME</fk-local-column>
+                    <fk-reference-column>NAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="PdfUIComponent">
+    <description>Captures the PDF Client specific properties of an UIComponent</description>
+    <columns>
+        <column name="NAME">
+            <description>Refers to the 'NAME' in the {@link UICOMPONENT} table</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="VIEWCLASS">
+            <description>Fully qualified name of a class that exports the view model obtained from the view controller. This API must be the child of {@link com.adventnet.client.view.pdf.PDFView}</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+        <column name="VIEWCONTROLLER">
+            <description>Fully qualified name of a class that creates/updates the view model and passes to the client. This API must be the child of {@link com.adventnet.client.view.web.ViewController}. If null, Web View controller is considered.</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+        </column>
+    </columns>
+    <primary-key name="PdfUIComponent_PK">
+        <primary-key-column>NAME</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="PdfUIComponent_FK" reference-table-name="UIComponent" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>NAME</fk-local-column>
+                    <fk-reference-column>NAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="ViewConfiguration">
+    <description>Contains the configurations for creating different types of views to display the client application data. </description>
+    <columns>
+        <column name="VIEWNAME_NO">
+            <description>Auto-generated unique ID</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+            <uniquevalue-generation>
+                <generator-name>ViewConfiguration.VIEWNAME_NO</generator-name>
+                <name-column>VIEWNAME</name-column>
+            </uniquevalue-generation>
+        </column>
+        <column name="VIEWNAME">
+            <description>Unique Name to identify this View Configuration. </description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>false</nullable>
+        </column>
+        <column name="COMPONENTNAME">
+            <description>Refers to the 'NAME' of the component, in {@link UICOMPONENT} table. For example ACTable, CSRTable or ACSQLTable. The list of components can be found in UIComponent Table</description>
+            <data-type>BIGINT</data-type>
+            <nullable>true</nullable>
+        </column>
+        <column name="ICONFILE">
+            <description>Relative URL path of the Icon that is shown along with the title</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+        </column>
+        <column name="IMAGEFILE">
+            <description>Relative URL path of the Image that is shown along with the title(used for Tab-view)</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+        </column>
+        <column name="TITLE">
+            <description>Name that is displayed for the particular view when it is rendered.</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+        </column>
+        <column name="DESCRIPTION">
+            <description>Description for the view configuration.</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+        </column>
+        <column name="ROLENAME">
+            <description>Role associated with the view. Based on the role, access to the view is restricted.</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+        </column>
+        <column name="MENUID">
+            <description>Refers to the 'MENUID' in {@link MENU} table which is to be associated with the view.</description>
+            <data-type>CHAR</data-type>
+            <max-size>50</max-size>
+            <nullable>true</nullable>
+        </column>
+        <column name="CUSTOMIZETYPE">
+            <description>If PERSONALIZE, a copy of the view(&amp;lt;VIEWNAME&amp;gt;_PERSVIEW_&amp;lt;ACCOUNT_ID&amp;gt;) is created and associated with the User, who tries to customize the view using features like sorting, changing the pagelength and column operations(re-sizing, re-ordering, visibility and display name). Default: NO</description>
+            <data-type>CHAR</data-type>
+            <max-size>20</max-size>
+            <default-value>NO</default-value>
+            <allowed-values>
+                <value>NO</value>
+                <value>UPDATE</value>
+                <value>PERSONALIZE</value>
+            </allowed-values>
+        </column>
+        <column name="BOXCONFIG">
+            <description></description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>true</nullable>
+        </column>
+        <column name="CSSCLASS">
+            <description>CSS class to be applied for the view while rendering.</description>
+            <data-type>CHAR</data-type>
+            <max-size>50</max-size>
+            <nullable>true</nullable>
+        </column>
+        <column name="ACCOUNT_ID">
+            <description>Refers to the User ID</description>
+            <data-type>BIGINT</data-type>
+            <nullable>true</nullable>
+        </column>
+        <column name="CHILDBOX">
+            <description>Image File that is shown along with the tab </description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+        </column>
+        <column name="TOOLBARID">
+            <description></description>
+            <data-type>CHAR</data-type>
+            <max-size>50</max-size>
+            <nullable>true</nullable>
+        </column>
+        <column name="HANDLER">
+            <description>Fully qualified name of a class can be given to provide additional restriction(apart from role level authorization) to access the view.</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+        </column>
+        <column name="TEMPLATENAME">
+            <description>Ember template name for the view</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+        </column>
+        <column name="STATE">
+            <description>Fully qualified name of a class that represents the view state retrieved from the request (or) Constructed for API Model. This API
+                must be the child of {@link com.adventnet.client.view.State}</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+        </column>
+		<column name="PROPERTIES">
+			<description>Additional Data(JSON format) to be appended in JSON response of view
+				Sample input : {&quot;KEY&quot;:&quot;VALUE&quot;}</description>
+			<data-type>CHAR</data-type>
+			<max-size>-1</max-size>
+			<nullable>true</nullable>
+		</column>
+       </columns>
+    <primary-key name="ViewConfiguration_PK">
+        <primary-key-column>VIEWNAME_NO</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="CC_COM_FK"
+            reference-table-name="UIComponent"
+            isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>COMPONENTNAME</fk-local-column>
+                    <fk-reference-column>NAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+    <unique-keys>
+        <unique-key name="ViewConfiguration_UK1">
+            <unique-key-column>VIEWNAME</unique-key-column>
+        </unique-key>
+    </unique-keys>
+</table>
+
+<table name="AdditionalViewParams">
+    <description>Represents the request query parameters for the view.</description>
+    <columns>
+        <column name="VIEWNAME">
+            <description>Refers to the 'VIEWNAME' in {@link VIEWCONFIGURATION} table to which this parameter belongs to</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="PARAMNAME">
+            <description>Name of the parameter to be passed</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>false</nullable>
+        </column>
+        <column name="PARAMINDEX">
+            <description>Order of the parameter. To be given only if a parameter has more than one value. Default: 0</description>
+            <data-type>INTEGER</data-type>
+            <default-value>0</default-value>
+            <nullable>false</nullable>
+        </column>
+        <column name="PARAMVALUE">
+            <description>Value associated with the parameter</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+        </column>
+    </columns>
+    <primary-key name="AVP_PK">
+        <primary-key-column>VIEWNAME</primary-key-column>
+        <primary-key-column>PARAMNAME</primary-key-column>
+        <primary-key-column>PARAMINDEX</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="AVP_CC_FK" reference-table-name="ViewConfiguration" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>VIEWNAME</fk-local-column>
+                    <fk-reference-column>VIEWNAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="TemplateViewParams">
+    <description>For a view, the request parameters which are required to be present/carry forwarded to the adjacent requests must be provided here</description>
+	<columns>
+		<column name="VIEWNAME">
+            <description>Refers to the view name defined in {@link VIEWCONFIGURATION} to which this parameter belongs to</description>
+			<data-type>BIGINT</data-type>
+			<nullable>false</nullable>
+		</column>
+		<column name="PARAMNAME">
+			<description>Name of the parameter</description>
+			<data-type>CHAR</data-type>
+			<max-size>100</max-size>
+			<nullable>false</nullable>
+		</column>
+		<column name="MANDATORY">
+			<description>If true, this parameter must be present in the view request.</description>
+			<data-type>BOOLEAN</data-type>
+			<default-value>false</default-value>
+			<nullable>false</nullable>
+		</column>
+	</columns>
+	<primary-key name="TemplateViewParams_PK">
+		<primary-key-column>VIEWNAME</primary-key-column>
+		<primary-key-column>PARAMNAME</primary-key-column>
+	</primary-key>
+	<foreign-keys>
+		<foreign-key name="TVIEWPARAMS_CC_FK" reference-table-name="ViewConfiguration" isbidirectional="false">
+			<fk-columns>
+				<fk-column>
+					<fk-local-column>VIEWNAME</fk-local-column>
+					<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+				</fk-column>
+			</fk-columns>
+			<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+		</foreign-key>
+	</foreign-keys>            
+</table>
+
+
+<table name="FeatureParams">
+    <description>Includes static parameters which stores information specific to a view. These values can be obtained using {@link com.adventnet.client.view.ViewModel#getFeatureValue}.</description>
+    <columns>
+        <column name="VIEWNAME">
+            <description>Refers to the 'VIEWNAME' in {@link VIEWCONFIGURATION} table to which this parameter belongs to.</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="FEATURENAME">
+            <description>Name of the parameter</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>false</nullable>
+        </column>
+
+        <column name="FEATUREVALUE">
+            <description>Value assigned to the parameter.</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+        </column>
+    </columns>
+    <primary-key name="FeatureConfigParams_PK">
+        <primary-key-column>VIEWNAME</primary-key-column>
+        <primary-key-column>FEATURENAME</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="FCONFIGPARAMS_CC_FK" reference-table-name="ViewConfiguration" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>VIEWNAME</fk-local-column>
+                    <fk-reference-column>VIEWNAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+
+<table name="WebViewConfig">
+    <description>Holds the Web client specific properties of a View. Overrides the properties provided in {@link WEBUICOMPONENT}</description>
+    <columns>
+        <column name="VIEWNAME">
+            <description>Refers to the 'VIEWNAME' in {@link VIEWCONFIGURATION} table to which this configuration belongs to</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="URL">
+            <description>Relative path for rendering the view. It overrides the path given in {@link WEBUICOMPONENT#URL}</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <unique>false</unique>
+        </column>
+        <column name="VIEWCONTROLLER">
+            <description>Fully qualified name of the class that creates/updates the view model and passes to the client. This API must be the child of {@link com.adventnet.client.view.web.ViewController}. It overrides the controller given in {@link WEBUICOMPONENT#VIEWCONTROLLER}</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+        </column>
+        <column name="IS_SCRIPTGENERATED">                    <!-- It will be removed in next release -->
+            <data-type>BOOLEAN</data-type>
+            <default-value>false</default-value>
+            <nullable>false</nullable>
+        </column>
+    </columns>
+    <primary-key name="WebViewConfig_PK">
+        <primary-key-column>VIEWNAME</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="WVC_CC_FK" reference-table-name="ViewConfiguration" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>VIEWNAME</fk-local-column>
+                    <fk-reference-column>VIEWNAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="PdfViewConfig">
+    <description>Holds the PDF client specific properties of a View. Overrides the properties provided in {@link PDFUICOMPONENT}</description>
+    <columns>
+        <column name="VIEWNAME">
+            <description>Refers to the 'VIEWNAME' in {@link VIEWCONFIGURATION} table to which this configuration belongs to</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="VIEWCLASS">
+            <description>Fully qualified name of the class that exports the view model obtained from the view controller. This API must be the child of {@link com.adventnet.client.view.pdf.PDFView}. It overrides the view class provided in {@link PDFUICOMPONENT#VIEWCLASS}.</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <unique>false</unique>
+        </column>
+        <column name="VIEWCONTROLLER">
+            <description>Fully qualified name of the class that creates/updates the view model and passes to the client. This API must be the child of {@link com.adventnet.client.view.web.ViewController}. It overrides the controller given in {@link PDFUICOMPONENT#VIEWCONTROLLER}. If null, the PDF View controller is considered.</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+        </column>
+    </columns>
+    <primary-key name="PdfViewConfig_PK">
+        <primary-key-column>VIEWNAME</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="PdfViewConfig_FK" reference-table-name="ViewConfiguration" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>VIEWNAME</fk-local-column>
+                    <fk-reference-column>VIEWNAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="UINavigationConfig">
+    <description>Stores rendering related properties of a view</description>
+    <columns>
+        <column name="VIEWNAME">
+            <description>Refers to the view name defined in {@link VIEWCONFIGURATION}</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="CONTENTAREANAME">
+            <description>Name of the content area where the view is rendered</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+        </column>
+        <column name="ADDTOLIST">
+            <description>If true, the given view is added with existing views in the content-area or else, Views in the content-area are replaced by the given view. Default: false</description>
+            <data-type>BOOLEAN</data-type>
+            <default-value>false</default-value>
+            <nullable>false</nullable>
+        </column>
+        <column name="DEFAULTSELECTEDVIEW">
+            <description>The default view to be rendered among the child views of the given VIEWNAME(parent-view)</description>
+            <data-type>BIGINT</data-type>
+            <nullable>true</nullable>
+        </column>
+        <column name="CLEARDEFAULTCONTENTAREA">
+            <description>Specifies whether to clear the default content area or not. Default: false</description>
+            <data-type>BOOLEAN</data-type>
+            <default-value>false</default-value>
+            <nullable>false</nullable>
+        </column>
+        <column name="REFRESHLEVEL">
+        <description>If refresh level is -1, it just opens url,
+                 If refresh level is 0, it sends as subrequest(AJAX request) and
+                 If refresh level is -2, it sends as subrequest
+            </description>
+            <data-type>INTEGER</data-type>
+            <default-value>-1</default-value>
+            <nullable>false</nullable>
+        </column>
+        <column name="TABLEALIAS">
+            <description>The table alias whose data is passed, if the view is based on data table</description>
+            <data-type>CHAR</data-type>
+            <max-size>50</max-size>
+            <nullable>true</nullable>
+            <unique>false</unique>
+        </column>
+    </columns>
+    <primary-key name="UINavigationConfig_PK">
+        <primary-key-column>VIEWNAME</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="UNC_CC_FK" reference-table-name="ViewConfiguration">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>VIEWNAME</fk-local-column>
+                    <fk-reference-column>VIEWNAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+        <foreign-key name="UNC_CC_DefaultVNFK" reference-table-name="ViewConfiguration">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>DEFAULTSELECTEDVIEW</fk-local-column>
+                    <fk-reference-column>VIEWNAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+
+    </foreign-keys>
+</table>
+
+<table name="Theme">
+    <description>Represents the theme icon, theme directory and PDF theme class in a single entity called Theme, identified by theme name. So user can customize the graphical appearance by changing the theme name.</description>
+    <columns>
+        <column name="THEMENAME_NO">
+            <description>Auto-generated Unique number for the theme</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+            <uniquevalue-generation>
+                <generator-name>Theme.THEMENAME_NO</generator-name>
+                <name-column>THEMENAME</name-column>
+            </uniquevalue-generation>
+        </column>
+        <column name="THEMENAME">
+            <description>Unique name to identify the theme.</description>
+            <data-type>CHAR</data-type>
+            <nullable>false</nullable>
+        </column>
+
+        <column name="ICON">
+            <description>Relative URL path of the icon image for the theme.</description>
+            <data-type>CHAR</data-type>
+            <nullable>true</nullable>
+        </column>
+
+        <column name="THEME_DIR">
+            <description>Relative path of the theme's directory.</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>false</nullable>
+        </column>
+        <column name="PDFTHEME_CLASS">
+            <description>Fully qualified name of the theme handler class for PDF generator. It must be a child of {@link com.adventnet.client.view.pdf.PDFTheme}. Default: com.adventnet.client.view.pdf.DefaultPDFTheme</description>
+            <data-type>CHAR</data-type>
+            <max-size>200</max-size>
+            <default-value>com.adventnet.client.view.pdf.DefaultPDFTheme</default-value>
+            <nullable>false</nullable>
+        </column>
+
+    </columns>
+    <primary-key name="CONSTRAINT_TC_PK">
+        <primary-key-column>THEMENAME_NO</primary-key-column>
+    </primary-key>
+    <unique-keys>
+        <unique-key name="Theme_UK1">
+            <unique-key-column>THEMENAME</unique-key-column>
+        </unique-key>
+    </unique-keys>
+</table>
+
+<table name="DefaultTheme">
+    <description>This Theme is the default for the entire application. To make it User specific, configure in {@link ACUSERCLIENTSTATE}.</description>
+    <columns>
+        <column name="THEMENAME">
+            <description>Refers to the 'THEMENAME_NO' in {@link THEME} table</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+    </columns>
+    <primary-key name="CONSTRAINT_DT_PK">
+        <primary-key-column>THEMENAME</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="D_CRID_FK"
+            reference-table-name="Theme">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>THEMENAME</fk-local-column>
+                    <fk-reference-column>THEMENAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="ThemeAttributesMapping">
+    <description>Contains theme-specific attributes and values.</description>
+    <columns>
+        <column name="THEMENAME">
+            <description>Refers to the 'THEMENAME_NO' in {@link THEME} table</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="ATTRIBUTENAME">
+            <description>Name of the attribute for the theme</description>
+            <data-type>CHAR</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="ATTRIBUTEVALUE">
+            <description>Value of the corresponding attribute</description>
+            <data-type>CHAR</data-type>
+            <nullable>false</nullable>
+        </column>
+    </columns>
+    <primary-key name="TATTRMAP_PK">
+        <primary-key-column>THEMENAME</primary-key-column>
+        <primary-key-column>ATTRIBUTENAME</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="TATTRMAP_FK" reference-table-name="Theme" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>THEMENAME</fk-local-column>
+                    <fk-reference-column>THEMENAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+   
+<table name="PersonalizedViewMap">
+    <description>Maps the View name with its personalized View Name based on the user Account ID.</description>
+    <columns>
+        <column name="ORIGVIEWNAME">
+            <description>Refers to the 'VIEWNAME_NO' of the view in {@link VIEWCONFIGURATION} table which has been personalized.</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="ACCOUNT_ID">
+            <description>Account ID of the User who personalized the view.</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="PERSVIEWNAME">
+            <description>Refers to the name of the personalized view.</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+            <unique>true</unique>
+        </column>
+    </columns>
+    <primary-key name="UPersonalization_PK">
+        <primary-key-column>ORIGVIEWNAME</primary-key-column>
+        <primary-key-column>ACCOUNT_ID</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="UPers_OCC_FK" reference-table-name="ViewConfiguration" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>ORIGVIEWNAME</fk-local-column>
+                    <fk-reference-column>VIEWNAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+        <foreign-key name="UPers_PCC_FK" reference-table-name="ViewConfiguration" isbidirectional="true">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>PERSVIEWNAME</fk-local-column>
+                    <fk-reference-column>VIEWNAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="OpenViewInContentArea">
+<description>Used to render a view in a placeholder(content area)</description>
+    <columns>
+
+        <column name="MENUITEMID">
+            <description>Refers to the MENUITEMID_NO in {@link MENUITEM}, which is invoked to render the associated view</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+
+        <column name="VIEWNAME">
+            <description>Refers to the 'VIEWNAME_NO' of the view in {@link VIEWCONFIGURATION} to be rendered in the given content area</description>
+            <data-type>BIGINT</data-type>
+            <!--max-size>250</max-size-->
+            <nullable>true</nullable>
+        </column>
+
+        <column name="PARENTVIEWNAME">
+            <description>Name of the view whose content area is considered, if CONTENTAREANAME is null</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+        </column>
+
+        <column name="CONTENTAREANAME">
+            <description>Name of the Content area in which the view is rendered</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <default-value>DEFAULTCONTENTAREA</default-value>
+            <nullable>false</nullable>
+        </column>
+
+        <column name="ADDTOLIST">
+            <description>If true, the given view will be added to the content area, though it already has some views. Otherwise, content area will be cleared and the given view is rendered alone.</description>
+            <data-type>BOOLEAN</data-type>
+            <default-value>true</default-value>
+            <nullable>false</nullable>
+        </column>
+
+        <column name="REQUESTPARAMS">
+            <description>Request parameters given here are passed, while rendering the view</description>
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+            <nullable>true</nullable>
+        </column>
+
+        <column name="RETRIEVEPARAMSFROMREQ">
+            <description>If true, templateviewparams {@link TEMPLATEVIEWPARAMS} of the view will be considered in forming the URL query string along with REQUESTPARAMS(if given). Default: true</description>
+            <data-type>BOOLEAN</data-type>
+            <default-value>true</default-value>
+            <nullable>false</nullable>
+        </column>
+
+        <column name="DACINDEX">
+            <description>If more than one content area is given, the last one will be considered</description>
+            <data-type>INTEGER</data-type>
+            <default-value>0</default-value>
+            <nullable>false</nullable>
+        </column>
+    </columns>
+
+    <primary-key name="OpenViewCA_PK">
+        <primary-key-column>MENUITEMID</primary-key-column>
+        <primary-key-column>VIEWNAME</primary-key-column>
+    </primary-key>
+
+    <foreign-keys>
+        <foreign-key name="OVInCA_MENUITEM_FK" reference-table-name="MenuItem">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>MENUITEMID</fk-local-column>
+                    <fk-reference-column>MENUITEMID_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+        <foreign-key name="OpenViewInCA_FK" reference-table-name="ViewConfiguration" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>VIEWNAME</fk-local-column>
+                    <fk-reference-column>VIEWNAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="TiledView">
+    <description>Allows to display a view in tiled area.</description>
+    <columns>
+        <column name="VIEWNAME">
+            <description>Refers to the 'VIEWNAME_NO' in {@link VIEWCONFIGURATION} table, which contains the tiled area</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="TILENAME">
+            <description>Name of the area, in which the tiled views has to be rendered </description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>false</nullable>
+        </column>
+
+        <column name="TILEDVIEWNAME">
+            <description>Name of the child view that has to be rendered in the tile</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+    </columns>
+    <primary-key name="TV_PK">
+        <primary-key-column>VIEWNAME</primary-key-column>
+        <primary-key-column>TILENAME</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="TV_CC_FK" reference-table-name="ViewConfiguration" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>VIEWNAME</fk-local-column>
+                    <fk-reference-column>VIEWNAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+        <foreign-key name="TVCH_CC_FK" reference-table-name="ViewConfiguration" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>TILEDVIEWNAME</fk-local-column>
+                    <fk-reference-column>VIEWNAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="ViewDataTableMapping">
+    <description>Provides the table names which are associated with a specific view.</description>
+    <columns>
+        <column name="VIEWNAME">
+            <description>Refers to the 'VIEWNAME' in {@link VIEWCONFIGURATION} table</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="TABLENAME">
+            <description>Name of the table to be associated with the given view </description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>false</nullable>
+        </column>
+    </columns>
+    <primary-key name="VDM_PK">
+        <primary-key-column>VIEWNAME</primary-key-column>
+        <primary-key-column>TABLENAME</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="VDM_CC_FK" reference-table-name="ViewConfiguration" isbidirectional="false">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>VIEWNAME</fk-local-column>
+                    <fk-reference-column>VIEWNAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>
+
+<table name="ACUserClientState">
+    <description>User specific theme can be configured here.</description>
+    <columns>
+        <column name="ACCOUNT_ID">
+            <description>Account ID of the User.</description>
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="SELECTEDTHEME">
+            <description>Refers to the 'THEMENAME_NO' in {@link THEME} table</description>
+            <data-type>BIGINT</data-type>
+            <nullable>true</nullable>
+        </column>
+        <column name="MODTIME">
+            <description>The modified time. This field is updated for large scale modifications of UI.</description>
+            <data-type>BIGINT</data-type>
+            <default-value>-1</default-value>
+            <nullable>false</nullable>
+        </column>
+    </columns>
+    <primary-key name="CONSTRAINT_ST_PK">
+        <primary-key-column>ACCOUNT_ID</primary-key-column>
+    </primary-key>
+
+    <foreign-keys>
+        <foreign-key name="ST_TC_FK" reference-table-name="Theme">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>SELECTEDTHEME</fk-local-column>
+                    <fk-reference-column>THEMENAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys>
+</table>  
+
+
+<table name="ACUserPreference">
+    <description>Stores the user specific configurations as key-value</description>
+    <columns>
+        <column name="ACCOUNT_ID">
+            <description>ID of the associated user</description>
+            <data-type>BIGINT</data-type>
+            <nullable>true</nullable>
+        </column>
+        <column name="PREFNAME">
+        <description>Name of the customized property/configuration</description>
+            <data-type>CHAR</data-type>
+            <max-size>50</max-size>
+            <nullable>false</nullable>
+        </column>
+        <column name="VALUE">
+        <description>Value of the customized property/configuration</description>
+            <data-type>CHAR</data-type>
+            <max-size>100</max-size>
+            <nullable>true</nullable>
+        </column>
+    </columns>
+    <primary-key name="UPREF_PK">
+        <primary-key-column>PREFNAME</primary-key-column>
+        <primary-key-column>ACCOUNT_ID</primary-key-column>
+    </primary-key>
+</table>
+
+<table name="ACViewToGroupMapping">
+	<columns>
+		<column name="VIEWNAME">
+            <description>Refers to the view name defined in {@link VIEWCONFIGURATION} to which this configuration belongs to</description>
+			<data-type>BIGINT</data-type>
+			<nullable>false</nullable>
+		</column>
+		<column name="GROUPNAME">
+			<data-type>CHAR</data-type>
+			<max-size>50</max-size>
+			<nullable>false</nullable>
+		</column>
+	</columns>
+	<primary-key name="ViewToGroup_PK">
+		<primary-key-column>VIEWNAME</primary-key-column>
+		<primary-key-column>GROUPNAME</primary-key-column>
+	</primary-key>
+	<foreign-keys>
+		<foreign-key name="ViewToGroup_FK" reference-table-name="ViewConfiguration" isbidirectional="false">
+			<fk-columns>
+				<fk-column>
+					<fk-local-column>VIEWNAME</fk-local-column>
+					<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+				</fk-column>
+			</fk-columns>
+			<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+		</foreign-key>
+	</foreign-keys>   
+</table>
+
+<table name="ACClientProps">
+        <description>Stores plain-text parameters as key-value. All generic/miscellaneous configurations are stored.</description>
+        <columns>
+                <column name="ACPROPID">
+                <description>Auto-generated Unique ID</description>
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>ACClientProps_QOSID</generator-name>
+                </uniquevalue-generation>
+            </column>
+            <column name="PARAMNAME">
+            <description>Name of the property/configuration</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <unique>true</unique>
+            </column>
+            <column name="PARAMVALUE">
+            <description>Value for the property/configuration</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <nullable>false</nullable>
+            </column>
+        </columns>
+        <primary-key name="ACClientProps_PK">
+            <primary-key-column>ACPROPID</primary-key-column>
+        </primary-key>
+</table>
+
+
+<table name="ACClientEncProps">
+    <description>Stores encrypted parameters as key-value. All generic/miscellaneous encrypted properties/configurations (e.g. password) are stored.</description>
+        <columns>
+                <column name="ACPROPID">
+                <description>Auto-generated Unique ID</description>
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>ACClientEncProps_QOSID</generator-name>
+                </uniquevalue-generation>
+            </column>
+
+            <column name="PARAMNAME">
+            <description>Name of the property/configuration</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <unique>true</unique>
+            </column>
+
+            <column name="PARAMVALUE">
+            <description>Encrypted Value for the given property/configuration</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <nullable>false</nullable>
+            </column>
+        </columns>
+        <primary-key name="ACClientEncProps_PK">
+            <primary-key-column>ACPROPID</primary-key-column>
+        </primary-key>
+    </table>
+   
+  <table name="ACEmailAddress">
+    <description>Email TO address list </description>
+    <columns>
+           <column name="MAILTOID">
+               <description>This is a surrogate key. The value is auto generated to identify an TO email address uniquely</description>
+               <data-type>BIGINT</data-type>
+               <nullable>false</nullable>
+               <uniquevalue-generation>
+                   <generator-name>EmailTo.MAILTOID</generator-name>
+               </uniquevalue-generation>
+           </column>
+           <column name="TOADDRESS">
+                <description>The TO Email Address</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <unique>true</unique>
+       </column>
+        </columns>
+        <primary-key name="EmailTo_PK">
+            <primary-key-column>MAILTOID</primary-key-column>
+        </primary-key>
+</table>
+
+  <table name="ValidationFiles">
+  	<columns>
+  		<column name="FILE_NO">
+  			<description>Validation File no:</description>
+  			<data-type>BIGINT</data-type>
+  			<nullable>false</nullable>
+  			<uniquevalue-generation>
+  				<generator-name>ValidationFiles.FILE_NO</generator-name>
+  			</uniquevalue-generation>
+  		</column>
+  		<column name="FILE_NAME">
+  			<description>File name with path</description>
+  			<data-type>CHAR</data-type>
+  			<max-size>255</max-size>
+  			<nullable>false</nullable>
+  		</column>
+  	</columns>
+  	<primary-key name="ValidationFiles_PK">
+  		<primary-key-column>FILE_NO</primary-key-column>
+  	</primary-key>
+  </table>
+  
+  <table name="ViewToOpen" >
+    <description>This table is used to redirect the menu-action to a view.</description>
+    <columns>
+        <column name="MENUITEMID">
+            <description>Refers to the menu-item ID defined in {@link MENUITEM}</description>
+            <data-type>BIGINT</data-type>
+        </column>
+        <column name="VIEWNAME" >
+            <description>Refers to the view name defined in {@link VIEWCONFIGURATION}</description>
+            <data-type>BIGINT</data-type>
+        </column>
+    </columns>
+    <primary-key name="ViewToOpen_PK">
+        <primary-key-column>MENUITEMID</primary-key-column>
+        <primary-key-column>VIEWNAME</primary-key-column>
+    </primary-key>
+    <foreign-keys>
+        <foreign-key name="ViewToOpen_FK" reference-table-name="MenuItem" >
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>MENUITEMID</fk-local-column>
+                    <fk-reference-column>MENUITEMID_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+        <foreign-key name="ViewToOpen_FK1" reference-table-name="ViewConfiguration" >
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>VIEWNAME</fk-local-column>
+                    <fk-reference-column>VIEWNAME_NO</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys> 
+</table>
+  
+</data-dictionary>

@@ -1,0 +1,53 @@
+License Agreement between the licensee and AXL Software
+
+Radius Client License
+
+AXL Software, hereinafter referred to as AXL, grants the licensee a worldwide non-
+exclusive, transferable limited license to use the Software Components
+comprising the Radius Client  class package. The licensee may not redistribute any of
+the Software Components except as follows:
+
+1. The licensee may reproduce and redistribute and sublicense the Software Components in
+object code form only (Java class files) and only when incorporated into The licensee's
+software product which adds substantial and primary functionality to the
+Software Components.
+
+2 Some portions of the Software Components may be under different licenses.  All 
+such licenses permit the use and redistribution their respective components.
+
+3.  The licensee may not permit further redistribution of the Software Components by the licensee's
+end users except as part of a new software product the licensee develops that meets the
+restrictions of item 1.
+
+To clarify, the licensee may use the Software Components only to build new software the licensee
+develop, and the licensee may only distribute the Software Components as part of this new
+software with the exception of those components from Section 2 that give the licensee
+more rights.
+
+4.  The the licensee is licensed to use the class code in any way seen fit which
+meets the restrictions herein.
+
+5.  The licensee's license will automatically terminate upon any transfer of the Software
+Components not permitted herein. Upon transfer (including pursuant to a merger,
+acquisition or sale of assets), the licensee must deliver the Software, including any
+copies and related documentation, to the transferee. The transferee must accept
+these License Terms as a condition to the transfer.
+
+6.  This is a License Agreement.  AXL Software warrants that it has all the
+intellectual property and other rights necessary to enter into this Agreement
+and to grant to Customer the licenses identified.
+
+7.  AXL software agrees to hold harmless and indemnify the end consumer from and
+against all damages liabilities and costs (including reasonable attorneys fees
+and expenses) in connection with any breach of the representation made in
+Section 6.
+
+AXL SOFTWARE MAKES NO REPRESENTATIONS OR WARRANTIES ABOUT THE SUITABILITY OF THE
+SOFTWARE FOR A PARTICULAR PURPOSE, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT
+LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE, OR NON- INFRINGEMENT. EXCEPT AS PROVIDED HEREIN, AXL SHALL NOT BE
+LIABLE FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF USING, MODIFYING OR
+DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES. THE SOFTWARE IS NOT DESIGNED FOR
+USE IN HIGH RISK ACTIVITIES REQUIRING FAIL-SAFE PERFORMANCE.  AXL DISCLAIMS ANY
+EXPRESS OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.
+

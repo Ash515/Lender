@@ -1,0 +1,509 @@
+<!-- $Id$ -->
+<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd">
+<!--<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd"> -->
+<data-dictionary name="Accounts">
+    <table name="IAMGroup" display-name="Group">
+        <description>Users in an Account can be grouped based on their traits and the group can be used to simplify administrative operations, such as, sharing a document to all "Managers"</description>
+        <columns>
+            <column name="GROUP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMGroup.GROUP_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ZGID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="GROUP_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="GROUP_DESCRIPTION">
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="GROUP_TYPE">
+                <description>Group type differentiate between teams, departments, usergroups. Just for UI Purpose</description>
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+            </column>
+            <column name="IS_ACTIVE">
+                <data-type>INTEGER</data-type>
+                <max-size>2</max-size>
+                <default-value>1</default-value>
+            </column>
+            <column name="CREATED_BY">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <default-value>-1</default-value>
+                <allowed-values>
+                    <pattern>&createdby;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="DEPARTMENT_HEAD">
+                <data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>-1</default-value>
+				<allowed-values>
+                    <pattern>&createdby;</pattern>
+                </allowed-values>
+            </column>
+        </columns>
+        <primary-key name="IAMGroup_PK">
+            <primary-key-column>GROUP_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMGroup_FK1" reference-table-name="IAMAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMGroup_UK1">
+                <unique-key-column>ZGID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMGroup_NAMEndx">
+                <index-column>GROUP_NAME</index-column>
+            </index>
+            <index name="IAMGroup_CRBYndx">
+                <index-column>CREATED_BY</index-column>
+            </index>
+        </indexes>
+    </table>
+
+    <table name="IAMGroupInvitation" display-name="GroupInvitation">
+        <description>Invitation for a user to participate in this group.</description>
+        <columns>
+            <column name="GROUP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="INVITE_EMAIL_ID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&email;</pattern>
+                </allowed-values>
+            </column>
+            <column name="INVITE_ZUID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <default-value>-1</default-value>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="INVITE_STATUS">
+                <description>Status of the invitation. Read only column for the applications. Value is computed systematically. 0 - Pending, 1 - Accepted, 2 - Rejected</description>
+                <data-type>INTEGER</data-type>
+                <max-size>2</max-size>
+                <default-value>0</default-value>
+            </column>
+            <column name="FULL_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DISPLAY_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="LOGIN_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&loginname;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMGroupInvitation_PK">
+            <primary-key-column>GROUP_AUTO_ID</primary-key-column>
+            <primary-key-column>INVITE_ZUID</primary-key-column>
+            <primary-key-column>INVITE_EMAIL_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMGroupInvitation_FK1" reference-table-name="IAMGroup" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>GROUP_AUTO_ID</fk-local-column>
+                        <fk-reference-column>GROUP_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <indexes>
+            <index name="IAMGroupInvitation_ZUIDndx">
+                <index-column>INVITE_ZUID</index-column>
+            </index>
+            <index name="IAMGroupInvitation_EMAIL_IDnds">
+                <index-column>INVITE_EMAIL_ID</index-column>
+            </index>
+        </indexes>
+    </table>
+
+    <table name="IAMGroupProps" display-name="GroupProperties">
+        <description>App specific properties for a Group. Internal usage by Apps only.</description>
+        <columns>
+            <column name="GROUP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="PROP_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&config-name;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PROP_VALUE">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMGroupProps_PK">
+            <primary-key-column>GROUP_AUTO_ID</primary-key-column>
+            <primary-key-column>PROP_NAME</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMGroupProps_FK1" reference-table-name="IAMGroup" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>GROUP_AUTO_ID</fk-local-column>
+                        <fk-reference-column>GROUP_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="IAMGroupMember" display-name="GroupMember">
+        <description>Members belong to a Group along with their role</description>
+        <columns>
+            <column name="GROUP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ZUID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IS_ACTIVE">
+                <data-type>INTEGER</data-type>
+                <max-size>2</max-size>
+                <default-value>1</default-value>
+            </column>
+            <column name="IS_MODERATOR">
+                <description>Is this member moderator of the group who can control the memberships.</description>
+                <data-type>INTEGER</data-type>
+                <max-size>2</max-size>
+                <default-value>1</default-value>
+            </column>
+            <column name="FULL_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="DISPLAY_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="LOGIN_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&loginname;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TYPE">
+           	 	<data-type>INTEGER</data-type>
+            	<max-size>2</max-size>
+            	<default-value>1</default-value>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMGroupMember_PK">
+            <primary-key-column>GROUP_AUTO_ID</primary-key-column>
+            <primary-key-column>ZUID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMGroupMember_FK1" reference-table-name="IAMGroup" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>GROUP_AUTO_ID</fk-local-column>
+                        <fk-reference-column>GROUP_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <indexes>
+            <index name="IAMGroupMember_ZUIDndx">
+                <index-column>ZUID</index-column>
+            </index>
+        </indexes>
+    </table>
+	<table name="IAMParentGroup" display-name="ParentGroup">
+		<description>To track the ancestor groups of the sub groups</description>
+		<columns>
+      		<column name="GROUP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+			<column name="PARENT_ZGID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+		</columns>
+		<primary-key name="IAMParentGroup_PK">
+            <primary-key-column>GROUP_AUTO_ID</primary-key-column>
+            <primary-key-column>PARENT_ZGID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMParentGroup_FK1" reference-table-name="IAMGroup" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>GROUP_AUTO_ID</fk-local-column>
+                        <fk-reference-column>GROUP_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+	</table>
+	<table name="IAMHierarchy" display-name="Hierarchy">
+        <description>Hierarchically links users and groups within an Account. For example, "Reporting To", "Work Location". This is mainly to ease administrative operations, such as, "Sharing a document for all employees working under a particular manager".</description>
+        <columns>
+            <column name="HIERARCHY_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMHierarchy.HIERARCHY_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ZHID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="HIERARCHY_SCREEN_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&screenname;</pattern>
+                </allowed-values>
+            </column>
+            <column name="HIERARCHY_DISPLAY_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>true</nullable>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="RESOURCE_GROUP_NAME">
+                <description>Specifies the resources (ProtoName) that can participate in this hierarchy. This will be referred against the list present in "IAMAppHierarchyResourceGroup" table</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMHierarchy_PK">
+            <primary-key-column>HIERARCHY_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMHierarchy_FK1" reference-table-name="IAMAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMHierarchy_UK1">
+                <unique-key-column>ZHID</unique-key-column>
+            </unique-key>
+            <unique-key name="IAMHierarchy_UK2">
+                <unique-key-column>ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>HIERARCHY_SCREEN_NAME</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+
+    <table name="IAMHierarchyNode" display-name="HierarchyNode">
+        <description>Multiple nodes form a hierarchy. A node can occur only once in a hierarchy.</description>
+        <columns>
+            <column name="ZHID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="NODE_SCREEN_NAME">
+                <description>A unique name for a node inside a parent node. It can be used for making URL path
+                    Ex: wiki/sales/marketing writer/sales/marketing. If not provided, it will be systematically generated
+                </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&screenname;</pattern>
+                </allowed-values>
+            </column>
+            <column name="NODE_UNIQUE_ID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="NODE_TYPE">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PARENT_NODE_UNIQUE_ID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PATH_FROM_ROOT">
+                <description>Holds the path from the root element.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&config-name;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MOVE_WITH_PARENT">
+                <description>Transient data that can be used for UI</description>
+                <data-type>BOOLEAN</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMHierarchyNode_PK">
+            <primary-key-column>ZHID</primary-key-column>
+            <primary-key-column>NODE_UNIQUE_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMHierarchyNode_FK1" reference-table-name="IAMHierarchy" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ZHID</fk-local-column>
+                        <fk-reference-column>ZHID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <indexes>
+            <index name="IAMHN_PATH_FROM_ROOTndx">
+                <index-column>PATH_FROM_ROOT</index-column>
+            </index>
+        </indexes>
+    </table>
+</data-dictionary>

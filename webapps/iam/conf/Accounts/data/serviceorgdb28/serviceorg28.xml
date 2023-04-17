@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="apigatewaysorgzaid" account_name="APIGateway Service Org">
+		<IAMAccountDomain domain="apigatewaysorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="bluepencilsorgzaid" account_name="BluePencil Service Org">
+		<IAMAccountDomain domain="bluepencilsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="meetingbridgesorgzaid" account_name="MeetingBridge Service Org">
+		<IAMAccountDomain domain="meetingbridgesorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

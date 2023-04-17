@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../conf/security.xsd">
+  <properties>
+    <property name="com.adventnet.iam.security.provider" value="com.adventnet.iam.internal.filter.AccountsSecurityProvider" />
+    <property name="com.zoho.client.handler" value="com.zoho.accounts.internal.ClientUserAPILoginHandler" />
+    <property name="csrf.migration" value="true" />
+    <property name="com.zoho.cs.handler" value="com.zoho.accounts.internal.CSHandlerImpl" />
+    <property name="enable.x.http.method.override.option" value="true" />
+    <property name="content.type.detect.option" value="tika"/>
+  </properties>
+</security>
+

@@ -1,0 +1,325 @@
+ <!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd">
+
+<?xml-stylesheet type="text/xsl" href="data-dictionary-transform.xsl"?>
+
+<!--$Id$ -->
+
+
+<data-dictionary name="ClientComponents">
+	<table name="ACElementAttr">
+		<columns>
+			<column name="NAME">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="ATTRNAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="ATTRVALUE">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="ACElementAttr_PK">
+			<primary-key-column>NAME</primary-key-column>
+			<primary-key-column>ATTRNAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACElementAttr_FK1"
+				reference-table-name="ACElement">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>NAME</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACPanelElement">
+		<columns>
+			<column name="NAME">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="CHILDELEMENT">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="BUTTONINDEX">
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="ACPanelElement_PK">
+			<primary-key-column>NAME</primary-key-column>
+			<primary-key-column>CHILDELEMENT</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACPanelElement_FK1"
+				reference-table-name="ACElement">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>NAME</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ACPanelElement_FK2"
+				reference-table-name="ACElement">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CHILDELEMENT</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+
+	<table name="ACFormConfig">
+		<columns>
+			<column name="NAME">
+				<description>Indicates the ViewConfiguration name to which this is
+					associated.</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="ISREADMODE">
+				<description>Indicates whether the form has to be shown in dual mode
+					i.e read / edit. In such cases a link to tranform the view from
+					read to edit mode will be provided.</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="COLUMNCONFIGLIST">
+				<description>Indicates the column configuration list to be used
+					while displaying the values. Only the columns that require
+					transformation need to be specified here. The other columns which
+					do not have any transformations can be skipped.</description>
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="LAYOUTCONFIGLIST">
+				<description>Indicates the layout configuration list to be used
+					while displaying the values. This is the main configuration. Only
+					the properties that are specified here will be displayed..</description>
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="JSFILENAME">
+				<description>Indicates the js file name to be included for the form
+					in question. This should contain the methods / objects that will be
+					used during form validation.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ACTIONLINK">
+				<description>Indicates the link where the form action should be
+					submitted. If not specified, form will be submitted to the
+					corresponding .ve</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="TARGET">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="FORMTYPE">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="CVNAME">
+				<description>This indicates the CustomViewName to be used for
+					fetching / updating the data to be shown in the form.</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SUCCESSMESSAGE">
+				<description>This indicates the message to be shown when the form
+					submit action is successful. Dynamic values can be specified in the
+					message as ${Property} where Property is the columnAlias whose
+					value is to be displayed. e.g. User Details for ${FirstName} has
+					been updated successfully.</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="FAILUREMESSAGE">
+				<description>This indicates the message to be shown when the form
+					submit action fails. Dynamic values can be specified in the message
+					as ${Property} where Property is the columnAlias whose value is to
+					be displayed. e.g. Error during updating Details for user
+					${FirstName}.</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ALERTTYPE">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<default-value>Default</default-value>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACFormConfiguration_PK">
+			<primary-key-column>NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACFormConfig_FK2"
+				reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>NAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ACFormConfig_FK3"
+				reference-table-name="CustomViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CVNAME</fk-local-column>
+						<fk-reference-column>CVID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ACFormConfig_FK5"
+				reference-table-name="ACColumnConfigurationList">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>COLUMNCONFIGLIST</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ACFormConfig_FK6"
+				reference-table-name="ACPSConfigList">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>LAYOUTCONFIGLIST</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACPSConfiguration">
+		<columns>
+			<column name="CONFIGNAME">
+				<description>Indicates the name of the layout configuration list in
+					which this configuration will be added</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="COLUMNINDEX">
+				<description>Indicates the column number at which this column should
+					start</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ROWINDEX">
+				<description>Indicates the row number at which this column should
+					start</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLSPAN">
+				<description>Indicates the number of cells to be spanned
+					horizontally.</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="ROWSPAN">
+				<description>Indicates the number of cells to be spanned vertically.</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="DATATYPE">
+				<description>Indicates the type of data that will displayed in the
+					concerned cell. The possible values can be FormElement, FieldName,
+					FieldValue, Label and Text</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="DATAVALUE">
+				<description>Indicates the value to be shown in the client. In case
+					of FieldName, Text and Label, the value is a string whereas in case
+					of FormElement and FieldValue, it is the name of the Columnalias
+					for which the data is to be shown.</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="WIDTH">
+				<description>Specifies the width which should be occupied by the
+					current element</description>
+				<data-type>INTEGER</data-type>
+			</column>
+			<column name="HEIGHT">
+				<description>Specifies the height which should be occupied by the
+					current element</description>
+				<data-type>INTEGER</data-type>
+			</column>
+			<column name="CREATORCONFIG">
+				<description>Specifies the creator configuration name that should be
+					used for generating the cell content. Currently this functionality
+					is implemented for Forms alone.</description>
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="ACPSConfiguration_PK">
+			<primary-key-column>CONFIGNAME</primary-key-column>
+			<primary-key-column>ROWINDEX</primary-key-column>
+			<primary-key-column>COLUMNINDEX</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACPSConfiguration_FK"
+				reference-table-name="ACPSConfigList">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CONFIGNAME</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ACPSConfiguration_FK1"
+				reference-table-name="ACElement">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CREATORCONFIG</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+</data-dictionary>	

@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Zoho Enhancement : 
+		* This policy file contains only HTML5 tags and attributes 
+		* If teams need to extend antisamy policy file please refer -> https://intranet.wiki.zoho.com/security/How-to-extend-antisamy-policy-file.html     
+-->
+<anti-samy-rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="antisamy.xsd">
+	<include href="antisamy-common-rules.xml" />
+	<common-regexps>
+		<!-- HTML5 Regex -->
+		<!-- Media-type reference http://www.iana.org/assignments/media-types/media-types.xhtml -->
+		<regexp name="mimeType" value="^(application|audio|image|message|model|multipart|text|video)/+[\w\+-\./]+$" description="HTML5:Regex" />
+		<!--  This "mediaQuery" attribute specify style for special devices (like iPhone), speech or print media. Refer -> https://www.w3schools.com/tags/att_style_media.asp -->
+		<regexp name="mediaQuery" value="(([a-zA-Z]{2,11})?(?:\s(and|or|,)\s)?(\([a-zA-Z0-9-:\s\/]+\))?)*" description="HTML5:Regex" />
+	</common-regexps>
+	<common-attributes>
+		<!-- HTML5 common attributes. To know about the commont attributes please refer this wiki, -->
+		<attribute name="dir" description="HTML5:Define direction of the text">
+			<literal-list>
+				<literal value="ltr" />
+				<literal value="rtl" />
+			</literal-list>
+		</attribute>
+		<attribute name="tabindex" description="Specifies the tab order of an element">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="loop" description="HTML5:Specifies that the video (or) audio will start over again, every time it is finished">
+			<regexp-list>
+				<regexp name="emptyValue" />
+				<regexp name="boolean" />
+			</regexp-list>
+			<literal-list>
+				<literal value="loop" />
+			</literal-list>
+		</attribute>
+		<attribute name="controls" description="HTML5:Specifies that video controls should be displayed (such as a play/pause button etc).">
+			<regexp-list>
+				<regexp name="emptyValue" />
+				<regexp name="boolean" />
+			</regexp-list>
+			<literal-list>
+				<literal value="controls" />
+			</literal-list>
+		</attribute>
+		<attribute name="muted" description="HTML5:Specifies that the audio should be muted">
+			<regexp-list>
+				<regexp name="emptyValue" />
+				<regexp name="boolean" />
+			</regexp-list>
+			<literal-list>
+				<literal value="muted" />
+			</literal-list>
+		</attribute>
+		<attribute name="open" description="HTML5:Specifies that the details should be visible (open) to the user">
+			<regexp-list>
+				<regexp name="emptyValue" />
+				<regexp name="boolean" />
+			</regexp-list>
+			<literal-list>
+				<literal value="open" />
+			</literal-list>
+		</attribute>
+		<attribute name="default" description="HTML5:Define the default value of the tag">
+			<regexp-list>
+				<regexp name="emptyValue" />
+				<regexp name="boolean" />
+			</regexp-list>
+			<literal-list>
+				<literal value="default" />
+			</literal-list>
+		</attribute>
+		<attribute name="checked" description="HTML5:Specifies that an option should be pre-selected when the page loads">
+			<regexp-list>
+				<regexp name="emptyValue" />
+				<regexp name="boolean" />
+			</regexp-list>
+			<literal-list>
+				<literal value="checked" />
+			</literal-list>
+		</attribute>
+		<attribute name="contextmenu" description="HTML5:The contextmenu attribute specifies a context menu for an element">
+			<regexp-list>
+				<regexp name="htmlId" />
+			</regexp-list>
+		</attribute>
+		<attribute name="hidden" description="HTML5:Hide the element">
+			<regexp-list>
+				<regexp name="emptyValue" />
+				<regexp name="boolean" />
+			</regexp-list>
+			<literal-list>
+				<literal value="hidden" />
+			</literal-list>
+		</attribute>
+		<attribute name="spellcheck" description="HTML5:The spellcheck attribute specifies whether the element is to have its spelling and grammar checked or not.">
+			<regexp-list>
+				<regexp name="boolean" />
+			</regexp-list>
+		</attribute>
+	</common-attributes>
+	<!--
+	This requires normal updates as browsers continue to diverge from the W3C and each other. As long as the browser wars continue
+	this is going to continue. I'm not sure war is the right word for what's going on. Doesn't somebody have to win a war after
+	a while? Even wars of attrition, surely?
+	 -->
+	<global-tag-attributes>
+		<!-- HTML5 Global Level Attribute -->
+		<attribute name="dir" description="HTML5:For more info refer common attribute section" />
+		<attribute name="accesskey" description="HTML5:In HTML4.01, the 'accesskey' attribute only supported a, area, button, input, label, legend, and textarea tags. But HTML5, give supports to all elements" />
+		<attribute name="tabindex" description="HTML5:In HTML4.01, the 'tabindex' attribute only supported in a, area, button, input, object, select and textarea tags.But HTML5, give supports to all elements" />
+		<!-- New Global Attributes are introduced in HTML5 -->
+		<attribute name="contextmenu" description="For more info refer common attribute section" />
+		<attribute name="hidden" description="For more info refer common attribute section" />
+		<attribute name="spellcheck" description="For more info refer common attribute section" />
+	</global-tag-attributes>
+	<tag-rules>
+		<!-- HTML5 introduced  some new value for 'type' attribute. So overrided, input tag with new values of 'type' attribute-->
+		<tag name="input" action="validate">
+			<attribute name="name" />
+			<attribute name="size" />
+			<attribute name="maxlength">
+				<regexp-list>
+					<regexp name="number" />
+				</regexp-list>
+			</attribute>
+			<attribute name="autocomplete" />
+			<attribute name="checked">
+				<regexp-list>
+					<regexp name="anything" />
+				</regexp-list>
+			</attribute>
+			<attribute name="alt" />
+			<attribute name="src">
+				<regexp-list>
+					<regexp name="onsiteURL" />
+					<regexp name="offsiteURL" />
+				</regexp-list>
+			</attribute>
+			<attribute name="usemap">
+				<regexp-list>
+					<regexp name="onsiteURL" />
+				</regexp-list>
+			</attribute>
+			<attribute name="type">
+				<literal-list>
+					<literal value="hidden" />
+					<literal value="text" />
+					<!-- <literal value="password"/>  -->
+					<!--  no user profiles should have password fields -->
+					<literal value="radio" />
+					<literal value="checkbox" />
+					<literal value="submit" />
+					<literal value="button" />
+					<literal value="image" />
+					<literal value="file" />
+					<literal value="reset" />
+					<!-- HTML5:Few new values are inroduced for 'type' attribute.For more info refer https://www.w3schools.com/html/html5_new_elements.asp -->
+					<literal value="color" />
+					<literal value="date" />
+					<literal value="datetime" />
+					<literal value="datetime-local" />
+					<literal value="email" />
+					<literal value="month" />
+					<literal value="number" />
+					<literal value="range" />
+					<literal value="search" />
+					<literal value="tel" />
+					<literal value="time" />
+					<literal value="url" />
+					<literal value="week" />
+				</literal-list>
+			</attribute>
+			<attribute name="value">
+				<regexp-list>
+					<regexp name="anything" />
+				</regexp-list>
+			</attribute>
+			<attribute name="disabled" />
+			<attribute name="readonly" />
+			<attribute name="border" />
+			<!-- HTML5 : Few attribute are introduced for 'input' tag. For more info refer https://www.w3schools.com/html/html5_new_elements.asp-->
+			<attribute name="min" description="HTML5:Define min value for input element">
+				<regexp-list>
+					<regexp name="number" />
+				</regexp-list>
+			</attribute>
+			<attribute name="max" description="HTML5:Define min value for input element">
+				<regexp-list>
+					<regexp name="number" />
+				</regexp-list>
+			</attribute>
+			<attribute name="pattern" description="HTML5:Validate the value of the 'input' field against regex pattern">
+				<regexp-list>
+					<regexp name="anything" />
+				</regexp-list>
+			</attribute>
+			<attribute name="placeholder" description="HTML5:The 'placeholder' attribute specifies a short hint that describes the expected value of a input field / textarea.">
+				<regexp-list>
+					<regexp name="anything" />
+				</regexp-list>
+			</attribute>
+			<attribute name="required" description="HTML5:Specifies that the element must be filled out before submitting the form">
+				<regexp-list>
+					<regexp name="emptyValue" />
+					<regexp name="boolean" />
+				</regexp-list>
+				<literal-list>
+					<literal value="required" />
+				</literal-list>
+			</attribute>
+			<attribute name="multiple" description="HTML5:Specifies that a user can enter more than one value. Used in file upload">
+				<regexp-list>
+					<regexp name="emptyValue" />
+					<regexp name="boolean" />
+				</regexp-list>
+				<literal-list>
+					<literal value="multiple" />
+				</literal-list>
+			</attribute>
+			<attribute name="step" description="HTML5:Specifies the legal number intervals for an input field">
+				<regexp-list>
+					<regexp name="number" />
+				</regexp-list>
+			</attribute>
+			<!-- HTML5 : "list" attribute for <input> tag -->
+			<attribute name="list" description="HTML5:Refers to a datalist element that contains pre-defined options for an input element">
+				<regexp-list>
+					<regexp name="htmlId" />
+				</regexp-list>
+			</attribute>
+			<attribute name="height" description="Customized:Based on the creator log, 'height' attribute is valid.Refer:https://intranet.wiki.zoho.com/security/HTML---and---CSS---Antisamy---behaviour---creator---log---analysis---6---march---2017.html" />
+			<attribute name="width" description="Customized:Based on the creator log, 'width' attribute is valid.Refer:https://intranet.wiki.zoho.com/security/HTML---and---CSS---Antisamy---behaviour---creator---log---analysis---6---march---2017.html" />
+		</tag>
+		<!-- New tags are introduced in HTML5,
+ 				1. NewSemantic/Structural Elements
+ 				2. New Form Elements
+ 				3. New Input Types
+				4. HTML5 Graphics - we supported graphics related elements and attribute in new antisamy policy file. The name of the policy file will be contain a keyword 'svg'.
+				5. New Media Elements
+				Refer -> https://www.w3schools.com/html/html5_new_elements.asp
+
+        -->
+		<!-- 1. NewSemantic/Structural Elements -->
+		<tag name="mark" action="validate" description="HTML5:Use the 'mark' tag if you want to highlight parts of your text." />
+		<tag name="main" action="validate" description="HTML:The 'main' tag defines main content of a document" />
+		<tag name="bdi" action="validate" description="HTML5:The 'bdi' tag isolates a part of text that might be formatted in a different direction from other text outside it." />
+		<tag name="figure" action="validate" description="HTML5:The 'figure' tag specifies self-contained content, like illustrations, diagrams, photos, code listings, etc." />
+		<tag name="figcaption" action="validate" description="HTML5:Defined caption for 'figure' element." />
+		<tag name="details" action="validate" description="HTML5:The 'details' tag specifies additional details that the user can view or hide on demand.">
+			<attribute name="open" />
+		</tag>
+		<tag name="summary" action="validate" description="HTML5:The 'summary' tag defines a visible heading for the 'details' element. The heading can be clicked to view/hide the details." />
+		<tag name="rp" action="validate" description="HTML5:The 'rp' tag can be used to provide parentheses around a ruby text, to be shown by browsers that do not support ruby annotations." />
+		<tag name="rt" action="validate" description="HTML5:The 'rt' tag defines an explanation or pronunciation of characters (for East Asian typography) in a ruby annotation." />
+		<tag name="wbr" action="validate" description="HTML5:The 'wbr' (Word Break Opportunity) tag specifies where in a text it would be ok to add a line-break." />
+		<tag name="ruby" action="validate" description="HTML5:Defines ruby annotation" />
+		<tag name="time" action="validate" description="HTML5:Defines a human-readable date/time.">
+			<attribute name="datetime" />
+		</tag>
+		<tag name="header" action="validate" description="HTML5:Defines the header of the document" />
+		<tag name="article" action="validate" description="HTML5:Defines the atricle of the document" />
+		<tag name="aside" action="validate" description="HTML5:Defines the aside of the document" />
+		<tag name="footer" action="validate" description="HTML5:Defines the footer of the document" />
+		<tag name="nav" action="validate" description="HTML5:Defines the naviagtion of the document" />
+		<tag name="section" action="validate" description="HTML5:Defines the section of the document" />
+		<tag name="progress" action="validate" description="HTML5:The 'progress' tag represents the progress of a task. ">
+			<attribute name="max">
+				<regexp-list>
+					<regexp name="number" />
+				</regexp-list>
+			</attribute>
+			<attribute name="value">
+				<regexp-list>
+					<regexp name="number" />
+				</regexp-list>
+			</attribute>
+			<attribute name="min">
+				<regexp-list>
+					<regexp name="number" />
+				</regexp-list>
+			</attribute>
+		</tag>
+		<!-- same behaviour of <progress> tag -->
+		<tag name="meter" action="validate" description="HTML5:The 'meter' tag defines a scalar measurement within a known range, or a fractional value. This is also known as a gauge.">
+			<attribute name="max">
+				<regexp-list>
+					<regexp name="number" />
+				</regexp-list>
+			</attribute>
+			<attribute name="min">
+				<regexp-list>
+					<regexp name="number" />
+				</regexp-list>
+			</attribute>
+			<attribute name="low">
+				<regexp-list>
+					<regexp name="number" />
+				</regexp-list>
+			</attribute>
+			<attribute name="high">
+				<regexp-list>
+					<regexp name="number" />
+				</regexp-list>
+			</attribute>
+			<attribute name="value">
+				<regexp-list>
+					<regexp name="number" />
+				</regexp-list>
+			</attribute>
+			<attribute name="optimum">
+				<regexp-list>
+					<regexp name="number" />
+				</regexp-list>
+			</attribute>
+		</tag>
+		<tag name="menuitem" action="validate" description="HTML5:The 'menuitem' tag defines a command/menu item that the user can invoke from a popup menu.">
+			<attribute name="type">
+				<literal-list>
+					<literal value="checkbox" />
+					<literal value="command" />
+					<literal value="radio" />
+				</literal-list>
+			</attribute>
+			<attribute name="disabled" />
+			<attribute name="checked" />
+			<attribute name="default" />
+			<attribute name="radiogroup">
+				<regexp-list>
+					<regexp name="htmlId" />
+				</regexp-list>
+			</attribute>
+			<attribute name="label">
+				<regexp-list>
+					<regexp name="anything" />
+				</regexp-list>
+			</attribute>
+			<attribute name="icon">
+				<regexp-list>
+					<regexp name="onsiteURL" />
+					<regexp name="offsiteURL" />
+				</regexp-list>
+			</attribute>
+		</tag>
+		<tag name="menu" action="validate" description="HTML5:The 'menu' tag defines a list/menu of commands.">
+			<attribute name="type">
+				<literal-list>
+					<literal value="context" />
+					<literal value="toolbar" />
+					<literal value="list" />
+				</literal-list>
+			</attribute>
+			<attribute name="label">
+				<regexp-list>
+					<regexp name="anything" />
+				</regexp-list>
+			</attribute>
+		</tag>
+		<!-- 2. New Form Elements -->
+		<tag name="datalist" action="validate" description="HTML5:Specifies the list for an 'input' element" />
+		<tag name="output" action="validate" description="HTML5:Defines output for an element">
+			<attribute name="for">
+				<regexp-list>
+					<!-- The below regex's similar to "htmlId" regex but,
+					extra '\s' char added for matching valid input -->
+					<regexp value="[\w\:\s\-\.]+" />
+				</regexp-list>
+			</attribute>
+			<attribute name="name" />
+		</tag>
+		<tag name="source" action="validate" description="HTML5:The 'source' tag is used to specify multiple media resources for media elements, such as 'video', 'audio', and 'picture'.">
+			<attribute name="src" onInvalid="removeTag">
+				<regexp-list>
+					<regexp name="onsiteURL" />
+					<regexp name="offsiteURL" />
+				</regexp-list>
+			</attribute>
+			<attribute name="media">
+				<regexp-list>
+					<regexp name="mediaQuery" />
+				</regexp-list>
+			</attribute>
+			<attribute name="type">
+				<regexp-list>
+					<regexp name="mimeType" />
+				</regexp-list>
+			</attribute>
+		</tag>
+		<tag name="audio" action="validate" description="HTML5: Defines audio">
+			<attribute name="src" onInvalid="removeTag">
+				<regexp-list>
+					<regexp name="onsiteURL" />
+					<regexp name="offsiteURL" />
+				</regexp-list>
+			</attribute>
+			<!-- Currently, there are 3 supported file formats for the <audio> element: MP3, Wav, and Ogg: -->
+			<attribute name="type">
+				<literal-list>
+					<literal value="audio/mpeg" />
+					<literal value="audio/ogg" />
+					<literal value="audio/wav" />
+				</literal-list>
+			</attribute>
+			<attribute name="muted" />
+			<attribute name="loop" />
+			<attribute name="controls" />
+			<attribute name="preload">
+				<literal-list>
+					<literal value="metadata" />
+					<literal value="auto" />
+					<literal value="none" />
+				</literal-list>
+			</attribute>
+		</tag>
+		<tag name="video" action="validate" description="HTML5:The 'video' tag specifies video, such as a movie clip or other video streams.">
+			<attribute name="src" onInvalid="removeTag">
+				<regexp-list>
+					<regexp name="onsiteURL" />
+					<regexp name="offsiteURL" />
+				</regexp-list>
+			</attribute>
+			<attribute name="poster">
+				<regexp-list>
+					<regexp name="onsiteURL" />
+					<regexp name="offsiteURL" />
+				</regexp-list>
+			</attribute>
+			<!-- IE not supported "preload" attribute -->
+			<attribute name="preload">
+				<literal-list>
+					<literal value="auto" />
+					<literal value="metadata" />
+					<literal value="none" />
+				</literal-list>
+			</attribute>
+			<attribute name="height">
+				<regexp-list>
+					<regexp name="measurements" />
+				</regexp-list>
+			</attribute>
+			<attribute name="width">
+				<regexp-list>
+					<regexp name="measurements" />
+				</regexp-list>
+			</attribute>
+			<attribute name="loop" />
+			<attribute name="controls" />
+			<attribute name="muted" />
+		</tag>
+		<tag name="track" action="validate" description="HTML5:This element is used to specify subtitles, caption files or other files containing text, that should be visible when the media is playing.">
+			<attribute name="src" onInvalid="removeTag">
+				<regexp-list>
+					<regexp name="onsiteURL" />
+					<regexp name="offsiteURL" />
+				</regexp-list>
+			</attribute>
+			<attribute name="default">
+				<regexp-list>
+					<regexp name="emptyValue" />
+					<regexp name="boolean" />
+				</regexp-list>
+				<literal-list>
+					<literal value="default" />
+				</literal-list>
+			</attribute>
+			<attribute name="kind">
+				<literal-list>
+					<literal value="captions" />
+					<literal value="chapters" />
+					<literal value="descriptions" />
+					<literal value="metadata" />
+					<literal value="subtitles" />
+				</literal-list>
+			</attribute>
+			<attribute name="label">
+				<regexp-list>
+					<regexp name="anything" />
+				</regexp-list>
+			</attribute>
+			<attribute name="srclang">
+				<regexp-list>
+					<regexp value="[a-zA-Z\-]{2,20}" />
+				</regexp-list>
+			</attribute>
+		</tag>
+	</tag-rules>
+</anti-samy-rules>

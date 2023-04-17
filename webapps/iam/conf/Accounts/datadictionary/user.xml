@@ -1,0 +1,3219 @@
+<?xml version="1.0"?>
+<!-- $Id $ -->
+<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd">
+<!--<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd"> -->
+<data-dictionary name="Accounts">
+    <table name="IAMUser" display-name="User">
+        <description>User is a person who uses Zoho Apps within an Account. A person can use Zoho Apps via different Accounts. A  "User" represents the person for a single Account only and the same person can have different users in different Accounts. Lifecycle of a user in one Account will not affect the users of that person in other Accounts</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMUser.USER_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+
+            <column name="ZUID">
+                <description>Unique ID of the user across Zoho</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="FIRST_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="LAST_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="DISPLAY_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_STATUS">
+                <description>Current status of the user Active - 1, Inactive - 0, Closed - 2</description>
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+            </column>
+            <column name="USER_ROLE">
+                <description>User Role member - 0, Admin - 1 </description>
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+            </column>
+            <column name="USER_TYPE">
+                <description>Type of the user. Ex: Employer, Contracter, Visitor etc</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="GENDER">
+                <description>M - Male, F - Female, O - Non binary, N - Not selected</description>
+                <data-type>CHAR</data-type>
+                <default-value>N</default-value>
+                <allowed-values>
+                    <value>M</value>
+                    <value>F</value>
+                    <value>N</value>
+                    <value>O</value>
+                </allowed-values>
+            </column>
+            <column name="COUNTRY_CODE">
+                <data-type>CHAR</data-type>
+                <max-size>5</max-size>
+                <!--default-value>US</default-value-->
+                <allowed-values>
+                    <pattern>&country-code;</pattern>
+                </allowed-values>
+            </column>
+            <column name="LANGUAGE_CODE">
+                <data-type>CHAR</data-type>
+                <max-size>2</max-size>
+                <!--default-value>en</default-value-->
+                <allowed-values>
+                    <pattern>&language-code;</pattern>
+                </allowed-values>
+            </column>
+            <column name="LANGUAGE_VARIANT">
+                <data-type>CHAR</data-type>
+                <max-size>30</max-size>
+                <allowed-values>
+                    <pattern>&locale-variant;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TIMEZONE">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="DATE_OF_BIRTH">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="DATE_OF_JOINING">
+                <description>The data at which this user has joined to this organization</description>
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="ABOUT_ME">
+                <data-type>CHAR</data-type>
+                <max-size>256</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="IDP">
+                <description>type of idps ZOHO(0), ORG_LDAP(1), GOOGLE(2), YAHOO(3), AOL(4), LIVE(5), SITE_MINDER(6), GAPPS(7) and FACEBOOK(8)</description>
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+            </column>
+            <column name="REGISTRATION_IP_ADDRESS">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="REFERRER">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="SKYPE_ID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="AUTH_TYPE">
+                <description>
+                    Identifies the authentication type. The value may be ZOHO, PORTAL etc.
+                    If ZOHO, the password validation will be done against the default ZOHO account.
+                    If portal, the it will happen against the portal. User can specify the AUTH_TYPE which can be overriden here.
+                    If the allows only the PORTAL authentication then the user setting will not be taken care.
+                </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <default-value>ZOHO</default-value>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUser_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUser_FK1" reference-table-name="IAMAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMUser_UK1">
+                <unique-key-column>ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>ZUID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMUser_ZUIDndx">
+                <index-column>ZUID</index-column>
+            </index>
+        </indexes>
+    </table>
+
+	<table name="IAMUserInfo" display-name="UserInfo">
+		<description>User's information, new columns to the user table can be added here.</description>
+		<columns>
+			<column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="STATE">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserInfo_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserInfo_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+         </foreign-keys>
+	</table>
+
+    <table name="IAMUserLocation" display-name="UserLocation">
+        <description>User verus Location association</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="LOCATION_AUTO_ID">
+                <description>Unique ID of the work location of the user</description>
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <!-- column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column -->
+            <column name="LOCATION_NAME_APL"><!--  Added as the LOCATION_AUTO_ID won' be available to the application -->
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&apl;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZUID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserLocation_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+        </primary-key>
+
+        <foreign-keys>
+            <foreign-key name="IAMUserLocation_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+
+            <foreign-key name="IAMUserLocation_FK3" reference-table-name="IAMLocation" >
+                <fk-columns>
+                    <!-- fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column -->
+                    <fk-column>
+                        <fk-local-column>LOCATION_AUTO_ID</fk-local-column>
+                        <fk-reference-column>LOCATION_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMUserLocation_UK1">
+                <!-- unique-key-column>ACCOUNT_AUTO_ID</unique-key-column -->
+                <unique-key-column>ZUID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+
+    <table name="IAMUserScreenName" display-name="ScreenName">
+        <description>Unique, human readable, identifier for a user within an Account.</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="SCREEN_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&screenname;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="IS_LOGIN_NAME">
+                <description>Non ZUID services will reserve space using this row if it is set to true</description>
+                <data-type>BOOLEAN</data-type>
+            </column>
+	    <column name="IS_ZOHO_EMAIL_ID">
+		<description>Identifies the email address provided by Zoho. Should be unique with UserName field for backward compatability.</description>
+		<data-type>BOOLEAN</data-type>
+		<default-value>false</default-value>
+	    </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserScreenName_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+            <primary-key-column>SCREEN_NAME</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserScreenName_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+            <foreign-key name="IAMUserScreenName_FK2" reference-table-name="IAMAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMUserScreenName_UK">
+                <unique-key-column>ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>SCREEN_NAME</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMUserScreenName_SNidx">
+                <index-column>SCREEN_NAME</index-column>
+            </index>
+        </indexes>
+    </table>
+    
+    <table name="IAMUserMobileScreenName" display-name="MobileScreenName">
+        <description>Unique, mobile number for a user within an Account.</description>
+        <columns>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="MOBILE_SCREEN_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&screenname;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_MOBILE_STATUS">
+                <data-type>INTEGER</data-type>
+            	<default-value>0</default-value>
+            </column>                      
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMMobileScreenName_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+            <primary-key-column>MOBILE_SCREEN_NAME</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMMobileScreenName_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+            <foreign-key name="IAMMobileScreenName_FK2" reference-table-name="IAMAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMMobileScreenName_UK">
+            	<unique-key-column>ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>MOBILE_SCREEN_NAME</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMMobileScreenName_SNidx">
+                <index-column>MOBILE_SCREEN_NAME</index-column>
+            </index>
+        </indexes>
+    </table>
+    
+
+    <table name="IAMUserEmail" display-name="UserEmail">
+        <description>Email address of a user. Ownership will be verified while adding an Email. Used for Account Recovery, Authentication and account related notifications</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="EMAIL_ID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&email;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="IS_VERIFIED">
+                <description>Will be set to true only if the given verification code is correct</description>
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="IS_PRIMARY">
+                <description>Identifies the primary email address</description>
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="VERIFICATION_CODE">
+                <description>Internal attribute generated by the system while adding the mobile. Will not be exposed to the services.</description>
+                <data-type>CHAR</data-type>
+                <max-size>32</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserEmail_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+            <primary-key-column>EMAIL_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserEmail_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+            <foreign-key name="IAMUserEmail_FK2" reference-table-name="IAMAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMUserEmail_UK">
+                <unique-key-column>ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>EMAIL_ID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMUserEmail_Emailidx">
+                <index-column>EMAIL_ID</index-column>
+            </index>
+        </indexes>
+    </table>
+
+    <table name="IAMUserPassword" display-name="Password">
+        <description>Password used to authenticate the user</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="PASSWORD">
+                <data-type>CHAR</data-type>
+                <max-size>128</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&password;</pattern>
+                </allowed-values>
+            </column>
+            <column name="SALT">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IS_PASSWORD_EXPIRED">
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="IS_ONE_TIME_PASSWORD">
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserPassword_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserPassword_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMUserAppPassword" display-name="AppPassword">
+        <description>Password used to authenticate the user</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="PASSWORD_ID">
+                <description>Unique ID of the user app password</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PASSWORD">
+                <data-type>CHAR</data-type>
+                <max-size>128</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&password;</pattern>
+                </allowed-values>
+            </column>
+            <column name="KEY_LABEL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="IP_ADDRESS">
+                <description>The IP Address of the user at the time of this password is generated.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+             <column name="USER_AGENT">
+                <description>Using which browser or devide the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="IP_AUDIT_INFO">
+                <description>iplocation info will be stored as JSON object.</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+            </column>
+        </columns>
+        <primary-key name="IAMUserAppPassword_PK">
+            <primary-key-column>PASSWORD_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserAppPassword_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <indexes>
+            <index name="IAMUserAppPassword_KEYLABELndx">
+                <index-column>KEY_LABEL</index-column>
+            </index>
+        </indexes>
+    </table>
+
+    <table name="IAMUserSecurityQA" display-name="SecurityQA">
+        <description>Security question and answers to be used during Account recovery</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="QUESTION_APL">
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&apl;</pattern>
+                </allowed-values>
+            </column>
+            <column name="QUESTION">
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="ANSWER">
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserSecurityQA_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+            <primary-key-column>QUESTION_APL</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserSecurityQA_FK" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMUserSecretKey" display-name="UserSecretKey">
+        <description>Password used to authenticate the user</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="SECRET_KEY">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&password;</pattern>
+                </allowed-values>
+            </column>
+             <column name="TOKEN_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="KEY_LABEL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="TYPE">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                 <default-value>Smart Phone</default-value>
+            </column>
+
+            <column name="TIME_PERIOD">
+                <data-type>INTEGER</data-type>
+                <default-value>30</default-value>
+            </column>
+            <column name="CODE_SIZE">
+                <data-type>INTEGER</data-type>
+                <default-value>6</default-value>
+            </column>
+            <column name="IS_VERIFIED">
+                <description>Will be set to true only if the given code is correct</description>
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="IS_PRIMARY">
+                <description>Will be set to true only if the given code is correct</description>
+                <data-type>BOOLEAN</data-type> 
+                <default-value>false</default-value>
+            </column>
+            <column name ="KEY_TYPE">
+            	<description>To differentiate between oneauth and Google authenticator(0)</description>
+            	<data-type>INTEGER</data-type>
+            	<default-value>0</default-value>
+            </column>
+            <column name="HMAC_ALGORITHM">
+            	<data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <default-value>SHA1</default-value>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserSecretKey_PK">
+            <primary-key-column>SECRET_KEY</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserSecretKey_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMUserSecretKey_UK">
+                <unique-key-column>TOKEN_ID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+
+    <table name="IAMUserPreference" display-name="Preference">
+        <description>User preference across Zoho Apps</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="THEME">
+                <data-type>CHAR</data-type>
+                <max-size>25</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DATE_FORMAT">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="FONT">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ALWAYS_SECURE">
+                <data-type>BOOLEAN</data-type>
+            </column>
+            <column name="NEWS_LETTER_SUBSCRIPTION">
+                <data-type>INTEGER</data-type>
+            </column>
+            <column name="NOTIFY_ME_BY">
+                <description>0-MAIL and 1-SMS</description>
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+                <allowed-values>
+                    <value>0</value>
+                    <value>1</value>
+                </allowed-values>
+            </column>
+            <column name="USER_TFA_STATUS">
+                <data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+                <allowed-values>
+                    <value>0</value>
+                    <value>1</value>
+                    <value>2</value>
+                    <value>3</value>
+                </allowed-values>
+            </column>
+            <column name="TFA_PREF_OPTION">
+                <data-type>INTEGER</data-type>
+                <default-value>-1</default-value>
+                <allowed-values>
+                    <value>-1</value>
+                    <value>0</value>
+                    <value>1</value>
+                    <value>2</value>
+                    <value>3</value>
+                    <value>4</value>
+                </allowed-values>
+            </column>
+            <column name="PASSWORD_EXPIRY_NOTIFICATION">
+                <data-type>BOOLEAN</data-type>
+                <default-value>true</default-value>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserPreference_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserPreference_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMUserAddress" display-name="Address">
+        <description>Residential address of the user</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ADDRESS_TYPE">
+                <description>1 - Work (2^0), 2 - Residential current(2^1), 4 - Residential permanent(2^2)</description>
+                <data-type>INTEGER</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="COMPANY_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="JOB_TITLE">
+                <data-type>CHAR</data-type>
+                <max-size>60</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="LOCATION_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="POST_BOX">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="STREET_ADDRESS">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="CITY">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="STATE">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="COUNTRY">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&country-code;</pattern>
+                </allowed-values>
+            </column>
+            <column name="POSTAL_CODE">
+                <data-type>CHAR</data-type>
+                <max-size>20</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="LATITUDE">
+                <data-type>CHAR</data-type>
+                <max-size>20</max-size>
+                <allowed-values>
+                    <pattern>&float;</pattern>
+                </allowed-values>
+            </column>
+            <column name="LONGITUDE">
+                <data-type>CHAR</data-type>
+                <max-size>20</max-size>
+                <allowed-values>
+                    <pattern>&float;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PHONE">
+                <data-type>CHAR</data-type>
+                <max-size>30</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="EXTENSION">
+                <data-type>CHAR</data-type>
+                <max-size>30</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="MOBILE">
+                <data-type>CHAR</data-type>
+                <max-size>30</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="FAX">
+                <data-type>CHAR</data-type>
+                <max-size>30</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="SEATING_LOCATION">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="TIMEZONE">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="LANGUAGE">
+                <data-type>CHAR</data-type>
+                <max-size>30</max-size>
+                <allowed-values>
+                    <pattern>&language-code;</pattern>
+                </allowed-values>
+            </column>
+            <column name="WEBSITE_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="BLOG_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TWITTER_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="LINKEDIN_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="FLICKR_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DELICIOUS_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="AMAZON_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="FACEBOOK_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="GOOGLEPLUS_URL">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+<!--                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>-->
+                <allowed-values>
+                    <pattern>&non-strict-url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserAddress_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+            <primary-key-column>ADDRESS_TYPE</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserAddress_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+
+    <table name="IAMUserProps" display-name="Properties">
+        <description>User properties used by Zoho Apps. This is like an extension to the "account/user/preference" resource</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="PROP_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PROP_VALUE">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserProps_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+            <primary-key-column>PROP_NAME</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserProps_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMUserTrustedDomain" display-name="TrustedDomain">
+        <description>List of domains that are trusted by the user in order to pass basic user attributes</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="TRUSTED_DOMAIN">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&domain;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IP_ADDRESS">
+                <description>The IP Address of the user at the time of this domain is trusted.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_AGENT">
+                <description>Using which browser or devide the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="IP_AUDIT_INFO">
+                <description>iplocation info will be stored as JSON object.</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+            </column>
+        </columns>
+        <primary-key name="IAMUserTrustedDomain_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+            <primary-key-column>TRUSTED_DOMAIN</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserTrustedDomain_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMUserMobile" display-name="UserMobile">
+        <description>Mobile number of the user. Used for Account Recovery, Authentication and account related notifications</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="MOBILE">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="COUNTRY_CODE">
+                <data-type>CHAR</data-type>
+                <max-size>5</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&country-code;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IS_VERIFIED">
+                <description>Will be set to true only if the given verification code is correct</description>
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="VERIFICATION_CODE">
+                <description>Internal attribute generated by the system while adding the mobile. Will not be exposed to the services.</description>
+                <data-type>CHAR</data-type>
+                <max-size>32</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IS_PRIMARY">
+            	<data-type>BOOLEAN</data-type>
+            </column>
+            <column name="VERIFY_TYPE">
+            	<data-type>INTEGER</data-type>
+            	<default-value>0</default-value>
+            	<allowed-values>
+                    <value>0</value>
+                    <value>1</value>
+                </allowed-values>
+            </column>
+            <column name="MODE">
+            	<data-type>INTEGER</data-type>
+            	<default-value>0</default-value>
+            </column>            
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserMobile_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+            <primary-key-column>MOBILE</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserMobile_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+            <foreign-key name="IAMUserMobile_FK2" reference-table-name="IAMAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <indexes>
+            <index name="IAMUserMobile_MOBILEndx">
+                <index-column>MOBILE</index-column>
+            </index>
+        </indexes>
+    </table>
+        
+    <table name="IAMUserDevice" display-name="UserDevice">
+        <description>Device Token of the user. Used for Account Recovery, Authentication and account related notifications</description>
+        <columns>
+            <column name="USER_DEVICE_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMUserDevice.USER_DEVICE_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="DEVICE_TOKEN_APL">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&apl;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DEVICE_TOKEN">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="DEVICE_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="APP_ID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="APNS_MODE">
+                <data-type>CHAR</data-type>
+                <max-size>20</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+			<column name="DEVICE_TYPE">
+                        <description>Will be set to 0 for iOS and 1 for Android</description>
+                        <data-type>INTEGER</data-type>
+                        <allowed-values>
+                                <value>0</value>
+                                <value>1</value> 
+                        </allowed-values>
+               </column>
+                 <column name="DEVICE_OS_VERSION">
+                         <description>Current OS Version of the User Device </description>
+                         <data-type>CHAR</data-type>
+                        <max-size>10</max-size>
+                        <nullable>false</nullable>
+                         <allowed-values>
+                                <pattern>&simple-string;</pattern>
+                         </allowed-values>
+            </column>
+            <column name="DEVICE_INFO">
+                         <description>Other info related to user device,for future use. </description>
+                         <data-type>CHAR</data-type>
+                        <max-size>250</max-size>
+                         <allowed-values>
+                                <pattern>xss:throwerror</pattern>
+                         </allowed-values>
+            </column>
+               <column name="SETUP_MODE">
+                <description>mode is 0 by default which means user has signed in and yet to confirm a mfa mode in device.</description>
+                <data-type>INTEGER</data-type>
+            	<default-value>0</default-value>
+            	<allowed-values>
+                    <value>0</value>
+                    <value>1</value>
+                    <value>2</value>
+                    <value>3</value>
+                    <value>4</value>
+                </allowed-values>
+            </column>
+            <column name="IS_PRIMARY">
+                <description>Will be set to true for the primary device.</description>
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="IS_VERIFIED">
+                <description>Will be set to true only if the Account SetUp is correct</description>
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="IS_LOCKED">
+                <description>Will be set to true only if the App is locked from the device.</description>
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="PUBLIC_KEY">
+                <description>Public Key associated with User. Used for Encrypting the msgs for Security.</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+             <column name="LOCATION">
+                <description>Location of the device.</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="REFRESH_TOKEN">
+                <description>Mapped Access token for this device.</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+             <column name="APP_VERSION">
+                <description>App version </description>
+                <data-type>CHAR</data-type>
+                <max-size>10</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODE">
+                <description>mode is 0 by default which means it is none 0-RECOVERY, 1-TFA, 2-MFA,3-PASSWORDLESS,4-PASSWORDLESS_WITH_BIOMETRIC</description>
+                <data-type>INTEGER</data-type>
+            </column>
+            <column name="PREF_OPTION">
+                <description>prefrence option 0 which means no mode is set.</description>
+                <data-type>INTEGER</data-type>
+            	<allowed-values>
+                    <value>0</value>
+                    <value>1</value>
+                    <value>2</value>
+                    <value>3</value>
+                    <value>4</value>
+                </allowed-values>
+            </column>
+           <column name="SECRET_KEY">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&password;</pattern>
+                </allowed-values>
+            </column>
+            <column name="BIO_TYPE">
+                <description>0-NoBIO , 1-TouchID, 2-FaceID , Type of bio associated to the pref_option column.For e.g., push notification with FACE-ID</description>
+                <data-type>INTEGER</data-type>
+            	<allowed-values>
+                    <value>0</value>
+                    <value>1</value>
+                    <value>2</value>
+                </allowed-values>
+            </column>
+        </columns>
+        <primary-key name="IAMUserDevice_PK">
+            <primary-key-column>USER_DEVICE_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserDevice_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+	        <unique-key name="IAMUserDevice_UK1">
+	            <unique-key-column>USER_AUTO_ID</unique-key-column>
+	            <unique-key-column>DEVICE_TOKEN_APL</unique-key-column>
+	        </unique-key>
+        </unique-keys>
+    </table>
+    
+   <table name="IAMUserSigninPreference" display-name="SigninPreference">
+        <description>User preference across Zoho Apps</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="DEFAULT_PREFERENCE">
+                <description> 0- password, 1-device</description>
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+                <allowed-values>
+                    <value>0</value>
+                    <value>1</value>
+                </allowed-values>
+            </column>
+          <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+          </column>
+          <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+          </column>
+        </columns>
+        <primary-key name="IAMUserSigninPreference_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserSigninPreference_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+   <table name="IAMUserThirdPartySecretKeys" display-name="UserThirdPartySecretKeys">
+      <description>Pass prase for My zoho app recovery</description>
+      <columns>
+         <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+          </column>
+          <column name="APP_NAME">
+             <description> Third party app name</description>
+             <data-type>CHAR</data-type>
+             <max-size>50</max-size>
+             <nullable>false</nullable>
+             <allowed-values>
+                    <pattern>&simple-string;</pattern>
+             </allowed-values>
+          </column>
+          <column name="LABEL">
+             <description> email/ user name for the app</description>
+             <data-type>CHAR</data-type>
+             <max-size>50</max-size>
+             <nullable>false</nullable>
+             <allowed-values>
+                    <pattern>&simple-string;</pattern>
+             </allowed-values>
+          </column>
+          <column name="APP_SECRET">
+             <description> Third party app secret</description>
+             <data-type>CHAR</data-type>
+             <max-size>255</max-size>
+             <nullable>false</nullable>
+             <allowed-values>
+                    <pattern>&simple-string;</pattern>
+              </allowed-values>
+          </column>
+          <column name="DURATIONS">
+              <description> Third party secret duration</description>
+              <data-type>INTEGER</data-type>
+              <default-value>30</default-value>
+          </column>
+          <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserThirdPartySecret_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+            <primary-key-column>APP_SECRET</primary-key-column>
+        </primary-key>
+           <foreign-keys>
+            <foreign-key name="IAMUserThirdPartySecret_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+   </table>
+   
+
+    <table name="IAMAccountAuthUserOpenID" display-name="OpenId">
+        <description>OpenId which is provided by the IDP, such as, Google, Yahoo, and the ZUID/Email association. Applications can perform GET and DELETE only. PUT and POST are triggered systematically during OpenID login</description>
+        <columns>
+			<column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="OPEN_ID_APL">
+                <description>Unique ID from the OpenID provider</description>
+                <data-type>CHAR</data-type>
+                <max-size>150</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&apl;</pattern>
+                </allowed-values>
+            </column>
+            <column name="OPEN_ID">
+                <description>Unique ID from the OpenID provider</description>
+                <data-type>CHAR</data-type>
+                <max-size>150</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>dontdisturb</pattern>
+                </allowed-values>
+            </column>
+            <column name="EMAIL_ID">
+                <description>Email address associated with the OpenID</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&email;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IDP">
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="USER_AGENT">
+                <description>Using which browser or devide the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="IP_AUDIT_INFO">
+                <description>iplocation info will be stored as JSON object.</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+            </column>
+        </columns>
+        <primary-key name="IAMAAUOpenID_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+            <primary-key-column>OPEN_ID_APL</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAAUOpenID_FK" reference-table-name="IAMUser" >
+                <fk-columns>
+					<fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <indexes>
+            <index name="IAMAAUOpenID_Emailndx">
+                <index-column>EMAIL_ID</index-column>
+            </index>
+        </indexes>
+    </table>
+
+    <table name="IAMUserPwdHistory" display-name="PasswordHistory">
+        <description>To track the old passwords of a user so that repeating the same password on forced password change can be aovided.</description>
+        <columns>
+            <column name="PASSWORD_HISTORY_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMUserPwdHistory.PASSWORD_HISTORY_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="PASSWORD">
+                <description>Previously used password</description>
+                <data-type>CHAR</data-type>
+                <max-size>128</max-size>
+                <allowed-values>
+                    <pattern>&password;</pattern>
+                </allowed-values>
+            </column>
+            <column name="SALT">
+                <description>The SALT used to digest the password</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+        </columns>
+        <primary-key name="IAMUserPwdHistory_PK">
+            <primary-key-column>PASSWORD_HISTORY_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserPwdHistory_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMUserPwdHistory_UK">
+                <unique-key-column>USER_AUTO_ID</unique-key-column>
+                <unique-key-column>MODIFIED_TIME</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMUserPwdHistory_Timendx">
+                <index-column>MODIFIED_TIME</index-column>
+            </index>
+        </indexes>
+    </table>
+
+    <table name="IAMUserAuthorizedIP" display-name="UserAuthorizedIp">
+        <description>IP addresses from which this user account can be accessed. Defined by the user.</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="IPID">
+                <description>For IAM BC added. Unique representation of ip range.</description>
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="IP_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="FROM_IP">
+                <description>From IP Address of the range.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TO_IP">
+                <description>To IP Address of the range. In case of single IP Address, this column will be null.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_AGENT">
+                <description>Using which browser or devide the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="IP_AUDIT_INFO">
+                <description>iplocation info will be stored as JSON object.</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+            </column>
+        </columns>
+        <primary-key name="IAMUserAuthorizedIP_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+            <primary-key-column>FROM_IP</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserAuthorizedIP_FK" reference-table-name="IAMUser">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMAccountTag" display-name="Tag">
+        <description>Various resources under an Account can be tagged for search purpose</description>
+        <columns>
+            <column name="TAG_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMAccountTag.TAG_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="TAG_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TAG_TYPE">
+                <description>Can be used for categorizing the Tags ex: Skills, Sports, Interests etc</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccountTag_PK1">
+            <primary-key-column>TAG_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccountTag_FK1" reference-table-name="IAMAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMAccountTag_UK">
+                <unique-key-column>ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>TAG_NAME</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+
+    <table name="IAMAccountTagItem" display-name="TagItem">
+        <description>Association of a Tag with related resources</description>
+        <columns>
+            <column name="TAG_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="RESOURCE_ID">
+                <description>The unique ID of the resource. If a user is tagger then ZUID will be here, for a group ZGID etc</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RESOURCE_TYPE">
+                <description>The Type of the resource. The Proto Name of the Resource. "User" for a user "Group" for a group etc</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&resource-name;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RESOURCE_URL">
+                <description>URL of the resource for easy fetching purpose. It is a nullable column.</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <allowed-values>
+                    <pattern>&url;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccountUserTag_PK1">
+            <primary-key-column>TAG_AUTO_ID</primary-key-column>
+            <primary-key-column>RESOURCE_ID</primary-key-column>
+            <primary-key-column>RESOURCE_TYPE</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccountUserTag_FK1" reference-table-name="IAMAccountTag" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>TAG_AUTO_ID</fk-local-column>
+                        <fk-reference-column>TAG_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="IAMCustomFields" display-name="CustomFields">
+        <description>In addition to the default user attributes available in the "Account/User" resource, Account specific additional user attributes are defined here. The value of this attribute is stored in "UserCustomField" entity.</description>
+        <columns>
+            <column name="CUSTOM_FIELD_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMCustomFields.CUSTOM_FIELD_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="CUSTOM_FIELD_ID">
+                <description>Some unique ID for the field either generated by cs OR set by the services. Can be used as the input field name</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CUSTOM_FIELD_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DATA_TYPE">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <value>STRING</value>
+                    <value>INTEGER</value>
+                    <value>BIGINT</value>
+                    <value>FLOAT</value>
+                    <value>BOOLEAN</value>
+                </allowed-values>
+            </column>
+            <column name="NULLABLE">
+                <data-type>BOOLEAN</data-type>
+            </column>
+            <column name="DEFAULT_VALUE">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="COLUMN_NUMBER">
+                <data-type>INTEGER</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMCustomFields_PK">
+            <primary-key-column>CUSTOM_FIELD_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMCustomFields_FK1" reference-table-name="IAMAccount" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMCustomFields_UK1">
+                <unique-key-column>ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>CUSTOM_FIELD_ID</unique-key-column>
+            </unique-key>
+            <unique-key name="IAMCustomFields_UK2">
+                <unique-key-column>ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>COLUMN_NUMBER</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+
+    <table name="IAMUserCustomField" display-name="UserCustomField">
+        <description>User specific value of the custom fields defined in "Account/User/CustomField" resource.</description>
+        <columns>
+            <column name="CUSTOM_FIELD_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMUserCustomField.CUSTOM_FIELD_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ZUID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_1">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_2">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_3">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_4">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_5">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_6">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_7">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_8">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_9">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_10">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_11">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_12">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_13">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_14">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_15">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_16">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_17">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_18">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_19">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_20">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_21">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_22">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_23">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_24">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_25">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_26">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_27">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_28">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_29">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="C_30">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+        </columns>
+        <primary-key name="IAMUserCustomField_PK1">
+            <primary-key-column>CUSTOM_FIELD_AUTO_ID</primary-key-column>
+            <primary-key-column>ACCOUNT_AUTO_ID</primary-key-column>
+            <primary-key-column>ZUID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserCustomField_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                    <fk-column>
+                        <fk-local-column>ZUID</fk-local-column>
+                        <fk-reference-column>ZUID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    <table name="IAMUserRecoveryCode" display-name="RecoveryCode">
+        <description>Generate Backup Codes for TFA Recovery.</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="RECOVERY_CODE_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMUserRecoveryCode.RECOVERY_CODE_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="RECOVERY_CODE">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&digest;</pattern>
+                </allowed-values>
+            </column>
+             <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserRecoveryCode_PK">
+            <primary-key-column>RECOVERY_CODE_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserRecoveryCode_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMUserRecoveryCode_UK1">
+                <unique-key-column>USER_AUTO_ID</unique-key-column>
+                <unique-key-column>RECOVERY_CODE</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+    <table name="IAMUserSystemProperties" display-name="UserSystemProperties">
+		<description>User properties internally used by Zoho accounts.</description>
+		<columns>
+			<column name="USER_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CAPTCHA_ENTERED_STATUS">
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="SPAM_CHECK_STATUS">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MAILBOX_EXIST">
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="SIGNUP_COUNTRY">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&country-code;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IP_INFO">
+                <description>iplocation info will be stored as JSON object.</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+            </column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMUserSystemProps_PK">
+			<primary-key-column>USER_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMUserSystemProps_FK1" reference-table-name="IAMUser">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>USER_AUTO_ID</fk-local-column>
+						<fk-reference-column>USER_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	<table name="IAMUserServiceDetails" display-name="UserServiceDetails">
+		<description>User servce status and details like first accessed time are stored here.</description>
+		<columns>
+			<column name="USER_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="SERVICE_DETAILS_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMUserServiceDetails.SERVICE_DETAILS_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+			 <column name="APP_ID">
+                <description>Unique ID for service from App table.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IS_ACTIVE">
+                <data-type>INTEGER</data-type>
+                <max-size>2</max-size>
+                <default-value>1</default-value>
+            </column>
+            <column name="DEFAULT_APP_ACCOUNT">
+                <description>Default app account zaaid</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMUserServiceDet_PK1">
+			<primary-key-column>SERVICE_DETAILS_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMUserServiceDetails_FK1" reference-table-name="IAMUser">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>USER_AUTO_ID</fk-local-column>
+						<fk-reference-column>USER_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		 <unique-keys>
+            <unique-key name="IAMUserServiceDet_UK1">
+                <unique-key-column>USER_AUTO_ID</unique-key-column>
+                <unique-key-column>APP_ID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+	</table>
+	<table name="IAMUserVerificationCode" display-name="UserVerificationCode">
+		<description>Stores verification code sent during signin for TFA authentication.</description>
+		<columns>
+			<column name="USER_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="VCID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MOBILE_NO">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="VERIFICATION_CODE">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&digest;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMUserVerificationCode_PK">
+			<primary-key-column>VCID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMUserVerificationCode_FK" reference-table-name="IAMUser">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>USER_AUTO_ID</fk-local-column>
+						<fk-reference-column>USER_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	
+	<table name="IAMUserAccountsProperties" display-name="UserAccountsProperties">
+		<description>User properties internally used by Zoho accounts.</description>
+		<columns>
+			<column name="USER_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="LAST_LOGIN_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="PASSWORD_STRENGTH">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="LAST_LOGIN_COUNTRY">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&country-code;</pattern>
+				</allowed-values>
+			</column>
+			<column name="LAST_PASSWORD_VERIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="LAST_API_ACCESS_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMUserAccountsProperties_PK">
+			<primary-key-column>USER_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMUserAccountsProperties_FK1" reference-table-name="IAMUser">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>USER_AUTO_ID</fk-local-column>
+						<fk-reference-column>USER_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	
+	    <table name="IAMOAuthAccessGrant" display-name="OAuthAccessGrant">
+        <description>User granting access to third party apps to use an AuthToken on behalf of him/her.</description>
+        <columns>
+        	<column name="USER_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+            <column name="ACCESS_GRANT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMOAuthAccessGrant.ACCESS_GRANT_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="CLIENT_ZID">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&clientzid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IP_ADDRESS">
+                <description>The IP Address of the user at the time of this access grant.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_AGENT">
+                <description>Using which browser or devide the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <description>The time at which the token is generated</description>
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMOAuthAccessGrant_PK">
+            <primary-key-column>ACCESS_GRANT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMOAuthAccessGrant_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMOAuthAccessGrant_UK1">
+                <unique-key-column>USER_AUTO_ID</unique-key-column>
+                <unique-key-column>CLIENT_ZID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+    
+    <table name="IAMOAuthAccessGrantScopes" display-name="OAuthAccessGrantScopes">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="ACCESS_GRANT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SCOPE_ID">
+				<description>
+					ID of the scope required. Will have from App.SCOPE_ID
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ALLOWED_OPERATIONS">
+                <data-type>INTEGER</data-type>
+            </column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthAccGrntScs_PK">
+			<primary-key-column>ACCESS_GRANT_AUTO_ID</primary-key-column>
+			<primary-key-column>SCOPE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthAccGrntScs_FK" reference-table-name="IAMOAuthAccessGrant">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ACCESS_GRANT_AUTO_ID</fk-local-column>
+						<fk-reference-column>ACCESS_GRANT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	
+	<table name="IAMUserOAuthApps" display-name="UserOAuthApps">
+        <description>User granting access to third party apps to use an AuthToken on behalf of him/her.</description>
+        <columns>
+        	<column name="USER_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+            <column name="USER_APP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMUserOAuthApps.USER_APP_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="APP_CLIENT_ZID">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IP_ADDRESS">
+                <description>The IP Address of the user at the time of this access grant.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <description>The time at which the token is generated</description>
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserOAuthApps_PK">
+            <primary-key-column>USER_APP_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserOAuthApps_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMUserOAuthApps_UK1">
+                <unique-key-column>USER_AUTO_ID</unique-key-column>
+                <unique-key-column>APP_CLIENT_ZID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>	
+    <table name="IAMOAuthAllowedClients" display-name="OAuthAllowedClients">
+        <description>User Oauth Clients allowed access for restricted clients case</description>
+        <columns>
+        	<column name="USER_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CLIENT_APP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMOAuthAllowedClients.CLIENT_APP_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+			<column name="ALLOWED_CLIENT_ZID">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&clientzid;</pattern>
+                </allowed-values>
+            </column>
+			<column name="CREATED_TIME">
+                <description>The time at which the token is generated</description>
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMOAuthAllowedClient_PK">
+            <primary-key-column>CLIENT_APP_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMOAuthAllowedClient_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+         <unique-keys>
+            <unique-key name="IAMOAuthAllowedClient_UK1">
+                <unique-key-column>USER_AUTO_ID</unique-key-column>
+                <unique-key-column>ALLOWED_CLIENT_ZID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        </table>
+    <table name="IAMUserGDPRDetails" display-name="UserGDPRDetails">
+        <description>User Associated GDPR Details</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="DPA_STATUS">
+                <data-type>INTEGER</data-type>
+            	<default-value>0</default-value>
+                <allowed-values>
+                    <value>0</value>
+                    <value>1</value>
+                    <value>2</value>
+                    <value>3</value>
+                </allowed-values>
+            </column>
+            <column name="EMAIL_ID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+            </column>
+        </columns>
+        <primary-key name="IAMUserGDPRDetails_FK1_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserGDPRDetails_FK1_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="IAMUserServicePreference" display-name="UserServicePreference">
+		<description>User servce status and details like first accessed time are stored here.</description>
+		<columns>
+			<column name="SERVICE_DETAILS_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			 <column name="PREFERENCE_KEY">
+                <description>Unique ID for service from App table.</description>
+                <data-type>CHAR</data-type>
+                <max-size>70</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PREFERENCE_VALUE">
+                <description>Default app account zaaid</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMUserServicePref_PK">
+			<primary-key-column>SERVICE_DETAILS_AUTO_ID</primary-key-column>
+			<primary-key-column>PREFERENCE_KEY</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMUserServicePref_FK1" reference-table-name="IAMUserServiceDetails">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_DETAILS_AUTO_ID</fk-local-column>
+						<fk-reference-column>SERVICE_DETAILS_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	
+	<table name="IAMUserSigninLocation" display-name="UserSigninLocation">
+        <description>User signin trusted location details</description>
+        <columns>
+           <column name="USER_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+        	<column name="LOCATION_AUTO_ID">
+                <description>Unique ID of the location of the user</description>
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMUserSigninLocation.LOCATION_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="LOCATION">
+                <data-type>CHAR</data-type>
+                <max-size>150</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="LATITUDE">
+                <data-type>CHAR</data-type>
+                <max-size>20</max-size>
+                <allowed-values>
+                    <pattern>&float;</pattern>
+                </allowed-values>
+            </column>
+            <column name="LONGITUDE">
+                <data-type>CHAR</data-type>
+                <max-size>20</max-size>
+                <allowed-values>
+                    <pattern>&float;</pattern>
+                </allowed-values>
+            </column>
+        </columns>
+        <primary-key name="IAMUserSigninLocation_PK">
+            <primary-key-column>LOCATION_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserSigninLocation_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMUserSigninLocation_UK1">
+                <unique-key-column>USER_AUTO_ID</unique-key-column>
+                <unique-key-column>LOCATION</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+    
+	<table name="IAMUserSigninUserAgent" display-name="UserSigninUserAgent">
+        <description>User signin trusted user_agent details</description>
+        <columns>
+        	<column name="LOCATION_AUTO_ID">
+               	<description>Unique ID of the work location of the user</description>
+               	<data-type>BIGINT</data-type>
+               	<nullable>false</nullable>
+           	</column>
+           	<column name="USER_AGENT_ID">
+               	<description>Unique ID of user_agent of the user</description>
+               	<data-type>BIGINT</data-type>
+               	<nullable>false</nullable>
+           	</column>
+        	<column name="DEVICE">
+        		<data-type>CHAR</data-type>
+        		<max-size>100</max-size>
+        	</column>
+        	<column name="BROWSER">
+        		<data-type>CHAR</data-type>
+        		<max-size>50</max-size>
+        	</column>
+        	<column name="USER_AGENT">
+        		<data-type>CHAR</data-type>
+        		<max-size>250</max-size>
+        		<allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+        	</column>
+        	<column name="LAST_ACCESSED_TIME">
+        		<data-type>BIGINT</data-type>
+        	</column>
+        </columns>
+		<primary-key name="IAMUserSigninUserAgent_PK">
+				<primary-key-column>LOCATION_AUTO_ID</primary-key-column>
+				<primary-key-column>BROWSER</primary-key-column>
+                <primary-key-column>DEVICE</primary-key-column>
+        </primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMUserSigninUserAgent_FK1" reference-table-name="IAMUserSigninLocation">
+				<fk-columns>
+					<fk-column>
+							<fk-local-column>LOCATION_AUTO_ID</fk-local-column>
+							<fk-reference-column>LOCATION_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+            <unique-key name="IAMUserSigninUserAgent_UK1">
+				<unique-key-column>USER_AGENT_ID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+	</table>
+
+    <table name="IAMUserExtendedInfo" display-name="UserExtendedInfo">
+        <description>User Oauth Clients allowed access for restricted clients case</description>
+        <columns>
+        	<column name="USER_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			 <column name="MANAGER_ZUID">
+                 <description>Reporting To users ZUID. Will be refered from IAMUser. Optional.</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="EMPLOYEE_ID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="DESIGNATION_ID">
+                <description>DESIGNATON_ID of the user. Will refer from IAMDesignations</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="LOCKED_UNTIL">
+            	<description> The duration until which the account is blocked after multiple failed sign in attempts</description>
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserExtended_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserExtended_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="IAMUserMailFetchLocation" display-name="UserMailFetchLocation">
+        <description>User Mail fetch trusted location details</description>
+        <columns>
+           <column name="USER_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="LOCATION_ID">
+               	<description>Unique ID of mail fetch location</description>
+               	<data-type>BIGINT</data-type>
+               	<nullable>false</nullable>
+           	</column>
+            <column name="LOCATION">
+                <data-type>CHAR</data-type>
+                <max-size>150</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="LATITUDE">
+                <data-type>CHAR</data-type>
+                <max-size>20</max-size>
+                <allowed-values>
+                    <pattern>&float;</pattern>
+                </allowed-values>
+            </column>
+            <column name="LONGITUDE">
+                <data-type>CHAR</data-type>
+                <max-size>20</max-size>
+                <allowed-values>
+                    <pattern>&float;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+        		<data-type>BIGINT</data-type>
+        	</column>
+        </columns>
+        <primary-key name="IAMUserMailFetchLocation_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+            <primary-key-column>LOCATION</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserMailFetchLocation_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMUserMailFetchLocation_UK1">
+				<unique-key-column>LOCATION_ID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+
+	<table name="IAMYubikeyRegistrationData" display-name="YubikeyRegistrationData">
+	 <description>Registration Data of users using Yubikey as TFA</description>
+	 <columns>
+			<column name="USER_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="YUBIKEY_ID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="CLIENT_DATA">
+				<data-type>CHAR</data-type>
+				<max-size>300</max-size>  <!-- 200 -->
+			<nullable>false</nullable>
+		</column>
+		<column name="PUBLIC_KEY">
+			<data-type>CHAR</data-type>
+			<max-size>500</max-size>
+			<nullable>false</nullable>
+		</column>
+		<column name="KEYHANDLE">
+			<data-type>CHAR</data-type>
+			<max-size>100</max-size>
+			<nullable>false</nullable>
+		</column>
+		<column name="COUNTER">
+			<data-type>INTEGER</data-type>
+			<default-value>-1</default-value>
+		</column>
+		<column name="IS_PRIMARY">
+            <data-type>BOOLEAN</data-type>
+            <default-value>false</default-value>
+		</column>
+		 <column name="CREATED_TIME">
+            <data-type>BIGINT</data-type>
+        </column>
+	  </columns>
+ 	  <primary-key name="IAMYubikeyRegistrationData_PK">
+           <primary-key-column>USER_AUTO_ID</primary-key-column>
+           <primary-key-column>YUBIKEY_ID</primary-key-column>
+      </primary-key>
+      <foreign-keys>
+           <foreign-key name="IAMYubikeyRegistrationData_FK1" reference-table-name="IAMUser" >
+               <fk-columns>
+                   <fk-column>
+                       <fk-local-column>USER_AUTO_ID</fk-local-column>
+                       <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                   </fk-column>
+               </fk-columns>
+               <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+           </foreign-key>
+      </foreign-keys>
+	</table>
+
+    <table name="IAMOneAuthPreference" display-name="OneAuthPreference">
+        <description>OneAuth Prefrence data of users</description>
+        <columns>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="SECRET_KEY">
+                <description>Shared secret key for TP Secret encryption</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PASS_PHRASE">
+                <description>encrypted pass phrase for OneAuth app recovery</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+             <column name="PASS_PHRASE_TIME">
+				<data-type>BIGINT</data-type>
+             </column>
+            <column name="RESTRICT_SIGNIN">
+                <description>Used to restrict signin</description>
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="TP_SECRET_SYNC">
+                <description>Used to Sync Third Party Secret</description>
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMOneAuthPreference_PK">
+            <primary-key-column>USER_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMOneAuthPreference_FK1" reference-table-name="IAMUser" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+</data-dictionary>

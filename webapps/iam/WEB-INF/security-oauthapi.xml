@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security-accounts.xsd">
+	<urls>
+		<url path="/webclient/v1/oauthclient" authentication="required" method="get" />
+		<url path="/webclient/v1/oauthclient/${clientId}" authentication="required" method="get" />
+		<url path="/webclient/v1/oauthclient" authentication="required" method="post" csrf="true">
+			<inputstream type="JSONObject" template="oauthclientc_json" max-len="-1" />
+		</url>
+		<url path="/webclient/v1/oauthclient/${clientId}" authentication="required" method="put" csrf="true">
+			<inputstream type="JSONObject" template="oauthclientu_json" max-len="-1" />
+		</url>
+		<url path="/webclient/v1/oauthclient/${clientId}" authentication="required" method="delete" csrf="true"/>
+		
+		<url path="/webclient/v1/oauthclient/${clientId}/multidc" authentication="required" method="get" />
+		<url path="/webclient/v1/oauthclient/${clientId}/multidc/${location}" authentication="required" method="get" />
+		<url path="/webclient/v1/oauthclient/${clientId}/multidc/${location}" authentication="required" method="post" csrf="true" >
+			<inputstream type="JSONObject" template="oauthclientdc_json" max-len="-1" />
+		</url>
+		<url path="/webclient/v1/oauthclient/${clientId}/multidc/${location}" authentication="required" method="delete" csrf="true" />
+		
+		<url path="/webclient/v1/portal/[0-9]+/clients" authentication="required" method="get"/>
+		<url path="/webclient/v1/portal/[0-9]+/clients/${clientId}" authentication="required" method="get"/>
+		<url path="/webclient/v1/portal/[0-9]+/clients" authentication="required" method="post" csrf="true">
+			<inputstream type="JSONObject" template="oauthclientportal_json" max-len="-1" />
+		</url>
+		<url path="/webclient/v1/portal/[0-9]+/clients/${clientId}" authentication="required" method="put" csrf="true">
+			<inputstream type="JSONObject" template="oauthclientportal_update_json" max-len="-1" />
+		</url>
+		<url path="/webclient/v1/portal/[0-9]+/clients/${clientId}" authentication="required" method="delete" csrf="true"/>
+		
+		<url path="/webclient/v1/selfclient" authentication="required" method="get"/>
+		<url path="/webclient/v1/selfclient" authentication="required" method="post" csrf="true">
+			<inputstream type="JSONObject" template="selfclient_json" max-len="-1" />
+		</url>
+		
+		<url path="/webclient/v1/selfclient/${clientId}/granttoken" authentication="required" method="post" csrf="true">
+			<inputstream type="JSONObject" template="granttoken_self" max-len="-1" />
+		</url>
+	</urls>
+	
+	
+	<jsontemplates>
+      	<jsontemplate name="oauthclientc_json">
+   			<key name="oauthclient" type="JSONObject" template="create_oauthclient_json" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="create_oauthclient_json">
+			<key name="client_name" regex="iamcleartextpattern" min-occurrences="1"/>
+			<key name="home_page_url" regex="serviceurl"/>
+			<key name="client_type" regex="WEB|Mobile|JS|JWT|Remote" />
+			<key name="client_redirect_uri" type="JSONArray" template="client_redirect_uri" max-len="-1" array-size="1-100"/>
+			<key name="scopes" type="JSONArray" template="client_scope" max-len="-1"/>
+			<key name="jsdomains" type="JSONArray" template="client_jsdomains" max-len="-1"/>
+		</jsontemplate>
+		<jsontemplate name="client_redirect_uri">
+			 <key name="IAMArray" regex="client_redirect_url"/>
+		</jsontemplate>
+		<jsontemplate name="client_scope">
+			 <key name="IAMArray" regex="scope"/>
+		</jsontemplate>
+		<jsontemplate name="client_jsdomains">
+			<key name="IAMArray" regex="serviceurl"/>
+		</jsontemplate>
+		
+		<jsontemplate name="oauthclientu_json">
+   			<key name="oauthclient" type="JSONObject" template="update_oauthclient_json" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="update_oauthclient_json">
+			<key name="client_name" regex="iamcleartextpattern"/>
+			<key name="home_page_url" regex="serviceurl"/>
+			<key name="client_redirect_uri" type="JSONArray" template="client_redirect_uri" max-len="-1"/>
+			<key name="scopes" type="JSONArray" template="client_scope" max-len="-1"/>
+			<key name="jsdomains" type="JSONArray" template="client_jsdomains" max-len="-1"/>
+		</jsontemplate>
+		
+		<jsontemplate name="oauthclientdc_json">
+			<key name="multidc" type="JSONObject" template="multdc_enable_json" max-len="-1"/>
+		</jsontemplate>
+		<jsontemplate name="multdc_enable_json">
+			<key name="location" regex="location"/>
+		</jsontemplate>
+		
+		<jsontemplate name="oauthclientportal_json">
+		    <key name="clients" type="JSONObject" template="create_oauthclient_json" max-len="-1"/>
+		</jsontemplate>
+		<jsontemplate name="oauthclientportal_update_json">
+			 <key name="clients" type="JSONObject" template="update_oauthclient_json" max-len="-1"/>
+		</jsontemplate>
+		
+		<jsontemplate name="selfclient_json">
+			<key name="selfclient" type="JSONObject" template="enable_json" max-len="-1"/>
+		</jsontemplate>
+		<jsontemplate name="enable_json">
+		   <key name="enable" regex="[a-z]+"/>
+		</jsontemplate>
+		<jsontemplate name="granttoken_self">
+			<key name="granttoken" type="JSONObject" template="granttoken_details" max-len="-1"/>
+		</jsontemplate>
+		<jsontemplate name="granttoken_details">
+			<key name="scope" regex="scope"/>
+			<key name="expiry" regex="[0-9]+"/>
+		</jsontemplate>
+	</jsontemplates>
+    
+ 	<regexes>
+		<regex name="scope" value="^[\w\/,\.]+$"/>
+		<regex name="clientId" value="[0-9]+[.][A-Za-z0-9]+"/>
+		<regex name="location" value="[a-zA-Z0-9]+"/>
+ 	</regexes>
+ 
+ </security>

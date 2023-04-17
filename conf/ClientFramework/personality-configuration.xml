@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$ -->
+<ClientFramework-personality-configuration>
+    <DominantTableConfig DOMINANTTABLEID="ViewConfiguration" isindexed="true" nonindexlimit="31">
+        <PersonalityConfiguration dominanttableid="ViewConfiguration" description="" personalityname="ViewConfiguration" personalityid="PersonalityConfiguration:personalityid:ViewConfiguration" modulename="ClientFramework">
+            <ConstituentTable tableid="ViewConfiguration" tableindex="0"/>
+            <ConstituentTable mandatory="false" tableid="AdditionalViewParams" fkconstraint_id="AVP_CC_FK" tableindex="1"/>
+            <ConstituentTable mandatory="false" tableid="TemplateViewParams" fkconstraint_id="TVIEWPARAMS_CC_FK" tableindex="2"/>
+            <ConstituentTable mandatory="false" tableid="FeatureParams" fkconstraint_id="FCONFIGPARAMS_CC_FK" tableindex="3"/>
+            <ConstituentTable mandatory="false" tableid="WebViewConfig" fkconstraint_id="WVC_CC_FK" tableindex="4"/>
+            <ConstituentTable mandatory="false" tableid="UINavigationConfig" fkconstraint_id="UNC_CC_FK" tableindex="5"/>
+            <ConstituentTable mandatory="false" tableid="TiledView" fkconstraint_id="TV_CC_FK" tableindex="6"/>
+            <ConstituentTable mandatory="false" tableid="ViewDataTableMapping" fkconstraint_id="VDM_CC_FK" tableindex="7"/>
+            <ConstituentTable mandatory="false" tableid="PdfViewConfig" fkconstraint_id="PdfViewConfig_FK" tableindex="8"/>
+            <ConstituentTable mandatory="false" tableid="ACViewToGroupMapping" fkconstraint_id="ViewToGroup_FK" tableindex="9"/>
+        </PersonalityConfiguration>
+    </DominantTableConfig>
+    <DominantTableConfig DOMINANTTABLEID="UIComponent" isindexed="true" nonindexlimit="31">
+        <PersonalityConfiguration dominanttableid="UIComponent" description="Core UIComponent Personality" personalityname="UIComponent" personalityid="PersonalityConfiguration:personalityid:UIComponent" modulename="ClientFramework">
+            <ConstituentTable tableid="UIComponent" tableindex="0"/>
+            <ConstituentTable mandatory="false" tableid="WebUIComponent" fkconstraint_id="WCC_COM_PROPS_FK" tableindex="1"/>
+            <ConstituentTable mandatory="false" tableid="PdfUIComponent" fkconstraint_id="PdfUIComponent_FK" tableindex="2"/>
+        </PersonalityConfiguration>
+    </DominantTableConfig>
+    <DominantTableConfig DOMINANTTABLEID="Menu">
+        <PersonalityConfiguration dominanttableid="Menu" description="Definition for WebMenu personality" personalityname="Menu" personalityid="PersonalityConfiguration:personalityid:Menu" modulename="ClientFramework">
+            <ConstituentTable tableid="Menu" tableindex="0"/>
+            <ConstituentTable tableid="MenuAndMenuItem" tableindex="1" mandatory="false"  fkconstraint_id="MenuAndMI_Menu_FK"/>
+        </PersonalityConfiguration>
+    </DominantTableConfig>
+
+    <DominantTableConfig DOMINANTTABLEID="MenuItem" nonindexlimit="15" >
+
+        <PersonalityConfiguration dominanttableid="MenuItem" description="Definition for WebMenuItem personality" personalityname="WebMenuItem" personalityid="PersonalityConfiguration:personalityid:WebMenuItem" modulename="ClientFramework">
+            <ConstituentTable tableid="MenuItem" tableindex="0"/>
+            <ConstituentTable mandatory="false" tableid="WebMenuItem" fkconstraint_id="WebMenuItem_MenuItem_FK" tableindex="1"/>
+            <ConstituentTable mandatory="false" tableid="OpenViewInContentArea" fkconstraint_id="OVInCA_MENUITEM_FK" tableindex="2"/>
+            <ConstituentTable mandatory="false" tableid="Action" fkconstraint_id="Action_WebMenuItem_FK" tableindex="3"/>
+            <ConstituentTable mandatory="false" tableid="Forward" fkconstraint_id="Forward_Action_FK" tableindex="4"/>
+            <ConstituentTable mandatory="false" tableid="ACParams" fkconstraint_id="ACParams_FK" tableindex="5"/>
+            <ConstituentTable mandatory="false" tableid="JavaScriptAction" fkconstraint_id="JSAction_WebMenuItem_FK" tableindex="6"/>
+            <ConstituentTable mandatory="false" tableid="ACAjaxOptions" fkconstraint_id="ACAjaxOptions_FK" tableindex="7"/>
+            <ConstituentTable mandatory="false" tableid="ACJSOption" fkconstraint_id="ACJSOption_FK" tableindex="8"/>
+            <ConstituentTable mandatory="false" tableid="CSRMenuItem" fkconstraint_id="CSRMenuItem_FK" tableindex="9"/>
+            <ConstituentTable mandatory="false" tableid="ViewToOpen" fkconstraint_id="ViewToOpen_FK" tableindex="10"/>
+        </PersonalityConfiguration>
+    </DominantTableConfig>
+
+
+<!-- Not used other than userPersonalisationAPI there table names are passed manually to make compactible with new iam, avoided AAAccount table -->
+    <!--PersonalityConfiguration dominanttableid="AaaAccount" description="The user specific client state" personalityname="ClientAccountState" personalityid="PersonalityConfiguration:personalityid:ClientAccountState" modulename="ClientFramework">
+        <ConstituentTable tableid="AaaAccount" tableindex="0"/>
+        <ConstituentTable mandatory="false" tableid="ACUserClientState" fkconstraint_id="ST_USERID_FK" tableindex="1"/>
+        <ConstituentTable mandatory="false" tableid="ACUserPreference" fkconstraint_id="UPREF_USERID_FK" tableindex="2"/>
+    </PersonalityConfiguration-->
+
+
+</ClientFramework-personality-configuration>

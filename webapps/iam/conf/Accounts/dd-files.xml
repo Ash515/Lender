@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<dd-files>
+    <ConfFile url="datadictionary/audit-template.xml"/>  <!-- Do not move audit-template from top -->
+    <ConfFile url="datadictionary/system-app.xml"/>
+    <ConfFile url="datadictionary/system-domain.xml"/>
+    <ConfFile url="datadictionary/org.xml"/>
+    <ConfFile url="datadictionary/authdomain.xml"/>
+    <ConfFile url="datadictionary/user.xml"/>
+    <ConfFile url="datadictionary/group.xml"/>
+    <ConfFile url="datadictionary/account.xml"/>
+    <ConfFile url="datadictionary/service-org.xml"/>
+    <ConfFile url="datadictionary/file.xml"/>
+    <ConfFile url="datadictionary/resource.xml"/>
+    <ConfFile url="datadictionary/token.xml"/>
+    <ConfFile url="datadictionary/audit.xml"/>
+    <ConfFile url="datadictionary/sslcustomdomain.xml"/>
+    <ConfFile url="datadictionary/iam-sub.xml"/>
+    <ConfFile url="datadictionary/oauth.xml"/>
+    <ConfFile url="datadictionary/oauth-userdetails.xml"/>
+<ConfFile url="datadictionary/ro-tables.xml"/>
+</dd-files><!--$Id: $-->

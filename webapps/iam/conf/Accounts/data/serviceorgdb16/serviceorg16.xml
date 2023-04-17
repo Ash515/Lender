@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="phonebridgesorgzaid" account_name="Zoho PhoneBridge Service Org">
+		<IAMAccountDomain domain="phonebridgesorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="officeapisorgzaid" account_name="Zoho OfficeAPI Service Org">
+		<IAMAccountDomain domain="officeapisorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="ziaplatformsorgzaid" account_name="Zoho ZIA Service Org">
+		<IAMAccountDomain domain="ziaplatformsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="landingpagesorgzaid" account_name="Zoho landingpage Service Org">
+		<IAMAccountDomain domain="landingpagesorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

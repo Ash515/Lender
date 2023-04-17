@@ -1,0 +1,413 @@
+<!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd">
+<?xml-stylesheet type="text/xsl" href="data-dictionary-transform.xsl"?>
+
+<!--$Id$ -->
+<data-dictionary name="ClientComponents">
+	<table name="ACGridLayoutConfig">
+		<columns>
+			<column name="VIEWNAME">
+				<description>Name of the view to be displayed as a Grid</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLUMNCOUNT">
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="GRID_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="GRID_VIEW_FK"
+				reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACTabChildConfig">
+		<description>Associates a view as a child of another tab-view. The
+			given child view can also be configured by associating another
+			view/tab/menu as drop-down</description>
+		<columns>
+			<column name="VIEWNAME">
+				<description>Name of the parent tab-view defined in {@link
+					 com.adventnet.clientframework.VIEWCONFIGURATION}</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CHILDVIEWNAME">
+				<description>Name of the view defined in {@link  com.adventnet.clientframework.VIEWCONFIGURATION},
+					which is a child of the view specified in {@link
+					ACTABCHILDCONFIG#VIEWNAME} column</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CHILDINDEX">
+				<description>Position of the child view</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="DROPDOWNVIEW">
+				<description>Name of the view, shown as drop-down</description>
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="DROPDOWNTAB">
+				<description>Name of the tab view, shown as drop-down</description>
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="DROPDOWNMENU">
+				<description>Name of the menu, shown as drop-down</description>
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="DROPDOWNPARAMS">
+				<description>Comma separated parameters for rendering the drop down.
+					Default: displayType=OnImageMouseOver</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<default-value>displayType=onImageMouseOver</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="AJAXPARAMS">
+				<description>Comma separated parameters to be passed in case of AJAX
+					tab</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="DISPLAYNAME">
+				<description>Name to be displayed for the Tab.</description>
+				<data-type>CHAR</data-type>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="TABCC_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+			<primary-key-column>CHILDINDEX</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="TABCC_CC_FK"
+				reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="TABCC_CompConfig_FK"
+				reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CHILDVIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false"
+				name="TABCC_DROPDOWN_CompConfig_FK" reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>DROPDOWNTAB</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false"
+				name="TABCC_POPDOWN_CompConfig_FK" reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>DROPDOWNVIEW</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false"
+				name="TABCC_MENUDOWN_CompConfig_FK" reference-table-name="Menu">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>DROPDOWNMENU</fk-local-column>
+						<fk-reference-column>MENUID_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACUserTabChildConfig">
+		<description>Associates a view as a child of another tab-view for a
+			specific user</description>
+		<columns>
+			<column name="VIEWNAME">
+				<description>Name of the parent tab-view defined in {@link
+					com.adventnet.clientframework.VIEWCONFIGURATION}</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CHILDVIEWNAME">
+				<description>Name of the view defined in {@link com.adventnet.clientframework.VIEWCONFIGURATION}
+					which is a child of the tab-view specified in {@link
+					ACUSERTABCHILDCONFIG#VIEWNAME} column</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CHILDINDEX">
+				<description>Position of the child view</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ACCOUNT_ID">
+				<description>ID of the associated user</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="DISPLAYNAME">
+				<description>Name to be displayed for the Tab.</description>
+				<data-type>CHAR</data-type>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="UTABCC_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+			<primary-key-column>CHILDINDEX</primary-key-column>
+			<primary-key-column>ACCOUNT_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="UTABCC_CC_FK"
+				reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="UTABCC_CompConfig_FK"
+				reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CHILDVIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACCVTabParentConfig">
+		<columns>
+			<column name="VIEWNAME">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="PARENTVIEWNAME">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="CVTABCC_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="CVTABCC_CC_FK"
+				reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="CVTABCC_CompConfig_FK"
+				reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PARENTVIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACTableLayoutChildConfig">
+		<columns>
+			<column name="VIEWNAME">
+				<description>It is a unique name for the given configuration.</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CHILDVIEWNAME">
+				<description>The name of the view we are using for the viewname. The
+					no of the child view name is our own wish.</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ROWINDEX">
+				<description>It is the starting point of view in a row.It is a
+					unique no.</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLUMNINDEX">
+				<description>It is the starting point of a view in a column.It is a
+					unique no.</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLSPAN">
+				<description>The length of the view vertically.</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="ROWSPAN">
+				<description>THe length of the view horizontally.</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="WIDTH">
+				<description>It shows the width of the view.</description>
+				<data-type>CHAR</data-type>
+				<max-size>10</max-size>
+			</column>
+			<column name="HEIGHT">
+				<description>It shows the height of the view.</description>
+				<data-type>CHAR</data-type>
+				<max-size>10</max-size>
+			</column>
+			<column name="SHOWINBOX">
+				<description>It is a boolean value.If we give showinbox value is
+					true,the component will be inside the box,otherwise not</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="ISOPEN">
+				<description>Indicates whether the box should be expanded /
+					collapsed by default.</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="TABLECC_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+			<primary-key-column>ROWINDEX</primary-key-column>
+			<primary-key-column>COLUMNINDEX</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="TABLECC_CC_FK"
+				reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="TABLECC_CompConfig_FK"
+				reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CHILDVIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="TABLECC_Unique">
+				<unique-key-column>VIEWNAME</unique-key-column>
+				<unique-key-column>CHILDVIEWNAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="ACGridLayoutChildConfig">
+		<description>Used to display a set of views in grid format.</description>
+		<columns>
+			<column name="VIEWNAME">
+				<description>Refers to 'VIEWNAME_NO' in {@link com.adventnet.clientframework.VIEWCONFIGURATION}
+					table</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CHILDVIEWNAME">
+				<description>Name of the view to be displayed in the grid</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CHILDINDEX">
+				<description>Order by which the given child view is displayed in
+					grid format.</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="SHOWINBOX">
+				<description>If true, the given child view is rendered inside the
+					box that can be expanded and collapsed. Otherwise, the view alone
+					is rendered.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="ISOPEN">
+				<description>Indicates whether the box should be expanded /
+					collapsed by default.</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="GLC_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+			<primary-key-column>CHILDINDEX</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="GLC_VIEW_FK"
+				reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="GLC_CVIEW_FK"
+				reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CHILDVIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+</data-dictionary>

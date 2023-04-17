@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: dynamic-value-handlers.xml,v 1.14 2005/09/30 11:51:02 vaseekaranb 
+	Exp $ -->
+
+<dynamic-value-handlers>
+	<DynamicValueHandler tablename="AaaTableAccessSPI"
+		columnname="SERVICE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="NAME" />
+			<DVPHParameter name="criteria-comparator" value="equals" />
+			<DVPHParameter name="referred-table" value="AaaService" />
+			<DVPHParameter name="referred-column" value="SERVICE_ID" />
+		</DVPHParameterList>
+	</DynamicValueHandler>
+	<DynamicValueHandler tablename="AaaAuthorizedRole"
+		columnname="ROLE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="NAME" />
+			<DVPHParameter name="criteria-comparator" value="equals" />
+			<DVPHParameter name="referred-table" value="AaaRole" />
+			<DVPHParameter name="referred-column" value="ROLE_ID" />
+		</DVPHParameterList>
+	</DynamicValueHandler>
+	<DynamicValueHandler tablename="AaaRole"
+		columnname="SERVICE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="NAME" />
+			<DVPHParameter name="criteria-comparator" value="equals" />
+			<DVPHParameter name="referred-table" value="AaaService" />
+			<DVPHParameter name="referred-column" value="SERVICE_ID" />
+		</DVPHParameterList>
+	</DynamicValueHandler>
+	<DynamicValueHandler tablename="AaaTrustedRole"
+		columnname="SERVICE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="NAME" />
+			<DVPHParameter name="criteria-comparator" value="equals" />
+			<DVPHParameter name="referred-table" value="AaaService" />
+			<DVPHParameter name="referred-column" value="SERVICE_ID" />
+		</DVPHParameterList>
+	</DynamicValueHandler>
+	<DynamicValueHandler tablename="AaaPermission"
+		columnname="SERVICE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="NAME" />
+			<DVPHParameter name="criteria-comparator" value="equals" />
+			<DVPHParameter name="referred-table" value="AaaService" />
+			<DVPHParameter name="referred-column" value="SERVICE_ID" />
+		</DVPHParameterList>
+	</DynamicValueHandler>
+	<DynamicValueHandler tablename="AaaServicePasswordRule"
+		columnname="SERVICE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="NAME" />
+			<DVPHParameter name="criteria-comparator" value="equals" />
+			<DVPHParameter name="referred-table" value="AaaService" />
+			<DVPHParameter name="referred-column" value="SERVICE_ID" />
+		</DVPHParameterList>
+	</DynamicValueHandler>
+	<DynamicValueHandler tablename="AaaAccount"
+		columnname="SERVICE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="NAME" />
+			<DVPHParameter name="criteria-comparator" value="equals" />
+			<DVPHParameter name="referred-table" value="AaaService" />
+			<DVPHParameter name="referred-column" value="SERVICE_ID" />
+		</DVPHParameterList>
+	</DynamicValueHandler>
+	<DynamicValueHandler tablename="AaaImpliedRole"
+		columnname="IMPLIEDROLE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="NAME" />
+			<DVPHParameter name="criteria-comparator" value="equals" />
+			<DVPHParameter name="referred-table" value="AaaRole" />
+			<DVPHParameter name="referred-column" value="ROLE_ID" />
+		</DVPHParameterList>
+	</DynamicValueHandler>
+
+	<DynamicValueHandler tablename="AaaModuleService"
+		columnname="MODULE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="MODULENAME" />
+			<DVPHParameter name="criteria-comparator" value="equals" />
+			<DVPHParameter name="referred-table" value="Module" />
+			<DVPHParameter name="referred-column" value="MODULE_ID" />
+		</DVPHParameterList>
+	</DynamicValueHandler>
+
+	<DynamicValueHandler tablename="AuditConfig"
+		columnname="MODULE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="MODULENAME" />
+			<DVPHParameter name="criteria-comparator" value="equals" />
+			<DVPHParameter name="referred-table" value="Module" />
+			<DVPHParameter name="referred-column" value="MODULE_ID" />
+		</DVPHParameterList>
+	</DynamicValueHandler>
+
+	<DynamicValueHandler tablename="AaaAccount"
+		columnname="ACCOUNTPROFILE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="NAME" />
+			<DVPHParameter name="criteria-comparator" value="equals" />
+			<DVPHParameter name="referred-table" value="AaaAccAdminProfile" />
+			<DVPHParameter name="referred-column" value="ACCOUNTPROFILE_ID" />
+		</DVPHParameterList>
+	</DynamicValueHandler>
+
+	<DynamicValueHandler tablename="AaaPassword"
+		columnname="PASSWDPROFILE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="NAME" />
+			<DVPHParameter name="criteria-comparator" value="equals" />
+			<DVPHParameter name="referred-table" value="AaaPasswordProfile" />
+			<DVPHParameter name="referred-column" value="PASSWDPROFILE_ID" />
+		</DVPHParameterList>
+	</DynamicValueHandler>
+
+	<DynamicValueHandler tablename="AaaPassword"
+		columnname="PASSWDRULE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="NAME" />
+			<DVPHParameter name="criteria-comparator" value="equals" />
+			<DVPHParameter name="referred-table" value="AaaPasswordRule" />
+			<DVPHParameter name="referred-column" value="PASSWDRULE_ID" />
+		</DVPHParameterList>
+	</DynamicValueHandler>
+
+
+</dynamic-value-handlers>

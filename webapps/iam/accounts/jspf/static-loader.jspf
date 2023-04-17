@@ -1,0 +1,82 @@
+<%-- $Id: $ --%>
+<%--
+ This file uses zaConstants, jsURLs ands cssURLs variables in value stack to load the page.<%-- No I18N --%>
+<%-- Page which includes this page must handle onZAScriptLoad function to do their process after script loading.  <%-- No I18N --%>
+<%@page import="com.adventnet.iam.xss.IAMEncoder"%>
+<%@page contentType="application/javascript" pageEncoding="UTF-8"%>
+<%
+	response.setHeader("Pragma", "no-cache"); // No I18N
+	response.setHeader("Cache-Control", "no-cache"); // No I18N
+	response.setDateHeader("Expires", 1); // No I18N
+%>
+var docHead = document.head || document.getElementsByTagName("head" )[0] || document.documentElement;//No I18N
+window.userPasswordMinLen = '<%=com.adventnet.iam.internal.Util.getUserPasswordDefaultMinLength()%>'; <%-- NO OUTPUTENCODING --%> //No I18N
+window.userPasswordMaxLen = '<%=com.adventnet.iam.internal.Util.getUserPasswordDefaultMaxLength()%>'; <%-- NO OUTPUTENCODING --%> //No I18N 
+var zaConstants = ${zaConstants};//No I18N
+window.ZACountryCodeDetails = ${country_code_details};<%-- No I18N --%>
+window.ZACountryStateDetails = ${country_state_details}; <%-- No I18N --%>
+window.ZADefaultCountry = '${default_country_code}';<%-- No I18N --%>
+window.loadCountryOptions = '${load_country}';<%-- No I18N --%>
+<%@include file="../js/html5.js" %>
+
+function zaOnLoadHandler() {
+	var cssURLs = "${cssURLs}"; // No I18N
+	var jsURLs = "${jsURLs}"; // No I18N
+
+	// Include CSS
+	if(cssURLs) { // No I18N
+		cssURLs = cssURLs.split(","); // No I18N
+		for(var i = 0, len = cssURLs.length; i < len; i++) {
+			var style = document.createElement("link"); // No I18n
+			style.href = zaConstants.css_url + cssURLs[i]; // No I18n
+			style.rel = "stylesheet"; //No I18N
+			docHead.appendChild(style); //No I18N
+		}
+	}
+	
+	// Synchronously Include Scripts
+	if(jsURLs) {
+		jsURLs = jsURLs.split(","); // No I18N
+		var scriptIdx = 0; // No I18N
+		(function _jsOnLoad() {//No I18N
+			if (scriptIdx == jsURLs.length) { // Last script, all scripts were loaded. So, call the users handler.  // No I18N
+				onZAScriptLoad();//No I18N
+			} else {//No I18N
+				var jsURL = jsURLs[scriptIdx++]; // No I18N
+				if((jsURL.indexOf("jquery-1.12.2.min.js") != -1 && window.jQuery)||(jsURL.indexOf("common.js") != -1 && window.I18N)||(jsURL.indexOf("signin.min.js") != -1 && window.I18N)) { // Don't include jQuery, If it is already included in the page.
+					 _jsOnLoad(); //No I18N
+				} else { //No I18N
+					if(jsURL.indexOf('http') != 0) { // is Relative URL ? // No I18N
+						jsURL = zaConstants.js_url + jsURL; // No I18N
+					}
+					includeScript(jsURL, _jsOnLoad); // No I18N
+				}
+			}
+		})();
+	}
+};
+
+function includeScript(url, callback) {
+	var script = document.createElement("script"); // No I18n
+	script.src = url; // No I18n
+	if (callback) { //No I18N
+		script.onload = script.onreadystatechange = function() { //No I18N
+			if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
+				callback(); //No I18N
+				script.onload = script.onreadystatechange = null; // To avoid calling repeatedly in IE // No I18N
+			}
+		};
+	}
+	docHead.appendChild(script); //No I18N
+};
+
+if(document.readyState == "complete") { // Call the handler if DOM already loaded.
+	zaOnLoadHandler(); <%-- No I18N --%>
+} else { <%-- No I18N --%>
+	// Should not use `window.onload` as it might be overridden by service team  
+	if (window.addEventListener) {
+	  window.addEventListener('load', zaOnLoadHandler, false); <%-- No I18N --%> 
+	} else if (window.attachEvent)  { <%-- No I18N --%>
+	  window.attachEvent('onload', zaOnLoadHandler); <%-- No I18N --%>
+	}
+}

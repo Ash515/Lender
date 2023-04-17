@@ -1,0 +1,25 @@
+# List of Sortable columns of a resource. 
+# Guidelines :
+#         Add Column Names in UPPERCASE
+---
+App:
+  - LISTING_ORDER
+
+User:
+  - FIRST_NAME
+  - CREATED_TIME
+
+Group:
+  - CREATED_TIME
+
+PasswordHistory:
+  - MODIFIED_TIME
+  
+CustomFields:
+  - COLUMN_NUMBER
+  
+AccountAudit:
+  - CREATED_TIME
+  
+AccountAuditTemplate:
+  - CREATED_TIME

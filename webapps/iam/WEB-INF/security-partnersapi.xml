@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security-accounts.xsd">
+<urls>
+
+ 	<url path="/webclient/v1/childorg" authentication="required"  method="post" internal="true" https="true" csrf="false" oauthscope="partnersapi" operation-type="CREATE" scoped-services="ZohoPayments,ZohoBooks" > 
+	    <inputstream type="JSONObject" template="childorg_create" max-len="-1" />
+	</url>
+	<url path="/webclient/v1/childorg/${email_or_zoid}" authentication="required" method="put" internal="true"  https="true" csrf="true" scoped-services="all">
+	   <inputstream type="JSONObject" template="childorg_update" max-len="-1" />
+	</url> 
+	<url path="/webclient/v1/childorg/${email_or_zoid}" authentication="required" method="delete" internal="true" https="true" csrf="false" oauthscope="partnersapi" operation-type="DELETE" scoped-services="ZohoPayments,ZohoBooks" />
+	 <url path="/webclient/v1/childorg/${email_or_zoid}/childorguser/${email}" authentication="required" internal="true"  method="get" oauthscope="partnersapi" operation-type="READ" scoped-services="all" />	
+	 <url path="/webclient/v1/childorg/${email_or_zoid}/childorguser" authentication="required" internal="true"  method="post" https="true"  csrf="false" oauthscope="partnersapi" operation-type="CREATE" scoped-services="all" >
+	   <inputstream type="JSONObject" template="partnerChildUser" max-len="-1" />
+	</url>
+	<url path="/webclient/v1/childorg/${email_or_zoid}/childorguser/${email}" authentication="required" internal="true"  method="put" https="true" csrf="false" oauthscope="partnersapi" operation-type="UPDATE" scoped-services="all" >
+	   <inputstream type="JSONObject" template="partnerChildUserupdate" max-len="-1" />
+	</url> 
+
+	<url path="/webclient/v1/childorg/${email_or_zoid}/childorguser/${email}/primaryemail" authentication="required" internal="true" method="put" https="true" csrf="false" oauthscope="partnersapi" operation-type="UPDATE" scoped-services="ZohoPayments,ZohoBooks">  
+		 <inputstream type="JSONObject" template="primaryEmailUpdate" max-len="-1" /> 
+	</url>
+	
+	<!-- childorg-Mobile-OnBoard -->
+	<url path="/webclient/v1/childorgmobile" authentication="required" method="POST" internal="true" https="true" csrf="false" oauthscope="partnersapi" operation-type="CREATE" scoped-services="ZohoPayments,ZohoBooks">
+	   <inputstream type="JSONObject" template="partner_mobile" max-len="-1" />
+	</url>
+	<url path="/webclient/v1/childorgmobile/${ch-phone}" authentication="required" method="PUT" internal="true" https="true" csrf="false" oauthscope="partnersapi" operation-type="UPDATE" scoped-services="ZohoPayments,ZohoBooks" >
+	   <inputstream type="JSONObject" template="partner_mobile_otp_resend" max-len="-1" />
+	</url>  
+	<url path="/webclient/v1/childorgmobile/${ch-phone}/verify" authentication="required" method="POST" internal="true" https="true" csrf="false" oauthscope="partnersapi" operation-type="CREATE" scoped-services="ZohoPayments,ZohoBooks">
+	   <inputstream type="JSONObject" template="verify_otp_create" max-len="-1" />
+	</url> 
+	
+	<!-- DEMO ORG API -->
+	 <url path="/webclient/v1/demoorg" method="post" internal="true" https="true" csrf="false" scoped-services="ZohoPayments" >
+	    <inputstream type="JSONObject" template="demoorg_create" max-len="-1" />
+	</url>
+	 <url path="/webclient/v1/demoorg/${email}" method="put" internal="true" https="true" csrf="false" scoped-services="ZohoPayments" >
+	    <inputstream type="JSONObject" template="demoorg_update" max-len="-1" />
+	</url>
+	
+	<!-- Reseller API -->
+	<url path="/webclient/v1/resellerconvert" method="post" authentication="optional" internal="true" https="true" csrf="false" scoped-services="ZohoPayments" >
+	    <inputstream type="JSONObject" template="reseller_create" max-len="-1" />
+	</url>
+</urls>
+
+ <jsontemplates>
+  		 <jsontemplate name="childorg_create">
+  		 	<key name="childorg" type="JSONObject" template="create_childorg" max-len="-1"/>
+  		 </jsontemplate>
+  		 <jsontemplate name="create_childorg">
+			<key name="childOrgEmail" regex="email"/>
+			<key name="partnerEmailOrZoid" regex="email_or_zoid"/>
+			<key name="parentSamlUsage" type="boolean"/>
+			<key name="granttoken" type="boolean"/>
+			<key name="userName" regex="iambase64"/>
+		</jsontemplate>
+		 <jsontemplate name="childorg_update">
+  		 	<key name="childorg" type="JSONObject" template="update_childorg" max-len="-1"/>
+  		 </jsontemplate>
+  		 <jsontemplate name="update_childorg">
+			<key name="partnerEmailOrZoid" regex="email_or_zoid"/>
+			<key name="toRemove" type="boolean"/>
+		</jsontemplate>
+  
+  
+ 		 <jsontemplate name="partnerChildUser">
+   			<key name="childorguser" type="JSONObject" template="create_partnerorgUser" max-len="-1"/>
+    	</jsontemplate>
+  		<jsontemplate name="create_partnerorgUser">
+			<key name="emailIds" type="JSONArray" template="emails" array-size="&lt;100"/>
+			<key name="userName" regex="iambase64"/>
+			<key name="serviceurl" regex="serviceurl" max-len="-1" secret="true"/>
+			<key name="ipaddress" regex="ipaddress"/>
+		</jsontemplate>
+		<jsontemplate name="emails">
+			<key name="IAMArray" regex="email" />
+		</jsontemplate>
+		
+		<jsontemplate name="partnerChildUserupdate">
+   			<key name="childorguser" type="JSONObject" template="update_partnerorgUsers" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="update_partnerorgUsers">
+			<key name="status" regex="0|1" />
+    	</jsontemplate>
+    	<jsontemplate name="primaryEmailUpdate">
+    		<key name="primaryemail" type="JSONObject" template="update_primaryEmail" max-len="-1" />
+    	</jsontemplate>
+    	<jsontemplate name="update_primaryEmail">
+    		<key name="newEmail" regex="email" />
+    	</jsontemplate>
+    	
+    	<jsontemplate name="partner_mobile">
+   			<key name="childorgmobile" type="JSONObject" template="create_mobileuser" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="create_mobileuser">
+    		<key name="mobile_no" regex="phone"/>
+			<key name="countrycode" regex="countrycode"/>
+    	</jsontemplate>
+    	
+    	<jsontemplate name="partner_mobile_otp_resend">
+   			<key name="childorgmobile" type="JSONObject" template="resend_otp" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="resend_otp">
+    		<key name="encrypt_mobile" regex="iambase64"/>
+			<key name="temp_token" regex="iambase64" max-len="-1"/>
+    	</jsontemplate>
+    	
+    	<jsontemplate name="verify_otp_create">
+   			<key name="verify" type="JSONObject" template="create_mobile_childorg" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="create_mobile_childorg">
+			<key name="otp_code" secret="true" regex="code"/>
+			<key name="encrypt_mobile" regex="iambase64"/>
+			<key name="temp_token" regex="iambase64" max-len="-1"/>
+			<key name="partnerEmailOrZoid" regex="email_or_zoid"/>
+			<key name="parentSamlUsage" type="boolean"/>
+			<key name="granttoken" type="boolean"/>
+    	</jsontemplate>
+    	
+    	<jsontemplate name="demoorg_create">
+    		<key name="demoorg" type="JSONObject" template="create_demoorg" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="create_demoorg">
+    		<key name="email" regex="email"/>
+    		<key name="password" regex="password" secret="true"/>
+    		<key name="domain" regex="domain"/>
+    	</jsontemplate>
+
+    	<jsontemplate name="demoorg_update">
+    		<key name="demoorg" type="JSONObject" template="update_demoorg" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="update_demoorg">
+    		<key name="email" regex="email"/>
+    		<key name="domain" regex="domain"/>
+    	</jsontemplate>
+
+        <jsontemplate name="reseller_create">
+    		<key name="resellerconvert" type="JSONObject" template="create_reseller" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="create_reseller">
+    		<key name="useremail" regex="email"/>
+    	</jsontemplate>
+    	 
+
+  </jsontemplates>
+  
+  <regexes>
+		<regex name="email" value="[\w]([\w\-\.\+\']*)@(?=.{4,256}$)(([A-Za-z0-9]+)(([\-\_]*[A-Za-z0-9])*)[\.])+[A-Za-z]{2,22}"/>
+		<regex name="email_or_zoid" value="(([\w]([\w\-\.\+\']*)@(?=.{4,256})(([A-Za-z0-9]+)(([\-\_]*[A-Za-z0-9])*)[\.])+[A-Za-z]{2,22})|([0-9]+))"/>
+		<regex name="ch-phone" value="[0-9]+" />
+  </regexes>
+
+</security>

@@ -1,0 +1,1988 @@
+<?xml version="1.0"?>
+<!-- $Id $ -->
+<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd">
+<!--<!DOCTYPE data-dictionary PUBLIC "-//ZOHO Corp.//DTD Data Dictionary 1.0//EN" "http://cm/cgi-bin2/cvsweb.cgi/~checkout~/internal_packages/mickeylite/dd2html/data-dictionary.dtd"> -->
+<data-dictionary name="Accounts">
+	<table name="IAMApp" display-name="App">
+		<description>
+			Applications provided by Zoho, gives efficient UI for the customers to operate their data stored in Zoho. For example, Zoho Docs, Zoho Creator, and Zoho Reports.
+		</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMApp.APP_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="APP_ID">
+				<description>Unique ID for service. Used for backward compatability.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="APP_NAME">
+				<description>
+					A string that identifies a service for inter service communications. It will also be used in i18n, rebranding, and licensing property keys. Usually, it will be same as the sub domain of the zoho.com site address.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&appname;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DEFAULT_SUB_DOMAIN">
+				<description>
+					The subdomain of zoho.com used to access this service. By default, the service name will be the sub domain. It can be changed in the operational environment by Organizations that rebrands Zoho.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&serviceurl;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DEFAULT_RO_SUB_DOMAIN">
+				<description>
+					The subdomain of zoho.com of DR site in read only mode used to access this service.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&serviceurl;</pattern>
+				</allowed-values>
+			</column>
+			<column name="APP_CODE">
+				<description>Unique code attribute for services.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&appcode;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DISPLAY_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ALIAS_NAME">
+				<description>Unique alias name for servicename. This is equivalent of servicename and can use this to generate authtoken and iscticket</description>
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<allowed-values>
+					<pattern>&appname;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DESCRIPTION">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="HOME_PAGE">
+				<description>
+					The home page of the service, where CS will redirect the user after login
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>true</nullable>
+				<allowed-values>
+					<pattern>&serviceurl;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ALLOW_REGISTRATION">
+				<description>
+					Can a new user be registered to this service. Useful, during migration time
+				</description>
+				<data-type>BOOLEAN</data-type>
+			</column>
+			<column name="AUTO_REGISTRATION">
+				<description>
+					Can a existing user of other Zoho service be registered to this service. Useful, during migration time
+				</description>
+				<data-type>BOOLEAN</data-type>
+			</column>
+			<column name="SERVICE_TYPE">
+				<description>
+					Category based on usage: PRODUCTIVITY, COLLABORATION, BUSINESS, HELPDESK, FINANCE, HUMANRESOURCES
+				</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="LISTING_ENABLED">
+				<description>
+					Can be shown to other services' user on clicking Zoho Apps link
+				</description>
+				<data-type>INTEGER</data-type>
+				<max-size>1</max-size>
+				<default-value>1</default-value>
+			</column>
+			<column name="LISTING_ORDER">
+				<description>In which order it has to be listed along with other services</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="ENABLE_SSTICKET">
+				<description>
+					Have a separate token for this service so that the token can not be used for accessing other services and vice versa. Sand boxing the service.
+				</description>
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+			</column>
+			<column name="LOGO_URL">
+				<description>The URL of the logo of this service</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<allowed-values>
+					<pattern>&url;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IS_LOGINNAME_REQUIRED">
+				<description>
+					Boolean to identify whether the app needs login name or not. If login name is required then IAM will redirect to the login name registration page.
+				</description>
+				<data-type>BOOLEAN</data-type>
+			</column>
+			<column name="REST_API_PATH">
+				<description>REST API Path(/&lt;rest_servlet&gt;/&lt;context&gt;/app/....) used to send the request orginated from other app to owner app. Ex: resource/accounts, api/contacts, etc.,</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<allowed-values>
+					<pattern>&simple-string;</pattern>
+				</allowed-values>
+			</column>
+			<column name="REST_SERVER">
+				<description>URL of the server Ex:(internal.accounts.zoho.com or contacts.zoho.com) which serves Resource api. Value in DEFAULT_SUB_DOMAIN will be taken. if RESOURCE_SERVER is NULL.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&url;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SERVICE">
+				<description>
+					specifies which service the app belongs.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>Zoho</default-value>
+			</column>
+		</columns>
+		<primary-key name="IAMApp_PK">
+			<primary-key-column>APP_AUTO_ID</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="IAMApp_UK1">
+				<unique-key-column>APP_NAME</unique-key-column>
+			</unique-key>
+			<unique-key name="IAMApp_UK2">
+				<unique-key-column>APP_ID</unique-key-column>
+			</unique-key>
+			<unique-key name="IAMApp_UK3">
+				<unique-key-column>REST_API_PATH</unique-key-column>
+			</unique-key>
+			<unique-key name="IAMApp_UK4">
+				<unique-key-column>APP_CODE</unique-key-column>
+			</unique-key>
+			<unique-key name="IAMApp_UK5">
+				<unique-key-column>ALIAS_NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	
+	<table name="IAMAppAllowedMethods" display-name="AppAllowedMethods">
+		<description>Contains Details regarding the allowed Methods for the Services</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="METHOD_ID">
+				<description>Hashed Method Id</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="METHOD_NAME">
+				<description>Unique Method Id</description>
+				<data-type>CHAR</data-type>
+				<max-size>500</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IS_ALLOWED">
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+			</column>
+			<column name="IS_ACL_ENABLED">
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAppAllowedMethods_PK">
+			<primary-key-column>APP_AUTO_ID</primary-key-column>
+			<primary-key-column>METHOD_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppAllowedMethods_FK" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="IAMAppKeyStore" display-name="AppKeyStore">
+		<description>Holds Public Key for the app used to sign internal request</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="LABEL">
+				<description>
+					Naming for key entry
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<default-value>isc</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="PUBLIC_KEY">
+				<description>
+					Public key used for ISC signature verification in producer side
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAppKeyStore_PK">
+			<primary-key-column>PUBLIC_KEY</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppKeyStore_FK" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMAppKeyStore_UK">
+				<unique-key-column>APP_AUTO_ID</unique-key-column>
+				<unique-key-column>LABEL</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="IAMSystemOperation" display-name="Operation">
+		<description>
+			Operations invoked by other APP's. For ex it might be resendConfirmationMail, getResetPasswordDigest etc.
+		</description>
+		<columns>
+			<column name="OPERATION_ID">
+				<description>Unique ID for operation</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="OPERATION_NAME">
+				<description>
+					Name of the Operation.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&simple-string;</pattern>
+				</allowed-values>
+			</column>
+			<column name="RESOURCE_URI">
+				<description>
+					The URI on which the operation to be executed
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>350</max-size>
+			</column>
+			<column name="OPERATION_PARAMS">
+				<description>
+					Required params for the operation
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>2000</max-size>
+			</column>
+			<column name="OPERATION_STATUS">
+				<description>
+					The status of the operation. Can 0-completed, 1-pending, 2-error
+				</description>
+				<data-type>INTEGER</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMSystemOperation_PK">
+			<primary-key-column>OPERATION_ID</primary-key-column>
+		</primary-key>
+		<indexes>
+			<index name="IAMSystemOperation_CTidx">
+				 <index-column>CREATED_TIME</index-column>
+			</index>
+		</indexes>
+	</table>
+
+	<table name="IAMAppConfiguration" display-name="Configuration">
+		<description>Holds deployment specific configuration such as "cookie_name". Any hard coded (in the source code) system configurations should be moved to this table</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CONFIG_NAME">
+				<description>Name of the configuration in dot notation format. For example, {feature}.{parameter}</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&config-name;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CONFIG_VALUE">
+				<description>Value of the configuration. The value can be set during deployment and can be changed in run time from Zoho Accounts Admin Console</description>
+				<data-type>CHAR</data-type>
+				<max-size>2000</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CONFIG_RO_VALUE">
+				<description>Value of the configuration in Read Only mode.</description>
+				<data-type>CHAR</data-type>
+				<max-size>260</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DATA_TYPE">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<allowed-values>
+					<value>STRING</value>
+					<value>INTEGER</value>
+					<value>BIGINT</value>
+					<value>FLOAT</value>
+					<value>BOOLEAN</value>
+					<value>FILE</value>
+				</allowed-values>
+			</column>
+			<column name="DEFAULT_VALUE">
+				<description>If not configured by the administrator</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAppConfiguration_PK">
+			<primary-key-column>APP_AUTO_ID</primary-key-column>
+			<primary-key-column>CONFIG_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppConfiguration_FK1" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="IAMAppRole" display-name="Role">
+		<description>Classification of users based on the access privilages within the Zoho App. For example, "SupportAdmin", "SupportModerator" in the "Zoho Support" App.</description>
+		<columns>
+			<column name="APP_ROLE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMAppRole.APP_ROLE_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="ZARID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ROLE_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&simple-string;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAppRole_PK">
+			<primary-key-column>APP_ROLE_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppRole_FK1" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMAppRole_UK1">
+				<unique-key-column>APP_AUTO_ID</unique-key-column>
+				<unique-key-column>ROLE_NAME</unique-key-column>
+			</unique-key>
+			<unique-key name="IAMAppRole_UK2">
+				<unique-key-column>ZARID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+
+	<table name="IAMAppSystemRole" display-name="AppSystemRole">
+		<description>
+			System roles like SASAdmin, IAMAdmin etc
+		</description>
+		<columns>
+			<column name="ROLE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMAppSystemRole.ROLE_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="ROLE_ID">
+				<description>
+					A unique number. Added for backward compatibility
+				</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="SYSTEM_ROLE_NAME">
+				<description>
+					A unique string which identifies a role in a Zoho App.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&rolename;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DESCRIPTION">
+				<data-type>CHAR</data-type>
+				<max-size>400</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAppSystemRole_PK">
+			<primary-key-column>ROLE_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppSystemRole_FK" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMAppSystemRole_UK1">
+				<unique-key-column>APP_AUTO_ID</unique-key-column>
+				<unique-key-column>SYSTEM_ROLE_NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="IAMUserSystemRoles" display-name="UserSystemRoles">
+		<description>
+			System roles vs Users mapping
+		</description>
+		<columns>
+			<column name="ROLE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="ZUID">
+				<description>The creator of this account</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="EXPIRY_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMUserSystemRoles_PK">
+			<primary-key-column>ROLE_AUTO_ID</primary-key-column>
+			<primary-key-column>ZUID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMUserSystemRoles_FK" reference-table-name="IAMAppSystemRole">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ROLE_AUTO_ID</fk-local-column>
+						<fk-reference-column>ROLE_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	
+	<table name="IAMAppResourceType" display-name="ResourceType">
+		<description>
+			A Zoho App can have one or more resource types. For example, Document, Folder, DataBase, Table, Report, Project, Milestone, Task
+		</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="RESOURCE_TYPE">
+				<description>A String which identifies a resource uniquely within the Zoho App. Will be same as the Entity(Resource) name in the ER diagram of the Data which is operated by the Zoho App. It will be a part of the i18n key which is used to i18n this resource type.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&resource-name;</pattern>
+				</allowed-values>
+			</column>
+			<column name="PARENT_RESOURCE_TYPE">
+				<description>A String which identifies a resource uniquely within the Zoho App. Will be same as the Entity(Resource) name in the ER diagram of the Data which is operated by the Zoho App. It will be a part of the i18n key which is used to i18n this resource type.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<allowed-values>
+					<pattern>&resource-name;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAppResourceType_PK">
+			<primary-key-column>APP_AUTO_ID</primary-key-column>
+			<primary-key-column>RESOURCE_TYPE</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppResourceType_FK" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="IAMAppResourceOperation" display-name="ResourceOperation">
+		<description>
+			Resource level operation. Should be any one of POST(CREATE), GET(READ), PUT(UPDATE) and DELETE once the Zoho App provides only RESTful operations.
+		</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="RESOURCE_TYPE">
+				<description>The type of the resource. For example, Document, Folder</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&resource-name;</pattern>
+				</allowed-values>
+			</column>
+			<column name="OPERATION_NAME">
+				<description>
+					Acts mainly as the i18n key, so that, in the UI, it's exposed as human friendlier way. That is instead of "PUT" a "PROJECT", it will be like "allowUserToUpdateThisProject".
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&simple-string;</pattern>
+				</allowed-values>
+			</column>
+			<column name="OPERATION_BIT_INDEX">
+				<description>
+					Same as the IAMAppRole.OPERATION_BIT_INDEX
+				</description>
+				<data-type>INTEGER</data-type>
+				<max-size>1</max-size>
+				<default-value>0</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="OPERATION_DESCRIPTION">
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="IS_DEFAULT">
+				<description>Can be performed by any user</description>
+				<data-type>INTEGER</data-type>
+				<max-size>1</max-size>
+				<default-value>0</default-value>
+			</column>
+			<column name="AUTH_TYPE">
+				<description>Authentication Type of the resource operation. 0-NONE, 1-SELF_PUBLIC, 2-ALL_PUBLIC, 3-VERIFY_PASSWORD</description>
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAppResourceOperation_PK">
+			<primary-key-column>APP_AUTO_ID</primary-key-column>
+			<primary-key-column>RESOURCE_TYPE</primary-key-column>
+			<primary-key-column>OPERATION_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppResourceOperation_FK" reference-table-name="IAMAppResourceType">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+					<fk-column>
+						<fk-local-column>RESOURCE_TYPE</fk-local-column>
+						<fk-reference-column>RESOURCE_TYPE</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="IAMAppUserAttribute" display-name="AppUserAttribute">
+		<description>User Attributes that holds value specific to this Zoho App. For example, DISPLAY_NAME and PHOTO for Zoho Forums should be different from that of Zoho Project. The value of this attribute will be stored in the IAMAppOrgUserAccountAttribute table.</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="ATTRIBUTE_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&config-name;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DATA_TYPE">
+				<description>The data type of the attribute, in case of FILE, the value will be stored in the ZFS and the file_id will be stored in the IAMAppUserAccount tale.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>STRING</value>
+					<value>INTEGER</value>
+					<value>BIGINT</value>
+					<value>FLOAT</value>
+					<value>BOOLEAN</value>
+					<value>FILE</value>
+				</allowed-values>
+			</column>
+			<column name="ATTRIBUTE_REGEX">
+				<description>For input validation purpose</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<allowed-values>
+					<pattern>dontdisturb</pattern>
+				</allowed-values>
+			</column>
+			<column name="NULLABLE">
+				<data-type>INTEGER</data-type>
+				<max-size>1</max-size>
+				<default-value>0</default-value>
+			</column>
+			<column name="DEFAULT_VALUE">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAppUserAttribute_PK">
+			<primary-key-column>APP_AUTO_ID</primary-key-column>
+			<primary-key-column>ATTRIBUTE_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppUserAttribute_FK" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="IAMAppPolicyConfig" display-name="PolicyConfig">
+		<description>
+			Externalizing permission to perform a set of critical operations that be can be configured in the operational environement. For example, Allowing a user to share a document to non org users
+		</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="POLICY_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&config-name;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DATA_TYPE">
+				<description>The data type of the policy.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<allowed-values>
+					<value>STRING</value>
+					<value>INTEGER</value>
+					<value>BIGINT</value>
+					<value>FLOAT</value>
+					<value>BOOLEAN</value>
+				</allowed-values>
+			</column>
+			<column name="POLICY_REGEX">
+				<description>For input validation purpose</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>dontdisturb</pattern>
+				</allowed-values>
+			</column>
+			<column name="DEFAULT_VALUE">
+				<description>If not configured by the administrator</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="POLICY_DESCRIPTION">
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAppPolicy_PK">
+			<primary-key-column>APP_AUTO_ID</primary-key-column>
+			<primary-key-column>POLICY_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppPolicy_FK" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="IAMAppRebrand" display-name="AppRebrand">
+		<description>
+			Externalizing Header and Footer, Email Templates, Admin and Support email addresses so that they can be configured in operational environment.
+		</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="REBRAND_ATTRIBUTE_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&config-name;</pattern>
+				</allowed-values>
+			</column>
+			<column name="REBRAND_ATTRIBUTE_TYPE">
+				<description>The data type of the rebrand attribute, in case of FILE, the value will be stored in the ZFS and the file_id will be stored in the IAMAppAccountRebrand table.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>STRING</value>
+					<value>INTEGER</value>
+					<value>BIGINT</value>
+					<value>FLOAT</value>
+					<value>BOOLEAN</value>
+					<value>FILE</value>
+				</allowed-values>
+			</column>
+			<column name="REBRAND_ATTRIBUTE_REGEX">
+				<description> For input validation purpose</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<allowed-values>
+					<pattern>dontdisturb</pattern>
+				</allowed-values>
+			</column>
+			<column name="DEFAULT_VALUE">
+				<description>If not configured by the administrator</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&simple-string;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAppRebrand_PK">
+			<primary-key-column>APP_AUTO_ID</primary-key-column>
+			<primary-key-column>REBRAND_ATTRIBUTE_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppRebrand_FK" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="IAMAppLicense" display-name="AppLicense">
+		<description>
+			Contains parameters that are used to restrict usage of particular App functions based licensing plans. For example, the usage in Docs is restricted based on storage space and number of users
+		</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="LICENSE_ATTRIBUTE_KEY">
+				<description>
+					In dot notation format. For example free, professional, business, professional.storage, business.users, etc.,
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&config-name;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DEFAULT_VALUE">
+				<description>
+					For example, for professional edition, default space give is 5GB
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DATA_TYPE">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>STRING</value>
+					<value>INTEGER</value>
+					<value>BIGINT</value>
+					<value>FLOAT</value>
+					<value>BOOLEAN</value>
+					<value>FILE</value>
+				</allowed-values>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAppLicense_PK">
+			<primary-key-column>APP_AUTO_ID</primary-key-column>
+			<primary-key-column>LICENSE_ATTRIBUTE_KEY</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppLicense_FK" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	
+	<table name="IAMAppHierarchyResourceGroup" display-name="HierarchyResourceGroup">
+		<description>Holds the list of resources a hierarchy can contain</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="RESOURCE_GROUP_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&simple-string;</pattern>
+				</allowed-values>
+			</column>
+			<column name="RESOURCE_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&resource-name;</pattern>
+				</allowed-values>
+			</column>
+		</columns>
+		<primary-key name="IAMHRG_PK">
+			<primary-key-column>RESOURCE_GROUP_NAME</primary-key-column>
+			<primary-key-column>RESOURCE_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMHRG_FK" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	
+	<table name="IAMScope" display-name="Scope">
+		<description>Scope vs Scope_Id. It is used to maintain the scopes and its description which will be used by the services.</description>
+		<columns>
+			<column name="SCOPE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMScope.Scope</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SCOPE_ID">
+				<description>Unique ID of the scope</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="SCOPE">
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&simple-string;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DESCRIPTION">
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&simple-string;</pattern>
+				</allowed-values>
+			</column>
+			<column name="PARENT_SCOPE_ID">
+				<description>Parent scope ID of this scope</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>-1</default-value>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="INTERNAL">
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="EXPOSED">
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+			</column>
+			<column name="OPERATION_TYPE">
+				<description>Allowed operation type of scope</description>
+				<data-type>INTEGER</data-type>
+				<default-value>30</default-value>
+			</column>
+			<column name="CREATED_TIME">
+				<description>The time at which the token is generated</description>
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMScope_PK">
+			<primary-key-column>SCOPE_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMScope_FK" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMScope_UK1">
+				<unique-key-column>SCOPE_ID</unique-key-column>
+			</unique-key>
+			<unique-key name="IAMScope_UK2">
+				<unique-key-column>APP_AUTO_ID</unique-key-column>
+				<unique-key-column>SCOPE</unique-key-column>
+				<unique-key-column>INTERNAL</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	<table name="IAMAppStatement" display-name="Statement">
+		<description>Contains HTML of the Sign In, Sign Up pages</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="STATEMENT_ID">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&simple-string;</pattern>
+				</allowed-values>
+			</column>
+			<column name="STATEMENT">
+				<data-type>CHAR</data-type>
+				<max-size>3500</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>dontdisturb</pattern>
+				</allowed-values>
+			</column>
+			<column name="PARAM_METADATA">
+				<data-type>CHAR</data-type>
+				<max-size>2500</max-size>
+				<allowed-values>
+					<pattern>&simple-string;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAppStatement_PK">
+			<primary-key-column>APP_AUTO_ID</primary-key-column>
+			<primary-key-column>STATEMENT_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppStatement_FK" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	<table name="IAMAppAnnouncement" display-name="AppAnnouncement">
+		<description>announcement redirection</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ANNOUNCEMENT_ID">
+				<data-type>CHAR</data-type>
+				<max-size>200</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="NAME">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="CLASS_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+			</column>
+			<column name="IS_ENABLED">
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+			</column>
+			<column name="ANNOUNCEMENT_TYPE">
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+			</column>
+			<column name="PRIORITY">
+			<description>The order of displaying preannouncements based on priority</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+			</column>
+			<column name="PERIOD_OF_DAYS">
+				<data-type>INTEGER</data-type>
+			</column>
+			<column name="SKIP_MOBILE_VERSION">
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="URL">
+				<description>The URL of this announcement</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&url;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAppAnnouncement_PK">
+			<primary-key-column>ANNOUNCEMENT_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppAnnouncement_FK" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	<table name="IAMDeploymentConfig" display-name="DeploymentConfig">
+		<description>Holds app/deployment specific configuration </description>
+		<columns>
+			<column name="DEPLOYMENT_CONFIG_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMDeploymentConfig.DEPLOYMENT_CONFIG_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="DEPLOYMENT_NAME">
+				<description>Name of the Deployment</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CONFIG_NAME">
+				<description>Name of the configuration</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CONFIG_VALUE">
+				<data-type>CHAR</data-type>
+				<max-size>300</max-size>
+			</column>
+		</columns>
+		<primary-key name="IAMDeploymentConfig_PK">
+			<primary-key-column>DEPLOYMENT_CONFIG_AUTO_ID</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="IAMDeploymentConfig_UK1">
+				<unique-key-column>DEPLOYMENT_NAME</unique-key-column>
+				<unique-key-column>CONFIG_NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	<table name="IAMCacheCluster" display-name="CacheCluster">
+		<description>Holds cache cluster configuration </description>
+		<columns>
+			<column name="CACHE_CLUSTER_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMCacheCluster.CACHE_CLUSTER_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="CLUSTER_NAME">
+				<description>Name of the cache cluster</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&config-name;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IS_SYNC_ENABLED">
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+			</column>
+			<column name="SYNC_CLUSTER_NAME">
+				<description>Name of the cache cluster to sync the data</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&config-name;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IS_SYNC_ENABLED_FOR_GET">
+				<description>synchorize for get request</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+		</columns>
+		<primary-key name="IAMCacheCluster_PK">
+			<primary-key-column>CACHE_CLUSTER_AUTO_ID</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="IAMCacheCluster_UK1">
+				<unique-key-column>CLUSTER_NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	<table name="IAMClusterNode" display-name="ClusterNode">
+		<description>Holds app specific cache configuration </description>
+		<columns>
+			<column name="NODE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMClusterNode.NODE_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="CACHE_CLUSTER_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="NODE_NAME">
+				<description>Name of the cache node</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&config-name;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CACHE_TYPE">
+				<description>Cache server type. Can be memcache or redis or some other</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="SERVER_IP_PORT">
+				<description>IP and Port details of the cache server</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IS_ENABLED">
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+			</column>
+			<column name="CACHE_PROPERTIES">
+				<data-type>CHAR</data-type>
+				<max-size>260</max-size>
+			</column>
+		</columns>
+		<primary-key name="IAMClusterNode_PK">
+			<primary-key-column>NODE_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMClusterNode_FK" reference-table-name="IAMCacheCluster">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CACHE_CLUSTER_AUTO_ID</fk-local-column>
+						<fk-reference-column>CACHE_CLUSTER_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMClusterNode_UK1">
+				<unique-key-column>CACHE_CLUSTER_AUTO_ID</unique-key-column>
+				<unique-key-column>NODE_NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	
+	<table name="IAMClusterRange" display-name="NodeRange">
+		<description>Holds node specific range configuration </description>
+		<columns>
+			<column name="RANGE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMClusterRange.RANGE_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="NODE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="RANGE_NAME">
+				<description>Name of the range node</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&config-name;</pattern>
+				</allowed-values>
+			</column>
+			<column name="START">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="END">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMClusterRange_PK">
+			<primary-key-column>RANGE_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMClusterRange_FK" reference-table-name="IAMClusterNode">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>NODE_AUTO_ID</fk-local-column>
+						<fk-reference-column>NODE_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMClusterRange_UK1">
+				<unique-key-column>RANGE_AUTO_ID</unique-key-column>
+				<unique-key-column>RANGE_NAME</unique-key-column>			
+			</unique-key>
+		</unique-keys>
+	</table>
+
+<!-- 	<table name="IAMScopeGroup" display-name="ScopeGroup">
+		<description>Scope vs Scope_Id. It is used to maintain the scopes and its description which will be used by the services.</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SCOPE_GROUP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMScopeGroup.SCOPE_GROUP_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="GROUP_ID">
+				<description>Unique ID of the scope</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="NAME">
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&simple-string;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DESCRIPTION">
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&simple-string;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<description>The time at which the token is generated</description>
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMScopeGroup_PK">
+			<primary-key-column>SCOPE_GROUP_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMScopeGroup_FK" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+		<unique-key name="IAMScopeGroup_UK">
+				<unique-key-column>APP_AUTO_ID</unique-key-column>
+				<unique-key-column>NAME</unique-key-column>
+			</unique-key>
+			<unique-key name="IAMScopeGroup_UK1">
+				<unique-key-column>GROUP_ID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	
+	<table name="IAMGroupScopeIds" display-name="GroupScopeIds">
+		<description>Scope vs Scope_Id. It is used to maintain the scopes and its description which will be used by the services.</description>
+		<columns>
+			<column name="SCOPE_GROUP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SCOPE_ID">
+				<description>Unique ID of the scope</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<description>The time at which the token is generated</description>
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMGroupScopeIds_PK">
+			<primary-key-column>SCOPE_GROUP_AUTO_ID</primary-key-column>
+			<primary-key-column>SCOPE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMGroupScopeIds_FK" reference-table-name="IAMScopeGroup">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SCOPE_GROUP_AUTO_ID</fk-local-column>
+						<fk-reference-column>SCOPE_GROUP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			</foreign-keys>
+	</table> -->
+	
+	<table name="IAMScopeDescriptions" display-name="ScopeDescriptions">
+		<description>Scope vs Scope_Id. It is used to maintain the scopes and its description which will be used by the services.</description>
+		<columns>
+			<column name="SCOPE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="OPERATION_TYPE">
+				<description>Unique ID of the scope</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DESCRIPTION">
+				<description>Unique ID of the scope</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IS_I18N">
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+			</column>
+			<column name="CREATED_TIME">
+				<description>The time at which the token is generated</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<description>The time at which the token is generated</description>
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMScopeDescriptions_PK">
+			<primary-key-column>SCOPE_AUTO_ID</primary-key-column>
+			<primary-key-column>OPERATION_TYPE</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMScopeDescriptions_FK" reference-table-name="IAMScope">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SCOPE_AUTO_ID</fk-local-column>
+						<fk-reference-column>SCOPE_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			</foreign-keys>
+	</table>
+	<table name="IAMSubScopes" display-name="SubScopes">
+		<description>Scope vs Scope_Id. It is used to maintain the scopes and its description which will be used by the services.</description>
+		<columns>
+			<column name="SCOPE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SCOPE_ID">
+				<description>Unique ID of the scope</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<description>The time at which the token is generated</description>
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMScopeSubIds_PK">
+			<primary-key-column>SCOPE_AUTO_ID</primary-key-column>
+			<primary-key-column>SCOPE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMScopeSubIds_FK" reference-table-name="IAMScope">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SCOPE_AUTO_ID</fk-local-column>
+						<fk-reference-column>SCOPE_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			</foreign-keys>
+	</table>
+	
+	<table name="IAMMailDetails" display-name="MailDetails">
+		<description>Holds Public Key for the app used to sign internal request</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MAIL_DETAILS_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMMailDetails.MAIL_DETAILS_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="CONNECTOR_NAME">
+				<description>
+					Naming for key entry
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<default-value>isc</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CONNECTOR_KEY">
+				<description>
+					Autentication key to connect mail server
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CONNECTOR_ID">
+				<description>
+					Autentication ID to connect mail server
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DEFAULT_MAIL_FROM">
+				<description>
+					Default mail from if not set in mail. 
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MAIL_SENDER_TYPE">
+				<description>
+					Used if we use multiple type of mail.
+				</description>
+				<data-type>INTEGER</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMMailDetails_PK">
+			<primary-key-column>MAIL_DETAILS_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMMailDetails_FK" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMMailDetails_UK1">
+			    <unique-key-column>APP_AUTO_ID</unique-key-column>
+				<unique-key-column>CONNECTOR_NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	
+	<table name="IAMMailTypes" display-name="MailTypes">
+		<description>Holds Public Key for the app used to sign internal request</description>
+		<columns>
+			<column name="APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MAIL_TYPE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMMailTypes.MAIL_TYPE_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="MAIL_TYPE_NAME">
+				<description>
+					Naming for key entry
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<default-value>isc</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MAIL_TYPE_DESCRIPTION">
+				<description>
+					Autentication key to connect mail server
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMMailTypes_PK">
+			<primary-key-column>MAIL_TYPE_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMMailTypes_FK" reference-table-name="IAMApp">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMMailTypes_UK1">
+			    <unique-key-column>APP_AUTO_ID</unique-key-column>
+				<unique-key-column>MAIL_TYPE_NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="IAMMailSender" display-name="MailSender">
+		<description>Holds Public Key for the app used to sign internal request</description>
+		<columns>
+			<column name="MAIL_TYPE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MAIL_DETAILS_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CONNECTOR_NAME">
+				<description>
+					Naming for key entry
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<default-value>isc</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MAIL_SENDER">
+				<description>
+					Autentication key to connect mail server
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMMailSender_PK">
+			<primary-key-column>MAIL_TYPE_AUTO_ID</primary-key-column>
+			<!-- <primary-key-column>MAIL_DETAILS_AUTO_ID</primary-key-column> -->
+		</primary-key>
+		<foreign-keys>
+		<foreign-key name="IAMMailSender_FK2" reference-table-name="IAMMailTypes">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>MAIL_TYPE_AUTO_ID</fk-local-column>
+						<fk-reference-column>MAIL_TYPE_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="IAMMailSender_FK1" reference-table-name="IAMMailDetails">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>MAIL_DETAILS_AUTO_ID</fk-local-column>
+						<fk-reference-column>MAIL_DETAILS_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="IAMShortenURL" display-name="ShortenURL">
+		<description>Shorten urls for invitation urls for sms</description>
+		<columns>
+			<column name="SHORTEN_ID">
+				<description>shortern url for eg: /lz45rsA</description>
+				<data-type>CHAR</data-type>
+				<max-size>25</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&digest;</pattern>
+				</allowed-values>
+			</column>
+			<column name="URL">
+				<description>mapped url with full url value</description>
+				<data-type>CHAR</data-type>
+				<max-size>500</max-size>
+				<allowed-values>
+					<pattern>&url;</pattern>
+				</allowed-values>
+			</column>
+			<column name="EXPIRY_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMShortenURL_PK">
+			<primary-key-column>SHORTEN_ID</primary-key-column>
+		</primary-key>
+	</table>
+		
+	<table name="IAMAppRoleOperations" display-name="AppRoleOperations">
+		<description> Allowed Operations for a particular App-Role</description>
+		<columns>
+			<column name="APP_ROLE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="OPERATION">
+				<data-type>CHAR</data-type>
+				<max-size>25</max-size>
+				<nullable>false</nullable>
+			</column>	
+		</columns>
+		<primary-key name="IAMAppRoleOperations_PK">
+			<primary-key-column>APP_ROLE_AUTO_ID</primary-key-column>
+			<primary-key-column>OPERATION</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMAppRoleOperations_FK1" reference-table-name="IAMAppRole">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>APP_ROLE_AUTO_ID</fk-local-column>
+						<fk-reference-column>APP_ROLE_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+</data-dictionary>

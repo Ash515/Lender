@@ -1,0 +1,8 @@
+<!-- $Id: service.xml,v 1.4 2009/10/06 06:46:01 suresh Exp $ -->
+<services>
+	<Service service_id="Service:service_id:AuthenticationService"
+		service_name="AuthenticationService" module_id="Authentication"
+		classname="com.adventnet.authentication.service.AuthenticationService">
+	</Service>
+
+</services>

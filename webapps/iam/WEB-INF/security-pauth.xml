@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- $Id: $ -->
+<security name="Zoho Accounts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security-accounts.xsd">
+	<urls>
+		<url path="/una/unconfirmed" pauth="true" iam-operation="unconfirmed" update-validationcount="true" captcha-threshold="2" block-threshold="3"/>
+		<url path="/una/unconfirmed/resend" pauth="true"/>
+		<url path="/una/unconfirmed/updateEmail" pauth="true">
+			<param name="newEmail" regex="email"/>
+		</url>
+		<url path="/una/tfaauth" pauth="true" iam-operation="tfa-verify"/>
+		
+		<url path="/una/tfa/verifycode" pauth="true" iam-operation="tfa-verify">
+			<param name="newEmail" regex="email"/>
+		</url>
+		
+		<url path="/una/passwdexp" pauth="true" iam-operation="pass-expired">
+			<param name="newEmail" regex="email"/>
+		</url>
+		<url path="/una/updatepass" pauth="true" iam-operation="pass-expired">
+			<param name="newEmail" regex="email"/>
+		</url>
+	</urls>
+</security>

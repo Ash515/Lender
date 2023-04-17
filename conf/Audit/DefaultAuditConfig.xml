@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<AuditConfigConf>
+
+	<AuditConfig id="AuditConfig:id:1" currentlevel="COARSE_GRAINED"
+		disableallaudit="true">
+		<AuditLevel levelname="COARSE_GRAINED" />
+		<AuditLevel levelname="FINE_GRAINED" />
+		<AuditTableConfig audittablename="OperationAuditRecord"
+			buffersize="100" batchsize="20" />
+	</AuditConfig>
+
+</AuditConfigConf>

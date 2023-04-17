@@ -1,0 +1,1124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema>
+	<attributeGroup name="commonUrlGroup">
+		<attribute name="dynamic-throttles" type="boolean"/>
+		<attribute name="webhook-access-method" type="String" />
+		<attribute name="authentication"  regex="required|optional|public" />
+		<attribute name="system-auth" regex="required|optional"/>
+		<attribute name="xframe-type"  regex="deny|none|sameorigin|trusted"/>
+		<attribute name="method"  type="String"/>
+		<attribute name="url-type"  regex="dynamic|multiple"/>
+		<attribute name="scoped-services" type="String" />
+		<attribute name="api" type="boolean"/>
+		<attribute name="isc" type="boolean"/>
+		<attribute name="apiscope" type="String" />
+		<attribute name="iscscope" type="String" />
+		<attribute name="runas-groupid-param" type="String" />
+		<attribute name="runas-grouptype-param" type="String" />
+		<attribute name="ipbl" type="boolean"/>
+		<attribute name="xss" type="boolean"/>
+		<attribute name="csrf" type="boolean"/>
+      	<attribute name="login-throwerror" type="boolean" />
+		<attribute name="description" type="String" />
+		<attribute name="operation-type" type="String" />
+		<attribute name="zs-module" type="String"/>
+      		<attribute name="zs-sub-module" type="String"/>
+      		<attribute name="zs-operation" type="String"/>
+		<attribute name="duration" type="String" />
+		<attribute name="internal" type="boolean" />
+		<attribute name="hip" type="boolean" />
+		<attribute name="lock-period" type="String" />
+		<attribute name="multi-part" type="boolean" />
+		<attribute name="dynamic-params" type="boolean" />
+		<attribute name="operation-param"  regex="string_without_colon" />
+		<attribute name="operation-value" type="String" />
+		<attribute name="path" type="String" />
+		<attribute name="path-regex" type="boolean" />
+		<attribute name="prefix" type="String"/> 
+		<attribute name="redirect" type="String" />
+		<attribute name="roles" type="String" />
+		<attribute name="threshold" type="int" />
+		<attribute name="max-request-size" type="int" />
+		<attribute name="file-upload-max-size" type="int" />
+		<attribute name="trusted" type="boolean" />
+		<attribute name="user" type="boolean" />
+		<attribute name="throwallerrors" type="boolean" />
+		<attribute name="dos-cookie" type="boolean" />
+		<attribute name="response-json-impurity" type="String" />
+		<attribute name="action-forward" type="String" />
+		<attribute name="internalortrusted" type="boolean" />
+		<attribute name="disable-extraparam" type="boolean" />
+		<attribute name="app-account-member-roles" type="String" />
+		<attribute name="oauthscope"  regex="alpha_numeric_underscore_hyphen_dot_comma" />
+		<attribute name="org-oauthscope"  regex="alpha_numeric_underscore_hyphen_dot_comma" />
+		<attribute name="auth-type"  regex="alpha_underscore_hyphen" />
+		<attribute name="ignore-extraparam" type="boolean"/> 
+		<attribute name="captcha-verification" type="boolean"/>
+		<attribute name="dc-system-auth" type="boolean"/>
+		<attribute name="error-page" type="boolean"/>
+		<attribute name="set-csrf-cookie" type="boolean"/>
+		<attribute name="request-dispatch-uri-pattern" type="String"/>
+	</attributeGroup>
+
+	<attributeGroup name="urlsGroup">
+		<attributeGroup ref="commonUrlGroup"/>
+	</attributeGroup>
+
+	<attributeGroup name="urlGroup">
+		<attributeGroup ref="commonUrlGroup"/>
+		<attribute name="parse-multipart-data" type="boolean"/>
+		<attribute name="parts-configured-for-mutlipart" type="boolean"/>
+		<attribute name="disable-get-api-csrf" type="boolean"/>
+		<attribute name="requestbody-required-for-verification" type="boolean"/>
+	</attributeGroup>
+
+	<attributeGroup name="urlThrottle">
+		<attribute name="duration" type="String" />
+		<attribute name="threshold" type="positiveInteger" is-mandatory="true"/>
+   		<attribute name="lock-period" type="String" />
+      		<attribute name="hip" type="boolean" />
+     		<attribute name="watch-time" type="String" />
+      		<attribute name="violation-limit" type="positiveInteger" />
+		<attribute name="lock-factor" regex="[2-9][0-9]*" />
+	</attributeGroup>
+
+	<attributeGroup name="paramGroup">
+	      	<attribute name="name" type="String" is-mandatory="true" error_msg="'name' attribute is not configured."/>
+		<attribute name="max-import-file-size" type="int"/>
+	      	<attributeGroup ref="commonParamGroup"/>
+		<attributeGroup ref="commonFileGroup"/>
+		<attribute name="mask" regex="required|partial"/>
+		<attribute name="preserve-chars" regex="((\d+),)?(\d+)"/>
+		<attribute name="preserve-chars-limit" type="int" minInclusive="0" maxInclusive="50"/>
+  	</attributeGroup>
+
+  	<attributeGroup name="commonParamGroup">
+		<attribute name="range" type="String" />
+		<attribute name="description" type="String" />
+		<attribute name="max-len" type="int" />
+		<attribute name="max-occurrences" type="int" />
+	 	<attribute name="min-len" type="int" />
+	  	<attribute name="min-occurrences" type="int" />
+ 		<attribute name="name-regex" type="boolean" />
+ 		<attribute name="canonicalize" type="boolean" />
+	  	<attribute name="deltacontent" type="boolean" />
+	  	<attribute name="regex" type="String" />
+	 	<attribute name="trim" type="boolean" />
+		<attribute name="split" type="String" />
+		<attribute name="type"  regex="boolean|char|short|int|long|float|double|properties|csv|JSONObject|JSONArray|JSONObject\|JSONArray|vcardArray|url|cleartext:check|cleartext:filter|cleartext:removehtmlentities|String|xml" /> 
+		<attribute name="format"  regex="Default|Excel|InformixUnload|InformixUnloadCsv|MySQL|RFC4180|TDF" />  
+		<attribute name="antispam" type="boolean" />	
+  		<attribute name="xss" regex="string_without_colon" />
+	  	<attribute name="default" type="String" />
+		<attribute name="decrypt" type="boolean" />
+	  	<attribute name="salt-delimiter" type="String" />
+	  	<attribute name="salt-validity" type="int" />
+ 		<attribute name="salt-ticket" type="boolean" />
+	  	<attribute name="secret" type="boolean"/>
+	 	<attribute name="decrypt-label" type="String" />
+		<attribute name="template" type="String" />
+		<attribute name="filter-matched-content" type="boolean" />
+		<attribute name="replacement-string" type="String" />
+		<attribute name="xml-schema-validation" type="boolean" />
+		<attribute name="xml-schema" type="String" />
+		<attribute name="allow-empty" type="boolean" />
+		<attribute name="allow-invalid" type="boolean" />
+		<attribute name="allow-xml-inline-entity-expansion" type="boolean" />
+		<attribute name="label" type="String" />
+		<attribute name="array-size" regex="json_array_size" />
+		<attribute name="dynamic-template-key-regex" type="String"/>
+		<disallow-attribute name="canonicalize" error_code="ZSDSE2002" rule_name="CANONICALIZE_IS_DEPRECATED" error_msg="'canonicalize' attribute will be deprecated.Remove this attribute." error_priority="LOW"/>
+		<disallow-attribute name="deltacontent" error_code="ZSDSE2003" rule_name="DELTACONTENT_IS_DEPRECATED" error_msg="'deltacontent' attribute will be deprecated.Remove this attribute." error_priority="LOW"/>
+		<disallow-attribute name="allow-xml-inline-entity-expansion" error_code="ZSDSE2004" rule_name="ALLOW_XML_INLINE_ENTITY_EXPANSION_IS_DEPRECATED" error_msg="'allow-xml-inline-entity-expansion' attribute will be deprecated.Remove this attribute." error_priority="LOW"/>
+		<disallow-attribute name="decrypt-label" error_code="ZSDSE2073" rule_name="DECRYPT_LABEL_IS_DEPRECATED" error_msg="'decrypt-label' attribute will be deprecated soon.Remove this attribute" error_priority="LOW"/>
+		<disallow-attribute name="salt-delimiter" error_code="ZSDSE2074" rule_name="SALT_DELIMITER_IS_DEPRECATED" error_msg="'salt-delimiter' attribute will be deprecated soon.Remove this attribute" error_priority="LOW"/>
+		<disallow-attribute name="salt-ticket" error_code="ZSDSE2075" rule_name="SALT_TICKET_IS_DEPRECATED" error_msg="'salt-ticket' attribute will be deprecated soon.Remove this attribute" error_priority="LOW"/>
+		<disallow-attribute name="salt-validity" error_code="ZSDSE2076" rule_name="SALT_VALIDITY_IS_DEPRECATED" error_msg="'salt-validity' attribute will be deprecated soon.Remove this attribute" error_priority="LOW"/>
+		<disallow-attribute name="trim" error_code="ZSDSE2077" rule_name="TRIM_IS_DEPRECATED" error_msg="'trim' attribute will be deprecated soon.Remove this attribute" error_priority="LOW"/>
+		<disallow-attribute name="filter-matched-content" error_code="ZSDSE2078" rule_name="FILTER_MATCHED_CONTENT_IS_DEPRECATED" error_msg="'filter-matched-content' attribute will be deprecated soon.Remove this attribute" error_priority="LOW"/>
+		<disallow-attribute name="replacement-string" error_code="ZSDSE2079" rule_name="REPLACEMENT_STRING_IS_DEPRECATED" error_msg="'replacement-string' attribute will be deprecated soon.Remove this attribute" error_priority="LOW"/>
+		<disallow-attribute name="label" error_code="ZSDSE2080" rule_name="LABEL_IS_DEPRECATED" error_msg="'label' attribute will be deprecated soon.Remove this attribute" error_priority="LOW"/>
+		<disallow-attribute name="range" error_code="ZSDSE2081" rule_name="RANGE_IS_DEPRECATED" error_msg="'range' attribute will be deprecated soon.Remove this attribute" error_priority="LOW"/>
+	</attributeGroup>
+
+	<attributeGroup name="inputstreamGroup">
+		<attribute name="description" type="String" />
+		<attribute name="max-len" type="int" />
+		<attribute name="min-len" type="int" />
+		<attribute name="regex" type="String" />
+		<attribute name="type" regex="boolean|char|short|int|long|float|double|properties|csv|JSONObject|JSONArray|JSONObject\|JSONArray|vcardArray|url|cleartext:check|cleartext:filter|cleartext:removehtmlentities|String|xml" />
+		<attribute name="format"  regex="Default|Excel|InformixUnload|InformixUnloadCsv|MySQL|RFC4180|TDF" />
+		<attribute name="xss" regex="string_without_colon" />
+		<attribute name="default" type="String" />
+		<attribute name="decrypt" type="boolean" />
+		<attribute name="salt-delimiter" type="String" />
+		<attribute name="salt-validity" type="int" />
+		<attribute name="salt-ticket" type="boolean" />
+		<attribute name="secret" type="boolean" />
+		<attribute name="decrypt-label" type="String" />
+		<attribute name="template" type="String" />
+		<attribute name="filter-matched-content" type="boolean" />
+		<attribute name="replacement-String" type="String" />
+		<attribute name="non-empty" type="boolean" />
+		<attribute name="xml-schema-validation" type="boolean" />
+		<attribute name="xml-schema" type="String" />
+		<attribute name="allow-xml-inline-entity-expansion" type="boolean" />
+		<attribute name="allow-invalid" type="boolean" />
+		<attribute name="array-size"  regex="json_array_size" />
+		<attribute name="dynamic-template-key-regex" type="String" />
+		<attribute name="trim" type="boolean" />
+		<attribute name="validation-mode"  regex="log|error" />
+		<disallow-attribute name="allow-xml-inline-entity-expansion" error_code="ZSDSE2006"  rule_name="ALLOW_XML_INLINE_ENTITY_EXPANSION_IS_DEPRECATED_IN_INPUTSTREAM" error_msg="'allow-xml-inline-entity-expansion' attribute in inputstream will be deprecated.Remove this attribute." error_priority="LOW"/>
+	</attributeGroup>
+
+	<attributeGroup name="fileGroup">
+		<attribute name="max-size" type="int"/>
+		<attribute name="name" type="String" is-mandatory="true" error_msg="'name' attribute is not configured."/>
+		<attribute name="name-regex" type="boolean" />
+	   	<attribute name="description" type="String" />
+	   	<attribute name="xss" regex="string_without_colon" />
+	   	<attribute name="continue-onerror" type="boolean" />
+	   	<attribute name="allow-empty" type="boolean" />
+	   	<attribute name="allow-lan-access" type="boolean"/>
+		<attribute name="limit"  type="String" />
+		<attribute name="mandatory"  type="boolean" />
+		<attribute name="zip-sanitizer-name" type="String"/>	
+		<attribute name="allowed-content-types" type="String"/>
+		<attribute name="type" regex="csv"/>
+		<attribute name="template" regex="string_without_colon"/>
+		<attribute name="format" regex="Default|Excel|InformixUnload|InformixUnloadCsv|MySQL|RFC4180|TDF"/>
+		<attributeGroup ref="commonFileGroup"/>
+		<disallow-attribute name="xss" error_code="ZSDSE2007" rule_name="XSS_IS_DEPRECATED_IN_FILE" error_msg="'xss' attribute in file element will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+		<disallow-attribute name="continue-onerror" error_code="ZSDSE2083" rule_name="CONTINUE_ONERROR_IS_DEPRECATED_IN_FILE" check_in_parent="true" error_msg="'continue-onerror' attribute will be deprecated.Remove this attribute." error_priority="LOW"/>
+	</attributeGroup>
+
+	<attributeGroup name="commonFileGroup">
+		<attribute name="content-type-name" type="String"/>
+		<attribute name="import-url" type="boolean" />
+		<attribute name="allowed-extensions" type="String" />
+		<attribute name="disallowed-extensions" type="String" />
+	   	<attribute name="antivirus" type="boolean" />
+		<attribute name="remove-exif" type="boolean"/>
+	   	<attribute name="av-threshold"  type="int" />
+		<disallow-attribute name="av-threshold" error_code="ZSDSE2082" rule_name="ANTI_VIRUS_THRESHOLD_IS_DEPRECATED_IN_FILE" check_in_parent="true" error_msg="'av-threshold' attribute will be deprecated.Remove this attribute." error_priority="HIGH"/>
+	</attributeGroup>
+
+	<attributeGroup name="disablesafeheadersGroup">
+		<attribute name="disable-safe-headers"  regex="(X-XSS-Protection|X-Frame-Options|X-Content-Type-Options|X-Download-Options|Content-Disposition|all)(,X-XSS-Protection|,X-Frame-Options|,X-Content-Type-Options|,X-Download-Options|,Content-Disposition){0,4}"/>
+	</attributeGroup>
+
+	<attributeGroup name="jsonTemplateGroup">
+		<attribute name="name" type="String" />
+  		<attribute name="disable-extra-key" type="boolean" />
+		<attribute name="continue-onerror" type="boolean" /> 
+  	</attributeGroup>
+
+	<attributeGroup name="orCriteriaAttrGroup">
+  		<attribute name="min-occurrences" type="int" />
+		<attribute name="max-occurrences" type="int" /> 
+  	</attributeGroup>
+
+	<groups>
+		<group name="securityGroup">
+			<element ref="acl"/>
+			<element ref="cache-configurations"/>
+			<element ref="resources"/>
+			<element ref="extensions"/>
+	  		<element ref="content-types"/>
+			<element ref="defaultparams"/>
+			<element ref="extraparam"/>
+			<element ref="extrakey"/>
+			<element ref="properties"/>
+			<element ref="regexes"/>
+			<element ref="urls"/>
+			<element ref="url-validators"/>
+			<element ref="xsspatterns"/>
+			<element ref="jsontemplates"/>
+			<element ref="templates"/>
+			<element ref="param-groups"/>
+			<element ref="jsonkey-groups"/>
+			<element ref="safe-response-headers"/>
+			<element ref="internal-request-headers"/>
+			<element ref="default-response-headers"/>
+			<element ref="default-request-headers"/>
+			<element ref="proxy-policy"/>
+			<element ref="xml-schemas"/>
+			<element ref="zip-sanitizers" />
+			<element ref="pii-detector"/>
+			<element ref="file-types"/>
+			<element ref="throttles"/>
+		</group>
+		<group name="urlschoice">
+			<element ref="url" />
+			<element ref="file" />
+			<element ref="param" />
+			<element ref="params" />
+			<element ref="param-group" />
+			<element ref="inputstream" />
+			<element ref="paramorstream"/>
+			<element ref="response" />
+			<element ref="request" />
+			<element ref="proxy-policy" />
+			<element ref="throttles"/>
+			<element ref="throttle"/>
+		</group>
+		<group name="urlchoice">
+			<element ref="extraparam" />
+			<element ref="file" />
+			<element ref="param" />
+			<element ref="params" />
+			<element ref="param-group" />
+			<element ref="inputstream" />
+			<element ref="paramorstream"/>
+			<element ref="response" />
+			<element ref="request" />
+			<element ref="proxy-policy" />
+			<element ref="throttles"/>
+			<element ref="throttle"/>
+		</group>
+	</groups>
+	<elements>
+		<element name="security">
+      			<children>
+			  	<choice>
+	      			<element ref="proxies"/>
+		      		<elementGroup>
+					<group ref="securityGroup"/>	
+				</elementGroup>
+				</choice>
+				<disallow-element name="proxies" error_code="ZSDSE2008" rule_name="PROXIES_ELEMENT_DEPRECATED" error_msg="'proxies' element is deprecated." error_priority="MEDIUM"/>
+				<disallow-element name="extraparam" error_code="ZSDSE2065" rule_name="EXTRAPARAM_ELEMENT_CONFIGURED_GLOBALLY" error_msg="'extraParam' element is configured globally. If you want extraparam, configure it under corresponding url" error_priority="HIGH"/>
+				<disallow-element name="extrakey" error_code="ZSDSE2066" rule_name="EXTRAKEY_ELEMENT_CONFIGURED_GLOBALLY"  error_msg="'extrakey' element is configured globally. If you want extrakey, configure it under corresponding jsontemplate" error_priority="HIGH"/>
+      		</children>
+      		<attributes>
+      			<attribute name="name" type="String" />
+      		</attributes>
+		</element>
+		<element name="proxies">
+			<children>
+				<element ref="proxy"/>
+	    	</children>
+		</element>
+		<element name="proxy" unique-keys="name">
+			<attributes>
+				<attribute name="path" type="String" is-mandatory="true" error_msg="'path' attribute is not configured for proxy element."/>
+				<attribute name="remote-server" type="String" is-mandatory="true" error_msg="'remote-server' attribute is not configured for proxy element."/>
+				<attribute name="remote-path" type="String" />
+				<attribute name="service-params" type="String" />
+				<attribute name="path-regex" type="boolean" />
+				<attribute name="allow-cookie" type="boolean"/>
+      				<attribute name="allow-headers" type="boolean"/>
+      				<attribute name="allow-querystring" type="boolean"/>
+     				<attribute name="allow-body" type="boolean"/>
+				<attribute name="exclude-headers" type="String"/>
+			</attributes>
+		</element>
+		<element name="jsontemplates">
+			<children>
+				<element ref="jsontemplate"/>
+				<element ref="key"/>
+				<element ref="extrakey"/>
+				<element ref="keys"/>
+				<disallow-element name="extrakey" error_code="ZSDSE2067" rule_name="EXTRAKEY_ELEMENT_CONFIGURED_IN_JSONTEMPLATES"  error_msg="'extrakey' element is configured globally. If you want extrakey, configure it under corresponding jsontemplate" error_priority="HIGH"/>
+			</children>
+	  	</element>
+	  	<element name="jsontemplate" unique-keys="name">
+	  		<children>
+				<element ref="key"/>
+				<element ref="key-group"/>
+				<element ref="extrakey"/>
+				<element ref="keys"/>
+				<disallow-element name="extrakey" error_code="ZSDSE2068"  rule_name="EXTRAKEY_CONFIGURED" error_msg="'extrakey' configuration is discouraged. Analyze and configure the required keys." error_priority="LOW"/>
+			</children>
+			<attributes>
+				<attributeGroup ref="jsonTemplateGroup"/>
+			</attributes>
+	  	</element>
+	  	<element name="key-group" unique-keys="name">
+	  		<attributes>
+	      		<attribute name="name" type="String" is-mandatory="true" error_msg="'name' attribute is not configured for key-group element."/>
+	  		</attributes>
+	  	</element>
+	  	<element name="templates">
+	  		<children>
+				<element ref="template"/>
+			</children>
+	  	</element>
+	  	<element name="template" unique-keys="name">
+	  		<children>
+				<element ref="key"/>
+			</children>
+			<attributes>
+	     		<attribute name="name" type="String" is-mandatory="true" error_msg="'name' attribute is not configured for template element."/>
+	 		</attributes>
+	  	</element>
+
+		<element name="param-groups">
+			<children>
+				<element ref="param-group"/>
+			</children>
+		</element>
+		<element name="param-group" check-occurrence-if-parent-type="param-groups" unique-keys="name">
+			<children>
+				<element ref="param"/>
+				<element name="or-criteria" ref="orcriteriaparam" />
+			</children>
+			<attributes>
+	    		<attribute name="name" type="String" is-mandatory="true" error_msg="'name' attribute is not configured for param-group element."/>
+			</attributes>
+		</element>
+		<element name="jsonkey-groups">
+	  		<children>
+				<element ref="jsonkey-group"/>
+			</children>
+	  	</element>
+	  	<element name="jsonkey-group" unique-keys="name">
+	  		<children>
+				<element ref="key"/>
+				<element name="or-criteria" ref="orcriteriakey" />
+	    	</children>
+			<attributes>
+	     		<attribute name="name" type="String" is-mandatory="true" error_msg="'name' attribute is not configured for jsonkey-group element."/>
+	     	</attributes>
+	  	</element>
+	  	<element name="content-types">
+	  		<children>
+	  			<element ref="content-type" min-occurrences="1"/>
+			</children>
+	  	</element>
+	  	<element name="content-type" unique-keys="name">
+			<children>
+	  			<element name="value" regex="((application|text|image|audio|video|model|chemical|message|multipart|x-conference)/[a-z0-9_.+-; =]+)|(application|text|image|audio|video|model|chemical|message|multipart|x-conference)"/>
+			</children>
+	  		<attributes>
+				<attribute name="content-types" type="String"/>
+				<attribute name="name"  regex="string_without_colon"  is-mandatory="true" error_msg="'name' attribute is not configured for content-type element."/>
+				<attribute name="extends" type="String"/>
+			</attributes>
+	  	</element>
+	  	<element name="defaultparams">
+	  		<children>
+				<element ref="param" min-occurrences="1"/>
+			</children>
+		</element>
+		<element name="extraparam">
+			<attributes>
+				<attributeGroup ref="commonParamGroup"/>
+				<attribute name="limit" type="int"/>
+			</attributes>
+			<conditions>		
+				<condition ref="paramConditions"/>	
+				<condition ref="jsonXmlConditions"/>
+				<condition ref="paramLenConditions"/>		      			
+			</conditions>
+	  	</element>
+	  	<element name="properties">
+	  		<children>
+				<element ref="property"/>
+			</children>
+			<conditions>		
+				<condition ref="propertiesCondition"/>			      			
+			</conditions>
+		</element>
+		<element name="property" unique-keys="name">
+			<attributes>
+				<attribute name="name" regex="disable.path.parameter.uri.decoding.check|allow.invalid.value|json.invalid.list|enable.x.http.method.override.option|csrf.cookie.name|csrf.param.name|captcha.url|com.adventnet.iam.secretkey|com.adventnet.iam.cryptolendelim|use.iam|enable.timeoutmatcher|xss.enable.timeoutmatcher|timeoutmatcher.maxthreads|timeoutmatcher.timeoutinmillis|trusted.ip.pattern|antivirus.host|antivirus.port|antivirus.numberof.persistant.connections|antivirus.readtimeout|http.ip.black.list.dns|http.ip.white.list.dns|allow.empty.value|response.encoding|ignore.trailing.slash|enable.xssfilter.log|xssfilter.log.maxsize|xss.detect.pattern|xss.detect.pattern.ext|xss.encodecheck.pattern|xss.trimctrlchars.pattern|proxy.host|proxy.port|proxy.username|proxy.password|set.csrf.cookie|ticket.cache.validity|com.adventnet.iam.internal.server|com.adventnet.iam.apikey|com.adventnet.iam.handler|service.name|login.page|logout.page|is.zuid|disable.ie.cache|disable.ie.nocache|com.adventnet.iam.security.provider|is.nonpersistentscan|internal.mailwatch.server.url|upload.filerule.connectiontimeout|upload.filerule.readtimeout|enable.xsspattern.detect|enable.xframe.options|xframe.default.option|readonly.mode|enable.currentuser.cache|com.adventnet.iam.authentication.provider|internalrequest.privatekey|com.zoho.cs.handler|com.zoho.cs.internal.server|exclude|com.zoho.client.handler|isc.signature.expiry.time|disable.authcsrf|csrf.migration|soid.migration.mode|disable.iam.soid|enable.request.options|disable.xssfilter.patterndetect|enable.response.send.error|mask.secret.param.logging|iscticket.cache.validity|com.zoho.zohoone.handler|disable.get.api.csrf.check|content.type.detect.option|enable.clamav.instrumentation|uri.ignore.prefix|error.label|log.response|use.iam.login|enable.app.firewall|enable.app.firewall.file|request.header.validation.mode|enable.patch.method.min.occurrence.check|custom.request.methods|disable.put.minoccur.check|enable.appsense|zohosecurity.plugin|allow.import.url.redirect|ignore.extra.param|captcha.image.dimensions|set.api.rate.limit.response.header|disable.service.url.throttles|convert.service.url.rolling.throttles.into.appserver|enable.secret.param.logging.mask|url.static.version|enable.hsts|hsts.allowed.domains|allow.proxy.url.redirect|url.redirect.maxlimit|enable.post.method.redirect|log.push.security.exception|dos.accessinfo.expiry.schedule.timeinterval|secret.request.param.names|secret.request.header.names|hsts.forceful.redirection|log.inputstream|dynamic.params.max.occurrence.limit|handle.errorpage.hip|handle.errorpage.json.response|disable.param.input.validation.for.testing.output.encoding|pattern.matcher.timeoutinmillis|pattern.matcher.max.iterationcount|mask.all.paramvalues.on.error|enable.pii.detector|inputstream.validation.mode|enable.individual.occurrence.check.for.dynamic.params|disable.redis.instrumentation|enable.tika.file.content.and.name.based.detection|pattern.matcher.mode|error.page.validation.mode|enable.trim|multi.av.config.provider|icap.av.config|restapi.av.config|csrf.cookie.samesite.mode|enable.csrf.samesite.strict.tmpcookie|start.live.window.cleaner.scheduler|block.request.on.dos.cache.exception|allowed.user.agents|appfirewall.provider|proxy.connection.timeout|proxy.read.timeout|com.zoho.ediscovery.handler|xml.schema.version|enable.xsd11.cta.full.xpath.checking|request.dispatcher.validation.mode" is-mandatory="true"  error_msg="'name' attribute is not configured for property element."/>
+		    		<attribute name="value" type="String" is-mandatory="true" error_msg="'value' attribute is not configured for property element."/>
+		      		<attribute name="description" type="String" />
+		      		<disallow-property name="xss.detect.pattern" error_code="ZSDSE2009" rule_name="XSS_DETECT_PATTERN_PROPERTY_DEPRECATED" error_msg="'xss.detect.pattern' attribute in property element will be deprecated soon.Remove this property." error_priority="HIGH"/>
+		      		<disallow-property name="xss.detect.pattern.ext" error_code="ZSDSE2010" rule_name="XSS_DETECT_PATTERN_EXT_PROPERTY_DEPRECATED" error_msg="'xss.detect.pattern.ext' attribute in property element will be deprecated soon.Remove this property." error_priority="HIGH"/>
+		      		<disallow-property name="xss.encodecheck.pattern" error_code="ZSDSE2011" rule_name="XSS_ENCODECHECK_PATTERN_PROPERTY_DEPRECATED" error_msg="'xss.encodecheck.pattern' attribute in property element will be deprecated soon.Remove this property." error_priority="HIGH"/>
+		      		<disallow-property name="enable.xsspattern.detect" error_code="ZSDSE2012" rule_name="ENABLE_XSSPATTERN_DETECT_PROPERTY_DEPRECATED" error_msg="'enable.xsspattern.detect' attribute in property element will be deprecated soon.Remove this property." error_priority="HIGH"/>
+		      		<disallow-property name="enable.xframe.options" error_code="ZSDSE2013" rule_name="ENABLE_XFRAME_OPTIONS_PROPERTY_DEPRECATED" error_msg="'enable.xframe.options' attribute in property element will be deprecated soon.Alternately this functionality can be achieved by configuring the 'x-frame-options' response header." error_priority="HIGH" />
+		      		<disallow-property name="xframe.default.option" error_code="ZSDSE2014" rule_name="XFRAME_DEFAULT_OPTION_PROPERTY_DEPRECATED" error_msg="'xframe.default.option' attribute in property element will be deprecated soon.Alternately this functionality can be achieved by configuring the 'x-frame-options' response header." error_priority="HIGH" />
+		      		<disallow-property name="exclude" error_code="ZSDSE2015" rule_name="EXCLUDE_PROPERTY_DEPRECATED" error_msg="'exclude' attribute in property element will be deprecated soon.Remove this property." error_priority="LOW" />
+		      		<disallow-property name="appfirewall.rest.server.url" error_code="ZSDSE2016" rule_name="APPFIREWALL_REST_SERVER_URL_PROPERTY_DEPRECATED" error_msg="'appfirewall.rest.server.url' attribute in property element will be deprecated soon.Remove this property." error_priority="LOW" />
+		      		<disallow-property name="com.adventnet.iam.appfirewall.provider" error_code="ZSDSE2017" rule_name="COM_ADVENTNET_IAM_APPFIREWALL_PROVIDER_PROPERTY_DEPRECATED" error_msg="'com.adventnet.iam.appfirewall.provider' attribute in property element will be deprecated soon.Remove this property." error_priority="LOW"/>
+		      		<disallow-property name="appfirewall.mode" error_code="ZSDSE2018" rule_name="APPFIREWALL_MODE_PROPERTY_DEPRECATED" error_msg="'appfirewall.mode' attribute in property element will be deprecated soon.Remove this property." error_priority="LOW" />
+		      		<disallow-property name="disable.xssfilter.patterndetect" error_code="ZSDSE2019" rule_name="DISABLE_XSSFILTER_PATTERNDETECT_PROPERTY_DEPRECATED" error_msg="'disable.xssfilter.patterndetect' attribute in property element will be deprecated soon.Remove this property." error_priority="HIGH"/>
+	      		</attributes>
+	      		<conditions>		
+					<condition ref="propertyCondition"/>	      			
+				</conditions>
+	  	</element>
+	  	<element name="regexes">
+	  		<children>
+			    <element ref="regex"/>
+		    </children>
+		</element>
+		<element name="regex" unique-keys="name">
+			<attributes>
+				<attribute name="name" type="String" is-mandatory="true" error_msg="'name' attribute is not configured for regex element."/>
+				<attribute name="value" type="String" is-mandatory="true" error_msg="'value' attribute is not configured for regex element."/>
+				<attribute name="timeout" type="int"/>	
+     				<attribute name="iteration" type="int"/>
+				<attribute name="description" type="String" />
+			</attributes>
+		</element>
+		<element name="url-validators">
+			<children>
+				<element ref="scheme"/>
+				<element ref="url-validator"/>	
+			</children>
+		</element>
+		<element name="url-validator">
+			<children>
+				<element ref="scheme"/>
+			</children>
+			<attributes>
+				<attribute name="name" type="String" is-mandatory="true" error_msg="'name' attribute is not configured for url validator element."/>
+				<attribute name="mode" regex="encode|error"/>
+				<attribute name="max-len" type="int" />
+				<attribute name="datauri-max-len" type="int" />
+			</attributes>
+		</element>
+		<element name="scheme">
+			<children>
+				<element name="domainauthority" ref="allowedvalues"/>
+				<element name="pathinfo" ref="allowedvalues"/>
+				<element name="querystring" ref="allowedvalues"/>
+			       	<element name="fragment" ref="allowedvalues"/>
+				<element name="datapart" ref="allowedvalues"/>
+				<element name="mimetypes" ref="allowedvalues"/>
+				<element name="charsets" ref="allowedvalues"/>
+			       	<element name="encoding" ref="allowedvalues"/>
+		    	</children>
+			<attributes>
+				<attribute name="name" type="String" is-mandatory="true" error_msg="'name' attribute is not configured for schema element."/>
+			</attributes>
+		</element>
+		<element name="allowedvalues">
+			<attributes>
+				<attribute name="allowed-values" type="String"/>
+			</attributes>
+		</element>
+		<element name="urls" unique-keys="path,operation-param,operation-value,method">
+			<children>
+				<group ref="urlschoice"/>
+			</children>
+			<attributes>
+				<attributeGroup ref="urlsGroup"/>
+			</attributes>
+			<conditions>
+				<condition ref="urlThresholdConditions"/>
+			</conditions>
+		</element>
+		<element name="url" unique-keys="path,operation-param,operation-value,method">
+			<children>
+			  	<group ref="urlchoice"/>
+				<disallow-element name="extraparam" error_code="ZSDSE2069" rule_name="EXTRAPARAM_CONFIGURED" error_msg="'extraparam' is discouraged.Analyze and configure proper param." error_priority="LOW"/>                               
+			</children>
+			<attributes>
+				<attributeGroup ref="urlGroup"/>
+				<disallow-attribute name="path-regex" error_code="ZSDSE2020" rule_name="PATH_REGEX_DEPRECATED" check_in_parent="true" error_msg="'path-regex' attribute will be deprecated.Alternately use url-type='multiple' or url-type='dynamic'." error_priority="LOW"/>
+				<disallow-attribute name="api"  error_code="ZSDSE2021" rule_name="API_DEPRECATED" check_in_parent="true" error_msg="'api' attribute will be deprecated .Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="ipbl" error_code="ZSDSE2022" rule_name="IPBL_DEPRECATED" check_in_parent="true" error_msg="'ipbl' attribute will be deprecated .Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="isc" error_code="ZSDSE2023" rule_name="ISC_DEPRECATED" check_in_parent="true" error_msg="'isc' attribute will be deprecated.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="xss" error_code="ZSDSE2024" rule_name="XSS_DEPRECATED" check_in_parent="true" error_msg="'xss' attribute in url element will be deprecated.Remove this attribute" error_priority="LOW"/>
+				<disallow-attribute name="dynamic-params" error_code="ZSDSE2025" rule_name="DYNAMIC_PARAMS_DEPRECATED" check_in_parent="true" error_msg="'dynamic-params' attribute will be deprecated.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="dos-cookie" error_code="ZSDSE2026" rule_name="DOS_COOKIE_DEPRECATED" check_in_parent="true" error_msg="'dos-cookie' attribute will be deprecated.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="max-request-size" error_code="ZSDSE2027" rule_name="MAX_REQUEST_SIZE_DEPRECATED" check_in_parent="true" error_msg="'max-request-size' attribute will be deprecated.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="internalortrusted" error_code="ZSDSE2028" rule_name="INTERNALORTRUSTED_DEPRECATED" check_in_parent="true" error_msg="'internalortrusted' attribute will be deprecated.Alternately configure internal='true' or trusted='true'." error_priority="LOW"/>
+				<disallow-attribute name="xframe-type" error_code="ZSDSE2029" rule_name="XFRAME_TYPE_DEPRECATED" check_in_parent="true" error_msg="'xframe-type' attribute will be deprecated.Alternately this functionality can be achieved by configuring the 'x-frame-options' response header." error_priority="HIGH"/>
+				<disallow-attribute name="multi-part" error_code="ZSDSE2030" rule_name="MULTIPART_DEPRECATED" check_in_parent="true" error_msg="'multi-part' attribute will be deprecated.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="action-forward" error_code="ZSDSE2084" rule_name="ACTION_FORWARD_DEPRECATED" check_in_parent="true" error_msg="'action-forward' attribute will be deprecated.Remove this attribute." error_priority="MEDIUM"/>
+				<disallow-attribute name="disable-extraparam" error_code="ZSDSE2085" rule_name="DISABLE_EXTRAPARAM_DEPRECATED" check_in_parent="true" error_msg="'disable-extraparam' attribute will be deprecated.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="response-json-impurity" error_code="ZSDSE2086" rule_name="RESPONSE_JSON_IMPURITY_DEPRECATED" check_in_parent="true" error_msg="'response-json-impurity' attribute will be deprecated.Remove this attribute." error_priority="LOW"/>
+			</attributes>
+			<conditions>
+				<condition ref="urlConditions"/>
+				<condition ref="urlThresholdConditions"/>
+			</conditions>
+		</element>
+		<element name="throttle">
+			<attributes>
+				<attributeGroup ref="urlThrottle"/>
+			</attributes>
+			<conditions>
+				<condition ref="urlThresholdConditions"/>
+			</conditions>
+		</element> 
+		<element name="cache-configurations"> 
+	    		<children>
+	    			<element ref="cache-configuration"  min-occurrences="1"/>  
+	    		</children>
+	    	</element>
+	    	<element name="cache-configuration"> 
+			<attributes>
+				<attribute name="pool-name" regex="[a-zA-Z0-9_]{3,20}" is-mandatory="true" error_msg="'pool-name' attribute is not configured for cache-configuration element."/>
+				<attribute name="cluster-ip" type="String"/>
+				<attribute name="cluster-port" type="unsignedInt"/>
+				<attribute name="sentinels" type="String"/>
+				<attribute name="master-name" type="String"/>
+				<attribute name="db" type="unsignedInt"/>
+				<attribute name="ranges" type="String"/>
+				<attribute name="max-total" type="unsignedInt"/>
+				<attribute name="min-idle" type="unsignedInt"/>
+				<attribute name="max-idle" type="unsignedInt"/>
+				<attribute name="read-timeout" type="unsignedInt"/>
+	     		</attributes>
+	    	</element>
+		<element name="throttles">
+			<children>
+  				<element ref="throttle"/>
+  			</children>
+			<attributes>
+	  			<attribute name="window" regex="LIVE|FIXED|ROLLING|SLIDING" is-mandatory="true"/>
+	  			<attribute name="scope" regex="APPSERVER|SERVICE" is-mandatory="true"/>
+				<attribute name="key" type="String" minLength="5" is-mandatory="true"/>
+				<attribute name="time-log-interval-duration" type="String"/>
+				<attribute name="name" regex="string_without_colon"/>	
+       				<attribute name="dynamic-throttle" type="boolean" />
+			</attributes>
+  		</element> 
+		<element name="file" unique-keys="name">
+			<children>
+				<element ref="filename"/>
+			</children>
+			<attributes>
+				<attributeGroup ref="fileGroup"/>
+			</attributes>
+			<conditions>
+				<condition ref="fileConditions"/>
+			</conditions>
+		</element>
+		<element name="xsspatterns">
+			<children>
+			    	<element ref="xsspattern"/>
+		    </children>
+		</element>
+		<element name="xsspattern" unique-keys="name">
+			<attributes>
+				<attribute name="allow-doctype" type="boolean"/>
+				<attribute name="balance-html-tags" type="boolean"/>
+				<attribute name="enable-neko-parser-exception-trace" type="boolean" />
+				<attribute name="xss-filter-type"  regex="JTIDY|NEKO|ANTISAMY|ANTISAMY_CSS|ANTISAMY_CSSPROPERTIES"/>
+				<attribute name="css-hyphen-prefix" type="String" />
+				<attribute name="whitelist-policy" type="String" />
+				<attribute name="skip-neko-output-escaping" type="boolean" />
+				<attribute name="handle-neko-parseerror" type="boolean" />
+				<attribute name="encode-element-values-markup-entities" type="boolean" />
+				<attribute name="xss-detect-space-entity-reference" type="boolean" />
+				<attribute name="extends" regex="string_without_colon" />      
+				<attribute name="filter-css-only" type="boolean" />
+				<attribute name="filter-css-raw-declarations" type="boolean" />
+				<attribute name="xss-detect-throwerror" type="boolean" />
+				<attribute name="insert-element-attributes" type="String" />
+				<attribute name="name"  regex="string_without_colon"  is-mandatory="true" error_msg="'name' attribute is not configured for param-group element."/>
+				<attribute name="remove-attribute-names" type="String" />
+				<attribute name="remove-attribute-values" type="String" />
+				<attribute name="remove-css-property" type="String" />
+				<attribute name="remove-css-value" type="String" />
+				<attribute name="remove-element-attributes" type="String" />
+				<attribute name="remove-element-names" type="String" />
+				<attribute name="allow-element-attributes" type="String" />
+				<attribute name="enable-canonicalize-strict" type="boolean" />
+				<attribute name="enable-csssyntax-strict" type="boolean" />
+				<attribute name="remove-commented-css" type="boolean" />
+				<attribute name="html-dont-decode" type="boolean" />
+				<attribute name="enable-canonicalization" type="boolean" />
+				<attribute name="remove-element-values" type="String" />
+				<attribute name="trusted-script-domains" type="String" />
+				<attribute name="whitelisted-script-domains" type="String" />
+				<attribute name="jtidy-critical-parser-errorcodes" type="String" />
+				<attribute name="ignore-meta-charset" type="boolean" />
+				<attribute name="remove-comments" type="boolean" />
+				<attribute name="remove-cdata" type="boolean" />
+				<attribute name="attribute-limit" type="int" />
+				<attribute name="remove-import" type="boolean" />
+				<attribute name="handle-hyphen-prefix" type="boolean" />
+				<attribute name="parser-mode" regex="DOM|SAX|dom|sax" />
+
+				<disallow-attribute name="balance-html-tags" error_code="ZSDSE2031" rule_name="BALANCE_HTML_TAGS_DEPRECATED" error_msg="'balance-html-tags' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="enable-neko-parser-exception-trace" error_code="ZSDSE2032" rule_name="ENABLE_NEKO_PARSER_EXCEPTION_TRACE_DEPRECATED" error_msg="'enable-neko-parser-exception-trace' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="css-hyphen-prefix" error_code="ZSDSE2033" rule_name="CSS_HYPHEN_PREFIX_DEPRECATED" error_msg="'css-hyphen-prefix' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="skip-neko-output-escaping" error_code="ZSDSE2036" rule_name="SKIP_NEKO_OUTPUT_ESCAPING_DEPRECATED" error_msg="'skip-neko-output-escaping' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="handle-neko-parseerror" error_code="ZSDSE2037" rule_name="HANDLE_NEKO_PARSEERROR_DEPRECATED" error_msg="'handle-neko-parseerror' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="encode-element-values-markup-entities" error_code="ZSDSE2038" rule_name="ENCODE_ELEMENT_VALUES_MARKUP_ENTITIES_DEPRECATED" error_msg="'encode-element-values-markup-entities' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="xss-detect-space-entity-reference" error_code="ZSDSE2039" rule_name="XSS_DETECT_SPACE_ENTITIES_REFERENCE_DEPRECATED" error_msg="'xss-detect-space-entity-reference' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="extends" error_code="ZSDSE2040" rule_name="EXTENDS_DEPRECATED" error_msg="'extends' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>      
+				<disallow-attribute name="filter-css-only" error_code="ZSDSE2041" rule_name="FILTER_CSS_ONLY_DEPRECATED" error_msg="'filter-css-only' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="filter-css-raw-declarations" error_code="ZSDSE2042" rule_name="FILTER_CSS_RAW_DECLARATION_DEPRECATED" error_msg="'filter-css-raw-declarations' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="xss-detect-throwerror" error_code="ZSDSE2043" rule_name="XSS_DETECT_THROWERROR_DEPRECATED" error_msg="'xss-detect-throwerror' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="insert-element-attributes" error_code="ZSDSE2044" rule_name="INSERT_ELEMENT_ATTRIBUTES_DEPRECATED" error_msg="'insert-element-attributes' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="remove-attribute-names" error_code="ZSDSE2045" rule_name="REMOVE_ATTRIBUTE_NAMES_DEPRECATED" error_msg="'remove-attribute-names' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="remove-attribute-values" error_code="ZSDSE2046" rule_name="REMOVE_ATTRIBUTE_VALUES_DEPRECATED" error_msg="'remove-attribute-values' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="remove-css-property" error_code="ZSDSE2047" rule_name="REMOVE_CSS_PROPERTY_DEPRECATED" error_msg="'remove-css-property' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="remove-css-value" error_code="ZSDSE2048" rule_name="REMOVE_CSS_VALUE_DEPRECATED" error_msg="'remove-css-value' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="remove-element-attributes" error_code="ZSDSE2049" rule_name="REMOVE_ELEMENT_ATTRIBUTES_DEPRECATED" error_msg="'remove-element-attributes' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="remove-element-names" error_code="ZSDSE2050" rule_name="REMOVE_ELEMENT_NAMES_DEPRECATED" error_msg="'remove-element-names' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="allow-element-attributes" error_code="ZSDSE2051" rule_name="ALLOW_ELEMENT_ATTRIBUTES_DEPRECATED" error_msg="'allow-element-attributes' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="enable-canonicalize-strict" error_code="ZSDSE2052" rule_name="ENABLE_CANONICALIZE_STRICT_DEPRECATED" error_msg="'enable-canonicalize-strict' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="enable-csssyntax-strict" error_code="ZSDSE2053" rule_name="ENABLE_CSSSYNTAX_STRICT_DEPRECATED" error_msg="'enable-csssyntax-strict' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="remove-commented-css" error_code="ZSDSE2054" rule_name="REMOVE_COMMENTED_CSS_DEPRECATED" error_msg="'remove-commented-css' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="html-dont-decode" error_code="ZSDSE2055" rule_name="HTML_DONT_DECODE_DEPRECATED" error_msg="'html-dont-decode' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="remove-element-values" error_code="ZSDSE2056" rule_name="REMOVE_ELEMENT_VALUES_DEPRECATED" error_msg="'remove-element-values' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="trusted-script-domains" error_code="ZSDSE2057" rule_name="TRUSTED_SCRIPT_DOMAINS_DEPRECATED" error_msg="'trusted-script-domains' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="whitelisted-script-domains" error_code="ZSDSE2058" rule_name="WHITELISTED_SCRIPT_DOMAINS_DEPRECATED" error_msg="'whitelisted-script-domains' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="jtidy-critical-parser-errorcodes" error_code="ZSDSE2060" rule_name="JTIDY_CRITICAL_PARSER_ERRORCODES_DEPRECATED" error_msg="'jtidy-critical-parser-errorcodes' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="ignore-meta-charset" error_code="ZSDSE2061" rule_name="IGNORE_META_CHARSET_DEPRECATED" error_msg="'ignore-meta-charset' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="remove-comments" error_code="ZSDSE2062" rule_name="REMOVE_COMMENTS_DEPRECATED" error_msg="'remove-comments' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="remove-cdata" error_code="ZSDSE2063" rule_name="REMOVE_CDATA_DEPRECATED" error_msg="'remove-cdata attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				<disallow-attribute name="attribute-limit" error_code="ZSDSE2064" rule_name="ATTRIBUTE_LIMIT_DEPRECATED" error_msg="'attribute-limit' attribute will be deprecated soon.Remove this attribute." error_priority="LOW"/>
+				
+			</attributes>
+			<conditions>
+				<condition ref="xssPatternConditions"/>
+			</conditions>
+	    	</element>
+		<element name="params">
+			<children>
+				<element name="or-criteria" ref="orcriteriaparam"/>
+				<element ref="param"/>
+	    		</children>
+		</element>
+		<element name="orcriteriaparam" min-occurrences="2">
+			<children>
+				<element ref="param"/>
+	    		</children>
+			<attributes>
+				<attributeGroup ref="orCriteriaAttrGroup"/>
+			</attributes>
+		</element>	
+	    	<element name="param" unique-keys="name">
+	    		<attributes>
+				<attributeGroup ref="paramGroup"/>
+			</attributes>
+			<conditions>
+				<condition ref="paramConditions"/>
+				<condition ref="jsonXmlConditions"/>
+				<condition ref="paramLenConditions"/>  
+			</conditions>
+		</element>
+		<element name="keys">
+			<children>
+				<element name="or-criteria" ref="orcriteriakey"/>
+				<element ref="key"/>
+	    		</children>
+		</element>
+		<element name="orcriteriakey" min-occurrences="2">
+			<children>
+				<element ref="key"/>
+	    		</children>
+			<attributes>
+				<attributeGroup ref="orCriteriaAttrGroup"/>
+			</attributes>
+		</element>
+		<element name="key" unique-keys="name">
+			<attributes>
+				<attribute name="name" type="String" />
+				<attribute name="index" type="String" />
+				<attributeGroup ref="commonParamGroup"/>
+	    		</attributes>
+	    		<conditions>				
+				<condition ref="paramConditions"/>
+				<condition ref="jsonXmlConditions"/>
+				<condition ref="paramLenConditions"/>  
+			</conditions>
+	  	</element>
+	  	<element name="extrakey" ref="extraparam">
+	      		<conditions>      	
+				<condition ref="paramConditions"/>
+				<condition ref="jsonXmlConditions"/>
+				<condition ref="paramLenConditions"/>  
+			</conditions>
+	  	</element>
+	  	<element name="inputstream">
+	  		<attributes>
+	      			<attributeGroup ref="inputstreamGroup"/>
+	  		</attributes>
+	  		<conditions>
+				<condition ref="paramConditions"/>
+	      			<condition ref="jsonXmlConditions"/>
+				<condition ref="streamLenConditions"/>  
+	      	</conditions>
+	  	</element>
+		<element name="paramorstream">
+			<attributes>
+				<attribute name="name" type="String" is-mandatory="true"  error_msg="'name' attribute is not configured for paramorstream element."/>
+				<attribute name="non-empty" type="boolean"/>
+				<attributeGroup ref="commonParamGroup"/>
+			</attributes>
+			<conditions>
+				<condition ref="paramConditions"/>
+			      	<condition ref="jsonXmlConditions"/>
+				<condition ref="streamLenConditions"/>
+			</conditions>
+		</element>
+	  	<element name="filename">
+	  		<attributes>
+				<attributeGroup ref="commonParamGroup"/>
+	 		</attributes>
+	 		<conditions>				
+				<condition ref="paramConditions"/>
+				<condition ref="jsonXmlConditions"/>
+				<condition ref="fileNameConditions"/>
+				<condition ref="paramLenConditions"/>
+	      	</conditions>
+	  	</element>
+	  	<element name="headers">
+	  		<children>
+				<element ref="header" min-occurrences="1"/>
+	    	</children>
+	   	</element> 	
+	   	<element name="header" unique-keys="name">
+	   		<children>
+				<element name="coheader">
+					<children>
+						<element name="header" unique-keys="name">
+							<attributes>
+								<attribute name="name" type="String" is-mandatory="true"  error_msg="'name' attribute is not configured for header element."/>
+								<attribute name="value" type="String" is-mandatory="true" error_msg="'value' attribute is not configured for header element."/>
+								<attribute name="default-value" type="String"/>
+								<attribute name="scope" type="String"/>
+								<attribute name="allowed-services" type="String"/>
+		       					</attributes>
+							<conditions>
+		       						<condition ref="headerConditions"/>
+		       					</conditions>
+						</element>
+	   				</children>
+				</element>
+			</children>
+	   		<attributes>
+				<attribute name="name" type="String" is-mandatory="true"  error_msg="'name' attribute is not configured for header element."/>
+				<attribute name="value" type="String" is-mandatory="true" error_msg="'value' attribute is not configured for header element."/>
+				<attribute name="default-value" type="String"/>
+				<attribute name="scope" type="String"/>
+				<attribute name="allowed-services" type="String"/>
+	       	</attributes>
+	       	<conditions>
+	       			<condition ref="headerConditions"/>
+	       	</conditions>
+	  	</element>
+	  	
+	  	
+	  	<element name="response">
+	  		<children>
+		 		<element ref="headers" min-occurrences="0"/>
+		  		<element ref="log"/>
+	      	</children>
+	      	<attributes>
+			 	<attributeGroup ref="disablesafeheadersGroup"/>
+			 	<attribute name="disable-headers" type="String" />
+				<attribute name="dynamic-cors-headers" type="boolean" />
+			 	<disallow-attribute name="disable-safe-headers" error_code="ZSDSE2071" rule_name="DISABLE_SAFE_HEADERS_DEPRECATED_FOR_RESPONSE" check_in_parent="true" error_msg="'disable-safe-headers' attribute will lead to clickjacking.Remove this attribute." error_priority="LOW"/>
+		 	</attributes>
+	   	</element>
+	   	<element name="log" >
+	   		<attributes>
+				<attribute name="size" type="int"/>
+				<attribute name="content-types" type="String"/>
+			</attributes>
+		</element>
+		<element name="safe-response-headers">
+			<children>
+				<element name="secure-headers" ref="headers" min-occurrences="1"/>
+				<element name="download-headers" ref="headers" min-occurrences="1"/>
+				<element name="json-headers" ref="headers" min-occurrences="1"/>
+		       		<element name="cache-headers" ref="headers" min-occurrences="1"/>
+				<element name='connection-headers' ref='headers' min-occurrences='1'/> 
+				<element name='error-page-headers' ref='headers' min-occurrences='1'/> 
+		    </children>
+		</element>
+		<element name="default-response-headers">
+			<children>
+			   	<element ref="header" min-occurrences="0"/>
+			</children>
+			<attributes>
+		 		<attributeGroup ref="disablesafeheadersGroup"/>
+				<attribute name="dynamic-cors-headers" type="boolean" />
+		 		<disallow-attribute name="disable-safe-headers" error_code="ZSDSE2072" rule_name="DISABLE_SAFE_HEADERS_DEPRECATED_FOR_DEFAULT_RESPONSE_HEADERS" error_msg="'disable-safe-headers' attribute will lead to clickjacking.Remove this attribute." error_priority="HIGH"/>
+	     	</attributes>
+	    	</element>
+		<element name="default-request-headers">
+			<children>
+			   	<element name="headers" ref="reqheaders"  min-occurrences="0" max-occurrences="1"/>
+			</children>
+	    	</element>
+		<element name="internal-request-headers">
+			<children>
+			   	<element name="header" min-occurrences="0">
+					<attributes>
+						<attributeGroup ref="paramGroup"/>
+					</attributes>
+				</element>
+				<element name="cookies" ref="cookies" min-occurrences="0" max-occurrences="1"/>
+			</children>
+	    	</element>
+	    	<element name="request">
+			<children>
+			   	<element name="headers" ref="reqheaders" min-occurrences="0" max-occurrences="1" />
+			</children>
+	    	</element>
+	<element name="proxy-policy">
+			<attributes>
+				<attribute name="allowed-services" type="String"/>
+			</attributes>
+	    </element>
+	    <element name="reqheaders">
+			<children>
+			   	<element name="header"  min-occurrences="0">
+			   		<attributes>
+		 				<attributeGroup ref="paramGroup"/>
+	     			</attributes>
+			   	</element>
+			   	<element name="cookies" ref="cookies" min-occurrences="0" max-occurrences="1" />
+			   	<element name="user-agent" ref="user-agent" min-occurrences="0" max-occurrences="1" />
+			</children>
+	    </element>
+	   	<element name="cookies"> 
+	   		<children>
+	   			<element name="cookie" min-occurrences="0">
+	   				<attributes>
+		 				<attributeGroup ref="paramGroup"/>
+	     			</attributes>
+	     		</element>	
+	   		</children>
+	    </element>
+	    <element name="user-agent"> 
+	    	<children>
+	    		<element name="browser" min-occurrences="0" max-occurrences="1">
+	    			<attributes>
+		 				<attributeGroup ref="commonParamGroup"/>
+						<attribute name="major" type="int"/>
+						<attribute name="minor" type="int"/>
+	     			</attributes>
+	    		</element>
+	    		<element name="os" min-occurrences="0" max-occurrences="1">
+	    			<attributes>
+		 				<attributeGroup ref="commonParamGroup"/>
+						<attribute name="major" type="int"/>
+						<attribute name="minor" type="int"/>
+	     			</attributes>
+	    		</element>
+	    		<element name="device" min-occurrences="0" max-occurrences="1">
+	    			<attributes>
+		 				<attributeGroup ref="commonParamGroup"/>
+						<attribute name="family" type="String"/>
+	     			</attributes>
+	    		</element>
+	    	</children>
+	    </element>
+		<element name="acl"> 
+	    	<children>
+	    		<element ref="ace"/>  
+	    	</children>
+		<attributes>
+			<attribute name="resource" type="String" is-mandatory="true" error_msg="'resource' attribute is not configured for acl element."/>
+	     	</attributes>
+	    </element>
+	    <element name="ace"> 
+		<attributes>
+			<attribute name="principal" type="String" is-mandatory="true" error_msg="'principal' attribute is not configured for acl element."/>
+			<attribute name="operation" type="String" is-mandatory="true" error_msg="'operation' attribute is not configured for acl element."/>
+			<attribute name="access" type="String" is-mandatory="true" error_msg="'access' attribute is not configured for acl element."/>
+	     	</attributes>
+	    </element>
+	    <element name="resources"> 
+	    	<children>
+	    		<element ref="resource"/>  
+	    	</children>
+	    </element>
+	    <element name="resource"> 
+		<attributes>
+			<attribute name="name" type="String" is-mandatory="true" error_msg="'name' attribute is not configured for resource element."/>
+			<attribute name="value" type="String" is-mandatory="true" error_msg="'value' attribute is not configured for resource element."/>
+			<attribute name="pattern" type="int"/>
+	     	</attributes>
+	     </element>
+	     <element name="extensions"> 
+	    	<children>
+	    		<element ref="extension"/>  
+	    	</children>
+	     </element>
+	     <element name="extension"> 
+			<attributes>
+				<attribute name="name" type="String" is-mandatory="true" error_msg="'name' attribute is not configured for extension element."/>
+				<attribute name="class" type="String" is-mandatory="true" error_msg="'class' attribute is not configured for extension element."/>
+		     	</attributes>
+	     </element>
+	    <element name="xml-schemas">
+		<children>	
+			<element ref="xml-schema"/>
+			</children>
+	    </element>
+	    <element name="xml-schema">
+		<attributes>
+			<attribute name="name" type="String" is-mandatory="true" error_msg="'name' attribute is not configured for xml-schema element."/>
+			<attribute name="schema-file" type="String" is-mandatory="true" error_msg="'schema-file' attribute is not configured for xml-schema element."/>
+		</attributes>
+	     </element>
+		<element name="zip-sanitizers">
+			<children>
+				<element ref="zip-sanitizer"/>		
+			</children>
+	  	</element>
+		<element name="zip-sanitizer">
+			<attributes>
+			   	<attribute name="name" regex="string_without_colon" is-mandatory="true"  error_msg="'name' attribute is not configured for zip-sanitizer element."/>
+				<attribute name="action" regex="error|sanitize"/>
+				<attribute name="max-extraction-size" type="long"/>  
+				<attribute name="max-files-count" type="int"/>
+      				<attribute name="max-level" type="int"/>
+      				<attribute name="blocked-extensions" type="String"/>
+      				<attribute name="blocked-content-types" type="String"/>
+      				<attribute name="allowed-extensions" type="String"/>
+      				<attribute name="allowed-content-types" type="String"/>
+			</attributes>
+	    	</element>
+		 <element name="pii-detector">
+		    <children>	
+			    <element  max-occurrences="1" ref="pii-classifier"/>
+		    </children>
+		    <attributes>
+			    <attribute name="regex-based" type="boolean" />
+		    </attributes>
+	    </element>
+
+	    <element name="pii-classifier">
+		    <children>	
+		    	<element  max-occurrences="1" ref="categories"/>
+			    <element  max-occurrences="1" ref="sensitivities"/>
+		    </children>
+	    </element>
+
+	    <element name="categories">
+		    <children>
+			    <element name="category">
+				    <attributes>
+					    <attribute name="value" regex="Personal|Identity|Place|Education_And_Work|Account|Financial|Authentication_And_Authorization|Internet_And_Telecommunication|Social|Medical|Device_Information|Others|ZOHOPII" />
+				    </attributes>
+			    </element>
+		    </children>
+	    </element>
+
+	    <element name="sensitivities">
+		    <children>
+			    <element name="sensitivity">
+				    <attributes>
+					    <attribute name="value" regex="High|Medium|Low" />
+				    </attributes>
+			    </element>
+		    </children>
+	    </element>
+
+	</elements>
+	<regexes>
+		<regex name="string_without_colon" value="((?!^[\.-])(?!.*[-_.]$)[-\w.])+" />
+		<regex name="alpha_numeric_underscore_hyphen_dot_comma" value="[a-zA-Z0-9,_\-\.]+" />
+		<regex name="alpha_underscore_hyphen" value="[a-zA-Z0-9,_\-]+" />
+		<regex name="json_array_size" value="((\d+)-(\d+))|((&lt;=|&gt;=|&lt;|&gt;)?(\d+))" />
+	</regexes>
+	<globalConditions>
+		<condition error_code="ZSDSE101" rule_name="INVALID_CHILD_CONFIGURATION" error_msg="Invalid child element configured." error_priority="HIGH" ></condition>
+		<condition error_code="ZSDSE102" rule_name="INVALID_CHILD_COMBINATION" error_msg="Invalid child element combination." error_priority="HIGH" ></condition>
+		<condition error_code="ZSDSE103" rule_name="INVALID_ATTRIBUTE" error_msg="Invalid attribute configured." error_priority="HIGH" ></condition>
+		<condition error_code="ZSDSE104" rule_name="MANDATORY_ATTRIBUTE_MISSING" error_msg="Mandatory attribute is missing." error_priority="HIGH" ></condition>
+		<condition error_code="ZSDSE105" rule_name="ATTRIBUTE_TYPE_MISMATCH" error_msg="Attribute value type mismatch." error_priority="HIGH" ></condition>
+		<condition error_code="ZSDSE106" rule_name="ATTRIBUTE_VALUE_MISMATCH" error_msg="Attribute value size mismatch." error_priority="HIGH" ></condition>
+		<condition error_code="ZSDSE107" rule_name="CHILD_OCCURRENCE_MISMATCH" error_msg="Element child Occurrence mismatch." error_priority="HIGH" ></condition>
+		<condition error_code="ZSDSE108" rule_name="CROSS_DOMAIN_XML_CONFIGURED" error_msg="cross domain xml configured." error_priority="HIGH" ></condition>
+		<condition error_code="ZSDSE109" rule_name="WEAK_ALGORITHM" error_msg="Contact mickey framework team" error_priority="HIGH" ></condition>
+		<condition error_code="ZSDSE110" rule_name="FILE_PARSING_EXCEPTION" error_msg="We can't able to parse the file. Please check the file content" error_priority="HIGH" ></condition>
+		<condition error_code="ZSDSE111" rule_name="UNAUTHENTICATED_URL" error_msg="URL is not authenticated. Analyze and configure proper authentication." error_priority="HIGH" ></condition>
+		<condition error_code="ZSDSE114" rule_name="ELEMENT_VALUE_TYPE_MISMATCH" error_msg="Element text content type mismatched" error_priority="HIGH" ></condition>
+	</globalConditions>
+	<conditions name="urlConditions">
+		<condition name="isURLPathNotConfigured" rule_name="URL_PATH_NOT_CONFIGURED" error_code="ZSDSE201" error_msg="'path' attribute is not configured for the url Element. 'path' attribute is mandatory." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="path" checkFor="false"></condition>
+		<condition name="isURLPathInvalid" rule_name="INVALID_URL_PATH" error_code="ZSDSE202" error_msg="'path' attribute contains empty value. Valid 'path' must be configured in the url Element." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="path" checkFor="true"></condition>
+		<condition name="isPathContainsDotStar" rule_name="URL_PATH_CONTAINS_DOT_STAR" error_code="ZSDSE203" error_msg="'path' attribute contains '.*'. Analyze and configure a proper 'path' value in the url Element." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="path" checkFor="true"></condition>
+		<condition name="isOperationValueNotConfigured" rule_name="OPERATION_VALUE_NOT_CONFIGURED" error_code="ZSDSE204" error_msg="'operation-value' attribute is not configured. If 'operation-param' is configured ,it is mandatory to configure 'operation-value'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="operation-value" checkFor="false"></condition>
+		<condition name="isOperationParamNotConfigured" rule_name="OPERATION_PARAM_NOT_CONFIGURED" error_code="ZSDSE205" error_msg="'operation-param' attribute is not configured. If 'operation-value' is configured ,it is mandatory to configure 'operation-param'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="operation-param" checkFor="false"></condition>
+		<condition name="isRunAsGroupTypeParamNotConfigured" rule_name="RUNAS_GROUPTYPE_PARAM_NOT_CONFIGURED" error_code="ZSDSE206" error_msg="'runas-grouptype-param' attribute is not configured.If 'runas-groupid-param' is configured ,it is mandatory to configure 'runas-grouptype-param' attribute." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="runas-grouptype-param" checkFor="false"></condition>
+		<condition name="isRunAsGroupIdParamNotConfiguredCheck" rule_name="RUNAS_GROUPID_PARAM_NOT_CONFIGURED" error_code="ZSDSE207" error_msg="'runas-groupid-param' attribute is not configured.If 'runas-grouptype-param' is configured ,it is mandatory to configure 'runas-groupid-param' attribute." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="runas-groupid-param" checkFor="false"></condition>
+		<condition name="isURLCSRFMethodPostPutDeleteNotConfigured" rule_name="METHOD_POST_PUT_DELETE_NOT_CONFIGURED" error_code="ZSDSE208" error_msg="method is neither 'post' or 'put' or 'delete'.If csrf='true' is configured then method must be 'post' or 'put' or 'delete'" error_priority="LOW" violates-if="true" issue-in="attribute" issue-key-name="method" checkFor="true"></condition>
+		<condition name="isInternalUnauthenticatedURLScopedServicesNotConfigured" rule_name="SCOPED_SERVICES_NOT_CONFIGURED" error_code="ZSDSE209" error_msg="'scoped-services' attribute is not configured. It is mandatory to configure 'scoped-services' for internal='true' when the url is unauthenticated." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="scoped-services" checkFor="false"></condition>
+		<condition name="isAuthenticationThresholdNotConfigured" rule_name="AUTHENTICATION_DOS_PREVENTION_ATTRIBUTES_NOT_CONFIGURED" error_code="ZSDSE210" error_msg="'authentication' and DOS prevention attributes (threshold,duration,lockperiod,hip) are not configured. If user='true' then 'authentication' and DOS prevention attribute configurations are mandatory." error_priority="LOW" violates-if="true" issue-in="attribute" issue-key-name="authentication,threshold" checkFor="true|false"></condition>
+		<condition name="isCSRFNotConfigured" error_code="ZSDSE212" rule_name="CSRF_TRUE_NOT_CONFIGURED" error_msg="csrf='true' is not configured. If method='post' or 'put' or 'delete', it is mandatory to configure csrf='true'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="csrf" checkFor="false"></condition>
+		<condition name="isURLApiScopeAuthenticationNotConfigured" error_code="ZSDSE213" rule_name="AUTHENTICATION_REQUIRED_NOT_CONFIGURED_FOR_APISCOPE" error_msg="authentication='required' is not configured. If 'apiscope' attribute is configured , it is mandatory to configure authentication='required'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="authentication" checkFor="true|false"></condition>
+		<condition name="isISCScopeAuthenticationNotConfigured" error_code="ZSDSE214" rule_name="AUTHENTICATION_REQUIRED_NOT_CONFIGURED_FOR_ISCSCOPE" error_msg="authentication='required' is not configured. If 'iscscope' attribute is configured , it is mandatory to configure authentication='required'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="authentication" checkFor="true|false"></condition>
+		<condition name="isURLOAuthScopeAuthenticationNotConfigured" error_code="ZSDSE215" rule_name="AUTHENTICATION_REQUIRED_NOT_CONFIGURED_FOR_OAUTHSCOPE" error_msg="authentication='required' is not configured. If 'oauthscope' attribute is configured , it is mandatory to configure authentication='required'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="authentication" checkFor="true|false"></condition>
+		<condition name="isURLRolesAuthenticationNotConfigured" error_code="ZSDSE216" rule_name="AUTHENTICATION_REQUIRED_NOT_CONFIGURED_FOR_ROLES" error_msg="authentication='required' is not configured. If 'roles' attribute is configured , it is mandatory to configure authentication='required'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="authentication" checkFor="true|false"></condition>
+		<condition name="isURLOrgOAuthScopeAuthenticationNotConfigured" error_code="ZSDSE217" rule_name="AUTHENTICATION_REQUIRED_NOT_CONFIGURED_FOR_ORG_OAUTHSCOPE" error_msg="authentication='required' is not configured. If 'org-oauthscope' attribute is configured , it is mandatory to configure authentication='required'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="authentication" checkFor="true|false"></condition>
+		<condition name="isURLAuthTypeAuthenticationNotConfigured" error_code="ZSDSE218"  rule_name="AUTHENTICATION_REQUIRED_NOT_CONFIGURED_FOR_AUTH_TYPE" error_msg="authentication='required' is not configured. If 'auth-type' attribute is configured , it is mandatory to configure authentication='required'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="authentication" checkFor="true|false"></condition>
+		<condition name="inValidWebHookGetAccess" error_code="ZSDSE219" rule_name="INVALID_WEBHOOK_GET_ACCESS" error_msg="If webhook-get-access='true', it is mandatory to configure authentication='required',method='post',operation-type='create','oauthscope' or 'org-oauthscope'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="authentication,method,operation-type,oauthscope,org-oauthscope" checkFor="true|false"></condition>
+		<condition name="isURLAppAccountMemberRolesAuthenticationNotConfigured" error_code="ZSDSE220" rule_name="AUTHENTICATION_REQUIRED_NOT_CONFIGURED_FOR_APP_ACCOUNT_MEMBER_ROLES" error_msg="authentication='required' is not configured. If 'app-account-member-roles' attribute is configured , it is mandatory to configure authentication='required'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="authentication" checkFor="true|false"></condition>
+		<condition name="isURLRunAsGroupIdParamAuthenticationNotConfigured" error_code="ZSDSE221" rule_name="AUTHENTICATION_REQUIRED_NOT_CONFIGURED_FOR_RUN_AS_GROUP_ID_PARAM" error_msg="authentication='required' is not configured. If 'runas-groupid-param' attribute is configured , it is mandatory to configure authentication='required'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="authentication" checkFor="true|false"></condition>
+		<condition name="isURLRunAsGroupTypeParamAuthenticationNotConfigured" error_code="ZSDSE222"  rule_name="AUTHENTICATION_REQUIRED_NOT_CONFIGURED_FOR_RUN_AS_GROUP_TYPE_PARAM"  error_msg="authentication='required' is not configured. If 'runas-grouptype-param' attribute is configured , it is mandatory to configure authentication='required'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="authentication" checkFor="true|false"></condition>
+		<condition name="isScopeNotConfigured" error_code="ZSDSE224" rule_name="SCOPE_NOT_CONFIGURED" error_msg="'apiscope' or 'oauthscope' or 'org-oauthscope' attribute is not configured.If api='true',it is mandatory to configure 'apiscope' or 'oauthscope' or 'org-oauthscope'." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="apiscope,oauthscope,org-oauthscope" checkFor="false"></condition>
+		<condition name="isIscScopeNotConfigured" error_code="ZSDSE225" rule_name="ISCSCOPE_NOT_CONFIGURED" error_msg="'iscscope' attribute is not configured. If isc='true', then 'iscscope' must be configured." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="iscscope" checkFor="false"></condition>
+		<condition name="checkUrlMethod" error_code="ZSDSE226" rule_name="INVALID_METHOD_CONFIGURED" error_msg="Invalid method configured. Configure it in 'custom.request.methods' property" error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="method" checkFor="true"></condition>
+		<condition name="isURLApiScopeAuthenticationOptionalConfigured" rule_name="AUTHENTICATION_OPTIONAL_NOT_CONFIGURED_FOR_APISCOPE" error_code="ZSDSE227" error_msg="authentication='optional' is configured. If 'apiscope' attribute is configured , it is mandatory to configure authentication='required'." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="authentication" checkFor="true"></condition>
+		<condition name="isURLISCScopeAuthenticationOptionalConfigured" rule_name="AUTHENTICATION_OPTIONAL_NOT_CONFIGURED_FOR_ISCSCOPE" error_code="ZSDSE228" error_msg="authentication='optional' is configured. If 'iscscope' attribute is configured , it is mandatory to configure authentication='required'." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="authentication" checkFor="true"></condition>
+		<condition name="isURLOAuthScopeAuthenticationOptionalConfigured" error_code="ZSDSE229" rule_name="AUTHENTICATION_OPTIONAL_NOT_CONFIGURED_FOR_OAUTHSCOPE" error_msg="authentication='optional' is configured. If 'oauthscope' attribute is configured , it is mandatory to configure authentication='required'." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="authentication" checkFor="true"></condition>
+		<condition name="isURLOrgOAuthScopeAuthenticationOptionalConfigured" error_code="ZSDSE230" rule_name="AUTHENTICATION_OPTIONAL_NOT_CONFIGURED_FOR_ORG_OAUTHSCOPE" error_msg="authentication='optional' is configured. If 'org-oauthscope' attribute is configured , it is mandatory to configure authentication='required'." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="authentication" checkFor="true"></condition>
+		<condition name="isURLAuthTypeAuthenticationOptionalConfigured" error_code="ZSDSE231" rule_name="AUTHENTICATION_OPTIONAL_NOT_CONFIGURED_FOR_AUTH_TYPE" error_msg="authentication='optional' is configured. If 'auth-type' attribute is configured , it is mandatory to configure authentication='required'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="authentication" checkFor="true"></condition>
+		<condition name="isOperationTypeNotConfiguredForScopeURL" error_code="ZSDSE232" rule_name="OPERATION_TYPE_NOT_CONFIGURED_FOR_SCOPE_URL" error_msg="'operation-type' attribute is not configured. If 'oauthscope' or 'org-oauthscope' attribute is configured , it is mandatory to configure 'operation-type' attribute." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="authentication" checkFor="true"></condition>
+		<condition name="isCSRFNotConfiguredForPatch" error_code="ZSDSE233" rule_name="CSRF_TRUE_NOT_CONFIGURED_FOR_POST_PUT_DELETE_PATCH" error_msg="csrf='true' is not configured. If method='POST or PUT or DELETE or PATCH', it is mandatory to configure csrf='true'." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="csrf" checkFor="false"></condition>
+		<condition name="isReadWriteMethodConfiguredinSameURL" error_code="ZSDSE234" rule_name="READ_WRITE_METHOD_CONFIGURED_IN_SAME_URL" error_msg="method='get,post' configured. Please split the url configuration." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="method" checkFor="true"></condition>
+		<condition name="isGetMethodWithWriteOperationTypeConfigured" error_code="ZSDSE235" rule_name="GET_METHOD_WITH_WRITE_OPERATION_TYPE_CONFIGURED" error_msg="operation-type is other than read. if method='get', it is mandatory to configure operation-type='READ'" error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="method,operation-type" checkFor="false"></condition>
+	</conditions>
+	<conditions name="paramConditions">
+		<condition name="isParamTypeXSSRegexNotConfigured" error_code="ZSDSE301" rule_name="TYPE_XSS_REGEX_NOT_CONFIGURED" error_msg="'type' or 'xss' or 'regex' attribute is not configured.For (param or extraparam or key or extrakey or inputstream) elements, it is mandatory to configure 'type' or 'xss' or 'regex' attribute." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="type,xss,regex" checkFor="true"></condition>
+		<condition name="isParamRegexXssClearTextConfigured" error_code="ZSDSE302" rule_name="XSS:_CLEARTEXT:_CONFIGURED_IN_REGEX" error_msg="regex='xss:' or 'cleartext:' is not a whitelist configuration.Instead if your input is html, use xss='antisamyfilter' or do proper output encoding." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="regex" checkFor="true"></condition>
+		<condition name="isParamTypeXssClearTextConfigured" error_code="ZSDSE303" rule_name="XSS:_CLEARTEXT:_CONFIGURED_IN_TYPE" error_msg="type='xss:' or 'cleartext:' is not a whitelist configuration. Instead if your input is html, use xss='antisamyfilter' or do proper output encoding." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="type" checkFor="true"></condition>
+		<condition name="isParamJsonXssTemplateRegexNotConfigured" error_code="ZSDSE304" rule_name="TEMPLATE_XSS_NOT_CONFIGURED" error_msg="'template' or 'xss' attribute is not configured.If type='JSONObject or JSONArray or JSONObject|JSONArray' ,it is mandatory to configure 'template' or 'xss' attribute." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="template,xss" checkFor="false"></condition>
+		<condition name="isParamJSONTypeNotConfigured" error_code="ZSDSE305" rule_name="TYPE_JSON_URL_NOT_CONFIGURED" error_msg="type='JSONObject or JSONArray or JSONObject|JSONArray or url' is not configured. If 'template' is configured, it is mandatory to configure type='JSONObject or JSONArray or JSONObject|JSONArray or url'" error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="type" checkFor="true"></condition>
+		<condition name="isParamTypeXMLNotConfigured" error_code="ZSDSE306" rule_name="TYPE_XML_NOT_CONFIGURED" error_msg="type='xml' is not configured. If 'xml-schema-validation' attribute is configured, it is mandatory to configure type='xml'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="type" checkFor="true"></condition>
+		<condition name="isParamMaxOccurrenceNotConfigured" error_code="ZSDSE307" rule_name="MAX_OCCURRENCE_NOT_CONFIGURED" error_msg="'max-occurrence' is not configured. If 'min-occurrence' is greater than 1 , it is mandatory to configure 'max-occurrence' attribute." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="max-occurrence" checkFor="false"></condition>
+		<condition name="isParamMinOccurrenceInvalid" error_code="ZSDSE308" rule_name="MIN_OCCURRENCE_GREATER_THAN_MAX_OCURREBCE" error_msg="'min-occurrence' is greater than 'max-occurrence'.'min-occurrence' value should always be lesser than 'max-occurrence'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="min-occurrence,max-occurrence" checkFor="true"></condition>
+		<condition name="isParamSplitMaxOccurrenceNotConfigured" error_code="ZSDSE309" rule_name="MAX_OCCURRENCE_LESS_THAN_ONE_FOR_SPLIT" error_msg="'max-occurrence' is  not greater than '1'. If 'split' attribute is configure,'max-occurrence' value should be greater than '1'." error_priority="MEDIUM" violates-if="false" issue-in="attribute" issue-key-name="max-occurrence" checkFor="true"></condition>
+		<condition name="isParamMinLengthInvalid" error_code="ZSDSE310" rule_name="MAX_LEN_NOT_CONFIGURED" error_msg="'max-len' is not configured. If 'min-len' is greater than 100 , it is mandatory to configure 'max-len' attribute." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="max-len" checkFor="false"></condition>
+		<condition name="isParamMaxLengthInvalid" error_code="ZSDSE311" rule_name="MIX_LEN_GREATER_THAN_MAX_LEN" error_msg="'min-len' is greater than 'max-len'. 'min-len' value should always be lesser than 'max-len'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="max-len,min-len" checkFor="true"></condition>
+		<condition name="isParamSaltDelimiterNotConfigured" error_code="ZSDSE312" rule_name="SALT_DELIMITER_NOT_CONFIGURED" error_msg="'salt-delimiter' attribute is not configured. If 'salt-validity' or 'salt-ticket' attribute is configured, it is mandatory to configure 'salt-delimiter' attribute." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="salt-delimiter" checkFor="false"></condition>
+		<condition name="isParamDecryptNotConfigured" error_code="ZSDSE313" rule_name="DECRYPT_TRUE_NOT_CONFIGURED" error_msg="decrypt='true' is not configured. If 'salt-delimiter' attribute is configured ,it is mandatory to configure decrypt='true'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="decrypt" checkFor="true|false"></condition>
+		 <condition name="isParamXssNotWhitelisted" error_code="ZSDSE315" rule_name="BLACKLISTED_FILTER_CONFIGURED" error_msg="blacklisted filter configured. Instead if your input is html, use xss='antisamyfilter' or do proper output encoding." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="xss" checkFor="true"></condition>
+		<condition name="isParamTypeStringConfigured" error_code="ZSDSE317" rule_name="TYPE_STRING_CONFIGURED" error_msg="type='String' is not a whitelist configuration.If your input is html configure xss='antisamyfilter' or a suitable 'type' or 'regex' attribute." error_priority="LOW" violates-if="true" issue-in="attribute" issue-key-name="type" checkFor="true"></condition>
+		<condition name="isParamRegexClearTextHtmlEntitiesConfigured" error_code="ZSDSE318" rule_name="CLEARTEXT:REMOVEHTMLENTITIES_CONFIGURED_IN_REGEX" error_msg="regex='cleartext:removehtmlentities' is not a whitelist configuration. Instead if your input is html, use xss='antisamyfilter' or do proper output encoding." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="type" checkFor="true"></condition>
+		<condition name="isParamTypeClearTextHtmlEntitiesConfigured" error_code="ZSDSE319" rule_name="CLEARTEXT:REMOVEHTMLENTITIES_CONFIGURED_IN_TYPE" error_msg="type='cleartext:removehtmlentities' is not a whitelist configuration.Instead if your input is html, use xss='antisamyfilter' or do proper output encoding." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="regex" checkFor="true"></condition>
+		<condition name="isParamRegexXSSEscapeConfigured" error_code="ZSDSE321" rule_name="XSS_ESCAPE_CONFIGURED_IN_REGEX" error_msg="regex='XSS:escape' is not a whitelist configuration.Instead if your input is html, use xss='antisamyfilter' or do proper output encoding." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="regex" checkFor="true"></condition>
+		 <condition name="isParamXssThrowerrorConfigured" error_code="ZSDSE322" rule_name="XSS_THROWERROR_FILTER_CONFIGURED" error_msg="xss='throwerror'  is configured. It is not a whitelist configuration. Instead if your input is html, use xss='antisamyfilter' or do proper output encoding." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="xss,regex" checkFor="true"></condition>
+               <condition name="isSecretParamConfigured" error_code="ZSDSE323" rule_name="SECRET_PARAM_CONFIGURED" error_msg="Secret param configured. Please add secret='true'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="name" checkFor="true"></condition>
+               <condition name="isParamXssEscapeConfigured" error_code="ZSDSE324" rule_name="XSS_ESCAPE_FILTER_CONFIGURED" error_msg="xss='escape'  is configured. It is not a whitelist configuration. Instead if your input is html, use xss='antisamyfilter' or do proper output encoding." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="xss,regex" checkFor="true"></condition>
+	<condition name="isParamRegexXSSThrowConfigured" error_code="ZSDSE325" rule_name="XSS_THROWERROR_FILTER_CONFIGURED_IN_REGEX" error_msg="xss='throwerror' or 'throw'is configured.It is not a whitelist configuration.Instead if your input is html, use xss='antisamyfilter' or do proper output encoding." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="regex" checkFor="true"></condition>
+	</conditions>
+	<conditions name="paramLenConditions">
+		<condition name="isParamMaxLengthInfiniteConfiguration" error_code="ZSDSE314" rule_name="MAX_LEN_-1_CONFIGURED" error_msg="max-len='-1' refers to infinite length. Analyze and configure a proper 'max-len' value for the param." error_priority="LOW" violates-if="true" issue-in="attribute" issue-key-name="max-len" checkFor="true"></condition>
+	</conditions>
+	<conditions name="streamLenConditions">
+		<condition name="isMaxLengthInfiniteConfiguration" error_code="ZSDSE326" rule_name="MAX_LEN-1_CONFIGURED_FOR_STREAMS" error_msg="max-len='-1' leads DOS attacks. Please configure required max-len." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="max-len" checkFor="false"></condition>
+	</conditions>
+
+	<conditions name="headerConditions">
+		<condition name="isPropertyXFrameOptionInvalid" error_code="ZSDSE401" rule_name="XFRAME_OPTION_NOT_CONFIGURED_PROPERLY" error_msg="'X-Frame-Options' attribute is not configured properly. 'X-Frame-Options' must be either 'trusted' or 'deny' or 'same-origin' or Allow-From urls." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="name,value" checkFor="true"></condition>
+	</conditions>
+	<conditions name="jsonXmlConditions">
+		<condition name="isParamXssXmlSchemaValidationNotConfigured" error_code="ZSDSE601" rule_name="XML_SCHEMA_VALIDATION_XSS_NOT_CONFIGURED" error_msg="'xml-schema-validation'or 'xss' attribute is not configured.If type='xml' ,it is mandatory to configure 'xml-schema-validation' or 'xss'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="xml-schema-validation,xss" checkFor="false"></condition>
+		<condition name="isParamJsonXssAndTemplateBothConfigured" error_code="ZSDSE602" rule_name="BOTH_XSS_AND_TEMPLATE_CONFIGURED" error_msg="Both 'xss' and 'template' attribute is configured. If type='JSONObject or JSONArray or JSONObject|JSONArray', either 'xss' or 'template' is allowed but not both." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="xss,template" checkFor="true"></condition>
+		<condition name="isParamTypeXMLXssConfigured" error_code="ZSDSE603" rule_name="XSS_CONFIGURED_FOR_XML_TYPE" error_msg="'xss' attribute is configured.If type='xml' ,it is mandatory to configure 'xml-schema-validation'." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="xss" checkFor="true"></condition>
+		<condition name="isParamJsonXssConfigured" error_code="ZSDSE604" rule_name="XSS_CONFIGURED_FOR_JSON_TYPE" error_msg="'template' attribute is not configured.If type='JSONObject or JSONArray or JSONObject|JSONArray' ,it is mandatory to configure 'template' attribute." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="xss" checkFor="true"></condition>
+	</conditions>
+	<conditions name="urlThresholdConditions">
+		<condition name="isDurationLockperiodHipNotConfigured" error_code="ZSDSE701" rule_name="DURATION_LOCKPERIOD_HIP_NOT_CONFIGURED" error_msg="'duration' and 'lockperiod' or 'hip' is not configured. If 'threshold' attribute is configured,  it is mandatory to configure 'duration' and 'lock-period' or 'hip'." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="duration,lock-period,hip" checkFor="false"></condition>
+		<condition name="isThresholdLockperiodHipNotConfigured" error_code="ZSDSE702" rule_name="THRESHOLD_LOCKPERIOD_HIP_NOT_CONFIGURED" error_msg="'threshold' and 'lockperiod' or 'hip' is not configured. If 'duration' attribute is configured,  it is mandatory to configure 'threshold' and 'lock-period' or 'hip'." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="threshold,lock-period,hip" checkFor="false"></condition>
+		<condition name="isThresholdDurationNotConfigured" error_code="ZSDSE703" rule_name="DURATION_THRESHOLD_NOT_CONFIGURED_FOR_LOCKPERIOD" error_msg="'duration' and 'threshold' is not configured. If 'lock-period' attribute is configured,  it is mandatory to configure 'duration' and 'threshold'." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="duration,threshold" checkFor="false"></condition>
+		<condition name="isThresholdDurationNotConfiguredForHip" error_code="ZSDSE704" rule_name="DURATION_THRESHOLD_NOT_CONFIGURED_FOR_HIP" error_msg="'duration' and 'threshold' is not configured. If 'hip' attribute is configured,  it is mandatory to configure 'duration' and 'threshold'." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="duration,threshold" checkFor="false"></condition>
+	</conditions>
+	<conditions name="fileConditions">
+		<condition name="isFileAntivirusNotEnabled" error_code="ZSDSE801" rule_name="ANTIVIRUS_TRUE_NOT_CONFIGURED" error_msg="antivirus='true' is not configured. It is mandatory to configure antivirus='true' for downloadable files." error_priority="MEDIUM" violates-if="true" issue-in="attribute" issue-key-name="antivirus" checkFor="true"></condition>
+	<condition name="isContentTypeConfiguredForFiles" error_code="ZSDSE802" rule_name="CONTENT_TYPE_NOT_CONFIGURED" error_msg="ContentType check is missing. Configure 'content-type-name' or 'allowed-content-types' attribute." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="content-type-name" checkFor="false"></condition>
+	</conditions>
+	<conditions name="fileNameConditions">
+		<condition name="isFileNameXssConfigured" error_code="ZSDSE901" rule_name="XSS_CONFIGURED_FOR_FILENAME" error_msg="'xss' attribute is configured in filename element. Configure proper regex if predefined regex of the filename is not enough." error_priority="LOW" violates-if="true" issue-in="attribute" issue-key-name="xss" checkFor="true"></condition>
+	</conditions>	
+	<conditions name="xssPatternConditions">
+		<condition name="isXssFilterTypeNotAntisamy" error_code="ZSDSE1001" rule_name="XSS_FILTER_TYPE_IS_NOT_ANTISAMY" error_msg="'xss-filter-type' is not configured properly.'xss-filter-type' must be 'ANTISAMY'" error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="xss-filter-type" checkFor="true"></condition>
+	</conditions>
+	<conditions name="propertiesCondition" check-if-file-name="security-properties.xml">
+		<condition name="authCSRFCheck" error_code="ZSDSE1101" rule_name="DISABLE_AUTHCSRF_FALSE_NOT_CONFIGURED" error_msg="disable.authcsrf='false' is not configured. It is mandatory to configure disable.authcsrf='false'" error_priority="HIGH" violates-if="true" issue-in="element" checkFor="true"></condition>
+	</conditions>
+	<conditions name="propertyCondition">
+		<condition name="authMigrationCheck" error_code="ZSDSE1201" rule_name="CSRF_MIGRATION_TRUE_CONFIGURED" error_msg="csrf.migration='true' is configured. Make sure you remove this configuration after 30 days from authcsrf enabled date." error_priority="HIGH" violates-if="true" issue-in="attribute" issue-key-name="name,value" checkFor="true"></condition>
+	</conditions>
+</schema>

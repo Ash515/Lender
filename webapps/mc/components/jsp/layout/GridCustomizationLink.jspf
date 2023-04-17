@@ -1,0 +1,68 @@
+<%-- $Id$ --%>
+	<%
+	if(PersonalizationUtil.isCustomizable(request, viewContext)){
+		if(model.getChildCount() > 0){
+			%>
+			<table cellspacing="0" cellpadding="0" border="0" align='right'>
+				<tr>
+					<td>
+						<button class="customizeButton" id="ICMGrid<%=IAMEncoder.encodeHTMLAttribute(referenceId)%>" onClick="showCustomizeLinks('GridCustomizationLinks','ICMGrid<%=IAMEncoder.encodeJavaScript(referenceId)%>',event,'<%=IAMEncoder.encodeJavaScript(referenceId)%>')" onMouseOver="return showBorder('<%=IAMEncoder.encodeJavaScript(currentView)%>')" onMouseOut="return hideBorder('<%=IAMEncoder.encodeJavaScript(currentView)%>')">&nbsp;Customize&nbsp;</button>
+					</td>	
+					<td align = "left"><button id='ICMG' class="customizeButtonPull" onClick="showCustomizeLinks('GridCustomizationLinks','ICMGrid<%=IAMEncoder.encodeJavaScript(referenceId)%>',event,'<%=IAMEncoder.encodeJavaScript(referenceId)%>')" onMouseOver="return showBorder('<%=IAMEncoder.encodeJavaScript(currentView)%>')" onMouseOut="return hideBorder('<%=IAMEncoder.encodeJavaScript(currentView)%>')" value=''></button></td>
+				</tr>
+			</table><br>
+			<%
+		}
+		else {
+			%>
+			<table class="customize" cellspacing="0" cellpadding="10" border="0" height="100%" valign="middle">
+				<tr>
+					<td valign="middle" align="center">
+						<span class="subTitle">[&nbsp;<%=IAMEncoder.encodeHTML((String)viewContext.getModel().getViewConfiguration().getFirstValue("ViewConfiguration", "TITLE"))%>&nbsp;]</span> <br><br>
+						<table cellspacing="0" cellpadding="0" border="0" align='center'>
+							<tr>
+								<td>
+									<button class="customizeButton" id="ICMGrid<%=IAMEncoder.encodeHTMLAttribute(referenceId)%>" onClick="showCustomizeLinks('GridCustomizationLinks','ICMGrid<%=IAMEncoder.encodeJavaScript(referenceId)%>',event,'<%=IAMEncoder.encodeJavaScript(referenceId)%>')" onMouseOver="return showBorder('<%=IAMEncoder.encodeJavaScript(currentView)%>')" onMouseOut="return hideBorder('<%=IAMEncoder.encodeJavaScript(currentView)%>')">Customize</button>
+								</td>	
+								<td align = "left">
+									<button class="customizeButtonPull" onClick="showCustomizeLinks('GridCustomizationLinks','ICMGrid<%=IAMEncoder.encodeJavaScript(referenceId)%>',event,'<%=IAMEncoder.encodeJavaScript(referenceId)%>')" onMouseOver="return showBorder('<%=IAMEncoder.encodeJavaScript(currentView)%>')" onMouseOut="return hideBorder('<%=IAMEncoder.encodeJavaScript(currentView)%>')">&nbsp;</button>
+								</td>
+							</tr>
+						</table>					
+					</td>
+				</tr>	
+			</table>
+			<%
+		}
+	}
+	%>
+
+
+	<%
+	if(PersonalizationUtil.isCustomizable(request, viewContext)){
+		%>
+			<DIV id = 'GridCustomizationLinks<%=IAMEncoder.encodeHTMLAttribute(referenceId)%>' class = 'customizeMenu' style='display:none;'>
+			<TABLE border = '0' cellspacing = '0' cellpadding = '0'>
+			<TR onClick="openCustomizationWindow('AddTab.do?VIEWNAME=<%out.print(viewContext.getModel().getViewName());//NO OUTPUTENCODING%>&TYPE=Box', 'height=200,width=250,scrollbars=1,resizable=1')" class = 'customizeMenuItem' onMouseOver='this.className="customizeMenuItemOver"' onMouseOut='this.className="customizeMenuItem"'><%--NO OUTPUTENCODING --%>
+			<TD nowrap>Create New Navigation Box ...</TD>
+			</TR>
+			<TR onClick="openCustomizationWindow('GridCustomization.cc?TYPE=Grid&VIEWNAME=<%out.print(viewContext.getModel().getViewName());//NO OUTPUTENCODING%>&DefaultGroup=Navigation&DisplayName=Navigation Box', 'height=650,width=1000,scrollbars=1,resizable=1')" class = 'customizeMenuItem' onMouseOver='this.className="customizeMenuItemOver"' onMouseOut='this.className="customizeMenuItem"'><%--NO OUTPUTENCODING --%>
+			<%
+			if(count > 0){
+			%>
+			<TD nowrap>Rearrange Existing Grids...</TD>
+			<%
+			}
+			else {
+			%>
+			<TD nowrap>Add from existing ...</TD>
+			<%
+			}
+			%>
+			</TR>
+			</TABLE>
+                        </DIV>
+			<%
+	}
+	%>
+

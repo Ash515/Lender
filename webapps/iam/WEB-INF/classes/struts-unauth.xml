@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- $Id: $ -->
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+  "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="ClientPortal" namespace="/cu" extends="struts-default">
+	 <action name="{[a-zA-Z0-9]}/register.js" class="com.zoho.accounts.actions.unauth.SignUp" method="registerScript">
+			<result name="success">jsp/unauth/register.jsp</result>
+		</action>
+		<action name="{[a-zA-Z0-9]}/signin.js" class="com.zoho.accounts.actions.unauth.SignIn" method="signinScript">
+			<result name="success">jsp/unauth/signin.jsp</result>
+		</action>
+		<action name="{[a-zA-Z0-9]}/register.ac" class="com.zoho.accounts.actions.unauth.SignUp" method="execute" />
+		<action name="{[a-zA-Z0-9]}/register" class="com.zoho.accounts.actions.unauth.SignUp" method="showRegisterPage" />
+		<action name="{[a-zA-Z0-9]}/validate/register.ac" class="com.zoho.accounts.actions.unauth.SignUp" method="doValidate" />
+		<action name="{[a-zA-Z0-9]}/regaudit/customfield" class="com.zoho.accounts.actions.unauth.SignUp" method="updateCustomFieldAudit" />
+		<action name="{[a-zA-Z0-9]}/captcha" class="com.zoho.accounts.actions.unauth.JCaptcha" method="execute" />
+		<action name="{[a-zA-Z0-9]}/signin.ac" class="com.zoho.accounts.actions.unauth.SignIn" method="handlePostRequest" />
+		<action name="{[a-zA-Z0-9]}/signin" class="com.zoho.accounts.actions.unauth.SignIn" method="handleGetRequest" />
+		<action name="{[a-zA-Z0-9]}/i/a" class="com.zoho.accounts.actions.unauth.AccountInvitation" method="showAccountInvitationPage" />
+		<action name="{[a-zA-Z0-9]}/w/c/u" class="com.zoho.accounts.actions.unauth.AccountConfirmation" method="showAccountConfirmationPage" />
+		<action name="{[a-zA-Z0-9]}/w/c/a" class="com.zoho.accounts.actions.unauth.AccountConfirmation" method="showAccountConfirmationPage" />
+		<action name="{[a-zA-Z0-9]}/secureconfirm.ac" class="com.zoho.accounts.actions.unauth.AccountConfirmation" method="validatePasswordAndConfirmAccount"/>
+		<action name="{[a-zA-Z0-9]}/password/forgot" class="com.zoho.accounts.actions.unauth.ForgotPassword" method="showForgotPasswordPage" />
+		<action name="{[a-zA-Z0-9]}/password.ac" class="com.zoho.accounts.actions.unauth.ForgotPassword" method="execute" />
+		<action name="{[a-zA-Z0-9]}/password2.ac" class="com.zoho.accounts.actions.unauth.ForgotPassword" method="showResetOption" />
+	
+
+		<action name="{[a-zA-Z0-9]}/w/pl/a" class="com.zoho.accounts.actions.unauth.Password" method="showAddPasswordPage" />
+		<action name="{[a-zA-Z0-9]}/w/pl/u" class="com.zoho.accounts.actions.unauth.Password" method="showAddPasswordPage" />
+		<action name="{[a-zA-Z0-9]}/addpass.ac" class="com.zoho.accounts.actions.unauth.Password" method="executeAddPasswordPage" />
+		<action name="{[a-zA-Z0-9]}/reset.ac" class="com.zoho.accounts.actions.unauth.Password" method="executeResetPassword" />
+		<action name="{[a-zA-Z0-9]}/password/reset" class="com.zoho.accounts.actions.unauth.Password" method="showResetPassword" />
+	
+		<action name="{[a-zA-Z0-9]}/logout" class="com.zoho.accounts.actions.unauth.SignOut" method="logOutAndRedirect" />
+		
+		<action name="{[a-zA-Z0-9]}/c/e" class="com.zoho.accounts.actions.unauth.AccountConfirmation" method="showAccountConfirmationPage" />
+		<action name="{[a-zA-Z0-9]}/i/au" class="com.zoho.accounts.actions.unauth.Password" method="showAddUserInvitationPage" />
+		<action name="{[a-zA-Z0-9]}/adduser.ac" class="com.zoho.accounts.actions.unauth.Password" method="executeAddUserInvitation" />
+		
+		<action name="{[a-zA-Z0-9]}/registerbyinvite.ac" class="com.zoho.accounts.actions.unauth.SignUp" method="executeRegisterUserByInvitation" />
+		<action name="{[a-zA-Z0-9]}/i/p/a" class="com.zoho.accounts.actions.unauth.SignUp" method="showInvitationRegisterPage" />
+		<action name="{[a-zA-Z0-9]}/client/authtoken" class="com.zoho.accounts.actions.unauth.SignIn" method="createClientAuthToken" />
+		<action name="{[a-zA-Z0-9]}/client/authtoken/delete" class="com.zoho.accounts.actions.unauth.SignOut" method="deleteClientAuthToken" />
+		<action name="{[a-zA-Z0-9]}/client/internal/authtoken" class="com.zoho.accounts.actions.unauth.SignIn" method="createClientAuthToken" />
+		<action name="{[a-zA-Z0-9]}/validatefsdigest" class="com.zoho.accounts.actions.unauth.FederatedSigninConsumer" method="validateCrossDcFSOAuthDigest"/>
+		
+		<action name="{[a-zA-Z0-9]}/clienterror">
+			 <result>jsp/clienterror.jsp</result>
+		</action>
+		<action name="{[a-zA-Z0-9]}/login" class="com.zoho.accounts.actions.unauth.SignIn" method="handleGetRequest" />
+		<action name="{[a-zA-Z0-9]}/extoauth/clientrequest" class="com.zoho.accounts.actions.client.ClientOpenIDHandler" method="handleRequest" />
+		<action name="{[a-zA-Z0-9]}/extoauth/clientcallback" class="com.zoho.accounts.actions.client.ClientOpenIDHandler" method="handleResponse" />
+	</package>
+
+	<package name="unauth" namespace="/accounts" extends="struts-default">
+	<action name="register.js" class="com.zoho.accounts.actions.unauth.SignUp" method="registerScript">
+			<result name="success">jsp/unauth/register.jsp</result>
+		</action>
+		<action name="signin.js" class="com.zoho.accounts.actions.unauth.SignIn" method="signinScript">
+			<result name="success">jsp/unauth/signin.jsp</result>
+		</action>
+		<action name="register/otp/initiate" class="com.zoho.accounts.actions.unauth.SignupHelper" method="sendOTP" />
+		<action name="register/otp/resend" class="com.zoho.accounts.actions.unauth.SignupHelper" method="sendOTP" />
+		<action name="register/otp/validate" class="com.zoho.accounts.actions.unauth.SignupHelper" method="verifySignupOtp" >
+			<result name="success" type="chain">register.ac</result>
+		</action>
+		<action name="register.ac" class="com.zoho.accounts.actions.unauth.SignUp" method="execute" />
+		<action name="register" class="com.zoho.accounts.actions.unauth.SignUp" method="showRegisterPage" />
+		<action name="validate/register.ac" class="com.zoho.accounts.actions.unauth.SignUp" method="doValidate" />
+		<action name="regaudit/customfield" class="com.zoho.accounts.actions.unauth.SignUp" method="updateCustomFieldAudit" />
+		<action name="captcha" class="com.zoho.accounts.actions.unauth.JCaptcha" method="execute" />
+		<action name="signin.ac" class="com.zoho.accounts.actions.unauth.SignIn" method="handlePostRequest" />
+		<action name="signin" class="com.zoho.accounts.actions.unauth.SignIn" method="handleGetRequest" />
+		<action name="i/a" class="com.zoho.accounts.actions.unauth.AccountInvitation" method="showAccountInvitationPage" />
+		<action name="i/sa" class="com.zoho.accounts.actions.unauth.SOrgInvitation" method="showInvitationPage" />
+		<action name="invitation/verifycode" class="com.zoho.accounts.actions.unauth.AccountInvitation" method="verifyInivitaionOtp" />
+		<action name="invitation/resendotp" class="com.zoho.accounts.actions.unauth.AccountInvitation" method="sendInvitaionOtpSms" />
+		<action name="invitation/accept" class="com.zoho.accounts.actions.unauth.AccountInvitation" method="sendInvitaionOtpSms" />
+		<action name="w/c/u" class="com.zoho.accounts.actions.unauth.AccountConfirmation" method="showAccountConfirmationPage" />
+		<action name="w/c/a" class="com.zoho.accounts.actions.unauth.AccountConfirmation" method="showAccountConfirmationPage" />
+		<action name="secureconfirm.ac" class="com.zoho.accounts.actions.unauth.AccountConfirmation" method="validatePasswordAndConfirmAccount"/>
+		<action name="accinvite.ac" class="com.zoho.accounts.actions.unauth.AccountInvitation" method="executeAcceptAccountInvitation" />
+		<action name="handleuserdata.ac" class="com.zoho.accounts.actions.unauth.AccountInvitation" method="handleUserData" />
+		<action name="gappaccinvite.ac" class="com.zoho.accounts.actions.unauth.AccountInvitation" method="handleInvitationFromGoogleRequest" />
+		<action name="handleinvitation.ac" class="com.zoho.accounts.actions.unauth.AccountInvitation" method="handleInvitation" />
+		<action name="rejectinvite.ac" class="com.zoho.accounts.actions.unauth.AccountInvitation" method="executeRejectAccountInvitation" />
+		<action name="password/forgot" class="com.zoho.accounts.actions.unauth.ForgotPassword" method="showForgotPasswordPage" />
+		<action name="password.ac" class="com.zoho.accounts.actions.unauth.ForgotPassword" method="execute" />
+		<action name="password2.ac" class="com.zoho.accounts.actions.unauth.ForgotPassword" method="showResetOption" />
+		<action name="i/a/m" class="com.zoho.accounts.actions.unauth.AccountInvitation" method="showAccountMergeInvitationPage" />
+		<action name="accmergeinvite.ac" class="com.zoho.accounts.actions.unauth.AccountInvitation" method="executeAcceptAccountMergeInvitation" />
+
+		<action name="w/pl/a" class="com.zoho.accounts.actions.unauth.Password" method="showAddPasswordPage" />
+		<action name="w/pl/u" class="com.zoho.accounts.actions.unauth.Password" method="showAddPasswordPage" />
+		<action name="addpass.ac" class="com.zoho.accounts.actions.unauth.Password" method="executeAddPasswordPage" />
+		<action name="reset.ac" class="com.zoho.accounts.actions.unauth.Password" method="executeResetPassword" />
+		<action name="password/reset" class="com.zoho.accounts.actions.unauth.Password" method="showResetPassword" />
+
+		<action name="oauthcallback.dc" class="com.zoho.accounts.actions.unauth.OpenIDAction" method="handleCrossDCValidation" />
+		<action name="validatedigest.dc" class="com.zoho.accounts.actions.unauth.OpenIDAction" method="validateCrossDCDigest" />
+		<action name="logout" class="com.zoho.accounts.actions.unauth.SignOut" method="logOutAndRedirect" />
+		
+		<action name="i/au" class="com.zoho.accounts.actions.unauth.Password" method="showAddUserInvitationPage" />
+		<action name="adduser.ac" class="com.zoho.accounts.actions.unauth.Password" method="executeAddUserInvitation" />
+		
+	
+		<action name="client/v2/{[a-zA-Z0-9]+}/jwt/auth" class="com.zoho.accounts.actions.unauth.SignIn" method="handelwebAppRemoteLogin"/>
+		
+		<action name="/{[a-zA-Z0-9]+}/home" class="com.zoho.accounts.actions.unauth.SignIn" method="handelHomePage"/>
+		
+		<action name="registerbyinvite.ac" class="com.zoho.accounts.actions.unauth.SignUp" method="executeRegisterUserByInvitation" />
+		<action name="i/p/a" class="com.zoho.accounts.actions.unauth.SignUp" method="showInvitationRegisterPage" />
+		<action name="client/authtoken" class="com.zoho.accounts.actions.unauth.SignIn" method="createClientAuthToken" />
+		<action name="client/authtoken/delete" class="com.zoho.accounts.actions.unauth.SignOut" method="deleteClientAuthToken" />
+		<action name="client/internal/authtoken" class="com.zoho.accounts.actions.unauth.SignIn" method="createClientAuthToken" />
+		<action name="fsrequest" class="com.zoho.accounts.actions.unauth.FederatedSigninConsumer" method="FederatedSigninRequestHandler" />
+		<action name="fsr" class="com.zoho.accounts.actions.unauth.FederatedSigninConsumer" method="FederatedSigninRequestHandler" />
+		<action name="oauthcallback" class="com.zoho.accounts.actions.unauth.FederatedSigninConsumer" method="FSResponseHandler" />
+		<action name="dcl.js" class="com.zoho.accounts.actions.unauth.DCLHandshakeAction" method="exchangeDCLCookie"/>
+		<action name="goauthresponse.dc" class="com.zoho.accounts.actions.unauth.DCLHandshakeAction" method="handleDCGOAuthCallback"/>
+		<action name="goauthcallback.dc" class="com.zoho.accounts.actions.unauth.DCLHandshakeAction" method="handleCrossDCGoAuth"/>
+		<action name="validategodigest.dc" class="com.zoho.accounts.actions.unauth.DCLHandshakeAction" method="validateCrossDCGoAuth"/>
+		<action name="fschoose.dc" class="com.zoho.accounts.actions.unauth.FederatedSigninConsumer" method="chooseMultiDcFS"/>
+		<action name="validatefsdigest" class="com.zoho.accounts.actions.unauth.FederatedSigninConsumer" method="validateCrossDcFSOAuthDigest"/>
+		<action name="fsoauthcallback.dc" class="com.zoho.accounts.actions.unauth.FederatedSigninConsumer" method="handleCrossDcFSOauth"/>
+		<action name="choose.dc">
+			 <result>jsp/unauth/choose-dc.jsp</result>
+		</action>
+		<action name="setDCookie">
+			 <result>jsp/unauth/setDCLCookie.jsp</result>
+		</action>
+		
+		<action name="clienterror">
+			 <result>jsp/clienterror.jsp</result>
+		</action>
+		<action name="login" class="com.zoho.accounts.actions.unauth.SignIn" method="handleGetRequest" />
+		<action name="extoauth/clientrequest" class="com.zoho.accounts.actions.client.ClientOpenIDHandler" method="handleRequest" />
+		<action name="extoauth/clientcallback" class="com.zoho.accounts.actions.client.ClientOpenIDHandler" method="handleResponse" />
+		<action name="extoauth/{[a-zA-Z0-9]+}/clientcallback" class="com.zoho.accounts.actions.client.ClientOpenIDHandler" method="handleResponse" />
+		<action name="/csamlsp/logout/sp/{[0-9]+}" class="com.zoho.accounts.actions.client.ClientSAMLHandler" method="handleLogoutResponse"/>
+		<action name="/csamlsp/logout/idp/{[0-9]+}" class="com.zoho.accounts.actions.client.ClientSAMLHandler" method="handleLogoutRequest"/>
+ 		<action name="/csamlrequest/{[a-zA-Z0-9]+}" class="com.zoho.accounts.actions.client.ClientSAMLHandler" method="handelRequest">
+			<result name="samlpostbinding">jsp/saml/post-binding.jsp</result>
+			<result name="error">/accounts/jsp/client/error.jsp</result>
+		</action>
+		<action name="/csamlresponse/{[a-zA-Z0-9]+}" class="com.zoho.accounts.actions.client.ClientSAMLHandler" method="handelResponse">
+			<result name="error">/accounts/jsp/client/error.jsp</result>
+		</action>
+		<action name="public/api/geocodedetails" class="com.zoho.accounts.external.PublicApi" method="getLocaleInformation"/>
+		<action name="public/api/locate" class="com.zoho.accounts.external.PublicApi" method="getIPLocation"/>
+		<action name="nativesignin" class="com.zoho.accounts.actions.unauth.GoogleNativeMobileSignIn" method="handelGoogleNativeSignIn">
+			<result name="success">/oauth/jsp/ui/showGrantPage.jsp</result>
+		</action>
+		<action name="widget/ticket" class="com.zoho.accounts.actions.unauth.SignIn" method="createWidgetToken"/>
+		<action name="widget/validate" class="com.zoho.accounts.actions.unauth.SignIn" method="validateWidgetTicket"/>
+		<action name="mobileapp/details" class="com.zoho.accounts.external.PublicApi" method="getMobileAppDetails"/>
+		
+		<action name="sorginvite.ac" class="com.zoho.accounts.actions.unauth.SOrgInvitation" method="executeAcceptInvitation" />
+		<action name="rejectsorginvite.ac" class="com.zoho.accounts.actions.unauth.SOrgInvitation" method="executeRejectInvitation" />
+		
+	</package> 
+</struts>

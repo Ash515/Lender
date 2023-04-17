@@ -1,0 +1,57 @@
+aaaserver:
+  system.configurations:
+    partneraccount.defaultname: Zoho
+    partneraccount.defaultdomain: zoho.com
+    partner.name: Zoho
+    trusted.cssdomain.pattern: .*
+    iam.server.url: http://localhost:8080
+    smtp.username: smtp-username
+    smtp.password: smtp-password
+    mail.smtp.host: smtp
+    mail.smtp.port: 25
+    mail.smtp.from: admin@1532345zaop53647321.com
+    admin.emailid: admin@1532345zaop53647321.com
+    support.emailid: admin@1532345zaop53647321.com
+    smtp.auth.enable: true
+    block.emaildomain: '@zaop.com'
+    abuse.emailid:  admin@1532345zaop53647321.com
+    support.help.link: www.zoho.com
+    send.iam3.mail.templates: zaop
+    accounts.query.set.distinct: true
+    alert.picker: admin@1532345zaop53647321.com
+    notify.email: admin@1532345zaop53647321.com
+    replyto.emailid: admin@1532345zaop53647321.com
+    assignuser.domaincheck.enabled: false
+    https.trust.all: false
+  url: http://localhost:8080
+  #oauthscopes:
+   #profile: - scope name
+    #type: 2 scope type
+    #operations: READ,CREATE,UPDATE,DELETE - all the operations needed 
+    #READ: read user profile data - description of read operation
+    #CREATE: to add user profile data - description of create operation
+    #UPDATE: update user profile data - description of update operation
+    #create + update if create and update is described should support 
+    #CREATE-UPDATE: description
+    #DELETE: delete user profile data
+    #create update delete - if these three are used provide description for write
+    #WRITE: description
+    #all if all operations are used
+    #ALL: to some
+  #oauthmobileapp:
+    #app1:
+      #serviceName: ZohoCreator
+      #mobileAppName: ZohoCreator
+      #package_name: com.zoho.creator.a
+      #client_type: 1
+      #app_type: 0
+      #url_scheme: creatorappIOS://
+      #client_id: client.creatorapp
+    #app2:
+      #serviceName: ZohoCreator
+      #mobileAppName: ZohoCreator
+      #package_name: com.zoho.creator.android
+      #client_type: 1
+      #app_type: 1
+      #url_scheme: creatorapp://
+      #client_id: client.creatorandroid

@@ -1,0 +1,203 @@
+<!-- $Id$ -->
+ 
+<!-- ******************* Start of Normal Tooltip ******************** -->
+
+<!--TPL-start-Tooltip_Prefix--> 
+<div id="${TOOLTIP_ID}" style="width:${POPUPWIDTH};display:none;">
+<table style="background-color:#FFFFE1;border: 1px solid #000000;"><tr><td>
+<!--TPL-end-Tooltip_Prefix--> 
+
+<!--TPL-start-Tooltip_Suffix--> 
+</td></tr></table>
+</div>
+<script>
+new Tooltip('${LINK_ID}', '${TOOLTIP_ID}',{duration:0.5,offsetTop:'${OFFSETTOP}'});
+</script>
+<!--TPL-end-Tooltip_Suffix--> 
+
+<!-- ******************* End of Normal Tooltip ******************** -->
+
+<!-- **************** Start of Mouse Move Tooltip ****************** -->
+
+<!--TPL-start-MouseMoveTooltip_Prefix--> 
+<div id="${TOOLTIP_ID}">
+<table style="background-color:#FFFFE1;border: 1px solid #000000;"><tr><td>
+<!--TPL-end-MouseMoveTooltip_Prefix--> 
+
+<!--TPL-start-MouseMoveTooltip_Suffix--> 
+</td></tr></table>
+</div>
+<script>
+registerMouseMoveTooltip('${LINK_ID}', '${TOOLTIP_ID}');
+</script>
+<!--TPL-end-MouseMoveTooltip_Suffix--> 
+
+<!-- **************** End of Mouse Move Tooltip ****************** -->
+
+
+<!-- **************** Start of Callout Tooltip ****************** -->
+<!--TPL-start-CalloutTooltip_Prefix--> 
+<div id="${TOOLTIP_ID}">
+<table class="TooltipBox" border="0" cellspacing="0" cellpadding="1">
+<tbody><tr><td class="boxTL">&nbsp;</td>
+<td class="boxHeader">${TITLE}</td>
+<td class="boxTR">&nbsp;</td>
+</tr>
+<tr><td colspan="3" class="boxContent">
+<!--TPL-end-CalloutTooltip_Prefix--> 
+
+<!--TPL-start-CalloutTooltip_Suffix--> 
+</td></tr>
+<tr><td class="boxBL"></td>
+<td class="boxBC"></td>
+<td class="boxBR"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<script>
+registerNormalTooltip('${LINK_ID}', '${TOOLTIP_ID}');
+</script>
+<!--TPL-end-CalloutTooltip_Suffix--> 
+<!-- **************** End of Callout Tooltip ****************** -->
+
+
+<!--TPL-start-ClickCalloutTooltip_Prefix--> 
+<div id="${TOOLTIP_ID}">
+<table class="TooltipBox" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr><td class="boxTL">&nbsp;</td>
+<td class="boxHeader">${TITLE}</td>
+<td class="boxCtrlButtonPane">
+<input class="closeButton" id="${TOOLTIP_ID}_close" type="button"></td>
+<td class="boxTR">&nbsp;</td>
+</tr>
+<tr><td colspan="4" class="boxContent">
+<!--TPL-end-ClickCalloutTooltip_Prefix--> 
+
+<!--TPL-start-ClickCalloutTooltip_Suffix--> 
+</td></tr>
+<tr><td class="boxBL"></td>
+<td class="boxBC" colspan="2"></td>
+<td class="boxBR"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<script>
+registerMouseClickTooltip('${LINK_ID}', '${TOOLTIP_ID}', '${TOOLTIP_ID}_close');
+</script>
+<!--TPL-end-ClickCalloutTooltip_Suffix--> 
+
+<!--TPL-start-ClickBubbleTooltip_Prefix--> 
+<div id="${TOOLTIP_ID}">
+<Table class='completeMessage' cellspacing=0>
+<tr><td class='caTopLeft'></td><td class='caTopCenter' colspan='2'></td>
+<td class='caTopRight'></td></tr>
+<tr><td class='caMiddleLeft'></td>
+<td class='caMessage'>
+<!--TPL-end-ClickBubbleTooltip_Prefix--> 
+
+<!--TPL-start-ClickBubbleTooltip_Suffix-->
+</td><td class='caClose'>
+<button class='caCloseButton' id="${TOOLTIP_ID}_close"></td>
+<td class='caMiddleRight'></td></tr>
+<tr><td class='caBottomLeft'></td><td class='caBottomCenter' colspan='2'>
+</td><td class='caBottomRight'></td></tr>
+</table>
+</div>
+<script>
+registerClickBubbleTooltip('${LINK_ID}', '${TOOLTIP_ID}', '${TOOLTIP_ID}_close');
+</script>
+<!--TPL-end-ClickBubbleTooltip_Suffix--> 
+
+<!--TPL-start-BubbleTooltip_Prefix--> 
+<div id="${TOOLTIP_ID}">
+<Table class='completeMessage' cellspacing=0>
+<tr><td class='caTopLeft'></td><td class='caTopCenter' colspan='2'></td>
+<td class='caTopRight'></td></tr>
+<tr><td class='caMiddleLeft'></td>
+<td class='caMessage'>
+
+<!--TPL-end-BubbleTooltip_Prefix--> 
+
+<!--TPL-start-BubbleTooltip_Suffix-->
+</td><td class='caClose'>
+<button class='caCloseButton' id="${TOOLTIP_ID}_close"></td>
+<td class='caMiddleRight'></td></tr>
+<tr><td class='caBottomLeft'></td><td class='caBottomCenter' colspan='2'>
+</td><td class='caBottomRight'></td></tr>
+</table>
+</div>
+<script>
+registerCalloutTooltip('${LINK_ID}', '${TOOLTIP_ID}');
+</script>
+<!--TPL-end-BubbleTooltip_Suffix--> 
+
+<!--TPL-start-AjaxTooltip_Prefix--> 
+<div id="${TOOLTIP_ID}"  style="visibility:hidden;display:none;">
+<Table class='completeMessage' cellspacing=0>
+<tr><td class='caTopLeft'></td><td class='caTopCenter' colspan='2'></td>
+<td class='caTopRight'></td></tr>
+<tr><td class='caMiddleLeft'></td>
+<td class='caMessage'>
+<div id="ajaxcontent_${TOOLTIP_ID}">
+<!--TPL-end-AjaxTooltip_Prefix--> 
+
+<!--TPL-start-AjaxTooltip_Suffix-->
+</div>
+</td><td class='caClose'>
+<button class='caCloseButton' onClick='hideCustomMessage()'></td>
+<td class='caMiddleRight'></td></tr>
+<tr><td class='caBottomLeft'></td><td class='caBottomCenter' colspan='2'>
+</td><td class='caBottomRight'></td></tr>
+</table>
+</div>
+<script>
+var xyz = $('${LINK_ID}');
+var href = xyz.getAttribute("href");
+
+function fetchpage(event)
+{
+	var acti = $('${LINK_ID}');
+	var myAjax = new Ajax.Updater(
+			'ajaxcontent_${TOOLTIP_ID}', 
+			href, 
+			{
+				method: 'get', 
+				asynchronous: 'false'
+			});	
+
+	registerMouseClickTooltip(link_id, tooltip_id);	
+}
+
+registerAjaxTooltip('${LINK_ID}','${TOOLTIP_ID}');
+</script>
+<!--TPL-end-AjaxTooltip_Suffix--> 
+
+
+
+<!--TPL-start-MenuPopupTooltip_Prefix-->  
+<div id="${TOOLTIP_ID}" class="MenuPopupTooltipBox hide" style="width:${POPUPWIDTH};" offsetleft="20" offsettop="-20" showevent="click" hideevent="click">
+ <input class="closeButton" type="button" style="float:right;">
+<!--TPL-end-MenuPopupTooltip_Prefix--> 
+
+<!--TPL-start-MenuPopupTooltip_Suffix--> 
+</div>
+<script>
+registerMenuPopupTooltip('${LINK_ID}', '${TOOLTIP_ID}','${OFFSETLEFT}','${OFFSETTOP}','${SHOWEVENT}','${HIDEEVENT}');
+
+</script>
+<!--TPL-end-MenuPopupTooltip_Suffix--> 
+
+<!--TPL-start-MenuPopupTooltipNoCloseBtn_Prefix-->  
+<div id="${TOOLTIP_ID}" class="MenuPopupTooltipBox hide" style="width:${POPUPWIDTH};background-color:#7FFFD4;" offsetleft="20" offsettop="-20" showevent="click" hideevent="click">
+
+<!--TPL-end-MenuPopupTooltipNoCloseBtn_Prefix--> 
+
+<!--TPL-start-MenuPopupTooltipNoCloseBtn_Suffix--> 
+</div>
+<script>
+registerMenuPopupTooltip('${LINK_ID}', '${TOOLTIP_ID}','${OFFSETLEFT}','${OFFSETTOP}','${SHOWEVENT}','${HIDEEVENT}');
+
+</script>
+<!--TPL-end-MenuPopupTooltipNoCloseBtn_Suffix--> 

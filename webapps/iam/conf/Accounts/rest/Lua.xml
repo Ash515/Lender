@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Lua>
+	<entry>
+		<name>runkeyGet</name>
+		<pool>DATA_POOL</pool>
+		<script>
+		local response = nil
+		local shakeymap = redis.call('hgetall',KEYS[1])
+		local runkey
+		local zaid
+		local next = next
+		if(next(shakeymap)~=nil and shakeymap~=false) then 
+			if(string.find(shakeymap[1],'run'))then
+				runkey = shakeymap[2]
+				zaid = shakeymap[4]
+			else
+				runkey = shakeymap[4]
+				zaid = shakeymap[2]
+			end 
+			response = redis.call('hget',KEYS[2]..zaid,runkey) 
+		end
+		return response		
+		</script>
+	</entry>
+	<entry>
+		<name>incrementIfExists</name>
+		<pool>EPHEMERAL_POOL</pool>
+		<script>
+		local response = nil
+		local isexists = redis.call('exists',KEYS[1])
+		if(isexists~=0) then 
+			response = redis.call('incr',KEYS[1]) .. ""
+		end
+		return response		
+		</script>
+	</entry>
+	<entry>
+		<name>decrementIfExists</name>
+		<pool>EPHEMERAL_POOL</pool>
+		<script>
+		local response = nil
+		local isexists = redis.call('exists',KEYS[1])
+		if(isexists~=0) then 
+			response = redis.call('decr',KEYS[1]) .. ""
+		end
+		return response		
+		</script>
+	</entry>
+	<entry>
+		<name>box.iam_clear_normal</name>
+		<pool>DATA_POOL_TT</pool>
+		<script>
+			function(runkeys)
+				table.foreach(runkeys, function(i,d)
+											box.space.iam3_data.index.runkey_idx:update({d},{{'=',5,'nil'},{'=',6,0}})
+											end
+										)
+				return 0		
+			end
+		</script>
+	</entry>
+	<entry>
+		<name>box.iam3_data_getData</name>
+		<pool>DATA_POOL_TT</pool>
+		<script>
+			function(sha,type)
+				local res={} 
+				local res2={}
+				local ts1=1 
+				local ts2=1
+				res = box.space.iam3_data:select({sha,type})
+				if(next(res)~=nil )then
+					ts2 = res[1][6]
+				else 
+					return {nil,box.space.iam_counters:inc('SHA_KEY')}
+				end
+
+				local rootid = res[1][3]
+				res2 = box.space.data_invalidation_space:select({rootid,type})
+
+				if(next(res2)~= nil )then
+					ts1 = res2[1][3]
+				end
+
+				if ts2>ts1 then
+					return {res[1][5],res[1][2]}
+				else 
+					return {'nil',res[1][2]}
+				end	
+			end
+		</script>
+	</entry>
+</Lua>

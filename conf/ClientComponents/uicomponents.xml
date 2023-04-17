@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id$ -->
+<uicomponents>
+    
+    <UIComponent name_no="UIComponent:name_no:ACTab"  name="ACTab">
+        <WebUIComponent url="/components/jsp/tab/tab.jsp" viewcontroller="com.adventnet.client.components.tab.web.TabController"/>
+    </UIComponent>
+
+	<UIComponent name_no="UIComponent:name_no:ACHorizontalViewList"  name="ACHorizontalViewList">
+        <WebUIComponent url="/components/jsp/tab/viewList.jsp" viewcontroller="com.adventnet.client.components.tab.web.TabController"/>
+    </UIComponent>
+
+  <UIComponent name_no="UIComponent:name_no:ACGridLayout"  name="ACGridLayout">
+      <WebUIComponent url="/components/jsp/layout/Grid.jsp" viewcontroller="com.adventnet.client.components.layout.grid.web.GridLayoutController"/>   
+      <PdfUIComponent viewclass="com.adventnet.client.components.layout.grid.pdf.GridLayoutPDFRenderer" viewcontroller="com.adventnet.client.components.layout.grid.web.GridLayoutController"/> 
+  </UIComponent>  
+
+  <UIComponent name_no="UIComponent:name_no:ACDAndDGridLayout"  name="ACDAndDGridLayout">
+      <WebUIComponent url="/components/jsp/layout/DAndDGrid.jsp" viewcontroller="com.adventnet.client.components.layout.grid.web.GridLayoutController"/>   
+      <PdfUIComponent viewclass="com.adventnet.client.components.layout.grid.pdf.GridLayoutPDFRenderer" viewcontroller="com.adventnet.client.components.layout.grid.web.GridLayoutController"/> 
+  </UIComponent>  
+
+
+  <UIComponent name_no="UIComponent:name_no:ACColumnarLayout"  name="ACColumnarLayout">
+      <WebUIComponent url="/components/jsp/layout/ColumnarLayout.jsp" viewcontroller="com.adventnet.client.components.layout.grid.web.GridLayoutController"/>   
+  </UIComponent>  
+
+
+  <UIComponent name_no="UIComponent:name_no:ACTable"  name="ACTable">
+      <WebUIComponent url="/components/jsp/table/Table.jsp" viewcontroller="com.adventnet.client.components.table.web.TableRetrieverAction"/> 
+      <PdfUIComponent viewclass="com.adventnet.client.components.table.pdf.TablePDFRenderer" viewcontroller="com.adventnet.client.components.table.web.TableRetrieverAction"/> 
+  </UIComponent>  
+
+<UIComponent name_no="UIComponent:name_no:ACTable_ImageCheckOnPdfExport"  name="ACTable_ImageCheckOnPdfExport">
+      <WebUIComponent url="/components/jsp/table/Table.jsp" viewcontroller="com.adventnet.client.components.table.web.TableRetrieverAction"/> 
+      <PdfUIComponent viewclass="com.adventnet.client.components.table.pdf.TablePDFRendererWithImageCheck" viewcontroller="com.adventnet.client.components.table.web.TableRetrieverAction"/> 
+  </UIComponent>
+  <UIComponent name_no="UIComponent:name_no:ACSQLTable"  name="ACSQLTable">
+      <WebUIComponent url="/components/jsp/table/Table.jsp" viewcontroller="com.adventnet.client.components.table.web.SqlViewController"/> 
+      <PdfUIComponent viewclass="com.adventnet.client.components.table.pdf.TablePDFRenderer" viewcontroller="com.adventnet.client.components.table.web.TableRetrieverAction"/> 
+    </UIComponent>  
+ <UIComponent name_no="UIComponent:name_no:ACCustomTable"  name="ACCustomTable">
+      <WebUIComponent url="/components/jsp/table/Table.jsp" viewcontroller="com.adventnet.client.components.table.web.CustomTableRetrieverAction"/> 
+      <PdfUIComponent viewclass="com.adventnet.client.components.table.pdf.TablePDFRenderer" viewcontroller="com.adventnet.client.components.table.web.TableRetrieverAction"/> 
+  </UIComponent> 
+	
+	<UIComponent name_no="UIComponent:name_no:ACPSTable"  name="ACPSTable">
+  	<WebUIComponent url="/components/jsp/table/PSTable.jsp" viewcontroller="com.adventnet.client.components.table.web.TableRetrieverAction"/> 
+      <PdfUIComponent viewclass="com.adventnet.client.components.table.pdf.TablePDFRenderer" viewcontroller="com.adventnet.client.components.table.web.TableRetrieverAction"/> 
+  </UIComponent>  
+
+	<UIComponent name_no="UIComponent:name_no:ACListTable"  name="ACListTable">
+     <WebUIComponent url="/components/jsp/table/ListTable.jsp" viewcontroller="com.adventnet.client.components.table.web.ListTableRetrieverAction"/>
+
+	</UIComponent>  
+        
+	<UIComponent name_no="UIComponent:name_no:ACTemplateTable"  name="ACTemplateTable">
+        <WebUIComponent url="/components/jsp/table/TemplateTable.jsp" 
+        viewcontroller="com.adventnet.client.components.table.web.TableRetrieverAction"/>
+	</UIComponent>          
+
+    <UIComponent name_no="UIComponent:name_no:ACLinkList"  name="ACLinkList">
+        <WebUIComponent url="/components/jsp/quicklinks/LinkView.jsp" viewcontroller="com.adventnet.client.components.quicklinks.web.LinkViewController"/>
+    </UIComponent>
+    
+    <UIComponent name_no="UIComponent:name_no:ACTableLayout"  name="ACTableLayout">
+        <WebUIComponent url="/components/jsp/layout/TableLayout.jsp" viewcontroller="com.adventnet.client.components.layout.table.web.TableLayoutController"/>   
+        <PdfUIComponent viewclass="com.adventnet.client.components.layout.table.pdf.TableLayoutPDFRenderer" viewcontroller="com.adventnet.client.components.layout.table.web.TableLayoutController"/> 
+    </UIComponent>  
+    
+    <!-- Component for displaying menuitems as quick links -->
+    <UIComponent name_no="UIComponent:name_no:VerticalMenu"  name="VerticalMenu">
+        <WebUIComponent url="/components/jsp/menu/VerticalMenu.jsp"/>   
+    </UIComponent>  
+
+    <UIComponent name_no="UIComponent:name_no:ACJSP"  name="ACJSP"/>
+
+    <UIComponent name_no="UIComponent:name_no:ACForm"  name="ACForm">
+        <WebUIComponent url="/components/jsp/form/DisplayForm.jsp" viewcontroller="com.adventnet.client.components.form.web.FormRetrieverAction"/> 
+    </UIComponent>  
+
+    <UIComponent name_no="UIComponent:name_no:ACFilterTable"  name="ACFilterTable">
+        <WebUIComponent url="/components/jsp/filter/FilterTable.jsp" viewcontroller="com.adventnet.client.components.filter.web.FilterTableController"/> 
+		<PdfUIComponent viewclass="com.adventnet.client.components.table.pdf.TablePDFRenderer" viewcontroller="com.adventnet.client.components.table.web.TableRetrieverAction"/>
+    </UIComponent>  
+
+    <UIComponent name_no="UIComponent:name_no:ACI18nList"  name="ACI18nList">
+	    <WebUIComponent url="/components/jsp/i18n/i18ntotallistview.jsp" viewcontroller="com.adventnet.client.components.i18n.web.I18nListController"/> 
+    </UIComponent>
+
+
+<UIComponent name_no="UIComponent:name_no:Defaultchart"  name="Defaultchart">
+    <WebUIComponent url="/components/jsp/chart/graph.jsp" viewcontroller="com.adventnet.client.components.chart.web.ChartController"/>
+    <PdfUIComponent viewclass="com.adventnet.client.components.chart.pdf.ChartPDFView" viewcontroller="com.adventnet.client.components.chart.web.ChartController"/>
+</UIComponent>
+
+
+<UIComponent name_no="UIComponent:name_no:ChartTab"  name="ChartTab">
+    <WebUIComponent url="/components/jsp/chart/graphTab.jsp" viewcontroller="com.adventnet.client.components.chart.web.ChartController"/>
+    <PdfUIComponent viewclass="com.adventnet.client.components.chart.pdf.ChartTabPDFView" viewcontroller="com.adventnet.client.components.chart.web.ChartController"/>
+</UIComponent>
+
+<UIComponent name_no="UIComponent:name_no:ACSQLFilterTable"  name="ACSQLFilterTable">
+    <WebUIComponent url="/components/jsp/sqlfilter/SQLFilterTable.jsp" viewcontroller="com.adventnet.client.components.sqlfilter.web.FilterSqlViewController"/>
+</UIComponent>
+
+<!-- WARNING -->
+<!-- Don't change name_no uvh pattern, otherwise it will be considered as insert and delete -->
+<!-- We need to maintain old UVHValue pattern in xml also, so that CSR components are considered as rename of Ember Components -->
+
+<UIComponent name_no="UIComponent:name_no:EmberTable"  name="CSRTable" state="com.adventnet.client.components.table.TableViewState">
+    <WebUIComponent viewcontroller="com.adventnet.client.components.table.CSRTableController" templatename="tableTemplate" iscsrcomponent="true"/>
+    <PdfUIComponent viewclass="com.adventnet.client.components.table.pdf.TablePDFRenderer" viewcontroller="com.adventnet.client.components.table.CSRTableController"/>
+</UIComponent>
+
+<UIComponent name_no="UIComponent:name_no:EmberFilterTable"  name="CSRFilterTable" state="com.adventnet.client.components.table.TableViewState">
+  <WebUIComponent viewcontroller="com.adventnet.client.components.filter.CSRFilterTableController" templatename="tableTemplate" iscsrcomponent="true"/>
+  <PdfUIComponent viewclass="com.adventnet.client.components.table.pdf.TablePDFRenderer" viewcontroller="com.adventnet.client.components.table.CSRFilterTableController"/>
+</UIComponent>  
+
+<UIComponent name_no="UIComponent:name_no:EmberTab"  name="CSRTab">
+	<WebUIComponent viewcontroller="com.adventnet.client.components.tab.web.TabController" templatename="tabView" iscsrcomponent="true"/>
+</UIComponent>
+
+<UIComponent name_no="UIComponent:name_no:EmberGridLayout"  name="CSRGridLayout">
+  <WebUIComponent viewcontroller="com.adventnet.client.components.layout.grid.web.GridLayoutController" templatename="gridView" iscsrcomponent="true"/>
+  <PdfUIComponent viewclass="com.adventnet.client.components.layout.grid.pdf.GridLayoutPDFRenderer" viewcontroller="com.adventnet.client.components.layout.grid.web.GridLayoutController"/>
+</UIComponent> 
+
+<UIComponent name_no="UIComponent:name_no:EmberSQLTable"  name="CSRSqlTable" state="com.adventnet.client.components.table.TableViewState">
+  <WebUIComponent viewcontroller="com.adventnet.client.components.table.CSRSqlTableController" templatename="tableTemplate" iscsrcomponent="true"/>
+  <PdfUIComponent viewclass="com.adventnet.client.components.table.pdf.TablePDFRenderer" viewcontroller="com.adventnet.client.components.table.CSRSqlTableController"/>
+</UIComponent>
+
+<UIComponent name_no="UIComponent:name_no:EmberSQLFilterTable"  name="CSRSqlFilterTable" state="com.adventnet.client.components.table.TableViewState">
+  <WebUIComponent viewcontroller="com.adventnet.client.components.sqlfilter.CSRSqlFilterTableController" templatename="tableTemplate" iscsrcomponent="true"/>
+    <PdfUIComponent viewclass="com.adventnet.client.components.table.pdf.TablePDFRenderer" viewcontroller="com.adventnet.client.components.table.CSRSqlFilterTableController"/>
+</UIComponent>
+
+<UIComponent name_no="UIComponent:name_no:EmberDoc"  name="CSRDoc">
+  <WebUIComponent templatename="docView" iscsrcomponent="true"/>
+</UIComponent>
+
+</uicomponents>

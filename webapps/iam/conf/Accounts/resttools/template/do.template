@@ -1,0 +1,96 @@
+package com.zoho.data;
+
+import java.util.*;
+import com.adventnet.persistence.*;
+import com.adventnet.persistence.internal.*;
+$imports
+
+//Generated code, do not edit
+ 
+public class $moduleNameDataObject extends DataObjectWrapper  {
+    
+    public $moduleNameDataObject() {
+    }
+    
+    public $moduleNameDataObject(DataObject dataObject1) throws DataAccessException {
+      if(dataObject1 == null) {
+      	throw new NullPointerException("dataObject should not be null.");
+      }
+      dataObject = dataObject1;
+    }
+      
+  $table_setter_getter_method_definitions
+  
+  $table_class_definitions
+ 
+}
+
+@@@@@_DO_NOT_DELETE_THIS_DELIMITTER_LINE_@@@@@
+
+public boolean contains$tablename() throws DataAccessException {
+  return this.dataObject.containsTable($resource.sqlname());
+}
+
+public static $tablename init$tablename(){
+    return new $tablename();
+}
+
+public $tablename get$tablename() throws DataAccessException {
+	Row r = this.dataObject.getRow($resource.sqlname());
+	return r != null ? new $tablename(r) : null;
+}
+public Iterator<$tablename> get$tablenames() throws DataAccessException {
+   Iterator it = this.dataObject.getRows($resource.sqlname());
+   List<$tablename> tns = new ArrayList<$tablename>();
+   while(it.hasNext()){
+	   tns.add(new $tablename((Row)it.next()));
+   }
+   return tns.iterator();
+}
+
+public void add$tablename($tablename row) throws DataAccessException {
+    this.dataObject.addRow(row.getRow());
+}
+
+public void update$tablename($tablename row) throws DataAccessException {
+   this.dataObject.updateRow(row.getRow());       
+}
+
+public void delete$tablename($tablename row) throws DataAccessException {
+   this.dataObject.deleteRow(row.getRow());       
+}
+
+@@@@@_DO_NOT_DELETE_THIS_DELIMITTER_LINE_@@@@@
+
+public static class $tablename extends RowWrapper {
+ 
+   public $tablename () {
+    Row row = new Row($resource.sqlname());
+   	super.setRow(row);
+   }
+   
+   public $tablename (Row row1){
+   	  if(row1 == null) {
+   	  	throw new NullPointerException("row should not be null.");
+   	  }   
+      super.setRow(row1);
+   }
+   
+   $column_setter_getter_method_definitions
+}
+
+@@@@@_DO_NOT_DELETE_THIS_DELIMITTER_LINE_@@@@@
+
+public $datatype get$columnMethodName(){
+	Object value = this.row.get("$column");
+	if(value instanceof UniqueValueHolder) {
+		return ($datatype) ((UniqueValueHolder) value).getValue();
+	}
+    return ($datatype) value;
+}
+
+public $tablename set$columnMethodName($datatype $column.toVariableName1){
+    this.row.set("$column", $column.toVariableName1);
+    return this;
+}
+

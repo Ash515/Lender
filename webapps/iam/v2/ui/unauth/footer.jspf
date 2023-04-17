@@ -1,0 +1,16 @@
+<%--$Id$--%>
+		<%
+		if(!Util.isFujixerox()) { 
+		%>
+			<div>
+				<span class="footer_spacing _copy">
+					<%=Util.getCopyRightYear()%>,
+				</span>
+				<span class="footer_spacing">
+					<a href="<%=Util.getI18NMsg(request,"IAM.ZOHOCORP.LINK")%>" title="<%=Util.getI18NMsg(request,"IAM.ZOHOCORP")%>" target="_blank" ><%=Util.getI18NMsg(request,"IAM.ZOHOCORP")%></a>
+				</span>
+				<span class="footer_spacing">
+					<%=Util.getI18NMsg(request,"IAM.ADVENTNET.ALL.RIGHTS.RESERVED")%>
+				</span>
+			</div>
+		<% }%>

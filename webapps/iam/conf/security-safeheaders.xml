@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id$ -->
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security.xsd">
+ <safe-response-headers>
+    	<secure-headers>
+    		<header name="X-XSS-Protection" value="1"/>
+   			<header name="X-Frame-Options" value="sameorigin"/>
+    		<header name="X-Content-Type-Options" value="nosniff"/>
+    	</secure-headers>
+    	<download-headers>
+    		<header name="X-Download-Options" value="noopen"/>
+    		<header name="X-Content-Type-Options" value="nosniff"/>
+    	</download-headers>
+    	<json-headers>
+    		<header name="Content-Disposition" value="attachment;"/>
+    		<header name="X-Download-Options" value="noopen"/>
+    		<header name="X-Content-Type-Options" value="nosniff"/>
+    		<header name="X-XSS-Protection" value="1"/>
+    	</json-headers>
+    	<cache-headers>
+    	    <header name="Pragma" value="no-cache"/>
+    	    <!--Expires header represents the amount of time after which the content expires. The duration is specified in terms of milliseconds since the epoch(Jan 1,1970). -->
+    	    <header name="Cache-Control" value="private,no-cache,no-store,max-age=0,must-revalidate"/>
+    		<header name="Expires" value="Thu, 01 Jan 1970 00:00:00 GMT"/>
+    	</cache-headers>
+    	<connection-headers>
+    	  <!-- Max age is set to 365 days -->
+    	    <header name="Strict-Transport-Security" value="max-age=31536000"/>
+    	</connection-headers>
+    	<error-page-headers>
+    		<header name="X-Frame-Options" value="deny"/>
+    	</error-page-headers>
+</safe-response-headers>
+<internal-request-headers>
+          <header name="zsec_user_import_url" type="boolean" />
+          <header name="zsec_proxy_server_name" regex="host_regex" />
+          <header name="zsec_proxy_server_signature" regex="iscsignature" secret="true" max-len="200"/>
+          <header name="zsec_proxy_request" type="boolean"/>
+	  <!-- Header Format :: ZS-SystemAuthorization: SystemAuth<space><iscsignaturevalue> -->
+          <header name="zs-systemauthorization" regex="SystemAuth\s[a-zA-Z0-9\-]+" secret="true" max-len="200" />
+          <header name="x-http-method-override" regex="(put|delete|patch|PUT|DELETE|PATCH)" />
+          <header name="x-zcsrf-token" regex="${CSRF_PARAM}=[a-f0-9-]+" mask="partial" max-len="200"/> <!-- last 5 chars will be printed eg: ***87654 -->
+          <cookies>
+             <cookie name="_zxor" regex="zxor_regex" max-len="1000" />
+             <cookie name="jsessionid_name" name-regex="true" regex="jsessionid"  />
+          </cookies>        
+</internal-request-headers>
+</security>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModuleStartStopProcessor>
+    <ModuleStartStopProcessor PROCESSOR_NAME="DBAUDIT" CLASSNAME="com.adventnet.persistence.DBAuditPopulator"/>
+    <ModuleStartStopProcessor PROCESSOR_NAME="HA" CLASSNAME="com.zoho.mickey.ha.HAImpl"/>
+    <!--ModuleStartStopProcessor PROCESSOR_NAME="HA" CLASSNAME="com.zoho.mickey.ha.db.DataBaseHAImpl"/-->
+</ModuleStartStopProcessor>

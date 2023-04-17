@@ -1,0 +1,32 @@
+The newest version of nomos license scanner found:
+ISC-possibility (#1)Legend:
+license relevant text
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<modelVersion>4.0.0</modelVersion>
+<groupId>org.mindrot</groupId>
+<artifactId>jbcrypt</artifactId>
+<version>0.4</version>
+<packaging>jar</packaging>
+
+<name>jBCrypt</name>
+<description>OpenBSD-style Blowfish password hashing for Java</description>
+<url>https://github.com/djmdjm/jBCrypt</url>
+
+<licenses>
+<license>
+<name>ISC</name>
+<url>https://opensource.org/licenses/isc-license</url>
+</license>
+</licenses>
+
+<developers>
+<developer>
+<name>Damien Miller</name>
+<email>djm@mindrot.org</email>
+<organization>Mindrot.org</organization>
+<organizationUrl>http://www.mindrot.org</organizationUrl>
+</developer>
+</developers>

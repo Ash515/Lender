@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<IAMAccounts>
+    <IAMAccount zaid="client" account_name="Zoho client Space" account_type="client">
+    </IAMAccount>
+</IAMAccounts>

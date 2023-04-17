@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id $-->
+
+<dynamic-value-handlers>
+	<DynamicValueHandler tablename="Scheduled_Task" columnname="SCHEDULE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="SCHEDULE_NAME"/>
+			<DVPHParameter name="criteria-comparator" value="equals"/>
+			<DVPHParameter name="referred-table" value="Schedule"/>
+			<DVPHParameter name="referred-column" value="SCHEDULE_ID"/>
+		</DVPHParameterList>
+	</DynamicValueHandler>
+	<DynamicValueHandler tablename="Scheduled_Task" columnname="TASK_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="TASK_NAME"/>
+			<DVPHParameter name="criteria-comparator" value="equals"/>
+			<DVPHParameter name="referred-table" value="TaskEngine_Task"/>
+			<DVPHParameter name="referred-column" value="TASK_ID"/>
+		</DVPHParameterList>
+	</DynamicValueHandler>
+	<DynamicValueHandler tablename="Periodic" columnname="START_DATE" class="com.adventnet.taskengine.internal.SchedulerDatetimeValueHandler"/>
+    <DynamicValueHandler tablename="Periodic" columnname="END_DATE" class="com.adventnet.taskengine.internal.SchedulerDatetimeValueHandler"/>
+    <DynamicValueHandler tablename="ServiceProperties" columnname="SERVICE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+        <DVPHParameterList>
+            <DVPHParameter name="criteria-column" value="SERVICE_NAME"/>
+            <DVPHParameter name="criteria-comparator" value="equals"/>
+            <DVPHParameter name="referred-table" value="Service"/>
+            <DVPHParameter name="referred-column" value="SERVICE_ID"/>
+        </DVPHParameterList>
+    </DynamicValueHandler>
+
+</dynamic-value-handlers>

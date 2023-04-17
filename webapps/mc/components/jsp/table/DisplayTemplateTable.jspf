@@ -1,0 +1,47 @@
+<%-- $Id$ --%>
+<%@ page
+	import="com.adventnet.client.components.table.web.TableTemplateHandler"%>
+<%
+    TableTemplateHandler tth = new TableTemplateHandler();
+    String tplFile = viewContext.getModel().getFeatureValue("TEMPLATEFILE");
+    tth.initialize(tplFile, transformerContext);
+%>
+<% 
+	String displayType = (String) viewModel.getTableViewConfigRow().get("DISPLAYTYPE");
+	if(displayType.equals("Vertical"))
+	{
+	%>
+<tr>
+	<%
+	}
+	%>
+	<components:row viewContext="<%=viewContext%>" javaScriptRow="true">
+		<%
+	if(displayType.equals("Horizontal"))
+	{
+	%>
+		<tr rowidx="<%out.print(transformerContext.getRowIndex());//NO OUTPUTENCODING%>"><%-- NO OUTPUTENCODING --%>
+			<%
+	}	
+	%>
+			<%
+    
+     out.println(tth.renderRow(transformerContext));//NO OUTPUTENCODING%>
+			<%
+	if(displayType.equals("Horizontal"))
+	{
+	%>
+		</tr>
+		<%
+	}	
+	%>
+	</components:row>
+	<%
+	if(displayType.equals("Vertical"))
+	{
+	%>
+</tr>
+<%
+	}	
+	%>
+

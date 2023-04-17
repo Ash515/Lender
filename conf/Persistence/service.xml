@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: service.xml,v 1.11 2011/03/07 10:21:59 vinod Exp $ -->
+<services>
+    <Service service_id="Service:service_id:CacheService" service_name="CacheService" module_id="Persistence" classname="com.adventnet.persistence.cache.CacheService">
+		<!--
+		<ServiceProperties serviceprop_id="ServiceProperties:serviceprop_id:CacheService-1" property="SoftRef" value="true"/>
+		<ServiceProperties serviceprop_id="ServiceProperties:serviceprop_id:CacheService-2" property="MaxSize" value="-1"/>
+		<ServiceProperties serviceprop_id="ServiceProperties:serviceprop_id:CacheService-3" property="MonitorPeriod" value="-1"/>
+		-->
+	</Service>
+    
+    <!--
+    <Service service_id="Service:service_id:MDSService" service_name="MDSService" module_id="Persistence" classname="com.adventnet.ds.adapter.mds.MDSService"/>
+    -->
+	
+	<!-- Service to load New Persistence related config files -->
+	<!--Service 
+		service_id="Service:service_id:3" 
+		service_name="NConfigLoaderService" 
+		module_id="Persistence" 
+		classname="com.adventnet.newpersistence.NConfigLoaderService" 
+	/-->
+
+</services>
+		

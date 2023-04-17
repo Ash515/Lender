@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- $Id: $ -->
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+  "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="internal" namespace="/accounts" extends="struts-default">
+		<action name="internal/install" class="com.zoho.accounts.actions.internal.SystemSetup" method="install" />
+		<action name="internal/clearconfig" class="com.zoho.accounts.actions.internal.SystemSetup" method="clearConfigurations" />
+		<action name="internal/populate" class="com.zoho.accounts.actions.internal.SystemSetup" method="populate" />
+		<action name="internal/invoke" class="com.zoho.accounts.actions.internal.SystemSetup" method="invoke" />
+	</package>
+</struts>

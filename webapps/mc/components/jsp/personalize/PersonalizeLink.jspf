@@ -1,0 +1,9 @@
+<%-- $Id$ --%>
+<%
+   String pers = (String)session.getAttribute("PERSONALIZE");
+   if(pers != null && pers.equals("TRUE")){
+%>
+  <a id="hidePersonalize" href="javascript:enableViewMode();">View Mode</a>
+<%}else {%>
+  <a id="showPersonalize" href="javascript:enableCustomization();">Personalize</a>
+<%}%>

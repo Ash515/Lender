@@ -1,0 +1,1692 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ZOHO Enhancement: 
+		* This policy file contains upto CSS2 properties and selectors
+		* If teams need to extend antisamy policy file please refer -> https://intranet.wiki.zoho.com/security/How-to-extend-antisamy-policy-file.html     
+-->
+<anti-samy-rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="antisamy.xsd">
+	<!--  CSS2 validation processing rules  -->
+	<include href="antisamy-common-rules.xml" />
+	<css-rules>
+		<property name="azimuth" description="This property is most likely to be implemented by mixing the same signal into different channels at differing volumes.">
+			<literal-list>
+				<literal value="left-side" />
+				<literal value="far-left" />
+				<literal value="left" />
+				<literal value="center-left" />
+				<literal value="center" />
+				<literal value="center-right" />
+				<literal value="right" />
+				<literal value="far-right" />
+				<literal value="right-side" />
+				<literal value="behind" />
+				<literal value="leftwards" />
+				<literal value="rightwards" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="angle" />
+			</regexp-list>
+		</property>
+		<property name="background" description="The 'background' property is a shorthand property for setting the individual background properties (i.e., 'background-color', 'background-image', 'background-repeat', 'background-attachment' and 'background-position') at the same place in the style sheet.">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="gradientfunction" />
+			</regexp-list>
+			<shorthand-list>
+				<shorthand name="background-color" />
+				<shorthand name="background-image" />
+				<shorthand name="background-repeat" />
+				<shorthand name="background-attachment" />
+				<shorthand name="background-position" />
+				<shorthand name="background-size" />
+				<shorthand name="background-origin" />
+				<shorthand name="background-clip" />
+			</shorthand-list>
+		</property>
+		<property name="background-attachment" description="If a background image is specified, this property specifies whether it is fixed with regard to the viewport ('fixed') or scrolls along with the document ('scroll').">
+			<literal-list>
+				<literal value="scroll" />
+				<literal value="fixed" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="background-color" description="This property sets the background color of an element, either a &amp;lt;color&amp;gt; value or the keyword 'transparent', to make the underlying colors shine through.">
+			<literal-list>
+				<literal value="transparent" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+		</property>
+		<property name="background-image" description="This property sets the background image of an element.">
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list description="ZOHO CHANGE : gradientfunction is added">
+				<regexp name="cssOffsiteUri" />
+				<regexp name="cssOnsiteUri" />
+				<regexp name="gradientfunction" />
+			</regexp-list>
+		</property>
+		<property name="background-position" description="If a background image has been specified, this property specifies its initial position.">
+			<literal-list>
+				<literal value="top" />
+				<literal value="center" />
+				<literal value="bottom" />
+				<literal value="left" />
+				<literal value="center" />
+				<literal value="right" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="percentage" />
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="background-repeat" description="If a background image is specified, this property specifies whether the image is repeated (tiled), and how.">
+			<literal-list>
+				<literal value="repeat" />
+				<literal value="repeat-x" />
+				<literal value="repeat-y" />
+				<literal value="no-repeat" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<!-- Begin simple properties -->
+		<property name="border-collapse" default="collapse" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="collapse" />
+				<literal value="separate" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="border-color" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="transparent" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+		</property>
+		<property name="border-top-color" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+		</property>
+		<property name="border-right-color" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+		</property>
+		<property name="border-bottom-color" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+		</property>
+		<property name="border-left-color" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+		</property>
+		<property name="bottom" default="auto" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="caption-side" default="top" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="top" />
+				<literal value="bottom" />
+				<literal value="left" />
+				<literal value="right" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="clear" default="none" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="none" />
+				<literal value="left" />
+				<literal value="right" />
+				<literal value="both" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="color" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+		</property>
+		<property name="cue-after" default="none" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="cssOffsiteUri" />
+				<regexp name="cssOnsiteUri" />
+			</regexp-list>
+		</property>
+		<property name="cue-before" default="none" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="cssOffsiteUri" />
+				<regexp name="cssOnsiteUri" />
+			</regexp-list>
+		</property>
+		<property name="direction" default="ltr" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="ltr" />
+				<literal value="rtl" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="display" default="inline" description="">
+			<category-list>
+				<category value="all" />
+			</category-list>
+			<literal-list>
+				<literal value="inline" />
+				<literal value="block" />
+				<literal value="inline-block" />
+				<literal value="list-item" />
+				<literal value="run-in" />
+				<literal value="compact" />
+				<literal value="marker" />
+				<literal value="table" />
+				<literal value="inline-table" />
+				<literal value="table-row-group" />
+				<literal value="table-header-group" />
+				<literal value="table-footer-group" />
+				<literal value="table-row" />
+				<literal value="table-column-group" />
+				<literal value="table-column" />
+				<literal value="table-cell" />
+				<literal value="table-caption" />
+				<literal value="-webkit-flex" />
+				<literal value="flex" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="elevation" default="level" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="below" />
+				<literal value="level" />
+				<literal value="above" />
+				<literal value="higher" />
+				<literal value="lower" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="angle" />
+			</regexp-list>
+		</property>
+		<property name="empty-cells" default="show" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="show" />
+				<literal value="hide" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="float" default="none" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="left" />
+				<literal value="right" />
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="font-size" default="medium" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="absolute-size" />
+				<regexp name="relative-size" />
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="font-size-adjust" default="none" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="font-stretch" default="normal" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="atfontface" />
+			</category-list>
+			<literal-list>
+				<literal value="normal" />
+				<literal value="wider" />
+				<literal value="narrower" />
+				<literal value="ultra-condensed" />
+				<literal value="extra-condensed" />
+				<literal value="condensed" />
+				<literal value="semi-condensed" />
+				<literal value="semi-expanded" />
+				<literal value="expanded" />
+				<literal value="extra-expanded" />
+				<literal value="ultra-expanded" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="font-style" default="normal" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="atfontface" />
+			</category-list>
+			<literal-list>
+				<literal value="normal" />
+				<literal value="italic" />
+				<literal value="oblique" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="font-variant" default="normal" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="normal" />
+				<literal value="small-caps" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="font-weight" default="normal" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="atfontface" />
+			</category-list>
+			<literal-list>
+				<literal value="normal" />
+				<literal value="bold" />
+				<literal value="bolder" />
+				<literal value="lighter" />
+				<literal value="100" />
+				<literal value="200" />
+				<literal value="300" />
+				<literal value="400" />
+				<literal value="500" />
+				<literal value="600" />
+				<literal value="700" />
+				<literal value="800" />
+				<literal value="900" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="height" default="auto" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="left" default="auto" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="letter-spacing" default="normal" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="normal" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="line-height" default="normal" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="normal" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="list-style-image" default="none" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="cssOffsiteUri" />
+				<regexp name="cssOnsiteUri" />
+			</regexp-list>
+		</property>
+		<property name="list-style-position" default="outside" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inside" />
+				<literal value="outside" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="list-style-type" default="disc" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="disc" />
+				<literal value="circle" />
+				<literal value="square" />
+				<literal value="decimal" />
+				<literal value="decimal-leading-zero" />
+				<literal value="lower-roman" />
+				<literal value="upper-roman" />
+				<literal value="lower-greek" />
+				<literal value="lower-alpha" />
+				<literal value="lower-latin" />
+				<literal value="upper-alpha" />
+				<literal value="upper-latin" />
+				<literal value="hebrew" />
+				<literal value="armenian" />
+				<literal value="georgian" />
+				<literal value="cjk-ideographic" />
+				<literal value="hiragana" />
+				<literal value="katakana" />
+				<literal value="hiragana-iroha" />
+				<literal value="katakana-iroha" />
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="marker-offset" default="auto" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="max-height" default="none" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="max-width" default="none" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="min-height" default="0" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+				<category value="atmedia" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="min-width" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="orphans" default="2" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="paged" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="integer" />
+			</regexp-list>
+		</property>
+		<property name="outline-color" default="invert" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="interactive" />
+			</category-list>
+			<literal-list>
+				<literal value="invert" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+		</property>
+		<property name="overflow" default="visible" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="visible" />
+				<literal value="hidden" />
+				<literal value="scroll" />
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="page-break-after" default="auto" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="paged" />
+			</category-list>
+			<literal-list>
+				<literal value="auto" />
+				<literal value="always" />
+				<literal value="avoid" />
+				<literal value="left" />
+				<literal value="right" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="page-break-before" default="auto" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="paged" />
+			</category-list>
+			<literal-list>
+				<literal value="auto" />
+				<literal value="always" />
+				<literal value="avoid" />
+				<literal value="left" />
+				<literal value="right" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="page-break-inside" default="auto" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="paged" />
+			</category-list>
+			<literal-list>
+				<literal value="avoid" />
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="pause-after" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="pause-before" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="pitch" default="medium" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="x-low" />
+				<literal value="low" />
+				<literal value="medium" />
+				<literal value="high" />
+				<literal value="x-high" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="frequency" />
+			</regexp-list>
+		</property>
+		<property name="pitch-range" default="50" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="position" default="static" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="static" />
+				<!-- possible to perform phishing attacks with the following -->
+				<!--
+				<literal value="relative"/>
+				<literal value="absolute"/>
+				<literal value="fixed"/>
+				 -->
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="richness" default="50" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="right" default="auto" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="size" default="auto" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="paged" />
+			</category-list>
+			<literal-list>
+				<literal value="auto" />
+				<literal value="portrait" />
+				<literal value="landscape" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="speak" default="normal" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="normal" />
+				<literal value="none" />
+				<literal value="spell-out" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="speak-header" default="once" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="once" />
+				<literal value="always" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="speak-numeral" default="continuous" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="digits" />
+				<literal value="continuous" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="speak-punctuation" default="none" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="code" />
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="speech-rate" default="medium" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="x-slow" />
+				<literal value="slow" />
+				<literal value="medium" />
+				<literal value="fast" />
+				<literal value="x-fast" />
+				<literal value="faster" />
+				<literal value="slower" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="stress" default="50" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="table-layout" default="auto" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="auto" />
+				<literal value="fixed" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="text-indent" default="0" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="text-transform" default="none" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="capitalize" />
+				<literal value="uppercase" />
+				<literal value="lowercase" />
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="top" default="auto" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="unicode-bidi" default="normal" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="normal" />
+				<literal value="embed" />
+				<literal value="bidi-override" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="vertical-align" default="baseline" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="baseline" />
+				<literal value="sub" />
+				<literal value="super" />
+				<literal value="top" />
+				<literal value="text-top" />
+				<literal value="middle" />
+				<literal value="bottom" />
+				<literal value="text-bottom" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="percentage" />
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="visibility" default="inherit" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="visible" />
+				<literal value="hidden" />
+				<literal value="collapse" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="volume" default="medium" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="silent" />
+				<literal value="x-soft" />
+				<literal value="soft" />
+				<literal value="medium" />
+				<literal value="loud" />
+				<literal value="x-loud" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="white-space" default="normal" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list description="ZOHO CHANGE : pre-line, pre-wrap is added">
+				<literal value="normal" />
+				<literal value="pre" />
+				<literal value="pre-wrap" />
+				<literal value="pre-line" />
+				<literal value="nowrap" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="widows" default="2" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="paged" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="integer" />
+			</regexp-list>
+		</property>
+		<property name="width" default="auto" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="word-spacing" default="normal" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="normal" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<!-- end simple properties -->
+		<!-- begin medium properties -->
+		<property name="border-style" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="none" />
+				<literal value="hidden" />
+				<literal value="dotted" />
+				<literal value="dashed" />
+				<literal value="solid" />
+				<literal value="double" />
+				<literal value="groove" />
+				<literal value="ridge" />
+				<literal value="inset" />
+				<literal value="outset" />
+			</literal-list>
+		</property>
+		<property name="border-top-style" default="none" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="border-style" />
+			</shorthand-list>
+		</property>
+		<property name="border-right-style" default="none" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="border-style" />
+			</shorthand-list>
+		</property>
+		<property name="border-bottom-style" default="none" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="border-style" />
+			</shorthand-list>
+		</property>
+		<property name="border-left-style" default="none" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="border-style" />
+			</shorthand-list>
+		</property>
+		<property name="border-top-width" default="medium" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="border-width" />
+			</shorthand-list>
+		</property>
+		<property name="border-right-width" default="medium" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="border-width" />
+			</shorthand-list>
+		</property>
+		<property name="border-bottom-width" default="medium" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="border-width" />
+			</shorthand-list>
+		</property>
+		<property name="border-left-width" default="medium" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="border-width" />
+			</shorthand-list>
+		</property>
+		<property name="border-width" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="thin" />
+				<literal value="medium" />
+				<literal value="thick" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="margin" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="paged" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="auto" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="margin-top" default="0" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="paged" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="margin" />
+			</shorthand-list>
+		</property>
+		<property name="margin-right" default="0" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="paged" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="margin" />
+			</shorthand-list>
+		</property>
+		<property name="margin-bottom" default="0" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="paged" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="margin" />
+			</shorthand-list>
+		</property>
+		<property name="margin-left" default="0" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="paged" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="margin" />
+			</shorthand-list>
+		</property>
+		<property name="outline-style" default="none" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="interactive" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="border-style" />
+			</shorthand-list>
+		</property>
+		<property name="outline-width" default="medium" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="interactive" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="border-width" />
+			</shorthand-list>
+		</property>
+		<property name="padding" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="padding-top" default="0" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="padding" />
+			</shorthand-list>
+		</property>
+		<property name="padding-right" default="0" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="padding" />
+			</shorthand-list>
+		</property>
+		<property name="padding-bottom" default="0" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="padding" />
+			</shorthand-list>
+		</property>
+		<property name="padding-left" default="0" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="padding" />
+			</shorthand-list>
+		</property>
+		<!-- end medium properties -->
+		<!-- begin hard properties -->
+		<property name="border" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+			<shorthand-list>
+				<shorthand name="border-width" />
+				<shorthand name="border-style" />
+			</shorthand-list>
+		</property>
+		<property name="border-top" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+			<shorthand-list>
+				<shorthand name="border-top-width" />
+				<shorthand name="border-style" />
+			</shorthand-list>
+		</property>
+		<property name="border-right" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+			<shorthand-list>
+				<shorthand name="border-top-width" />
+				<shorthand name="border-style" />
+			</shorthand-list>
+		</property>
+		<property name="border-bottom" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+			<shorthand-list>
+				<shorthand name="border-top-width" />
+				<shorthand name="border-style" />
+			</shorthand-list>
+		</property>
+		<property name="border-left" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+			<shorthand-list>
+				<shorthand name="border-top-width" />
+				<shorthand name="border-style" />
+			</shorthand-list>
+		</property>
+		<property name="cue" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="cue-before" />
+				<shorthand name="cue-after" />
+			</shorthand-list>
+		</property>
+		<property name="list-style" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="list-style-type" />
+				<shorthand name="list-style-position" />
+				<shorthand name="list-style-image" />
+			</shorthand-list>
+		</property>
+		<property name="marks" default="none" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="paged" />
+			</category-list>
+			<literal-list>
+				<literal value="crop" />
+				<literal value="cross" />
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="outline" description="">
+			<category-list>
+				<category value="visual" />
+				<category value="interactive" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="outline-color" />
+				<shorthand name="outline-style" />
+				<shorthand name="outline-width" />
+			</shorthand-list>
+		</property>
+		<property name="pause" description="">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="text-decoration" default="none" description="">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="none" />
+				<literal value="underline" />
+				<literal value="overline" />
+				<literal value="line-through" />
+				<literal value="blink" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<!-- end hard properties -->
+		<!--  begin manual properties -->
+		<property name="border-spacing" default="0" description="The lengths specify the distance that separates adjacent cell borders. If one length is specified, it gives both the horizontal and vertical spacing. If two are specified, the first gives the horizontal spacing and the second the vertical spacing. Lengths may not be negative.">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="clip" default="auto" description="The 'clip' property applies to elements that have a 'overflow' property with a value other than 'visible'.">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list description="ZOHO CHANGE: rect function is added">
+				<regexp name="length" />
+				<regexp value="rect\(([0-9]{1,3})px,\s?([0-9]{1,3})px,\s?([0-9]{1,3})px,\s?([0-9]{1,3})px\)" />
+			</regexp-list>
+		</property>
+		<property name="counter-increment" default="none" description="The 'counter-increment' property accepts one or more names of counters (identifiers), each one optionally followed by an integer.">
+			<category-list>
+				<category value="all" />
+			</category-list>
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="cssIdentifier" />
+				<regexp name="integer" />
+			</regexp-list>
+		</property>
+		<property name="cursor" default="auto" description="This property specifies the type of cursor to be displayed for the pointing device.">
+			<category-list>
+				<category value="visual" />
+				<category value="interactive" />
+			</category-list>
+			<literal-list description="ZOHO CHANGE: supported literal values from the property 'alias'">
+				<literal value="auto"/>
+				<literal value="inherit"/>
+				<literal value="crosshair"/>
+				<literal value="default"/>
+				<literal value="pointer"/>
+				<literal value="move"/>
+				<literal value="e-resize"/>
+				<literal value="ne-resize"/>
+				<literal value="nw-resize"/>
+				<literal value="n-resize"/>
+				<literal value="se-resize"/>
+				<literal value="sw-resize"/>
+				<literal value="s-resize"/>
+				<literal value="w-resize"/>
+				<literal value="text"/>
+				<literal value="wait"/>
+				<literal value="help"/>
+				<!-- Supported literal values for CSS3 support and from creator/crm log analysis -->
+				<literal value="alias" />
+				<literal value="all-scroll" />				
+				<literal value="cell" />
+				<literal value="context-menu" />
+				<literal value="col-resize" />
+				<literal value="copy" />
+				<literal value="ew-resize" />
+				<literal value="grab" />
+				<literal value="grabbing" />
+				<literal value="nesw-resize" />
+				<literal value="ns-resize" />
+				<literal value="nwse-resize" />
+				<literal value="no-drop" />
+				<literal value="not-allowed" />
+				<literal value="progress" />
+				<literal value="row-resize" />
+				<literal value="se-resize" />
+				<literal value="sw-resize" />
+				<literal value="vertical-text" />
+				<literal value="zoom-in" />
+				<literal value="zoom-out" />			
+			</literal-list>
+			<regexp-list>
+				<regexp name="cssOffsiteUri" />
+				<regexp name="cssOnsiteUri" />
+			</regexp-list>
+		</property>
+		<property name="text-shadow" default="none" description="This property accepts a comma-separated list of shadow effects to be applied to the text of the element.">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="font" description="The 'font' property is, except as described below, a shorthand property for setting 'font-style', 'font-variant', 'font-weight', 'font-size', 'line-height', and 'font-family', at the same place in the style sheet.">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<literal-list>
+				<literal value="/" />
+				<literal value="caption" />
+				<literal value="icon" />
+				<literal value="menu" />
+				<literal value="message-box" />
+				<literal value="small-caption" />
+				<literal value="status-bar" />
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="font-style" />
+				<shorthand name="font-variant" />
+				<shorthand name="font-weight" />
+				<shorthand name="font-size" />
+				<shorthand name="line-height" />
+				<shorthand name="font-family" />
+			</shorthand-list>
+		</property>
+		<property name="font-family" description="This property specifies a prioritized list of font family names and/or generic family names.">
+			<category-list>
+				<category value="visual" />
+				<category value="atfontface" />
+			</category-list>
+			<!-- allowing only generic font families -->
+			<literal-list>
+				<literal value="serif" />
+				<literal value="arial" />
+				<literal value="lucida console" />
+				<literal value="sans-serif" />
+				<literal value="cursive" />
+				<literal value="verdana" />
+				<literal value="fantasy" />
+				<literal value="monospace" />
+			</literal-list>
+			<regexp-list>
+				<!-- regexp value="[\w,\-&apos;&quot; ]+"/-->
+				<regexp value="[0-9a-zA-Z\s\P{InBasicLatin}_,\-&apos;&quot;]+" description="ZOHO CHANGE : This regex is added to support all the system family names"/>
+			</regexp-list>
+		</property>
+		<property name="page" description="The 'page' property can be used to specify a particular type of page where an element should be displayed.">
+			<category-list>
+				<category value="visual" />
+				<category value="paged" />
+			</category-list>
+			<literal-list>
+				<literal value="auto" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="cssIdentifier" />
+			</regexp-list>
+		</property>
+		<property name="play-during" default="auto" description="Similar to the 'cue-before' and 'cue-after' properties, this property specifies a sound to be played as a background while an element's content is spoken.">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<literal-list>
+				<literal value="mix" />
+				<literal value="repeat" />
+				<literal value="none" />
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="cssOffsiteUri" />
+				<regexp name="cssOnsiteUri" />
+			</regexp-list>
+		</property>
+		<property name="text-align" description="This property describes how inline content of a block is aligned.">
+			<category-list>
+				<category value="visual" />
+			</category-list>
+			<!--  For safety, ignoring string alignment which can be used to line table cells on characters -->
+			<literal-list>
+				<literal value="left" />
+				<literal value="right" />
+				<literal value="center" />
+				<literal value="justify" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="voice-family" description="The value is a comma-separated, prioritized list of voice family names (compare with 'font-family').">
+			<category-list>
+				<category value="aural" />
+			</category-list>
+			<!--  Allowing only generic voice family -->
+			<literal-list>
+				<literal value="male" />
+				<literal value="female" />
+				<literal value="child" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<!--  end manual properties -->
+	</css-rules>
+</anti-samy-rules>

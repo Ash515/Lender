@@ -1,0 +1,6 @@
+<%-- $Id$ --%>
+<%
+String msg= "<div class=\"tableFetchingUpdateStatus\" id=\""+ viewContext.getUniqueId()+"_loading\">Loading Table Please Wait ......</div>";
+%>
+<script defer>changeStatusText('<%out.print(viewContext.getUniqueId());//NO OUTPUTENCODING%>')</script><%--NO OUTPUTENCODING --%>
+<script defer>showDialog('<%out.print( msg);//NO OUTPUTENCODING%>','position=absmiddle,dialogBoxType=none,closePrevious=false');</script><%--NO OUTPUTENCODING --%>

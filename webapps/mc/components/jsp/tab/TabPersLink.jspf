@@ -1,0 +1,13 @@
+<%-- $Id$ --%>
+<%if(PersonalizationUtil.isCustomizable(request, viewContext)){	%>
+		<DIV id = 'TabCustomizationLinks<%out.print(referenceId);//NO OUTPUTENCODING%>' class = 'customizeMenu' style='display:none;'><%--NO OUTPUTENCODING --%>
+		<TABLE border = '0' cellspacing = '0' cellpadding = '0'>
+		<TR onClick="openCustomizationWindow('AddTab.do?COUNT=<%out.print(model.getChildConfigList().size());//NO OUTPUTENCODING%>&VIEWNAME=<%out.print(viewContext.getModel().getViewName());//NO OUTPUTENCODING%>', 'height=200,width=250,scrollbars=1,resizable=1,status=yes')" class = 'customizeMenuItem' onMouseOver='this.className="customizeMenuItemOver"' onMouseOut='this.className="customizeMenuItem"'><%--NO OUTPUTENCODING --%>
+		<TD>Create New Tab ...</TD>
+		</TR>
+		<TR onClick="openCustomizationWindow('TabCustomization.cc?TYPE=HTab&VIEWNAME=<%out.print(viewContext.getModel().getViewName());//NO OUTPUTENCODING%>&DefaultGroup=Tabs', 'height=550,width=1000,scrollbars=1,resizable=1')" class = 'customizeMenuItem' onMouseOver='this.className="customizeMenuItemOver"' onMouseOut='this.className="customizeMenuItem"'><%--NO OUTPUTENCODING --%>
+		<TD>Rearrange Existing Tabs ...</TD>
+		</TR>
+		</TABLE>
+		</DIV>
+<%}%>

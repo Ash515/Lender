@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="sitesonesorgzaid" account_name="Zoho Sites -Account- Service Org">
+		<IAMAccountDomain domain="sitesonesorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="gspsorgzaid" account_name="Zoho TAX -Account- Service Org">
+		<IAMAccountDomain domain="gspsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="abtestsorgzaid" account_name="Zoho ABTest -Account- Service Org">
+		<IAMAccountDomain domain="abtestsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="workflowsorgzaid" account_name="Zoho Workflow -Account- Service Org">
+		<IAMAccountDomain domain="workflowsorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

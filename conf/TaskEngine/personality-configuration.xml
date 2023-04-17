@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$ -->
+<TaskEngine-personality-configuration>
+<DominantTableConfig DOMINANTTABLEID="Schedule" nonindexlimit="30" >
+<PersonalityConfiguration description="Schedule Configurations" dominanttableid="Schedule" modulename="TaskEngine" personalityid="PersonalityConfiguration:personalityid:UVH@18699871" personalityname="Schedule_Pers">
+<ConstituentTable tableid="Schedule" tableindex="0"/>
+<ConstituentTable fkconstraint_id="Periodic_FK" mandatory="false" tableid="Periodic" tableindex="1"/>
+<ConstituentTable fkconstraint_id="Calendar_FK" mandatory="false" tableid="Calendar" tableindex="2"/>
+<ConstituentTable fkconstraint_id="Composite_FK1" mandatory="false" tableid="Composite" tableindex="3"/>
+<ConstituentTable fkconstraint_id="Calendar_Periodicity_FK1" mandatory="false" tableid="Calendar_Periodicity" tableindex="4"/>
+</PersonalityConfiguration>
+</DominantTableConfig>
+</TaskEngine-personality-configuration>

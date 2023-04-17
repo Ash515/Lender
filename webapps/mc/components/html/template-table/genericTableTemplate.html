@@ -1,0 +1,185 @@
+$Id$
+
+<html><title>Table Template</title>
+	
+<div  viewname="TemplateTable1" componentname="ACTable">
+
+
+<Table   mc:row="filter" cellspacing="0" cellpadding="0" class="navigatorTable" align="center">
+<tr>
+
+ <td mc:column="FilterComboBox" width="20%"></td>
+       
+<td>
+<input id="edit" type="button" name="EVENT_TYPE" disabled value="Edit"  onclick="createFilter(uniqId,'Edit',listId,selFilter ,controllerViewName);"/>
+</td>
+<td>
+<input id="delete" type="button" name="EVENT_TYPE" disabled value="Delete"  onclick="deleteFilter(uniqId,listId ,selFilter , controllerViewName);"/>
+</td>
+<td>
+<input id="create" type="button" name="EVENT_TYPE" enabled value="Create"  onclick="createFilter(uniqId,'Add',listId,selFilter, controllerViewName);"/>
+</td>
+<td>
+|
+</td>
+</tr>
+
+
+<tr>
+<td width="100%">
+<div style="display:none;width:100%" class="criteriaDiv" id="${viewName}_FILTERPOS"></div>
+</td>
+</tr>
+</Table>
+<Table  cellspacing="0" cellpadding="0" class="navigatorTable" align="center"> 
+<tr mc:row="mc:navigator">
+      <td mc:column="DefaultMenu"> </td>
+      
+       <td mc:navigatorDetailsColumn="true" width="25%" nowrap align="left" class="navigatorDetailsColumn">Showing : ${startRow}&nbsp;to&nbsp;                ${lastRow}&nbsp;of&nbsp;${totalRows}
+       </td> 
+       
+       
+                  
+       <td mc:navigatorLinksColumn="true" nowrap class="navigatorLinksColumn">
+       <img mc:firstLink="true" src="/mc/themes/wifi/images/navigator/first_link.png" alt="First" border="0" align="ABSMIDDLE"/>
+       <img mc:previousLink="true" src="/mc/themes/wifi/images/navigator/previous_link.png" alt="Previous" border="0" align="ABSMIDDLE"/>
+       <span mc:pageLinks="5">Page: </span>
+       <img mc:nextLink="true" src="/mc/themes/wifi/images/navigator/next_link.png" alt="Next" border="0" align = "ABSMIDDLE">
+       <img mc:lastLink="true" src="/mc/themes/wifi/images/navigator/last_link.png" alt="Last" border="0" align = "ABSMIDDLE">
+       </td>
+
+       <td align="left" mc:navigatorRangeColumn="true" width="25%" nowrap class="navigatorRangeColumn" mc:viewPerPageLinks="5">
+		View Per Page:       
+       </td>
+
+
+   </tr>
+   </Table>       
+   <table cellspacing="0" cellpadding="0" border="0" align="center" class="tableComponent">
+
+<tr mc:row="header">   
+<th mc:columnName="mc:toggle" nowrap="" align="center" class="tableHeader" width=1%><input type="checkbox" onclick="TableDOMModel.toggleAll(this)" title="Select all" value="checkbox" table_el="TOGGLEALL" class="toggleAll" name="toggleAll"></input></th>
+
+<th mc:columnName="DefaultColumn" class="tableHeader" align="left"></th>
+
+
+
+
+<th mc:columnName="mc:lastColumn" width="1%" valign="middle" nowrap="" align="right"  class="tableHeader"><input type="button" onclick="return openSearch_template(this)" class="tableSearchButton" table_el="OSBTN"/><input class="hide" type="button" onclick="return closeSearch_template(this)" table_el="CSBTN"/>
+
+
+<input mc:columnChooserType="DefaultColumnChooserType" type="button" onclick="invokeMenuAction_template(this)" class="columnEditButton" /></th>
+
+
+</tr>
+
+
+
+
+
+<tr mc:row="searchRow" class="searchRow hide" table_el="SEARCHROW">
+
+<td class="TableHeader"></td>
+
+<td class="TableHeader" mc:column="DefaultSearchColumn"></td>
+
+<td class="TableHeader"><input type="button" onclick="fetchSpotSearchData(this);" class="tableSearchGoButton" name="searchSubmit"></input></td>
+</tr>
+
+
+
+
+
+
+<tr mc:row="reference">
+
+   <td><input type="checkbox" onclick="TableDOMModel.toggle(this);" name="rowSelection" class="radiobutton"></input></td>
+
+      <td mc:column="DefaultReferenceColumn"><div mc:value="true" >row 1, cell 2</div></td>
+   </tr>
+
+</table>
+
+</div>
+
+
+<pre>
+
+
+
+</pre>
+<div  viewname="TemplateTable2" componentname="ACTable">
+
+
+
+<Table  cellspacing="0" cellpadding="0" class="navigatorTable" align="center"> 
+<tr mc:row="mc:navigator">
+      <td mc:column="DefaultMenu"> </td>
+      
+       <td mc:navigatorDetailsColumn="true" width="25%" nowrap align="left" class="navigatorDetailsColumn">Showing : ${startRow}&nbsp;to&nbsp;                ${lastRow}&nbsp;of&nbsp;${totalRows}
+       </td> 
+       
+       
+                  
+       <td mc:navigatorLinksColumn="true" nowrap class="navigatorLinksColumn">
+       <img mc:firstLink="true" src="/mc/themes/wifi/images/navigator/first_link.png" alt="First" border="0" align="ABSMIDDLE"/>
+       <img mc:previousLink="true" src="/mc/themes/wifi/images/navigator/previous_link.png" alt="Previous" border="0" align="ABSMIDDLE"/>
+       <span mc:pageLinks="5">Page: </span>
+       <img mc:nextLink="true" src="/mc/themes/wifi/images/navigator/next_link.png" alt="Next" border="0" align = "ABSMIDDLE">
+       <img mc:lastLink="true" src="/mc/themes/wifi/images/navigator/last_link.png" alt="Last" border="0" align = "ABSMIDDLE">
+       </td>
+
+       <td align="left" mc:navigatorRangeColumn="true" width="25%" nowrap class="navigatorRangeColumn" mc:viewPerPageLinks="5">
+		View Per Page:       
+       </td>
+
+
+   </tr>
+   </Table>       
+   <table cellspacing="0" cellpadding="0" border="0" align="center" class="tableComponent">
+
+<tr mc:row="header">   
+<th mc:columnName="mc:toggle" nowrap="" align="center" class="tableHeader" width=1%><input type="checkbox" onclick="TableDOMModel.toggleAll(this)" title="Select all" value="checkbox" table_el="TOGGLEALL" class="toggleAll" name="toggleAll"></input></th>
+
+<th mc:columnName="DefaultColumn" class="tableHeader" align="left"></th>
+
+
+
+
+<th mc:columnName="mc:lastColumn" width="1%" valign="middle" nowrap="" align="right"  class="tableHeader"><input type="button" onclick="return openSearch_template(this)" class="tableSearchButton" table_el="OSBTN"/><input class="hide" type="button" onclick="return closeSearch_template(this)" table_el="CSBTN"/>
+
+
+<input mc:columnChooserType="DefaultColumnChooserType" type="button" onclick="invokeMenuAction_template(this)" class="columnEditButton" /></th>
+
+
+</tr>
+
+
+
+
+
+<tr mc:row="searchRow" class="searchRow hide" table_el="SEARCHROW">
+
+<td class="TableHeader"></td>
+
+<td class="TableHeader" mc:column="DefaultSearchColumn"></td>
+
+<td class="TableHeader"><input type="button" onclick="fetchSpotSearchData(this);" class="tableSearchGoButton" name="searchSubmit"></input></td>
+</tr>
+
+
+
+
+
+
+<tr mc:row="reference">
+
+   <td><input type="checkbox" onclick="TableDOMModel.toggle(this);" name="rowSelection" class="radiobutton"></input></td>
+
+      <td mc:column="DefaultReferenceColumn"><div mc:value="true" >row 1, cell 2</div></td>
+   </tr>
+
+</table>
+
+</div>
+

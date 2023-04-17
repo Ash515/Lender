@@ -1,0 +1,14 @@
+public enum $resourcetypename {
+
+	$COLUMNS
+	public String column() {
+		return name();
+	}
+
+	public static String table() {
+		return "$resourcetypetolower";
+	}
+	public static String sqlname() {
+		return com.zoho.resource.util.RESTUtil.checkROTable("$restContext","$resourcetypetolower","$resourcetypesqlname");
+	}
+}

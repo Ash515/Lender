@@ -1,0 +1,1117 @@
+<?xml version="1.0"?>
+<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd">
+<data-dictionary name="Accounts" template-meta-handler="com.zoho.resource.metadata.internal.AuditTemplateHandlerImpl">
+    <table name="IAMMailClientAuditTemplate" display-name="MailClientAuditTemplate" template="true">
+    	<description>Mail Client(POP/IMAP/etc) Password Verification API Success Audit</description>
+    	<columns>
+            <column name="MAIL_CLIENT_AUDIT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMMailClientAuditTemplate.MAIL_CLIENT_AUDIT_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ARID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMMailClientAuditTemplate.ARID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ZUID">
+                <description>Unique Identifier of the user</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="EMAIL_ID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&email;</pattern>
+                </allowed-values>
+            </column>
+            <column name="APP_NAME">
+                <description>Unique Identifier of the service</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&appname;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IP_ADDRESS">
+                <description>IP Address of the user from where the access is originated</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_AGENT">
+                <description>Using which browser or device the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="AUDITED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMMailClientAuditTemplate_PK">
+            <primary-key-column>MAIL_CLIENT_AUDIT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <unique-keys>
+			<unique-key name="IAMMailClientAuditTemplate_UK1">
+                        <unique-key-column>ARID</unique-key-column>
+                </unique-key>
+		</unique-keys>
+         <indexes>
+            <index name="IAMMailClientAuditTemplate_ZUIDndx">
+                <index-column>ZUID</index-column>
+            </index>
+            <index name="IAMMailClientAuditTemplate_ATndx">
+                <index-column>AUDITED_TIME</index-column>
+            </index>
+        </indexes>
+    </table>
+    <table name="IAMAccountAuditTemplate" display-name="AccountAuditTemplate" template="true">
+        <description>Sign Up, Sign In, Sign Out and Close time of an Account member</description>
+        <columns>
+            <column name="ACCOUNT_AUDIT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAccountAuditTemplate.ACCOUNT_AUDIT_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ARID">
+                <description>Unique Identifier of this audit record</description>
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAccountAuditTemplate.ARID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ZAID">
+                <description>Unique Identifier of the Zoho Account</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZUID">
+                <description>Unique Identifier of the user</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+             <column name="APP_ID">
+                <data-type>INTEGER</data-type>
+            </column>
+            <column name="OPERATION_ID">
+                <data-type>INTEGER</data-type>
+            </column>
+            <column name="IP_ADDRESS">
+                <description>IP Address of the user from where the access is originated</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="REFERRER">
+                <data-type>CHAR</data-type>
+                <max-size>2000</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TOKEN_DIGEST">
+                <description>Message digest(SHA512) of the auth token used</description>
+                <data-type>CHAR</data-type>
+                <max-size>255</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_AGENT">
+                <description>Using which browser or device the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccountAuditTemplate_PK">
+            <primary-key-column>ACCOUNT_AUDIT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <unique-keys>
+            <unique-key name="IAMAccountAuditTemplate_UK1">
+                <unique-key-column>ARID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMAccountAuditTemplate_ZUIDndx">
+                <index-column>ZUID</index-column>
+            </index>
+            <index name="IAMAccountAuditTemplate_CTndx">
+                <index-column>CREATED_TIME</index-column>
+            </index>
+            <index name="IAMAccountAuditTemplate_COAndx">
+            	<index-column>CREATED_TIME</index-column>
+            	<index-column>OPERATION_ID</index-column>
+            	<index-column>APP_ID</index-column>
+            </index>
+        </indexes>
+    </table>
+    
+    <table name="IAMResourceAuditTemplate" display-name="ResourceAuditTemplate" template="true">
+        <description>Audit details(who performed what on which resource at when from where) about an operation performed on a resource</description>
+        <columns>
+            <column name="RESOURCE_AUDIT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMResourceAuditTemplate.RESOURCE_AUDIT_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ARID">
+                <description>Unique Identifier of this audit record</description>
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMResourceAuditTemplate.ARID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ZAID">
+                <description>Unique Identifier of the Zoho Account</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZUID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="OWNER_ZUID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="APP_ID">
+                <data-type>INTEGER</data-type>
+            </column>
+            <column name="REQUEST_ID">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RESOURCE_TYPE">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&resource-name;</pattern>
+                </allowed-values>
+            </column>
+            <column name="OPERATION">
+                <data-type>CHAR</data-type>
+                <max-size>10</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <value>POST</value>
+                    <value>PUT</value>
+                    <value>DELETE</value>
+                </allowed-values>
+            </column>
+            <column name="OLD_DATA">
+                <description>Data before the operation is performed. In json format</description>
+                <data-type>CHAR</data-type>
+                <max-size>70000</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="NEW_DATA">
+                <description>Data after the operation is performed. In json format</description>
+                <data-type>CHAR</data-type>
+                <max-size>70000</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="REST_URL">
+                <description>For which URI request data is audited.</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TOKEN_DIGEST">
+                <description>The Auth Token used to access the resource. Used to group operations that are performed in a session</description>
+                <data-type>CHAR</data-type>
+                <max-size>255</max-size>
+                <allowed-values>
+                    <pattern>&hexadecimal;</pattern>
+                </allowed-values>
+            </column>
+            <column name="THREAD_ID">
+                <description>The thread used to perform the operation. Used to group operations that are performed in a single request</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="APP_IP">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="REMOTE_IP">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_AGENT">
+                <description>Using which browser or devide the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="AUDITED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMResourceAuditTemplate_PK">
+            <primary-key-column>RESOURCE_AUDIT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <unique-keys>
+            <unique-key name="IAMResourceAuditTemplate_UK1">
+                <unique-key-column>ARID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMResourceAuditTemplate_ATndx">
+                <index-column>AUDITED_TIME</index-column>
+            </index>
+            <index name="IAMResourceAuditTemplate_ROndx">
+                <index-column>RESOURCE_TYPE</index-column>
+                <index-column>OPERATION</index-column>
+            </index>
+             <index name="IAMResourceAuditTemplate_OZndx">
+                <index-column>OWNER_ZUID</index-column>
+            </index>
+        </indexes>
+    </table>
+    <table name="IAMAccountRegistrationAuditTemplate" display-name="RegistrationAuditTemplate" template="true">
+        <description>Auditing the registration page</description>
+        <columns>
+            <column name="ACCOUNT_REG_AUDIT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAccountRegistrationAuditTemplate.ACCOUNT_REG_AUDIT_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ARID">
+                <description>Unique Identifier of this audit record</description>
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAccountRegistrationAuditTemplate.ARID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ZAID">
+                <description>Unique Identifier of the Zoho Account</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="REG_ID">
+                <description>Unique key generated and set on the user browser</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="APP_IP">
+                <description>Application server ip address</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="REMOTE_IP">
+                <description>Remote ip address in which that page was invoked</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_AGENT">
+                <description>Using which browser or device the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="REFERRER">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="APP_ID">
+                <data-type>INTEGER</data-type>
+            </column>
+            <column name="STATUS">
+                <description>0 - registration complete, 1 - Register page invoked, 2 - User name avaialbility check done, 3 - Form submitted with errors, 4 - Redirected to IDP</description>
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+            </column>
+            <column name="ERRORS">
+                <description>Comma separated error codes</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZUID_AFTER_REG">
+                <description>ZUID unique value after generated</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CURRENT_ZUID">
+                <description>Registration page invoked by a logged in user</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="GET_COUNT">
+                <description>Number of times the registration page invoked</description>
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+            </column>
+            <column name="EMAIL_ID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&email;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IDP">
+                <description>Z - ZOHO, G - Google, Y - Yahoo, A - Google Apps, F - Facebook</description>
+                <data-type>CHAR</data-type>
+                <max-size>2</max-size>
+                <default-value>Z</default-value>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="END_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccRegAuditTemplate_PK">
+            <primary-key-column>ACCOUNT_REG_AUDIT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <unique-keys>
+            <unique-key name="IAMAccRegAuditTemplate_UK1">
+                <unique-key-column>ARID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMAccRegAuditTemplate_ZUIDndx">
+                <index-column>REG_ID</index-column>
+            </index>
+        </indexes>
+    </table>
+    <table name="IAMAccountUpdateAuditTemplate" display-name="AccountUpdateAuditTemplate" template="true">
+        <description>Auditing the registration page</description>
+        <columns>
+            <column name="ACCOUNT_UPDATE_AUDIT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAccountUpdateAuditTemplate.ACCOUNT_UPDATE_AUDIT_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ARID">
+                <description>Unique Identifier of this audit record</description>
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAccountUpdateAuditTemplate.ARID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ZAID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZUID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CONTROL_QUERY_STRING">
+                <data-type>CHAR</data-type>
+                <max-size>400</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RESPONSE_STATUS">
+                <description> FAILED(0), SUCCESS(1) </description>
+                <data-type>INTEGER</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccountUpdateAuditTemplate_PK">
+            <primary-key-column>ACCOUNT_UPDATE_AUDIT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <unique-keys>
+            <unique-key name="IAMAccountUpdateAuditTemplate_UK1">
+                <unique-key-column>ARID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+    <table name="IAMAPIAuditTemplate" display-name="APIAuditTemplate" template="true">
+        <description>Sign Up, Sign In, Sign Out and Close time of an Account member</description>
+        <columns>
+            <column name="API_AUDIT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAPIAuditTemplate.API_AUDIT_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ARID">
+                <description>Unique Identifier of this audit record</description>
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAPIAuditTemplate.ARID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ZAID">
+                <description>Unique Identifier of the Zoho Account</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZUID">
+                <description>Unique Identifier of the user</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="APP_ID">
+                <data-type>INTEGER</data-type>
+            </column>
+            <column name="SCREEN_NAME">
+                <description>Unique Identifier of the Application Account</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&loginname;</pattern>
+                </allowed-values>
+            </column>
+            <column name="OPERATION_ID">
+                <data-type>INTEGER</data-type>
+            </column>
+            <column name="IP_ADDRESS">
+                <description>IP Address of the user from where the access is originated</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="REFERRER">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TOKEN_DIGEST">
+                <description>Message digest(SHA512) of the auth token used</description>
+                <data-type>CHAR</data-type>
+                <max-size>255</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_AGENT">
+                <description>Using which browser or device the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAPIAuditTemplate_PK">
+            <primary-key-column>API_AUDIT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <unique-keys>
+            <unique-key name="IAMAPIAuditTemplate_UK1">
+                <unique-key-column>ARID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMAPIAuditTemplate_ZUIDndx">
+                <index-column>ZUID</index-column>
+            </index>
+            <index name="IAMAPIAuditTemplate_CTndx">
+                <index-column>CREATED_TIME</index-column>
+            </index>
+            <index name="IAMAPIAuditTemplate_CORndx">
+                <index-column>CREATED_TIME</index-column>
+                <index-column>OPERATION_ID</index-column>
+                <index-column>APP_ID</index-column>
+            </index>
+        </indexes>
+    </table>
+    <table name="IAMZAIDSMSAuditTemplate" display-name="ZAIDSMSAuditTemplate" template="true">
+        <description>Auditing the SMS data which consists when, to whom, etc</description>
+        <columns>
+            <column name="ZAID">
+                <data-type>CHAR</data-type>
+             	<max-size>100</max-size>
+             	<nullable>false</nullable>
+             	<allowed-values>
+                    <pattern>&zid;</pattern>
+             	</allowed-values>
+            </column>
+            <column name="SMSAudit_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMZAIDSMSAuditTemplate.SMSAudit_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ZID">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MOBILE_NO">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TYPE">
+                <data-type>INTEGER</data-type>
+                <max-size>10</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="USECASE">
+                <data-type>INTEGER</data-type>
+                <max-size>10</max-size>
+            </column>            
+            <column name="LANGUAGE_CODE">
+                <data-type>CHAR</data-type>
+                <max-size>10</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RESPONSE">
+                <description>Response or error from telesign api</description>
+                <data-type>CHAR</data-type>
+                <max-size>300</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMZAIDSMSAuditTemplate_PK">
+            <primary-key-column>SMSAudit_AUTO_ID</primary-key-column>
+        </primary-key>
+        <indexes>
+            <index name="IAMZAIDSMSAuditTemplate_ZIDndx">
+                <index-column>ZID</index-column>
+            </index>
+             <index name="IAMZAIDSMSAuditTemplate_MOBNOndx">
+                <index-column>MOBILE_NO</index-column>
+            </index>
+        </indexes>
+    </table>
+
+    <table name="IAMTFAAuditTemplate" display-name="TFAAuditTemplate" template="true">
+    <description>Auditing TFA for each account member</description>
+    <columns>
+	<column name="TFAAUDIT_ID">
+       	<data-type>CHAR</data-type>
+        <max-size>50</max-size>
+        <allowed-values>
+         	<pattern>&audit;</pattern>
+        </allowed-values>
+    </column>
+    <column name="ZAID">
+		<data-type>CHAR</data-type>
+		<max-size>100</max-size>
+		<nullable>false</nullable>
+		<allowed-values>
+		<pattern>&zid;</pattern>
+		</allowed-values>
+	</column>
+	<column name="ZID">
+		<data-type>CHAR</data-type>
+		<max-size>50</max-size>
+		<nullable>false</nullable>
+		<allowed-values>
+		<pattern>&zid;</pattern>
+		</allowed-values>
+	</column>
+	<column name="APP_ID">
+        <data-type>INTEGER</data-type>
+   	</column>
+	<column name="OPERATION_ID">
+		<data-type>INTEGER</data-type>
+		<default-value>1</default-value>
+	</column>
+	<column name="STATUS">
+		<data-type>CHAR</data-type>
+		<max-size>150</max-size>
+		<allowed-values>
+        	<pattern>&audit;</pattern>
+        </allowed-values>
+	</column>
+	<column name="ERRORS">
+    	<description>Comma separated error codes</description>
+        <data-type>CHAR</data-type>
+        <max-size>250</max-size>
+        <allowed-values>
+        	<pattern>&audit;</pattern>
+        </allowed-values>
+	</column>
+	<column name="USER_AGENT">
+		<description>Using which browser or device the access has been made.</description>
+		<data-type>CHAR</data-type>
+		<max-size>250</max-size>
+		<allowed-values>
+			<pattern>&audit;</pattern>
+		</allowed-values>
+	</column>
+	<column name="REFERRER">
+		<data-type>CHAR</data-type>
+		<max-size>250</max-size>
+		<allowed-values>
+			<pattern>&audit;</pattern>
+		</allowed-values>
+	</column>
+	<column name="STARTED_TIME">
+		<data-type>BIGINT</data-type>
+	</column>
+	<column name="ALTERED_TIME">
+		<data-type>BIGINT</data-type>
+	</column>
+    </columns>
+    <primary-key name="IAMTFAAuditTemplate_PK">
+            <primary-key-column>TFAAUDIT_ID</primary-key-column>
+    </primary-key>
+	<indexes>
+    	<index name="IAMTFAAuditTemplate_ZIDndx">
+        	<index-column>ZID</index-column>
+		</index>
+    </indexes>
+    </table>
+    <table name="IAMMFAAuditTemplate" display-name="MFAAuditTemplate" template="true">
+    <description>Auditing MFA for each account member</description>
+    <columns>
+    <column name="MFAAUDIT_ID">
+    	<data-type>CHAR</data-type>
+        <max-size>100</max-size>
+        <allowed-values>
+        	<pattern>&simple-string;</pattern>
+    	</allowed-values>
+    </column>
+	<column name="ZUID">
+		<data-type>CHAR</data-type>
+		<max-size>100</max-size>
+		<nullable>false</nullable>
+		<allowed-values>
+		<pattern>&zid;</pattern>
+		</allowed-values>
+	</column>
+	<column name="OPERATION_ID">
+		<data-type>INTEGER</data-type>
+		<default-value>1</default-value>
+	</column>
+	<column name="STATUS">
+		<data-type>CHAR</data-type>
+		<max-size>150</max-size>
+		<allowed-values>
+        	<pattern>&audit;</pattern>
+        </allowed-values>
+	</column>
+	<column name="ERRORS">
+    	<description>Comma separated error codes</description>
+        <data-type>CHAR</data-type>
+        <max-size>250</max-size>
+        <allowed-values>
+        	<pattern>&audit;</pattern>
+        </allowed-values>
+	</column>
+	<column name="USER_AGENT">
+		<description>Using which browser or device the access has been made.</description>
+		<data-type>CHAR</data-type>
+		<max-size>250</max-size>
+		<allowed-values>
+			<pattern>&audit;</pattern>
+		</allowed-values>
+	</column>
+     <column name="DEVICE_TOKEN">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+     </column>
+     <column name="DEVICE_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+     </column>
+     <column name="LOCATION">
+                <description>Location of the device.</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+     </column>
+     <column name="REFERRER">
+		<data-type>CHAR</data-type>
+		<max-size>250</max-size>
+		<allowed-values>
+			<pattern>&audit;</pattern>
+		</allowed-values>
+	</column>
+	<column name="STARTED_TIME">
+		<data-type>BIGINT</data-type>
+	</column>
+	<column name="ALTERED_TIME">
+		<data-type>BIGINT</data-type>
+	</column>
+	</columns>
+    <primary-key name="IAMMFAAuditTemplate_PK">
+            <primary-key-column>MFAAUDIT_ID</primary-key-column>
+    </primary-key>
+	<indexes>
+    	<index name="IAMMFAAuditTemplate_ZIDndx">
+        	<index-column>ZUID</index-column>
+		</index>
+    </indexes>
+    </table>
+
+    <table name="IAMSignInFailedAuditTemplate" display-name="SignInFailedAuditTemplate" template="true">
+        <description>Audit the all the failed attempts happened during SignIn</description>
+        <columns>
+            <column name="SIGNINFAILED_AUDIT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMSignInFailedAuditTemplate.SIGNINFAILED_AUDIT_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ARID">
+                <description>Unique Identifier of this audit record</description>
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMSignInFailedAuditTemplate.ARID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+             <column name="LOGIN_ID">
+                <description>Unique Identifier of the Application Account</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&loginname;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZUID">
+                <description>Unique Identifier of the user</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+             <column name="IP_ADDRESS">
+                <description>IP Address of the user from where the access is originated</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="APP_ID">
+               <data-type>INTEGER</data-type>
+            </column>
+            <column name="REFERRER">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+              <column name="USER_AGENT">
+                <description>Using which browser or device the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="ERROR_CODE">
+                <description>error codes for NO SUCH USER - 1,INAVLID PASSWORD - 2,INAVLID PASSWORD - 3,IP RESTRICTION - 4,REGISTRATION NOT ALLOWED - 5,REGISTRATION NOT ALLOWED - 6,ACCOUNT INACTIVE - 7,DISABLED THIRD PARTY SIGNIN - 8</description>
+                <data-type>TINYINT</data-type>
+            </column>
+            <column name="COUNTRY">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&country-code;</pattern>
+                </allowed-values>
+            </column>
+            <column name="REQUEST_TYPE">
+                <description>Web login-1,Verify Password-2,Verify App Password-3</description>
+                <data-type>TINYINT</data-type>
+            </column>
+            <column name="SIGNIN_ID">
+                <description>Unique cookie generated and set on the user browser</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            </columns>
+            <primary-key name="IAMSignInFailedAuditTemplate_PK">
+            <primary-key-column>SIGNINFAILED_AUDIT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <unique-keys>
+            <unique-key name="IAMSignInFailedAuditTemplate_UK">
+                <unique-key-column>ARID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+          <index name="IAMSignInFailedAuditTemplate_ZUIDndx">
+                <index-column>ZUID</index-column>
+            </index>
+            <index name="SignInFailedAuditTemplate_SIGNINIDndx">
+                <index-column>SIGNIN_ID</index-column>
+            </index>
+            <index name="IAMSignInFailedAuditTemplate_IPndx">
+                <index-column>IP_ADDRESS</index-column>
+            </index>
+             <index name="IAMSignInFailedAuditTemplate_USERIDndx">
+                <index-column>LOGIN_ID</index-column>
+            </index>
+            <index name="IAMSignInFailedAuditTemplate_CTndx">
+                <index-column>CREATED_TIME</index-column>
+            </index>
+             <index name="IAMSignInFailedAuditTemplate_RTndx">
+                <index-column>REQUEST_TYPE</index-column>
+            </index>
+        </indexes>
+      </table>
+      <table name="IAMOAuthAuditTemplate" display-name="OAuthAuditTemplate" template="true">
+        <description>OAuth Registration and other processes.</description>
+        <columns>
+            <column name="OAUTH_AUDIT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMOAuthAuditTemplate.OAUTH_AUDIT_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ARID">
+                <description>Unique Identifier of this audit record</description>
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMOAuthAuditTemplate.ARID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ZAID">
+                <description>Unique Identifier of the Zoho Account</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ZID">
+                <description>Unique Identifier of the user/Account</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="APP_ID">
+                <data-type>INTEGER</data-type>
+            </column>
+            <column name="CLIENT_ZID">
+                <description>Unique Identifier of the Client</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&clientzid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="OPERATION_ID">
+                <description>Accounts Operation 
+                    1- Create Grant Token. 2. validate Grant Token. 3. generate access token from grant token
+                    4- Create Refresh Token. 5. generate access token from refesh token.6. Delete Refresh token.
+                    7- validate Access Token. 8. Delete Access token.
+                </description>
+                <data-type>TINYINT</data-type>
+            </column>
+            <column name="IP_ADDRESS">
+                <description>IP Address of the user from where the access is originated</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TOKEN_DIGEST">
+                <description>Message digest(SHA512) of the auth token used</description>
+                <data-type>CHAR</data-type>
+                <max-size>255</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PARENT_TOKEN_DIGEST">
+                <description>Message digest(SHA512) of the Refresh token or grant token  used</description>
+                <data-type>CHAR</data-type>
+                <max-size>255</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_AGENT">
+                <description>Using which browser or device the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ADDED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMOAuthAuditTemplate_PK">
+            <primary-key-column>OAUTH_AUDIT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <unique-keys>
+            <unique-key name="IAMOAuthAuditTemplate_UK1">
+                <unique-key-column>ARID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMOAuthAuditTemplate_ZUIDndx">
+                <index-column>ZID</index-column>
+            </index>
+            <index name="IAMOAuthAuditTemplate_CTndx">
+                <index-column>ADDED_TIME</index-column>
+            </index>
+            <index name="IAMOAuthAuditTemplate_STndx">
+            	<index-column>ADDED_TIME</index-column>
+            	<index-column>OPERATION_ID</index-column>
+            	<index-column>APP_ID</index-column>
+            	<index-column>ZID</index-column>
+            </index>
+            <index name="IAMOAuthAuditTemplate_TOKndx">
+            	<index-column>ADDED_TIME</index-column>
+            	<index-column>TOKEN_DIGEST</index-column>
+            </index>
+        </indexes>
+    </table>
+</data-dictionary>
+<!-- $Id$ -->

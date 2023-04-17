@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+
+<IAMRoleAccessCheck ROLE="IAMPartnerAdmin">
+	<IAMRoleResourceMappings RESOURCE="account" OPERATIONS_ALLOWED="POST|PUT|DELETE"/>
+</IAMRoleAccessCheck>
+<IAMRoleAccessCheck ROLE="SuperAdmin">
+	<IAMRoleResourceMappings RESOURCE="account" OPERATIONS_ALLOWED="PUT|DELETE"/>
+</IAMRoleAccessCheck>
+<IAMRoleAccessCheck ROLE="OrgAdmin">
+	<IAMRoleResourceMappings RESOURCE="account" OPERATIONS_ALLOWED="PUT|DELETE"/>
+</IAMRoleAccessCheck>
+<IAMRoleAccessCheck ROLE="SelfUser">
+	<IAMRoleResourceMappings RESOURCE="account" OPERATIONS_ALLOWED="PUT" INHERIT_ALLOWED="false"/>
+	<IAMRoleResourceMappings RESOURCE="accountmember" OPERATIONS_ALLOWED="PUT|DELETE"/>
+	<IAMRoleResourceMappings RESOURCE="appaccountmember" OPERATIONS_ALLOWED="PUT|DELETE"/>
+	<IAMRoleResourceMappings RESOURCE="groupmember" OPERATIONS_ALLOWED="PUT|DELETE"/>
+	<IAMRoleResourceMappings RESOURCE="openid" OPERATIONS_ALLOWED="PUT|DELETE"/>
+	<IAMRoleResourceMappings RESOURCE="user" OPERATIONS_ALLOWED="PUT|DELETE"/>
+	<IAMRoleResourceMappings RESOURCE="userdomain" OPERATIONS_ALLOWED="PUT|DELETE"/>
+</IAMRoleAccessCheck>
+<IAMRoleAccessCheck ROLE="NoUser">
+	<IAMRoleResourceMappings RESOURCE="account" OPERATIONS_ALLOWED="POST" INHERIT_ALLOWED="false"/>
+	<IAMRoleResourceMappings RESOURCE="approle" OPERATIONS_ALLOWED="*" INHERIT_ALLOWED="false"/>
+	<IAMRoleResourceMappings RESOURCE="authtoken" OPERATIONS_ALLOWED="POST" INHERIT_ALLOWED="false"/>
+	<IAMRoleResourceMappings RESOURCE="captcha" OPERATIONS_ALLOWED="*" INHERIT_ALLOWED="false"/>
+	<IAMRoleResourceMappings RESOURCE="digest" OPERATIONS_ALLOWED="*" INHERIT_ALLOWED="false"/>
+	<IAMRoleResourceMappings RESOURCE="useralldomainstoken" OPERATIONS_ALLOWED="POST"/>
+	<IAMRoleResourceMappings RESOURCE="userverificationcode" OPERATIONS_ALLOWED="POST" INHERIT_ALLOWED="false"/>
+</IAMRoleAccessCheck>
+
+</IAMAccounts>

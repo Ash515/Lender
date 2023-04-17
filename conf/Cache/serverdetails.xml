@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id: serverdetails.xml,v 1.1 2008/06/30 01:57:32 balar Exp $ -->
+<cacheservers>
+	<!-- <ServerDetails serverid="ServerDetails:serverid:1" poolname="cachedPersistencePool" 
+		servername="localhost:5555" weight="1" serverorder="1"/> -->
+</cacheservers>

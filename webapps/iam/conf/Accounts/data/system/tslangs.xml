@@ -1,0 +1,47 @@
+<IAMTelesignLanguages>
+<IAMTelesignLanguage lang_name="Arabic" lang_code="ar"/>
+<IAMTelesignLanguage lang_name="Arabic, Egyptian" lang_code="ar-EG"/>
+<IAMTelesignLanguage lang_name="Bulgarian" lang_code="bg"/>
+<IAMTelesignLanguage lang_name="Cantonese (Chinese, Hong Kong)" lang_code="zh-HK"/>
+<IAMTelesignLanguage lang_name="Catalan" lang_code="ca"/>
+<IAMTelesignLanguage lang_name="Croatian" lang_code="hr"/>
+<IAMTelesignLanguage lang_name="Czech" lang_code="cs"/>
+<IAMTelesignLanguage lang_name="Danish" lang_code="da"/>
+<IAMTelesignLanguage lang_name="Dutch" lang_code="nl"/>
+<IAMTelesignLanguage lang_name="English, Australian" lang_code="en-AU"/>
+<IAMTelesignLanguage lang_name="English, UK" lang_code="en-GB"/>
+<IAMTelesignLanguage lang_name="English, US" lang_code="en-US"/>
+<IAMTelesignLanguage lang_name="Estonian" lang_code="et"/>
+<IAMTelesignLanguage lang_name="Filipino" lang_code="fil"/>
+<IAMTelesignLanguage lang_name="Finnish" lang_code="fi"/>
+<IAMTelesignLanguage lang_name="French" lang_code="fr"/>
+<IAMTelesignLanguage lang_name="French, Canadian" lang_code="fr-CA"/>
+<IAMTelesignLanguage lang_name="German" lang_code="de"/>
+<IAMTelesignLanguage lang_name="Greek" lang_code="el"/>
+<IAMTelesignLanguage lang_name="Hebrew" lang_code="he"/>
+<IAMTelesignLanguage lang_name="Hindi" lang_code="hi"/>
+<IAMTelesignLanguage lang_name="Hungarian" lang_code="hu"/>
+<IAMTelesignLanguage lang_name="Icelandic" lang_code="is"/>
+<IAMTelesignLanguage lang_name="Indonesian" lang_code="id"/>
+<IAMTelesignLanguage lang_name="Italian" lang_code="it"/>
+<IAMTelesignLanguage lang_name="Japanese" lang_code="ja"/>
+<IAMTelesignLanguage lang_name="Korean" lang_code="ko"/>
+<IAMTelesignLanguage lang_name="Latvian" lang_code="lv"/>
+<IAMTelesignLanguage lang_name="Lingala" lang_code="ln"/>
+<IAMTelesignLanguage lang_name="Lithuanian" lang_code="lt"/>
+<IAMTelesignLanguage lang_name="Mandarin" lang_code="zh-CN"/>
+<IAMTelesignLanguage lang_name="Norwegian" lang_code="no"/>
+<IAMTelesignLanguage lang_name="Polish" lang_code="pl"/>
+<IAMTelesignLanguage lang_name="Portuguese, Brazilian" lang_code="pt-BR"/>
+<IAMTelesignLanguage lang_name="Portuguese, European" lang_code="pt"/>
+<IAMTelesignLanguage lang_name="Romanian" lang_code="ro"/>
+<IAMTelesignLanguage lang_name="Russian" lang_code="ru"/>
+<IAMTelesignLanguage lang_name="Slovakian" lang_code="sk"/>
+<IAMTelesignLanguage lang_name="Spanish, European" lang_code="es"/>
+<IAMTelesignLanguage lang_name="Spanish, Latin American" lang_code="es-419"/>
+<IAMTelesignLanguage lang_name="Swedish" lang_code="sv"/>
+<IAMTelesignLanguage lang_name="Thai" lang_code="th"/>
+<IAMTelesignLanguage lang_name="Turkish" lang_code="tr"/>
+<IAMTelesignLanguage lang_name="Ukrainian" lang_code="uk"/>
+<IAMTelesignLanguage lang_name="Vietnamese" lang_code="vi"/>
+</IAMTelesignLanguages>

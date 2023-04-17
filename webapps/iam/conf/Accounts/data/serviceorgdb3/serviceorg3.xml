@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: $ -->
+<IAMAccounts>
+	<IAMAccount zaid="invoicesorgzaid" account_name="Zoho Invoice Service Org">
+		<IAMAccountDomain domain="invoicesorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="bookssorgzaid" account_name="Zoho Books Service Org">
+		<IAMAccountDomain domain="bookssorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="zsmsorgzaid" account_name="Zoho Subscription Management Service Org">
+		<IAMAccountDomain domain="zsmsorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

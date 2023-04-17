@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<conf-files>
+    <ConfFile url="bean.xml"/>
+    <ConfFile url="service.xml"/>
+    <ConfFile url="patchUpdaterService.xml"/>
+</conf-files>
+
+

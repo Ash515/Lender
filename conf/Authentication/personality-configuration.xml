@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id: personality-configuration.xml,v 1.5 2005/06/10 06:18:14 vinod Exp 
+	$ -->
+<personality-configuration>
+	<DominantTableConfig DOMINANTTABLEID="Module" isindexed="false" nonindexlimit="31">
+		<PersonalityConfiguration personalityid="PersonalityConfiguration:personalityid:ServiceNameForContext"
+			personalityname="ServiceNameForContext" dominanttableid="Module"
+			modulename="Authentication" description="To fetch service name for the requested context">
+			<ConstituentTable tableid="Module" mandatory="true" tableindex="0" />
+			<ConstituentTable tableid="ModuleContext" mandatory="true" tableindex="1" fkconstraint_id="ModuleContext_FK1"/>	
+			<ConstituentTable tableid="AaaModuleService" mandatory="true" tableindex="2" fkconstraint_id="AaaModuleService_FK1"/>
+			<ConstituentTable tableid="AaaService" mandatory="true" tableindex="3" fkconstraint_id="AaaModuleService_FK2"/>
+		</PersonalityConfiguration>
+	</DominantTableConfig>
+	
+	<DominantTableConfig DOMINANTTABLEID="AaaLogin" isindexed="false" nonindexlimit="31">
+		<PersonalityConfiguration personalityid="PersonalityConfiguration:personalityid:AccountDOForSSO"
+			personalityname="AccountDOForSSO" dominanttableid="AaaLogin"
+			modulename="Authentication" description="To fetch Account DO for provided SSOID">
+			<ConstituentTable tableid="AaaLogin" mandatory="true" tableindex="0" />
+			<ConstituentTable tableid="AaaAccount" mandatory="true" tableindex="1" fkconstraint_id="AaaAccount_FK1"/>	
+			<ConstituentTable tableid="AaaUser" mandatory="true" tableindex="2" fkconstraint_id="AaaLogin_FK"/>
+			<ConstituentTable tableid="AaaUserProfile" mandatory="false" tableindex="3" fkconstraint_id="AaaUserProfile_FK1"/>
+			<ConstituentTable tableid="AaaService" mandatory="true" tableindex="4" fkconstraint_id="AaaAccount_FK2"/>
+			<ConstituentTable tableid="AaaAuthorizedRole" mandatory="false" tableindex="5" fkconstraint_id="AaaAuthorizedRole_FK"/>
+			<ConstituentTable tableid="AaaRole" mandatory="false" tableindex="6" fkconstraint_id="AaaAuthorizedRole_FK1"/>
+			<ConstituentTable tableid="AaaAccSession" mandatory="true" tableindex="7" fkconstraint_id="AaaAccSession_FK"/>
+			<ConstituentTable tableid="AaaAccHttpSession" mandatory="true" tableindex="8" fkconstraint_id="AaaAccHttpSession_FK"/>
+		</PersonalityConfiguration>
+	</DominantTableConfig>
+</personality-configuration>
+
+

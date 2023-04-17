@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="assistsorgzaid" account_name="Zoho Assist -Account- Service Org">
+		<IAMAccountDomain domain="assistsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="paysorgzaid" account_name="Zoho Pay -Account- Service Org">
+		<IAMAccountDomain domain="paysorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="parsersorgzaid" account_name="Zoho Parser -Account- Service Org">
+		<IAMAccountDomain domain="parsersorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="blueprintplussorgzaid" account_name="Zoho BlueprintPlus -Account- Service Org">
+		<IAMAccountDomain domain="blueprintplussorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

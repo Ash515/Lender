@@ -1,0 +1,56 @@
+<!--$Id$-->
+<html>
+<!--TPL-start-NavigationOfNoCountTable-->
+<table  class="navigatorTable" cellpadding="0" cellspacing="0">
+<tr><td align="right">
+<table cellspacing="0" cellpadding="0" style="align:right">
+	<tbody>
+		<tr> 
+			<td  align="right" cellpadding="0" class="navigatorDetailsColumn">Showing : ${FromIndex} to ${ToIndex} &nbsp;
+			</td>
+			<td align="right" cellpadding="0" class="navigatorLinksColumn">&nbsp;${Link1}<img src="${themeDir}/images/navigator/previous_link.png"  border="0">&nbsp;Previous${Link2} &nbsp;
+					${Link3}Next&nbsp;<img src="${themeDir}/images/navigator/next_link.png" alt="First" border="0">${Link4}&nbsp;</td>
+			<td class="navigatorRangeColumn" align="right">
+<form name="navigation">
+	&nbsp;View Per Page:&nbsp;${ComboBox}</form>
+</td>
+</tr>
+</tbody>
+</table>
+</td></tr>
+</table>
+
+<!--TPL-end-NavigationOfNoCountTable-->
+
+<!--TPL-start-NavigationOfNoCountTable2-->
+<td  align="right" cellpadding="0" class="navigatorDetailsColumn">Showing : ${FromIndex} to ${ToIndex} &nbsp;
+			</td>
+<td align="right" cellpadding="0" class="navigatorLinksColumn">&nbsp;${Link1}<img src="${themeDir}/images/navigator/previous_link.png"  border="0">&nbsp;Previous${Link2} &nbsp;
+					${Link3}Next&nbsp;<img src="${themeDir}/images/navigator/next_link.png" alt="First" border="0">${Link4}&nbsp;</td>
+			
+<!--TPL-end-NavigationOfNoCountTable2-->
+
+<!--TPL-start-NavigationOfNoCountTableWithCountOnDemand-->
+<table  class="navigatorTable" cellpadding="0" cellspacing="0">
+<tr><td align="right">
+<table cellspacing="0" cellpadding="0" style="align:right">
+	<tbody>
+		<tr> 
+			<td  align="right" cellpadding="0" class="navigatorDetailsColumn">Showing : ${FromIndex} to ${ToIndex} &nbsp; 
+			of &nbsp; ${totalCount} &nbsp;</td>
+			<td align="right" cellpadding="0" class="navigatorLinksColumn">&nbsp;${Link1}<img src="${themeDir}/images/navigator/previous_link.png"  border="0">&nbsp;Previous${Link2} &nbsp;
+					${Link3}Next&nbsp;<img src="${themeDir}/images/navigator/next_link.png" alt="First" border="0">${Link4}&nbsp;</td>
+			<td class="navigatorRangeColumn" align="right">
+<form name="navigation">
+	&nbsp;View Per Page:&nbsp;${ComboBox}</form>
+</td>
+</tr>
+</tbody>
+</table>
+</td></tr>
+</table>
+
+<!--TPL-end-NavigationOfNoCountTableWithCountOnDemand-->
+
+
+</html>

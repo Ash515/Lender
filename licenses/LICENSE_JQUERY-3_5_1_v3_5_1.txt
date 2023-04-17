@@ -1,0 +1,93 @@
+<!-- $Id$ -->
+<html><link rel="stylesheet" href="/zohocreator/platform/images/home.css"/><body>
+
+<div id="signin" style="display:none">
+<style>
+/* ZCAccounts signin styles starts */
+.zoho-signIn-popup{
+font-family: sans-serif;
+width: 100%;
+height: 100%;
+text-align: center;
+line-height: 30px;
+display: table;
+}
+.zoho-signIn-popup-btn{
+background: #f04b2f;
+color: #fff;
+border: none;
+padding: 10px 20px;
+font-size: 18px;
+font-weight: 500;
+min-width: 130px;
+cursor: pointer;
+outline: none;
+border-radius: 2px;
+letter-spacing: 1px;
+font-family:sans-serif;
+}
+.zoho-signIn-popup-btn:hover{
+background-color: #e64226;
+}
+.zoho-signIn-popup-heading{
+margin: 0px auto 25px;
+font-size: 20px;
+padding: 0 20px;
+font-weight: 300;
+}
+.zoho-signIn-popup-heading.zc-refresh{
+margin-bottom: 0px;
+}
+.zc-dis-row{
+display: table-row;
+}
+.zc-dis-cell{
+display: table-cell;
+vertical-align: middle;
+}
+.zoho-signIn-popup-heading span{
+color: #3987d9;
+cursor: pointer;
+}
+.zoho-signIn-popup-heading span:hover{
+color:#295d95;
+}
+/* ZCAccounts signin styles ends */
+</style>
+
+<div class="zoho-signIn-popup"><div class="zc-dis-row"><div class="zc-dis-cell"><h3 class="zoho-signIn-popup-heading" id="contentid">Sign in to your Zoho account to view this Form.</h3>
+<input type="button" value="Sign In" class="zoho-signIn-popup-btn" id="signinbtn"></input></div></div></div><script type="text/javascript">function getCookie(keyName)
+{
+if (document.cookie.length>0)
+{
+cookieBegin=document.cookie.indexOf(keyName + "="); //No I18N
+if (cookieBegin!=-1)
+{
+cookieBegin=cookieBegin + keyName.length+1;
+cookieEnd=document.cookie.indexOf(";",cookieBegin); //No I18N
+if (cookieEnd==-1) cookieEnd=document.cookie.length;
+{
+return unescape(document.cookie.substring(cookieBegin,cookieEnd));
+}
+}
+}
+return ""; //No I18N
+}
+var newLiveCookie = getCookie("ZCNEWLIVEUI");
+
+if(newLiveCookie != null && newLiveCookie != undefined && newLiveCookie == 'true'){
+location.href = location.href.replace(location.host, "app.zohocreator.com");
+}; 
+document.getElementById("signinbtn").onclick = function(){
+var iamCompleteUrl = "https://accounts.zoho.com/signin?servicename=ZohoCreator\x26hide_signup\x3Dtrue" + "&serviceurl=" + window.location.protocol + "//" + window.location.host + "/loginsuccess"; 
+window.open(iamCompleteUrl);
+document.getElementById("contentid").innerHTML = 'Click <span onclick="javascript:window.location.reload()">refresh</span>  to view this Form.'; //No I18N
+document.getElementById("contentid").classList.add('zc-refresh'); //No I18N
+document.getElementById("signinbtn").style.display = "none";
+}</script></div><script type="text/javascript">var isIframe 	= (window.top != null && window.top != undefined) && (window.self != null && window.self != undefined) && (window.self !== window.top);
+if(isIframe){
+document.getElementById("signin").style.display="block";
+}else{
+window.location.href = "https://accounts.zoho.com/signin?servicename=ZohoCreator\x26hide_signup\x3Dtrue"+"&serviceurl=https%3A%2F%2Fcreatorexport.zoho.com%252Fjsp%252Fshowapp.jsp%253Fappurl%253D%252Ffile%252Fcmgmt.tool%252Flicense%252FInteg_open_requests%252F414916000028322007%252FAttach_License_File_Text%252Fdownload%253Ffilepath%253D%252F1593076309330_jquery-3.5.1_LICENSE.txt";
+}</script>
+</body></html>

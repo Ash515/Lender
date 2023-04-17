@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id: personality-configuration.xml,v 1.2 2005/05/19 05:17:56 shyams Exp $ -->
+<personality-configuration>
+    <DominantTableConfig DOMINANTTABLEID="CustomViewConfiguration" isindexed="false" nonindexlimit="10">
+        <PersonalityConfiguration personalityid="PersonalityConfiguration:personalityid:1"
+            personalityname="CustomViewConfiguration" dominanttableid="CustomViewConfiguration" modulename="CustomView"
+            description="The personality Definition for CustomViewConfiguration">
+            
+            <ConstituentTable tableid="CustomViewConfiguration" mandatory="true" tableindex="0"/>
+        </PersonalityConfiguration>
+    </DominantTableConfig>
+
+    <PersonalityConfiguration personalityid="PersonalityConfiguration:personalityid:2"
+        personalityname="TableViewConfiguration" dominanttableid="CustomViewConfiguration" modulename="CustomView"
+        description="Defines personality, TableViewConfiguration including tables CustomViewConfiguration and TableViewSortColumn ">
+        
+        <ConstituentTable tableid="CustomViewConfiguration" mandatory="true"
+            tableindex="0"/>
+        <ConstituentTable tableid="TableViewSortColumn" mandatory="true"
+            tableindex="1" fkconstraint_id="TableViewSortCol_FK" />
+    </PersonalityConfiguration>
+</personality-configuration>
+

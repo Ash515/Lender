@@ -1,0 +1,67 @@
+<%--$Id$--%>
+<%@page import="com.adventnet.client.components.web.SearchOperator"%>
+<%@page import="com.adventnet.client.components.table.web.DefaultTransformer"%>
+<%@page import="com.adventnet.client.components.table.web.ColumnTransformer"%>
+<%@page import="com.adventnet.i18n.I18N" %>
+
+<%boolean isSearchValPresent = false;%>
+<%boolean isSearchPresent = false;%>
+
+<%if(transformerContext.isSearchEnabled()){%>
+	<%isSearchPresent = true;%>
+<%}%>
+
+<% isSearchValPresent =  transformerContext.isSearchValuePresent(); %>
+
+<TR table_el='SEARCHROWCOMBO' alerttype='Custom'
+<%if(!isSearchValPresent){%>
+ class='searchRow hide'
+<%}else{%>
+ class='searchRow'
+<%}%>
+>
+
+<%if(!("NONE".equals(enableRowSelection))) {%>
+               <% if(enableRow.indexOf("CHECKBOX")!=-1){%>
+	<TH>&nbsp;</TH>
+                <%}else if(enableRow.indexOf("RADIO")!=-1){%>
+	<TH>&nbsp;</TH>
+                <%}}%>
+
+<components:column viewContext="<%=viewContext%>">
+	<components:cell viewContext="<%=viewContext%>" type = "Header">
+
+<%String searchValue = transformerContext.getSearchValue();%>
+
+<%String selectedValue = transformerContext.getSearchComboValue();%>
+<%String headerClass = "tableHeader";
+TableViewModel tableViewModel = (TableViewModel) viewContext.getViewModel();
+String  columnName = transformerContext.getPropertyName();
+String aliasName = uniqueId +"_"+columnName;
+Class type = transformerContext.getDataType();%>
+
+<%if(columnName != null && columnName.equals(tableViewModel.getSortedColumn())){%>
+                <%headerClass = "sortedTableHeader";%><%--NO OUTPUTENCODING --%>
+            <%}%>
+<%HashMap prop = transformerContext.getRenderedAttributes();%>
+
+<TH class='<%out.print(headerClass);//NO OUTPUTENCODING%>' ><%--NO OUTPUTENCODING --%>
+
+<%if(transformerContext.isSearchEnabled()){%>
+	<select id='<%out.print(IAMEncoder.encodeHTMLAttribute(aliasName));//NO OUTPUTENCODING%>sel' name='searchRowCombobox' onChange="this.options[this.selectedIndex].onclick()"><%--NO OUTPUTENCODING --%>
+	<%ColumnTransformer ctObj = tableIter.getColumnTransformer();%>
+	<% SearchOperator[] criOps = ctObj.getSearchOperators(transformerContext);%>
+		<%for(int idx=0; idx<criOps.length; idx++) {
+		String criteriaOption = criOps[idx].getDisplayString();%>
+		<option value='<%out.print(criOps[idx].getValue());//NO OUTPUTENCODING%>' <%out.print((criteriaOption.equals(selectedValue))?"selected":"");//NO OUTPUTENCODING%> onclick="hideSearchBox('<%out.print(IAMEncoder.encodeJavaScript(aliasName));//NO OUTPUTENCODING%>','<%out.print(criOps[idx].getNumberOfArguments());//NO OUTPUTENCODING%>')"><%out.print(criteriaOption);//NO OUTPUTENCODING%></option><%--NO OUTPUTENCODING --%>
+	<%}%>
+
+	</select>
+<%}else{%>
+&nbsp;
+<%}%>
+
+</TH>
+	</components:cell>
+	</components:column>
+</TR>

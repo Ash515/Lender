@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="aistratussorgzaid" account_name="AIStratus Service Org">
+		<IAMAccountDomain domain="aistratussorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="chatsorgzaid" account_name="ZohoChat Service Org">
+		<IAMAccountDomain domain="chatsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="solopreneursorgzaid" account_name="Solopreneur Service Org">
+		<IAMAccountDomain domain="solopreneursorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="aidevsorgzaid" account_name="AIDev Service Org">
+		<IAMAccountDomain domain="aidevsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="insightssorgzaid" account_name="Insights Service Org">
+		<IAMAccountDomain domain="insightssorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

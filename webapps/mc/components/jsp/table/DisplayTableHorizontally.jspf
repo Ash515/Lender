@@ -1,0 +1,15 @@
+<%-- $Id$ --%>
+<%@ page import="com.adventnet.client.components.table.web.TableUtil"%>
+
+<%
+  String enableRowSelection = (String)  viewModel.getTableViewConfigRow().get("ENABLEROWSELECTION");
+%><% 
+if(((Boolean)(viewModel.getTableViewConfigRow().get("DISPLAYHEADER"))).booleanValue() )
+	{%>
+ <%@ include file = "DisplayTableHeaders.jspf" %>
+   <%if(transformerContext.isAdvancedSearch()){%>	
+ <%@ include file = "DisplayTableSearchCombo.jspf" %>
+<%}%>
+ <%@ include file = "DisplayTableSearchBox.jspf" %>
+ <%} %>
+ <%@ include file = "DisplayTableCells.jspf" %>

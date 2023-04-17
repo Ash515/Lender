@@ -1,0 +1,13 @@
+package resource;
+
+option java_package = "com.zoho.accounts";
+option java_outer_classname = "TemplateMessageProto";
+
+message TemplateMessage {
+optional string from = 1;
+optional string replyto = 2;
+required string subject = 3;
+required string message = 4;
+optional string serviceurl = 5;
+}
+

@@ -1,0 +1,118 @@
+public static $URIType get$URIType($constructorArgs){
+    return new $URIType($callingConstructorArgs);
+} 
+
+$accessModifier static $URIType get$URIType($collectionConstructorArgs){
+    return new $URIType($collectionCallingConstructorArgs);
+} 
+
+public static class $URIType extends URI {
+
+    $URIType( $constructorArgs ) {
+        super("$restContext", $uniqueResourceName);
+    }
+
+    $constructorAccessModifier $URIType( $collectionConstructorArgs ) {
+        super("$restContext", $collectionUniqueResourceName);
+    }
+
+    $URIType( URI uri){
+        super("$restContext", uri.getUniqueResourceName());
+        setQueryString(uri.getQueryString());
+        setRepresentation(uri.getRepresentation());
+    }
+
+    public $URIType setAuthHeader(AuthHeader authHeader){
+        super.setAuthHeader(authHeader);
+        return this;
+    }
+
+    public $protoClassName GET() throws ResourceException {
+        return ($protoClassName)super.GET();
+    }
+
+    public $protoClassName [] GETS() throws ResourceException {
+        return ($protoClassName[]) super.GETS();
+    }
+
+    public $protoClassName [] next() throws ResourceException {
+        return ($protoClassName[]) super.next();
+    }
+
+    public $protoClassName [] previous() throws ResourceException {
+        return ($protoClassName[]) super.previous();
+    }
+
+    public $URIType POST( $protoClassName m) throws ResourceException {
+        URI uri = super.POST(m);
+        return new $URIType(uri).setAuthHeader(getAuthHeader());
+    }
+
+    public $URIType PUT( $protoClassName m) throws ResourceException {
+        com.zoho.resource.URI uri = super.PUT(m);
+        return new $URIType(uri).setAuthHeader(getAuthHeader());
+    }
+    
+    public $URIType POSTONPUT( $protoClassName m) throws ResourceException {
+        com.zoho.resource.URI uri = super.POSTONPUT(m);
+        return new $URIType(uri).setAuthHeader(getAuthHeader());
+    }
+
+    public $protoClassName POSTnGET($protoClassName m) throws ResourceException {
+        return ($protoClassName) super.POSTnGET(m);
+    }
+
+    public $URIType setQueryString(String queryStr) {
+        return setQueryString(new $URITypeQueryString(this, queryStr));
+    }
+    
+    public $URIType setQueryString(QueryString qs) {
+        return setQueryString(qs.toString());
+    }
+
+    public $URIType setQueryString($URITypeQueryString qs){
+        super.setQueryString(qs);
+        return this;
+    }
+
+    public $URITypeQueryString getQueryString(){
+        if(!hasQueryString()) {
+            setQueryString(new $URITypeQueryString(this));
+        }
+        return ($URITypeQueryString) super.getQueryString();
+    }
+
+    public $URIType getInstance(String selfUrl) {
+        URI uri = super.getInstance(getRESTContext(), getSwitchedRemoteContext(), selfUrl);
+        return new $URIType(uri);
+    }
+
+    public class $URITypeQueryString extends QueryString {
+
+        $URIType uri = null;
+
+        public $URITypeQueryString($URIType uri) {
+            super(uri);
+            this.uri = uri;
+        }
+
+        public $URITypeQueryString($URIType uri, String queryStr) {
+            super(uri, queryStr);
+            this.uri = uri;
+        }
+
+        public $URITypeQueryString setLimit(int startIndex, int noOfResults){
+            super.setLimit(startIndex, noOfResults);
+            return this;
+        }
+
+        public $URITypeQueryString setCriteria(Criteria criteria){
+            super.setCriteria(criteria);
+            return this;
+        }
+
+        public $URIType build(){
+            return this.uri.setQueryString(this);
+        }
+    } 
+}   

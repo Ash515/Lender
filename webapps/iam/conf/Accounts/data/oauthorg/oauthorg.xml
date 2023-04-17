@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<IAMOAuthAppGroups>
+<IAMOAuthAppGroup OAUTH_APP_GROUP_AUTO_ID="1003" OAUTH_APP_GROUP_ID="1003" OAUTH_APP_GROUP_NAME="oauthorg" DESCRIPTION="Internal Org OAuth space" />
+
+</IAMOAuthAppGroups>

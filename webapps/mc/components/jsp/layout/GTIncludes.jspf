@@ -1,0 +1,8 @@
+<%-- $Id$ --%>
+<script>
+parent.includeJS(CONTEXT_PATH + '/components/javascript/Personalization.js',window);
+parent.includeJS(CONTEXT_PATH + '/components/javascript/DragAndDrop.js',window);
+parent.includeJS(CONTEXT_PATH + '/components/javascript/Utils.js',window);
+parent.includeJS(CONTEXT_PATH + '/components/javascript/GridAndTabLayout.js',window);
+</script>
+

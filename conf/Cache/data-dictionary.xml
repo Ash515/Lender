@@ -1,0 +1,37 @@
+<!-- $Id: data-dictionary.xml,v 1.2 2008/07/03 02:20:41 balar Exp $ -->
+<table name="ServerDetails">
+	<columns>
+		<column name="SERVERID">
+			<data-type>BIGINT</data-type>
+			<uniquevalue-generation>
+				<generator-name>ServerDetails.SERVERID</generator-name>
+			</uniquevalue-generation>
+		</column>
+		<column name="POOLNAME">
+			<data-type>CHAR</data-type>
+			<nullable>false</nullable>
+		</column>
+		<column name="SERVERNAME">
+			<data-type>CHAR</data-type>
+			<nullable>false</nullable>
+		</column>
+		<column name="WEIGHT">
+			<data-type>INTEGER</data-type>
+			<default-value>1</default-value>
+			<nullable>false</nullable>
+		</column>
+		<column name="SERVERORDER">
+			<data-type>INTEGER</data-type>
+			<nullable>false</nullable>
+		</column>
+	</columns>
+
+	<primary-key name="ServerDetails_PK">
+		<primary-key-column>SERVERID</primary-key-column>
+	</primary-key>
+	<unique-keys>
+		<unique-key name="ServerDetails_PK_UK0">
+			<unique-key-column>SERVERNAME</unique-key-column>
+		</unique-key>
+	</unique-keys>
+</table>

@@ -1,0 +1,24 @@
+url_prefix : 
+   path : /accounts/p/[0-9]+
+   is_regex : true
+servlet-mappings :
+   ZohoSignIn :
+     servlet-class : com.zoho.accounts.webclient.servlet.Signin
+     servlet-paths :
+         - servlet-path :
+              path : /signin
+              is_regex : false
+   WMSTokenGen :
+     servlet-class : com.adventnet.iam.servlet.ClientAuthSignIn
+     servlet-paths :
+         - servlet-path :
+              path : /clogin
+              is_regex : false
+              
+#   OneAuthAndroidDownload :
+#     servlet-class : com.zoho.accounts.servlet.OneAuthAndroidDownload
+#     servlet-paths :
+#         - servlet-path :
+#              path : /Downloads/android
+#              is_regex : false      
+#         

@@ -1,0 +1,502 @@
+<?xml version="1.0" ?>
+<!-- $Id: data-dictionary.xml,v 1.10 2011/08/22 10:00:05 divya Exp $ -->
+<!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd">
+
+<data-dictionary name="CustomView">
+    <table name="CustomViewConfiguration" system="false">
+        <columns>
+			<column name="CVID">
+                <description>Unique id identifying the CustomView.</description>
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>CVConfiguration.CVID</generator-name>
+                </uniquevalue-generation>
+			</column>
+
+            <column name="CVNAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+            </column>
+            <column name="QUERYID">
+                <data-type>BIGINT</data-type>
+                <max-size>19</max-size>
+                <nullable>false</nullable>
+            </column>
+            <!--column name="CRID">
+            <data-type>BIGINT</data-type>
+            <max-size>19</max-size>
+            <nullable>false</nullable>
+        </column-->
+        </columns>
+        <primary-key name="CustomViewConfig_PK">
+            <primary-key-column>CVID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <!--foreign-key name="CV_CR_FK" reference-table-name="ConfigurationRecord" isbidirectional="true">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>CRID</fk-local-column>
+                    <fk-reference-column>CRID</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key-->
+            <foreign-key name="CV_SQ_FK" reference-table-name="SelectQuery" isbidirectional="true">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>QUERYID</fk-local-column>
+                        <fk-reference-column>QUERYID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="CustomViewConfig_UK1">
+                <unique-key-column>CVNAME</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+
+    <table name="CustomViewServiceProviders">
+        <columns>
+            <column name="CVTYPEID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>CVServiceProviders.CVID</generator-name>
+                </uniquevalue-generation>
+            </column>
+            <column name="CVTYPE">
+                <data-type>CHAR</data-type>
+                <max-size>96</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="CORECLIENTSERVICE">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="CORESERVERSERVICE">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+            </column>
+            <!--column name="CRID">
+            <data-type>BIGINT</data-type>
+            <max-size>19</max-size>
+            <nullable>false</nullable>
+        </column-->
+        </columns>
+        <primary-key name="CVServiceProviders_PK">
+            <primary-key-column>CVTYPEID</primary-key-column>
+        </primary-key>
+        <!--foreign-keys>
+        <foreign-key name="CVSP_CR_FK" reference-table-name="ConfigurationRecord" isbidirectional="true">
+            <fk-columns>
+                <fk-column>
+                    <fk-local-column>CRID</fk-local-column>
+                    <fk-reference-column>CRID</fk-reference-column>
+                </fk-column>
+            </fk-columns>
+            <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+        </foreign-key>
+    </foreign-keys-->
+    <unique-keys>
+        <unique-key name="CVServiceProviders_UK1">
+            <unique-key-column>CVTYPE</unique-key-column>
+        </unique-key>
+    </unique-keys>
+    </table>
+
+    <table name="ModeSpecificServiceProviders">
+        <columns>
+            <column name="CVTYPEID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="COMM_MODE">
+                <data-type>INTEGER</data-type>
+                <nullable>false</nullable>
+            </column>
+        </columns>
+        <primary-key name="ModeSpecificSPs_PK">
+            <primary-key-column>CVTYPEID</primary-key-column>
+            <primary-key-column>COMM_MODE</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="MSSPs_CVSP_FK" reference-table-name="CustomViewServiceProviders" isbidirectional="false">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>CVTYPEID</fk-local-column>
+                        <fk-reference-column>CVTYPEID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="ClientServiceProviders">
+        <columns>
+            <column name="CVTYPEID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="COMM_MODE">
+                <data-type>INTEGER</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="SPINDEX">
+                <data-type>INTEGER</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="SERVICEPROVIDER">
+                <data-type>CHAR</data-type>
+                <max-size>96</max-size>
+                <nullable>false</nullable>
+            </column>
+        </columns>
+        <primary-key name="ClientServiceProviders_PK">
+            <primary-key-column>CVTYPEID</primary-key-column>
+            <primary-key-column>COMM_MODE</primary-key-column>
+            <primary-key-column>SERVICEPROVIDER</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="ClientSP_MSSP_FK" reference-table-name="ModeSpecificServiceProviders" isbidirectional="false">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>CVTYPEID</fk-local-column>
+                        <fk-reference-column>CVTYPEID</fk-reference-column>
+                    </fk-column>
+                    <fk-column>
+                        <fk-local-column>COMM_MODE</fk-local-column>
+                        <fk-reference-column>COMM_MODE</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="ServerServiceProviders">
+        <columns>
+            <column name="CVTYPEID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="COMM_MODE">
+                <data-type>INTEGER</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="SPINDEX">
+                <data-type>INTEGER</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="SERVICEPROVIDER">
+                <data-type>CHAR</data-type>
+                <max-size>96</max-size>
+                <nullable>false</nullable>
+            </column>
+        </columns>
+        <primary-key name="ServerServiceProviders_PK">
+            <primary-key-column>CVTYPEID</primary-key-column>
+            <primary-key-column>COMM_MODE</primary-key-column>
+            <primary-key-column>SERVICEPROVIDER</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="ServerSP_MSSP_FK" reference-table-name="ModeSpecificServiceProviders" isbidirectional="false">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>CVTYPEID</fk-local-column>
+                        <fk-reference-column>CVTYPEID</fk-reference-column>
+                    </fk-column>
+                    <fk-column>
+                        <fk-local-column>COMM_MODE</fk-local-column>
+                        <fk-reference-column>COMM_MODE</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="TableViewSortColumn" system="false">
+        <columns>
+			<!--
+			<column name="CVID">
+                <description>Unique id identifying the service.</description>
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <unique>true</unique>
+			</column>
+			-->
+            <column name="CVID">
+                <data-type>BIGINT</data-type>
+			</column>
+            <column name="TABLEALIAS">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="COLUMNNAME">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="ASCENDING_ORDER">
+                <data-type>BOOLEAN</data-type>
+            </column>
+            <column name="SORTINDEX">
+                <data-type>INTEGER</data-type>
+                <max-size>10</max-size>
+                <nullable>false</nullable>
+            </column>
+        </columns>
+        <primary-key name="TableViewSortCol_PK">
+            <primary-key-column>CVID</primary-key-column>
+            <primary-key-column>SORTINDEX</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="TableViewSortCol_FK" reference-table-name="CustomViewConfiguration" isbidirectional="false">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>CVID</fk-local-column>
+                        <fk-reference-column>CVID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="TreeDefinition" system="false">
+        <columns>
+            <column name="TREEID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>TreeDefinition.TREEID</generator-name>
+                </uniquevalue-generation>
+            </column>
+            <column name="TREETYPE">
+                <data-type>CHAR</data-type>
+                <max-size>47</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="BASETREENODETABLE">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="TREEINFOTABLE">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="SIBLINGORDERED">
+                <data-type>BOOLEAN</data-type>
+                <nullable>false</nullable>
+            </column>
+        </columns>
+        <primary-key name="TreeDef_PK">
+            <primary-key-column>TREEID</primary-key-column>
+        </primary-key>
+        <unique-keys>
+            <unique-key name="TreeDef_UK1">
+                <unique-key-column>TREETYPE</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+    
+    <table name="TablesInTree" system="false">
+        <columns>
+            <column name="TREEID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="TREENODETABLE">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="TABLENAME">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+            </column>
+        </columns>
+        <primary-key name="TableInTree_PK">
+            <primary-key-column>TREEID</primary-key-column>
+            <primary-key-column>TREENODETABLE</primary-key-column>
+            <primary-key-column>TABLENAME</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="TableInTree_TreeDef_FK" reference-table-name="TreeDefinition" isbidirectional="false">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>TREEID</fk-local-column>
+                        <fk-reference-column>TREEID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="TreeIdentifierColumns" system="false">
+        <columns>
+            <column name="TREEID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="COLUMNNAME">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+            </column>
+        </columns>
+        <primary-key name="TreeIdentifierCN_PK">
+            <primary-key-column>TREEID</primary-key-column>
+            <primary-key-column>COLUMNNAME</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="TreeIdentifierCN_TreeDef_FK" reference-table-name="TreeDefinition" isbidirectional="false">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>TREEID</fk-local-column>
+                        <fk-reference-column>TREEID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="TreeQuery" system="false">
+        <columns>
+            <column name="QUERYID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="TREETYPE">
+                <data-type>CHAR</data-type>
+            </column>
+            <column name="DEPTH">
+                <data-type>INTEGER</data-type>
+            </column>
+        </columns>
+
+        <primary-key name="TreeQuery_PK">
+            <primary-key-column>QUERYID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="TreeQuery_FK" reference-table-name="SelectQuery" isbidirectional="false">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>QUERYID</fk-local-column>
+                        <fk-reference-column>QUERYID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="SQinTreeQuery" system="false">
+        <columns>
+            <column name="TQUERYID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="QUERYID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="TABLENAME">
+                <data-type>CHAR</data-type>
+            </column>
+        </columns>
+        <primary-key name="TreeQueryID_PK">
+            <primary-key-column>TQUERYID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="TreeQueryID_FK" reference-table-name="TreeQuery" isbidirectional="false">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>TQUERYID</fk-local-column>
+                        <fk-reference-column>QUERYID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+            <foreign-key name="Tree_FK1" reference-table-name="SelectQuery" isbidirectional="false">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>QUERYID</fk-local-column>
+                        <fk-reference-column>QUERYID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+    <table name="TreeQueryIdentifierColumns" system="false">
+        <columns>
+            <column name="QUERYID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="TABLENAME">
+                <data-type>CHAR</data-type>
+            </column>
+            <column name="COLUMNNAME">
+                <data-type>CHAR</data-type>
+            </column>
+            <column name="COLUMNVALUE">
+                <data-type>CHAR</data-type>
+            </column>
+        </columns>
+        <primary-key name="Tree_PK">
+            <primary-key-column>COLUMNNAME</primary-key-column>
+            <primary-key-column>QUERYID</primary-key-column>
+        </primary-key>
+
+        <foreign-keys>
+            <foreign-key name="Tree_FK" reference-table-name="TreeQuery" isbidirectional="false">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>QUERYID</fk-local-column>
+                        <fk-reference-column>QUERYID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="ObjectIdentifierColumns" system="false">
+        <columns>
+            <column name="QUERYID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="TABLENAME">
+                <data-type>CHAR</data-type>
+            </column>
+            <column name="COLUMNNAME">
+                <data-type>CHAR</data-type>
+            </column>
+            <column name="COLUMNVALUE">
+                <data-type>CHAR</data-type>
+            </column>
+        </columns>
+        <primary-key name="Object_PK">
+            <primary-key-column>COLUMNNAME</primary-key-column>
+            <primary-key-column>QUERYID</primary-key-column>
+        </primary-key>
+
+        <foreign-keys>
+            <foreign-key name="Object_FK" reference-table-name="TreeQuery" isbidirectional="false">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>QUERYID</fk-local-column>
+                        <fk-reference-column>QUERYID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+</data-dictionary>
+

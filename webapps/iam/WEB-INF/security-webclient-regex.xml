@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id$ -->
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security-accounts.xsd">
+	<regexes>
+		<!-- in ciphertext_or_email % is added to to support unicode charaters and it is temporary which should be removed once security team supports  -->
+		<regex name="ciphertext_or_email" value="(([a-zA-Z0-9/=+\*\-\.\_]+)|([%\p{L}\p{M}\p{N}\_]([%\p{L}\p{M}\p{N}\_\+\-\.\'&amp;]*)@(?=.{4,256}$)(([%\p{L}\p{N}\p{M}]+)(([\-\_]*[%\p{L}\p{N}\p{M}])*)[\.])+[%\p{L}\p{M}]{2,22}))" />
+		<regex name="localeDetails" value="countrycode|timezones|languages"/>
+		<regex name="member_Zuid" value="([a-zA-Z0-9@\.\-_\+',]+|[0-9]+)"/> 
+		<regex name="invitation_status" value="(accept|reject)"/> 
+		<regex name="ZID" value="[0-9a-zA-Z]+"/>
+		<regex name="oz-phoneno" value="[0-9]+" />
+		<regex name="enc-phoneno" value="[a-zA-Z0-9]*" />
+		<regex name="ip_id" value="[0-9\.]+"  />
+		<regex name="httpcookievalue" value="[a-zA-Z0-9\.]*"  />
+		<regex name="multihttpcookievalue" value="[a-zA-Z0-9\,]*"  />
+		<regex name="domain_name" value="[a-zA-Z0-9\.\-]*"  />
+		<regex name="ciphertext" value="[a-zA-Z0-9]*"  />
+		<regex name="multiciphertext" value="[a-zA-Z0-9\,]*"  />
+		<regex name="apppass_id" value="[0-9]+$"  />
+		<regex name="backup-modes" value="(sendemail|savetxt|printcodes)"/>
+		<regex name="newdevicetok" value="[a-zA-Z0-9_\-\:\=]*"  />
+		<regex name="digest_in_url" value="([a-zA-Z0-9\-\_])+" />
+		<regex name="yubikey_id" value="[a-zA-Z0-9_\-]+"  />
+		<regex name="portalid" value="([a-zA-Z0-9@\.\-_\+',]+|[0-9]+)"/>
+		<regex name="devicepref" value="[a-zA-Z_]*"/>
+		<regex name="domain-name" value="([\p{L}\p{M}\p{N}]([\p{L}\p{M}\p{N}\-]{0,61}[\p{L}\p{M}\p{N}])?\.)+[\p{L}\p{M}]{2,22}"/>
+		<regex name="dpa_cleartext" value="[0-9a-zA-Z_\-\+\.\$@\?\,\:\'\/\!\[\]\(\)\;\|&amp;\P{InBasicLatin}\s&quot;]+" />
+		<regex name="iam_client_id" value="^[0-9\.a-zA-Z]+$" />
+	</regexes>
+</security>

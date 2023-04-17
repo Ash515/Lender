@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="security.xsd">
+	<urls>
+		<!-- TODO: We will remove this once we moved operation param model completely. -->
+		<url path="/_zohoone_/zohandler" authentication="optional" method="post" csrf="false" internal="true" scoped-services="ZohoOne,ZohoDirectory,ZBSM,Remotely" api="true" apiscope="handlerapi" description="ZohoOne request handler">
+			<extraparam xss="antisamyfilter" max-len="10000" />
+			<param-group name="zohandler_params" />
+		</url>
+		
+		<url path="/zdlibrary/handler" authentication="optional" method="post"
+			 csrf="true" description="ZohoDirectory Launcher Library request handler">
+			<param name="action" regex="zdlibrary_action" description="For differentiating the calls with action" />
+			<param name="data" type="JSONObject" max-len="-1" xss="throwerror" />
+		</url>
+		
+		<url path="/_zohoone_/zohandler" authentication="optional" method="post" operation-param="operation" operation-value="READ" internal="true" oauthscope="ZOHANDLERAPI" operation-type="READ" scoped-services="ZohoOne,ZohoDirectory,ZBSM,Remotely" description="To fetch details for Zoho One">
+			<param-group name="zohandler_params" />
+			<extraparam xss="antisamyfilter" max-len="10000" />
+		</url>
+		
+		<url path="/_zohoone_/zohandler" authentication="optional" method="post" operation-param="operation" operation-value="CREATE" internal="true" oauthscope="ZOHANDLERAPI" operation-type="CREATE" scoped-services="ZohoOne,ZohoDirectory,ZBSM,Remotely" description="To fetch details for Zoho One">
+			<param-group name="zohandler_params" />
+			<extraparam xss="antisamyfilter" max-len="10000" />
+		</url>
+		
+		<url path="/_zohoone_/zohandler" authentication="optional" method="post" operation-param="operation" operation-value="UPDATE" internal="true" oauthscope="ZOHANDLERAPI" operation-type="UPDATE" scoped-services="ZohoOne,ZohoDirectory,ZBSM,Remotely" description="To fetch details for Zoho One">
+			<param-group name="zohandler_params" />
+			<extraparam xss="antisamyfilter" max-len="10000" />
+		</url>
+		
+		<url path="/_zohoone_/zohandler" authentication="optional" method="post" operation-param="operation" operation-value="DELETE" internal="true" oauthscope="ZOHANDLERAPI" operation-type="DELETE" scoped-services="ZohoOne,ZohoDirectory,ZBSM,Remotely" description="To fetch details for Zoho One">
+			<param-group name="zohandler_params" />
+			<extraparam xss="antisamyfilter" max-len="10000" />
+		</url>
+		
+		<url path="/IAMClearTicketCache" authentication="optional" />
+		<url path="/iamclearcache" internal="true" authentication="optional" method="post,get">
+			<param name="clearconfig" type="boolean" />
+			<param name="clearappconfig" type="boolean" />
+			<param name="clearpartneraccountcache" type="boolean" />
+			<param name="clearcryptoinstance" type="boolean" />
+			<param name="iamclearagentcache" type="boolean" />
+			<param name="cleargeodetailscache" type="boolean" />
+			<extraparam regex="cleartextpattern" />
+		</url>
+		<url path="/internal/iamcontrolurl" scoped-services="AaaServer" internal="true" authentication="optional" method="post,get">
+			<param name="monitor" type="boolean" />
+			<param name="clearcookie" type="boolean" />
+			<param name="logout" type="boolean" />
+			<param name="buildnumber" type="boolean" />
+			<param name="iamagentversion" type="boolean" />
+			<param name="downloadconf" type="boolean" />
+			<param name="userdb" regex="ADD|UPDATE|DELETE" />
+			<param name="LOGIN_NAME" regex="username_or_email" />
+			<param name="ZUID" type="long" />
+			<param name="SOIDS" type="long" split="," max-occurrences="10" />
+			<param name="ZAAIDS" type="long" split="," max-occurrences="10" />
+			<param name="PRIMARY_EMAIL" regex="email_or_phonenumber" />
+			<param name="EMAIL_ID" regex="email" />
+			<param name="NEW_LOGIN_NAME" regex="username_or_email" />
+			<param name="closedusernotify" type="boolean" />
+			<param name="type" regex="[a-zA-Z]+" />
+			<param name="dataJson" type="JSONObject" max-len="100000" template="iamcontrolurl_json" />
+
+			<extraparam regex="cleartextpattern" />
+		</url>
+		<url path="/IAMRemoteServiceLogout" authentication="optional" description="Custom domain session invalidate URL">
+			<param name="nocache" type="long" />
+		</url>
+		<url path="/~zo~/appaccount" authentication="required" method="post" csrf="false" internal="true" scoped-services="ZohoOne,ZohoHome"
+			description="ZohoOne request handler">
+			<param name="data" type="JSONObject" max-len="-1" xss="throwerror" />
+		</url>
+		<url path="/~za~/[a-zA-Z0-9]+/(vfields|ufields)" path-regex="true" authentication="optional" duration="60" threshold="40" lock-period="60" dos-cookie="true" method="post,get,options">
+			<response disable-safe-headers="X-Frame-Options">
+		    	<headers>
+		               <header name="Access-Control-Allow-Origin" value="trusted">
+		               <!-- coheader only will get set if the origin is trusted. check AccountsSecurityProvider.isTrusted() -->
+			               <coheader>
+			               	 <header name="Access-Control-Allow-Credentials" value="true"/>
+		              		 <header name="Access-Control-Allow-Methods" value="POST,OPTIONS"/>
+		              		 <header name="Access-Control-Allow-Headers" value="Content-Type,Z-Authorization"/>
+			               </coheader>
+		               </header>
+		        </headers>
+	        </response>
+			<param name="data" xss="throwerror" max-len="1000" min-occurrences="1" />
+			<param name="_corsfn" regex="^([A-Za-z0-9_.\-]+)$" />
+      		<param name="_pmsg" type="boolean" />
+      		<param name="ott" regex="[0-9]+\.[0-9]+\.[a-zA-Z0-9-]+" max-len="1000" secret="true"/>
+		</url>
+
+		<url path="/oauthorize" authentication="optional" description="Tmp TokenPairTicket validation URL" method="post,get">
+			<param name="portal" regex="^[0-9]*$" />
+			<param name="state" regex="^(http(s?)\:\/\/[-.\p{L}\p{M}\p{N}_]*)?(\/?)([\p{L}\p{M}\p{N}\!\-\.\?\,\:\'\/\\\+\*=&amp;%\$;#_@]*)?$" max-len="50000" />
+			<param name="is_ajax" type="boolean" />
+		</url>
+		<url path="/reauth/authorize" authentication="required" description="Tmp Password Token validation URL" method="get"/>
+
+		<url path="/handleiamaction" authentication="optional" internal="true" scoped-services="AaaServer,ZohoEDiscovery" description="Getting data from services for Org merging" method="post">
+			<param name="action" regex="cleartextpattern" max-len="100"/>
+			<param name="data" type="JSONObject" max-len="-1"  template="handleiamaction_json" />
+		</url>
+		<url path="/internal/handleCrossOrgOAuth" authentication="optional" internal="true" scoped-services="AaaServer" description="Pre flight request and approval of org" method="post">
+			<param name="details" max-len="-1" type="JSONObject" template="details"/>
+		</url>
+		<!--EDiscovery Agent URL Starts -->
+ 		<url path="/ediscovery/(legal|takeout)/${ediscovery_id}/${iam_id}(\/reinit)?" method="post" authentication="optional" internal="true" scoped-services="ZohoEDiscovery" description="Initating EDiscovery Requests" >
+			<param-group name="ediscovery_params"/>
+		</url>
+		<url path="/ediscovery/dcm/${ediscovery_id}/${iam_id}/(export|import(\/callback)?)(\/reinit(\/${ediscovery_id})?)?" method="post" authentication="optional" internal="true" scoped-services="ZohoEDiscovery" description="Initating EDiscovery Requests" >
+			<param-group name="ediscovery_params"/>
+		</url>
+		<url path="/ediscovery/dcm/${ediscovery_id}/${iam_id}/callback/(src|dest)(\/reinit(\/${ediscovery_id})?)?" method="post" authentication="optional" internal="true" scoped-services="ZohoEDiscovery" description="Initating EDiscovery Requests" >
+			<param-group name="ediscovery_params"/>
+		</url>
+		<!--EDiscovery Agent URL Ends -->
+	</urls>
+	<jsontemplates>
+    	<jsontemplate name="details">
+    	    <key name="action" regex="0|1" min-occurrences="1"/>
+    	    <key name="orgs" type="JSONArray" template="orgsData" array-size="1-20"/>
+    	    <key name="zuid" regex="plain_str"/>
+    	    <key name="handshakeid" regex="cleartextpattern" max-len="255"/>
+    	    <key name="status" regex="0|1"/>
+    	    <key name="orgId" regex="plain_str"/>
+    	    <key name="serviceName" regex="cleartextpattern" />
+    	</jsontemplate>
+    	<jsontemplate name="orgsData">
+    		<key name="IAMArray" regex="plain_str"/>
+    	</jsontemplate>
+    </jsontemplates>
+	
+	<param-groups>
+		<param-group name="zohandler_params">
+			<param name="data" type="JSONObject" max-len="-1" xss="antisamyfilter"/>
+			<param name="module" regex="ZOHANDLER|INTEGHANDLER" />
+			<param name="_ztrk" regex="username" description="Used for debugging to map originated request from ZohoDirectory to ZOHandler request in service." />
+			<param name="filters" type="JSONObject" max-len="-1" xss="antisamyfilter"/>
+			<param name="include" regex="[a-z_,\.]+" max-len="500"/>
+			<param name="sortBy" regex="-?[a-z_\.]+" />
+			<param name="sort_order" type="boolean" />
+			<param name="q" regex="cleartextpattern" />
+			<param name="search_properties" type="JSONObject" max-len="-1" xss="antisamyfilter"/>
+			<param name="page" type="int" />
+			<param name="per_page" type="int" />
+		</param-group>
+	</param-groups>
+	
+	<defaultparams>
+                <param name="serviceurl" regex="serviceurl"  max-len="50000"/>
+                <param name="ticket" regex="iamticket" max-len="1000" secret="true"/>
+                <param name="servicename" regex="servicename"/>
+                <param name="iamcontrol" type="boolean"/>
+                <param name="iscticket" regex="iamticket" secret="true" max-len="320"/>
+                <param name="zacode" regex="iamticket" max-len="1000"/>
+                <param name="oauthorize" regex="iamticket" max-len="1000"/>
+                <param name="isctickethash" regex="^[a-zA-Z0-9\.\-]+$" max-len="500"/>
+                <param name="iscTicketHash" regex="^[a-zA-Z0-9\.\-]+$" max-len="500"/>
+                <param name="iscservicename" regex="servicename"/>
+                <param name="isczuid" type="long"/>
+                <param name="iscscope" regex="^[a-zA-Z0-9]+$"/>
+                <param name="authtoken" regex="iamticket" secret="true" max-len="1000"/>
+                <param name="remember" type="int"/>
+                <param name="zapikey" regex="cleartextpattern" secret="true" max-len="500"/>
+                <param name="apiKey" regex="cleartextpattern" secret="true" max-len="500"/>
+                <param name="encapiKey" regex="[0-9a-zA-Z&quot;\{\}_\-\+\.\$@\?\,\:=\'\/\!\[\]\|&amp;\P{InBasicLatin}\s]+" max-len="5000"/>
+                <param name="service_language" regex="^[A-Za-z_\-]+$"/> 
+                <param name="url_param" regex="httpparametervalue" secret="true" max-len="500"/>
+        </defaultparams>
+    <jsontemplates>
+        <jsontemplate name="iamcontrolurl_json">
+			<key name="action" regex="cleartextpattern" max-len="100"/>
+			<key name="child_account" type="JSONObject" max-len="-1" template="child_account_json"/>
+			<key name="new_users" type="JSONArray" template="zuids_json" max-len="-1"/>
+			<key name="conflict_users" type="JSONArray" template="zuids_json" max-len="-1"/>
+			<key name="added_by" type="long" />
+		</jsontemplate>
+		<jsontemplate name="child_account_json">
+			<key name="zaaid" type="long"/>
+			<key name="org_type" type="long" />
+		</jsontemplate>
+		<jsontemplate name="handleiamaction_json">
+			<key name="fromZoid" regex="^[0-9]+$"/>
+			<key name="toZoid" regex="^[0-9]+$"/>
+			<key name="zids" type="JSONArray" template="zuids_json" array-size="0-50" max-len="-1"/>
+			<key name="zidType" regex="plain_str"/>
+			<key name="purpose" regex="plain_str"/>
+		</jsontemplate>
+		<jsontemplate name="zuids_json">
+			<key name="IAMArray" regex="domain_or_text"/>
+		</jsontemplate>
+	</jsontemplates>
+	<regexes>
+		<regex name="plain_str" value="^[a-zA-Z0-9_+\-\.,\s]+$" />
+		<regex name="domain_or_text" value="^(([\p{L}\p{M}\p{N}]([\p{L}\p{M}\p{N}\-]{0,61}[\p{L}\p{M}\p{N}])?\.)+[\p{L}\p{M}]{2,22}|[a-zA-Z0-9.]+)$" />
+		<regex name="email" value="^[\p{L}\p{M}\p{N}\_]([\p{L}\p{M}\p{N}\_\+\-\.\'&amp;]*)@(?=.{4,256}$)(([\p{L}\p{N}\p{M}]+)(([\-\_]*[\p{L}\p{N}\p{M}])*)[\.])+[\p{L}\p{M}]{2,22}$" />
+		<regex name="email_or_phonenumber" value="^[\p{L}\p{M}\p{N}\_]([\p{L}\p{M}\p{N}\_\+\-\.\'&amp;]*)@(?=.{4,256}$)(([\p{L}\p{N}\p{M}]+)(([\-\_]*[\p{L}\p{N}\p{M}])*)[\.])+[\p{L}\p{M}]{2,22}$|^([0-9/=+\*\-\.\_]+)" />
+		<regex name="username_or_email" value="^(([\p{L}\p{N}\p{M}\_\.\-]+)|[\p{L}\p{N}\_\p{M}]([\p{L}\p{M}\p{N}\_\+\-\.\'&amp;]*)@(?=.{4,256}$)(([\p{L}\p{N}\p{M}]+)(([\-\_]*[\p{L}\p{N}\p{M}])*)[\.])+[\p{L}\p{M}]{2,22})$" />
+		<regex name="phone" value="^[0-9]{5,14}$" />
+		<regex name="countrycode" value="^[a-zA-Z]{2,6}$" />
+		<regex name="zdlibrary_action" value="^([A-Z_]+)$" />
+		<regex name="ediscovery_id" value="\w{1,20}" />
+		<regex name="iam_id" value="\d{1,16}" />
+	</regexes>
+	<param-groups>
+		<param-group name="ediscovery_params">
+			<param name="app_type" regex="(APP_ACCOUNT|SERVICE_ORG|ORG|PERSONAL)" min-occurrences="1" />
+			<param name="admin_zuid" regex = "iam_id" />
+			<param name="new_zid" regex = "iam_id" />
+		</param-group>
+	</param-groups>
+</security>

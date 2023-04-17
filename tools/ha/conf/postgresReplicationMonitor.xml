@@ -1,0 +1,10 @@
+<!-- $Id$ -->
+<task>
+    <Schedule schedule_id="Schedule:schedule_id:TestPostgresReplicationMonitor" schedule_name="PostgresReplicationMonitor">
+        <Scheduled_Task audit_flag="true" task_id="TaskEngine_Task:task_id:TaskPostgresReplicationMonitor">
+            <Task_Input instance_id="Task_Input:instance_id:InstancePostgresReplicationMonitor" admin_status="4"/>
+        </Scheduled_Task>
+        <Periodic time_period="5"/>
+    </Schedule>
+    <TaskEngine_Task class_name="com.zoho.mickey.ha.task.MonitorReplication" task_id="TaskEngine_Task:task_id:TaskPostgresReplicationMonitor" task_name="PostgresReplicationMonitor"/>
+</task>

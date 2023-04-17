@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>@@@@@DOC_TITLE@@@@@</title>
+        <style type="text/css">
+            body { font-size: 12px; font-family: DejaVu Sans, Roboto; }
+            .treeview ul { padding-left: 20px; }
+            .treeview li { list-style: none; }
+            .treeview li { padding: 3px 0; }
+            .treeview li span { cursor: pointer; }
+            .treeview .expandable > .dropico, .treeview .collapsable .dropico, .dropblankico {
+                background: transparent url('data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABkAAD/4QMraHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MSA2NC4xNDA5NDksIDIwMTAvMTIvMDctMTA6NTc6MDEgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUuMSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkZCRDUwN0EzRUQ4QzExRTA4RkE1QjBGNEQ1QzJCREZFIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkZCRDUwN0E0RUQ4QzExRTA4RkE1QjBGNEQ1QzJCREZFIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkJENTA3QTFFRDhDMTFFMDhGQTVCMEY0RDVDMkJERkUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RkJENTA3QTJFRDhDMTFFMDhGQTVCMEY0RDVDMkJERkUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7/7gAOQWRvYmUAZMAAAAAB/9sAhAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAgICAgICAgICAgIDAwMDAwMDAwMDAQEBAQEBAQIBAQICAgECAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwP/wAARCAAMAAcDAREAAhEBAxEB/8QAXwABAQAAAAAAAAAAAAAAAAAABAoBAQAAAAAAAAAAAAAAAAAAAAAQAAAEBQIFBQAAAAAAAAAAAAMEBQYCFRYHFxIIAAETFBkkJSYYCREBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AovcRElt2/OlrJTZKFV20m4DZ7AzFWxYBcI4oNt6vLbyaNLlwrUoMUEQAzFGAiNqtwEHnCGnkyAZxxlogDAaoWWgNZ6c+PS7OTJX9tvHW56VnXd4/wphGGhsK9P12O++lVdafkNU6Jn7fS3Af/9k=') no-repeat center;
+                padding-left: 17px;
+            }
+            .treeview .collapsable > .dropico { background-image: url('data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABkAAD/4QMraHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MSA2NC4xNDA5NDksIDIwMTAvMTIvMDctMTA6NTc6MDEgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUuMSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkYwMzU5MkQ5RUQ4QzExRTBCNDE4RjVDM0E5MzZEQTU4IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkYwMzU5MkRBRUQ4QzExRTBCNDE4RjVDM0E5MzZEQTU4Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RjAzNTkyRDdFRDhDMTFFMEI0MThGNUMzQTkzNkRBNTgiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RjAzNTkyRDhFRDhDMTFFMEI0MThGNUMzQTkzNkRBNTgiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7/7gAOQWRvYmUAZMAAAAAB/9sAhAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAgICAgICAgICAgIDAwMDAwMDAwMDAQEBAQEBAQIBAQICAgECAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwP/wAARCAAJAAkDAREAAhEBAxEB/8QAYAAAAwEAAAAAAAAAAAAAAAAABQYHCgEBAAAAAAAAAAAAAAAAAAAAABAAAAQCCQUAAAAAAAAAAAAAAwQFBgAlAiIzNRYHCAkKExS0dTYRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AFvki8kXEGPdvXb1fsgmTP1L6l2epX/aEF7J3J1eICfP2hZwuEsJMK5EjT7XrjmgwRwBBWvVT9gd8kSAuEB//9k='); }
+            .dropblankico { background: none; }
+            .res-name { display: inline; cursor: pointer;}
+            .active-resource { font-weight: bold; }
+            .resource-details {
+                position: absolute; top: 4%; left: 25%;
+                width: 700px; display: none;
+                background-color: #fff; border: 1px solid #BBB;
+                border-radius: 5px; box-shadow: 1px 3px 5px 0px #AAAAAA;
+                overflow: hidden;
+            }
+            .res-identifier { font-weight: bold; }
+            .res-url { font-size:14px !important; }
+            /*            .res-url:hover { background: grey;color:white;cursor: pointer }*/
+            .res-url:hover {cursor: pointer;color: #0785CD }
+            .res-title {
+                font-size: 14px; font-weight: bold;
+                border-bottom: 1px dashed #000; cursor: default;
+                margin-bottom: 10px; background-color: #F9F9F9; padding: 6px;
+            }
+            .res-title span { font-size: 11px; color: #999; font-weight: normal;}
+            .res-attrs table { border-collapse: collapse; }
+            .res-attrs td {
+                overflow: hidden; text-overflow: ellipsis;
+                border-bottom: 1px solid #AAA;
+            }
+            .res-attrs td:first-child { width:200px; }
+            .res-attrs td:nth-child(2) { border-left: 1px solid #AAAAAA; color: #777777; white-space: pre-line; }
+            .res-attrs td div { padding: 2px 0; }
+            .res-attrs td { white-space: nowrap; padding-left:10px; }
+            .res-attrs td:nth-child(2) { white-space: normal; }
+            .res-search { margin-left: 20px; width: 220px; padding: 5px;}
+
+            .collapsable > .res-name, .expandable > .res-name { color:#0785cd; padding:0px; font-size:14px; }
+            #container > ul > li > .res-name { color:#d0490e; padding:4px; font-size:14px; }
+            #container > ul > .expandable > .res-name, #container > ul > .collapsable > .res-name { color: #656565; font-family:DejaVu Sans, Geneva, sans-serif; font-size:14px;padding:4px; }
+            .res-det-close { color: #666; float: right; margin-right: 4px; cursor: pointer; }
+            .res-det-close:hover { text-decoration: underline; }
+            .res-tooltip {
+                min-width: 200px; max-width: 300px; font-size: 11px;
+                border: 1px solid #A0A0A0 !important; border-radius: 5px;
+                background-color: #F9F9F9 !important;
+            }
+            .res-tooltip ul { margin: 2px; }
+            .res_td:hover{
+                background-color:#E3E3E3;
+                cursor: pointer;
+            }
+            .select_one{float: right;margin-right:20px;margin-top: 20px }
+            .select_one div{
+                float: left;cursor: pointer;margin-left: 15px
+            }
+            .divadd_class{font-weight: bold;}
+            .btn{
+                background-image:linear-gradient(-90deg, rgb(255, 255, 255), rgb(236, 236, 236));
+                background-image:-webkit-gradient(linear, left top, left bottom,color-stop(0%, rgb(255, 255, 255)), color-stop(100%, rgb(236, 236, 236)));
+                background-image:-moz-linear-gradient(-90deg, rgb(255, 255, 255), rgb(236, 236, 236));
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#99ffffff', EndColorStr='#99ececec');
+                -ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorStr='#99ffffff', EndColorStr='#99ececec')";
+                background-color:rgb(244, 244, 244);
+                border:1px solid rgb(154, 154, 154);
+                border-radius:3px;
+                -moz-border-radius:3px;
+                -webkit-border-radius:3px;
+                padding:2px 5px;
+                box-shadow:0px 0px 0px rgb(255, 255, 255);
+                -moz-box-shadow:0px 0px 0px rgb(255, 255, 255);
+                -webkit-box-shadow:0px 0px 0px rgb(255, 255, 255);
+                font-size:12px;
+                font-weight:normal;
+                color:rgb(0, 0, 0);
+                text-shadow:0px 0px 0px rgba(0, 0, 0, 0.5);
+            }
+            .btn:hover{
+                box-shadow:0px 0px 3px rgb(154, 154, 154);
+                -moz-box-shadow:0px 0px 3px rgb(154, 154, 154);
+                -webkit-box-shadow:0px 0px 3px rgb(154, 154, 154);
+            }
+
+            .btn:active,.btn:focus{
+                background-image:linear-gradient(-90deg, rgb(205, 205, 205), rgb(255, 255, 255));
+                background-image:-webkit-gradient(linear, left top, left bottom,color-stop(0%, rgb(205, 205, 205)), color-stop(100%, rgb(255, 255, 255)));
+                background-image:-moz-linear-gradient(-90deg, rgb(205, 205, 205), rgb(255, 255, 255));
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#99cdcdcd', EndColorStr='#99ffffff');
+                -ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorStr='#99cdcdcd', EndColorStr='#99ffffff')";
+                background-color:rgb(222, 222, 222);
+            }
+            .closeframe{
+                height:20px;width:700px;border:1px solid ;background-color:#6f6e6b;-moz-border-radius:3px;padding:8px;box-shadow: 3px 3px 15px 0 grey;
+            }.closeframe span{
+                color: white; float: right;cursor:pointer;font-size:17px;font-family: monospace;color: white;
+            }
+            .closeframe1{
+                height:20px;width:700px;border:1px solid ;background-color:#6f6e6b;-moz-border-radius:3px;padding:8px;box-shadow: 3px 3px 15px 0 grey;
+            }
+            .closeframe1 span{
+                color: white; float: right;cursor:pointer;font-size:17px;font-family: monospace;color: white;
+            }
+            .iframec{
+                background-color:white;-moz-border-radius:3px;padding:8px;border: 2px solid;box-shadow: 3px 3px 15px 0 grey;
+            }
+            .iframediv{
+                background: #a7a7a7; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; padding: 8px;
+                overflow:auto;border:2px solid;width:700px;height:400px;box-shadow: 3px 3px 15px 0 grey;
+            }
+            .errorF{
+                color:red;padding:8px;font-weight:bold;
+            }
+            #current_sucess{
+                color:green;padding:8px;font-weight:bold;
+            }
+            .frameparent{
+                position:absolute;display:block;height:500px;top:4%;left:25%;
+            }
+            .iframediv ul li { font-size: 14px; margin: 0; border-bottom: 1px solid #666; }
+            .iframediv ul li a { color: #222; display: block; padding: 4px 4px; margin: 0; border-bottom: 1px solid #ccc; }
+            .iframediv ul li:last-child, .box ul li:last-child a { border: none; }
+            .iframediv ul li a:hover { background: #ccc; text-decoration: none; }
+            a { text-decoration: none; }
+            ul { list-style: none; }
+            .closeframe1 span:hover{color:black;}
+            .closeframe span:hover{color:black;}
+            /******************************************Auto complete css********************************************/
+            .ui-widget {
+                margin-top: 2em;
+            }
+            .ui-widget-header,
+            .ui-widget-content {
+                background: white;
+                border: 1px solid grey;
+                width: 167px;
+                max-height:300px;
+                overflow:auto;
+                color: #333333;
+                cursor: pointer;
+                list-style: none outside none;
+                margin: 0;
+                padding: 6px 33px 6px 11px;
+                position: relative;
+                white-space: nowrap;
+            }.ui-widget-content::-webkit-scrollbar {
+                background: #B7B7B7;
+                width: 8px;
+                border-radius: 4px;
+                border: 1px solid #B7B7B7;
+                padding: 10px;
+                height: 9px;
+                overflow: auto;
+            }
+            .ui-menu-item:hover{
+                background-color: #F3F3F3;
+                border-radius: 3px;
+                color: #000000;
+                padding: 3px 10px;
+                margin-left: -11px;
+                width: 200px;
+                color: #333333;
+
+            }
+            ui-menu-item{
+                padding: 2px;
+            }
+            .ui-widget-content::-webkit-scrollbar-thumb {
+                background: white;
+                border-radius: 10px;
+                border: 1px solid #B7B7B7;
+                height: 3px;
+            }
+
+
+            /******************************************Auto complete css********************************************/
+            .putbox{
+                height:22px;
+                width:430px;
+                border:1px solid #BBBBBB;
+
+            }
+            .putbox:hover{
+                background-color: #F2F2F2;
+            }
+        </style>
+        <script type="text/javascript" src="/rmd/javascript/jquery-1.12.2.min.js"></script>
+        <script type="text/javascript" src="/rmd/javascript/jquery.treeview.js"></script>
+        <script type="text/javascript" src="/rmd/javascript/wtooltip.min.js"></script>
+        <script type="text/javascript">
+            function stopEvents(e) {
+                if (e.stopPropagation) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                } else {
+                    e.cancelBubble = true;
+                    e.returnValue = false;
+                }
+            }
+            
+            function search(resource) {
+                var attr = "res-det-"+resource.toLowerCase();
+                var $r = $("#container [detail_id='"+attr+"']:first");
+                var $drop = $r.siblings(".dropico");
+                if($r.size() > 0) {
+                    var ele  = [$r];
+                    while(!$r.is(":visible")) {  
+                        $r = $r.parents("ul:first").siblings(".dropico");
+                        ele.push($r); 
+                    }                 
+                    for (var i = ele.length - 1; i >= 0; i--) {
+                        ele[i].click();
+                    }                 
+                    // Expand Resource
+                    if($drop.parent('li').hasClass('expandable')) {
+                        $drop.click();
+                    }   
+                }       
+                return false;
+            }       
+
+            function isValidData(val,datatype){
+                if(val.value!=""){
+                    var color_b=$(val).css("border");
+                    if(datatype=="INTEGER"){
+                        var numericExpression = /^[0-9]+$/;
+                        if(val.value.match(numericExpression)){
+                            if(color_b!="1px solid rgb(119, 119, 119)"){
+                                val.style.border="1px solid #777777";
+                            }
+                            return true;
+                        }else{
+                            val.focus();
+                            val.style.border="2px solid #F07878";
+                            alert("Please Enter a Integer value")
+                            return false
+                        }                        
+                    }
+                    else if(datatype=="BIGINT"){
+                        var numericExpression = /^[0-9]+$/;
+                        var maxlen=19;
+                        var textlen=val.value.length;
+                        if(textlen>maxlen){
+                            val.focus();
+                            alert("exceeded max length")
+                            return false
+                        }
+                        else{
+                            if(val.value.match(numericExpression)){
+                                if(color_b!="1px solid rgb(119, 119, 119)"){
+                                    val.style.border="1px solid #777777";
+                                }
+                                return true;
+                            }else{
+                                val.focus();
+                                val.style.border="2px solid #F07878";
+                                alert("Please Enter a BigInt value")
+                                return false
+                            } 
+                        }
+                    
+                    }
+                    else if(datatype=="BOOLEAN"){
+                        if(val.value=="true"||val.value=="false"){
+                            if(color_b!="1px solid rgb(119, 119, 119)"){
+                                val.style.border="1px solid #777777";
+                            }
+                            return true;
+                        }else{
+                            val.focus();
+                            val.style.border="2px solid #F07878";
+                            alert("Please Enter a Boolean")
+                            return false;
+                        }        
+                    }
+                }
+            }
+            function callClear(){
+                var currentid=$('.active-resource').attr("detail_id")
+                var  jcurentid="#"+currentid
+                var currenttdall=$(""+jcurentid+" td:odd")
+                $(currenttdall).html("")
+            }
+            function isUpperCase(ch)
+            {
+                if(ch == ch.toUpperCase())
+                {
+                    return true;
+                }
+                return false;
+            }
+            function handlePostCaptcha(xhr){
+                var response=new Response(xhr)
+                if(response.isSuccess()){
+                    var as=response.xhr.getResponseHeader("Location");
+                    var digest=as.substring(as.lastIndexOf('/'))
+                    var xhr=$.ajax({
+                        "beforeSend": function(xhr) {
+                            xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+                        } ,
+                        "url": "/accounts/resource/accounts/account/system/captcha"+digest,
+                        "type":"GET",
+                        "async": false,
+                        "contentType": "application/json",
+                        "complete":handleGetCaptcha
+                    });
+                }
+            }
+            function handleGetCaptcha(xhr){
+                var response=new Response(xhr)
+                var jsonA=response.xhr.responseText
+                var cap=JSON.parse("("+jsonA+")")
+                var captcha_digest=cap.representation[0].captcha_digest;
+                var captcha_text=cap.representation[0].captcha_text;
+                var accountheader="Zoho-captcha "+captcha_digest+":"+captcha_text+"";
+                localStorage.setItem("accountheader",accountheader)
+            }
+            function sendContent(json,url,isAccount,activehtml,isApp,method){
+                if(isAccount||isApp){
+                    if(isAccount){
+                        var xhr=$.ajax({
+                            "beforeSend": function(xhr) {
+                                xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+                            } ,
+                            "url": "/accounts/resource/accounts/account/system/captcha",//hardcorded admin captcha url
+                            "type":"POST",
+                            "async": false,
+                            "contentType": "application/json",
+                            "data":'{"captcha_digest":"fgfgf67","captcha_text":"sdsd"}',
+                            "complete":handlePostCaptcha
+                        });
+                        var serverurl="/accounts/resource/accounts";
+                        json['user']={'first_name': 'admin','last_name': 'admin'}
+                    }
+                    else{
+                        var serverurl="/accounts/resource/accounts";
+                    }
+                }
+                else{
+                    var getCactive=activehtml.substring(0,activehtml.lastIndexOf('/'));
+                    var surl=localStorage.getItem(getCactive+" ")
+                    if(surl!=null){
+                        var serverurl=surl;
+                    }
+                    else{
+                        var serverurl=localStorage.getItem("location");
+                    }
+                }
+                var xhr = jQuery.ajax({
+                    "beforeSend" : function(xhr) {
+                        xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+                        xhr.detailidname=isAccount;
+                        xhr.appidname=isApp;
+                        var a=$('.dropico');
+                        var sa=$('.active-resource').html()
+                        for(var i=0;i<a.length;i++){
+                            var valueS=a[i].nextSibling.innerHTML
+                            if(valueS==sa){
+                                xhr.childL=activehtml;
+                            }
+                        }
+                        if(isAccount==false) {
+                        }
+                        else{
+                            xhr.setRequestHeader("Authorization", localStorage.getItem('accountheader'))
+                        }
+                        var currentPwd = this.currentPassword;
+                        if(currentPwd) {
+                            xhr.setRequestHeader("X-Password", currentPwd);
+                        }
+                        xhr.setRequestHeader("X-HTTP-Method-Override", "POST");
+                        if(!isAccount){
+                            if(this.subResources) {
+                                var subResourceHeader = "";
+                                for(var i = 0; i < this.subResources.length; i++) {
+                                    subResourceHeader += this.subResources[i] + ",";
+                                }
+                                xhr.setRequestHeader("X-Content-List", subResourceHeader);
+                            }
+                        }
+                    },
+                    "url": serverurl+url,
+                    "type": method,
+                    "async": false,
+                    "contentType": "application/json",
+                    "data":JSON.stringify(json),
+                    "complete" : handleResponse});
+            }
+            function handleResponse(xhr){
+                var response=new Response(xhr)
+                var active_id="#"+$('.active-resource').attr('detail_id')
+                var ids=$('.active-resource').attr('detail_id')
+                var  jcurentid="#"+ids
+                var currenttdall=$(""+jcurentid+" td:odd")
+                var divframe=document.createElement("div") 
+                divframe.setAttribute("class", "frameparent")
+                var frame=document.createElement("iframe")
+                frame.setAttribute("height", "600")
+                frame.setAttribute("width", "700")
+                frame.setAttribute("class", "iframec")
+                var accountDiv=document.createElement("div")
+                accountDiv.setAttribute("class", "iframediv")
+                if(response.isSuccess()){
+                    var location_zuid=response.xhr.getResponseHeader("Location")
+                    var isCAccount=response.xhr.detailidname;
+                    var href_locat=location_zuid.substring(0,location_zuid.lastIndexOf('/'))
+                    if(isCAccount){
+                        var n_form=location_zuid.substring(location_zuid.lastIndexOf('/'))
+                        var urlform=n_form.substring(1)
+                        var zuid=localStorage.getItem("zuid")
+                        var htmlbuilder=""
+                        if(zuid!=null){
+                            var zuids=zuid+","+urlform
+                            localStorage.setItem("zuid",zuids)
+                            var list_id=localStorage.getItem("zuid").split(",")
+                            htmlbuilder+="<ul>";
+                            for(var i=0;i<list_id.length;i++){
+                                var location_zuid=href_locat+"/"+list_id[i]
+                                htmlbuilder+="<li style='padding:3px'><a href='"+location_zuid+"' target='_blank' style='text-decoration:none' >"+location_zuid+"</a></li>";
+                            }
+                            htmlbuilder+="</ul>";
+                        }
+                        else{
+                            htmlbuilder+="<ul>";
+                            localStorage.setItem("zuid",urlform)
+                            var location_zuid=href_locat+"/"+urlform
+                            htmlbuilder+="<li style='padding:3px'><a href='"+location_zuid+"' target='_blank' style='text-decoration:none' >"+location_zuid+"</a></li>";
+                            htmlbuilder+="</ul>";
+                        }
+                        accountDiv.innerHTML=htmlbuilder;
+                        var closeframe='<div  class="closeframe1"><b style="font-size: 16px;color:white;padding:3px">ACCOUNTS</b><span onclick=$(this.parentNode.parentNode).hide(1000)>close x</span></div>'           
+                        $(divframe).append(closeframe)
+                        var isit=$(divframe).append(accountDiv)
+                        $("body").append(isit)
+                        localStorage.setItem("location",location_zuid)
+                        var new_sucess=document.createElement("div")
+                        new_sucess.innerHTML="<center id='current_sucess'>Data Submitted Successfully</center>"
+                        $(active_id).append(new_sucess)
+                        setTimeout( function() {
+                            $(new_sucess).remove();
+                        }, 5000 );
+                        $(currenttdall).html("")
+                    }
+                    else{
+                        frame.setAttribute("src", href_locat)
+                        var urlHeader=href_locat.substring(href_locat.lastIndexOf('/'))
+                        var closeframe='<div  class="closeframe"><b style="font-size: 16px;color:white;padding:3px">'+urlHeader.substring(1).toUpperCase()+'</b><span onclick=$(this.parentNode.parentNode).hide(1000)>close x</span></div>'
+                        $(divframe).append(closeframe)
+                        var isit=$(divframe).append(frame)
+                        $("body").append(isit)
+                        var new_sucess=document.createElement("div")
+                        new_sucess.innerHTML="<center id='current_sucess'>Data Submitted Successfully</center>"
+                        $(active_id).append(new_sucess)
+                        setTimeout( function() {
+                            $(new_sucess).remove();
+                        }, 5000 );
+                        if(response.xhr.childL!=null){
+                            window.localStorage.setItem(response.xhr.childL,location_zuid)
+                        }
+                        $(currenttdall).html("")
+                    }
+                }
+                else{
+                    putErrorMsg("Error While post Data")
+
+                }
+            }
+            function Response(xhr) {
+                this.xhr = xhr;
+                this.isSuccess = function() {
+                    return (xhr.status == 200 && this.getValue(true).httpResponseCode == 200) ||  xhr.status == 201 || xhr.status == 204;
+                }
+                this.getValue = function(toJSON) {
+                    return toJSON == false ? this.xhr.responseText : JSON.parse("("+this.xhr.responseText+")");
+                }
+                this.getLocationHeader = function() {
+                    var result = this.getValue(true);
+                    return result.responseHeader[0].headerValue;
+                }
+                this.getResponseCode = function() {
+                    return this.xhr.status;
+                }
+                this.getError = function() {
+                    if(!this.isSuccess()) {
+                        return this.xhr.statusText != "" ? JSON.parse("'"+this.xhr.statusText+"'") : "";
+                    }
+                    return null;
+                }
+                this.getIDFromLocationHeader = function() {
+                    var location = this.getLocationHeader();
+                    return location ? location.substring(location.lastIndexOf("/")+1) : null;
+                }
+            }
+            function addRestClient(id){
+                applyStyle(id)
+                $(".res-attrs td:odd").dblclick(function (){calleditcommon(this,id)});
+            }
+            function addDescription(id){
+                applyStyle(id)
+                $(".res-attrs td:odd").dblclick(function (){$(".postbtn").show();calleditcommon(this,id);});
+            }
+            function calleditcommon(td,id){
+                /***************************************common method for edit Doc start*****************************************************************/
+                var isDatadictionary=id=="datadictionary";
+                var id_detail=$('.active-resource').attr("detail_id")
+                var ids="#"+id_detail
+                var isEditVisible=  $(""+ids+"").children().eq(2).is(":visible")
+                var saveandclose=document.createElement("div");
+                var bootombuttonmsg="";
+                var as=$(td).children();
+                saveandclose.setAttribute("style", "text-align:center;padding:20px");
+                if(isDatadictionary){
+                    td.innerHTML = "<textarea style='height:50px;width:425px;'onfocus='javscript:count=2' id='ta' ></textarea>"
+                    $(td).children().focus();
+                    bootombuttonmsg="<span style='margin-right:45px;cursor:pointer'  onclick='commonSendValue(\""+id+"\")'class='btn'>Update </span><span style='cursor:pointer' onclick='$(this.parentNode.parentNode).hide(); ' class='btn'>Cancel</span>";   
+                }
+                else{
+                    var current_val=$(td).attr('allowed_value');
+                    if(current_val!=""){
+                        var options=current_val.split(',')
+                        var selectionbox="";
+                        for(var i=0;i<options.length-1;i++){
+                            selectionbox+="<option value="+options[i]+">"+options[i]+"</option>"
+                        }
+                        td.innerHTML="<select value='Allowed Values' style='width:220px;text-transform: capitalize;'>"+selectionbox+"</select>"
+                        $('select').focus();
+                    }
+                    else{
+                        if(as.length==1){
+                            as.focus();
+                        }
+                        else{
+                            var data_type=$(td).attr("data_type");
+                            var data_pattern=$(td).attr("data_type_pattern");
+                            if(data_pattern!=""){
+                                if(data_pattern.length>100){
+                                    td.innerHTML="<input type='text' value='' style='height:22px;width:430px;border:1px solid #777777;'onblur=isValidData(this,\""+data_type+"\")  />";
+                                }
+                                else{
+                                    td.innerHTML="<input type='text' value='' x-moz-errormessage='Please Enter a valid Data' pattern='"+data_pattern+"'  style='height:22px;width:430px;border:1px solid #777777;'onblur=isValidData(this,\""+data_type+"\")  />";
+                                }
+                            }
+                            else{
+                                td.innerHTML="<input type='text' value='' style='height:22px;width:430px;border:1px solid #777777;'onblur=isValidData(this,\""+data_type+"\")  />";
+                            }
+                            $(td).children().focus();
+                        }
+                    }  
+                    bootombuttonmsg="<span style='margin-right:45px;cursor:pointer' id='savebt' onclick='commonSendValue(\""+id+"\")' class='btn'>Post Data </span><span style='cursor:pointer' onclick='$(this.parentNode.parentNode).hide();callClear()' class='btn'>Cancel</span>"
+                }
+                saveandclose.innerHTML=bootombuttonmsg;
+                if(!isEditVisible){
+                    $(saveandclose).insertAfter(""+ids+" .res-attrs")
+                }
+                /***************************************common method for edit Doc Ended*****************************************************************/
+            }
+            /***************************************common method for Send value start*****************************************************************/
+            function commonSendValue(id){
+                var isDatadictionary=id=="datadictionary";
+                var currentid=$('.active-resource').attr("detail_id")
+                var  jcurentid="#"+currentid
+                var c_eventd=$(""+jcurentid+" td:even")
+                var c_oddtd=$(""+jcurentid+" td:odd")
+                var child_event=c_eventd.children();
+                var resName = $(".active-resource").html();
+                var len=c_eventd.size();
+                var arr_map={};
+                var oddvalue="";
+                for(var i=0;i<len;i++){
+                    var dump = "";
+                    var mandotary=child_event[i].children[1].style.display;
+                    var evenvalue=c_eventd[i].childNodes[1].children[0].innerHTML
+                    var el=evenvalue.length;
+                    for(var j=0;j<el;j++){
+                        if(isUpperCase(evenvalue[j])){dump += "_"+evenvalue[j];}
+                        else{dump += evenvalue[j];}
+                    }
+                    var newEven=dump.toLowerCase().substring(1)
+                    c_oddtd[i].childElementCount==0?oddvalue="":oddvalue=c_oddtd[i].lastChild.value
+                    if(oddvalue!=""){arr_map[newEven]=oddvalue;}
+                    var isMandotary=mandotary!="none"
+                    if(!isDatadictionary)
+                    {
+                        if(oddvalue==""){if(evenvalue == "Zaid" || evenvalue == "AppId"|| evenvalue=="Zuid"){
+                            }
+                            else{if(isMandotary){
+                                    alert(""+evenvalue+" is mandotary please fill the mandotary field and post")
+                                    return false;}}
+                        }}}
+                if(isDatadictionary){
+                    var cnt=0;
+                    $.each(arr_map, function(index, value){cnt++;});
+                    cnt==0?alert("please enter the value and update"):UpdateContent(arr_map,resName,currentid,jcurentid)
+                }
+                else{
+                    var jsonform=arr_map
+                    var urls=$(""+jcurentid+"").children().eq(0).children().eq(1).html()
+                    var url1=urls.substring(urls.lastIndexOf('/'))
+                    var url=url1.substring(0,url1.lastIndexOf(')'))
+                    var isAccount=(currentid=="res-det-account")?true:false
+                    var isApp=(currentid=="res-det-app")?true:false
+                    var activeurl=urls.substring(2,urls.lastIndexOf(')'))
+                    sendContent(jsonform,url,isAccount,activeurl,isApp,id);
+                }
+            }
+            /***************************************common method for Send value Ends*****************************************************************/
+            function applyStyle(id){
+                var htmlv="";
+                var cid="";
+                id=="datadictionary"?htmlv="Description Selected":id=="put"?htmlv="RestClientPutSelected":htmlv="RestClientPostSelected";
+                id=="put"?cid="post":cid=id;
+                $("#"+cid).siblings().hide("200");
+                $("#back").show("200");
+                $("#"+cid).html(htmlv);
+                $("#"+cid).attr("style","font-weight:bold")
+                $(".res-attrs td:odd").addClass("res_td");
+            }
+            function UpdateContent(arr_map,colname,currentid,jcurentid)
+            {
+                $.post("updatecontent","json="+JSON.stringify(arr_map)+"&"+"colname="+colname,function(data){
+                    var isFailedId=document.getElementById(currentid).lastChild.id
+                    var isNotshow=isFailedId=="failed_post"?true:false
+                    var failed=document.createElement("div")
+                    failed.setAttribute("id", "failed_post")
+                    if(data!=""){
+                        failed.innerHTML="<center style='color:red;padding:8px;font-weight:bold'>Error while Update Data</center>"
+                    }else{
+                        failed.innerHTML="<center style='color:green;padding:8px;font-weight:bold'>Data sucessfully Updated</center>"
+                    }
+                    if(!isNotshow){
+                        $(jcurentid).append(failed)
+                    }
+                    setTimeout( function() {
+                        $(failed).remove();
+                    }, 5000 );
+                });
+            }
+			window.onload = function() {
+                $('#container').treeview({
+                    collapsed: true,
+                    animated: 'fast',
+                    unique: true
+                });
+                var _previd_;
+                $(".res-name").click(function() {
+                    if(_previd_) {
+                        $("#container [detail_id='"+_previd_.substring(1)+"']").removeClass("active-resource");
+                        $(_previd_).hide();
+                    }
+                    var id = _previd_ = '#'+this.getAttribute('detail_id');
+                    $(this).addClass("active-resource");
+                    $(id).css("top", document.documentElement.scrollTop + 20).fadeIn();
+                    var attrid=this.getAttribute('detail_id');
+                    var main_id=attrid.split('-');
+                    window.location.hash="#"+main_id[2];
+                });
+                if(!$.browser.mozilla) {
+                    $("input[type='search']").attr("title", "Please Enter a valid Resource Name");
+                }
+                $('.res-attrs table td:first-child').wTooltip({
+                    delay: 500,
+                    className: "res-tooltip",
+                    offsetY: 15
+                });
+                // Load Default Resource
+                var hashResourceName = window.location.hash.substring(1);
+                var $hashRes = $("#res-det-"+hashResourceName);
+                if ($hashRes.size() > 0){
+                    search(hashResourceName);
+                } else {
+                    $('span:first, .res-name:first' , "#container li:first").click()
+                }
+            }
+            function callFetch(fetchval){
+                var isHide=$(fetchval).parent().children().eq(2).children().is(":visible")
+                if(!isHide){
+                    $(fetchval).parent().children().eq(2).children().attr("style","display:block")
+                }
+                var count=fetchval.innerHTML;
+                
+                if(count.indexOf("<span>")!=-1){
+                }
+                else{
+                    var spanInner=fetchval.innerHTML;
+                    if(spanInner.indexOf("<span>")!=-1){
+                    }
+                    else{
+                        var sv="";
+                        var spanval="";
+                        var idval=fetchval.id;
+                        var idval_fetch=spanInner.substring(1,spanInner.lastIndexOf(')'));
+                        spanval=idval==""?idval_fetch:idval;
+                        sv=spanval.split("/");
+                        var len=sv.length;
+                        if(len>2){
+                            var sc=""
+                            var htmlv=""
+                            for(var i=0;i<len;i++){
+                                sc=sv[i].split(' ').join('');
+                                if(i==2){
+                                    htmlv+="<span>/</span><input type='text' id='fetchid' value='' size='14px' /><span>/"+sc+"</span>"
+                                }
+                                else{
+                                    if(sc!=""){
+                                        htmlv+="<span>/"+sc+"</span>";
+                                    }
+                                }
+                            }
+                            fetchval.innerHTML=htmlv;
+                        }
+                        else{
+                            var htmlv="<span>"+spanval.split(' ').join('')+"/</span><input type='text' id='fetchid' value='' />"
+                            fetchval.innerHTML=htmlv;
+                        }
+                    }
+                }
+                    
+            }
+            function checkFetch(id,val){
+                var concatval="";
+                var innerVal=document.getElementById("fetchid").value;
+                if(innerVal==""){
+                    $(id).parent().parent().children().eq(1).html("("+val+")")
+                    var concatval=val;
+                }
+                else{
+                    var sval=val.split("/");
+                    if(sval.length>2){
+                        for(var i=0;i<sval.length;i++){
+                            if(i!=0){
+                                if(i==2){
+                                    concatval+=innerVal+"/"+sval[i];
+                                }
+                                else{
+                                    i==sval.length?concatval+="/"+sval[i]:concatval+="/"+sval[i]+"/"
+                                }    
+                            }
+                            
+                        }
+                        if(concatval.indexOf("//")!=-1){
+                            concatval=concatval.replace("//","/");
+                        }
+                        $(id).parent().parent().children().eq(1).html("("+concatval+")")
+                        $(id).parent().parent().children().eq(1).attr("id",val)
+                    }else{
+                        concatval=val+"/"+innerVal
+                        if(concatval.indexOf("//")!=-1){
+                            concatval=concatval.replace("//","/");
+                        }
+                        $(id).parent().parent().children().eq(1).html("("+concatval+")")
+                        $(id).parent().parent().children().eq(1).attr("id",val)
+                    }
+                }
+                $(id).parent().parent().children().eq(2).children().attr("style","display:none")
+                callPutOption(concatval)
+            }
+            function callAutoComplte(listA){
+                var autocompleteTag=listA;
+                $( ".res-search" ).autocomplete({
+                    source: autocompleteTag
+                });
+            }
+            function callPutOption(url){
+                var s_url="/accounts/resource/accounts"+url.toLowerCase();
+                var serverurl=s_url.split(' ').join('')
+                var xhr=$.ajax({
+                    "beforeSend": function(xhr) {
+                        xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+                    } ,
+                    "url": serverurl,
+                    "type":"GET",
+                    "async": false,
+                    "contentType": "application/json",
+                    "complete":handleGetFetchdata
+                });
+                
+                
+            }
+          var options="";
+            var count="";
+            function handleGetFetchdata(xhr)
+            {
+                var response = new Response(xhr);
+                var currentid = $(".active-resource").attr("detail_id");
+                var ids = "#" + currentid;
+                var c_eventd = $("#" + currentid + " td:even");
+                var c_oddtd = $("#" + currentid + " td:odd");
+                var isEditVisible = $("" + ids + "").children().eq(2).is(":visible");
+                var id = "put";
+                var selector = document.createElement('select');
+                if (response.isSuccess())
+                {
+                    var e_rtext = JSON.parse("(" + response.xhr.responseText + ")");
+                    if (e_rtext.representation != "")
+                    {
+                        var len = e_rtext.representation.length;
+                        for (var j = 0; j < len; j++)
+                        {
+                            var jsonText = e_rtext.representation[j];
+                            $.each(jsonText, function (index, value)
+                            {
+                                var key = convertUpperCase(index);
+                                for (var i = 0; i < c_eventd.length; i++)
+                                {
+                                    var findVal = $(c_eventd[i]).children().children().eq(0).html();
+                                    if (findVal == key)
+                                    {
+                                        if (key != "SystemRoleName")
+                                        {
+                                            $(c_oddtd[i]).html("<input type='text' value='" + value + "' class='putbox'/>");
+                                        }
+                                        else
+                                        {
+                                            options +=  "<option value="+value+">"+value+"</option>" ;
+                                            count=i;
+                                        }
+                                    }
+                                }
+                                if (key != "SystemRoleName")
+                                {
+                                    for (var k = 0; k < c_eventd.length; k++)
+                                    {
+                                        var findVal = $(c_oddtd[k]).html();
+                                        if (findVal.indexOf("<input"))
+                                        {
+                                            $(c_oddtd[k]).html("<input type='text' value='' class='putbox'/>");
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                        if(options!=""){
+                            $(selector).html(options)
+                            $(c_oddtd[count]).html(selector)
+                        }
+                        var saveandclose = document.createElement("div");
+                        saveandclose.setAttribute("style", "text-align:center;padding:20px");
+                        var bootombuttonmsg = "<span style='margin-right:45px;cursor:pointer' id='savebt1' onclick='Putdata(\"" + id + "\")' class='btn'>Put Data </span><span style='cursor:pointer' onclick='$(this.parentNode.parentNode).hide();callClear()' class='btn'>Cancel</span>";
+                        saveandclose.innerHTML = bootombuttonmsg;
+                        if (!isEditVisible)
+                        {
+                            $(saveandclose).insertAfter("" + ids + " .res-attrs");
+                        }
+                        options="";
+                    }
+                }
+                else
+                {
+                    putErrorMsg("Error While Fetch data");
+                }
+            }
+            function convertUpperCase(key){
+                if(key.indexOf("_")!=-1){
+                    var rval=""
+                    var split_key=key.split("_");
+                    for(var i=0;i<split_key.length;i++){
+                        var splitpart=split_key[i];
+                        for(var j=0;j<splitpart.length;j++){
+                            j==0?rval+=splitpart[j].toUpperCase():rval+=splitpart[j];
+                        }
+                    }
+                    return rval;
+                }
+                else{
+                    var keyval="";
+                    for(var i=0;i<key.length;i++){
+                        i==0?keyval+=key[i].toUpperCase():keyval+=key[i];
+                    }
+                    return keyval
+                }
+            }
+            function Putdata(id){
+                var currentid=$('.active-resource').attr("detail_id")
+                var  jcurentid="#"+currentid
+                var urlv=$(jcurentid).children().children().eq(1).html();
+                var c_eventd=$(""+jcurentid+" td:even")
+                var c_oddtd=$(""+jcurentid+" td:odd")
+                var len=c_eventd.size();
+                var arr_map={};
+                var oddvalue="";
+                for(var i=0;i<len;i++){
+                    var dump = "";
+                    var evenvalue=c_eventd[i].childNodes[1].children[0].innerHTML
+                    var el=evenvalue.length;
+                    for(var j=0;j<el;j++){
+                        if(isUpperCase(evenvalue[j])){dump += "_"+evenvalue[j];}
+                        else{dump += evenvalue[j];}
+                    }
+                    var newEven=dump.toLowerCase().substring(1)
+                    c_oddtd[i].childElementCount==0?oddvalue="":oddvalue=c_oddtd[i].lastChild.value
+                    if(oddvalue!=""){arr_map[newEven]=oddvalue;}
+                }
+                var url=urlv.substring(1,urlv.lastIndexOf(")"));
+                var serverurl=url.split(' ').join('')
+                var xhr=$.ajax({
+                    "beforeSend": function(xhr) {
+                        xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+                    } ,
+                    "url": "/accounts/resource/accounts"+serverurl.toLowerCase(),
+                    "type":"PUT",
+                    "async": false,
+                    "data":JSON.stringify(arr_map),
+                    "contentType": "application/json",
+                    "complete":handlePutResponse
+                });
+            }
+            function handlePutResponse(xhr){
+                var response=new Response(xhr)
+                if(response.isSuccess()){
+                    var e_rtext=response.getLocationHeader();
+                    if(e_rtext!=""){
+                        window.open(e_rtext)
+                        window.location.reload()
+                    }
+                    else{
+                        putErrorMsg("Error While update Data")
+                    }
+                }
+                else{
+                    putErrorMsg("Error While update Data")
+                }
+            }
+            function putErrorMsg(msg){
+                var ids=$('.active-resource').attr('detail_id')
+                var isFailedId=document.getElementById(ids).lastChild.id
+                var active_id="#"+$('.active-resource').attr('detail_id')
+                var isNotshow=isFailedId=="failed_post"?true:false
+                var failed=document.createElement("div")
+                failed.setAttribute("id", "failed_post")
+                failed.innerHTML="<center class='errorF'>"+msg+"</center>"
+                if(!isNotshow){
+                    $(active_id).append(failed)
+                }
+                setTimeout( function() {
+                    $(failed).remove();
+                }, 5000 );
+            }
+        </script>
+    </head>
+    <body>
+<div class ="select_one">
+            <div  id="post" onclick=addRestClient(this.id) class="btn">Rest Client</div>
+            <div  id="datadictionary" onclick="addDescription(this.id)" class="btn">Description</div>
+            <div  id="back" onclick=window.location.reload() style="display: none" class="btn">&laquo; Back </div>
+</div>
+        <form onsubmit="return search($(this).find('input').val());">
+            <input type="search" list="resources" placeholder="Search Resource" pattern="^[a-zA-Z0-9]+$" class="res-search" x-moz-errormessage="Please Enter a valid Resource Name">
+        	<datalist id="resources">@@@@@@OPTIONHTML@@@@@@@@</datalist>
+            <input type="submit" value="." style="visibility: hidden;">
+        </form>
+        <div id="container">
+            @@@@@@@@@@@@@@@@@CONTAINER_INNER@@@@@@@@@@@@@@@@@
+        </div>
+    </body>
+</html>
+@@@@@@@@@@@MAIN_HTML_ENDS@@@@@@@@@@@
+
+@@@@@@@@@@@TREE_STARTS@@@@@@@@@@@
+
+<li>
+    <span class="@@@@@DROP@@@@@"></span><div class="res-name" detail_id="res-det-@@@@@RESOURCE_LOWER@@@@@">@@@@@RESOURCE_NAME@@@@@</div>
+    @@@@@CHILD_TREE@@@@@
+</li>
+
+@@@@@@@@@@@TREE_ENDS@@@@@@@@@@@
+
+@@@@@@@@@@@RESOURCE_DETAILS_STARTS@@@@@@@@@@@
+
+<div id="res-det-@@@@@RESOURCE_LOWER@@@@@" class="resource-details">
+    <div class="res-title">
+        <span class="res-det-close" onclick="$(this.parentNode.parentNode).hide();">[X]</span>
+        @@@@@RESOURCE_NAME@@@@@ <span class="res-url" onclick="callFetch(this)">( @@@@@RESOURCE_URL@@@@@ )</span><span style="position:absolute; float: left;padding-left:3px"><button id='fetchdata' style="display:none;" onclick='checkFetch(this,"@@@@@RESOURCE_URL@@@@@")'>Fetch</button></span><br>
+        <span>@@@@@RESOURCE_DESCRIPTION@@@@@</span>
+    </div>
+    <div class="res-attrs">
+        <table width="100%" cellpadding="8">
+            <tbody>
+                @@@@@@@@@@@ATTR_ROWS@@@@@@@@@@@
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@@@@@@@@@@@RESOURCE_DETAILS_ENDS@@@@@@@@@@@
+
+@@@@@@@@@@@ATTR_ROW_STARTS@@@@@@@@@@@
+<tr>
+    <td title="@@@@@ATTR_DATA_TYPE@@@@@<br>@@@@@ALLOWED_VALUE_TITLE@@@@@">
+            <div>
+            <span class="@@@@@ATTR_IDENTIFIER_CLASS@@@@@">@@@@@ATTR_NAME@@@@@</span>&nbsp;<font color="#FF0000" style="display: @@@@@MANDATORY_STYLE_DISPLAY@@@@@">*</font>
+        </div>
+    </td>
+    <td data_type_pattern="@@@@@ATTRTD_PATTERN@@@@@"   allowed_value="@@@@@ALLOWEDTD_VALUE_TITLE@@@@@" data_type="@@@@@ATTRTD_DATATYPE@@@@@">
+        @@@@@ATTR_DESCRIPTION@@@@@
+    </td>
+</tr>
+@@@@@@@@@@@ATTR_ROW_ENDS@@@@@@@@@@@

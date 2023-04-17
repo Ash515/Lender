@@ -1,0 +1,155 @@
+<DIV id='EditMode' class='hide'>
+	<TABLE width='100%' border='0' align="center" cellpadding='0' cellspacing='0' class='resizeView'>
+		<TR>
+			<TD>&nbsp;</td>
+			<TD align="center" nowrap>$TOPIMAGES</TD>
+			<TD>&nbsp;</TD>
+		</TR>	
+		<TR>
+			<TD width='1px'>$LEFTIMAGES</TD>
+			<TD align='center' height='$HEIGHTpx'>$TITLE<br><a href="javascript:disableEdit();" class="resizeClose">[Close]</a></TD>
+			<TD width='1px' align="right">$RIGHTIMAGES</TD>
+		</TR>
+		<TR>
+			<TD>&nbsp;</td>
+			<TD align="center" nowrap>$BOTTOMIMAGES</TD>
+			<TD>&nbsp;</TD>
+		</TR>	
+	</TABLE>
+</DIV>
+
+<DIV id='PlacedView' class='hide'>
+	<TABLE border='0' cellpadding='0' cellspacing='0' width='100%' onMouseOver='invokeMethod("enableViewSelection",document.getElementById("_ev$ID"))'>
+		<TR>
+			<td colspan="3"><div id="_indicator1$ID" style="float:left;position:relative;top:-2;width:100%;background: #FBF997;border :1px solid #D9D48C;text-align:center;font-weight:bold;vertical-align:middle;" class='hide'>Insert Here</div>
+        </td>
+		</tr>
+		<tr>
+			<td class="wkTopLeft">&nbsp;</td>
+			<td class="wkTopBg">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td nowrap onMouseDown="startDrag(event, '_ev$ID')" style="cursor:move"><input name="Button" type="button" class="wkDragButton" value=""></td>
+						<td nowrap><input name="Submit" type="button" class="resizeButton" value="" onClick='return enableEdit($ID)'></td>
+						<td width="90%" id='_ev$ID_d' onMouseDown="startDrag(event, '_ev$ID')" style="cursor:move">&nbsp;</td>
+           				<td nowrap><input type="button" class="closeButton" onClick='removeView($ID, true)'></td>
+					</tr>
+				</table>													
+			</td>	 
+			<td class="wkTopRight">&nbsp;</td>
+		</tr>
+		<tr>
+			<td height='$HEIGHTpx' colspan="3" class="wkContent" id='_ev$ID' rowIndex='$RID' colIndex='$CID' viewId = '$ID' onMouseDown="startDrag(event, '_ev$ID')" align="center" viewName='$VN' title='$TITLE' desc='$DESC'>$TITLE&nbsp;</td>
+		</tr>
+	</table>
+</DIV>
+
+<DIV id='DummyView' class='hide'>
+	<TABLE border='0' cellpadding='3' class='emptyCell' cellspacing='0' width='100%' height='75px' onMouseOver='invokeMethod("enableViewSelection",document.getElementById("_ev$ID_dv"))'>
+		<TR><TD height='$HEIGHTpx' id='_ev$ID_dv' rowIndex='$RID' colIndex='$CID' viewId = '$ID' align="center" viewName='$VN' title='$TITLE' desc='$DESC'>(Empty Cell)</TD></TR>
+	</TABLE>	
+</DIV>
+<DIV id='EndDummyView' class='hide'>
+	<TABLE border='0' cellpadding='3' class='emptyCellEnd' cellspacing='0' width='100%' height='75px' onMouseOver='invokeMethod("enableViewSelection",document.getElementById("_ev$ID_dv"))'>
+		<TR><TD height='$HEIGHTpx' id='_ev$ID_dv' rowIndex='$RID' colIndex='$CID' viewId = '$ID' align="center" viewName='$VN' title='$TITLE' desc='$DESC'>&nbsp;</TD></TR>
+	</TABLE>	
+</DIV>
+
+
+<DIV id='GridView' class='hide'>
+	<TABLE border='0' cellpadding='0' cellspacing='0' width="50%" align='center' onMouseOver='enableViewSelection(document.getElementById("_ev$ID"))'>
+		<TR>
+			<td colspan="3"><div id="_indicator1$ID" style="float:left;position:relative;top:-2;width:100%;background: #FBF997;border :1px solid #D9D48C;text-align:center;font-weight:bold;vertical-align:middle;" class='hide'>Insert Here</div>
+        </td>
+		</tr>
+		<tr>
+			<td class="wkTopLeft">&nbsp;</td>
+			<td class="wkTopBg">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td nowrap onMouseDown="startDrag(event, '_ev$ID')" style="cursor:move"><input name="Button" type="button" class="wkDragButton" value=""></td>
+						<td width="90%" id='_ev$ID_d' onMouseDown="startDrag(event, '_ev$ID')" style="cursor:move">&nbsp;</td>
+						<td nowrap><input type="button" class="closeButton" onClick='removeView($ID, true)'></td>
+					</tr>
+				</table>													
+			</TD>	 
+			<td class="wkTopRight">&nbsp;</td>
+		</tr>
+		<tr>
+			<td height='$HEIGHTpx' colspan="3" class="wkContent" id='_ev$ID' viewId='$ID' onMouseDown="startDrag(event, '_ev$ID')" align="center" viewName='$VN' title='$TITLE' desc='$DESC'>$TITLE&nbsp;</td>
+		</tr>
+	</table>
+</DIV>
+<DIV id='TabView' class='hide'>
+	<TABLE border='0' cellpadding='0' cellspacing='0' width='100%' onMouseOver='enableViewSelection(document.getElementById("_ev$ID"))'>
+		<TR>
+			<td>
+				<div id="_indicator1$ID" style="float:right;position:relative;border-top:2px solid #000000; border-bottom:2px solid #000000;background-image:url(<%=IAMEncoder.encodeJavaScript(themeDir)%>/images/vt_insertIndication.gif);background-repeat:repeat-y;height:20px;width:8px;top:-2px" class='hide'>&nbsp;</div><%--NO OUTPUTENCODING --%>
+			</td> 
+			<td class="wkTopLeft">&nbsp;</td>
+			<td class="wkTopBg">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td class="wkContent1" id='_ev$ID' nowrap viewId='$ID' onMouseDown="startDrag(event, '_ev$ID')" align="center" viewName='$VN' title='$TITLE' desc='$DESC'>$TITLE&nbsp;</td>
+						<td nowrap align="right"><input type="button" class="closeButton" onClick='removeView($ID, true)'>&nbsp;</td>
+					</tr>
+				</table>
+			</td>
+			<td class="wkTopRight">&nbsp;</td>
+		</tr>
+	</table>	
+</DIV>
+
+<DIV id='RemovedGridView' class='hide'>
+	<table align="center" cellspacing='0' cellpadding='0' width='100%' id='LVR$ID' class='cursor viewNotSelected' onMouseDown="startDrag(event,'LVR$ID')" viewName='$VN' title='$TITLE' desc='$DESC' onMouseOver='showDescription(this)' onMouseOut='hideDescription()'>
+		<tr>
+			<td class="smTopLeft">&nbsp;</td>
+			<td class="smTopBg">&nbsp;<button class="smDragButton"></button></td>
+			<td class="smTopRight">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="smContent">$TITLE&nbsp;</td>
+		</tr>
+	</table><br>
+</DIV>
+
+<DIV id='VTabView' class='hide'>
+	<TABLE border='0' cellpadding='0' cellspacing='0' width='100%' onMouseOver='enableViewSelection(document.getElementById("_ev$ID"))'>
+		<TR>
+			<td colspan="2"><div id="_indicator1$ID" style="float:left;position:relative;top:-2;width:100%;height:2px;background: #FBF997;border :1px solid #D9D48C;text-align:center;font-weight:bold;vertical-align:middle;" class='hide'></div>
+			</td>
+		</TR>	
+		<TR>
+			<td class="wkTopLeft">&nbsp;</td>
+			<td class="wkTopBg">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td onMouseDown="startDrag(event, '_ev$ID')" style="cursor:move"><input name="Button" type="button" class="wkDragButton" value=""></td>
+					<td class="wkContent1" id='_ev$ID' nowrap viewId='$ID' onMouseDown="startDrag(event, '_ev$ID')" align="center" viewName='$VN' title='$TITLE' desc='$DESC'>$TITLE&nbsp;</td>
+		     		<td nowrap align="right"><input name="Submit" type="button" class="closeButton" onClick='removeView($ID, true)'></td>
+				</tr>
+			</table>
+			</td>
+			<td class="wkTopRight">&nbsp;</td>
+		</tr>
+		</tr>
+	</table>	
+</DIV>
+		<script>
+			var newCount = 0;
+			function addNewView(){
+				var value = document.getElementById("newViewText").value;
+				var newViewName = value.replace(/ /g,"_");
+				if(value != null && value != ""){
+					var html = "<table cellspacing='0' cellpadding='0' width='95%' id='LVN" + newCount + "' class='cursor viewNotSelected' onMouseDown=\"startDrag(event,'LVN"+newCount+"')\" viewName='"+newViewName+"' title='"+value+"' desc='"+value+"' onMouseOver='showDescription(this)' onMouseOut='hideDescription()'><tr><td class='smTopLeft'>&nbsp;</td><td  class='smTopBg'>&nbsp;<button class='smDragButton' value=' ' onClick='return false;'>&nbsp;</td><td class='smTopRight'>&nbsp;</td></tr><tr><td colspan='3' class='smContent'>"+value+"</td></tr></table>";
+
+//				  var newHtml = html.replace(/\$ID/g, newCount);
+//			    newHtml = newHtml.replace('$HEIGHT', height);
+//			    newHtml = newHtml.replace(/\$CLASS/g, css);
+
+					document.getElementById("newViewPH").innerHTML = document.getElementById("newViewPH").innerHTML + "<br>" + html;
+					newCount++;
+				}
+			}
+		</script>
+

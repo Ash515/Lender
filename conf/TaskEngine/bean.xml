@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- $Id: bean.xml,v 1.5 2009/04/16 07:01:51 vinod Exp $ -->
+<beans>
+    <Bean bean_id="Bean:bean_id:Scheduler"
+        bean_name="Scheduler"
+                module_id="TaskEngine"
+                transaction_type="1"
+        classname="com.adventnet.taskengine.internal.SchedulerBean">
+    </Bean>
+    <Bean bean_id="Bean:bean_id:ScheduleExecutorWT"
+        bean_name="ScheduleExecutorWT" 
+		module_id="TaskEngine" 
+		transaction_type="1"
+        classname="com.adventnet.taskengine.internal.SchedulerBean">
+    </Bean>
+    <Bean bean_id="Bean:bean_id:ScheduleExecutorNT"
+        bean_name="ScheduleExecutorNT"
+                module_id="TaskEngine"
+                transaction_type="4"
+        classname="com.adventnet.taskengine.internal.SchedulerBean">
+    </Bean>
+
+    <Bean bean_id="Bean:bean_id:PurePersistenceLite-NoTrans" bean_name="PurePersistenceLite-NoTrans" module_id="TaskEngine" classname="com.adventnet.persistence.PersistenceBean" transaction_type="4"/>
+</beans>

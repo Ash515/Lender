@@ -1,0 +1,2481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ZOHO Enhancement :
+		* This policy file contains only CSS3 properties and selectors
+		* If teams need to extend antisamy policy file please refer -> https://intranet.wiki.zoho.com/security/How-to-extend-antisamy-policy-file.html     
+-->
+<anti-samy-rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="antisamy.xsd">
+	<include href="antisamy-common-rules.xml" />
+	<common-regexps>
+		<!--ZOHO: CSS3 allowed regexes -->
+        	<regexp name="cssSelectorCommonRegex" value="[a-zA-Z0-9&quot;\-_\[\]\|\s.*+,&gt;#:%=~^$()\P{InBasicLatin}]+"/>
+        	<regexp name="cssSelectorCommonRegexExclusion" value=""/>
+        	<regexp name="cssAtCharsetEncoding" value="(utf-8|iso-8859-15)"/>
+        	<regexp name="mediaType" value ="(all|print|screen|speech)"/>
+                <regexp name="mediaFeatureWithEmptyValue" value ="^(-|grid|color|monochrome)[a-zA-Z0-9\s,\-_]*"/>
+      		<regexp name="aspectratio" value="([0-9]+)/([0-9]+)"/>
+      		<regexp name="resolution" value="((-|\+)?0|(-|\+)?([0-9]+(\.[0-9]+)?)(dpi|dpcm|dppx))"/>
+		<regexp name="pageSelector" value="[a-zA-Z0-9\:\s,\-_]+"/>
+		<regexp name="unknownSelector" value="[a-zA-Z0-9\:\s,\-_@]+"/>
+		<regexp name="string" value="[a-zA-Z0-9\-_]+"/>
+		<regexp name="transitionproperty" value="[a-z\-]+"/>
+		<regexp name="function" value="([a-zA-Z0-9\-]+)\([a-zA-Z0-9=.,%\-\s]*\)"/>
+		<regexp name="gradientfunction" value="(-(moz|webkit|o|ms)-)?(gradient|linear-gradient|radial-gradient|repeating-linear-gradient|repeating-radial-gradient)\([a-zA-Z0-9.,%\-\s\(\)]*\)"/>
+		<regexp name="keyFrameInnerSelector" value="(from|to|([0-9]{1,3})%)"/>
+		<regexp name="rgbaCode" value="rgba\(([1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5]),\s?([1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5]),\s?([1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5]),\s?([01]{1}(\.[0-9]+)?)\)"/>
+      		<regexp name="hslCode" value="hsl\(([0-9]{1,3}),\s?([0-9]+(\.[0-9]+)?)%,\s?([0-9]+(\.[0-9]+)?)%\)"/>
+ 		<regexp name="hslaCode" value="hsla\(([0-9]{1,3}),\s?([0-9]+(\.[0-9]+)?)%,\s?([0-9]+(\.[0-9]+)?)%,\s?([01]{1}(\.[0-9]+)?)\)"/>  
+		<!-- unicode characters in content property is added  -->
+		<regexp name="content" value="(&quot;[a-zA-Z0-9\-.\s_,\P{InBasicLatin}]*&quot;){1}"/>
+	</common-regexps>
+	<!--  CSS3 validation processing rules  -->
+	<css-rules>
+		<!--   CSS3 properties -->
+		<property name="src" description="">
+			<category-list>
+				<category value="atfontface" />
+			</category-list>
+			<regexp-list>
+				<regexp name="cssOffsiteUri" />
+				<regexp name="cssOnsiteUri" />
+			</regexp-list>
+		</property>
+		<property name="opacity" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="background-blend-mode" description="">
+			<literal-list>
+				<literal value="normal" />
+				<literal value="multiply" />
+				<literal value="screen" />
+				<literal value="overlay" />
+				<literal value="darken" />
+				<literal value="lighten" />
+				<literal value="color-dodge" />
+				<literal value="saturation" />
+				<literal value="color" />
+				<literal value="luminosity" />
+			</literal-list>
+		</property>
+		<property name="background-clip" description="">
+			<literal-list>
+				<literal value="border-box" />
+				<literal value="padding-box" />
+				<literal value="content-box" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="background-origin" description="">
+			<literal-list>
+				<literal value="padding-box" />
+				<literal value="border-box" />
+				<literal value="content-box" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="background-size" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="contain" />
+				<literal value="cover" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positiveLength" />
+				<regexp name="positivePercentage" />
+			</regexp-list>
+		</property>
+		<property name="border-radius" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positiveLength" />
+				<regexp name="positivePercentage" />
+			</regexp-list>
+			<shorthand-list>
+				<shorthand name="border-top-left-radius" />
+				<shorthand name="border-top-right-radius" />
+				<shorthand name="border-bottom-right-radius" />
+				<shorthand name="border-bottom-left-radius" />
+			</shorthand-list>
+		</property>
+		<property name="-webkit-border-radius" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positiveLength" />
+				<regexp name="positivePercentage" />
+			</regexp-list>
+			<shorthand-list>
+				<shorthand name="border-top-left-radius" />
+				<shorthand name="border-top-right-radius" />
+				<shorthand name="border-bottom-right-radius" />
+				<shorthand name="border-bottom-left-radius" />
+			</shorthand-list>
+		</property>
+		<property name="-moz-border-radius" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positiveLength" />
+				<regexp name="positivePercentage" />
+			</regexp-list>
+			<shorthand-list>
+				<shorthand name="border-top-left-radius" />
+				<shorthand name="border-top-right-radius" />
+				<shorthand name="border-bottom-right-radius" />
+				<shorthand name="border-bottom-left-radius" />
+			</shorthand-list>
+		</property>
+		<property name="border-bottom-left-radius" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positiveLength" />
+				<regexp name="positivePercentage" />
+			</regexp-list>
+		</property>
+		<property name="border-bottom-right-radius" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positiveLength" />
+				<regexp name="positivePercentage" />
+			</regexp-list>
+		</property>
+		<property name="border-top-left-radius" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positiveLength" />
+				<regexp name="positivePercentage" />
+			</regexp-list>
+		</property>
+		<property name="border-top-right-radius" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positiveLength" />
+				<regexp name="positivePercentage" />
+			</regexp-list>
+		</property>
+		<property name="border-image" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="border-image-source" />
+				<shorthand name="border-image-slice" />
+				<shorthand name="border-image-width" />
+				<shorthand name="border-image-outset" />
+				<shorthand name="border-image-repeat" />
+			</shorthand-list>
+		</property>
+		<property name="-webkit-border-image" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="border-image-source" />
+				<shorthand name="border-image-slice" />
+				<shorthand name="border-image-width" />
+				<shorthand name="border-image-outset" />
+				<shorthand name="border-image-repeat" />
+			</shorthand-list>
+		</property>
+		<property name="-moz-border-image" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="border-image-source" />
+				<shorthand name="border-image-slice" />
+				<shorthand name="border-image-width" />
+				<shorthand name="border-image-outset" />
+				<shorthand name="border-image-repeat" />
+			</shorthand-list>
+		</property>
+		<property name="-o-border-image" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="border-image-source" />
+				<shorthand name="border-image-slice" />
+				<shorthand name="border-image-width" />
+				<shorthand name="border-image-outset" />
+				<shorthand name="border-image-repeat" />
+			</shorthand-list>
+		</property>
+		<property name="border-image-outset" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positiveLength" />
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="border-image-repeat" description="">
+			<literal-list>
+				<literal value="stretch" />
+				<literal value="repeat" />
+				<literal value="round" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="border-image-slice" description="">
+			<literal-list>
+				<literal value="fill" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+				<regexp name="positivePercentage" />
+			</regexp-list>
+		</property>
+		<property name="border-image-source" description="">
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="none" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="cssOnsiteUri" />
+				<regexp name="cssOffsiteUri" />
+			</regexp-list>
+		</property>
+		<property name="border-image-width" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positiveLength" />
+				<regexp name="number" />
+				<regexp name="positivePercentage" />
+			</regexp-list>
+		</property>
+		<!-- box-decoration-break is not yet stablised -->
+		<property name="box-decoration-break" description="">
+			<literal-list>
+				<literal value="slice" />
+				<literal value="clone" />
+			</literal-list>
+		</property>
+		<property name="-o-box-decoration-break" description="">
+			<literal-list>
+				<literal value="slice" />
+				<literal value="clone" />
+			</literal-list>
+		</property>
+		<property name="-webkit-box-decoration-break" description="">
+			<literal-list>
+				<literal value="slice" />
+				<literal value="clone" />
+			</literal-list>
+		</property>
+		<property name="box-shadow" description="">
+			<literal-list>
+				<literal value="inset" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-box-shadow" description="">
+			<literal-list>
+				<literal value="inset" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="-moz-box-shadow" description="">
+			<literal-list>
+				<literal value="inset" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="overflow-x" description="">
+			<literal-list>
+				<literal value="scroll" />
+				<literal value="visible" />
+				<literal value="hidden" />
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-ms-overflow-x" description="">
+			<literal-list>
+				<literal value="scroll" />
+				<literal value="visible" />
+				<literal value="hidden" />
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-overflow-x" description="">
+			<literal-list>
+				<literal value="scroll" />
+				<literal value="visible" />
+				<literal value="hidden" />
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-overflow-x" description="">
+			<literal-list>
+				<literal value="scroll" />
+				<literal value="visible" />
+				<literal value="hidden" />
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="overflow-y" description="">
+			<literal-list>
+				<literal value="scroll" />
+				<literal value="visible" />
+				<literal value="hidden" />
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-ms-overflow-y" description="">
+			<literal-list>
+				<literal value="scroll" />
+				<literal value="visible" />
+				<literal value="hidden" />
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-overflow-y" description="">
+			<literal-list>
+				<literal value="scroll" />
+				<literal value="visible" />
+				<literal value="hidden" />
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-overflow-y" description="">
+			<literal-list>
+				<literal value="scroll" />
+				<literal value="visible" />
+				<literal value="hidden" />
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="align-content" description="">
+			<literal-list>
+				<literal value="stretch" />
+				<literal value="center" />
+				<literal value="flex-start" />
+				<literal value="flex-end" />
+				<literal value="space-between" />
+				<literal value="space-around" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-align-content" description="">
+			<literal-list>
+				<literal value="stretch" />
+				<literal value="center" />
+				<literal value="flex-start" />
+				<literal value="flex-end" />
+				<literal value="space-between" />
+				<literal value="space-around" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="align-items" description="">
+			<literal-list>
+				<literal value="stretch" />
+				<literal value="center" />
+				<literal value="flex-start" />
+				<literal value="flex-end" />
+				<literal value="baseline" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-align-items" description="">
+			<literal-list>
+				<literal value="stretch" />
+				<literal value="center" />
+				<literal value="flex-start" />
+				<literal value="flex-end" />
+				<literal value="baseline" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="align-self" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="stretch" />
+				<literal value="center" />
+				<literal value="flex-start" />
+				<literal value="flex-end" />
+				<literal value="baseline" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-align-self" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="stretch" />
+				<literal value="center" />
+				<literal value="flex-start" />
+				<literal value="flex-end" />
+				<literal value="baseline" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="flex" description="">
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="auto" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="flex-grow" />
+				<shorthand name="flex-shrink" />
+				<shorthand name="flex-basis" />
+			</shorthand-list>
+		</property>
+		<property name="flex-basis" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positiveLength" />
+				<regexp name="number" />
+				<regexp name="positivePercentage" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-flex-basis" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positiveLength" />
+				<regexp name="number" />
+				<regexp name="positivePercentage" />
+			</regexp-list>
+		</property>
+		<property name="-moz-flex-basis" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positiveLength" />
+				<regexp name="number" />
+				<regexp name="positivePercentage" />
+			</regexp-list>
+		</property>
+		<property name="flex-direction" description="">
+			<literal-list>
+				<literal value="row" />
+				<literal value="row-reverse" />
+				<literal value="column" />
+				<literal value="column-reverse" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-flex-direction" description="">
+			<literal-list>
+				<literal value="row" />
+				<literal value="row-reverse" />
+				<literal value="column" />
+				<literal value="column-reverse" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-flex-direction" description="">
+			<literal-list>
+				<literal value="row" />
+				<literal value="row-reverse" />
+				<literal value="column" />
+				<literal value="column-reverse" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="flex-flow" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="flex-direction" />
+				<shorthand name="flex-wrap" />
+			</shorthand-list>
+		</property>
+		<property name="-webkit-flex-flow" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="flex-direction" />
+				<shorthand name="flex-wrap" />
+			</shorthand-list>
+		</property>
+		<property name="-moz-flex-flow" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="flex-direction" />
+				<shorthand name="flex-wrap" />
+			</shorthand-list>
+		</property>
+		<property name="flex-grow" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-flex-grow" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="-moz-flex-grow" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="flex-shrink" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="-moz-flex-shrink" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-flex-shrink" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="flex-wrap" description="">
+			<literal-list>
+				<literal value="nowrap" />
+				<literal value="wrap" />
+				<literal value="wrap-reverse" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-flex-wrap" description="">
+			<literal-list>
+				<literal value="nowrap" />
+				<literal value="wrap" />
+				<literal value="wrap-reverse" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-flex-wrap" description="">
+			<literal-list>
+				<literal value="nowrap" />
+				<literal value="wrap" />
+				<literal value="wrap-reverse" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="justify-content" description="">
+			<literal-list>
+				<literal value="center" />
+				<literal value="flex-start" />
+				<literal value="flex-end" />
+				<literal value="space-between" />
+				<literal value="space-around" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-justify-content" description="">
+			<literal-list>
+				<literal value="center" />
+				<literal value="flex-start" />
+				<literal value="flex-end" />
+				<literal value="space-between" />
+				<literal value="space-around" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-justify-content" description="">
+			<literal-list>
+				<literal value="center" />
+				<literal value="flex-start" />
+				<literal value="flex-end" />
+				<literal value="space-between" />
+				<literal value="space-around" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="order" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-order" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="-moz-order" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="line-break" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="loose" />
+				<literal value="normal" />
+				<literal value="strict" />
+			</literal-list>
+		</property>
+		<property name="overflow-wrap" description="">
+			<literal-list>
+				<literal value="break-word" />
+				<literal value="normal" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="" />
+			</regexp-list>
+		</property>
+		<property name="tab-size" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+				<regexp name="positiveLength" />
+			</regexp-list>
+		</property>
+		<property name="-o-tab-size" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+				<regexp name="positiveLength" />
+			</regexp-list>
+		</property>
+		<property name="-moz-tab-size" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+				<regexp name="positiveLength" />
+			</regexp-list>
+		</property>
+		<property name="text-align-last" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="left" />
+				<literal value="right" />
+				<literal value="center" />
+				<literal value="justify" />
+				<literal value="start" />
+				<literal value="end" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-text-align-last" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="left" />
+				<literal value="right" />
+				<literal value="center" />
+				<literal value="justify" />
+				<literal value="start" />
+				<literal value="end" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="text-justify" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inter-word" />
+				<literal value="inter-ideograph" />
+				<literal value="inter-cluster" />
+				<literal value="distribute" />
+				<literal value="kashida" />
+				<literal value="trim" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="word-break" description="">
+			<literal-list>
+				<literal value="normal" />
+				<literal value="break-all" />
+				<literal value="keep-all" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="word-wrap" description="">
+			<literal-list>
+				<literal value="normal" />
+				<literal value="break-word" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="text-decoration-color" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+		</property>
+		<property name="-moz-text-decoration-color" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+		</property>
+		<property name="text-decoration-line" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="underline" />
+				<literal value="overline" />
+				<literal value="line-through" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-text-decoration-line" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="underline" />
+				<literal value="overline" />
+				<literal value="line-through" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="text-decoration-style" description="">
+			<literal-list>
+				<literal value="solid" />
+				<literal value="double" />
+				<literal value="dotted" />
+				<literal value="dashed" />
+				<literal value="wavy" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-text-decoration-style" description="">
+			<literal-list>
+				<literal value="solid" />
+				<literal value="double" />
+				<literal value="dotted" />
+				<literal value="dashed" />
+				<literal value="wavy" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="text-underline-position" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="under" />
+				<literal value="left" />
+				<literal value="right" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="font-feature-settings" description="">
+			<literal-list>
+				<literal value="normal" />
+				<literal value="on" />
+				<literal value="off" />
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="string" />
+			</regexp-list>
+		</property>
+		<property name="-moz-font-feature-settings" description="">
+			<literal-list>
+				<literal value="normal" />
+				<literal value="on" />
+				<literal value="off" />
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="string" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-font-feature-settings" description="">
+			<literal-list>
+				<literal value="normal" />
+				<literal value="on" />
+				<literal value="off" />
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="string" />
+			</regexp-list>
+		</property>
+		<property name="font-kerning" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="normal" />
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="font-synthesis" description="">
+			<literal-list>
+				<literal value="weight" />
+				<literal value="style" />
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="font-variant-caps" description="">
+			<literal-list>
+				<literal value="normal" />
+				<literal value="small-caps" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="font-variant-ligatures" description="">
+			<literal-list>
+				<literal value="normal" />
+				<literal value="none" />
+				<literal value="common-ligatures" />
+				<literal value="no-common-ligatures" />
+				<literal value="discretionary-ligatures" />
+				<literal value="no-discretionary-ligatures" />
+				<literal value="no-discretionary-ligatures" />
+				<literal value="historical-ligature" />
+				<literal value="no-historical-ligatures" />
+				<literal value="contextual" />
+				<literal value="no-contextual" />
+			</literal-list>
+		</property>
+		<property name="font-variant-numeric" description="">
+			<literal-list>
+				<literal value="normal" />
+				<literal value="lining-nums" />
+				<literal value="oldstyle-nums" />
+				<literal value="proportional-nums" />
+				<literal value="tabular-nums" />
+				<literal value="diagonal-fractions" />
+				<literal value="stacked-fractions" />
+				<literal value="ordinal" />
+				<literal value="slashed-zero" />
+			</literal-list>
+		</property>
+		<property name="font-variant-position" description="">
+			<literal-list>
+				<literal value="normal" />
+				<literal value="sub" />
+				<literal value="super" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="animation" description="">
+			<shorthand-list>
+				<shorthand name="animation-name" />
+				<shorthand name="animation-duration" />
+				<shorthand name="animation-timing-function" />
+				<shorthand name="animation-delay" />
+				<shorthand name="animation-iteration-count" />
+				<shorthand name="animation-direction" />
+				<shorthand name="animation-fill-mode" />
+				<shorthand name="animation-play-state" />
+			</shorthand-list>
+		</property>
+		<property name="-webkit-animation" description="">
+			<shorthand-list>
+				<shorthand name="animation-name" />
+				<shorthand name="animation-duration" />
+				<shorthand name="animation-timing-function" />
+				<shorthand name="animation-delay" />
+				<shorthand name="animation-iteration-count" />
+				<shorthand name="animation-direction" />
+				<shorthand name="animation-fill-mode" />
+				<shorthand name="animation-play-state" />
+			</shorthand-list>
+		</property>
+		<property name="-moz-animation" description="">
+			<shorthand-list>
+				<shorthand name="animation-name" />
+				<shorthand name="animation-duration" />
+				<shorthand name="animation-timing-function" />
+				<shorthand name="animation-delay" />
+				<shorthand name="animation-iteration-count" />
+				<shorthand name="animation-direction" />
+				<shorthand name="animation-fill-mode" />
+				<shorthand name="animation-play-state" />
+			</shorthand-list>
+		</property>
+		<property name="-o-animation" description="">
+			<shorthand-list>
+				<shorthand name="animation-name" />
+				<shorthand name="animation-duration" />
+				<shorthand name="animation-timing-function" />
+				<shorthand name="animation-delay" />
+				<shorthand name="animation-iteration-count" />
+				<shorthand name="animation-direction" />
+				<shorthand name="animation-fill-mode" />
+				<shorthand name="animation-play-state" />
+			</shorthand-list>
+		</property>
+		<property name="animation-delay" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="-moz-animation-delay" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-animation-delay" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="-o-animation-delay" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="animation-direction" description="">
+			<literal-list>
+				<literal value="normal" />
+				<literal value="reverse" />
+				<literal value="alternate" />
+				<literal value="alternate-reverse" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-animation-direction" description="">
+			<literal-list>
+				<literal value="normal" />
+				<literal value="reverse" />
+				<literal value="alternate" />
+				<literal value="alternate-reverse" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-animation-direction" description="">
+			<literal-list>
+				<literal value="normal" />
+				<literal value="reverse" />
+				<literal value="alternate" />
+				<literal value="alternate-reverse" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-o-animation-direction" description="">
+			<literal-list>
+				<literal value="normal" />
+				<literal value="reverse" />
+				<literal value="alternate" />
+				<literal value="alternate-reverse" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="animation-duration" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="-moz-animation-duration" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-animation-duration" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="-o-animation-duration" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="animation-fill-mode" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="forwards" />
+				<literal value="backwards" />
+				<literal value="both" />
+				<literal value="initial" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-animation-fill-mode" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="forwards" />
+				<literal value="backwards" />
+				<literal value="both" />
+				<literal value="initial" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-animation-fill-mode" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="forwards" />
+				<literal value="backwards" />
+				<literal value="both" />
+				<literal value="initial" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-o-animation-fill-mode" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="forwards" />
+				<literal value="backwards" />
+				<literal value="both" />
+				<literal value="initial" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="animation-iteration-count" description="">
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="infinite" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="-moz-animation-iteration-count" description="">
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="infinite" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-animation-iteration-count" description="">
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="infinite" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="-o-animation-iteration-count" description="">
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="infinite" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="animation-name" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="string" />
+			</regexp-list>
+		</property>
+		<property name="-moz-animation-name" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="string" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-animation-name" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="string" />
+			</regexp-list>
+		</property>
+		<property name="-o-animation-name" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="string" />
+			</regexp-list>
+		</property>
+		<property name="animation-play-state" description="">
+			<literal-list>
+				<literal value="paused" />
+				<literal value="running" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-animation-play-state" description="">
+			<literal-list>
+				<literal value="paused" />
+				<literal value="running" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-o-animation-play-state" description="">
+			<literal-list>
+				<literal value="paused" />
+				<literal value="running" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-animation-play-state" description="">
+			<literal-list>
+				<literal value="paused" />
+				<literal value="running" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="animation-timing-function" description="">
+			<literal-list>
+				<literal value="linear" />
+				<literal value="ease" />
+				<literal value="ease-in" />
+				<literal value="ease-out" />
+				<literal value="ease-in-out" />
+				<literal value="step-start" />
+				<literal value="step-end" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-animation-timing-function" description="">
+			<literal-list>
+				<literal value="linear" />
+				<literal value="ease" />
+				<literal value="ease-in" />
+				<literal value="ease-out" />
+				<literal value="ease-in-out" />
+				<literal value="step-start" />
+				<literal value="step-end" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-animation-timing-function" description="">
+			<literal-list>
+				<literal value="linear" />
+				<literal value="ease" />
+				<literal value="ease-in" />
+				<literal value="ease-out" />
+				<literal value="ease-in-out" />
+				<literal value="step-start" />
+				<literal value="step-end" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-o-animation-timing-function" description="">
+			<literal-list>
+				<literal value="linear" />
+				<literal value="ease" />
+				<literal value="ease-in" />
+				<literal value="ease-out" />
+				<literal value="ease-in-out" />
+				<literal value="step-start" />
+				<literal value="step-end" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="perspective" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="-moz-perspective" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-perspective" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="perspective-origin" description="">
+			<literal-list>
+				<literal value="left" />
+				<literal value="center" />
+				<literal value="right" />
+				<literal value="top" />
+				<literal value="bottom" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positiveLength" />
+				<regexp name="positivePercentage" />
+			</regexp-list>
+		</property>
+		<property name="transform" description="">
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="none" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="function" />
+			</regexp-list>
+		</property>
+		<property name="-moz-transform" description="">
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="none" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="function" />
+			</regexp-list>
+		</property>
+		<property name="-o-transform" description="">
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="none" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="function" />
+			</regexp-list>
+		</property>
+		<property name="-ms-transform" description="">
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="none" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="function" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-transform" description="">
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="none" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="function" />
+			</regexp-list>
+		</property>
+		<property name="transform-origin" description="">
+			<literal-list>
+				<literal value="left" />
+				<literal value="center" />
+				<literal value="right" />
+				<literal value="top" />
+				<literal value="bottom" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="-moz-transform-origin" description="">
+			<literal-list>
+				<literal value="left" />
+				<literal value="center" />
+				<literal value="right" />
+				<literal value="top" />
+				<literal value="bottom" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-transform-origin" description="">
+			<literal-list>
+				<literal value="left" />
+				<literal value="center" />
+				<literal value="right" />
+				<literal value="top" />
+				<literal value="bottom" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="-o-transform-origin" description="">
+			<literal-list>
+				<literal value="left" />
+				<literal value="center" />
+				<literal value="right" />
+				<literal value="top" />
+				<literal value="bottom" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="-ms-transform-origin" description="">
+			<literal-list>
+				<literal value="left" />
+				<literal value="center" />
+				<literal value="right" />
+				<literal value="top" />
+				<literal value="bottom" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+				<regexp name="percentage" />
+			</regexp-list>
+		</property>
+		<property name="transform-style" description="">
+			<literal-list>
+				<literal value="flat" />
+				<literal value="preserve-3d" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-transform-style" description="">
+			<literal-list>
+				<literal value="flat" />
+				<literal value="preserve-3d" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-transform-style" description="">
+			<literal-list>
+				<literal value="flat" />
+				<literal value="preserve-3d" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="transition" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="transition-property" />
+				<shorthand name="transition-duration" />
+				<shorthand name="transition-timing-function" />
+				<shorthand name="transition-delay" />
+			</shorthand-list>
+		</property>
+		<property name="-moz-transition" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="transition-property" />
+				<shorthand name="transition-duration" />
+				<shorthand name="transition-timing-function" />
+				<shorthand name="transition-delay" />
+			</shorthand-list>
+		</property>
+		<property name="-webkit-transition" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="transition-property" />
+				<shorthand name="transition-duration" />
+				<shorthand name="transition-timing-function" />
+				<shorthand name="transition-delay" />
+			</shorthand-list>
+		</property>
+		<property name="-o-transition" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="transition-property" />
+				<shorthand name="transition-duration" />
+				<shorthand name="transition-timing-function" />
+				<shorthand name="transition-delay" />
+			</shorthand-list>
+		</property>
+		<property name="transition-property" description="">
+			<regexp-list>
+				<regexp name="transitionproperty" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-transition-property" description="">
+			<regexp-list>
+				<regexp name="transitionproperty" />
+			</regexp-list>
+		</property>
+		<property name="-moz-transition-property" description="">
+			<regexp-list>
+				<regexp name="transitionproperty" />
+			</regexp-list>
+		</property>
+		<property name="-o-transition-property" description="">
+			<regexp-list>
+				<regexp name="transitionproperty" />
+			</regexp-list>
+		</property>
+		<property name="transition-duration" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="-moz-transition-duration" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-transition-duration" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="-o-transition-duration" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="transition-timing-function" description="">
+			<literal-list>
+				<literal value="linear" />
+				<literal value="ease" />
+				<literal value="ease-in" />
+				<literal value="ease-out" />
+				<literal value="ease-in-out" />
+				<literal value="step-start" />
+				<literal value="step-end" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-transition-timing-function" description="">
+			<literal-list>
+				<literal value="linear" />
+				<literal value="ease" />
+				<literal value="ease-in" />
+				<literal value="ease-out" />
+				<literal value="ease-in-out" />
+				<literal value="step-start" />
+				<literal value="step-end" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-transition-timing-function" description="">
+			<literal-list>
+				<literal value="linear" />
+				<literal value="ease" />
+				<literal value="ease-in" />
+				<literal value="ease-out" />
+				<literal value="ease-in-out" />
+				<literal value="step-start" />
+				<literal value="step-end" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-o-transition-timing-function" description="">
+			<literal-list>
+				<literal value="linear" />
+				<literal value="ease" />
+				<literal value="ease-in" />
+				<literal value="ease-out" />
+				<literal value="ease-in-out" />
+				<literal value="step-start" />
+				<literal value="step-end" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="transition-delay" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="-moz-transition-delay" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-transition-delay" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="-o-transition-delay" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="time" />
+			</regexp-list>
+		</property>
+		<property name="box-sizing" description="">
+			<literal-list>
+				<literal value="content-box" />
+				<literal value="border-box" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-box-sizing" description="">
+			<literal-list>
+				<literal value="content-box" />
+				<literal value="border-box" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-box-sizing" description="">
+			<literal-list>
+				<literal value="content-box" />
+				<literal value="border-box" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="outline-offset" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="resize" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="both" />
+				<literal value="horizontal" />
+				<literal value="vertical" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="text-overflow" description="">
+			<literal-list>
+				<literal value="clip" />
+				<literal value="ellipsis" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="column-count" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="-moz-column-count" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-column-count" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</property>
+		<property name="column-gap" description="">
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="normal" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="-moz-column-gap" description="">
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="normal" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-column-gap" description="">
+			<literal-list>
+				<literal value="inherit" />
+				<literal value="normal" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="column-rule" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="column-rule-width" />
+				<shorthand name="column-rule-style" />
+				<shorthand name="column-rule-color" />
+			</shorthand-list>
+		</property>
+		<property name="-webkit-column-rule" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="column-rule-width" />
+				<shorthand name="column-rule-style" />
+				<shorthand name="column-rule-color" />
+			</shorthand-list>
+		</property>
+		<property name="-moz-column-rule" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="column-rule-width" />
+				<shorthand name="column-rule-style" />
+				<shorthand name="column-rule-color" />
+			</shorthand-list>
+		</property>
+		<property name="column-rule-color" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-column-rule-color" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+		</property>
+		<property name="-moz-column-rule-color" description="">
+			<literal-list>
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+				<regexp name="rgbCode" />
+				<regexp name="rgbaCode" />
+				<regexp name="hslCode" />
+				<regexp name="hslaCode" />
+				<regexp name="systemColor" />
+			</regexp-list>
+		</property>
+		<property name="column-rule-style" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="hidden" />
+				<literal value="dotted" />
+				<literal value="dashed" />
+				<literal value="solid" />
+				<literal value="double" />
+				<literal value="groove" />
+				<literal value="ridge" />
+				<literal value="inset" />
+				<literal value="outset" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-column-rule-style" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="hidden" />
+				<literal value="dotted" />
+				<literal value="dashed" />
+				<literal value="solid" />
+				<literal value="double" />
+				<literal value="groove" />
+				<literal value="ridge" />
+				<literal value="inset" />
+				<literal value="outset" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-column-rule-style" description="">
+			<literal-list>
+				<literal value="none" />
+				<literal value="hidden" />
+				<literal value="dotted" />
+				<literal value="dashed" />
+				<literal value="solid" />
+				<literal value="double" />
+				<literal value="groove" />
+				<literal value="ridge" />
+				<literal value="inset" />
+				<literal value="outset" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="column-rule-width" description="">
+			<category-list>
+				<category value="" />
+			</category-list>
+			<literal-list>
+				<literal value="medium" />
+				<literal value="thin" />
+				<literal value="thick" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="-moz-column-rule-width" description="">
+			<category-list>
+				<category value="" />
+			</category-list>
+			<literal-list>
+				<literal value="medium" />
+				<literal value="thin" />
+				<literal value="thick" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-column-rule-width" description="">
+			<category-list>
+				<category value="" />
+			</category-list>
+			<literal-list>
+				<literal value="medium" />
+				<literal value="thin" />
+				<literal value="thick" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="column-span" description="">
+			<literal-list>
+				<literal value="all" />
+				<literal value="1" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-moz-column-span" description="">
+			<literal-list>
+				<literal value="all" />
+				<literal value="1" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="-webkit-column-span" description="">
+			<literal-list>
+				<literal value="all" />
+				<literal value="1" />
+				<literal value="inherit" />
+			</literal-list>
+		</property>
+		<property name="column-width" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-column-width" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="-moz-column-width" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="length" />
+			</regexp-list>
+		</property>
+		<property name="columns" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="column-width" />
+				<shorthand name="column-count" />
+			</shorthand-list>
+		</property>
+		<property name="-webkit-columns" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="column-width" />
+				<shorthand name="column-count" />
+			</shorthand-list>
+		</property>
+		<property name="-moz-columns" description="">
+			<literal-list>
+				<literal value="auto" />
+				<literal value="inherit" />
+			</literal-list>
+			<shorthand-list>
+				<shorthand name="column-width" />
+				<shorthand name="column-count" />
+			</shorthand-list>
+		</property>
+		<property name="filter" description="">
+			<regexp-list>
+				<regexp name="function" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-filter" description="">
+			<regexp-list>
+				<regexp name="function" />
+			</regexp-list>
+		</property>
+		<property name="-ms-filter" description="">
+			<regexp-list>
+				<regexp name="function" />
+			</regexp-list>
+		</property>
+		<property name="object-fit" description="">
+			<literal-list>
+				<literal value="fill" />
+				<literal value="contain" />
+				<literal value="cover" />
+				<literal value="scale-down" />
+			</literal-list>
+		</property>
+		<property name="object-position" description="">
+			<category-list>
+				<category value="" />
+			</category-list>
+			<literal-list>
+				<literal value="top" />
+				<literal value="center" />
+				<literal value="bottom" />
+				<literal value="left" />
+				<literal value="center" />
+				<literal value="right" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positivePercentage" />
+				<regexp name="positiveLength" />
+			</regexp-list>
+		</property>
+		<property name="-o-object-position" description="">
+			<category-list>
+				<category value="" />
+			</category-list>
+			<literal-list>
+				<literal value="top" />
+				<literal value="center" />
+				<literal value="bottom" />
+				<literal value="left" />
+				<literal value="center" />
+				<literal value="right" />
+				<literal value="inherit" />
+			</literal-list>
+			<regexp-list>
+				<regexp name="positivePercentage" />
+				<regexp name="positiveLength" />
+			</regexp-list>
+		</property>
+		<property name="marquee-direction" description="">
+			<literal-list>
+				<literal value="forward" />
+				<literal value="reverse" />
+			</literal-list>
+		</property>
+		<property name="-moz-marquee-direction" description="">
+			<literal-list>
+				<literal value="forward" />
+				<literal value="reverse" />
+			</literal-list>
+		</property>
+		<property name="-webkit-marquee-direction" description="">
+			<literal-list>
+				<literal value="forward" />
+				<literal value="reverse" />
+			</literal-list>
+		</property>
+		<property name="-o-marquee-direction" description="">
+			<literal-list>
+				<literal value="forward" />
+				<literal value="reverse" />
+			</literal-list>
+		</property>
+		<property name="-ms-marquee-direction" description="">
+			<literal-list>
+				<literal value="forward" />
+				<literal value="reverse" />
+			</literal-list>
+		</property>
+		<property name="marquee-play-count" description="">
+			<regexp-list>
+				<regexp name="positiveInteger" />
+			</regexp-list>
+		</property>
+		<property name="-ms-marquee-play-count" description="">
+			<regexp-list>
+				<regexp name="positiveInteger" />
+			</regexp-list>
+		</property>
+		<property name="-webkit-marquee-play-count" description="">
+			<regexp-list>
+				<regexp name="positiveInteger" />
+			</regexp-list>
+		</property>
+		<property name="-o-marquee-play-count" description="">
+			<regexp-list>
+				<regexp name="positiveInteger" />
+			</regexp-list>
+		</property>
+		<property name="-moz-marquee-play-count" description="">
+			<regexp-list>
+				<regexp name="positiveInteger" />
+			</regexp-list>
+		</property>
+		<property name="marquee-speed" description="">
+			<literal-list>
+				<literal value="slow" />
+				<literal value="fast" />
+				<literal value="normal" />
+			</literal-list>
+		</property>
+		<property name="-moz-marquee-speed" description="">
+			<literal-list>
+				<literal value="slow" />
+				<literal value="fast" />
+				<literal value="normal" />
+			</literal-list>
+		</property>
+		<property name="-ms-marquee-speed" description="">
+			<literal-list>
+				<literal value="slow" />
+				<literal value="fast" />
+				<literal value="normal" />
+			</literal-list>
+		</property>
+		<property name="-o-marquee-speed" description="">
+			<literal-list>
+				<literal value="slow" />
+				<literal value="fast" />
+				<literal value="normal" />
+			</literal-list>
+		</property>
+		<property name="-webkit-marquee-speed" description="">
+			<literal-list>
+				<literal value="slow" />
+				<literal value="fast" />
+				<literal value="normal" />
+			</literal-list>
+		</property>
+		<property name="marquee-style" description="">
+			<literal-list>
+				<literal value="scroll" />
+				<literal value="slide" />
+				<literal value="alternate" />
+			</literal-list>
+		</property>
+		<property name="-ms-marquee-style" description="">
+			<literal-list>
+				<literal value="scroll" />
+				<literal value="slide" />
+				<literal value="alternate" />
+			</literal-list>
+		</property>
+		<property name="-moz-marquee-style" description="">
+			<literal-list>
+				<literal value="scroll" />
+				<literal value="slide" />
+				<literal value="alternate" />
+			</literal-list>
+		</property>
+		<property name="-webkit-marquee-style" description="">
+			<literal-list>
+				<literal value="scroll" />
+				<literal value="slide" />
+				<literal value="alternate" />
+			</literal-list>
+		</property>
+		<property name="-o-marquee-style" description="">
+			<literal-list>
+				<literal value="scroll" />
+				<literal value="slide" />
+				<literal value="alternate" />
+			</literal-list>
+		</property>
+		<!--  @ media features -->
+		<property name="color-index" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<regexp-list>
+				<regexp name="integer" />
+			</regexp-list>
+		</property>
+		<property name="min-color-index" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<regexp-list>
+				<regexp name="integer" />
+			</regexp-list>
+		</property>
+		<property name="max-color-index" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<regexp-list>
+				<regexp name="integer" />
+			</regexp-list>
+		</property>
+		<property name="min-color" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<regexp-list>
+				<regexp name="integer" />
+			</regexp-list>
+		</property>
+		<property name="max-color" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<regexp-list>
+				<regexp name="integer" />
+			</regexp-list>
+		</property>
+		<property name="aspect-ratio" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<regexp-list>
+				<regexp name="aspectratio" />
+			</regexp-list>
+		</property>
+		<property name="min-aspect-ratio" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<regexp-list>
+				<regexp name="aspectratio" />
+			</regexp-list>
+		</property>
+		<property name="max-aspect-ratio" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<regexp-list>
+				<regexp name="aspectratio" />
+			</regexp-list>
+		</property>
+		<property name="grid" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+		</property>
+		<property name="monochrome" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<regexp-list>
+				<regexp name="integer" />
+			</regexp-list>
+		</property>
+		<property name="min-monochrome" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<regexp-list>
+				<regexp name="integer" />
+			</regexp-list>
+		</property>
+		<property name="max-monochrome" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<regexp-list>
+				<regexp name="integer" />
+			</regexp-list>
+		</property>
+		<property name="orientation" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="landscape" />
+				<literal value="portrait" />
+			</literal-list>
+		</property>
+		<property name="resolution" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<regexp-list>
+				<regexp name="resolution" />
+			</regexp-list>
+		</property>
+		<property name="min-resolution" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<regexp-list>
+				<regexp name="resolution" />
+			</regexp-list>
+		</property>
+		<property name="max-resolution" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<regexp-list>
+				<regexp name="resolution" />
+			</regexp-list>
+		</property>
+		<property name="scan" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="progressive" />
+				<literal value="interlace" />
+			</literal-list>
+		</property>
+		<!--  moz related media features -->
+		<property name="-moz-images-in-menus" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+		</property>
+		<property name="-moz-mac-graphite-theme" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+		</property>
+		<property name="-moz-maemo-classic" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+		</property>
+		<property name="-moz-os-version" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="windows-xp" />
+				<literal value="windows-vista" />
+				<literal value="windows-win7" />
+				<literal value="windows-win8" />
+				<literal value="windows-win10" />
+			</literal-list>
+		</property>
+		<property name="-moz-scrollbar-end-backward" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+		</property>
+		<property name="-moz-scrollbar-end-forward" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+		</property>
+		<property name="-moz-scrollbar-start-backward" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+		</property>
+		<property name="-moz-scrollbar-start-forward" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+		</property>
+		<property name="-moz-touch-enabled" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+		</property>
+		<property name="-moz-windows-classic" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+		</property>
+		<property name="-moz-windows-compositor" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+		</property>
+		<property name="-moz-windows-default-theme" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+		</property>
+		<property name="-moz-windows-glass" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+		</property>
+		<property name="-moz-windows-theme" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="aero" />
+				<literal value="luna-blue" />
+				<literal value="luna-olive" />
+				<literal value="luna-silver" />
+				<literal value="royale" />
+				<literal value="generic" />
+				<literal value="zune" />
+			</literal-list>
+		</property>
+		<property name="-webkit-transform-3d" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+		</property>
+		<property name="-webkit-transform-2d" description="">
+			<category-list>
+				<category value="atmedia" />
+			</category-list>
+			<literal-list>
+				<literal value="0" />
+				<literal value="1" />
+			</literal-list>
+		</property>
+		<property name="content" description="">
+			<regexp-list>
+				<regexp name="content" />
+			</regexp-list>
+		</property>
+	</css-rules>
+	<require-atkeyframe-css-selectors>
+		<literal-list>
+			<literal value="@keyframes" />
+			<literal value="@-webkit-keyframes" />
+			<literal value="@-moz-keyframes" />
+		</literal-list>
+	</require-atkeyframe-css-selectors>
+</anti-samy-rules>

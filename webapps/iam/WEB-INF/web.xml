@@ -1,0 +1,2094 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+
+<!-- THE  CODE IN THE TAGS "onpremiseStart" and "onpremiseEnd"  WON'T BE COPIED IN ONPREMISE web.xml -->
+
+<!--onPremiseStart
+ <listener>
+        <listener-class>com.zoho.sas.container.SASContextListener</listener-class>
+  </listener>
+  
+	<filter>
+		<filter-name>Instrumentation</filter-name>
+		<filter-class>com.zoho.instrument.InstrumentFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Instrumentation</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+     	<filter-name>AccessLogFilter</filter-name>
+     	<filter-class>com.zoho.logs.logclient.filter.AccessLogFilter</filter-class>
+    		 <init-param>
+     			<param-name>logClientName</param-name>
+    		 	<param-value>com.adventnet.iam.logging.IAMAccessLogImpl</param-value>
+      		</init-param>
+      		<init-param>
+     			<param-name>secretParams</param-name>
+     			<param-value>PASSWORD,password,loginpassword,current,newp,invoker_method,pwd,cpwd,ticket,CURRPASSWORD,TICKET,authtoken</param-value>
+      		</init-param>
+     </filter>
+ 	<filter-mapping>
+         <filter-name>AccessLogFilter</filter-name>
+         <url-pattern>/*</url-pattern>
+    </filter-mapping>
+onPremiseEnd-->
+
+    <filter>
+        <filter-name>Security Filter</filter-name>
+        <filter-class>com.adventnet.iam.security.SecurityFilter</filter-class>
+        
+        <init-param>
+            <param-name>config-file</param-name>
+<!--onPremiseStart
+            <param-value>security-properties.xml,security-iam-properties.xml,security-admin.xml,security-supportadmin.xml,security-accountsadmin.xml,security-internal.xml,security-unauth.xml,security-accountsunauth.xml,conf/security-common.xml,security.xml,security-accounts.xml,security-oauth.xml,security-wmslite.xml,security-saml.xml,conf/security-sas.xml,security-clientoauth.xml,security-rest.xml,security-oauthapi.xml,security-pali.xml,security-partnersapi.xml,security-webclient-regex.xml,security-webclient-auth.xml,security-webclient-unauth.xml</param-value>
+onPremiseEnd-->
+<!-- OnCloudStart -->
+	        <param-value>security-properties.xml,security-iam-properties.xml,security-internal.xml,security-unauth.xml,security-accountsunauth.xml,conf/security-common.xml,security.xml,security-accounts.xml,security-oauth.xml,security-saml.xml,security-clientoauth.xml,security-rest.xml,security-oauthapi.xml,security-pali.xml,security-partnersapi.xml,security-webclient-regex.xml,security-webclient-auth.xml,security-webclient-unauth.xml</param-value>
+<!-- OnCloudEnd -->
+	   </init-param>
+       <init-param>
+            <param-name>development.mode</param-name>
+            <param-value>false</param-value>
+        </init-param>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>Security Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+<!--onPremiseStart
+    <filter>
+       <filter-name>ServerHealthCheckFilter</filter-name>
+       <filter-class>com.zoho.sas.filter.ServerHealthCheckFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>ServerHealthCheckFilter</filter-name>
+      <url-pattern>/grid/login/servercheck.jsp</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+         <filter-name>ServerHealthCheckFilter</filter-name>
+          <url-pattern>/_app/health</url-pattern>
+   </filter-mapping>
+onPremiseEnd-->
+   <filter>
+       <filter-name>ClientFilter</filter-name>
+       <filter-class>com.zoho.accounts.filter.internal.ClientUserFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>ClientFilter</filter-name>
+      <url-pattern>/clientoauth/*</url-pattern>
+   </filter-mapping>
+
+   <filter>
+       <filter-name>AccountsAgentFilter</filter-name>
+       <filter-class>com.adventnet.iam.filter.AccountsAgentFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>AccountsAgentFilter</filter-name>
+      <url-pattern>*</url-pattern>
+   </filter-mapping>
+	
+	<filter>
+		<filter-name>AccountsInternalAuthFilter</filter-name>
+		<filter-class>com.zoho.accounts.filter.internal.AccountsInternalAuthFilter</filter-class>
+	</filter>       
+	<filter-mapping>
+		<filter-name>AccountsInternalAuthFilter</filter-name>
+		<url-pattern>/accounts/resource/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AccountsInternalAuthFilter</filter-name>
+		<url-pattern>/invoker/*</url-pattern>
+	</filter-mapping>
+    <filter>
+        <filter-name>Accounts Filter</filter-name>
+        <filter-class>com.adventnet.iam.internal.filter.AccountsFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Accounts Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <filter>
+        <filter-name>RefererCheckFilter</filter-name>
+        <filter-class>com.zoho.accounts.filter.internal.RefererCheckFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RefererCheckFilter</filter-name>
+        <url-pattern>/file</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>RefererCheckFilter</filter-name>
+        <url-pattern>/static/file</url-pattern>
+    </filter-mapping>
+    
+    <filter>
+		<filter-name>iamServlet</filter-name>
+		<filter-class>com.zoho.accounts.iservlet.filter.IAMServletFilter
+		</filter-class>
+		<init-param>
+			<param-name>config-file</param-name>
+			<param-value>conf/Accounts/Servlet/client-servlet.yml</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>iamServlet</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+  		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	
+    <filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>com.zoho.accounts.filter.StructsFilter</filter-class>
+		<init-param>
+			<param-name>exclude</param-name>
+			<param-value>/accounts/feeds/.*|/login/upgradeaction|/login/enableAutoAccountCreation|/accounts/sl/.*|/accounts/p/.*</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+  		<url-pattern>/accounts/captcha</url-pattern>
+  		<dispatcher>REQUEST</dispatcher> 
+  		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+  		<url-pattern>/accounts/signin</url-pattern>
+  		<dispatcher>REQUEST</dispatcher> 
+  		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+ 		<url-pattern>/accounts/csamlsp/*</url-pattern>
+ 		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+  		<url-pattern>/accounts/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+  		<url-pattern>/cu/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+  		<url-pattern>/i/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/oauth/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/clientoauth/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/saml2/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+  	<filter-name>struts2</filter-name>
+  	<url-pattern>/accounts/fsr</url-pattern>
+  		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+  	<filter-name>struts2</filter-name>
+  	<url-pattern>/accounts/handleinvitation.ac</url-pattern>
+  		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	
+	<filter-mapping>
+  	<filter-name>struts2</filter-name>
+  	<url-pattern>/accounts/oauthcallback</url-pattern>
+  		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+  	<filter-name>struts2</filter-name>
+  	<url-pattern>/accounts/fsrequest</url-pattern>
+  		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+<!--onPremiseStart
+onPremiseEnd-->
+	
+    <!-- SAS SERVLETS STARTS -->
+	<servlet>
+		<servlet-name>com.zoho.sas.servlet.StatisticsProviderServlet</servlet-name>
+		<servlet-class>com.zoho.sas.servlet.StatisticsProviderServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>com.zoho.sas.servlet.SiteReplicationServlet</servlet-name>
+		<servlet-class>com.zoho.sas.servlet.SiteReplicationServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>com.zoho.sas.servlet.URLInvokerServlet</servlet-name>
+		<servlet-class>com.zoho.sas.servlet.URLInvokerServlet</servlet-class>
+	</servlet>
+	 
+    <servlet>
+	    <servlet-name>com.zoho.sas.servlet.DBUpgradeServlet</servlet-name>
+	    <servlet-class>com.zoho.sas.servlet.DBUpgradeServlet</servlet-class>
+    </servlet>
+  
+	<servlet-mapping>
+		<servlet-name>com.zoho.sas.servlet.StatisticsProviderServlet</servlet-name>
+		<url-pattern>/login/StatisticsProvider</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>com.zoho.sas.servlet.SiteReplicationServlet</servlet-name>
+		<url-pattern>/login/SiteReplication</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>com.zoho.sas.servlet.URLInvokerServlet</servlet-name>
+		<url-pattern>/grid/login/URLInvoker</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+	<servlet-name>com.zoho.sas.servlet.DBUpgradeServlet</servlet-name>
+	<url-pattern>/login/upgradeaction</url-pattern>
+    </servlet-mapping>
+
+<!--onPremiseStart
+	<servlet>
+		<servlet-name>com.zoho.sas.servlet.DataUpgradeServlet</servlet-name>
+		<servlet-class>com.zoho.sas.servlet.DataUpgradeServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>com.zoho.sas.servlet.DataUpgradeServlet</servlet-name>
+		<url-pattern>/sasupgrade</url-pattern>
+	</servlet-mapping>
+onPremiseEnd-->
+    <servlet>
+        <servlet-name>GoogleOAuth</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.GOAuthRequest</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GoogleOAuth</servlet-name>
+        <url-pattern>/goauth</url-pattern>
+    </servlet-mapping>
+   	<servlet>
+        <servlet-name>GoogleOAuthResponse</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.GOAuthResponse</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GoogleOAuthResponse</servlet-name>
+        <url-pattern>/goauthresponse</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminAction</servlet-name>
+        <servlet-class>com.adventnet.iam.internal.admin.AdminServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminAction</servlet-name>
+        <url-pattern>/admin/*</url-pattern>
+    </servlet-mapping>
+  
+    <servlet>
+        <servlet-name>SupportAdminAction</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.SupportAdminServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SupportAdminAction</servlet-name>
+        <url-pattern>/supportadmin/*</url-pattern>
+        <url-pattern>/support/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserAction</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.UserAction</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserAction</servlet-name>
+        <url-pattern>/u/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserAction</servlet-name>
+        <url-pattern>/user/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RMobileSetupAction</servlet-name>
+        <servlet-class>com.zoho.accounts.servlet.AddRecoveryMobile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RMobileSetupAction</servlet-name>
+        <url-pattern>/setup/recoverymobile/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LoginMobileSetupAction</servlet-name>
+        <servlet-class>com.zoho.accounts.servlet.AddLoginMobile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginMobileSetupAction</servlet-name>
+        <url-pattern>/setup/screenmobile/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EmailSetupAction</servlet-name>
+        <servlet-class>com.zoho.accounts.servlet.AddEmail</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmailSetupAction</servlet-name>
+        <url-pattern>/setup/email/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+		<servlet-name>TFAPrefServlet</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.TFAPrefServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TFAPrefServlet</servlet-name>
+		<url-pattern>/tfapref/*</url-pattern>
+	</servlet-mapping>
+    <servlet>
+		<servlet-name>DeviceServlet</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.DeviceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeviceServlet</servlet-name>
+		<url-pattern>/device/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+        <servlet-name>CheckUserNameAvailability</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.UserNameAvailability</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckUserNameAvailability</servlet-name>
+        <url-pattern>/ui/unauth/un</url-pattern>
+    </servlet-mapping>
+     <servlet>
+        <servlet-name>SignupAction</servlet-name>
+        <servlet-class>com.zoho.accounts.servlet.SignupAction</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignupAction</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignupAction</servlet-name>
+        <url-pattern>/register/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Confirmation</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.Confirmation</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Confirmation</servlet-name>
+        <url-pattern>/confirm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Confirmation</servlet-name>
+        <url-pattern>/oia</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Confirmation</servlet-name>
+        <url-pattern>/oir</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Confirmation</servlet-name>
+        <url-pattern>/noia</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Confirmation</servlet-name>
+        <url-pattern>/noir</url-pattern>
+    </servlet-mapping>
+      <servlet>
+        <servlet-name>OAuthorizeCallback</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.OAuthorizeCallback</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OAuthorizeCallback</servlet-name>
+        <url-pattern>/oauthorize/callback</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Password</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.Password</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Password</servlet-name>
+        <url-pattern>/password</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Password</servlet-name>
+        <url-pattern>/password/verifyotp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Password</servlet-name>
+        <url-pattern>/password/resendcode</url-pattern>
+    </servlet-mapping>    
+    <servlet-mapping>
+        <servlet-name>Password</servlet-name>
+        <url-pattern>/password/selectpref</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Password</servlet-name>
+        <url-pattern>/password/reset</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Reserve</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.Reserve</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Reserve</servlet-name>
+        <url-pattern>/reserve</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Reserve</servlet-name>
+        <url-pattern>/unreserve</url-pattern>
+    </servlet-mapping>
+    <servlet>
+    	<servlet-name>Authorize</servlet-name>
+    	<servlet-class>com.adventnet.iam.servlet.Authorize</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>Authorize</servlet-name>
+    	<url-pattern>/authorize</url-pattern>
+    </servlet-mapping>
+    <servlet>
+    	<servlet-name>GrantAccessDomain</servlet-name>
+<servlet-class>org.apache.jsp.v2.ui.unauth.authorize_jsp</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>GrantAccessDomain</servlet-name>
+    	<url-pattern>/authorize-domain</url-pattern>
+    </servlet-mapping>
+    <servlet>
+    	<servlet-name>Validate</servlet-name>
+    	<servlet-class>com.zoho.accounts.servlet.ValidateRequest</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>Validate</servlet-name>
+    	<url-pattern>/api/v2/validate</url-pattern>
+    </servlet-mapping>
+    <servlet>
+    	<servlet-name>ValidateTempTicket</servlet-name>
+    	<servlet-class>com.zoho.accounts.servlet.ValidateTempTicket</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>ValidateTempTicket</servlet-name>
+    	<url-pattern>/api/v2/validate/temporary</url-pattern>
+    </servlet-mapping>
+    <servlet>
+    	<servlet-name>Configurations</servlet-name>
+    	<servlet-class>com.zoho.accounts.servlet.Configurations</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>Configurations</servlet-name>
+    	<url-pattern>/api/v2/configuration/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>APIAuthToken</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.APIAuthToken</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>APIAuthToken</servlet-name>
+        <url-pattern>/apiauthtoken/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SignOut</servlet-name>
+        <servlet-class>com.zoho.accounts.servlet.SignoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignOut</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Partner</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.Partner</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Partner</servlet-name>
+        <url-pattern>/partner</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Download</servlet-name>
+        <servlet-class>com.adventnet.zoho.Download</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Download</servlet-name>
+        <url-pattern>/file</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Download</servlet-name>
+        <url-pattern>/static/file</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>PublicAPI</servlet-name>
+        <servlet-class>com.zoho.accounts.servlet.PublicAPI</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PublicAPI</servlet-name>
+        <url-pattern>/api/public/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Upload</servlet-name>
+        <servlet-class>com.adventnet.zoho.Upload</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/image/upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/mobileupload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/internal/upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/api/upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/api/internal/upload</url-pattern>
+    </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/uploadcrop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/update/logo</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SimpleCaptcha</servlet-name>
+        <servlet-class>com.adventnet.zoho.SimpleCaptcha</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SimpleCaptcha</servlet-name>
+        <url-pattern>/static/hip.jpg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SimpleCaptcha</servlet-name>
+        <url-pattern>/static/showcaptcha</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>JCaptcha</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.JCaptcha</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JCaptcha</servlet-name>
+        <url-pattern>/captcha</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RMI</servlet-name>
+        <servlet-class>com.adventnet.iam.internal.Invoker</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RMI</servlet-name>
+        <url-pattern>/invoker</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RMI</servlet-name>
+        <url-pattern>/invoker/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SwitchTo</servlet-name>
+<servlet-class>org.apache.jsp.ui.profile.switchto_jsp</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SwitchTo</servlet-name>
+        <url-pattern>/switchto</url-pattern>
+    </servlet-mapping>
+<!--onPremiseStart
+    <servlet>
+        <servlet-name>ExoResyn</servlet-name>
+<servlet-class>org.apache.jsp.accounts.jsp.auth.exo-resync_jsp</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExoResyn</servlet-name>
+        <url-pattern>/tfa/exo/resync</url-pattern>
+    </servlet-mapping>
+onPremiseEnd-->
+    <servlet>
+        <servlet-name>MfaError</servlet-name>
+<servlet-class>org.apache.jsp.ui.unauth.mfaerror_jsp</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MfaError</servlet-name>
+        <url-pattern>/mfaerror</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UserMigrationSourceDC</servlet-name>
+        <servlet-class>com.zoho.accounts.dcmigration.DCMigrationExportHandling</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserMigrationSourceDC</servlet-name>
+        <url-pattern>/dcm/exportdata</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UserMigrationDest</servlet-name>
+        <servlet-class>com.zoho.accounts.dcmigration.DCMigrationImportHandling</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserMigrationDest</servlet-name>
+        <url-pattern>/dcm/importdata</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CLXAudit</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.AuditCLXTransaction</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CLXAudit</servlet-name>
+        <url-pattern>/clx/audit</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>FederatedReauthServlet</servlet-name>
+        <servlet-class>com.zoho.accounts.internal.fs.FederatedReauthServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FederatedReauthServlet</servlet-name>
+        <url-pattern>/accounts/sl/relogin/fs</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SAMLAuthRequestServlet</servlet-name>
+        <servlet-class>com.adventnet.iam.saml.SAMLAuthRequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SAMLAuthRequestServlet</servlet-name>
+        <url-pattern>/samlauthrequest/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>NewSAMLAuthResponseServlet</servlet-name>
+        <servlet-class>com.zoho.accounts.internal.saml.SAMLAuthResponseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NewSAMLAuthResponseServlet</servlet-name>
+        <url-pattern>/signin/samlsp/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewSAMLAuthResponseServlet</servlet-name>
+        <url-pattern>/iam/signin/samlsp/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>NewSAMLLogoutRequestServlet</servlet-name>
+        <servlet-class>com.zoho.accounts.internal.saml.SAMLLogoutRequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NewSAMLLogoutRequestServlet</servlet-name>
+        <url-pattern>/spsamllogout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewSAMLLogoutRequestServlet</servlet-name>
+        <url-pattern>/logout/samlsp/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SAMLAuthResponseServlet</servlet-name>
+        <servlet-class>com.adventnet.iam.saml.SAMLAuthResponseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SAMLAuthResponseServlet</servlet-name>
+        <url-pattern>/samlresponse/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SAMLAuthResponseServlet</servlet-name>
+        <url-pattern>/iam/samlresponse/*</url-pattern>
+    </servlet-mapping>
+	<servlet>
+        <servlet-name>JWTAuthResponse</servlet-name>
+        <servlet-class>com.zoho.accounts.internal.signin.jwt.JWTSignInResponse</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JWTAuthResponse</servlet-name>
+        <url-pattern>/signin/jwt/*</url-pattern>
+    </servlet-mapping>
+
+<!--onPremiseStart
+    <servlet>
+        <servlet-name>SamlIdpLogoutServlet</servlet-name>
+        <servlet-class>com.zoho.accounts.internal.saml.SamlIdpLogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SamlIdpLogoutServlet</servlet-name>
+        <url-pattern>/samlSPNotify/*</url-pattern>
+    </servlet-mapping>
+onPremiseEnd-->
+    <servlet>
+        <servlet-name>APIAuthTokenServlet</servlet-name>
+        <servlet-class>com.zoho.iam.atom.api.internal.APIAuthTokenServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>APIAuthTokenServlet</servlet-name>
+        <url-pattern>/getauthtoken/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SAMLLogoutRequest</servlet-name>
+        <servlet-class>com.adventnet.iam.saml.SAMLLogoutRequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SAMLLogoutRequest</servlet-name>
+        <url-pattern>/samlDoLogout</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Error Msgs</servlet-name>
+<servlet-class>org.apache.jsp.ui.profile.errmsg_jsp</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Error Msgs</servlet-name>
+        <url-pattern>/error-msgs</url-pattern>
+    </servlet-mapping>
+	<servlet>
+		<servlet-name>PhoneAction</servlet-name>
+		<servlet-class>com.adventnet.iam.servlet.PhoneServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PhoneAction</servlet-name>
+		<url-pattern>/p/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ZohoID</servlet-name>
+		<servlet-class>com.adventnet.iam.servlet.AddZohoID</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ZohoID</servlet-name>
+		<url-pattern>/addzohoemail</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ZohoID</servlet-name>
+		<url-pattern>/setzohoid</url-pattern>
+	</servlet-mapping>
+<!--onPremiseStart
+	<servlet>
+        <servlet-name>Configure</servlet-name>
+<servlet-class>org.apache.jsp.ui.settings.configure_jsp</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Configure</servlet-name>
+        <url-pattern>/ui/configure/email</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Configure</servlet-name>
+        <url-pattern>/ui/configure/mobile/recovery</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Configure</servlet-name>
+        <url-pattern>/ui/configure/mobile/login</url-pattern>
+    </servlet-mapping>
+onPremiseEnd-->
+    
+	<servlet>
+        <servlet-name>InternalZacAction</servlet-name>
+        <servlet-class>com.zoho.accounts.internal.zac.ZACServiceBluePrintApi</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InternalZacAction</servlet-name>
+        <url-pattern>/zac/*</url-pattern>
+    </servlet-mapping>
+	<servlet>
+	
+	
+        <servlet-name>jsp</servlet-name>
+        <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
+        <init-param>
+                <param-name>fork</param-name>
+                <param-value>false</param-value>
+        </init-param>
+        <init-param>
+                <param-name>xpoweredBy</param-name>
+                <param-value>false</param-value>
+        </init-param>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+	<servlet-name>jsp</servlet-name>
+	<url-pattern>*.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>jsp</servlet-name>
+	<url-pattern>*.jspx</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>jsp</servlet-name>
+	<url-pattern>*.zp</url-pattern>
+    </servlet-mapping>
+    <servlet>
+		<servlet-name>APIServlet</servlet-name>
+		<servlet-class>com.zoho.iam.atom.api.internal.APIServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>APIServlet</servlet-name>
+		<url-pattern>/accounts/feeds/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Resource</servlet-name>
+		<servlet-class>com.zoho.resource.internal.RESTServlet</servlet-class>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>prefix</param-name>
+			<param-value>resource</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Resource</servlet-name>
+		<url-pattern>/accounts/resource/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Resource</servlet-name>
+		<url-pattern>/accounts/api/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+        <servlet-name>Upload Photo</servlet-name>
+        <servlet-class>com.zoho.photo.servlet.SavePhoto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Download Photo</servlet-name>
+        <servlet-class>com.zoho.photo.servlet.DownloadPhoto</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Upload Photo</servlet-name>
+        <url-pattern>/photo/w</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Download Photo</servlet-name>
+        <url-pattern>/photo/r</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Signin Activity</servlet-name>
+        <servlet-class>com.zoho.accounts.servlet.AddTrustedDevices</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Signin Activity</servlet-name>
+        <url-pattern>/signin/activity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Signin Activity</servlet-name>
+        <url-pattern>/signin/activity/confirm</url-pattern>
+    </servlet-mapping>
+   	<servlet-mapping>
+        <servlet-name>Signin Activity</servlet-name>
+        <url-pattern>/signin/session/terminate</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Renew Role</servlet-name>
+<servlet-class>org.apache.jsp.ui.unauth.renewrole_jsp</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Renew Role</servlet-name>
+        <url-pattern>/role/renew</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+		<servlet-name>SSOKitAddEmail</servlet-name>
+		<servlet-class>com.zoho.accounts.webclient.servlet.SSOKitAddEmail</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SSOKitAddEmail</servlet-name>
+		<url-pattern>/ssokit/addemail</url-pattern>
+	</servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>MetaData</servlet-name>
+        <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+        <init-param>
+            <param-name>listings</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>MetaData</servlet-name>
+        <url-pattern>/rmd/*</url-pattern>
+    </servlet-mapping>
+<!--onPremiseStart
+    <servlet>
+        <servlet-name>DeveloperConsole</servlet-name>
+<servlet-class>org.apache.jsp.ui.dconsole.home_jsp</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeveloperConsole</servlet-name>
+        <url-pattern>/developerconsole</url-pattern>
+    </servlet-mapping>
+onPremiseEnd-->
+    
+   <servlet>
+    <servlet-name>Jersey REST Service</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+        <param-name>jersey.config.server.provider.packages</param-name>
+        <param-value>com.zoho.accounts.actions.rest</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>Jersey REST Service</servlet-name>
+   <url-pattern>/rest/*</url-pattern>
+   </servlet-mapping>
+    
+    <servlet>
+		<servlet-name>webuapi</servlet-name>
+		<servlet-class>com.zoho.iam.rest.servlet.ICRESTServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>webuapi</servlet-name>
+		<url-pattern>/webclient/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>webuapi</servlet-name>
+		<url-pattern>/api/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>webuapi</servlet-name>
+		<url-pattern>/signin/v2/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>webuapi</servlet-name>
+		<url-pattern>/ssokit/v1/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>webuapi</servlet-name>
+		<url-pattern>/accounts/p/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GroupInvitationPage</servlet-name>
+		<servlet-class>com.zoho.accounts.webclient.servlet.Confirmation</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GroupInvitationPage</servlet-name>
+		<url-pattern>/invitation/group/*</url-pattern>
+	</servlet-mapping>
+
+    <servlet>
+        <servlet-name>ZADashboard</servlet-name>
+        <servlet-class>com.zoho.accounts.webclient.servlet.AccountsIndex</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ZADashboard</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Error Msgs New</servlet-name>
+<servlet-class>org.apache.jsp.v2.ui.static_.errorMsg_jsp</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Error Msgs New</servlet-name>
+        <url-pattern>/accounts-msgs</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Relogin</servlet-name>
+<servlet-class>org.apache.jsp.v2.ui.settings.passwordConfirmation_jsp</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Relogin</servlet-name>
+        <url-pattern>/account/relogin</url-pattern>
+    </servlet-mapping>
+	<servlet>
+        <servlet-name>ReauthServlet</servlet-name>
+        <servlet-class>com.zoho.accounts.servlet.ReauthServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReauthServlet</servlet-name>
+        <url-pattern>/mreauth</url-pattern>
+    </servlet-mapping>
+    
+	<servlet>
+		<servlet-name>LinkAccount</servlet-name>
+		<servlet-class>com.zoho.accounts.actions.fs.LinkAccountsCallback</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LinkAccount</servlet-name>
+		<url-pattern>/linkedaccounts/status</url-pattern>
+	</servlet-mapping>
+     <servlet>
+        <servlet-name>UserPPAndNewsLetterAnnouncement</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.UserPPAndNewsLetterAnnouncement</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserPPAndNewsLetterAnnouncement</servlet-name>
+        <url-pattern>/gdpr/ppStatus/update</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UserDPAAgreementStatus</servlet-name>
+        <servlet-class>com.adventnet.iam.servlet.UserDPAAgreementStatus</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserDPAAgreementStatus</servlet-name>
+        <url-pattern>/gdpr/dpastatus/update</url-pattern>
+    </servlet-mapping>
+
+   <servlet>
+    <servlet-name>UpdateSourceDCMigrationEmail</servlet-name>
+    <servlet-class>com.zoho.accounts.dcmigration.UpdateSourceDCMigrationEmail</servlet-class>
+   </servlet>
+   <servlet-mapping>
+    <servlet-name>UpdateSourceDCMigrationEmail</servlet-name>
+    <url-pattern>/dcm/updateemail</url-pattern>
+   </servlet-mapping>
+    
+   <servlet>
+    <servlet-name>UpdteDestDCMigrateEmail</servlet-name>
+    <servlet-class>com.zoho.accounts.dcmigration.UpdateDestDCMigrationEmail</servlet-class>
+   </servlet>
+   <servlet-mapping>
+    <servlet-name>UpdteDestDCMigrateEmail</servlet-name>
+    <url-pattern>/dcm/updatedestdcemail</url-pattern>
+   </servlet-mapping>
+   
+   <servlet>
+    <servlet-name>DownloadMigData</servlet-name>
+    <servlet-class>com.zoho.accounts.dcmigration.DownloadDCMigrationData</servlet-class>
+   </servlet>
+   <servlet-mapping>
+    <servlet-name>DownloadMigData</servlet-name>
+    <url-pattern>/dcm/downloaddata</url-pattern>
+   </servlet-mapping>
+   
+    <servlet>
+    	<servlet-name>LastActivityTimeUpdater</servlet-name>
+    	<servlet-class>com.zoho.accounts.actions.internal.UserAccountsPropertiesUpdater</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>LastActivityTimeUpdater</servlet-name>
+    	<url-pattern>/internal/useraccountspropertiesupdater</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+	    <cookie-config>
+	        <secure>true</secure>
+	        <http-only>true</http-only>
+	    </cookie-config>
+        <session-timeout>10</session-timeout>
+    </session-config>
+    <error-page>
+        <error-code>400</error-code>
+        <location>/v2/ui/unauth/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/v2/ui/unauth/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/v2/ui/unauth/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>408</error-code>
+        <location>/v2/ui/unauth/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>413</error-code>
+        <location>/v2/ui/unauth/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>414</error-code>
+        <location>/v2/ui/unauth/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/v2/ui/unauth/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>505</error-code>
+        <location>/v2/ui/unauth/error.jsp</location>
+    </error-page>
+     <error-page>
+		<error-code>405</error-code>
+		<location>/v2/ui/unauth/error.jsp</location>
+	</error-page>
+	<error-page>
+        <error-code>401</error-code>
+        <location>/v2/ui/unauth/error.jsp</location>
+    </error-page>
+	<error-page>
+        <error-code>415</error-code>
+        <location>/v2/ui/unauth/error.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/v2/ui/unauth/error.jsp</location>
+    </error-page>
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+    <welcome-file-list>
+        <welcome-file>/v2/ui/static/home.jsp</welcome-file>
+    </welcome-file-list>
+
+<!--
+Automatically created by Apache Tomcat JspC.
+-->
+
+    <servlet>
+        <servlet-name>org.apache.jsp.photo.jsp.error_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.photo.jsp.error_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.photo.jsp.photo_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.photo.jsp.photo_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.saml.jsp.ui.showErrorPage_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.saml.jsp.ui.showErrorPage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.saml.jsp.ui.redirectToPage_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.saml.jsp.ui.redirectToPage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.accounts.jsp.fsError_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.accounts.jsp.fsError_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.accounts.jsp.clienterror_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.accounts.jsp.clienterror_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.accounts.jsp.header_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.accounts.jsp.header_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.accounts.jsp.error_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.accounts.jsp.error_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.accounts.jsp.footer_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.accounts.jsp.footer_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.accounts.jsp.client.error_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.accounts.jsp.client.error_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.accounts.jsp.auth.exo_002dresync_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.accounts.jsp.auth.exo_002dresync_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.accounts.jsp.oauthui.showErrorPage_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.accounts.jsp.oauthui.showErrorPage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.accounts.jsp.oauthui.showGrantPage_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.accounts.jsp.oauthui.showGrantPage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.accounts.jsp.oauthui.redirectToPage_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.accounts.jsp.oauthui.redirectToPage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.accounts.jsp.unauth.signin_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.accounts.jsp.unauth.signin_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.accounts.jsp.unauth.register_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.accounts.jsp.unauth.register_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.accounts.jsp.unauth.choose_002ddc_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.accounts.jsp.unauth.choose_002ddc_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.accounts.jsp.unauth.setDCLCookie_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.accounts.jsp.unauth.setDCLCookie_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.dconsole.home_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.dconsole.home_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.dconsole.api_002dclients_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.dconsole.api_002dclients_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.digest_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.digest_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.screenname_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.screenname_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.orgpolicy_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.orgpolicy_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.inviteRestrictionClear_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.inviteRestrictionClear_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.defaultzsoid_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.defaultzsoid_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.securityqa_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.securityqa_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.appaccountops_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.appaccountops_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.deletegroup_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.deletegroup_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.orgcontact_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.orgcontact_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.domain_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.domain_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.pendinguser_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.pendinguser_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.orgrole_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.orgrole_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.appaccountowner_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.appaccountowner_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.serviceorgops_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.serviceorgops_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.emailops_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.emailops_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.index_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.includes_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.includes_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.externalusers_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.externalusers_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.support.userdevice_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.support.userdevice_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.profile.errmsg_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.profile.errmsg_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.profile.switchto_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.profile.switchto_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.profile.photo_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.profile.photo_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.announcement.sessionslimitreminder_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.announcement.sessionslimitreminder_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.announcement.tfaupdaterecovery_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.announcement.tfaupdaterecovery_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.announcement.confirmrecovery_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.announcement.confirmrecovery_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.announcement.tfasetupbanner_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.announcement.tfasetupbanner_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.announcement.tfaenforcementbanner_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.announcement.tfaenforcementbanner_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.announcement.blockunconfirmedpa_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.announcement.blockunconfirmedpa_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.announcement.addrecovery_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.announcement.addrecovery_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.announcement.blockconcurrentwebsessions_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.announcement.blockconcurrentwebsessions_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.settings.registerzohoId_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.settings.registerzohoId_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.settings.configure_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.settings.configure_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.settings.configureMobile_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.settings.configureMobile_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.settings.verifyMobileSignup_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.settings.verifyMobileSignup_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.unauth.password_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.unauth.password_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.unauth.renewrole_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.unauth.renewrole_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.unauth.mfaerror_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.unauth.mfaerror_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.unauth.verifyMobile_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.unauth.verifyMobile_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.unauth.createauthtoken_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.unauth.createauthtoken_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.unauth.mobileinvitation_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.unauth.mobileinvitation_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.unauth.openiderror_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.unauth.openiderror_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.unauth.confirmedUserSuccessPage_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.unauth.confirmedUserSuccessPage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.unauth.verifyFederatedSignin_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.unauth.verifyFederatedSignin_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.unauth.samlerror_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.unauth.samlerror_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.unauth.forgot_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.unauth.forgot_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.ui.unauth.samlpost_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.ui.unauth.samlpost_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showInActiveErrorPage_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.ui.showInActiveErrorPage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showapprovesucess_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.ui.showapprovesucess_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.oauthrestrictedclientcreation_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.ui.oauthrestrictedclientcreation_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showErrorPage_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.ui.showErrorPage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showInActivePage_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.ui.showInActivePage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showConfirmPasswd_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.ui.showConfirmPasswd_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showrejectsucess_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.ui.showrejectsucess_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showdevice_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.ui.showdevice_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.promptCreateOAuthClient_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.ui.promptCreateOAuthClient_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showInternalMobileActivatePage_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.ui.showInternalMobileActivatePage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showConfirmPasswdForMobile_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.ui.showConfirmPasswdForMobile_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showImplicitTokenRefresh_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.ui.showImplicitTokenRefresh_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showGrantPage_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.ui.showGrantPage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showCrossOrgInvitation_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.ui.showCrossOrgInvitation_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.redirectToPage_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.ui.redirectToPage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.oauth.jsp.clientui.showErrorPage_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.oauth.jsp.clientui.showErrorPage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.static_.home_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.static_.home_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.static_.index_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.static_.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.v2.ui.announcement.AddMobileScreenName_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.v2.ui.announcement.AddMobileScreenName_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.v2.ui.settings.passwordConfirmation_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.v2.ui.settings.passwordConfirmation_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.v2.ui.static_.home_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.v2.ui.static_.home_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.v2.ui.static_.errorMsg_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.v2.ui.static_.errorMsg_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.internal.postSamlResponse_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.internal.postSamlResponse_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.internal.invoke_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.internal.invoke_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.internal.mysql_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.internal.mysql_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.internal.clearTemplateTableID_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.internal.clearTemplateTableID_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.internal.clearcacheconfig_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.internal.clearcacheconfig_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.internal.clusterstatus_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.internal.clusterstatus_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.internal.clearcache_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.internal.clearcache_jsp</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.photo.jsp.error_jsp</servlet-name>
+        <url-pattern>/photo/jsp/error.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.photo.jsp.photo_jsp</servlet-name>
+        <url-pattern>/photo/jsp/photo.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.saml.jsp.ui.showErrorPage_jsp</servlet-name>
+        <url-pattern>/saml/jsp/ui/showErrorPage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.saml.jsp.ui.redirectToPage_jsp</servlet-name>
+        <url-pattern>/saml/jsp/ui/redirectToPage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.accounts.jsp.fsError_jsp</servlet-name>
+        <url-pattern>/accounts/jsp/fsError.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.accounts.jsp.clienterror_jsp</servlet-name>
+        <url-pattern>/accounts/jsp/clienterror.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.accounts.jsp.header_jsp</servlet-name>
+        <url-pattern>/accounts/jsp/header.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.accounts.jsp.error_jsp</servlet-name>
+        <url-pattern>/accounts/jsp/error.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.accounts.jsp.footer_jsp</servlet-name>
+        <url-pattern>/accounts/jsp/footer.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.accounts.jsp.client.error_jsp</servlet-name>
+        <url-pattern>/accounts/jsp/client/error.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.accounts.jsp.auth.exo_002dresync_jsp</servlet-name>
+        <url-pattern>/accounts/jsp/auth/exo-resync.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.accounts.jsp.oauthui.showErrorPage_jsp</servlet-name>
+        <url-pattern>/accounts/jsp/oauthui/showErrorPage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.accounts.jsp.oauthui.showGrantPage_jsp</servlet-name>
+        <url-pattern>/accounts/jsp/oauthui/showGrantPage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.accounts.jsp.oauthui.redirectToPage_jsp</servlet-name>
+        <url-pattern>/accounts/jsp/oauthui/redirectToPage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.accounts.jsp.unauth.signin_jsp</servlet-name>
+        <url-pattern>/accounts/jsp/unauth/signin.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.accounts.jsp.unauth.register_jsp</servlet-name>
+        <url-pattern>/accounts/jsp/unauth/register.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.accounts.jsp.unauth.choose_002ddc_jsp</servlet-name>
+        <url-pattern>/accounts/jsp/unauth/choose-dc.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.accounts.jsp.unauth.setDCLCookie_jsp</servlet-name>
+        <url-pattern>/accounts/jsp/unauth/setDCLCookie.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.dconsole.home_jsp</servlet-name>
+        <url-pattern>/ui/dconsole/home.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.dconsole.api_002dclients_jsp</servlet-name>
+        <url-pattern>/ui/dconsole/api-clients.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.digest_jsp</servlet-name>
+        <url-pattern>/ui/support/digest.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.screenname_jsp</servlet-name>
+        <url-pattern>/ui/support/screenname.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.orgpolicy_jsp</servlet-name>
+        <url-pattern>/ui/support/orgpolicy.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.inviteRestrictionClear_jsp</servlet-name>
+        <url-pattern>/ui/support/inviteRestrictionClear.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.defaultzsoid_jsp</servlet-name>
+        <url-pattern>/ui/support/defaultzsoid.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.securityqa_jsp</servlet-name>
+        <url-pattern>/ui/support/securityqa.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.appaccountops_jsp</servlet-name>
+        <url-pattern>/ui/support/appaccountops.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.deletegroup_jsp</servlet-name>
+        <url-pattern>/ui/support/deletegroup.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.orgcontact_jsp</servlet-name>
+        <url-pattern>/ui/support/orgcontact.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.domain_jsp</servlet-name>
+        <url-pattern>/ui/support/domain.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.pendinguser_jsp</servlet-name>
+        <url-pattern>/ui/support/pendinguser.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.orgrole_jsp</servlet-name>
+        <url-pattern>/ui/support/orgrole.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.appaccountowner_jsp</servlet-name>
+        <url-pattern>/ui/support/appaccountowner.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.serviceorgops_jsp</servlet-name>
+        <url-pattern>/ui/support/serviceorgops.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.emailops_jsp</servlet-name>
+        <url-pattern>/ui/support/emailops.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.index_jsp</servlet-name>
+        <url-pattern>/ui/support/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.includes_jsp</servlet-name>
+        <url-pattern>/ui/support/includes.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.externalusers_jsp</servlet-name>
+        <url-pattern>/ui/support/externalusers.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.support.userdevice_jsp</servlet-name>
+        <url-pattern>/ui/support/userdevice.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.profile.errmsg_jsp</servlet-name>
+        <url-pattern>/ui/profile/errmsg.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.profile.switchto_jsp</servlet-name>
+        <url-pattern>/ui/profile/switchto.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.profile.photo_jsp</servlet-name>
+        <url-pattern>/ui/profile/photo.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.announcement.sessionslimitreminder_jsp</servlet-name>
+        <url-pattern>/ui/announcement/sessionslimitreminder.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.announcement.tfaupdaterecovery_jsp</servlet-name>
+        <url-pattern>/ui/announcement/tfaupdaterecovery.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.announcement.confirmrecovery_jsp</servlet-name>
+        <url-pattern>/ui/announcement/confirmrecovery.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.announcement.tfasetupbanner_jsp</servlet-name>
+        <url-pattern>/ui/announcement/tfasetupbanner.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.announcement.tfaenforcementbanner_jsp</servlet-name>
+        <url-pattern>/ui/announcement/tfaenforcementbanner.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.announcement.blockunconfirmedpa_jsp</servlet-name>
+        <url-pattern>/ui/announcement/blockunconfirmedpa.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.announcement.addrecovery_jsp</servlet-name>
+        <url-pattern>/ui/announcement/addrecovery.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.announcement.blockconcurrentwebsessions_jsp</servlet-name>
+        <url-pattern>/ui/announcement/blockconcurrentwebsessions.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.settings.registerzohoId_jsp</servlet-name>
+        <url-pattern>/ui/settings/registerzohoId.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.settings.configure_jsp</servlet-name>
+        <url-pattern>/ui/settings/configure.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.settings.configureMobile_jsp</servlet-name>
+        <url-pattern>/ui/settings/configureMobile.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.settings.verifyMobileSignup_jsp</servlet-name>
+        <url-pattern>/ui/settings/verifyMobileSignup.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.unauth.password_jsp</servlet-name>
+        <url-pattern>/ui/unauth/password.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.unauth.renewrole_jsp</servlet-name>
+        <url-pattern>/ui/unauth/renewrole.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.unauth.mfaerror_jsp</servlet-name>
+        <url-pattern>/ui/unauth/mfaerror.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.unauth.verifyMobile_jsp</servlet-name>
+        <url-pattern>/ui/unauth/verifyMobile.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.unauth.createauthtoken_jsp</servlet-name>
+        <url-pattern>/ui/unauth/createauthtoken.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.unauth.mobileinvitation_jsp</servlet-name>
+        <url-pattern>/ui/unauth/mobileinvitation.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.unauth.openiderror_jsp</servlet-name>
+        <url-pattern>/ui/unauth/openiderror.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.unauth.confirmedUserSuccessPage_jsp</servlet-name>
+        <url-pattern>/ui/unauth/confirmedUserSuccessPage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.unauth.verifyFederatedSignin_jsp</servlet-name>
+        <url-pattern>/ui/unauth/verifyFederatedSignin.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.unauth.samlerror_jsp</servlet-name>
+        <url-pattern>/ui/unauth/samlerror.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.unauth.forgot_jsp</servlet-name>
+        <url-pattern>/ui/unauth/forgot.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.ui.unauth.samlpost_jsp</servlet-name>
+        <url-pattern>/ui/unauth/samlpost.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showInActiveErrorPage_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/ui/showInActiveErrorPage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showapprovesucess_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/ui/showapprovesucess.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.oauthrestrictedclientcreation_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/ui/oauthrestrictedclientcreation.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showErrorPage_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/ui/showErrorPage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showInActivePage_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/ui/showInActivePage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showConfirmPasswd_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/ui/showConfirmPasswd.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showrejectsucess_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/ui/showrejectsucess.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showdevice_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/ui/showdevice.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.promptCreateOAuthClient_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/ui/promptCreateOAuthClient.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showInternalMobileActivatePage_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/ui/showInternalMobileActivatePage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showConfirmPasswdForMobile_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/ui/showConfirmPasswdForMobile.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showImplicitTokenRefresh_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/ui/showImplicitTokenRefresh.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showGrantPage_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/ui/showGrantPage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.showCrossOrgInvitation_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/ui/showCrossOrgInvitation.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.ui.redirectToPage_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/ui/redirectToPage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.oauth.jsp.clientui.showErrorPage_jsp</servlet-name>
+        <url-pattern>/oauth/jsp/clientui/showErrorPage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.static_.home_jsp</servlet-name>
+        <url-pattern>/static/home.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.static_.index_jsp</servlet-name>
+        <url-pattern>/static/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.v2.ui.announcement.AddMobileScreenName_jsp</servlet-name>
+        <url-pattern>/v2/ui/announcement/AddMobileScreenName.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.v2.ui.settings.passwordConfirmation_jsp</servlet-name>
+        <url-pattern>/v2/ui/settings/passwordConfirmation.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.v2.ui.static_.home_jsp</servlet-name>
+        <url-pattern>/v2/ui/static/home.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.v2.ui.static_.errorMsg_jsp</servlet-name>
+        <url-pattern>/v2/ui/static/errorMsg.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.internal.postSamlResponse_jsp</servlet-name>
+        <url-pattern>/internal/postSamlResponse.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.internal.invoke_jsp</servlet-name>
+        <url-pattern>/internal/invoke.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.internal.mysql_jsp</servlet-name>
+        <url-pattern>/internal/mysql.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.internal.clearTemplateTableID_jsp</servlet-name>
+        <url-pattern>/internal/clearTemplateTableID.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.internal.clearcacheconfig_jsp</servlet-name>
+        <url-pattern>/internal/clearcacheconfig.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.internal.clusterstatus_jsp</servlet-name>
+        <url-pattern>/internal/clusterstatus.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.internal.clearcache_jsp</servlet-name>
+        <url-pattern>/internal/clearcache.jsp</url-pattern>
+    </servlet-mapping>
+
+<!--
+End of content automatically created by Apache Tomcat JspC.
+-->
+
+</web-app>

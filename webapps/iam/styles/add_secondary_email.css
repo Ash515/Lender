@@ -1,0 +1,338 @@
+/*$Id$*/
+body {
+	display: block;
+	margin: 0;
+	font-family: 'Open Sans', sans-serif;
+}
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button
+	{
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.container {
+	display: block;
+	height: auto;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 30px;
+	margin: auto;
+	max-width: 600px;
+}
+
+.zoho_logo {
+	display: block;
+	height: 27px;
+	width: 78px;
+	margin-bottom: 20px;
+	background-size: auto 40px;
+}
+
+.heading {
+	display: block;
+	font-size: 20px;
+	line-height: 30px;
+	font-weight: 600;
+	margin-bottom: 10px;
+}
+
+.description {
+	display: block;
+	font-size: 15px;
+	line-height: 28px;
+	margin-bottom: 40px;
+}
+
+.textbox_div {
+	display: block;
+	width: 100%;
+	height: 30px;
+	max-width: 400px;
+	margin-bottom: 15px;
+	position: relative;
+}
+
+.textbox_label {
+	display: block;
+	font-size: 15px;
+	position: relative;
+	margin-top: -30px;
+	margin-left: 1px;
+	letter-spacing: 0.3;
+	transition: all .2s ease;
+	cursor: text;
+	max-width: 340px;
+}
+
+.textbox {
+	display: block;
+	border: none;
+	border-radius: 0px;
+	outline: none;
+	width: 100%;
+	border-bottom: 2px solid #EFEFEF;
+	height: 34px;
+	padding: 0;
+	font-size: 15px;
+	position: relative;
+	z-index: 1;
+	text-indent: 0px;
+	background-color: transparent;
+}
+
+.wrong_input {
+	display: block;
+	height: 2px;
+	width: 0%;
+	background-color: #f76262;
+	position: relative;
+	top: -2px;
+	margin: auto;
+	-webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	transition: all .2s ease;
+	z-index: 2;
+}
+
+.textbox_line {
+	display: block;
+	height: 2px;
+	width: 0%;
+	background-color: #44C26A;
+	position: relative;
+	top: -2px;
+	margin: auto;
+	-webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	transition: all .2s ease;
+	z-index: 2;
+}
+
+.textbox:focus ~ .wrong_input, .textbox:valid ~ .wrong_input {
+	width: 100%;
+}
+
+.textbox:focus ~ .textbox_line, .textbox:valid ~ .textbox_line {
+	width: 100%;
+}
+
+.textbox:focus ~ .textbox_label, .textbox:valid ~ .textbox_label {
+	font-size: 13px;
+	margin-top: -50px;
+	color: #555;
+}
+
+.textbox:focus ~ .textbox_line {
+	width: 100%;
+}
+
+.error_msg {
+	visibility: hidden;
+	height: 20px;
+	font-size: 14px;
+	color: #f76262;
+	margin-bottom: 15px;
+	float: left;
+}
+
+.btn {
+	display: block;
+	height: 40px;
+	width: 100%;
+	padding: 0px 30px;
+	background-color: #44C26A;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 18px;
+	border: none;
+	border-radius: 2px;
+	outline: none;
+	cursor: pointer;
+	max-width: 400px;
+	text-transform: uppercase;
+}
+
+.btn:hover {
+	background-color: #38A85A;
+}
+
+#otpdiv {
+	display: none;
+}
+
+.emailchange {
+	display: inline-block;
+	font-weight: 600;
+	margin-bottom: 40px;
+	line-height: 20px;
+	margin-right: 5px;
+}
+
+.bluetext {
+	color: #4A90E2;
+	cursor: pointer;
+	font-weight: 600;
+}
+
+.resend {
+	display: inline-block;
+	float: right;
+	top: 0px;
+	font-size: 15px;
+	right: 5px;
+	position: absolute;
+	padding: 5px;
+	z-index: 1;
+}
+
+.Alert {
+	display: block;
+	margin: auto;
+	height: 40px;
+	min-width: 100px;
+	width: fit-content;
+	background-color: #011e0ad9;
+	border-radius: 6px;
+	position: fixed;
+	top: -60px;
+	left: 0;
+	right: 0;
+	-webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	transition: all .2s ease;
+}
+
+.alert_message {
+	display: inline-block;
+	font-size: 14px;
+	color: #fff;
+	line-height: 18px;
+	margin: 11px 0px;
+	margin-right: 20px;
+}
+
+.showalert {
+	top: 20px;
+}
+
+.whitebg {
+	background: none;
+}
+
+.center_logo {
+	display: block;
+	margin: auto;
+	width: 80px;
+}
+
+.center_text {
+	display: block;
+	text-align: center;
+	width: auto;
+	padding: 0px 40px;
+}
+
+.center_btn {
+	display: block;
+	margin: auto;
+}
+
+.errorbox {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: auto;
+	border-radius: 2px;
+}
+
+.logo_bg {
+	display: block;
+	height: 0px;
+	box-sizing: border-box;
+	padding: 40px;
+}
+
+.discription {
+	display: block;
+	margin-bottom: 20px;
+	font-size: 16px;
+	line-height: 30px;
+	font-weight: 400;
+}
+
+.tick_icon {
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+	background-size: cover;
+	margin: 10px;
+	background-color: white;
+	border-radius: 50%;
+	float: left;
+	background-image: url(../images/tick.png);
+}
+
+.cross_icon {
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+	background-size: cover;
+	margin: 10px;
+	background-color: white;
+	border-radius: 50%;
+	float: left;
+	background-image: url(../images/cross.png);
+}
+
+.loading_gif {
+	display: none;
+	background: url(../images/loading.png) no-repeat transparent;
+	height: 16px;
+	width: 16px;
+	background-size: 16px;
+	animation: rotate 1s infinite linear;
+	position: absolute;
+	margin: auto;
+	float: right;
+	top: 12px;
+	left: 30px;
+	z-index: 100;
+}
+
+.error_icon {
+	display: block;
+	background-color: #FFDFDF;
+	height: 60px;
+	width: 60px;
+	border-radius: 30px;
+	margin: auto;
+	margin-bottom: 20px;
+	margin-top: -30px;
+	background: url(../images/Link.png) no-repeat #FFDFDF 18px 18px;
+	background-size: 24px;
+}
+.button_block {
+	display: block;
+	width: auto;
+	position: relative;
+}
+.link_expire_icon {
+	background: url(../images/Expire.png) no-repeat #FFDFDF 18px 18px;
+	background-size: 24px;
+}
+.success_icon {
+	background: url(../images/plain_tick.png) no-repeat #CEEEC7  18px 21px;
+	background-size: 24px;
+}
+@
+keyframes rotate {from { -moz-transform:rotate(0deg);
+	-webkit-transform: rotate(0deg);
+}
+
+to {
+	-moz-transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+}
+}

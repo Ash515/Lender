@@ -1,0 +1,33 @@
+<!-- $Id$ -->
+ 
+<!-- ******************* Start of DropDownMenuActivator Tooltip ******************** -->
+
+<!--TPL-start-DropDownMenuActivator_Prefix-->
+<table cellspacing="0" cellpadding="0" border="0">
+	<tr>
+		<td><input type="button" class="menuDropDownBtn" id="${MENUID}_BTN"
+			onClick="showDropDownMenu('${MENUID}',this,event)" value="${DISPLAYNAME}" /></td>
+		<td><input type="button" class="menuDropDownBtnPull"
+			onClick="showDropDownMenu('${MENUID}',this,event)" /></td>
+	</tr>
+</table>
+<!--TPL-end-DropDownMenuActivator_Prefix--> 
+
+<!-- ******************* End of DropDownMenuActivator Tooltip ******************** -->
+
+<!-- ******************* Start of DropDownMenuContent Tooltip ******************** -->
+
+<!--TPL-start-DropDownMenuContent_Prefix-->
+<div id="${MENUID}_PDM" style='display:none;'>
+<div class="dropDownMenu">
+<ul class="menudropdown">
+	<!--TPL-end-DropDownMenuContent_Prefix-->
+	
+	
+	<!--TPL-start-DropDownMenuContent_Suffix-->
+</ul>
+</div>
+</div>
+<!--TPL-end-DropDownMenuContent_Suffix-->
+
+<!-- ******************* End of DropDownMenuContent Tooltip ******************** -->

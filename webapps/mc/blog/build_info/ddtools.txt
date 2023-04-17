@@ -1,0 +1,9 @@
+Module=DDTOOLS
+SourceCoLabel=default
+BuildDate=Nov_24_2017
+BuildTime=13:10:04
+BuildLabel=default_Nov_24_2017
+build-timestamp= 1511509204
+StaticVersion=
+Source_Changeset=c0acf1d6f74a
+Build_Comment=

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security-accounts.xsd">
+    <urls>
+    <url path="/rest/user/sessions" method="delete" csrf="true" https="true" sl_auth="pa_required"/>
+
+    <url path="/rest/user/password/verify" https="true" authentication="optional" sl_auth="customauth_optional" user-needed="true" method="post" csrf="true"  duration="5" threshold="50" lock-period="10">
+        <param name="password" regex="oldpassword" max-len="250" secret="true" />
+     </url>
+   
+   <url path="/rest/announcement/recovery" method="post" csrf="true" https="true" authentication="required" duration="15" threshold="10" lock-period="30">
+     <param name="email_or_mobile" regex="email_or_mobile" />
+     <param name="country_code" regex="^[a-zA-Z]+$" />
+   </url>
+   
+    <url path="/rest/announcement/recovery/${id}" method="put" url-type="dynamic" path-regex="true" csrf="true" https="true" sl_auth="pa_optional" authentication="optional"  duration="15" threshold="10" lock-period="30">
+     <param name="new_email_or_mobile" regex="email_or_mobile" />
+     <param name="new_country_code" regex="^[a-zA-Z]+$" />
+   </url>
+   
+   <url path="/rest/announcement/recovery/${id}/verify" operation-param="action" operation-value="unauth" url-type="dynamic" path-regex="true" method="post" csrf="true" https="true" sl_auth="pa_required"  duration="15" threshold="5" lock-period="30">
+	  <param name="code" regex="^[0-9a-zA-Z]+$" />
+   </url>
+
+<url path="/rest/announcement/recovery/${id}/verify" operation-param="action" operation-value="pwdauth" url-type="dynamic" authentication="required" path-regex="true" method="post" csrf="true" https="true" reauth="true" api="true" duration="15" threshold="5" lock-period="30">
+	  <param name="code" regex="^[0-9a-zA-Z]+$" />
+   </url>
+   
+   <url path="/rest/announcement/recovery/${id}/verify" operation-param="action" operation-value="auth" url-type="dynamic" authentication="required" path-regex="true" method="post" csrf="true" https="true" duration="15" threshold="5" lock-period="30">
+	  <param name="code" regex="^[0-9a-zA-Z]+$" />
+   </url>
+
+   <url path="/rest/announcement/recovery/${id}/resend" url-type="dynamic" authentication="optional" path-regex="true" method="post" csrf="true" https="true" sl_auth="pa_optional"  duration="15" threshold="10" lock-period="30"/>
+    
+    <url path="/rest/announcement/password/change" method="post" csrf="true" https="true" sl_auth="pa_required"  duration="15" threshold="10" lock-period="30">
+	  <param name="new_password" regex="oldpassword" max-len="250" secret="true"  />
+	  <param name="current_password" regex="oldpassword" max-len="250" secret="true"  />
+	  <param name="remove_websessions" type="boolean" />
+	  <param name="remove_devicesessions" type="boolean" />
+   </url>
+   
+   <url path="/webclient/v1/mfa/setup/mobile" authentication="required" csrf="true" method="post" https="true" reauth="true" api="true" duration="15" threshold="10" lock-period="30">
+   		<inputstream type="JSONObject" template="add_mobile" />   
+   </url>
+   
+   <url path="/webclient/v1/mfa/setup/mobile/${id}/resend"  url-type="dynamic" authentication="required" path-regex="true" method="put" csrf="true" https="true" reauth="true" api="true" duration="15" threshold="10" lock-period="30">
+	  <param name="cc" regex="^[a-zA-Z]+$" />
+   </url>
+   
+	<url path="/webclient/v1/mfa/setup/mobile/${id}/verify" url-type="dynamic" authentication="required" path-regex="true" method="put"  csrf="true" https="true" reauth="true" api="true" duration="15" threshold="10" lock-period="30">
+	  <param name="cc" regex="^[a-zA-Z]+$" />
+	  <param name="code" regex="^[0-9a-zA-Z]+$" />
+   </url>
+   
+   <url path="/webclient/v1/mfa/setup/totp/secret" authentication="required" csrf="true" method="post" https="true" reauth="true" api="true" duration="15" threshold="5" lock-period="30">
+   		<inputstream type="JSONObject" template="gauth_mode" />   
+   </url>
+  
+   <url path="/webclient/v1/mfa/setup/totp/download" authentication="required" method="get" https="true" duration="15" threshold="15" lock-period="30">
+   </url>
+   
+   <url path="/webclient/v1/mfa/setup/totp/verify" authentication="required" method="post" csrf="true" https="true" reauth="true" api="true" duration="15" threshold="10" lock-period="30">
+  		<inputstream type="JSONObject" template="gauth_verify" max-len="-1"/>   
+   </url>
+      
+    <url path="/accounts/images/fonts/Accounts-Font-Icons.ttf"></url> 
+    <url path="/accounts/images/fonts/Accounts-Font-Icons.woff"></url>
+     <url path="/accounts/images/fonts/Accounts-Font-Icons.eot"></url> 
+     <url path="/accounts/images/fonts/Accounts-Font-Icons.svg"></url>
+    
+    <url path="/webclient/v1/ssokit/email" method="post" description="Send or Resend a verification code to the email id provided" csrf="true">
+		 <inputstream type="JSONObject" template="email_json" max-len="-1" />
+	</url>
+	
+	<url path="/webclient/v1/ssokit/email/${digest_in_url}" method="put" description="Verify the otp and add secondary email" duration="5" threshold="3" lock-period="15" csrf="true">
+		 <inputstream type="JSONObject" template="email_verify_json" max-len="-1" />
+	</url>
+	
+	<url path="/api/v1/ssokit/token" method="post" description="Generate a temp token for temporary session" duration="5" threshold="3" lock-period="15" csrf="false">
+		 <inputstream type="JSONObject" template="token_json" max-len="-1" />
+	</url>
+    
+</urls>
+
+<jsontemplates>
+		<jsontemplate name="add_mobile">
+   			<key name="mobile"  type="JSONObject" template="add_mobile_template" max-len="-1" />   
+    	</jsontemplate>
+    		<jsontemplate name="add_mobile_template">
+   			<key name="ph" regex="phone_numbers" />
+   			<key name="cc" regex="^[a-zA-Z]+$"  />
+    	</jsontemplate>
+
+      	<jsontemplate name="gauth_mode">
+   			<key name="totpsecret"  type="JSONObject" template="gauth_secret_template" max-len="-1" />   
+    	</jsontemplate>
+    		<jsontemplate name="gauth_secret_template">
+   			<key name="en_tkn" regex="plain_str" />   
+    	</jsontemplate>
+    	
+    	<jsontemplate name="gauth_verify">
+   			<key name="totpverify"  type="JSONObject" template="gauth_verify_template" max-len="-1" />   
+    	</jsontemplate>
+    	<jsontemplate name="gauth_verify_template">
+   			<key name="code" regex="^[0-9a-zA-Z]+$" min-occurrences="1" /> 
+    	</jsontemplate>
+		
+		<jsontemplate name="email_json">
+			<key name="email" type="JSONObject" template="email_format" max-len="-1" />
+		</jsontemplate>
+		<jsontemplate name="email_format">
+			<key name="email" regex="email" min-occurrences="1"/>
+		</jsontemplate>
+		
+		<jsontemplate name="email_verify_json">
+			<key name="email" type="JSONObject" template="email_verify_format" max-len="-1" />
+		</jsontemplate>
+		<jsontemplate name="email_verify_format">
+			<key name="code" regex="code"/>
+		</jsontemplate>
+		
+		<jsontemplate name="token_json">
+			<key name="token" type="JSONObject" template="token_format" max-len="-1" />
+		</jsontemplate>
+		<jsontemplate name="token_format">
+			<key name="redirect_uri" regex="serviceurl" min-occurrences="1"/>
+		</jsontemplate>
+    	
+    </jsontemplates>
+    <regexes>
+    <regex name="digest_in_url" value="([a-zA-Z0-9\-])+" />
+    </regexes>
+</security>
+
+
+

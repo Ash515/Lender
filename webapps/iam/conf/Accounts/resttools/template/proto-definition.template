@@ -1,0 +1,12 @@
+//$resourceDescription
+message $resourceName {
+	
+	$attributeDefinitions
+	
+        message Parent {
+            $parentsDefinitions
+        }
+
+	// optional Reference reference = 100; // Stopped generating Reference object
+	optional Parent parent = 101;
+}

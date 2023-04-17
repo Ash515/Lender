@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../conf/security.xsd">
+  <properties>
+    <property name="service.name" value="AaaServer" />
+    <property name="login.page" value="/" />
+    <property name="logout.page" value="/logout" />
+    <property name="com.adventnet.iam.internal.server" value="http://localhost:8080" />
+    <property name="csrf.cookie.name" value="iamcsr" />
+    <property name="csrf.param.name" value="iamcsrcoo" />
+    <property name="response.encoding" value="UTF-8" />
+    <property name="disable.authcsrf" value="false" />
+    <property name="com.adventnet.iam.secretkey" value="Kt$PFC4DyjUzS9a!RdP[rMq92e" />
+    <property name="use.iam" value="true" />
+    <property name="secret.request.param.names" value="PASSWORD,password,loginpassword,current,newp,invoker_method,pwd,cpwd,ticket,CURRPASSWORD,TICKET,authtoken" />
+
+    <!-- This is to push critical excetion to logs events for finding any brute force attack is happening -->
+    <property name="log.push.security.exception" value="true" />
+  </properties>
+</security>
+

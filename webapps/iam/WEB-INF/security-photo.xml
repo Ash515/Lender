@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<security name="Zoho Accounts">
+    <urls>
+        <url path="/photo/jsp/photo.jsp" authentication="required">
+            <param name="id" type="cleartext:check"  min-occurrences="1" />
+            <param name="t" regex="photo_type" />
+            <param name="callback" type="cleartext:check" />
+        </url>
+        <url path="/photo/r" authentication="optional">
+            <param name="id" type="cleartext:check"  min-occurrences="1" />
+            <param name="API" type="boolean" />
+            <param name="t" regex="photo_type" />
+            <param name="s" regex="photo_size" />
+            <param name="ot" type="int" description="Service Org Type. Parameted is exclusive for Service Org Log." />
+        </url>
+        <url path="/photo/w" authentication="required">
+            <param name="id" type="cleartext:check"  min-occurrences="1" />
+            <param name="t" regex="photo_type" />
+            <param name="permission" regex="photo_permission" />
+            <param name="callback" type="cleartext:check" />
+            <param name="API" type="boolean" />
+            <param name="ot" type="int" description="Service Org Type. Parameted is exclusive for Service Org Log." />
+            <file name="photo" content-type-name="image" max-size="1024" allowed-extensions="jpg,png,gif,jpeg"  antivirus="true">
+            	<filename regex="cleartext:removehtmlentities" max-len="150"/>
+            </file>            
+        </url>
+    </urls>
+    
+    <regexes>
+        <regex name="photo_type" value="USER|GROUP|ACCOUNT|APPACCOUNT|SERVICEORG" />
+        <regex name="photo_size" value="stamp|thumbnail|normal|original" />
+        <regex name="photo_permission" value="NONE|ZOHO_USERS|ORG_USERS|PUBLIC|MY_BUDDIES|WITH_IN_GROUP" />
+    </regexes>
+    
+    <content-types>
+        <content-type name="image" content-types="image/.*" />
+    </content-types>
+</security>

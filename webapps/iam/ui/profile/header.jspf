@@ -1,0 +1,194 @@
+<%-- $Id$ --%>
+<%@page import="com.adventnet.iam.xss.IAMEncoder"%>
+<%@page import="com.zoho.accounts.AccountsConfiguration"%>
+<%@page import="com.adventnet.iam.internal.Util"%>
+<%
+String productivityServices = "";
+String collabrationServices = "";
+String businessServices = "";
+String financeServices = "";
+String helpdeskServices = "";
+String hrServices = "";
+
+
+for (Service service : Util.SERVICEAPI.getAllServices()) {
+	String serviceName = service.getServiceName();
+	String serviceDisplayName = service.getDisplayName();
+	
+	String serviceclass = "icon_"+serviceName.toLowerCase()+"_16-2x servicelogospan";//No I18N
+	
+	if(service.getServiceType() == Service.PRODUCTIVITY && service.isPublic()){
+		productivityServices += "<li class=\"ZAppProducts\"><a href=\""+service.getWebUrl()+"\" target=\"_blank\"><span class=\""+serviceclass+"\"></span> <span>"+serviceDisplayName+"</span></a></li>";
+	}
+	else if(service.getServiceType() == Service.COLLABORATION && service.isPublic()){
+		collabrationServices += "<li class=\"ZAppProducts\"><a href=\""+service.getWebUrl()+"\" target=\"_blank\"><span class=\""+serviceclass+"\"></span> <span>"+serviceDisplayName+"</span></a></li>";	
+	}
+	else if(service.getServiceType() == Service.BUSINESS && service.isPublic()){
+		businessServices += "<li class=\"ZAppProducts\"><a href=\""+service.getWebUrl()+"\" target=\"_blank\"><span class=\""+serviceclass+"\"></span> <span>"+serviceDisplayName+"</span></a></li>";	
+	}
+	else if(service.getServiceType() == Service.FINANCE && service.isPublic()){
+		financeServices += "<li class=\"ZAppProducts\"><a href=\""+service.getWebUrl()+"\" target=\"_blank\"><span class=\""+serviceclass+"\"></span> <span>"+serviceDisplayName+"</span></a></li>";	
+	}
+	else if(service.getServiceType() == Service.HELPDESK && service.isPublic()){
+		helpdeskServices += "<li class=\"ZAppProducts\"><a href=\""+service.getWebUrl()+"\" target=\"_blank\"><span class=\""+serviceclass+"\"></span> <span>"+serviceDisplayName+"</span></a></li>";
+	}else if(service.getServiceType() == Service.HUMANRESOURCES && service.isPublic()){
+		hrServices+="<li class=\"ZAppProducts\"><a href=\""+service.getWebUrl()+"\" target=\"_blank\"><span class=\""+serviceclass+"\"></span> <span>"+serviceDisplayName+"</span></a></li>";
+	}
+}
+boolean hideHelpLink = "true".equals(AccountsConfiguration.getConfiguration("hide.helplink", "false"));
+boolean isStatiCURL = "true".equals(AccountsConfiguration.getConfiguration("iam.static", "false"));
+String cssURL = isStatiCURL ? Util.getCSSURL(request) : request.getContextPath() + "/static"; //No I18N
+%>
+<style type="text/css">
+@font-face {
+	font-family: 'Open Sans';
+	font-weight: 300;
+	font-style: normal;
+	src: local('Open Sans'), url('<%=imgurl%>/opensans/font.woff')
+		format('woff');
+}
+body {
+	margin: 0 auto;
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="<%=cssURL%>/servicelogo.css"></link> 
+<header class="headertop">
+	<div class="leftthing">
+	<%if(("false".equals(AccountsConfiguration.getConfiguration("remove.applauncher", "false")))){ %>
+		<div class="ztb-deployment-zoho" id="ztb-switch-menu">
+			<div class="ztb-switch-to-square">
+				<span></span><span class="two"></span><span></span><span></span><span class="five"></span><span></span><span></span><span class="eight"></span><span></span>
+			</div>
+		</div>
+	<%}%>
+		<div style="float:left;" id="ztb-logo">
+			<%if(Util.isZoho()){ %>
+				<span class="accountslogo commonlogo" ></span>
+			<%} else{%>
+				<img src="<%=imgurl%>/zlogo.png" id="ztb-logo-rebrand" style="margin-top: 3px;margin-left: 8px;max-height: 34px;">
+			<%} %>
+		</div>
+		
+		<div class="logoutcontainer">
+			<img id="ztb-profile-image" src="<%=cPath%>/file?fs=thumb&ID=<%=userid%>">
+				<div  id="ztb-profile" style="width: 320px; height: 175px;top:0px;background: #fff;" class="ztb-font-family ztb-expand">
+					<div id="ztb-profile-header">
+						<p id="ztb-user-name" ><%=IAMEncoder.encodeHTML(user.getDisplayName())%></p>
+						<p id="ztb-user-id" ><%=IAMEncoder.encodeHTML(user.getPrimaryEmail())%></p>
+						<p id="ztb-zoho-uid">
+							<label><%=Util.getI18NMsg(request,"IAM.TOPBAR.USER.ID")%>: <%=user.getZUID()%></label><span id="ztb-zoho-uid-info"
+								class="ztb-icon-group"></span>
+						</p>
+					</div>
+					<img class="profileimage" src="<%=cPath%>/file?fs=thumb&ID=<%=userid%>">
+					<a target="_blank" id="ztb-change-photo"  class="changephoto" onclick="openUploadPhoto('user','0');"><%=Util.getI18NMsg(request,"IAM.PHOTO.CHANGE")%></a>
+					<div id="ztb-accountInfo">
+						<span class="ztb-signout"><a class="ztb-anchor" id="ztb-signout" href="<%=IAMEncoder.encodeHTMLAttribute(IAMUtil.getLogoutURL())%>"><%=Util.getI18NMsg(request,"IAM.LOGOUT")%></a></span>
+				   </div>
+		       </div>
+		</div>
+		<div id="ztb-menu-container" class="ztb-font-family ">
+			<div class="ztb-item-container" id="ztb-textTypeCont"></div>
+			<div class="ztb-item-container"></div>
+			<div class="ztb-item-container"></div>
+			<div class="ztb-item-container">
+			<%if(!hideHelpLink){ %>
+				<div id="ztb-help" class="ztb-menu-type ztb__tooltip" title="Help">
+					<span class="ztb-icons ztb-icon-group ztb-help-icon"></span>
+				</div>
+			<%} %>
+			</div>
+		</div>
+	</div>
+</header>
+<div id="ztb-help-menu" class="ztb-dropdown ztb-font-family ztb-collapse">
+	<div class="ztb-arrow " style="right: 10px;"></div>
+	<div class="ztb-content">
+		<ul class="ztb-ul">
+		<%if(Util.isZoho()){
+			String resourceLink = AccountsConfiguration.getConfiguration("iam.resourcelink", "https://www.zoho.com/accounts/resources.html");//no i18n
+			String userGuideLink = AccountsConfiguration.getConfiguration("iam.userguidelink", "https://www.zoho.com/accounts/help/");//no i18n
+			String developerGuideLink = AccountsConfiguration.getConfiguration("iam.developerguidelink", "https://www.zoho.com/accounts/protocol/oauth.html");//no i18n
+			String faqsLink = AccountsConfiguration.getConfiguration("iam.faqslink", "https://www.zoho.com/accounts/help/faq.html");//no i18n
+			%>
+			<li id="ztb-helpLink" class=""><a href="<%=resourceLink%>" target="_blank"><span class=""></span><%=Util.getI18NMsg(request,"IAM.RESOURCES")%></a></li>
+			<li id="ztb-helpLink" class=""><a href="<%=userGuideLink%>" target="_blank"><span class=""></span><%=Util.getI18NMsg(request,"IAM.USERGUIDE")%></a></li>
+			<li id="ztb-helpLink" class=""><a href="<%=developerGuideLink%>" target="_blank"><span class=""></span><%=Util.getI18NMsg(request,"IAM.DEVELOPERGUIDE")%></a></li>
+			<li id="ztb-helpLink" class=""><a href="<%=faqsLink%>" target="_blank"><span class=""></span><%=Util.getI18NMsg(request,"IAM.HEADER.FAQ")%></a></li>
+			<%}else{ %>
+				<li id="ztb-helpLink" class=""><a href="<%=iamHelpLink%>" target="_blank"><span class=""></span><%=Util.getI18NMsg(request,"IAM.HELP")%></a></li>
+			<%} %>
+		</ul>
+	</div>
+</div>
+<div class="accountsmenu" id="accountmenu">
+	<div>
+		<div class="ZAppGroup">
+			<ul>
+				<li class="ZAppTitle"><%=Util.getI18NMsg(request,"IAM.TOPBAR.SALES.MARKETING.TITLE")%></li>
+				<li><%=productivityServices%></li>
+			</ul>
+			<ul style="margin-top: 33px;">
+				<li class="ZAppTitle"><%=Util.getI18NMsg(request,"IAM.TOPBAR.HUMANRESOURCES.TITLE")%></li>
+				<li><%=hrServices%></li>
+			</ul>
+		</div>
+		<div class="ZAppGroup">
+			<ul>
+				<li class="ZAppTitle"><%=Util.getI18NMsg(request,"IAM.TOPBAR.EMAIL.COLLABORATION.TITLE")%></li>
+				<li><%=collabrationServices%></li>
+			</ul>
+		</div>
+		<div class="ZAppGroup">
+			<ul>
+				<li class="ZAppTitle"><%=Util.getI18NMsg(request,"IAM.TOPBAR.BUSINESS.PROCESS.TITLE")%></li>
+				<li><%=businessServices%></li>
+			</ul>
+			<ul style="margin-top: 33px;">
+				<li class="ZAppTitle"><%=Util.getI18NMsg(request,"IAM.TOPBAR.FINANCE.TITLE")%></li>
+				<li><%=financeServices%></li>
+			</ul>
+			<ul style="margin-top: 33px;">
+				<li class="ZAppTitle"><%=Util.getI18NMsg(request,"IAM.TOPBAR.HELPDESK.SOFTWARE.TITLE")%></li>
+				<li><%=helpdeskServices%></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$("#ztb-switch-menu").click(function(e){
+	if(!$("#accountmenu").is(":visible")){
+    	$("#accountmenu").show();
+    	$("#ztb-switch-menu").addClass("ztb-active");
+     	e.stopPropagation();
+	}
+});
+$("#accountmenu").click(function(e){
+    e.stopPropagation();
+});
+$(".logoutcontainer").click(function(e){
+	if(!$("#ztb-profile").is(":visible")){
+    	$("#ztb-profile").show();
+    	$("#ztb-help-menu").hide();
+     	e.stopPropagation();
+	}
+	
+});
+$("#ztb-help").click(function(e){
+	if(!$("#ztb-help-menu").is(":visible")){
+    	$("#ztb-help-menu").show();
+    	$("#ztb-menu-container").css("background","#d2d2d2");//No i18N
+     	e.stopPropagation();
+	}
+});
+$(document).click(function(){
+    $("#ztb-profile").hide();
+    $("#accountmenu").hide();
+    $("#ztb-help-menu").hide();
+    $("#ztb-menu-container").css("background","#fff");//No i18N
+    $("#ztb-switch-menu").removeClass("ztb-active");
+});
+</script>

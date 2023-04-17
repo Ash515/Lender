@@ -1,0 +1,26 @@
+
+<html>
+<!--TPL-start-Table_Export--> 
+<script>
+var pdfurl = getViewURL('${VIEWNAME}', 'pdf');
+var csvurl = getViewURL('${VIEWNAME}', 'csv');
+var xlsurl = getViewURL('${VIEWNAME}', 'xlsx');
+var jsonurl = getViewURL('${VIEWNAME}', 'json');
+var htmlurl = getViewURL('${VIEWNAME}', 'html');
+htmlurl = "exporthtml/" + htmlurl;
+
+</script>
+<div class="exportlinks">
+<table>
+	<tr>
+		<td>Export in :&nbsp;<span class="export pdf"
+			onclick="openExport(pdfurl,true)">PDF</span>&nbsp;<span class="export csv"
+			onclick="openExport(csvurl,true)">CSV</span>&nbsp;<span class="export excel"
+			onclick="openExport(xlsurl,true)">XLSX</span>&nbsp;<span class="export json"
+			onclick="openExport(jsonurl,true)">JSON</span>&nbsp;<span class="export html"
+			onclick="openExport(htmlurl,true)">HTML</span></td>
+	</tr>
+</table>
+</div>
+<!--TPL-end-Table_Export--> 
+</html>

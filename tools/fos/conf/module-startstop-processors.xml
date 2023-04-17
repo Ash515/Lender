@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModuleStartStopProcessor>
+    <ModuleStartStopProcessor PROCESSOR_NAME="DBAUDIT" CLASSNAME="com.adventnet.persistence.DBAuditPopulator"/>
+    <ModuleStartStopProcessor PROCESSOR_NAME="FOS" CLASSNAME="com.adventnet.persistence.fos.FOS"/>
+</ModuleStartStopProcessor>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$ -->
+<auth-policy>
+<!-- Read All Tables Role -->
+<AaaRole role_id="AaaRole:role_id:0" name="ReadAllTables"
+service_id="System" description="Kind of users who have permission to read all tables" />
+<AaaPermission permission_id="AaaPermission:permission_id:0"
+permission_name="readAllTables" service_id="System">
+<AaaTablePermission table_name="*" access_type="R" />
+</AaaPermission>
+<AaaAce permission_id="AaaPermission:permission_id:0" role_id="AaaRole:role_id:0"
+env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
+
+<!-- Access All Tables Role -->
+<AaaRole role_id="AaaRole:role_id:1" name="AccessAllTables"
+service_id="System"
+description="Kind of users who have permission to access  entries in all tables" />
+<AaaPermission permission_id="AaaPermission:permission_id:1"
+permission_name="accessAllTables" service_id="System">
+<AaaTablePermission table_name="*" access_type="CRUD" />
+</AaaPermission>
+<AaaAce permission_id="AaaPermission:permission_id:1" role_id="AaaRole:role_id:1"
+env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
+
+<!-- AccessAllMethods Role -->
+<AaaRole role_id="AaaRole:role_id:2" name="AccessAllMethods"
+service_id="System"
+description="Kind of users who have permission to invoke all methods on all EJBs" />
+<AaaPermission permission_id="AaaPermission:permission_id:2"
+permission_name="accessAllMethods" service_id="System">
+<AaaMethodPermission bean_name="*" method_name="*" />
+</AaaPermission>
+<AaaAce permission_id="AaaPermission:permission_id:2" role_id="AaaRole:role_id:2"
+env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
+
+<!--Principal Role-->
+<AaaRole role_id="4" service_id="System" name="Principal" description="Principal of Institute" />
+<AaaPermission permission_id="4" permission_name="principalPermissions" service_id="System">
+<AaaTablePermission  table_name="*" access_type="CRUD" />
+</AaaPermission>
+<AaaAce permission_id="4" role_id="4" env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
+
+<!--HOD Role-->
+<AaaRole role_id="5" service_id="System" name="HOD" description="HOD of a dept" />
+<AaaPermission permission_id="51" permission_name="hodpermission1" service_id="System">
+<AaaTablePermission  table_name="Students" access_type="RU" />
+</AaaPermission>
+<AaaPermission permission_id="52" permission_name="hodPermission2" service_id="System">
+<AaaTablePermission  table_name="Sem1" access_type="CRUD" />
+</AaaPermission>
+<AaaPermission permission_id="53" permission_name="hodPermission3" service_id="System">
+<AaaTablePermission  table_name="Sem2" access_type="CRUD" />
+</AaaPermission>
+<AaaAce permission_id="51" role_id="5" env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
+<AaaAce permission_id="52" role_id="5" env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
+<AaaAce permission_id="53" role_id="5" env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0"  />
+<!--Staff Role-->
+<AaaRole role_id="6" service_id="System" name="Staff" description="Staff of a dept" />
+<AaaPermission permission_id="61" permission_name="staffpermission1" service_id="System">
+<AaaTablePermission  table_name="Students" access_type="R" />
+</AaaPermission>
+<AaaPermission permission_id="62" permission_name="staffPermission2" service_id="System">
+<AaaTablePermission  table_name="Sem1" access_type="CRU" />
+</AaaPermission>
+<AaaPermission permission_id="63" permission_name="staffPermission3" service_id="System">
+<AaaTablePermission  table_name="Sem2" access_type="CRU" />
+</AaaPermission>
+<AaaAce permission_id="61" role_id="6" env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
+<AaaAce permission_id="62" role_id="6" env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
+<AaaAce permission_id="63" role_id="6" env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0"  />
+<!--Student Role-->
+<AaaRole role_id="7" service_id="System" name="Student" description="Student of a dept" />
+<AaaPermission permission_id="71" permission_name="studentpermission1" service_id="System">
+<AaaTablePermission  table_name="Sem1" access_type="R" />
+</AaaPermission>
+<AaaPermission permission_id="72" permission_name="studentpermission2" service_id="System">
+<AaaTablePermission  table_name="Sem2" access_type="R" />
+</AaaPermission>
+<AaaAce permission_id="71" role_id="7" env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
+<AaaAce permission_id="72" role_id="7" env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
+
+<AaaRole role_id="8" service_id="System" name="Manager" description="Manager of company" />
+<AaaPermission permission_id="8" permission_name="managerPermissions" service_id="System">
+<AaaTablePermission  table_name="*" access_type="CRUD" />
+</AaaPermission>
+<AaaAce permission_id="8" role_id="8" env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
+
+<AaaRole role_id="9" service_id="System" name="Trainer" description="Trainer of company" />
+<AaaPermission permission_id="9" permission_name="trainerPermissions" service_id="System">
+<AaaTablePermission  table_name="*" access_type="CRUD" />
+</AaaPermission>
+<AaaAce permission_id="9" role_id="9" env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
+<!-- Role to Account mapping -->
+<AaaAuthorizedRoles>
+<AaaAuthorizedRole account_id="admin/System"
+role_id="AaaRole:role_id:1" />
+<AaaAuthorizedRole account_id="admin/System"
+role_id="AaaRole:role_id:2" />
+<AaaAuthorizedRole account_id="guest/System"
+role_id="AaaRole:role_id:0" />
+<AaaAuthorizedRole account_id="guest/System"
+role_id="AaaRole:role_id:2" />
+</AaaAuthorizedRoles>
+
+</auth-policy>

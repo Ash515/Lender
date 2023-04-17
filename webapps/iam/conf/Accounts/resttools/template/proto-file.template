@@ -1,0 +1,6 @@
+syntax = "proto2";
+package $moduleName.toLowerCase;
+option java_package = "com.zoho.$moduleName.toLowerCase";
+option java_outer_classname = "$resourceClassNameProto";
+
+$protoDefinition

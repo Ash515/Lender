@@ -1,0 +1,181 @@
+/* $Id: $ */
+@CHARSET "UTF-8";
+
+.form-title {
+	font-size: 18px;
+	margin-bottom: 12px;
+}
+
+.signupoutersection {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.signupcontainer {
+	margin: 0 auto;
+	padding: 10px;
+}
+
+.za-captcha {
+	border: 1px solid #D6D6D6;
+	margin-top: 10px;
+	width: 200px;
+	height: 70px;
+}
+
+.domain-overlay {
+	position: relative;
+}
+
+.domain-overlay span {
+	font-size: 15px;
+	color: #6D6D6D;
+	float: right;
+	position: absolute;
+	right: -5px;
+	padding: 5px 0 5px 5px;
+}
+
+.za-msgbox {
+	color: #888;
+	width: 30%;
+	position: absolute;
+	top: 129px;
+	left: 902px;
+	padding: 5px;
+	max-width: 400px;
+}
+
+.za-msgbox.error {
+	color: #FF0000;
+}
+
+.za-newsletter {
+	vertical-align: top;
+	margin: 0 5px 10px 0;
+}
+
+.za-confirm {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #EEE;
+	background: rgba(119, 119, 119, 0.7);
+	z-index: 1001;
+	display: none;
+}
+
+.za-confirm-container {
+	position: relative;
+	top: 25%;
+	width: 400px;
+	margin: 0 auto;
+	background-color: #FFF;
+	padding: 20px;
+	border-radius: 5px;
+}
+
+.za-confirm-title {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.za-refresh-captcha {
+	height: 30px;
+	width: 35px;
+	display: inline-block;
+	margin-right: 1px;
+	background: transparent url('../../images/register.png') no-repeat -42px -176px;
+}
+
+.signupblocktabl {
+	margin: 3% auto 0px;
+}
+
+.signupblockdiv {
+	border: 1px solid #bfd5e3;
+}
+
+.signupblockheaderdiv {
+	background: transparent url('../../images/registerbg.gif') repeat-x 0px -2px;
+	text-align: justify;
+}
+
+.signupblockheader {
+	font-size: 18px;
+	color: #444;
+	padding: 10px 12px 5px;
+}
+
+.signupblocksubtitle {
+	padding: 5px 12px;
+	line-height: 15px;
+}
+
+.signupblockbut {
+	float: left;
+	cursor: pointer;
+	margin: 15px 0px 10px 0px;
+}
+
+.signupblockbutlt, .signupblockbutrt {
+	background: transparent url('../../images/acc-img.gif') no-repeat -2px -40px;
+	height: 20px;
+	width: 5px;
+	float: left;
+}
+
+.signupblockbutrt {
+	background-position: -18px -40px;
+}
+
+.signupblockbutco {
+	background: transparent url('../../images/common-bg.gif') repeat-x 0px 0px;
+	height: 20px;
+	float: left;
+	line-height: 19px;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 0px 2px;
+}
+
+.signupblockbutco a {
+	text-decoration: none;
+	color: #414141;
+}
+
+.botshadow {
+	background: transparent url('../../images/shadw-bot.gif') repeat-x 0px 0px;
+	width: 800px;
+	height: 5px;
+}
+
+.rtshadow {
+	background: transparent url('../../images/shadw-rt.gif') repeat-y 0px 0px;
+	line-height: 5px;
+	width: 8px;
+}
+
+.rtshadow div {
+	background-color: #fff;
+	width: 100%;
+	padding-left: 3px;
+}
+.za-email-suggestion{
+	margin-left: 2px;
+    margin-top: 6px;
+    color: #4C4B4B;
+}
+.za-email-suggestion a{
+	cursor: pointer;
+	color: #2281CF;
+	
+}
+.za-email-domain{
+	font-weight: bold;
+}
+.za-domain-error{
+	color: #B94A48;
+}

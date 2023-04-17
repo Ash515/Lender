@@ -1,0 +1,364 @@
+ <!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd">
+<?xml-stylesheet type="text/xsl" href="data-dictionary-transform.xsl"?>
+<!--$Id$-->
+
+<data-dictionary name="ClientComponents">
+
+	<table name="ACFilterGroup">
+		<description>By using ACFilterGroup, filters can be grouped within the given filterlist. It maps the filtergroup with the filterlist. </description>
+		<columns>
+			<column name="LISTID">
+				<description>Refers to the 'LISTID' in {@link ACFILTERLIST} table to which this FilterGroup belongs to</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="GROUPNAME">
+				<description>Unique name to identify the FilterGroup</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="DISPLAYNAME">
+				<description>Name which is displayed for the FilterGroup in the UI.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+			</column>
+			<column name="GRPINDEX">
+				<description>Order by which the FilterGroup is positioned in the FilterList.</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACFilterGroup_PK">
+			<primary-key-column>LISTID</primary-key-column>
+			<primary-key-column>GROUPNAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACFilterGroup_FK" reference-table-name="ACFilterList">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>LISTID</fk-local-column>
+						<fk-reference-column>LISTID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="ACFilterGroup_UK">
+				<unique-key-column>LISTID</unique-key-column>
+				<unique-key-column>GRPINDEX</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="ACUserFilterGroup">
+		<description>Represents the map of filterlist and filtergroup. Difference between ACFilterGroup and ACUserFilterGroup is that filters falling in this category are dynamically created by the user.</description>
+		<columns>
+			<column name="LISTID">
+				<description>Refers to the 'LISTID' in {@link ACFILTERLIST} table to which this UserFilterGroup belongs to</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="GROUPNAME">
+				<description>Refers to the 'GROUPNAME' in {@link ACFILTERGROUP} table</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACUserFilterGrp_PK">
+			<primary-key-column>LISTID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACUFilter_ACFG_FK" reference-table-name="ACFilterGroup">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>LISTID</fk-local-column>
+						<fk-reference-column>LISTID</fk-reference-column>
+					</fk-column>
+					<fk-column>
+						<fk-local-column>GROUPNAME</fk-local-column>
+						<fk-reference-column>GROUPNAME</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+ 	<table name="ACFilter">
+		<description>Defines a filter with specific criteria. Either 'CRITERIAID' or 'QUERYID' should be given. If both are given, CRITERIAID is considered.</description>
+		<columns>
+			<column name="LISTID">
+				<description>Refers to the 'LISTID' in {@link ACFILTERLIST} table to which this filter belongs to</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="GROUPNAME">
+				<description>Refers to the 'GROUPNAME' in {@link ACFILTERGROUP} table to which this filter belongs to</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="FILTERNAME">
+				<description>Unique name used to identify the filter within the list.(Note: it must be unique within the whole list and not just the group).</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="DISPLAYNAME">
+				<description>Name which is displayed for this Filter in the UI</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="FILTERINDEX">
+				<description>Order by which the filter is positioned within the group</description>
+				<data-type>INTEGER</data-type>
+			</column>
+			<column name="CRITERIAID">
+				<description>Refers to the 'CRITERIAID' in {@link ACCRITERIA} table which needs to be applied for the filter</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="QUERYID">
+				<description>Refers to the 'QUERID' in SELECTQUERY table which is used instead of view query while applying the filter.</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATEDBY">
+				<description>Account ID of the user who created the filter</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="EMPTY_MESSAGE_ID">
+				<description>Refers to the 'EMPTY_MESSAGE_ID' of {@link EMPTYTABLEMESSAGE} table. For more info, refer {@link EMPTYTABLEMESSAGE} doc.</description>
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACFilter_PK">
+			<primary-key-column>LISTID</primary-key-column>
+			<primary-key-column>GROUPNAME</primary-key-column>
+			<primary-key-column>FILTERNAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACFilter_ACFG_FK" reference-table-name="ACFilterGroup">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>LISTID</fk-local-column>
+						<fk-reference-column>LISTID</fk-reference-column>
+					</fk-column>
+					<fk-column>
+						<fk-local-column>GROUPNAME</fk-local-column>
+						<fk-reference-column>GROUPNAME</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="true" name="ACFilter_ACCR_FK" reference-table-name="ACCriteria">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CRITERIAID</fk-local-column>
+						<fk-reference-column>CRITERIAID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-SET-NULL</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ACFilter_FK" reference-table-name="SelectQuery">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>QUERYID</fk-local-column>
+						<fk-reference-column>QUERYID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-SET-NULL</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ACFilter_ETM_FK" reference-table-name="EmptyTableMessage">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>EMPTY_MESSAGE_ID</fk-local-column>
+						<fk-reference-column>EMPTY_MESSAGE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="ACFilter_Unique">
+				<unique-key-column>LISTID</unique-key-column>
+				<unique-key-column>FILTERNAME</unique-key-column>
+			</unique-key>
+			<unique-key name="ACFilter_Unique2">
+				<unique-key-column>LISTID</unique-key-column>
+				<unique-key-column>GROUPNAME</unique-key-column>
+				<unique-key-column>FILTERINDEX</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="ACLink">
+		<description>Used to configure a list of menuitems as a view. Useful in favorites type of views.</description>
+		<columns>
+			<column name="VIEWNAME">
+				<description>Refers to the 'VIEWNAME' in {@link com.adventnet.clientframework.VIEWCONFIGURATION} table to which this menuitem is associated</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="MENUITEMID">
+				<description>Refers to the 'ID' in {@link com.adventnet.clientframework.MENUITEM} table linked to the considered view</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="MENUITEMINDEX">
+				<description>Order by which the menuitem is displayed</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CREATEDBY">
+				<description>Account ID of the User who created it.</description>
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="ACLink_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+			<primary-key-column>MENUITEMID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACLink_VC_FK" reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ACLink_MI_FK" reference-table-name="MenuItem">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>MENUITEMID</fk-local-column>
+						<fk-reference-column>MENUITEMID_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+ 	<table name="ACFilterConfigList">
+		<description>Represents a list of filter configurations defined in {@link ACFILTERCONFIG}</description>
+		<columns>
+			<column name="ID">
+				<description>Auto-generated unique ID</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>ACFilterConfigList.ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="NAME">
+				<description>Unique name to identify the list</description>
+				<data-type>CHAR</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="VIEWNAME">
+				<description>Name of the view whose controller has to be used while creating custom filter</description>
+				<data-type>CHAR</data-type>
+				<default-value>FilterCreateForm</default-value>
+			</column>
+		</columns>
+		<primary-key name="ACFilterConfigList_PK">
+			<primary-key-column>ID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="ACFilterConfig">
+		<description>Contains configurations of a filter for a given column.</description>
+		<columns>
+			<column name="ID">
+				<description>Refers to the 'ID' in {@link ACFILTERCONFIGLIST} table to which this ACFilterConfig belongs to</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLINDEX">
+				<description>Position of the given column in the custom filter form</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="TABLEALIAS">
+				<description>Alias of the given table for which we are creating the filter</description>
+				<data-type>CHAR</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="TABLENAME">
+				<description>Name of the Table for which we are creating the filter</description>
+				<data-type>CHAR</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="COLNAME">
+				<description>Name of the column for which the filter is created. </description>
+				<data-type>CHAR</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="DISPLAYNAME">
+				<description>Displayname of the column in the custom filter form.</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="FILTERTYPE">
+				<description>Datatype of the filter compatible to column. Based on this, the filter comparators for the given column will be changed.</description>
+				<data-type>CHAR</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ALLOWEDDISPCOL">
+				<description>Name of the column (in given ALLOWEDVALTBL), whose values is displayed instead of those in ALLOWEDVALCOL.</description>
+				<data-type>CHAR</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="SHOWALLOWEDVALUES">
+				<description>Decides from where to take the values for the given column. If FROMDD, allowed values given for the column will be considered. If FROMTABLE, values from the column(ALLOWEDVALCOL) of table(ALLOWEDVALTBL) will be considered. Otherwise, teams can define their own by using CLASSNAME. Default: none.</description>
+				<data-type>CHAR</data-type>
+				<default-value>none</default-value>
+				<allowed-values>
+					<value>none</value>
+					<value>FROMDD</value>
+					<value>FROMTABLE</value>
+					<value>CUSTOM</value>
+				</allowed-values>
+			</column>
+			<column name="ALLOWEDVALTBL">
+				<description>Table name from which values will be taken, if SHOWALLOWEDVALUES is FROMTABLE.</description>
+				<data-type>CHAR</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="ALLOWEDVALCOL">
+				<description>Column name of table(ALLOWEDVALTBL) from which the values will be taken, if SHOWALLOWEDVALUES is FROMTABLE.</description>
+				<data-type>CHAR</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="CLASSNAME">
+				<description>Fully qualified name of the class which returns the values for the given column, if SHOWALLOWEDVALUES is CUSTOM. Must be a child of {@link com.adventnet.client.components.filter.web.CustomCriteria}</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACFilterConfig_PK">
+			<primary-key-column>ID</primary-key-column>
+			<primary-key-column>COLINDEX</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACFilterConfig_FK" reference-table-name="ACFilterConfigList">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ID</fk-local-column>
+						<fk-reference-column>ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+</data-dictionary>

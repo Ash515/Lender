@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<!-- Give all the module names here the configurations will be populated based on the order given -->
+<modules>
+    <Module moduleorder="10" modulename="Persistence" modulehierarchy="1"/>
+    <Module moduleorder="40" modulename="Audit" modulehierarchy="2"/>
+    <Module moduleorder="50" modulename="Authentication" modulehierarchy="3"/>
+    <Module moduleorder="60" modulename="Authorization" modulehierarchy="4"/>
+    <Module moduleorder="70" modulename="CustomView" modulehierarchy="2"/>
+    <Module moduleorder="75" modulename="TaskEngine" modulehierarchy="2"/>
+    <Module moduleorder="90" modulename="Tomcat" modulehierarchy="2"/>
+    <Module moduleorder="100" modulename="ClientFramework" modulehierarchy="4" />
+    <Module moduleorder="110" modulename="ClientComponents" modulehierarchy="5"/>
+<Module moduleorder="120" modulename="Lender" modulehierarchy="2"/>
+
+</modules>

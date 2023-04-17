@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id$ -->
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security-accounts.xsd">
+  <param-groups>
+	    <param-group name="uploadparams">
+			<param name="t" regex="user|org|group|partner|publicgroup|appaccount|serviceorg" />
+			<param name="ID" regex="ciphertext" max-len="500" />
+			<param name="EID" regex="ciphertext" max-len="500" />
+			<param name="photoViewPermission" regex="[0-4]" />
+	    </param-group>
+	</param-groups>
+  <urls>
+ 
+    <url path="/ui/settings/api-tokens.jsp" authentication="required">
+      <param name="service" type="boolean" />
+    </url>
+    <url path="/iam/ui/settings/api-tokens.jsp" authentication="required" redirect="/ui/settings/api-tokens.jsp" 	method= "get" >
+      <param name= "service" type= "boolean" />
+    </url>
+  
+    <url path="/ui/configure/email" authentication="required" method="get" auth-type="reauth">
+    </url>
+	   	<url path="/setup/email/otp/send" method="post" duration="5" threshold="10" lock-period="15" authentication="required" csrf="true" auth-type="reauth">
+	   		<param name="email" regex="email"/>
+	   	</url>
+	    <url path="/setup/email/otp/resend" method="post" duration="5" threshold="10" lock-period="15" authentication="required" csrf="true" auth-type="reauth">
+	    	<param name="email" regex="email"/>
+	    </url>
+	    <url path="/setup/email/otp/verify" method="post" duration="5" threshold="10" lock-period="15" authentication="required" csrf="true" auth-type="reauth">
+	    	<param name="email" regex="email"/>
+	    	<param name="otp" regex="code"/>
+	    </url>
+    <url path="/ui/configure/mobile/login" authentication="required" method="get" auth-type="reauth">
+    </url>
+	    <url path="/setup/screenmobile/otp/send" method="post" duration="5" threshold="10" lock-period="15" authentication="required" csrf="true" auth-type="reauth">
+	    	<param name="mobile" regex="phone"/>
+	    	<param name="country_code" regex="countrycode"/>
+	    </url>
+	    <url path="/setup/screenmobile/otp/resend" method="post" duration="5" threshold="10" lock-period="15" authentication="required" csrf="true" auth-type="reauth">
+	    	<param name="mobile" regex="phone"/>
+	    </url>
+	    <url path="/setup/screenmobile/otp/verify" method="post" duration="5" threshold="10" lock-period="15" authentication="required" csrf="true" auth-type="reauth">
+	    	<param name="mobile" regex="phone"/>
+	    	<param name="otp" regex="code"/>
+	    </url>
+	<url path="/ui/configure/mobile/recovery" authentication="required" method="get" auth-type="reauth">
+    </url>
+	   	<url path="/setup/recoverymobile/otp/send" method="post" duration="5" threshold="10" lock-period="15" authentication="required" csrf="true" auth-type="reauth">
+	   		<param name="mobile" regex="phone"/>
+	    	<param name="country_code" regex="countrycode"/>
+	   	</url>
+	    <url path="/setup/recoverymobile/otp/resend" method="post" duration="5" threshold="10" lock-period="15" authentication="required" csrf="true" auth-type="reauth">
+	    	<param name="mobile" regex="phone"/>
+	    </url>
+	    <url path="/setup/recoverymobile/otp/verify" method="post" duration="5" threshold="10" lock-period="15" authentication="required" csrf="true" auth-type="reauth">
+	    	<param name="mobile" regex="phone"/>
+	    	<param name="otp" regex="code"/>
+	    </url>
+    <url path="/ui/settings/configureMobile.jsp" authentication="required" method="get"/>
+
+    <url path="/account/relogin" authentication="optional" sl_auth="customauth_optional" user-needed="true" csrf="false" method="post,get">
+    </url> 
+    
+    <url path="/signin/v1/relogin" authentication="optional" sl_auth="customauth_optional" user-needed="true" csrf="false" method="get">
+    </url> 
+    <url path="/u/ph/d" method="post" authentication="required" csrf="true" description="Delete user uploaded photo" />
+    <url path="/u/h" authentication="required" csrf="true" method="post" redirect="/home">
+      <param name="hideheader" type="boolean" description="show/hide header and footer in home page" />
+    </url>
+    <url path="/u/h" authentication="required" method="get" redirect="/home">
+      <param name="hideheader" type="boolean" description="show/hide header and footer in home page" />
+    </url>
+    <url path="/u/info" authentication="optional" method="get,post">
+      <param name="callback" regex="printUser" />
+    </url>
+    <url path="/file" authentication="optional" sl_auth="customauth_optional" user-needed="true" description="To show group,user,org,partner and publicgroup logos">
+      <response disable-safe-headers="X-Content-Type-Options" />
+      <param name="t" regex="user|org|group|partner|publicgroup|appaccount|serviceorg" />
+      <param name="ID" regex="ciphertext" max-len="500" />
+      <param name="height" type="int" />
+      <param name="width" type="int" />
+      <param name="fs" regex="plain_str" />
+      <param name="nocache" type="long" />
+      <param name="API" type="boolean" />
+      <param name="ot" type="int" description="Service Org Type. Parameted is exclusive for Service Org Log." />
+      <param name="nodata" type="boolean" description="if true, response will be returned with 200 or 204 status without photo data" />
+      <param name="exp" type="int" />
+    </url>
+    <url path="/static/showcaptcha" description="To generate the captcha for the given digest">
+      <param name="digest" regex="digest" max-len="500" />
+    </url>
+    <url path="/static/file" method="post,get" authentication="optional" description="To show group,user,org,partner and publicgroup logos">
+      <param name="t" regex="user|org|group|partner|publicgroup|appaccount|serviceorg|samlorg" />
+      <param name="ID" regex="ciphertext" max-len="500" />
+      <param name="domain" regex="domain"/>
+      <param name="height" type="int" />
+      <param name="width" type="int" />
+      <param name="fs" regex="plain_str" />
+      <param name="nocache" type="long" />
+      <param name="API" type="boolean" />
+      <param name="ParentZID" regex="ciphertext" max-len="500"/>
+      <param name="ot" type="int" description="Service Org Type. Parameted is exclusive for Service Org Log." />
+      <param name="nodata" type="boolean" description="if true, response will be returned with 200 or 204 status without photo data" />
+    </url>
+    <url path="/upload" authentication="required" method="post" multi-part="true" internal="true" scoped-services="all" description="Used to Upload USER/GROUP/ORG and Partner logo">
+      <param-group name="uploadparams"/>
+      <file content-type-name="image" name="ph" max-size="10240" allowed-extensions="jpg,png,gif,jpeg" antivirus="true">
+        <filename regex="cleartext:removehtmlentities" max-len="150" />
+      </file>
+    </url>
+    <url path="/image/upload" authentication="required" method="post" multi-part="true" csrf="true" description="Used to Upload USER/GROUP/ORG and Partner logo">
+	  <param name="API" type="boolean" />
+	  <param name="fs" regex="favicon" />
+	  <param name="ot" type="int" description="Service Org Type. Parameted is exclusive for Service Org Log." />
+	  <param-group name="uploadparams"/>
+	  <file content-type-name="image" name="ph" max-size="10240" allowed-extensions="jpg,png,gif,jpeg" antivirus="true">
+        <filename regex="cleartext:removehtmlentities" max-len="150" />
+	  </file>
+	</url>
+    <url path="/mobileupload"  method="post" csrf="false" authentication="required" oauthscope="profile" operation-type="UPDATE"  description="Used to Upload USER Photo from MobileApp">
+      <param name="API" type="boolean" />
+      <file content-type-name="image" name="ph" max-size="2048" allowed-extensions="jpg,png,gif,jpeg" antivirus="true">
+        <filename regex="cleartext:removehtmlentities" max-len="150" />
+      </file>
+    </url>
+    <url path="/uploadcrop" authentication="required" method="post" multi-part="true" csrf="true" description="Used to crop Upload USER/GROUP/ORG and Partner logo">
+      <param name="h" type="int" />
+      <param name="w" type="int" />
+      <param name="x" type="int" />
+      <param name="y" type="int" />
+      <param name="jcrop" type="boolean" />
+      <param name="EID" regex="ciphertext" max-len="500" />
+      <param name="t" regex="user|org|group|partner|publicgroup|appaccount|serviceorg" />
+      <param name="currentphoto" type="boolean" />
+      <param name="photoViewPermission" regex="[0-4]" />
+      <param name="ot" type="int" description="Service Org Type. Parameted is exclusive for Service Org Log." />
+    </url>
+    <!--profile related url configurationd-->
+ 
+    <url path="/u/unlinkopenid" method="post" authentication="required" csrf="true" description="remove openid mapping">
+      <param name="emailID" regex="email" min-occurrences="1" />
+      <param name="idp" type="int" min-occurrences="1" />
+      
+    </url>
+    <url path="/u/deleteconnectedapp" method="post" authentication="required" csrf="true" duration="5" threshold="20" lock-period="15" description="delete connected app with the account">
+      <param name="clientZid" regex="cleartextpattern"/>  
+      <param name="clientID" regex="cleartextpattern"/>   
+    </url>
+
+    <url path="/u/deleteconnectedmobileapp" method="post" authentication="required" csrf="true" duration="5" threshold="20" lock-period="15" description="delete connected Mobile app with the account">
+      <param name="clientZid" regex="cleartextpattern"/>  
+      <param name="clientID" regex="cleartextpattern"/>
+      <param name="hs" regex="cleartextpattern" max-len="1000" />
+    </url>
+    
+   
+    <url path="/tfapref/savetext" authentication="required" method="post" https="true" csrf="true" duration="5" threshold="10" lock-period="15" user="true" description="save recovery codes to text file">
+      <param name="savepref" type="int" />
+      <param name="email" regex="email" />
+      <param name="pass" regex="oldpassword" max-len="250" secret="true" />
+    </url>
+    <!--settings related url configurationd-->
+
+    <url path="/p/update" authentication="required" method="post" csrf="true" duration="20" lock-period="1440" threshold="5" user="true" description="Updating mobile number">
+      <param name="mobile" regex="phone" />
+      <param name="countrycode" regex="countrycode" />
+      <param name="verifytype" type="int" />
+      <param name="is_ph_pg" type="boolean" />
+    </url>
+    
+    <url path="/p/primary" https="true" method="post" authentication="required" csrf="true" duration="5" threshold="10" lock-period="15" user="true" description="Change Primary mobile number">
+      <param name="password" regex="oldpassword" max-len="250" secret="true" />
+      <param name="mobile" regex="phone" />
+    </url>
+    <url path="/p/verify" authentication="required" method="post" https="true" csrf="true" duration="5" lock-period="15" threshold="10" user="true" description="Verify unconfirmed mobile number">
+      <param name="code" regex="code" />
+      <param name="mobile" regex="phone" />
+      <param name="password" regex="oldpassword" max-len="250" secret="true" />
+    </url> 
+    
+    <url path="/p/genbackup" method="post" authentication="required" csrf="true" duration="1" lock-period="5" threshold="10" user="true" description="generate Backup Code for recovery" />
+    <url path="/p/resend" sl_auth="tfatemp_optional" authentication="optional" user-needed="true"  method="post" csrf="true" duration="20" threshold="5" lock-period="1440" user="true" description="Resend verificaton code.">
+      <param name="mobile" regex="phone" />
+    </url>
+
+    <!--other url configurationd-->
+    <url path="/logout" method="get" description="Sign out of current user">
+      <param name="hide_signup" type="boolean" />
+      <param name="hide_title" type="boolean" />
+    </url>
+    <url path="/u/rpw" method="post" operation-param="a" operation-value="b" authentication="required" csrf="true" duration="1" threshold="10" lock-period="10" user="true" description="Send mail for resetting user password" />
+    <url path="/error-msgs" authentication="optional" description="JS error messages">
+      <param name="ln" regex="language" />
+      <param name="nl" regex="language" />
+      <param name="v" type="int" />
+    </url>
+    <url path="/static/hip.jpg">
+      <param name="HIP" type="long" />
+    </url>
+    <url path="/captcha" duration="5" threshold="150" lock-period="10">
+      <param name="cdigest" regex="digest" max-len="500" />
+      <param name="HIP" type="long" />
+      <param name="action" regex="hipstring" max-len="20" />
+    </url>
+    <url path="/switchto" authentication="optional" description="Common Switch To">
+    <proxy-policy allowed-services="all" />
+      <param name="bgClr" regex="colorcode" />
+      <param name="headerClr" regex="colorcode" />
+      <param name="borderClr" regex="colorcode" />
+      <param name="txtClr" regex="colorcode" />
+      <param name="hoverClr" regex="colorcode" />
+      <param name="dropDownClass" regex="cleartextpattern" />
+      <param name="fontStyle" regex="cleartextpattern" />
+      <param name="https" type="boolean" />
+      <param name="zapps" type="boolean" />
+      <param name="exclude" regex="servicename" split="," max-occurrences="20" />
+    </url>
+    <url path=".*\.js" path-regex="true" />
+    <url path=".*\.css" path-regex="true" />
+    <url path=".*\.ico" path-regex="true" />
+    <url path=".*\.gif" path-regex="true" />
+    <url path=".*\.jpg" path-regex="true" />
+    <url path=".*\.png" path-regex="true" />
+    <url path=".*\.xml" path-regex="true" />
+    <url path=".*./help/.*" path-regex="true" />
+    <url path="/images/mobileapps/.*\.svg" path-regex="true"/>
+    <url path="/images/opensans/font.woff" />
+    <url path="/images/font.woff" />
+    <url path="/images/opensans/font.eot" />
+    <url path="/images/opensans/font.ttf" />
+    <url path="/images/opensans/font.svg" />
+    <url path="/images/opensans/font.woff2" />
+    <url path="/images/robotolight/font.woff2" />
+    <url path="/images/robotoregular/font.woff2" />
+    <url path="/images/robotomedium/font.woff2" />
+    <url path="/images/robotobold/font.woff2" />
+    <url path="/images/opensanssemibold/font.woff" />
+    <url path="/images/opensanssemibold/font.eot" />
+    <url path="/images/opensanssemibold/font.ttf" />
+    <url path="/images/opensanssemibold/font.svg" />
+    <url path="/images/opensanssemibold/font.woff2" />
+    <url path="/images/fonticon/AnnouncementIcons.ttf"></url>
+    <url path="/images/fonticon/AnnouncementIcons.woff"></url>
+    <url path="/images/fonticon/AnnouncementIcons.eot"></url>
+    <url path="/images/fonticon/AnnouncementIcons.svg"></url>
+    <url path="/images/opensanslight/font.woff" />
+    <url path="/images/opensanslight/font.eot" />
+    <url path="/images/opensanslight/font.ttf" />
+    <url path="/images/opensanslightfont.svg" />
+    <url path="/images/opensanslight/font.woff2" />
+    <url path="/images/fonticon/DCfonts.eot"></url>
+    <url path="/images/fonticon/DCfonts.svg"></url>
+    <url path="/images/fonticon/DCfonts.ttf"></url>
+    <url path="/images/fonticon/DCfonts.woff"></url>
+    <url path="/images/fonticon/signin.eot"></url>
+    <url path="/images/fonticon/signin.svg"></url>
+    <url path="/images/fonticon/signin.ttf"></url>
+    <url path="/images/fonticon/signin.woff"></url>
+    <url path="/getauthtoken/.*" https="true" method="post" csrf="false" duration="60" threshold="40" lock-period="30" description="Validates the user-name/password and generates the AuthToken">
+      <param name="login" regex="username_or_email" max-len="150" />
+      <param name="password" regex="oldpassword" max-len="250" secret="true" />
+      <param name="validity" type="int" />
+    </url>
+    <url path="/u/clearusercache" authentication="optional" duration="1" threshold="10" lock-period="10" user="true" description="Clear IAM Ticket" method="post,get">
+      <param name="nocache" type="long" />
+    </url>
+    <!-- Announcements -->
+    <url path="/ui/announcement/tosUpdate.jsp" authentication="required" />
+    <url path="/u/timezone" method="post" authentication="required" csrf="true" description="save user's current timezone">
+      <param name="timezone" regex="[a-zA-Z0-9-/_+]+" max-len="50" />
+    </url>
+    <url path="/u/verifyPassword" method="post" csrf="true" duration="5" threshold="10" lock-period="20" https="true" sl_auth="fs_required">
+      <param name="password" regex="password" max-len="250" secret="true" />
+      <param name="hd-domain" regex="plain_str" />
+    </url>
+
+   	<url path="/u/resendConfirmationMail" method="post" csrf="true" duration="5" threshold="10" lock-period="20" sl_auth="fs_required" >
+    	<param name="name" regex="iamcleartextpattern" />
+    	<param name="email" regex="username_or_email" />
+    </url>
+    <url path="/u/resendCode" authentication="optional" sl_auth="ms_optional" method="post" csrf="true" duration="15" threshold="5" lock-period="20" >
+    </url>
+    <url path="/u/updateMobile" method="post" authentication="optional" https="true" csrf="true" duration="5" threshold="10" lock-period="20"  sl_auth="ms_optional">
+    	<param name="mobile" regex="phone"  />
+    	<param name="code" regex="countrycode" />
+        <param name="passwd" regex="password" max-len="250" secret="true" />
+        <param name="selectedupdate" regex="iamcleartextpattern" max-len="15" />        	
+   	</url>
+
+    <url path="/u/verifyotp" authentication="optional" sl_auth="ms_optional" csrf="true" method="post" duration="15" threshold="10" lock-period="20" >
+    	<param name="mobile" regex="phone"  />     
+    	<param name="otpcode" regex="code"  />
+    	<param name="countrycode" regex="countrycode" />  
+        <param name="scopes" regex="scope_with_servicename" split="," max-occurrences="20" />
+        <param name="getticket" type="boolean" />
+        <param name="appname" regex="iamcleartextpattern" />    	  	      	    	    	 	    	
+   	</url>
+    <url path="/u/verifyCode" method="post" csrf="true" duration="5" threshold="10" lock-period="20" sl_auth="fs_required">
+    	<param name="code" regex="code" />
+		<param name="hd-domain" regex="plain_str" />
+    </url>
+    <url path="/u/createFSAccount" method="post" csrf="true" sl_auth="fs_required">
+      <param name="email" regex="email" />
+      <param name="action" regex="plain_str" />
+      <param name="agree" regex="plain_str" />
+      <param name="hd-domain" regex="plain_str" />
+    </url>
+    <url path="/u/confirmaddmobile" method="post" authentication="required" https="true" csrf="true" duration="5" threshold="15" lock-period="20">
+        <param name="passwd" regex="oldpassword" max-len="250" secret="true"/>
+    	<param name="mobile" regex="phone"  /> 
+    	<param name="oldmobile" regex="phone"  />      	
+    </url>
+    <url path="/u/profileconfigureMobile" method="post" https="true" authentication="required"  csrf="true" duration="5" threshold="15" lock-period="20">
+        <param name="passwd" regex="oldpassword" max-len="250" secret="true"/>
+    	<param name="mobile" regex="phone"  />
+    	<param name="oumobile" regex="[0-9]{1,5}\-[0-9]{5,14}"  />
+    	<param name="countrycode" regex="countrycode" />    	      	    	            	
+    </url>     
+    <url path="/u/profileverifyMobile" method="post" authentication="required"  csrf="true" duration="5" threshold="15" lock-period="20">
+    	<param name="mobileno" regex="phone"  />
+    	<param name="oumobile" regex="[0-9]{1,5}\-[0-9]{5,14}"  />
+    	<param name="otpcode" regex="code" />
+    	<param name="ms" type="boolean" />
+    </url>
+    <url path="/u/profileresendMobile" method="post" authentication="required"  csrf="true" duration="5" threshold="15" lock-period="20">
+    	<param name="mobileno" regex="phone"  />
+    	<param name="otpcode" regex="code" />    	      	    	            	
+    </url> 
+    <url path="/u/deleteMobile" method="post" authentication="required"  csrf="true" duration="5" threshold="15" lock-period="20">
+    	<param name="mobile" regex="phone"  />
+    </url>        
+   
+    <url path="/apiauthtoken/create" authentication="required"  method="get" description="Create APIAuthToken via Browser authentication">
+      <param name="SCOPE" regex="scope_with_servicename" split="," max-occurrences="20" />
+      <param name="DISPLAY_NAME" regex="iamcleartextpattern" />
+    </url>
+    <url path="/apiauthtoken/create" authentication="required" duration="1" method="post" csrf="false" api="true" threshold="5" lock-period="15" user="true" description="Create APIAuthToken via Browser authentication">
+      <param name="SCOPE" regex="scope_with_servicename" split="," max-occurrences="20" />
+      <param name="DISPLAY_NAME" regex="iamcleartextpattern" />
+    </url>
+    <url path="/apiauthtoken/delete" https="true" description="Delete the APIAuthToken" method="post,get">
+      <param name="AUTHTOKEN" regex="iamticket" secret="true" max-len="1000" />
+    </url>
+    <!-- Urls to register zoho id -->
+    <url path="/setzohoid" authentication="required" description="To update zoho email id" method="post" csrf="true" duration="1" threshold="10" lock-period="10" user="true">
+      <param name="uname" regex="username" min-len="6" max-len="30" />
+      <param name="HIP" regex="hipstring" max-len="8" />
+      <param name="cdigest" regex="digest" max-len="500" />
+      <param name="captcha" regex="username" min-len="6" max-len="30" />
+    </url>
+    <url path="/addzohoemail" authentication="required">
+    	<param name="service" type="boolean" />
+    </url>
+    <url path="/accounts/samlsp/certificate" authentication="required" roles="OrgAdmin" duration="2" threshold="10" lock-period="10" description="to download sp certificate">
+      <param name="ad" regex="plain_str" />
+    </url>
+     <url path="/accounts/samlsp/metadata" authentication="required" roles="OrgAdmin" duration="2" threshold="10" lock-period="10" description="to download saml metadata">      
+      <param name="ad" regex="plain_str" />
+    </url>
+  	
+    <url path="/rmd/accounts/.*" trusted="true" />
+    <url path="/i/[0-9a-zA-z]*{8}" https="true" duration="10" threshold="100" lock-period="30" url-type="dynamic" description="shortened invitation url to the actual url"/>
+    <!-- MFA -->
+    <url path="/tfapref/mfa/setup" method="post" csrf="false" authentication="required" oauthscope="mfaSetup" operation-type="CREATE" description="set the initial device details of user">
+         	<param name="devicetype" max-len="1" min-occurrences="1" type="int" />
+         	<param name="appid" max-len="50" min-occurrences="1" regex="app_id"/>
+         	<param name="apnsmode" max-len="20" min-occurrences="1" regex="apns_mode"/>
+        	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="olddevicetoken" max-len="250" regex="device_token"/>
+        	<param name="osversion"  max-len="10" min-occurrences="1" regex="os_version"/>
+        	<param name="deviceinfo" max-len="250" regex="((?![0-9a-zA-Z+\,\(\)\[\]\s\P{InBasicLatin}]).)+" filter-matched-content="true" replacement-string=" "/>
+        	<param name="devicename" max-len="500" regex="iambase64"/>
+        	<param name="publickey" max-len="500" min-occurrences="1" regex="iambase64"/>
+    </url>
+    <url path="/device/update" method="post" csrf="false" authentication="required" oauthscope="mfaSetup" operation-type="UPDATE" description="Update DeviceToken when restored from backup, Update OS Version, Update Device Info">
+        	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="newdevicetoken" max-len="250" regex="device_token"/>
+        	<param name="osversion"  max-len="10" min-occurrences="1" regex="os_version"/>
+        	<param name="deviceinfo" max-len="250" regex="((?![0-9a-zA-Z+\,\(\)\[\]\s\P{InBasicLatin}]).)+" filter-matched-content="true" replacement-string=" "/>
+        	<param name="devicename" max-len="500" regex="((?![0-9a-zA-Z+\,\(\)\[\]\s\P{InBasicLatin}]).)+" filter-matched-content="true" replacement-string=" "/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+    </url>
+    <url path="/device/secondary/configure" method="post" csrf="false" authentication="required" oauthscope="mfaSetup" operation-type="UPDATE" description="Update the UserDevice Table">
+         	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+        	<param name="makeprimary" type="boolean"/>
+    </url>
+    <url path="/tfapref/mfa/activate" method="post" csrf="false" https="true" duration="5" threshold="10" lock-period="15"  description="activate mfa for user">
+        	<param name="mode" regex="[2|3|4|5]"/>
+        	<param name="password" regex="oldpassword" max-len="250" secret="true"/>
+        	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="olddevicetoken" max-len="250" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+    </url>
+    <url path="/tfapref/mfa/deactivate" https="true" method="post" authentication="required" csrf="true" duration="5" threshold="10" lock-period="15" description="deactivate mfa">
+        	 <param name="password" regex="oldpassword" max-len="250" secret="true" />
+        	 <param name="code" regex="code" />
+    </url>
+        
+    <url path="/device/mfa/verify"  method="post" csrf="false" description="Approval for a SignIn Request from Device">
+        	<param name="mode" type="int"/>
+        	<param name="tokenid" max-len="50" regex="code"/>
+        	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+        	<param name="Time" type="long"/>
+    </url>
+        
+    <url path="/device/approval" method="post" csrf="false" duration="5" threshold="10" lock-period="15" description="Approval from Primary Device">
+    		<param name="tokenid" max-len="50" regex="code"/>
+            <param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+        	<param name="Time" type="long"/>
+        	<param name="purpose" type="int"/>
+        	<param name="code" regex="code" />
+    </url>
+
+    <url path="/device/tfapref/deactivate" method="post" https="true" csrf="false" duration="5" threshold="10" lock-period="15" description="Disable mfa from Device" >
+            <param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="password" regex="oldpassword" max-len="250" secret="true"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+    </url>
+    
+    <url path="/device/remotelogout/getactivesessions" method="post" csrf="false" description="Get All ActiveSessions">
+            <param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+    </url>
+
+	<url path="/device/v2/remotelogout/getactivesessions" method="post" csrf="false" description="Get All ActiveSessions">
+            <param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+    </url>
+    
+	<url path="/device/launch/sync" method="post" csrf="false" description="OneAuth App Launch Sync the latest states,modes,data etc...">
+			<param name="refresh_token" regex="iamcleartextpattern" max-len="1000" secret="true"/>
+            <param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+        	<param name="version" regex="os_version" />
+    </url>
+
+    <url path="/device/reauth" method="post" csrf="false" description="To reauth Auth with device as password is changed." https="true">
+        	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+        	<param name="version" regex="os_version" />
+        	<param name="password" regex="oldpassword" max-len="250" secret="true"/>
+    </url>
+    
+    
+    
+    
+    <url path="/device/v2/launch/sync" method="post" csrf="false" description="OneAuth App Launch Sync the latest states,modes,data etc...">
+            <param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+        	<param name="refresh_token" regex="iamcleartextpattern" max-len="1000" secret="true"/>
+    </url>
+    
+    <url path="/device/pending/notification" method="post" csrf="false" description="OneAuth App on launch get pending notifications if any...">
+            <param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+    </url>
+    
+    <url path="/device/remotelogout/terminate" method="post" csrf="false" description="Terminate a user Session">
+        	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+    </url>
+    <url path="/device/remotelogout/terminateall" method="post" csrf="false" description="Terminate all user Sessions">
+        	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+    </url>
+    <url path="/device/remotelogout/terminateselected" description="Terminate selected user Sessions" method="post">
+        	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+        	<param name="ticketCol" regex="^(?:[a-z0-9\.\-,])+$" max-len="1000"/>
+    </url>
+    <url path="/device/signout" method="post" csrf="false" description="Signout from OneAuth">
+        	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+    </url>
+    <url path="/device/makeprimary" method="post" csrf="false" https="true" duration="5" threshold="20" lock-period="15" description="Make a Secondary device as Primary Device">
+        	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="secdevicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+        	<param name="password" regex="oldpassword" max-len="250" secret="true"/>
+    </url>
+    <url path="/device/lockapp" method="post" csrf="false" duration="5" threshold="20" lock-period="15" description="App Lock and Unlock from Device">
+        	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+        	<param name="lockapp" type="boolean"/>
+    </url>
+    <url path="/device/totp/secret" method="post" csrf="false" duration="5" threshold="20" lock-period="15" description="Get TOTP secret from device">
+        	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+    </url>
+    <url path="/device/totp/secsecret" method="post" csrf="false" duration="5" threshold="20" lock-period="15" description="Get TOTP secret from device">
+        	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+    </url>
+        <url path="/device/totp/verify" method="post" csrf="false" duration="5" threshold="20" lock-period="15" description="Get TOTP secret from device">
+        	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+        	<param name="token" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="code" regex="code" max-len="10" max-occurrences="1" />
+    </url>
+    <url path="/device/totp/secverify" method="post" csrf="false" duration="5" threshold="20" lock-period="15" description="Get TOTP secret from device">
+        	<param name="devicetoken" max-len="250" min-occurrences="1" regex="device_token"/>
+        	<param name="ZUID" type="long" min-occurrences="1"/>
+        	<param name="code" regex="code" max-len="10" max-occurrences="1" />
+    </url>
+
+    <url path="/device/push/resend"  sl_auth="mfaauth_required" method="post" csrf="true" duration="5" threshold="5" lock-period="15" description="Resend Push for Push Mode">
+        	<param name="code" regex="code" />
+        	<param name="devicetoken" max-len="250" regex="device_token"/>
+    </url>
+    <url path="/device/photo/delete"  method="post" csrf="false" authentication="required" oauthscope="profile" operation-type="UPDATE"  description="Used to Delete USER Photo from MobileApp">
+    </url>
+    
+    <url path="/static/blank.html"  description="For Iframe loading"/> 
+    <url path="/ui/settings/gdpr-dpa.jsp" authentication="required"/>
+      
+    <url path="/samlauthrequest/relogin" threshold="10" duration="5" lock-period="15" authentication="optional" sl_auth="customauth_optional" user-needed="true" method="get">
+    </url>
+    <url path="/invoker/[a-zA-Z0-9]+/[a-zA-Z_$][\w$]*/[a-zA-Z_$][\w$]*" internal="true" method="post">
+         <param name="invoker_method" type="String" max-len="-1"/>
+         <param name="format" type="int"/>
+         <param name="domain" regex="domain"/>
+         <param name="client_zaid" regex="plain_str"/>
+         <param name="rsreq" regex="plain_str"/>
+         <param name="zaaid" type="long"/>
+         <param name="oauthToken" regex="iamcleartextpattern"/>
+         <param name="tokenType" regex="iamcleartextpattern"/>
+    </url> 
+    <url path="/accounts/feeds/v1/([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,22}/user(/[0-9@\w\-\.\+\']+)?" method="post,get,put,delete" csrf="false">
+         <param name="_Authorization" type="String"/>
+         <param name="start" type="int"/>
+         <param name="total" type="int"/>
+    </url>
+	<url path="/user/gdpr/dpastatus" authentication="required" api="true" method="post" csrf="false" roles="GDPRAdmin" oauthscope="gdprdpa" operation-type="READ" description="API to return DPA status for given email">
+		<param name="email_id" regex="email" min-occurrences="1" />
+	</url>
+    <url path="/internal/useraccountspropertiesupdater" method="post" internal="true" scoped-services="ZohoARM">
+    	<param name="accessType" regex="uap_type"/>
+    	<param name="accessTime" regex="timestamp"/>
+    	<param name="zuidList" type="JSONArray" template="JSONArrayForZuid" array-size="1-1000" max-len="15000"/>
+    </url>
+    <url  path="/oauthorize/callback" authentication="optional" method="get" description="Servlet to return TempToken to OAuthorize ">
+		<param name="portal" regex="^[0-9]*$" />
+		<param name="state" regex="serviceurl" max-len="50000" />
+	</url>
+	
+	<url path="/u/apiconsole/switch" authentication="required" method="post" csrf="true" threshold="10" duration="5" lock-period="15" description="Switch to new apiconole ui">
+	</url>
+	<url path="/linkaccount/add" authentication="required" method="post" csrf="true" threshold="10" duration="5" lock-period="15" description="Add linked account">
+		<param name="provider" regex="idpProviders"/>
+	</url>
+	<url path="/privacy/certificate/[0-9]" authentication="required" method="get" threshold="15" duration="5" lock-period="15" description="View different privacy certificates">
+		<param name="services" regex="([a-zA-Z\,]+[a-zA-Z])"/>
+        <param name="download" type="boolean"/>
+	</url>
+	
+	
+  </urls>
+  
+  <jsontemplates>
+  	<jsontemplate name="JSONArrayForZuid">
+  		<key name="IAMArray" regex="[0-9]*"></key>
+  	</jsontemplate>
+  </jsontemplates>
+  
+  <extraparam min-len="0" max-len="100" xss="throwerror" description="To allowe extra parameters and values" />
+  <content-types>
+    <content-type name="image" content-types="image/.*|application/octet-stream" />
+    <content-type name="csv" content-types="text/csv|application/octet-stream" />
+    <content-type name="txt" content-types="text/plain|application/octet-stream" />
+    <content-type name="tpl" content-types="text/html|application/octet-stream" />
+    <content-type name="saml_key" content-types="text/.*|application/.*" />
+  </content-types>
+  <regexes>
+  	<regex name="idpProviders" value="YAHOO|TWITTER|LINKEDIN|FACEBOOK|GOOGLE|GAPPS|WEIBO|BAIDU|QQ|DOUBAN|AZURE|ICLOUD|INTUIT|WECHAT|SLACK|APPLE|ADP"/>
+    <regex name="oldpassword" value=".{1,500}" />
+    <regex name="password" value="^.{3,500}$" />
+    <regex name="serviceurl" value="^(http(s?)\:\/\/[-.\p{L}\p{M}\p{N}_]*)?(\/?)([\p{L}\p{M}\p{N}\!\-\.\?\,\:\'\/\\\+\*=&amp;%\$;#_@]*)?$" />
+    <regex name="extended_boolean" value="true|false|on|off" />
+    <regex name="skypename" value="^[A-Za-z0-9_\.\-,:]+$" />
+    <regex name="timezone" value="^[A-Za-z0-9_/+\-]+$" />
+    <regex name="date_format" value="^[A-Za-z\-\.\/:;,&quot;'\s\P{InBasicLatin}]+$" />
+    <regex name="phone_numbers" value="^[\(\)\+\-0-9\.\/\s]{1,30}$" />
+    <regex name="colorcode" value="^(([#]?[A-Fa-f0-9\-]+)|([a-zA-Z]+))$" />
+    <regex name="scope_with_servicename" value="^[a-zA-Z0-9\/\.,_]+$" />
+    <regex name="iamcleartextpattern" value="[0-9a-zA-Z_\-\+\.\$@\?\,\:\'\/\!\[\]\|&amp;\P{InBasicLatin}\s]+" />
+    <regex name="offline_token" value="[0-9a-zA-Z_\-\+\.\$@\?\,#^%~`\*\:\'\/\!\[\]\|&amp;\P{InBasicLatin}\s]+" />
+    <regex name="iambase64" value="[0-9a-zA-Z&quot;\{\}_\-\+\.\$@\?\,\:=\'\/\!\[\]\|&amp;\P{InBasicLatin}\s]+" />
+    <regex name="code" value="^[0-9a-zA-Z]+$" />
+    <regex name="urlwithdigest" value="^(ht|f)tp(s?)\:\/\/[-.\w]*(\/?)([a-zA-Z0-9\*\-\.\?\,\:\'\/\\\+=&amp;%\$#_@]*)?$" />
+	<regex name="domain" value="^([\p{L}\p{M}\p{N}]([\p{L}\p{M}\p{N}\-]{0,61}[\p{L}\p{M}\p{N}])?\.)+[\p{L}\p{M}]{2,22}$" />
+	<regex name="username" value="^[\p{L}\p{N}\p{M}\_\.]+$" />
+    <regex name="device_type" value="^[0-9]$" />
+    <regex name="device_token" value="[0-9a-zA-Z_\-\+\.\$@\?\,\:=\'\/\!\[\]\|&amp;\P{InBasicLatin}\s]+" />
+    <regex name="os_version" value="^[0-9\.]+$" />
+    <regex name="device_info" value="^[0-9a-zA-Z+\,\[\]\s]+$" />
+    <regex name="app_id" value="^[0-9\.a-zA-Z]+$" />
+ 	<regex name="apns_mode" value="^[a-zA-Z]+$" />
+ 	<regex name="pwdid" value="^[0-9]+$" />
+ 	<regex name="email_or_mobile" value="(([\p{L}\p{M}\p{N}_]([\p{L}\p{M}\p{N}_\-\.\+\'&amp;]*)@(?=.{4,256})(([\p{L}\p{M}\p{N}]+)(([\-\_]*[\p{L}\p{M}\p{N}])*)[\.])+[\p{L}\p{M}]{2,22})|([0-9]{5,14}))" />
+ 	<regex name="id" value="[0-9a-zA-Z\+\-\'\.@\_%]+" />
+ 	<regex name="uap_type" value="^(PasswordVerify|OAuthApi)$"/>
+ 	<regex name="timestamp" value="[0-9]+"></regex>
+ 	<regex name="address" value="[0-9a-zA-Z_%\~\\\{\}\|\&quot;\*\^\#\-\=\;\.\$@\?\,\&amp;\+\(\)\[\]\:\'\/\!\P{InBasicLatin}\s]+" />
+ 	
+ 	<!-- url is https://example.com/identifier -->
+ 	<regex name="urlwithparams" value="^(http(s?)\:\/\/[-.\p{L}\p{M}\p{N}_]*(:[0-9]{1,4})?)(\/[\p{L}\p{M}\p{N}\!\-\.\?\,\:\'\/\\\+\*=&amp;%\$;#_@]*)?$" />
+ 	<!-- uri is /identifier and it always starts with / -->
+ 	<regex name="uriwithparams" value="^(\/[\p{L}\p{M}\p{N}\!\-\.\?\,\:\'\/\\\+\*=&amp;%\$;#_@]*)$" />
+ 	<!-- url/uri this accepts both with url or uri -->
+ 	<regex name="urloruriwithparams" value="^((http(s?)\:\/\/[-.\p{L}\p{M}\p{N}_]*(:[0-9]{1,4})?)|(\/))([\p{L}\p{M}\p{N}\!\-\.\?\,\:\'\/\\\+\*=&amp;%\$;#_@]*)?$" />
+ 	
+  </regexes>
+  <defaultparams>
+    <param name="__d" regex="e" />
+    <param name="stop_mredirect" type="boolean" description="To avoid to disable mobile optimized page"/>
+    <param name="m_redirect" type="boolean" description="To display mobile optimized page" />
+    <param name="newmobilepage" type="boolean" description="To display new mobile optimized page" />
+    <param name="_sh" type="boolean" description="Option to hide/show Header and Footer in the accounts context pages" />
+    <param name="_embed" type="boolean" />
+    <param name="scope" regex="^[\w\/,\.]+$|^(ht|f)tp(s?)\:\/\/[-.\w]*(\/?)([a-zA-Z0-9\-\.\?\,\:\'\/\\\+=&amp;%\$#_@]*)?$" split=",| " max-occurrences="1000"/>
+  </defaultparams>
+</security>

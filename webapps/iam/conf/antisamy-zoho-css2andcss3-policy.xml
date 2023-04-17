@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Zoho Enhancements : 
+		* This policy file contains properties and selectors of CSS2 and CSS3 and it's relevant configuration.
+		* If teams need to extend antisamy policy file please refer -> https://intranet.wiki.zoho.com/security/How-to-extend-antisamy-policy-file.html     
+-->
+<anti-samy-rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="antisamy.xsd">
+	<include href="antisamy-common-rules.xml" />
+	<include href="antisamy-css2-policy.xml" />
+	<include href="antisamy-css3-policy.xml" />
+</anti-samy-rules>

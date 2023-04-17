@@ -1,0 +1,226 @@
+/* $Id: $ */
+@CHARSET "UTF-8";
+/********************
+$GLOBAL
+********************/
+body,table,input {
+	font-family: "Open Sans";
+	font-size: 12px;
+	padding: 0;
+	margin: 0;
+	color: #333333
+}
+.bodybg{
+	background: #F3EEE6 !important;
+}
+.desc {
+	margin-left:15px;
+	margin-bottom:5px;
+	color:#808080;
+	padding-bottom: 5px;
+	padding-top: 10px;
+}
+a {
+	color: #0F5491;
+	text-decoration: none;
+	outline: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+/* Move to form.js */
+input[type="text"],input[type="email"],input[type="password"],textarea {
+	border: 1px solid #D6D6D6;
+	border-radius: 5px;
+	padding: 5px;
+	width: 350px;
+}
+
+input[type="text"]:focus,input[type="email"]:focus,input[type="password"]:focus,textarea:focus {
+	border: 1px solid rgba(121, 187, 238, 0.75) !important;
+	box-shadow: 0 0 3px rgba(82, 168, 236, 0.5);
+	outline: none;
+}
+
+.invisible {
+	border: none;
+	width: 0;
+	height: 0;
+	display: none;
+}
+
+.disabled {
+	cursor: default !important;
+	filter: alpha(opacity = 50%);
+	opacity: 0.5;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+.mr3 {
+	margin-right: 3px !important;
+}
+
+.mr5 {
+	margin-right: 5px;
+}
+
+.mb0 {
+	margin-bottom: 0;
+}
+
+.p0 {
+	padding: 0 !important;
+}
+/********************
+$HEADER_FOOTER
+********************/
+header {
+	border-bottom: 1px solid #E8E6E6;
+	margin-bottom: 5px;
+	padding: 10px;
+}
+
+header .logo {
+	background: url("../images/logo.png") 0 0 no-repeat;
+	float: left;
+	height: 24px;
+	width: 195px;
+}
+header .partnerlogo {
+	float: left;
+	height: 24px;
+	width: 195px;
+}
+header .links {
+	float: right;
+	margin-top: 5px;
+}
+
+header a {
+	margin: 0 8px;
+	color: #555;
+}
+
+footer {
+	clear: both;
+	font-size: 10px;
+	padding: 10px 5px;
+	text-align: center;
+	position: relative;
+	top: 50px;
+}
+
+footer a,footer span {
+	font-size: 10px;
+	color: #999;
+	text-shadow: 0 2px 0 #FFFFFF;
+}
+
+footer a:after {
+	content: "|";
+	padding: 0 5px;
+}
+
+footer a:last-child:after {
+	content: "";
+}
+
+footer div {
+	float: right;
+}
+/********************
+$ZPLACEHOLDER 
+********************/
+.zph-show .zph-overlay {
+	visibility: visible;
+}
+
+.zph-hide .zph-overlay {
+	visibility: hidden;
+}
+
+.zph-overlay {
+	position: absolute;
+	padding: 6px 7px;
+	z-index: 0;
+	color: #A5A0A0;
+	cursor: text;
+}
+/********************
+$SIGN_IN
+********************/
+.label-error {
+	color: #FF0000;
+	text-align: center;
+	font-size: 14px;
+}
+
+.idp-topborder {
+	background-color: #C4C4C4;
+	margin-top: 10px;
+	height: 1px;
+}
+
+.GIcon,.GAppsIcon,.YIcon,.FIcon,.TWIcon,.LNIcon,.ZIcon,.AZIcon{
+	background: url('../../images/Signinusing-Icons.png') no-repeat -70px 3px;
+	border: 1px solid #dcdcdc;
+	float: left;
+	height: 31px;
+	width: 28px;
+	margin: 7px 3px 0 2px;
+	cursor: pointer;
+}
+
+.GAppsIcon {
+	background-position: -134px -17px;
+	width: 59px;
+}
+
+
+.ZIcon {
+	background-position: -227px -91px;
+	width: 31px;
+}
+
+
+.YIcon {
+	background-position: -176px 3px;
+	width: 31px;
+}
+
+.FIcon {
+	background-position: 3px 3px;
+	width: 32px;
+}
+
+.TWIcon {
+	background-position: -140px 3px;
+	width: 32px;
+}
+
+.LNIcon {
+	background-position: -104px 3px;
+	width: 32px;
+}
+
+.AZIcon {
+	background-position: -15px -304px;
+	width: 120px;
+}
+
+.sub-form-title {
+	font-size: 13px;
+	padding-top: 5px;
+}

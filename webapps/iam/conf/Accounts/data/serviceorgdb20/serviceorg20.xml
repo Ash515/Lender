@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="bookingssorgzaid" account_name="Zoho Bookings Service Org">
+		<IAMAccountDomain domain="bookingssorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="cloudsorgzaid" account_name="Zoho Cloud Service Org">
+		<IAMAccountDomain domain="cloudsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="writerautomationsorgzaid" account_name="Zoho writerautomation Service Org">
+		<IAMAccountDomain domain="writerautomationsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="videoplatformsorgzaid" account_name="Zoho videoplatform Service Org">
+		<IAMAccountDomain domain="videoplatformsorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

@@ -1,0 +1,6 @@
+<%-- $Id$ --%>
+<%-- This File should be included after includes.jspf (used imgurl which is defined in includes.jspf) --%>
+<%--Files(Icons) to be included for loading images--%>
+
+<%-- Loads image as tiles in safari startup page. For Web Clips(apple) - kind of favicons in safari --%>
+<link rel="apple-touch-icon" href="<%=imgurl%>/apple-touch-icon.png"> <%-- NO OUTPUTENCODING --%>

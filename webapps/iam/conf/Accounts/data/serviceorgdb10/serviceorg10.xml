@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="teamdrivesorgzaid" account_name="Zoho TeamDrive Org">
+		<IAMAccountDomain domain="teamdrivesorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="agilesorgzaid" account_name="Zoho Agiles Service Org">
+		<IAMAccountDomain domain="agilesorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="flowsorgzaid" account_name="Zoho Flow Service Org">
+		<IAMAccountDomain domain="flowsorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

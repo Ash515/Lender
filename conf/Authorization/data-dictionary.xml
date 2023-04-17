@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: data-dictionary.xml,v 1.29 2011/06/29 06:20:06 vinod Exp $ -->
+
+<!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd">
+<!--?xml-stylesheet type="text/xsl" href="./data-dictionary-transform.xsl"? -->
+
+<data-dictionary name="Authorization">
+
+	<description>Data Dictionary definition for Authorization Application</description>
+
+	<table name="AaaTrustedRole">
+		<description>TrustedRole for service</description>
+		<columns>
+			<column name="SERVICE_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="TRUSTED_ROLE_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+				<unique>true</unique>
+			</column>
+			<column name="UNAUTH_ROLE_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<unique>true</unique>
+			</column>
+		</columns>
+		<primary-key name="AaaTrustedRole_PK">
+			<primary-key-column>SERVICE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaTrustedRole_FK"
+				reference-table-name="AaaService" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaTrustedRole_FK1"
+				reference-table-name="AaaRole" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>UNAUTH_ROLE_ID</fk-local-column>
+						<fk-reference-column>ROLE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaTrustedRole_FK2"
+				reference-table-name="AaaRole" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>TRUSTED_ROLE_ID</fk-local-column>
+						<fk-reference-column>ROLE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaEnvironmentEntry">
+		<description></description>
+		<columns>
+			<column name="SERVICE_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="VALUE">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<unique></unique>
+			</column>
+			<column name="TYPE">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>java.lang.Boolean</value>
+					<value>java.lang.String</value>
+					<value>java.lang.Integer</value>
+					<value>java.lang.Double</value>
+					<value>java.lang.Byte</value>
+					<value>java.lang.Short</value>
+					<value>java.lang.Long</value>
+					<value>java.lang.Float</value>
+				</allowed-values>
+			</column>
+			<column name="DESCRIPTION">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>No Description</default-value>
+			</column>
+		</columns>
+		<primary-key name="AaaEnvironmentEntry_PK">
+			<primary-key-column>SERVICE_ID</primary-key-column>
+			<primary-key-column>NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaEnvironmentEntry_FK"
+				reference-table-name="AaaService" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaPermission">
+		<description></description>
+		<columns>
+			<column name="PERMISSION_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>AaaPermission.PID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="PERMISSION_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<unique>true</unique>
+			</column>
+			<column name="SERVICE_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="DESCRIPTION">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>No Description</default-value>
+			</column>
+		</columns>
+		<primary-key name="AaaPermission_PK">
+			<primary-key-column>PERMISSION_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaPermission_FK"
+				reference-table-name="AaaService" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaTableAccessSPI">
+		<description></description>
+		<columns>
+			<column name="TABLE_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="SERVICE_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="CRITERIA_CLASS">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaTableAccessSPI_PK">
+			<primary-key-column>TABLE_NAME</primary-key-column>
+			<primary-key-column>SERVICE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaTableAccessSPI_FK"
+				reference-table-name="AaaService" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaSimplePermission">
+		<description></description>
+		<columns>
+			<column name="PERMISSION_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="OPERATION_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaSimplePermission_PK">
+			<primary-key-column>PERMISSION_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaSimplePermission_FK"
+				reference-table-name="AaaPermission" isbidirectional="true">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PERMISSION_ID</fk-local-column>
+						<fk-reference-column>PERMISSION_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaMethodPermission">
+		<description>Defines permission for accessing Bean methods</description>
+		<columns>
+			<column name="PERMISSION_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="BEAN_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="METHOD_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaMethodPermission_PK">
+			<primary-key-column>PERMISSION_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaMethodPermission_FK1"
+				reference-table-name="AaaPermission" isbidirectional="true">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PERMISSION_ID</fk-local-column>
+						<fk-reference-column>PERMISSION_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaMethodParams">
+		<description>Parameter values for indentifying bean methods</description>
+		<columns>
+			<column name="PERMISSION_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="PARAM_TYPE">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="PARAM_ORDER">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaMethodParams_PK">
+			<primary-key-column>PERMISSION_ID</primary-key-column>
+			<primary-key-column>PARAM_ORDER</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaMethodParams_FK"
+				reference-table-name="AaaMethodPermission" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PERMISSION_ID</fk-local-column>
+						<fk-reference-column>PERMISSION_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaTablePermission">
+		<description>Defines permission for accessing DB tables</description>
+		<columns>
+			<column name="PERMISSION_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="TABLE_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="CRITERIA">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>-1</max-size>
+			</column>
+			<column name="ACCESS_TYPE">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>4</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>C</value>
+					<value>R</value>
+					<value>U</value>
+					<value>D</value>
+					<value>CR</value>
+					<value>CU</value>
+					<value>CD</value>
+					<value>RU</value>
+					<value>RD</value>
+					<value>UD</value>
+					<value>CRU</value>
+					<value>CRD</value>
+					<value>CUD</value>
+					<value>RUD</value>
+					<value>CRUD</value>
+				</allowed-values>
+			</column>
+		</columns>
+		<primary-key name="AaaTablePermission_PK">
+			<primary-key-column>PERMISSION_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaTablePermission_FK1"
+				reference-table-name="AaaPermission" isbidirectional="true">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PERMISSION_ID</fk-local-column>
+						<fk-reference-column>PERMISSION_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaTableUpdatePermission">
+		<description>Defines permission for specific fields based in condition
+			in case of table update</description>
+		<columns>
+			<column name="PERMISSION_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="TABLE_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLUMN_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="UPDATE_CRITERIA">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+			</column>
+		</columns>
+		<primary-key name="AaaTableUpdatePermission_PK">
+			<primary-key-column>PERMISSION_ID</primary-key-column>
+			<primary-key-column>TABLE_NAME</primary-key-column>
+			<primary-key-column>COLUMN_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaTableUpdatePermission_FK"
+				reference-table-name="AaaTablePermission" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PERMISSION_ID</fk-local-column>
+						<fk-reference-column>PERMISSION_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaTableReadPermission">
+		<description>Defines permission for specific fields based in condition
+			in case of table update</description>
+		<columns>
+			<column name="PERMISSION_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="TABLE_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLUMN_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+		</columns>
+		<primary-key name="AaaTableReadPermission_PK">
+			<primary-key-column>PERMISSION_ID</primary-key-column>
+			<primary-key-column>TABLE_NAME</primary-key-column>
+			<primary-key-column>COLUMN_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaTableReadPermission_FK"
+				reference-table-name="AaaTablePermission" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PERMISSION_ID</fk-local-column>
+						<fk-reference-column>PERMISSION_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaAce">
+		<description></description>
+		<columns>
+			<column name="PERMISSION_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+			</column>
+			<column name="ROLE_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="ENV_CRITERIA">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>ALL</default-value>
+			</column>
+			<column name="EXPIRY_TIME">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<default-value>0</default-value>
+			</column>
+			<column name="EXCLUDE">
+				<description></description>
+				<data-type>BOOLEAN</data-type>
+				<max-size></max-size>
+				<default-value>false</default-value>
+			</column>
+			<column name="EVALUATIONORDER">
+				<description></description>
+				<data-type>INTEGER</data-type>
+				<max-size></max-size>
+				<default-value>0</default-value>
+			</column>
+		</columns>
+		<primary-key name="AaaAce_PK">
+			<primary-key-column>PERMISSION_ID</primary-key-column>
+			<primary-key-column>ROLE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaAce_FK" reference-table-name="AaaPermission"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PERMISSION_ID</fk-local-column>
+						<fk-reference-column>PERMISSION_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="AaaAce_FK1" reference-table-name="AaaRole"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ROLE_ID</fk-local-column>
+						<fk-reference-column>ROLE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaImpliedPermission">
+		<description></description>
+		<columns>
+			<column name="PERMISSION_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="IMPLIED_TABLE_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="IMPLIED_BY_TABLE_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="CRITERIA">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+			</column>
+		</columns>
+		<primary-key name="AaaImpliedPermission_PK">
+			<primary-key-column>PERMISSION_ID</primary-key-column>
+			<primary-key-column>IMPLIED_TABLE_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaImpliedPermission_FK"
+				reference-table-name="AaaTablePermission" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PERMISSION_ID</fk-local-column>
+						<fk-reference-column>PERMISSION_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaImpliedTableColumn">
+		<description></description>
+		<columns>
+			<column name="PERMISSION_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="IMPLIED_TABLE_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLUMN_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="COLUMN_ORDER">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<default-value>0</default-value>
+			</column>
+		</columns>
+		<primary-key name="AaaImpliedTableColumn_PK">
+			<primary-key-column>PERMISSION_ID</primary-key-column>
+			<primary-key-column>IMPLIED_TABLE_NAME</primary-key-column>
+			<primary-key-column>COLUMN_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaImpliedTableColumn_FK"
+				reference-table-name="AaaImpliedPermission" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PERMISSION_ID</fk-local-column>
+						<fk-reference-column>PERMISSION_ID</fk-reference-column>
+					</fk-column>
+					<fk-column>
+						<fk-local-column>IMPLIED_TABLE_NAME</fk-local-column>
+						<fk-reference-column>IMPLIED_TABLE_NAME</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaImpliedByTableColumn">
+		<description></description>
+		<columns>
+			<column name="PERMISSION_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="IMPLIED_TABLE_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="IMPLIED_BY_TABLE_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLUMN_NAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="COLUMN_ORDER">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<default-value>0</default-value>
+			</column>
+		</columns>
+		<primary-key name="AaaImpliedByTableColumn_PK">
+			<primary-key-column>PERMISSION_ID</primary-key-column>
+			<primary-key-column>IMPLIED_BY_TABLE_NAME</primary-key-column>
+			<primary-key-column>IMPLIED_TABLE_NAME</primary-key-column>
+			<primary-key-column>COLUMN_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaImpliedByTableColumn_FK"
+				reference-table-name="AaaImpliedPermission" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PERMISSION_ID</fk-local-column>
+						<fk-reference-column>PERMISSION_ID</fk-reference-column>
+					</fk-column>
+					<fk-column>
+						<fk-local-column>IMPLIED_TABLE_NAME</fk-local-column>
+						<fk-reference-column>IMPLIED_TABLE_NAME</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AaaDisableAuth">
+		<description>Disable Auth for a module</description>
+		<columns>
+			<column name="MODULE_ID">
+				<description></description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="AaaDisableAuth_PK">
+			<primary-key-column>MODULE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AaaDisableAuth_FK"
+				reference-table-name="Module" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>MODULE_ID</fk-local-column>
+						<fk-reference-column>MODULE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+
+</data-dictionary>

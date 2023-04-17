@@ -1,0 +1,19 @@
+<%-- $Id$ --%>
+		<%
+		// The pageNumber is still bugging me. Something needs to be done as the user has to change the default value here.
+		String pageNumber = (String) viewContext.getStateParameter("PAGE_NUMBER");
+                TableNavigatorModel navigableModel = (TableNavigatorModel)tableModel;
+		int recordsPerPage = (int) navigableModel.getPageLength();
+		if(pageNumber == null){
+				pageNumber = "1";
+		}
+		if((String) viewModel.getTableViewConfigRow().get("NAVIGATIONCONFIG") != null){
+                //%% How will forwardTo work!!! It is hard coded!!!
+		%>
+				<components:Page totalRecords="<%=navigableModel.getTotalRecordsCount()%>" recordsPerPage="<%=recordsPerPage%>" linksPerPage="5" forwardTo="TestTable.cc" pageNumber="<%=new Integer(pageNumber).intValue()%>" rangeList = "<%=viewModel.getRangeList()%>">
+				<%@ include file='../rangenavigator/NavigateByPageX.jspf'%>
+				</components:Page>
+				<%
+		}
+		%>
+

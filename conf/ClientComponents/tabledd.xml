@@ -1,0 +1,1551 @@
+<!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd">
+<?xml-stylesheet type="text/xsl" href="data-dictionary-transform.xsl"?>
+<!--$Id$ -->
+
+<data-dictionary name="ClientComponents">
+
+	<table name="ACFilterList">
+		<description>Represents the map of filterlist name and filterlist ID.</description>
+		<columns>
+			<column name="LISTID">
+				<description>Auto-generated Unique ID</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>ACFilterList_REFID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="LISTNAME">
+				<description>Unique name to identify the filterlist</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>true</unique>
+			</column>
+			<column name="DESCRIPTION">
+				<description>Description of the filter list</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+			</column>
+		</columns>
+		<primary-key name="ACFilterList_PK">
+			<primary-key-column>LISTID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="ACElement">
+		<columns>
+			<column name="NAME_NO">
+				<description>Unique name which identifies the Element to be used for
+					form element creation.</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+				<uniquevalue-generation>
+					<generator-name>ACElement.NAME_NO</generator-name>
+					<name-column>NAME</name-column>
+				</uniquevalue-generation>
+			</column>
+			<column name="NAME">
+				<description>Unique name which identifies the Element to be used for
+					form element creation.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="UICREATOR">
+				<description>Specifies the class file to be used for creating the
+					formelement indicated by the NAME attribute. The class should be an
+					implementation of the UICreator interface.</description>
+				<data-type>CHAR</data-type>
+				<max-size>200</max-size>
+				<default-value>com.adventnet.client.components.web.DefaultUICreator</default-value>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="VALIDATIONMETHOD">
+				<description>Specifies the validation method, if any, to be used for
+					this particular element during form validation. The form element
+					value and the formelement object will be passed as arguments. </description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="ALERTMESSAGE">
+				<description>Specifies the message to be displayed when the
+					validation for this element fails. Works only when the
+					VALIDATIONMETHOD is configured. The implementation is like follows.
+					If the return type is boolean, then in case of failure the message
+					specified will be used. If the return type is String, then in case
+					of failure, the returned string itself will be used as the alert
+					message.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="TYPE">
+				<description>Specifies the type of element. i.e, Select / Input /
+					Radio etc...</description>
+				<data-type>CHAR</data-type>
+				<max-size>15</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="ACElement_PK">
+			<primary-key-column>NAME_NO</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="ACElement_UK1">
+				<unique-key-column>NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="ACNavigationConfiguration">
+		<description>Holds the pagination properties for a table-view where
+			the page length can be configured using {@link ACPAGELENGTHCONFIG}.</description>
+		<columns>
+			<column name="NAME_NO">
+				<description>Unique ID of the Navigation configuration</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+				<uniquevalue-generation>
+					<generator-name>ACNavigationConfiguration.NAME_NO</generator-name>
+					<name-column>NAME</name-column>
+				</uniquevalue-generation>
+			</column>
+			<column name="NAME">
+				<description>Name by which this configuration is referred</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="NAVIGATIONTYPE">
+				<description>Type of Navigation to be used for constructing the
+					navigation component with &lt;code&gt;NORMAL&lt;/code&gt; being the
+					default.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>NORMAL</default-value>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="NOCOUNT">
+				<description>If true, then the count will not be fetched. Default:
+					false</description>
+				<data-type>CHAR</data-type>
+				<max-size>25</max-size>
+				<default-value>false</default-value>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="ORIENTATION">
+				<description>Indicates the position for the navigation component.
+					The possible values are TOP(at the top of the table), BOTTOM(at the
+					bottom of the table) and BOTH(at both top and bottom of the table).</description>
+				<data-type>CHAR</data-type>
+				<max-size>25</max-size>
+				<default-value>TOP</default-value>
+				<nullable>true</nullable>
+				<unique>false</unique>
+				<allowed-values>
+					<value>TOP</value>
+					<value>BOTTOM</value>
+					<value>BOTH</value>
+				</allowed-values>
+			</column>
+			<column name="TEMPLATENAME">
+				<description>Client side rendering template name for the specific navigation component</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+			</column>
+		</columns>
+		<primary-key name="ACNavigationConfiguration_PK">
+			<primary-key-column>NAME_NO</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="ACNavigationConfiguration_UK1">
+				<unique-key-column>NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="ACColumnConfigurationList">
+		<description>Represents a list of column configurations defined in
+			{@link ACCOLUMNCONFIGURATION}</description>
+		<columns>
+			<column name="NAME_NO">
+				<description>Auto-generated unique number to represent this list</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+				<uniquevalue-generation>
+					<generator-name>ACColumnConfigurationList.NAME_NO</generator-name>
+					<name-column>NAME</name-column>
+				</uniquevalue-generation>
+			</column>
+			<column name="NAME">
+				<description>Unique name to identify this list for a
+					table/form/propertysheet view.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACColumnConfigurationList_PK">
+			<primary-key-column>NAME_NO</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="ACColumnConfigurationList_UK1">
+				<unique-key-column>NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="ACPSConfigList">
+		<columns>
+			<column name="NAME_NO">
+				<description>Unique name used to identify the group of layout
+					configuration details for a view.</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+				<uniquevalue-generation>
+					<generator-name>ACPSConfigList.NAME_NO</generator-name>
+					<name-column>NAME</name-column>
+				</uniquevalue-generation>
+			</column>
+			<column name="NAME">
+				<description>Unique name used to identify the group of layout
+					configuration details for a view.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACPSConfigList_PK">
+			<primary-key-column>NAME_NO</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="ACPSConfigList_UK1">
+				<unique-key-column>NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="EmptyTableMessage">
+		<description>Contains the configurable message that can be displayed
+			when there is no data to display. It can be configured for a specific
+			table-view or on application of a filter.</description>
+		<columns>
+			<column name="EMPTY_MESSAGE_ID">
+				<description>Auto-generated Unique ID</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>EmptyTableMessage.EMPTY_MESSAGE_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="ICON_URL">
+				<description>Relative URL path of icon to be displayed with the
+					message.</description>
+				<data-type>CHAR</data-type>
+				<max-size>200</max-size>
+			</column>
+			<column name="TITLE_TEXT">
+				<description>Header Text for the message .</description>
+				<data-type>CHAR</data-type>
+				<max-size>200</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="MESSAGE_TEXT">
+				<description>Body of the message</description>
+				<data-type>CHAR</data-type>
+				<max-size>500</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="MENU_ID">
+				<description>Refers to the 'MENUID_NO' in the {@link com.adventnet.clientframework.MENU} to be
+					displayed with the message.</description>
+				<data-type>BIGINT</data-type>
+				<max-size>50</max-size>
+			</column>
+		</columns>
+		<primary-key name="EmptyTableMessage_PK">
+			<primary-key-column>EMPTY_MESSAGE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="EmptyTableMessage_FK"
+				reference-table-name="Menu" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>MENU_ID</fk-local-column>
+						<fk-reference-column>MENUID_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACTableViewConfig">
+		<description>Contains configurable attributes of a table-view </description>
+		<columns>
+			<column name="NAME">
+				<description>Refers to name of the view defined in {@link com.adventnet.clientframework.VIEWCONFIGURATION}</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CVNAME">
+				<description>ID of the CUSTOMVIEWCONFIGURATION to fetch data
+					for this table-view</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="NAVIGATIONCONFIG">
+				<description>Name of the {@link ACNAVIGATIONCONFIGURATION} used for
+					constructing the navigation component</description>
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="COLUMNCONFIGLIST">
+				<description>Name of the {@link ACCOLUMNCONFIGURATIONLIST}</description>
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="PSCONFIGLIST">
+				<description>Name of the {@link ACPSCONFIGLIST} for this table</description>
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="EMPTY_TABLE_MESSAGE">
+				<description>Customizable message when no rows are present in the
+					table-view</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="DISPLAYTYPE">
+				<description>Way to display a table-view. Columns of a row can be
+					displayed horizontally/vertically or like a Property Sheet(shown as
+					Property-value pair). Default: Horizontal</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<default-value>Horizontal</default-value>
+				<allowed-values>
+					<value>Horizontal</value>
+					<value>Vertical</value>
+					<value>PropertySheet</value>
+				</allowed-values>
+			</column>
+			<column name="COLUMNCHOOSERMENUITEM">
+				<description>Specifies the MenuItem for invoking the column-chooser
+					for the view</description>
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="ENABLEROWSELECTION">
+				<description>Specifies whether the row selection should be enabled
+					or not. Available types are CHECKBOX / RADIO. Use NONE to disable
+					this feature. Default: CHECKBOX
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<default-value>CHECKBOX</default-value>
+				<allowed-values>
+					<value>NONE</value>
+					<value>CHECKBOX</value>
+					<value>RADIO</value>
+				</allowed-values>
+			</column>
+			<column name="RENDERMENU">
+				<description>Indicates whether to render the menu associated with
+					the view. Default: false </description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="DATASOURCENAME">
+				<description>Name of the external datasource,if the data is to be
+					retrieved from another database</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="PAGELENGTH">
+				<description>Number of records to be fetched and displayed by
+					default.</description>
+				<data-type>INTEGER</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="SORTCOLUMN">
+				<description>Alias of the column by which the data should be sorted
+					by default.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="SORTORDER">
+				<description>Order by which the column should be sorted by default.</description>
+				<data-type>CHAR</data-type>
+				<max-size>10</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ENABLEROWHOVER">
+				<description>Indicates whether a row should be highlighted or not on
+					hover. Default: false </description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="ENABLEEXPORT">
+				<description>If true, table data can be exported in PDF, CSV, XLSX
+					and JSON format. Default: false </description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="DISPLAYHEADER">
+				<description>Indicates whether the header of the table is to be
+					displayed. Default: true  </description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+			</column>
+			<column name="CUSTOMTABLEMODELRENDERER">
+				<description>Fully qualified name of the class which can be used to
+					create a customized table model. It must be a child of {@link
+					com.adventnet.client.components.table.web.CustomTableModelRenderer}</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<default-value>com.adventnet.client.components.table.web.DefaultCustomTableModelRenderer</default-value>
+				<nullable>true</nullable>
+			</column>
+			<column name="HLSEARCH">
+				<description>Indicates whether to highlight the spot searched data
+					for all the search enabled columns. Default: false</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="ISADVANCEDSEARCH">
+				<description>Indicates whether to display the allowed values for
+					search as a drop down list for each search enabled column, based on
+					its data type. Default: false </description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="SHOWNAVIG">
+				<description>If true, hides the header and navigation part if no
+					rows found in table. Default: false</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="ROWTRANSFORMER">
+				<description>Fully Qualified name of the Class for row level
+					transformations. It must be a child of {@link
+					com.adventnet.client.components.table.web.RowTransformer}</description>
+				<data-type>CHAR</data-type>
+				<max-size>200</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ISSCROLLENABLED">
+				<description>Indicates whether the table is scroll-table(next set of
+					records is fetched on scrolling) or not </description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="INITIALFETCHEDROWS">
+				<description>Rows fetched by first request in dynamic table.
+					Default: -1</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+			</column>
+			<column name="TEMPLATEVIEWNAME">
+				<description>The Name given as a parameter value to 'viewname' in
+					the template files, which are used to render the view.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="EMPTY_MESSAGE_ID">
+				<description>Indicates the ID of the Empty Message defined in {@link
+					EMPTYTABLEMESSAGE}</description>
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACTableViewConfig_PK">
+			<primary-key-column>NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACTableViewConfig_FK2"
+				reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>NAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ACTableViewConfig_FK3"
+				reference-table-name="CustomViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CVNAME</fk-local-column>
+						<fk-reference-column>CVID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ACTableViewConfig_FK4"
+				reference-table-name="ACNavigationConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>NAVIGATIONCONFIG</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ACTableViewConfig_FK5"
+				reference-table-name="ACColumnConfigurationList">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>COLUMNCONFIGLIST</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ACTableViewConfig_FK6"
+				reference-table-name="ACPSConfigList">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PSCONFIGLIST</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ACTableViewConfig_FK7"
+				reference-table-name="MenuItem">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>COLUMNCHOOSERMENUITEM</fk-local-column>
+						<fk-reference-column>MENUITEMID_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="ACTableViewConfig_FK8" reference-table-name="EmptyTableMessage" isbidirectional="false">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>EMPTY_MESSAGE_ID</fk-local-column>
+                        <fk-reference-column>EMPTY_MESSAGE_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+             </foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACTableFilterListRel">
+		<description>Manages the filterlist and the configurations of custom
+			filter(s) for a view.</description>
+		<columns>
+			<column name="VIEWNAME">
+				<description>Refers to the 'VIEWNAME' in {@link com.adventnet.clientframework.VIEWCONFIGURATION}
+					table</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="FILTERLISTID">
+				<description>Refers to the 'LISTNAME' in {@link ACFILTERLIST} table</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="DEFAULTFILTERNAME">
+				<description>Name of the Filter(present in the filter list and
+					defined in {@link ACFILTER}) to be applied to the given view by
+					default</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="FILTERCONFIGLISTNAME">
+				<description>Refers to the 'NAME' in {@link ACFILTERCONFIGLIST}
+					table</description>
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="ISCUSTOMFILTER">
+				<description>If false, filter cannot be created at runtime. If true,
+					user can create their own filter on demand. Default: false</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+			</column>
+			<column name="FILTERUITYPE">
+				<description>It refers to the customized filter UI provided by the
+					client. If LEFT, filters will be displayed as links without the
+					table view with which this filter is associated . If CENTER,
+					filters will not be displayed. If NORMAL, both will be displayed.
+					Default: NORMAL</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<default-value>NORMAL</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>NORMAL</value>
+					<value>LEFT</value>
+					<value>CENTER</value>
+				</allowed-values>
+			</column>
+			<column name="LINKEDVIEWNAME">
+				<description>Refers to the viewname coupled for which this filter
+					has to be applied, if FILTERUITYPE is LEFT.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+		</columns>
+		<primary-key name="ACTblFilterRelGroup_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACTblFilterRel_CC_FK"
+				reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ACTblFilterRel_ACFL_FK"
+				reference-table-name="ACFilterList">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>FILTERLISTID</fk-local-column>
+						<fk-reference-column>LISTID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACTableColumns">
+		<description>It stores the properties of modified columns of a
+			personalized view. It overrides the values given in
+			ACColumnConfiguration</description>
+		<columns>
+			<column name="VIEWNAME">
+				<description>Refers to the 'VIEWNAME_NO' of the view in {@link
+					com.adventnet.clientframework.VIEWCONFIGURATION} table</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="COLUMNINDEX">
+				<description>Position by which the column is ordered in the
+					personalized view.</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="COLUMNALIAS">
+				<description>Refers to the 'COLUMNALIAS' given in {@link
+					ACCOLUMNCONFIGURATION} table</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="DISPLAYNAME">
+				<description>Name displayed as the Column Header.</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="VISIBLE">
+				<description>If true, the column is shown in the view. Default: true</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="WIDTH">
+				<description>Indicates the width of the each column. Intention is to support the Resizable columns in the mickey client</description>
+
+				<data-type>BIGINT</data-type>
+				<max-size>19</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+       
+						<column name="REDACT_TYPE">
+							<description>Indicates the masking type incase if it is Personally Identifiable Information(PII) column. Default value : NULL</description>
+							<data-type>CHAR</data-type>
+					    	<max-size>50</max-size>
+					        <nullable>true</nullable>
+				    	</column>          
+				</columns>
+		<primary-key name="ACTableColumns_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+			<primary-key-column>COLUMNALIAS</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACTableColumns_FK1"
+				reference-table-name="ACTableViewConfig">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>NAME</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACCriteria">
+		<description>It has the information for constructing a criteria by
+			logically binding the various conditions provided in {@link
+			ACRELATIONALCRITERIA} using {@link #LOGICALREPRESENTATION} </description>
+		<columns>
+			<column name="CRITERIAID">
+				<description>Auto generated Unique ID for a criteria</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>ACCriteria_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="LOGICALREPRESENTATION">
+				<description>For a single entry, refers to the
+					'RELATIONALCRITERIAID' in {@link ACRELATIONALCRITERIA}.
+					For multiple entries, their logical relation, enclosed in paranthesis,
+					can be given as,
+					Syntax: (RelationalCriteria_1 | RelationalCriteria_2 &amp;amp; ...... &amp;amp;
+					RelationalCriteria_N)
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACCriteria_PK">
+			<primary-key-column>CRITERIAID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="ACRelationalCriteria">
+		<description>It represents the condition for the given column</description>
+		<columns>
+			<column name="CRITERIAID">
+				<description>Refers to the 'CRITERIAID' in {@link ACCRITERIA}</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="RELATIONALCRITERIAID">
+				<description>Unique ID for the ACCRelationalCriteria</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="TABLEALIAS">
+				<description>Name(not alias) of the table involved</description>
+				<data-type>CHAR</data-type>
+			</column>
+			<column name="COLUMNNAME">
+				<description>Name of the column</description>
+				<data-type>CHAR</data-type>
+			</column>
+			<column name="COMPARATOR">
+				<description>Numerical representation of the comparator(e.g. 1 for
+					not-equal). Refer QUERYCONSTANTS table</description>
+				<data-type>INTEGER</data-type>
+			</column>
+			<column name="VALUE">
+				<description>Value being compared with the given column</description>
+				<data-type>CHAR</data-type>
+			</column>
+			<column name="CASESENSITIVE">
+				<description>Whether value comparison is case sensitive. Default:
+					true.</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACRel_Crit_PK">
+			<primary-key-column>CRITERIAID</primary-key-column>
+			<primary-key-column>RELATIONALCRITERIAID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACRel_Criteria_FK"
+				reference-table-name="ACCriteria">
+				<description>Foreign key to refer the table ACCriteria</description>
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CRITERIAID</fk-local-column>
+						<fk-reference-column>CRITERIAID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACPageLengthConfig">
+		<description>Holds the page length(no. of records per page) for
+			Navigation Component.</description>
+		<columns>
+			<column name="NAME">
+				<description>Refers to the 'NAME' in the {@link
+					ACNAVIGATIONCONFIGURATION} table</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="PAGELENGTH">
+				<description>Page length for the Navigation Configuration</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="ACPageLengthConfig_PK">
+			<primary-key-column>NAME</primary-key-column>
+			<primary-key-column>PAGELENGTH</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACPageLengthConfig_FK1"
+				reference-table-name="ACNavigationConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>NAME</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACColumnConfiguration">
+		<description>Contains column-level configurable features and
+			attributes. It also provides the configurations for transforming
+			column data.</description>
+		<columns>
+			<column name="CONFIGNAME">
+				<description>Refers to the 'NAME' of the {@link ACCOLUMNCONFIGURATIONLIST} table</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="COLUMNINDEX">
+				<description>Position of the column in the view</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="COLUMNALIAS">
+				<description>Refers to the 'COLUMNALIAS' of the SELECTCOLUMN
+					table; if not present in the SELECTCOLUMN table then it's a dummy
+					column.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="DISPLAYNAME">
+				<description>Name displayed as the Column Header.</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="VISIBLE">
+				<description>If true, the column is shown in the view, otherwise
+					hidden. Default: true</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="SORTENABLED">
+				<description>Indicates whether the column can be sorted or not.
+					Default: true</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="TRANSFORMER">
+				<description>Fully qualified name of the transformer class for
+					transforming the data before rendering. It must be a child of
+					{@link
+					com.adventnet.client.components.table.web.ColumnTransformer}.
+					Default: {@link
+					com.adventnet.client.components.table.web.DefaultTransformer}</description>
+				<data-type>CHAR</data-type>
+				<max-size>200</max-size>
+				<default-value>com.adventnet.client.components.table.web.DefaultTransformer</default-value>
+				<unique>false</unique>
+			</column>
+			<column name="ACTIONNAME">
+				<description>Refers to the 'MENUITEMID' of the {@link com.adventnet.clientframework.MENUITEM}
+					table.</description>
+				<data-type>CHAR</data-type>
+				<max-size>200</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="SEARCHENABLED">
+				<description>To enable/disable search for the column. Default: false</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="CREATORCONFIG">
+				<description>Specifies the creator configuration name for generating
+					the cell content.</description>
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="DEFAULT_TEXT">
+				<description>Text to display when the column value is null.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="DATE_FORMAT">
+				<description>Format to display date/time values.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="TRIM_LENGTH">
+				<description>If length of column value exceeds the given value,
+					message from {@link ACCOLUMNCONFIGURATION#TRIM_MSG_LINK} is
+					displayed.</description>
+				<data-type>INTEGER</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="TRIM_MSG_LINK">
+				<description>Javascript function which displays the actual value
+					whose length is beyond TRIM_LENGTH. User can specify their own
+					method. Some samples are
+					&lt;code&gt;defaultTrimmedMessageDisplayer&lt;/code&gt;,
+					&lt;code&gt;showTrimmedMessageOnImageClick&lt;/code&gt;,
+					&lt;code&gt;showTrimmedMessageOnMouseOver&lt;/code&gt;,
+					&lt;code&gt;showMessageOnTextMouseOver&lt;/code&gt;. For more info,
+					refer TableHandling.js doc.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>defaultTrimmedMessageDisplayer</default-value>
+				<nullable>true</nullable>
+			</column>
+			<column name="PREFIX_TEXT">
+				<description>
+					Both dynamic/static text can be prefixed to the column value.
+					Dynamic: Value format is "_$COLUMNALIAS"
+					, where COLUMNALIAS refers to SELECTCOLUMN Table whose
+					column value is taken.
+					Static: Given value is taken.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>75</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="SUFFIX_TEXT">
+				<description>
+					Both dynamic/static text can be suffixed to the column value.
+					Dynamic: Value format is "_$COLUMNALIAS"
+					, where COLUMNALIAS refers to SELECTCOLUMN Table whose
+					column value is taken.
+					Static: Given value is taken.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>75</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="SUFFIX_ICON">
+				<description>
+					Icon can be suffixed to the column value dynamically/statically.
+					Dynamic: Value format is "_$COLUMNALIAS"
+					, where COLUMNALIAS refers to SELECTCOLUMN Table from where
+					icon path is taken.
+					Static: Given path of icon is taken.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ICON">
+				<description>
+					Icon can be prefixed to the column value dynamically/statically.
+					Dynamic: Value format is "_$COLUMNALIAS"
+					, where COLUMNALIAS refers to SELECTCOLUMN Table from where
+					icon path is taken.
+					Static: Given path of icon is taken.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="TABLEALIAS">
+				<description>Alias of the table in which dynamic column is created.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="VIEWNAME">
+				<description>Name of the view invoked and rendered from the column.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="STATIC_TEXT">
+				<description>Text that is internationalized and displayed in the
+					column, irrespective of the column value.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ISNULLABLE">
+				<description>Specifies whether the column can be nullable or not.
+					For example, it is used to determine whether the column is
+					mandatory or not in ACForm component.</description>
+				<data-type>BOOLEAN</data-type>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="CSSCLASS">
+				<description>CSS class for the column.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="MENUID">
+				<description>MENUID of {@link com.adventnet.clientframework.MENU} whose menu-items are displayed
+					to perform various actions on the selected row.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ISHEADERVISIBLE">
+				<description>If true, the column header is displayed, or else an
+					empty header is shown. Default: true</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="AUTOLINK">
+				<description>If true, the column value is featured as a link.
+					Default: false</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="REPLACE_TEXT">
+				<description>
+					Given value replaces the column value. Input format is "_$COLUMNALIAS"
+					, where COLUMNALIAS refers to SELECTCOLUMN.COLUMNALIAS
+					whose value replaces the actual column value.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="REPLACE_ICON">
+				<description>
+					Given icon replaces the column value. Input format is
+					"_$COLUMNALIAS"
+					, where COLUMNALIAS refers to SELECTCOLUMN.COLUMNALIAS
+					whose value(icon path) replaces the actual column value.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="HEADERCSS">
+				<description>CSS class for column header.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ACTIONINVOKINGSTYLE">
+				<description>The way action is invoked on column values</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ROLENAME">
+				<description>Authorization role assigned to the column</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="COLUMN_TYPE">
+				<description>DataType of the column. For example, it assists in
+					Search and Validation.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ISDYNAMIC">
+				<description>Indicates whether it is a custom column or not.
+					Default: false</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="PREFIX_LINK">
+				<description>
+					Link can be prefixed to the column value dynamically/statically.
+					Dynamic: Value format is
+					"_$COLUMNALIAS"
+					, where COLUMNALIAS refers to SELECTCOLUMN Table whose
+					column value is displayed as a link.
+					Static: Given value is displayed as link.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>75</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="SUFFIX_LINK">
+				<description>
+					Link can be suffixed to the column value dynamically/statically.
+					Dynamic: Value format is
+					"_$COLUMNALIAS"
+					, where COLUMNALIAS refers to SELECTCOLUMN Table whose
+					column value is displayed as a link.
+					Static: Given value is displayed as link.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>75</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="WIDTH">
+				<description>Initial width of the column which can be resized
+					dynamically.</description>
+				<data-type>BIGINT</data-type>
+				<max-size>19</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="ISEXPORTABLE">
+				<description>If false, the column is not considered for export.
+					Default: true</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="ISCHOOSABLE">
+				<description>If false, the column is not available in the column
+					chooser menu. It is always visible in the view. Default: true</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+				<nullable>true</nullable>
+			</column>
+			<column name="PROPERTIES">
+				<description>Additional Data(JSON format) to be appended with column
+					configuration(JSON Format). Eg. {&quot;KEY&quot;:&quot;VALUE&quot;}</description>
+				<data-type>CHAR</data-type>
+				<max-size>-1</max-size>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACColumnConfiguration_PK">
+			<primary-key-column>CONFIGNAME</primary-key-column>
+			<primary-key-column>COLUMNALIAS</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="true" name="ACColumnConfiguration_FK1"
+				reference-table-name="ACColumnConfigurationList">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CONFIGNAME</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ACColumnConfiguration_FK2"
+				reference-table-name="ACElement">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CREATORCONFIG</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACGroupByColumns">
+		<description>Maintains the columns which participate in GROUPBY clause
+			of a query. [Note: Applicable for ACTable Component only] </description>
+		<columns>
+			<column name="VIEWNAME">
+				<description>Refers to the 'NAME' in {@link ACTABLEVIEWCONFIG} table</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="TABLEALIAS">
+				<description>Name of the table whose column is used to group by</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLUMNNAME">
+				<description>Name of the column to be used for grouping</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLUMNALIAS">
+				<description>Alias of the column to be used for grouping</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACGroupByColumns_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+			<primary-key-column>TABLEALIAS</primary-key-column>
+			<primary-key-column>COLUMNALIAS</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACGroupByColumns_FK1"
+				reference-table-name="ACTableViewConfig">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>NAME</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACFunctionColumns">
+		<description>Maintains the column details and the function name needed
+			for aggregation. [Note: Applicable for ACTable Component only]</description>
+		<columns>
+			<column name="VIEWNAME">
+				<description>Refers to the 'NAME' in {@link ACTABLEVIEWCONFIG} table</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="TABLEALIAS">
+				<description>Name of the table whose column participate in
+					aggregation</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLUMNNAME">
+				<description>Name of the column to which the aggregate function is
+					applied</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLUMNALIAS">
+				<description>Alias of the column to which the aggregate function is
+					applied</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="FUNCTIONNAME">
+				<description>Name of the aggregate function to be applied for the
+					given column</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>AVG</value>
+					<value>COUNT</value>
+					<value>DISTINCT</value>
+					<value>MAX</value>
+					<value>MIN</value>
+					<value>SUM</value>
+				</allowed-values>
+			</column>
+		</columns>
+		<primary-key name="ACFunctionColumns_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+			<primary-key-column>TABLEALIAS</primary-key-column>
+			<primary-key-column>COLUMNALIAS</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACFunctionColumns_FK1"
+				reference-table-name="ACTableViewConfig">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>NAME</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACRendererConfiguration">
+		<description>It contains the rendering attribute(s) needed for
+			ColumnTransformer</description>
+		<columns>
+			<column name="CONFIGNAME">
+				<description>Refers to the 'NAME' of the {@link
+					ACCOLUMNCONFIGURATIONLIST} table.</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="COLUMNALIAS">
+				<description>Refers to the 'COLUMNALIAS' of the {@link
+					ACCOLUMNCONFIGURATION} table.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="PROPERTYNAME">
+				<description>Name of the property given to the transformer.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="PROPERTYVALUE">
+				<description>Value of the property.</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="ACRendererConfiguration_PK">
+			<primary-key-column>CONFIGNAME</primary-key-column>
+			<primary-key-column>COLUMNALIAS</primary-key-column>
+			<primary-key-column>PROPERTYNAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false"
+				name="ACRendererConfiguration_FK1" reference-table-name="ACColumnConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CONFIGNAME</fk-local-column>
+						<fk-reference-column>CONFIGNAME</fk-reference-column>
+					</fk-column>
+					<fk-column>
+						<fk-local-column>COLUMNALIAS</fk-local-column>
+						<fk-reference-column>COLUMNALIAS</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACLinkParams">
+		<description>It contains details of parameters like name, index, value
+			and scope for the given column menu-item.</description>
+		<columns>
+			<column name="CONFIGNAME">
+				<description>Refers to the 'NAME' in {@link
+					ACCOLUMNCONFIGURATIONLIST} table</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="COLUMNALIAS">
+				<description>Refers to the 'COLUMNALIAS' in {@link
+					ACCOLUMNCONFIGURATION} table</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="NAME">
+				<description>Name of the parameter passed</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="PARAMINDEX">
+				<description>Order of the parameter, applicable only if the
+					parameter has multiple values </description>
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="VALUE">
+				<description>Value of the parameter specified if SCOPE is 'STATIC',
+					or else value taken as per defined 'SCOPE'</description>
+				<data-type>CHAR</data-type>
+				<max-size>80</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="SCOPE">
+				<description>Data will be fetched for the parameter according to the
+					given scope.
+					if 'SCOPE' is 'STATIC' then 'VALUE' will be considered,
+					if 'SCOPE' is 'STATE' then value will be fetched from state param,
+					if 'SCOPE' is 'REQUEST' then value will be from request,
+					if 'SCOPE' is 'DATAMODEL' then value will be fetched from tablemodel
+					Default 'SCOPE' is 'STATIC'</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>STATIC</default-value>
+				<nullable>true</nullable>
+				<allowed-values>
+					<value>STATIC</value>
+					<value>REQUEST</value>
+					<value>STATE</value>
+					<value>DATAMODEL</value>
+				</allowed-values>
+			</column>
+		</columns>
+		<primary-key name="ACLinkParams_PK">
+			<primary-key-column>CONFIGNAME</primary-key-column>
+			<primary-key-column>COLUMNALIAS</primary-key-column>
+			<primary-key-column>NAME</primary-key-column>
+			<primary-key-column>PARAMINDEX</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACLinkParams_FK1"
+				reference-table-name="ACColumnConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CONFIGNAME</fk-local-column>
+						<fk-reference-column>CONFIGNAME</fk-reference-column>
+					</fk-column>
+					<fk-column>
+						<fk-local-column>COLUMNALIAS</fk-local-column>
+						<fk-reference-column>COLUMNALIAS</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="DynamicColumnConfiguration">
+		<description>For ACSQL views, select-column properties of a dynamic
+			column is maintained here</description>
+		<columns>
+			<column name="VIEWNAME">
+				<description>Refers to the 'VIEWNAME_NO' of the table-view in {@link
+					com.adventnet.clientframework.VIEWCONFIGURATION#VIEWNAME} table</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="TABLEALIAS">
+				<description>Alias of the table in which dynamic column is created.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="COLUMNALIAS">
+				<description>Indicates the Columnalias, as specified in SelectQuery</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="COLUMNNAME">
+				<description>Name of the dynamic column created</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="DYCOLUMNNAME">
+				<description>Auto-generated name by which it is internally referred.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="DynamicColumnConfiguration_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+			<primary-key-column>COLUMNALIAS</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false"
+				name="DynamicColumnConfiguration_FK1" reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="PIIRedactConfig">
+		<description>Contains the masking information of a PII(Personally
+			Identifiable Information) column. It can be used in export, to
+			mask/conceal the user data.</description>
+		<columns>
+			<column name="VIEWNAME">
+				<description>Indicates the name of the view to be exported.</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="COLUMNALIAS">
+				<description>Indicates the ID of the user.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="REDACT_TYPE">
+				<description>Indicates the masking type incase if it is Personally
+					Identifiable Information column. Supported types are 'MASK',
+					'SHUFFLE', 'PREFIX_MASK', 'SUFFIX_MASK','SKIP', 'PHONE', 'EMAIL'.
+					Default value : 'MASK'</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<default-value>MASK</default-value>
+				<nullable>false</nullable>
+			</column>
+
+		</columns>
+		<primary-key name="PIIRedactConfig_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+			<primary-key-column>COLUMNALIAS</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="PIIRedactConfig_FK1"
+				reference-table-name="ViewConfiguration" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+</data-dictionary>

@@ -1,0 +1,166 @@
+# $Id: $
+# Allowed Options
+# ---------------
+# *pre-action* - List of method names called. Called before adding/updating in DB.
+# *post-action* - List of method names called. Called after adding/updating in DB.
+# *params* - list of params requires for the signup
+#     acname - Display Name of the account
+#     portalname - Account Domain Identifier of the account (User will be regestered in that account)
+#     actype - Type Of Account
+#     em - Email Address
+#     mobile - Mobile Number
+#     firstname -
+#     lastname -
+#     nickname -
+#     gender -
+#     country -
+#     language -
+#     timezone -
+#     pass - Password
+#     cdigest - Captch Digest
+#     captcha - Captch value entered by user
+#     af - Unique id of the Affiliate
+---
+patterns:
+    email: ^[a-zA-Z0-9]([\w\-\.\+]*)@([\w\-\.]*)(\.[a-zA-Z]{2,8}(\.[a-zA-Z]{2}){0,2})$
+    phone: ^[0-9\-\+\s]+$
+    cleartext: ^[0-9a-zA-Z_\-\.\$@\?\,\:\'\/\!\P{InBasicLatin}\s]+$
+    username: ^[A-Za-z0-9_.]+$
+    country: ^[a-zA-Z]{2}$
+    language: ^[a-zA-Z-]{2,5}$
+    timezone : ^[a-zA-Z0-9-/+_]+$
+    password : ^.{3,60}$
+    digest: ^([a-zA-Z0-9\._\*\-%])+$
+    plaintxt: ^[a-zA-Z0-9]+$
+    loginname: ^([a-zA-Z0-9]([\w\-\.\+]*)@([\w\-\.]*)(\.[a-zA-Z]{2,8}(\.[a-zA-Z]{2}){0,2}))|([A-Za-z0-9_.]+)|([0-9]{9,10})$
+    appname: ^([a-zA-Z])+$
+
+operations:
+    sign-up:
+        paramdef:
+            zaid: {regex: plaintxt}
+            acname: {regex: cleartext, maxlen: 100}
+            portal: {regex: username, maxlen: 100}
+            appname : {regex: appname}
+            actype: {regex: PERSONAL|ORG}
+            username: {regex: username, maxlen: 100}
+            email: {regex: email, mandatory: true}
+            mobile: {regex: phone, mandatory: true}
+            firstname: {regex: cleartext}
+            lastname: {regex: cleartext}
+            nickname: {regex: cleartext}
+            gender: {regex: M|F}
+            country: {regex: country}
+            language: {regex: language}
+            timezone: {regex: timezone}
+            password: {regex: password, mandatory: true}
+            cdigest: {regex: digest, mandatory: true, maxlen: 512}
+            captcha: {regex: plaintxt, mandatory: true, maxlen: 8}
+            affiliate: {regex: plaintxt}
+            identifier: {regex: cleartext}
+        email:
+            pre-action: [verifyCaptcha, verifyAntiSpam]
+            params:
+                zaid: zaid
+                acname: acname
+                portal: portal
+                actype: actype
+                firstname: firstname
+                lastname: lastname
+                username: username
+                email: email
+                password: password
+                cdigest: cdigest
+                captcha: captcha
+                affiliate: affiliate
+            post-action: [auditSignUp, mapAffiliate]
+        mobile:
+            pre-action: [verifyCaptcha]
+            params:
+                zaid: zaid
+                acname: acname
+                portal: portal
+                actype: actype
+                mobile: mobile
+                password: password
+                cdigest: cdigest
+                captcha: captcha
+                affiliate: affiliate
+            post-action: [auditSignUp, mapAffiliate]
+        openid:
+            autoconfirm: true
+            params: &openidinput
+              zaid: zaid
+              acname: acname
+              portal: portal
+              actype: actype
+              em: openid.ext1.value.email
+              firstname: openid.ext1.value.firstname
+              lastname: openid.ext1.type.lastname
+              nickname: openid.sreg.nickname
+              gender: openid.sreg.gender
+              country: openid.ext1.value.country
+              language: openid.ext1.value.language
+              timezone: openid.sreg.timezone
+              identifier: identifier
+        google:
+            autoconfirm: true
+            params: *openidinput
+        google_apps:
+            autoconfirm: true
+            params: *openidinput
+        yahoo:
+            autoconfirm: true
+            params: *openidinput
+        facebook:
+            autoconfirm: true
+            params: 
+                <<: *openidinput
+                ## Example to extenteding values in `*openidinput`
+                fid: facebookid
+
+    sign-in:
+        paramdef:
+            acname: {regex: cleartext, maxlen: 100}
+            actype: {regex: personal|business,}
+            email: {regex: email}
+            username: {regex: username, maxlen: 100}
+            mobile: {regex: phone}
+            password: {regex: password, mandatory: true}
+            cdigest: {regex: digest, maxlen: 512}
+            captcha: {regex: plaintxt, maxlen: 8}
+            identifier: {regex: cleartext}
+            firstname: {regex: cleartext}
+            lastname: {regex: cleartext}
+            nickname: {regex: cleartext}
+            gender: {regex: M|F}
+            country: {regex: country}
+            language: {regex: language}
+            timezone: {regex: timezone}
+            loginname: {regex: loginname}
+        login:
+            pre-action: [verifyCaptcha]
+            params:
+                loginname: loginname
+                password: password
+                cdigest: cdigest
+                captcha: captcha
+            post-action: [checkSigninCases, addAuthToken]
+        openid:
+            autoconfirm: true
+            params: *openidinput
+        google:
+            autoconfirm: true
+            params: *openidinput
+        google_apps:
+            autoconfirm: true
+            params: *openidinput
+        yahoo:
+            autoconfirm: true
+            params: *openidinput
+        facebook:
+            autoconfirm: true
+            params:
+                <<: *openidinput
+                fid: facebookid
+...

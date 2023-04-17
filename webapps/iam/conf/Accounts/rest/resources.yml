@@ -1,0 +1,20 @@
+# ICREST Framework 2.0 
+# Multi YAML load start file
+# single file load is also supported. In single file load, it contains the extra key "icrest_handlers_api"
+#
+# The YAML files with unique base_uri is listed below. (with respect to this file package)
+#
+# Configuration sample :
+# ```
+# "icrest_handlers_api": The class with package which is extending the ICRESTHanlder.java 
+# "files": <List of files>
+#
+#
+
+"icrest_handlers_api": "com.zoho.accounts.webclient.authorization.ICRESTHandlerImpl"
+
+"files":
+   - resources-webclient.yml
+   - resources-api.yml
+   - resources-signin.yml
+   - resources-ssokit.yml

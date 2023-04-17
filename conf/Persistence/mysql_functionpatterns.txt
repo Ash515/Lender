@@ -1,0 +1,58 @@
+################### Numeric Functions
+
+
+
+#################### String Functions
+
+#0-expression_to_find 1-expression_to_search
+CHARINDEX=INSTR({1}, {0})
+CHARINDEX.TYPE=INTEGER
+
+LENGTH=CHAR_LENGTH({0})
+LENGTH.TYPE=BIGINT
+
+
+
+###################### Date Functions
+
+#0-date, 1-interval_number, 2-interval_type (day/month/year)
+DATEADD=ADDDATE({0}, INTERVAL {1} {2})
+DATEADD.TYPE=DATE
+
+#0-date, 1-interval_number, 2-interval_type (day/month/year)
+ADDDATE = ADDDATE({0}, INTERVAL {1} {2})
+ADDDATE.TYPE=DATE
+
+#0-date, 1-datepart(unit)
+EXTRACT=EXTRACT({1} FROM {0})
+
+#0-date1, 1-date2
+DATEDIFF=DATEDIFF({0}, {1})
+
+SYSDATE=NOW()
+
+NAME_OF_DAY=DAYNAME({0})
+
+CAST=CAST({0} AS {1})
+
+CAST_AS_INT=CAST({0} AS 'SIGNED')
+
+CAST_AS_FLOAT=CAST({0} AS 'DECIMAL')
+
+CAST_AS_TIMESTAMP=CAST({0} AS 'DATETIME')
+
+
+# dummy column
+DUMMY_COL={0}
+
+#Bit Operation
+AND=({0} '&' {1})
+
+
+
+######## Conditional Sum
+
+#0-Criteria, 1-Column, 2-Integer value
+SUM_IF= SUM(IF({0},{1},{2}))
+SUM_IF.TYPE=INTEGER
+

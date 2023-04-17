@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--$Id$-->
+<conf-files>
+
+    <ConfFile url="service.xml"/>
+   
+    <ConfFile url="template-files.xml"/>
+    
+    <ConfFile url="uicomponents.xml"  />
+
+    <ConfFile url="viewconfigurations.xml"  />
+
+    <ConfFile url="filterrelviews.xml"  />
+
+    <ConfFile url="menuconfiguration.xml" />
+    
+    <ConfFile url="chartkey.xml" />
+    
+    <ConfFile url="templatehandlers.xml"/>
+    
+    <ConfFile url="formconfigurations.xml"  />
+   
+</conf-files>
+	

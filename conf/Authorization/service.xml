@@ -1,0 +1,15 @@
+<!-- $Id: service.xml,v 1.4 2009/05/27 09:32:05 suresh Exp $ -->
+<services>
+
+	<Service service_id="Service:service_id:AuthorizationService"
+		service_name="AuthorizationService" module_id="Authorization"
+		classname="com.adventnet.authorization.service.AuthorizationService">
+		<ServiceProperties
+			serviceprop_id="ServiceProperties:serviceprop_id:AuthorizationService-FGA"
+			property="FGA" value="false" />
+		<ServiceProperties
+			serviceprop_id="ServiceProperties:serviceprop_id:AuthorizationService-CGA"
+			property="CGA" value="false" />
+	</Service>
+
+</services>

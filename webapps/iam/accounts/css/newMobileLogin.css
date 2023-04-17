@@ -1,0 +1,418 @@
+/* $Id: $ */
+body {
+	margin: 0;
+	font-family: 'Open Sans', sans-serif;
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src:url('../../images/opensanslight/font.eot');
+    src:local('Open Sans'),
+    	url('../../images/opensanslight/font.eot?#iefix') format('eot'),
+        url('../../images/opensanslight/font.woff') format('woff'), 
+        url('../../images/opensanslight/font.ttf') format('truetype'),
+        url('../../images/opensanslight/font.svg#OpenSans-Light') format('svg');
+}
+.back {
+	top: 0;
+	height: 40%;
+	width: 100%;
+	display: block;
+	position: fixed;
+	z-index: -1;
+}
+
+.zoho-logo {
+	background: url(../../images/Signinusing-Icons.png) no-repeat transparent -2px -2px;;
+	background-size: 200px;
+	width: 150px;
+	height: 28px;
+	display: block;
+	margin: 50px auto 10px;
+}
+
+.signin-head {
+	font-size: 28px;
+	display: block;
+	text-align: center;
+	padding: 10px 0px;
+	font-weight: 300;
+}
+
+.signin-div {
+	height: auto;
+	transition: all .3s ease-in-out;
+	width: 300px;
+	margin: auto;
+	margin-top: 10px;
+}
+
+.signin-div .sub-head {
+	font-size: 18px;
+	padding-bottom: 10px;
+	text-align: center;
+	font-weight: 300;
+	margin-bottom: 20px;
+}
+
+.formfield {
+	width: 100%;
+	margin: auto;
+	margin-bottom: 20px;
+	transition: all .2s ease-in-out;
+	height: 40px;
+}
+
+.textbox {
+	width: 100%;
+	height: 36px;
+	text-indent: 5px;
+	font-size: 16px;
+	text-indent: 8px;
+	border: none;
+	border-bottom: 1px solid #ccc;
+	background-color: transparent;
+	transition: all .3s ease-in-out;
+}
+
+.password {
+	display: block;
+}
+
+.eye_icon {
+	cursor: pointer;
+	content: "";
+	height: 36px;
+	width: 36px;
+	display: block;
+	background: url(../../images/newmob_sprite_2x.png) no-repeat transparent -34px -119px;
+	position: relative;
+	top: -36px;
+	float: right;
+	background-size: 250px;
+}
+
+.textbox:hover, .textbox:valid {
+	border-bottom: 1px solid #10bc83;
+}
+
+::-webkit-input-placeholder {
+	font-weight: 100;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+	font-weight: 100;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+	font-weight: 100;
+}
+
+:-ms-input-placeholder {
+	font-weight: 100;
+}
+
+input:focus {
+	outline: none;
+}
+
+.primary-btn {
+	display: block;
+	cursor: pointer;
+	height: 40px;
+	width: 100%;
+	border: none;
+	background-color: #10bc83;
+	color: #fff;
+	font-size: 16px;
+	margin: 10px auto;
+	margin-top: 10px;
+	transition: all .3s ease-in-out;
+}
+
+.negative-action {
+	height: 0;
+	background-color: #ccc;
+	color: #000;
+	padding: 0;
+	overflow: hidden;
+	margin-bottom: 0;
+}
+
+button {
+	outline: none;
+}
+
+.hint-text, .fed_head {
+	box-sizing: border-box;
+	padding: 20px;
+	display: block;
+	font-size: 12px;
+	margin: auto;
+	text-align: center;
+	width: 300px;
+}
+
+.fed_head {
+	font-size: 14px;
+	padding: 10px;
+	padding-top: 0px;
+	line-height: 2;
+}
+
+.blue {
+	color: #00aeef;
+	display: inline-block;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.formfield_errormsg,.error {
+	display: none;
+	font-size: 12px;
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	padding: 0px;
+	box-sizing: border-box;
+	overflow: hidden;
+	color: #EC644B;
+}
+
+.hyperlink {
+	cursor: pointer;
+	color: #00aeef;
+}
+
+.showerror {
+	height: 20px;
+}
+
+.unedit {
+	transition: all .1s ease;
+	border: 1px solid transparent;
+	background: transparent;
+	font-size: 16px;
+}
+
+.federated_signin {
+	transition: all .3s ease-in-out;
+	display: block;
+	height: 50px;
+	width: 290px;
+	margin: auto;
+	overflow: hidden;
+	margin-top: 5px;
+}
+
+.fed-logo {
+	cursor: pointer;
+	display: inline-block;
+	height: 30px;
+	width: 30px;
+	background-color: azure;
+	border-radius: 3px;
+	margin: 7px;
+	opacity: .8;
+	background: url("../../images/Signinusing-Icons.png");
+}
+
+.fed-logo:hover {
+	opacity: 1;
+}
+
+.zoho {
+	background: url("../../images/Signinusing-Icons.png") no-repeat transparent  -194px -75px;
+	background-size: 250px;
+	border: 1px solid #5c83f0;
+}
+
+.google {
+	background: url("../../images/Signinusing-Icons.png") no-repeat transparent -55px 3px;
+	background-size: 250px;
+	border: 1px solid #5c83f0;
+}
+
+.facebook {
+	background: url(../../images/Signinusing-Icons.png) no-repeat transparent 4px 3px;
+	background-size: 260px;
+	border: 1px solid #5c83f0;
+}
+
+.twitter {
+	background: url("../../images/Signinusing-Icons.png") no-repeat transparent -119px 3px;
+	background-size: 250px;
+	border: 1px solid #5c83f0;
+}
+
+.linkedin {
+	background: url("../../images/Signinusing-Icons.png") no-repeat transparent -88px 3px;
+	background-size: 250px;
+	border: 1px solid #5c83f0;
+}
+
+.microsoft {
+	background: url("../../images/Signinusing-Icons.png") no-repeat transparent -55px 3px;
+	background-size: 250px;
+	border: 1px solid #5c83f0;
+}
+
+.yahoo {
+	background: url("../../images/Signinusing-Icons.png") no-repeat transparent -150px 3px;
+	background-size: 250px;
+	border: 1px solid #5a34a6;
+}
+
+.showpassword {
+	height: 40px;
+	margin-bottom: 10px;
+}
+
+.removelabel {
+	height: 0;
+	padding: 0;
+}
+
+.zeroheight {
+	height: 0;
+}
+
+.loader, .loader:before, .loader:after {
+	border-radius: 50%;
+}
+
+.loader {
+	display: inline-block;
+	color: #ffffff;
+	font-size: 3px;
+	text-indent: -99999em;
+	margin-left: 90px;
+	margin-top: -3px;
+	position: absolute;
+	width: 28px;
+	height: 28px;
+	box-shadow: inset 0 0 0 1em;
+	-webkit-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	transform: translateZ(0);
+	float: right;
+}
+
+.loader:before, .loader:after {
+	position: absolute;
+	content: '';
+}
+
+.loader:before {
+	width: 16px;
+	height: 32px;
+	background: #00aeef;
+	border-radius: 10.2em 0 0 10.2em;
+	top: -2px;
+	left: -2px;
+	-webkit-transform-origin: 5.2em 5.1em;
+	transform-origin: 15px 15px;
+	-webkit-animation: load2 2s infinite ease 1.5s;
+	animation: load2 2s infinite ease 1.5s;
+}
+
+.loader:after {
+	width: 16px;
+	height: 32px;
+	background: #00aeef;
+	border-radius: 0 10.2em 10.2em 0;
+	top: -0.1em;
+	left: 15px;
+	-webkit-transform-origin: 0px 5.1em;
+	transform-origin: 0px 15px;
+	-webkit-animation: load2 2s infinite ease;
+	animation: load2 2s infinite ease;
+}
+
+@
+-webkit-keyframes load2 { 0% {
+	-webkit-transform: rotate(0deg);
+	transform: rotate(0deg);
+}
+
+100%
+{
+-webkit-transform
+:
+ 
+rotate
+(360deg);
+
+    
+transform
+:
+ 
+rotate
+(360deg);
+
+  
+}
+}
+@
+keyframes load2 { 0% {
+	-webkit-transform: rotate(0deg);
+	transform: rotate(0deg);
+}
+
+100%
+{
+-webkit-transform
+:
+ 
+rotate
+(360deg);
+
+    
+transform
+:
+ 
+rotate
+(360deg);
+
+  
+}
+}
+.changeloadbtn {
+	display: block;
+	height: 44px;
+	width: 44px;
+	border-radius: 22px;
+	padding: 0px;
+}
+.changeloadbtn:before {
+	content: "";
+	height: 20px;
+	width: 20px;
+	display: inline-block;
+	margin: 9px;
+	border: 3px solid #fff;
+	border-top: 3px solid #10bc83;
+	border-radius: 50%;
+	animation: spin .5s linear infinite;
+}
+.buttontexthide{
+	display: block;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+/*----------------media query---------------*/
+@media only screen and (max-width : 420px) {
+	.signin-div {
+		width: 85%;
+	}
+}
+
+@media only screen and (max-width : 800px) and (min-width:421px) {
+}

@@ -1,0 +1,149 @@
+<%-- $Id$ --%>
+<TR>
+<%DataObject dataObject = viewContext.getModel().getViewConfiguration();
+  String enableRow = (String) dataObject.getFirstValue(ACTABLEVIEWCONFIG.TABLE, ACTABLEVIEWCONFIG.ENABLEROWSELECTION_IDX);%>
+
+<% 
+String showNoDataHeader = request.getParameter("showNoDataHeader");
+boolean showHeader = (showNoDataHeader == null || showNoDataHeader.equalsIgnoreCase("true"));%>
+<%if(!showHeader && ((tableModel instanceof TableNavigatorModel) && (((TableNavigatorModel)tableModel).getTotalRecordsCount() <= 0))){%>
+<%}else{%>
+<%boolean generateHeaderDiv = false;
+pageContext.setAttribute("isSearchPresent",new Boolean(false));
+pageContext.setAttribute("isSearchValPresent",new Boolean(false));%>  
+
+<%if((enableRowSelection.indexOf("NONE")==-1)) {%>
+               <% if(enableRow.indexOf("CHECKBOX")!=-1){%>
+                   <TH align='center' class='tableHeader' width="2%"> <input name='toggleAll' class='toggleAll' table_el='TOGGLEALL' type='CHECKBOX' value='checkbox' title='Select all' onClick='TableDOMModel.toggleAll(this)'></TH>
+                <%}else if(enableRow.indexOf("RADIO")!=-1){%>
+                   <TH align='center'  class='tableHeader' width="2%"><input name='toggleAll' type='RADIO'  table_el='TOGGLEALL'  id='toggleAll' value='radio' class='hide'>&nbsp;</TH>
+                <%}         
+            }%>
+
+<components:column viewContext="<%=viewContext%>">
+	<components:cell viewContext="<%=viewContext%>" type = "Header">
+
+<%String headerClass = "tableHeader";
+if(transformerContext.getHeaderCssClass()!=null && transformerContext.getHeaderCssClass().trim().length() != 0)
+{
+	headerClass=transformerContext.getHeaderCssClass()+" "+headerClass;
+}
+TableViewModel tableViewModel = (TableViewModel) viewContext.getViewModel();
+String  columnName = transformerContext.getPropertyName();%>     
+<%boolean isSearchValPresent = ((Boolean)pageContext.getAttribute("isSearchValPresent")).booleanValue();%>
+<%boolean isSearchPresent = ((Boolean)pageContext.getAttribute("isSearchPresent")).booleanValue();%>
+
+<%if(transformerContext.isSearchEnabled()){%>
+	<%isSearchPresent = true;%>
+	<%pageContext.setAttribute("isSearchPresent",isSearchPresent);%>
+<%}%>
+<%if(StringUtils.isNotEmpty(transformerContext.getSearchValue())){%>
+                 <%isSearchValPresent = true;%>
+                 <%pageContext.setAttribute("isSearchValPresent", new Boolean(true));%>
+<%}%>
+            
+
+
+<%if(transformerContext.isSortEnabled()){
+            if(columnName == null){
+        throw new RuntimeException("Sorting cannot be set to true for a Dummy column(" 
+        		+ ((DataObject)transformerContext.getColumnConfiguration()).getFirstValue("ACColumnConfiguration","COLUMNALIAS")  + ")"); 
+			}
+		if(columnName != null && columnName.equals(tableViewModel.getSortedColumn()))
+		{
+                headerClass = "sortedTableHeader";
+                 if(transformerContext.getHeaderCssClass()!=null && transformerContext.getHeaderCssClass().trim().length() != 0)
+                {
+                	headerClass=transformerContext.getHeaderCssClass()+" "+headerClass;
+                }
+          }}
+		 HashMap prop = transformerContext.getRenderedAttributes();
+%>
+<TH class='<%out.print(headerClass);//NO OUTPUTENCODING%> ' id='<%out.print(uniqueId);//NO OUTPUTENCODING%>_h_<%out.print(colCount);//NO OUTPUTENCODING%>'><%--NO OUTPUTENCODING --%>
+<%
+colCount++;
+if(tableIter.isLastColumn()){%>
+<TABLE width='100%' valign='top'  cellspacing='0' cellpadding='2'><TR><TD class='<%out.print(headerClass);//NO OUTPUTENCODING%>'><%--NO OUTPUTENCODING --%>
+<%}else if (generateHeaderDiv) {%>
+           <div class='tableHeaderDiv'>
+        <%}%>
+
+
+<%if(transformerContext.isSortEnabled()) {%>
+	<%if(!WebClientUtil.isRestful(transformerContext.getViewContext().getRequest()) || (1 == 1)){
+		if(tableModel instanceof TableDatasetModel)
+		{
+			TableDatasetModel tdm = (TableDatasetModel)tableModel;
+			int columnIndex =  tdm.getColumnIndex(columnName);
+			if(columnIndex >= 0)
+			{
+				//table sorting is done using columnIndex rather than columnName for ACSQLString tables. In tdm(TableDatasetModel) columnIndex is starts with 0 instead of 1. Hence we have added +1 to the columnIndex.
+				columnName = String.valueOf(columnIndex+1);
+			}
+		}
+		%>
+
+<a href='javascript:sortData("<%out.print(referenceId);//NO OUTPUTENCODING%>" ,"<%out.print(columnName);//NO OUTPUTENCODING%>" )'>  <%out.print(prop.get("VALUE"));//NO OUTPUTENCODING%> </a><%--NO OUTPUTENCODING --%>
+&nbsp;&nbsp;<input type='button' class='<%out.print(transformerContext.getSortButtonClass());//NO OUTPUTENCODING%>'  onClick= 'return sortData("<%out.print(referenceId);//NO OUTPUTENCODING%>" ,"<%out.print(columnName);//NO OUTPUTENCODING%>")'><%--NO OUTPUTENCODING --%>
+
+        <%}else{%>
+                <%String navigurl = TableUtil.getSortOrderNavigURL(viewContext, uniqueId, columnName);%>
+
+<a href="javascript:showRangewithStateURL(" + <%out.print(uniqueId);//NO OUTPUTENCODING%> "," <%out.print(navigurl);//NO OUTPUTENCODING%> ")"> <%out.print(props.get("VALUE"));//NO OUTPUTENCODING%> </a><%--NO OUTPUTENCODING --%>
+
+&nbsp;&nbsp;<input type='button' class='<%out.print(transformerContext.getSortButtonClass());//NO OUTPUTENCODING%> " onClick='return showRangewithStateURL(<%out.print(uniqueId);//NO OUTPUTENCODING%> +","+ <%out.print(navigurl);//NO OUTPUTENCODING%> )'><%--NO OUTPUTENCODING --%>
+               <%}} else{%>
+
+           <%out.print( prop.get("VALUE"));//NO OUTPUTENCODING%><%--NO OUTPUTENCODING --%>
+        <%}%>
+
+       <%if(tableIter.isLastColumn()){%>
+            </TD>
+
+
+        <%if(isSearchPresent){%>
+		<%String osClass = "";%>
+                <%String csClass = "";%>
+		<%if(isSearchValPresent){%>
+                   <% osClass = "hide";%>
+                    <%csClass = "tableSearchCloseButton";%>
+                <%}else {%>
+                    <%csClass = "hide";%>
+                    <%osClass = "tableSearchButton";%>
+                <%}%>
+
+<%if(WebClientUtil.isRestful(request) && (1 == 0)){%>
+<%String rootview = WebViewAPI.getRootView(request, viewContext);%>
+<%String navigurl =  request.getContextPath()+"/" + uniqueId + ".cc?" + "s:rootview=" + rootview ;%>
+<TD align='right' valign='middle' width='5px' nowrap><input table_el='OSBTN' type='button' class='<%out.print(osClass);//NO OUTPUTENCODING%> ' onClick="return openSearch(this)"><input table_el='CSBTN' type='button' class='<%out.print(csClass);//NO OUTPUTENCODING%>' onClick="return closeSearch(this,<%out.print(uniqueId);//NO OUTPUTENCODING%> +"," +<%out.print(navigurl);//NO OUTPUTENCODING%> )"></TD><%--NO OUTPUTENCODING --%>
+
+<%}else{%>
+<TD align='right' valign='middle' width='5px' nowrap><input table_el='OSBTN' type='button' class='<%=osClass%>' onClick="return openSearch(this)"><input table_el='CSBTN' type='button' class='<%=csClass%>' onClick="return closeSearch(this)"></TD>
+<%}}%>
+
+
+
+<%Long ccMenuItem = (Long) tableViewModel.getTableViewConfigRow().get("COLUMNCHOOSERMENUITEM");%>
+        <%if(ccMenuItem != null){%>
+                <%out.print(MenuVariablesGenerator.getScriptInclusion(ccMenuItem, (HttpServletRequest)pageContext.getRequest()));//NO OUTPUTENCODING%><%--NO OUTPUTENCODING --%>
+                   <%out.print(MenuVariablesGenerator.generateMenuVariableScript(ccMenuItem, (HttpServletRequest)pageContext.getRequest()));//NO OUTPUTENCODING%><%--NO OUTPUTENCODING --%>
+<TD align='right' valign='middle' width='5px' nowrap><input type='button' id='<%out.print(uniqueId);//NO OUTPUTENCODING%>_CCBtn' class='columnEditButton' onClick="invokeMenuAction('<%out.print(MenuVariablesGenerator.getMenuItemID(ccMenuItem));//NO OUTPUTENCODING%>','<%out.print(uniqueId);//NO OUTPUTENCODING%>','viewName=<%out.print(viewContext.getModel().getViewName());//NO OUTPUTENCODING%>&TABLEVIEWID=<%out.print(uniqueId);//NO OUTPUTENCODING%>', null)"></TD><%--NO OUTPUTENCODING --%>
+                <%}%>
+</TR></TABLE>
+<%}%>
+<%if (generateHeaderDiv && !tableIter.isLastColumn()){%>
+            </div>
+        <%}%>
+</TH>
+<%if(WebClientUtil.isRestful(request)){%>
+                <%String rootview = WebViewAPI.getRootView(request, viewContext);
+                viewContext.setURLStateParameter("rootview", rootview);%>
+        <%}%>
+
+	</components:cell>
+	</components:column>
+
+<%}%>
+
+               
+

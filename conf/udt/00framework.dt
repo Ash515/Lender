@@ -1,0 +1,53 @@
+days.basic.baseType = CHAR
+days.basic.maxLength = 3
+days.basic.allowedList = SUN,MON,TUE,WED,THU,FRI,SAT
+
+months.basic.baseType = CHAR
+months.basic.maxLength = 3
+months.basic.allowedList = JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC
+
+jsonstring.basic.baseType = CHAR
+jsonstring.basic.maxLength = -1
+jsonstring.basic.validator = com.adventnet.persistence.JsonStringDataTypeValidator
+
+gender.basic.baseType = CHAR
+gender.basic.maxLength = 6
+gender.basic.allowedList = MALE,FEMALE,OTHER
+
+honorific.basic.baseType = CHAR
+honorific.basic.maxLength = 3
+honorific.basic.allowedList = Mr,Mrs,Dr,Ms,Sir
+
+length.basic.baseType = CHAR
+length.basic.maxLength = 2
+length.basic.allowedList = mm,cm,m,km,in,ft,yd,mi
+
+weight.basic.baseType = CHAR
+weight.basic.maxLength = 3
+weight.basic.allowedList = mg,cg,g,kg,ton,lb
+
+currency.basic.baseType = CHAR
+currency.basic.maxLength = 3
+currency.basic.allowedList = INR,USD,EUR,JPY,GBP,AUD,CHF,CAD,MXN,CNY,NZD,SEK,RUB,HKD,NOK,SGD,TRY,KRW,ZAR,BRL
+
+currencysymbol.basic.baseType = NCHAR
+currencysymbol.basic.maxLength = 1
+currencysymbol.basic.allowedList = \u20B9,\u0024,\u00A3,\u00A5,\u20AC
+
+age.basic.baseType = INTEGER
+age.basic.allowedRangeFrom = 1
+age.basic.allowedRangeTo = 125
+
+uuid.advanced.meta = com.adventnet.db.persistence.metadata.UUIDDataType
+uuid.advanced.mysql.dtadapter = com.adventnet.db.adapter.mysql.MysqlUuidDTAdapter
+uuid.advanced.mysql.dtsqlgenerator = com.adventnet.db.adapter.mysql.MysqlUuidDTSQLGenerator
+uuid.advanced.mysql.dtresultsetadapter = com.adventnet.db.adapter.mysql.MysqlUuidDTResultSetAdapter
+uuid.advanced.mysql.dttransformer = com.adventnet.db.adapter.mysql.MysqlUuidDTTransformer
+uuid.advanced.postgres.dtadapter = com.adventnet.db.adapter.postgres.PostgresUuidDTAdapter
+uuid.advanced.postgres.dtsqlgenerator = com.adventnet.db.adapter.postgres.PostgresUuidDTSQLGenerator
+uuid.advanced.postgres.dtresultsetadapter = com.adventnet.db.adapter.postgres.PostgresUuidDTResultSetAdapter
+uuid.advanced.postgres.dttransformer = com.adventnet.db.adapter.postgres.PostgresUuidDTTransformer
+uuid.advanced.mssql.dtadapter = com.adventnet.db.adapter.mssql.MssqlUuidDTAdapter
+uuid.advanced.mssql.dtsqlgenerator = com.adventnet.db.adapter.mssql.MssqlUuidDTSQLGenerator
+uuid.advanced.mssql.dtresultsetadapter = com.adventnet.db.adapter.mssql.MssqlUuidDTResultSetAdapter
+uuid.advanced.mssql.dttransformer = com.adventnet.db.adapter.mssql.MssqlUuidDTTransformer

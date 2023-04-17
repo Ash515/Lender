@@ -1,0 +1,1882 @@
+/*$Id$*/
+			body
+			{
+			    font-size: 16px;
+			    font-family: 'Open Sans', sans-serif;
+			    margin: 0;
+			}
+			.container
+			{
+			    margin: auto;	
+			    display: block;
+			    width: 60%;
+			    height: auto;
+			    margin-top: 60px;
+			}
+			.logo
+			{   
+			    padding: 20px 0px;
+			    display: block;
+			    height: auto;
+			    width: auto;
+			}
+			.head_text
+			{
+			    font-size: 150%;
+			    padding:10px 0px;
+			}
+			.normal_text
+			{
+    			display: block;
+    			font-size: 90%;
+    			padding: 5px 0px; 
+			}
+			.medium_text
+			{
+    			font-size: 80%;
+			}
+            .modal 
+            {    
+                z-index: 1;    
+                margin: auto;
+                display: none; 
+                width: 800px;
+    			height: 600px;    
+                background-color: #fff;    
+                border-radius: 4px;    
+                box-shadow: 0px 0px 0px #ccc;    
+                overflow: hidden;    
+                position: absolute;    
+                top: 45%;    
+                margin-left: -400px;    
+                left: 50%;    
+                margin-top: -225px;
+            }
+
+			.left_info
+			{	width:30%;
+				display: inline-block;
+				overflow:auto;
+				height:100%;
+    			background-color: #f2f2f2;	
+			}
+
+			.zoho_logo
+			{
+    			float: left;
+   				height: 30px;
+    			display: inline-block;	
+    			margin-right: 0px;
+			}
+			
+			.service_name
+			{	
+     			float: left;
+    			display: inline-block;
+    			margin: 33px;
+    			margin-left: 1px;
+    			font-weight: 400;
+    			font-size: 20px;
+    			color: #333333;
+        		margin-top: 0px;
+			}
+			.right_info
+			{
+		
+				width: 70%;
+   				box-sizing: border-box;
+			    display: inline-block;
+			    float: right;
+			    overflow: auto;
+			    height: 90%;
+			    overflow-y: scroll;
+			    padding: 25px;
+			}
+			.product
+			{
+    			width: 100%;
+    			list-style: none;
+    			display: inline-block;
+    			position: relative;
+    			box-sizing: border-box;
+    			padding: 10px;
+                cursor: pointer;
+			}
+
+			.highlight
+			{
+    			background-color: #f9f9f9;
+    			color: #000;
+			}
+            .mail_icon
+            {
+                background: url("../images/product-logo.png") no-repeat transparent 0px -485px;
+                background-size: 100%;
+            }
+            .projects_icon
+            {
+                background: url("../images/product-logo.png") no-repeat transparent 0px 0px;
+                background-size: 100%;
+            }
+           .desk_icon
+            {
+                background: url("../images/product-logo.png") no-repeat transparent 0px -1115px;
+                background-size: 100%;
+            }
+			.product_name
+			{
+   				padding: 5px 8px;
+    			display: inline-block;
+    			float: left;	
+                width: 105px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                font-size: 14px;    
+			}
+			.visibility
+			{
+				visibility: visible;
+			}
+
+
+			.product_num_service_num
+			{
+				padding: 10px;
+    			display: table;
+    			margin-bottom:10px;	
+			}
+			.product_num_name
+			{    margin-left: 40%;
+			}
+
+
+			.primary-btn 
+			{
+    			cursor: pointer;
+    			height: auto;
+    			width: auto;
+    			display: block;
+    			padding: 10px;
+    			margin: 5px 0px;
+			}
+
+			.headinh
+			{
+				width: 100%;
+    			border-bottom: 1px solid #ccc;
+    			padding: 10px;
+    			box-sizing: border-box;
+    			font-size: 16px;
+			}
+			.description
+			{
+    			display: block;
+    			font-size: 14px;
+    			padding: 5px;
+			}
+			.hide
+			{
+				display:none;
+			}
+            .product_1_name, .product_2_name
+            {
+                display: block;
+                padding: 5px;
+            }
+            .select_tick
+            {
+                height: 14px;
+                width: 14px;
+                border-radius: 12px;
+                border: 2px dotted #ccc;
+                display: inline-block;
+                float: left;
+            }
+            .select_text
+            {
+                font-size: 14px;
+                padding: 0px 10px;
+                display: inline-block;
+            }
+            .highlight_select
+            {
+                opacity: 1;
+/*                border: 1px solid #10bc83;*/
+            }
+            .selected_tick
+            {
+                background-color: #fff;
+                border: 2px solid #10bc83;
+            }
+            .selected_tick:before
+            {
+                content: "";
+                height: 8px;
+                position: relative;
+                width: 8px;
+                background-color: #10bc83;
+                margin: 3px;
+                display: block;
+                border-radius: 10px;
+                transform: rotate(-45deg);
+            }
+            button:focus
+            {
+                outline: none;
+            }
+            .btn
+            {
+                cursor: pointer;
+                font-size: 14px;
+                padding: 8px 16px;
+                background-color: #10bc83;
+                color: #fff;
+                border: none;
+                margin:8px 0px;
+                    margin-right: 10px;
+            }
+    		.notes
+    		{
+        		display: block;
+        		border-left: 3px solid #eeeeee;
+    		}
+    		.notes ul li
+    		{
+        		margin-left: -30px;
+        		display: block;
+        		line-height: 1.7;  
+        		list-style: none;
+    		}
+    		.circle
+    		{
+        		position: relative;
+        		top: -2px;
+        		display: inline-block;
+        		background-color: #898989;
+        		height: 6px;
+        		width: 6px;
+        		border-radius: 3px;
+        		margin-right: 10px;
+    		}
+
+   		    .cancel
+    		{
+    		    cursor: pointer;
+    		    color: #000;
+    		    background-color: #eeeeee;
+    		    margin: 8px 0px;
+    			padding: 8px 15px;
+    		    font-size: 90%; 
+    		    border-radius:2px;
+    		    border: 1px solid #eeeeee;
+    		}
+    		.cancel a
+    		{
+    		    text-decoration:none;
+   			    color:#000;
+    		    outline:none
+    		}
+
+            .edit_circle            
+            {                 
+                transition: all .2s ease-in-out;                
+                height: 18px;                
+                width: 18px;                
+                display: none;                            
+                border-radius: 10px;                
+                font-size: 8px;                
+                box-sizing: border-box;                                
+                float: right;                
+                margin: 5px;                
+                color: #ccc;      
+                margin-left: 0px; 
+                background-color: #10bc83; 
+                transform: rotate(-45deg); 
+            }            
+            .icon-tick             
+            {                
+                transition: all .2s ease-in-out;                
+                height: 3px;                
+                width: 7px;                
+                border-bottom: 2px solid #fff;              
+                border-left: 2px solid #fff;                    
+                display: inline-block;                
+                margin: 5px;  
+                position: relative;
+                top: 1px;
+            }            
+/*
+            .product:hover .icon-tick            
+            {                
+                border: none;                
+                height: 0px;                
+                width: 0px;                
+                margin: 0;            
+            }            
+*/
+/*
+            .product:hover .icon-tick:before            
+            {                
+                content:"\e900";                
+                position: relative;                
+                left: -3px;                
+                top: 3px;            
+            }            
+*/
+/*
+            .product:hover .edit_circle      
+            {                
+                transform: rotate(45deg);                
+                border: 1px solid #4aa7f1;                  
+                color: #4aa7f1;            
+            }
+*/
+
+            /*-----------------Footer------------------*/
+    		#footer
+    		{
+        		width:100%;
+       			height:20px;
+                padding: 20px 0px;
+        
+    		}
+   	 		#footer div
+    		{
+        		text-align:center;
+        		font-size: 70%;
+    		}
+    		#footer div a
+    		{
+        		text-decoration:none;
+    		}
+    		#height
+    		{
+        		height:100%;
+        		width:1px;
+        		background-color:transparent;
+        		position: absolute;
+        		display:none;
+    		}
+    		.footer_spacing
+    		{
+    			padding-right:3px;
+    		}
+    		._copy:before 
+    		{
+  				content:"\00a9";
+			}
+			.screen
+			{
+				width:100%;
+				height: 100%;
+				position:fixed;
+				top:0px;
+				left:0px;
+				background-color: #000;
+				opacity: 0.4;
+				z-index: 1;
+				display:none;
+			}
+            #height
+            {
+                height:100%;
+                width:1px;
+                background-color:transparent;
+                position: absolute;
+                display:none;
+            }
+            .error
+            {
+                color:red;
+                display: none;
+                font-size: 12px;
+            }
+
+
+            /*---------------Top message-----------------*/
+
+        .top_div
+        {
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            top: 0px;
+            position: absolute;
+            height: 40px;
+            width: 400px;
+            background: rgba(221, 221, 221, 0.22);
+            border-right: 3px solid #ef4444;
+            color: #ef4444;
+            display:none;
+        }
+        .cross_mark
+        {
+            position: relative;
+            display: inline-block;
+            background-color: #ef4444;
+            height: 40px;
+            width: 40px;
+        }
+        .crossline1
+        {
+                top: 18px;
+                margin: auto;
+                position: relative;
+                border-radius: 2px;
+                height: 4px;
+                width: 20px;
+                display: block;
+                background-color: #fff;
+                transform: rotate(45deg);
+        }
+        .crossline2
+        {
+            top: 14px;
+            border-radius: 2px;
+            height: 4px;
+            width: 20px;
+            display: block;
+            background-color: #fff;
+            transform: rotate(-45deg);
+            position: relative;
+            margin: auto;
+        }
+        
+        .top_msg
+        {
+            position: relative;
+            font-size: 13px;
+            display: inline-block;
+            text-align: center;
+            color: #000;
+            width: 86%;
+            height: 100%;
+            box-sizing: border-box;
+            float: right;
+            padding: 10px;
+            left: -15px;
+            
+        }  
+        .error_notif 
+        {
+            color: #ff6164;
+            margin-left: 5px;
+            font-size: 12px;
+            margin-top: -25px;
+        }
+            ul
+            {
+                padding-left: 0px;
+            }
+            .permissions_list
+            {
+                font-size: 13px;
+                padding: 5px;
+            }
+            .permissions_head
+            {
+                font-size: 14px;
+                font-weight: 500;
+            }
+            .checkbox_div
+            {
+                height: 16px;
+                display: inline-block;
+                width: auto;
+                cursor: not-allowed;
+            }
+            .real_checkbox
+            {
+                position: relative;
+                left: 8px;
+                top: -3px;
+                z-index: 1;
+                opacity: 0;
+                cursor: not-allowed;
+            }
+            .checkbox_style
+            {
+                height: 12px;
+                width: 12px;
+                border: 1px solid #ccc;
+                display: inline-block;
+                position:relative;
+                left: -10px;
+                border-radius: 2px;
+            }
+            input:checked ~ .checkbox_style
+            {
+                background-color: #10bc83;
+                border:1px solid #10bc83;
+            }
+            .tick
+            {
+                display: block;
+                height: 3px;
+                width: 7px;
+                border-left: 1px solid #fff;
+                border-bottom: 1px solid #fff;
+                margin: auto;
+                position: relative;
+                transform: rotate(-0.125turn);
+                top: 3px;
+            }
+            .checkbox_label
+            {
+                width: auto;
+                display: inline-block;
+                height: 16px;
+            }
+            li
+            {
+                list-style: none;
+            }
+            .selected_options_box
+            {
+                cursor: pointer;
+                height: 62px;
+                width: 220px;
+                margin: 10px;
+                display: inline-block;
+                border: 1px solid #ccc;
+                margin-left: 0px;
+                box-sizing: border-box;
+                padding: 10px;
+            }
+            .selected_options_box:hover
+            {
+                border-bottom: 2px solid #10bc83;
+            }
+            .selected_options_box:hover  .font_icons
+            {
+                opacity: 1;
+            }
+            .selected_product
+            {
+                display:inline-block;
+                width:150px;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                font-weight: 400;
+                font-size: 14px;
+            }
+            .selected_option
+            {
+                display:inline-block;
+                width:150px;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                font-size: 12px;
+                font-weight: 100;   
+            }
+            svg
+            {
+                height: 12px;
+                opacity: 0;
+                padding: 0px 8px;
+                cursor: pointer;
+            }
+            .font_icons
+            {
+                height: 14px;
+                width: 14px;
+                display: inline-block;
+                opacity: 0;
+                float: right;
+                margin: -8px;
+                margin-right: 5px;
+            }
+            .selected_options_box:hover  svg
+            {
+                fill:#10bc83;
+            }
+            .selectedbox_div
+            {
+                height: auto;
+                width: 100%;
+                display: none;
+                margin: 20px 0px;
+            }
+            .selection_head
+            {
+                font-size: 14px;
+                font-weight: 500;
+                padding: 10px 0px;
+            }
+            input:disabled ~ .checkbox_style            
+            {                
+                background: #999;                
+                border-color: #999;            
+            }
+
+            .close_btn
+            {
+                cursor: pointer;
+                display: none;
+                height: 20px;
+                width: 20px;
+                float: right;
+                transform: rotate(135deg);
+                margin: 4px;
+            }
+            .close_btn:before
+            {
+                display: block;
+                content: "";
+                height: 100%;
+                width: 2px;
+                background-color: #000;
+                margin: auto;
+            }
+            .close_btn:after
+            {
+                display: block;
+                content: "";
+                height: 2px;
+                width: 100%;
+                background-color: #000;
+                position: relative;
+                margin: auto;
+                top: calc(-50% - 1px);
+            }
+            .showselected
+            {
+                display: block;
+                margin: 10px 0px;
+                border-bottom: 1px solid #f1f1f1;
+                transition: all .3s ease-in-out; 
+            }
+            .showselected:hover
+            {
+                border-bottom: 1px solid #999;
+            }
+            .showselected:hover svg
+            {
+                opacity: .5;
+            }
+
+            .servicehead
+            {
+                display: block;
+                font-size: 15px;
+                font-weight: 600;
+                padding: 4px 0px;
+            }
+            .service_selectedoption
+            {
+                display:inline-block;
+                font-size: 13px;
+                font-weight: 100;
+            }
+             .customoauth
+            {
+                display:inline-block;
+                font-size: 12px;
+                font-weight: 100;
+            }
+            .infoicon{
+				background:transparent url('../images/acc-img.gif')scroll no-repeat -99px -340px;
+				height:16px;
+				width:16px;
+				margin:-3px 2px 0px 4px;
+				padding: 2px 10px;
+			}
+            .tooltip {
+				position: relative;
+				display: inline-block;
+			}
+			.tooltip .tooltiptext {
+				visibility: hidden;
+				background-color: black;
+				color: #fff;
+				text-align: center;
+				border-radius: 6px;
+				padding: 5px;
+				position: absolute;
+				top: 5px;
+				width: fit-content;
+				transform: translateY(-50%);
+			}
+			.tooltip .tooltiptext::after {
+				content: "";
+				position: absolute;
+				top: 50%;
+				right: 100%;
+				margin-top: -5px;
+				border-width: 5px;
+				border-style: solid;
+				border-color: transparent black transparent transparent;
+			}
+			.tooltip:hover .tooltiptext {
+				visibility: visible;
+			}
+            .servicedetails
+            {
+                display: inline-block;
+                cursor: pointer;
+            }
+            .scopes
+            {
+            	    padding: 8px 0px;
+            }
+            .scopes ul li
+            {
+                font-size: 13px;
+                list-style: none;
+		
+                
+            }
+            .scopes ul li:before
+            {
+                content: "";
+                display: inline-block;
+                height: 3px;
+                width: 8px;
+                border-bottom: 2px solid green;
+                border-left: 2px solid green;
+                transform: rotate(-45deg);
+                margin: 4px 9px;
+                line-height: 1.5;
+            }
+            .profile
+            {
+                height: 50px;
+                width: auto;
+                border-radius: 30px;
+                border: 1px solid #f2f2f2;
+                position: relative;
+                float: right;
+                top: 30px;
+                right: 30px;
+                min-width: 200px;
+                max-width: 250px;
+                cursor: pointer;
+
+            }
+            .profile:hover .profile_name
+            {
+                margin-top: 6px;
+            }
+            .profile:hover .logout
+            {
+                opacity: 1;
+            }
+            .logout
+            {
+                display: block;
+                font-size: 12px;
+                color: #ff4a4a;
+                position: relative;
+                left: 10px;
+                opacity: 0;
+                transition: all .2s ease-in-out;
+            }
+            .profile_pic
+            {
+                height: 42px;
+                width: 42px;
+                display: inline-block;
+                margin: 4px;
+                float: left;
+                border-radius: 28px;
+            
+                background-size: 100%;
+            }
+            .profile_name
+            {
+                margin: 13px 8px;
+                display: inline-block;
+                float: left;
+                font-size: 15px;
+                width: 150px;
+                max-width: 180px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space:nowrap;
+                 transition: all .2s ease-in-out;
+                 margin-bottom: 0px;
+            }
+            .selectedbox_div
+            {
+                display: none;
+            }
+            
+            
+            .deviceapprovalimage 
+            { 
+ 				background: url("../images/oauth-sprite.png") no-repeat -12px -18px; <%--NO OUTPUTENCODING --%>     
+ 				height: 68px; 
+    			width: 72px; 
+    			float: right; 
+     			margin: 30px 22px 0px 0px; 
+     			display:none;
+			} 
+        .servicelogo
+        {
+            height: 48px;
+            width: 48px;
+            display: inline-block;
+            float: left;
+            margin-right: 10px;
+            background: url("../images/product-logo.png") no-repeat transparent 0px -2340px;
+            background-size: 100%;
+        }
+        .product_icon 
+        {
+            height: 32px;
+            width: 32px;
+            display: inline-block;
+            float: left;background: url("../images/product-logo.png") no-repeat transparent 0px -1563px;
+    		background-size: 100%;
+        }
+        .zohoassist_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px 0px;
+            background-size: 100%;
+        }
+        .zohobooks_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -32px;
+            background-size: 100%;
+        }
+        .zohobugtracker_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -64px;
+            background-size: 100%;
+        }
+        .zohocampaigns_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -95px;
+            background-size: 100%;
+        }
+        .zohoconnect_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -129px;
+            background-size: 100%;
+        }
+        .zohocontactmanager_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -162px;
+            background-size: 100%;
+        }
+        .zohocreator_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -193px;
+            background-size: 100%;
+        }
+        .zohocrm_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -225px;
+            background-size: 100%;
+        }
+        .skydeskcrm_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -225px;
+            background-size: 100%;
+        }
+        .zohodocs_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -258px;
+            background-size: 100%;
+        }
+        .zohoinvoice_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -290px;
+            background-size: 100%;
+        }
+        .virtualoffice_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -323px;
+            background-size: 100%;
+        }
+        .zohomeeting_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -355px;
+            background-size: 100%;
+        }
+        .zohopeople_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -387px;
+            background-size: 100%;
+        }
+        .zohoprojects_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -420px;
+            background-size: 100%;
+        }
+        .zohorecruit_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -452px;
+            background-size: 100%;
+        }
+        .zohoreports_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -484px;
+            background-size: 100%;
+        }
+         .skydeskreports_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -484px;
+            background-size: 100%;
+        }
+        .LiveDesk_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -516px;
+            background-size: 100%;
+        }
+        .zohosheet_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -549px;
+            background-size: 100%;
+        }
+        .zohoshow_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -580px;
+            background-size: 100%;
+        }
+        .zohosite24x7_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -612px;
+            background-size: 100%;
+        }
+         .zohowriter_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -840px;                      
+            background-size: 100%;
+        }
+        .zohosites_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -645px;
+            background-size: 100%;
+        }
+        .zohosocial_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -677px;
+            background-size: 100%;
+        }
+        .zohosubscriptions_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -710px;
+            background-size: 100%;
+        }
+        .zohosupport_icon , .desk_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -741px;
+            background-size: 100%;
+        }
+        .zohosurvey_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -774px;
+            background-size: 100%;
+        }
+        .zohovault_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -806px;
+            background-size: 100%;
+        }
+        .zohowriter_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -840px;              
+            background-size: 100%;
+        }
+        .zohoexpense_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -871px;
+            background-size: 100%;
+        }
+        .zohoshowtime_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -903px;
+            background-size: 100%;
+        }
+        .zohocalendar_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -935px;
+            background-size: 100%;
+        }
+        .zohoforms_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -967px;
+            background-size: 100%;
+        }
+        .zohowiki_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1000px;
+            background-size: 100%;
+        }
+        .zohomotivator_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1032px;
+            background-size: 100%;
+        }
+        .zohochat_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1065px;
+            background-size: 100%;
+        }
+        .zohofour_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1096px;
+            background-size: 100%;
+        }
+        .zohoinventory_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1128px;
+            background-size: 100%;
+        }
+        .zohoappcreator_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1161px;
+            background-size: 100%;
+        }
+        .salesinbox_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1192px;
+            background-size: 100%;
+        }
+        .mdmondemand_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1224px;
+            background-size: 100%;
+        }
+        .zohocheckout_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1254px;
+            background-size: 100%;
+        }
+        .notebook_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1356px;
+            background-size: 100%;
+        }
+        .zohopc_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -258px;                          
+            background-size: 100%;
+        }
+        .zohosign_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1288px;
+            background-size: 100%;
+        }
+        .zohosprints_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1323px;
+            background-size: 100%;
+        }
+        .pagesense_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1390px;
+            background-size: 100%;
+        }
+        .zohoflow_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1424px;
+            background-size: 100%;
+        }
+        .zohobackstage_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1460px;
+            background-size: 100%;
+        }
+        .teamdrive_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1493px;
+            background-size: 100%;
+        }
+        .zohomarketinghub_icon {
+ 		   background: url(../images/product-logo.png) no-repeat transparent 0px -1529px;
+    		background-size: 100%;
+		}
+		.zohobigin_icon {
+			background: url(../images/product-logo.png) no-repeat transparent 0px -1597px;
+    		background-size: 100%;
+		}
+	
+        .x2_zohoassist_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px 0px;
+            background-size: 100%;
+        }
+        .x2_zohobooks_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -48px;
+            background-size: 100%;
+        }
+        .x2_zohobugtracker_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -96px;
+            background-size: 100%;
+        }
+        .x2_zohocampaigns_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -142px;
+            background-size: 100%;
+        }
+        .x2_zohoconnect_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -194px;
+            background-size: 100%;
+        }
+        .x2_zohocontactmanager_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -242px;
+            background-size: 100%;
+        }
+        .x2_zohocreator_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -290px;
+            background-size: 100%;
+        }
+        .x2_zohocrm_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -338px;
+            background-size: 100%;
+        }
+        .x2_skydeskcrm_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -338px;
+            background-size: 100%;
+        }
+        .x2_zohodocs_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -387px;
+            background-size: 100%;
+        }
+        .x2_zohoinvoice_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -437px;
+            background-size: 100%;
+        }
+        .x2_virtualoffice_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -484px;
+            background-size: 100%;
+        }
+        .x2_zohomeeting_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -532px;
+            background-size: 100%;
+        }
+        .x2_zohopeople_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -580px;
+            background-size: 100%;
+        }
+        .x2_zohoprojects_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -628px;
+            background-size: 100%;
+        }
+        .x2_zohorecruit_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -678px;
+            background-size: 100%;
+        }
+        .x2_zohoreports_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -726px;
+            background-size: 100%;
+        }
+        .x2_skydeskreports_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -726px;
+            background-size: 100%;
+        }
+        .x2_LiveDesk_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -774px;
+            background-size: 100%;
+        }
+        .x2_zohosheet_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -824px;
+            background-size: 100%;
+            height: 50px;
+        }
+        .x2_zohoshow_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -870px;
+            background-size: 100%;
+        }
+        .x2_zohosite24x7_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -916px;
+            background-size: 100%;
+        }
+        .x2_zohosites_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -968px;
+            background-size: 100%;
+        }
+        .x2_zohosocial_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1016px;
+            background-size: 100%;
+        }
+        .x2_zohosubscriptions_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1065px;
+            background-size: 100%;
+        }
+        .x2_zohosupport_icon , .x2_desk_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1112px;
+            background-size: 100%;
+        }
+        .x2_zohosurvey_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1160px;
+            background-size: 100%;
+        }
+        .x2_zohovault_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1209px;
+            background-size: 100%;
+        }
+        .x2_zohowriter_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1260px;
+            background-size: 100%;
+        }
+        .x2_zohoexpense_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1306px;
+            background-size: 100%;
+        }
+        .x2_zohoshowtime_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1354px;
+            background-size: 100%;
+        }
+        .x2_zohocalendar_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1402px;
+            background-size: 100%;
+        }
+        .x2_zohoforms_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1450px;
+            background-size: 100%;
+        }
+        .x2_zohowiki_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1502px;
+            background-size: 100%;
+        }
+        .x2_zohomotivator_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1548px;
+            background-size: 100%;
+        }
+        .x2_zohochat_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1598px;
+            background-size: 100%;
+        }
+        .x2_zohofour_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1644px;
+            background-size: 100%;
+        }
+        .x2_zohoinventory_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1692px;
+            background-size: 100%;
+        }
+        .x2_zohoappcreator_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1742px;
+            background-size: 100%;
+        }
+        .x2_salesinbox_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1788px;
+            background-size: 100%;
+        }
+        .x2_mdmondemand_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1834px;
+            background-size: 100%;
+        }
+        .x2_zohocheckout_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1882px;
+            background-size: 100%;
+        }
+        .x2_zohowriter_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1260px;
+            background-size: 100%;
+        }
+        .x2_notebook_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -2035px;
+            background-size: 100%;
+        }
+        .x2_zohopc_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -387px;
+            background-size: 100%;
+        }
+        .x2_zohosign_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1931px;
+            background-size: 100%;
+        }
+        .x2_zohosprints_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -1984px;
+            background-size: 100%;
+        }
+        .x2_pagesense_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -2084px;
+            background-size: 100%;
+        }
+        .x2_zohoflow_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -2136px;
+            background-size: 100%;
+        }
+        .x2_zohobackstage_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -2190px;
+            background-size: 100%;
+        }
+        .x2_teamdrive_icon
+        {
+            background: url("../images/product-logo.png") no-repeat transparent 0px -2240px;
+            background-size: 100%;
+        }
+        .x2_zohomarketinghub_icon
+        {
+        	background: url(../images/product-logo.png) no-repeat transparent 0px -2290px;
+    		background-size: 100%;
+        }
+        .x2_zohobigin_icon {
+			background: url(../images/product-logo.png) no-repeat transparent 0px -2395px;
+    		background-size: 100%;
+		}
+/* scnsn */
+    .mob_profile 
+    {
+		height: 50px;
+	    width: auto;
+	    position: absolute;
+	    top: 37px;
+    right: 37px;
+	    max-width: 52px;
+	    cursor: pointer;
+	}
+	.mob_logout
+	{
+	
+	    width: 100%;
+	    height: 100%;
+	    position: fixed;
+	    border: 1px solid black;
+	    z-index: 2;
+	    display:none;
+	        background-color: rgba(0, 0, 0, .9);
+	    top:0px
+	}
+	.profile_pic_enlarge 
+	{
+		height: 100px;
+	    width: 100px;
+	    display: block;
+	    border-radius: 50%;
+	    margin:auto;
+	}
+	.white
+	{
+		color:white;
+		width: 100%;
+        text-align: center;
+        padding-bottom:10px;
+	}
+	.profile_info
+	{
+		display:block;
+		margin-top:42%;
+		
+	
+	}
+	.exit_profile
+	{
+	    height: 42px;
+	    width: 42px;
+	    display: inline-block;
+	    margin-right: 32px;
+	    float: right;
+	    border-radius: 28px;
+	    background-color: #999;
+	    margin-top: 32px;
+	  
+	}
+	.mob_name
+	{
+		font-size:24px;
+		padding:20px 0px;
+		
+	}
+
+	.close_X
+	{
+		cursor: pointer;
+	    display: inline;
+	    height: 20px;
+	    width: 20px;
+	    float: right;
+	    transform: rotate(135deg);
+	    margin: 11px;
+	    
+	}
+   .close_X:before
+   {
+       display: block;
+       content: "";
+       height: 100%;
+       width: 2px;
+       background-color: white;
+       margin: auto;
+   }
+   .close_X:after
+   {
+       display: block;
+       content: "";
+       height: 2px;
+       width: 100%;
+       background-color: white;
+       position: relative;
+       margin: auto;
+       top: calc(-50% - 1px);
+   }
+   .log_out
+   {
+   	    width: 80%;
+  	 	margin: auto;
+  	   display:block;
+  	   position:fixed;
+  	   bottom:30px;
+  	   height:42px;
+  	   left:0px;
+  	   right:0px;
+  	   
+   }
+   .mob_emailid
+   {
+   		font-size: smaller;
+    	padding:0px;
+   }
+   #scope_resp
+   {
+   	display:none;
+   }
+   .dullimage{
+    opacity: 0.5;
+   } 
+   .empty_org
+   {
+   	margin-top:12px;
+   }
+   		
+   		.scopes_cross_empty
+		{
+			padding: 8px 0px;
+		}
+		.scopes_cross_empty ul li
+		{
+			font-size: 13px;
+			list-style: none;
+			    padding-left: 9px;
+		}
+   		.scopes_cross
+		{
+			display: inline-block; 
+			height: 8px;
+			width: 8px;
+			float:left;
+			    padding-right: 8px;
+			        margin-top: 3.5px
+		}
+		.scopes_cross:before
+		{
+			content: "";	
+			height: 8px;
+			width: 2px;
+			background-color: red;	
+			display: inline-block;
+			position: relative;
+			transform: rotate(45deg);
+			right: -2px;
+		}
+		.scopes_cross:after
+		{
+			content: "";	
+			height: 8px;
+			width: 2px;
+			background-color: red;	
+			display: inline-block;
+			position: relative;
+			transform: rotate(-45deg);
+			
+		}
+		
+.togglebtn_div {
+    height: 16px;
+    padding: 4px;
+    width: 30px;
+    display: inline-block;
+}
+
+.real_togglebtn {
+    height: 16;
+    width: 16px;
+    border-radius: 12px;
+    border: 2px dotted #ccc;
+    display: inline-block;
+    float: left;
+}
+.togglebase {
+    height: 16px;
+    width: 30px;
+    display: inline-block;
+    background: #ccc;
+    border-radius: 10px;
+    position: absolute;
+}
+
+.toggle_circle {
+    transition: all .2s ease-in-out;
+    height: 12px;
+    width: 12px;
+    background-color: #fff;
+    border-radius: 10px;
+    display: inline-block;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    box-shadow: 0px 0px 5px #999;
+}
+.real_togglebtn:checked ~ .togglebase {
+    background-color: #10bc83;
+}
+.real_togglebtn:checked ~ .togglebase .toggle_circle {
+    left: 16px;
+}   
+   
+.toggle_field, .toggle_block_field {
+    display: block;
+    margin-top: 15px;
+}
+.toggle_text {
+    font-size: 16px;
+    display: inline-block;
+    width: 300px;
+    line-height: 20px;
+    float: left;
+}    
+.applicationdiv {
+    display: inline-block;
+    overflow: auto;
+    height: auto;
+    background-color: #f2f2f2;
+    width: calc( 95% - 20px);
+    padding: 20px;
+}
+
+
+.selected_applicationDIV
+{
+	background-color: #f2f2f2;
+}
+
+.checkbox_div 
+{    
+	display: block;    
+	height: auto;    
+	overflow: auto;    
+	margin-top: 15px;    
+	position: relative;
+	width:135px;
+	padding: 10px 10px 0px 10px;
+	
+}
+
+.checkbox_check 
+{    
+	z-index: 1;    
+	opacity: 0;    
+	margin: 0px;    
+	height: 16px;    
+	cursor: pointer;    
+	width: 16px;
+	position: relative;
+    top: 3px;
+    left: 17px;
+}
+
+
+.checkbox 
+{    
+	float: left;    
+	z-index: 0;    
+	height: 12px;    
+	width: 12px;    
+	display: inline-block;    
+	border: 2px solid #ccc;    
+	border-radius: 2px;    
+	position: relative;    
+	overflow: hidden;    
+	background-color: #fff;
+}
+
+
+.checkbox_label 
+{    
+	display: inline-block;    
+	font-size: 14px;    
+	margin: 0px 6px;    
+	float: left;    
+	cursor: pointer;
+}
+
+.checkbox_check:checked ~ .checkbox 
+{    
+	background-color: #10bc83;    
+	border-color: #10bc83;
+}
+
+.product_application_space
+{
+	margin-bottom: 20px;
+}
+
+.application_options
+{
+	display: inline-block;
+    background-color: white;
+    height: 30px;
+    width: 130px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    margin: 0px 15px 10px 0px;
+    cursor:pointer !important;
+    padding-left: 5px;
+}
+
+.application_options label
+{
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.checkbox_tick 
+{    
+	display: block;    
+	height: 3px;    
+	width: 8px;    
+	border-bottom: 2px solid #fff;    
+	border-left: 2px solid #fff;    
+	transform: rotate(-45deg);    
+	margin: 2px 1px;
+}
+
+.application_options .checkbox	
+{
+	float: none;
+    top: 3px;
+    left: -3px;
+}
+
+.application_space .primary-btn
+{
+	width: 160px;
+	margin:0px;
+	margin-top: 5px;
+	    
+}
+
+        		    /*-------------media---------------------*/
+
+@media only screen and (max-width : 800px) and (min-width:421px)
+{
+    .logo
+    {
+        width: 110px;
+    }
+    
+    .container
+    {
+        margin-top: 30px;
+        width: 80%;  
+    }
+
+    .button
+    {   
+        text-align: center;
+        padding: 10px 10px;
+        margin-bottom: 10px;
+    }  
+
+    .form_field , .text_box , .bar 
+    {
+        width: 80%;
+    }
+    
+    .profile_info
+    {
+    	margin-top:12%;
+    }
+    
+    
+    
+    
+        .modal 
+        {
+        	       margin-left: -41%;
+				    width: 83%;
+				    height: 90%;
+				    margin-top: -27%;
+		}
+        .left_info 	
+        {
+    		width: 10%;
+		}
+		.product_name
+		{
+			display:none;
+		}
+		.right_info 
+		{
+    		width: 85%;
+		    height: 85%;
+		    padding: 10px;
+    	}
+    	.primary-btn 
+    	{
+    		width: 90%;
+		}
+		.icon-tick 
+		{
+			margin:4px;
+			height: 3px;
+    		width: 6px;
+		}
+    	.edit_circle 
+    	{
+    		height: 16px;
+   	 		width: 16px;
+   	 		margin: -23%;
+    	}
+    	.mob_name
+    	{
+    		padding:5px 0px;
+    	}
+    	
+
+
+}
+
+
+@media only screen and (max-width : 420px)
+{
+    .container
+    {
+        margin: auto;
+        margin-top: 30px;
+        width: 80%;  
+    }
+    .logo
+    {
+        margin: auto;
+	    height: 30px;
+	    width: auto;
+    }
+    .text_box, .form_field , .bar 
+    {
+        width: 100%;
+    }
+    
+    .button
+    {
+        padding: 10px 0px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .btn, .cancel
+    {
+                    
+        
+        padding: 10px 0px;
+        width: 100%;
+        text-align: center;
+    }
+       .log_out
+   {
+   	    width: 80%;
+  	 	margin: auto;
+  	   display:block;
+  	   position:fixed;
+  	   bottom:30px;
+  	   height:42px;
+  	   left:0px;
+  	   right:0px;
+  	   
+   }
+
+	    .top_div
+        {
+        	width:99%;
+        }
+        
+        
+        .modal 
+        {
+        	    margin-left: -41%;
+        	   	width: 83%;
+        }
+        .left_info 	
+        {
+    		width: 52px;
+		}
+		.product_name
+		{
+			display:none;
+		}
+		.right_info 
+		{
+    		width: 80%;
+    		
+    		
+    	}
+    	.primary-btn 
+    	{
+    		width: 90%;
+		}
+		.icon-tick 
+		{
+			margin:4px;
+			height: 3px;
+    		width: 6px;
+		}
+    	.edit_circle 
+    	{
+    		height: 16px;
+   	 		width: 16px;
+   	 		margin: -30%;
+    	}
+    	.close_btn 
+    	{
+    		margin-top: -7.5%;
+    	}
+
+
+	
+}

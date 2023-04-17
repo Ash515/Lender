@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<auth-conf>
+
+	<AaaGenderHonorificList>
+		<AaaGenderHonorific gh_id="AaaGenderHonorific:gh_id:0"
+			gender="Male" honorific="Mr" />
+		<AaaGenderHonorific gh_id="AaaGenderHonorific:gh_id:1"
+			gender="Male" honorific="Dr" />
+		<AaaGenderHonorific gh_id="AaaGenderHonorific:gh_id:2"
+			gender="Male" honorific="Sir" />
+		<AaaGenderHonorific gh_id="AaaGenderHonorific:gh_id:3"
+			gender="Female" honorific="Ms" />
+		<AaaGenderHonorific gh_id="AaaGenderHonorific:gh_id:4"
+			gender="Female" honorific="Mrs" />
+		<AaaGenderHonorific gh_id="AaaGenderHonorific:gh_id:5"
+			gender="Female" honorific="Dr" />
+	</AaaGenderHonorificList>
+
+	<AaaPasswordRuleList>
+		<AaaPasswordRule passwdrule_id="AaaPasswordRule:passwdrule_id:0"
+			name="Normal" min_length="5" max_length="10" req_mixedcase="false"
+			numof_splchar="-1" beginwith_letter="false" loginname_indepndt="false" />
+		<AaaPasswordRule passwdrule_id="AaaPasswordRule:passwdrule_id:1"
+			name="Severe" min_length="7" max_length="12" req_mixedcase="true"
+			numof_splchar="1" beginwith_letter="true" loginname_indepndt="true" />
+		<AaaServicePasswordRule service_id="System"
+			passwdrule_id="AaaPasswordRule:passwdrule_id:0" />
+	</AaaPasswordRuleList>
+
+	<AaaPasswordProfileList>
+		<AaaPasswordProfile passwdprofile_id="AaaPasswordProfile:passwdprofile_id:0"
+			name="Profile 1" exp_after="15" expew_thres="3" login_afterexp="0"
+			update_interval="5" chpasswd_onfl="true" numof_oldpasswd="2" />
+		<AaaPasswordProfile passwdprofile_id="AaaPasswordProfile:passwdprofile_id:1"
+			name="Profile 2" exp_after="-1" expew_thres="-1" login_afterexp="-1"
+			update_interval="-1" chpasswd_onfl="false" numof_oldpasswd="-1" />
+	</AaaPasswordProfileList>
+
+	<AaaAccAdminProfileList>
+		<AaaAccAdminProfile accountprofile_id="AaaAccAdminProfile:accountprofile_id:0"
+			name="Profile 1" exp_after="30" deleteon_expiry="2" nvrlogin_explt="-1"
+			idle_session="-1" expew_thres="3" forceout_onexp="true" simul_login="1"
+			allowed_badlogin="3" lock_period="30" />
+		<AaaAccAdminProfile accountprofile_id="AaaAccAdminProfile:accountprofile_id:1"
+			name="Profile 2" exp_after="-1" deleteon_expiry="-1" nvrlogin_explt="-1"
+			idle_session="-1" expew_thres="-1" forceout_onexp="false"
+			simul_login="-1" allowed_badlogin="-1" lock_period="-1" />
+	</AaaAccAdminProfileList>
+
+	<!-- Organizations -->
+	<AaaContactInfo contactinfo_id="AaaContactInfo:contactinfo_id:0"
+		emailid="aaaadmin@adventnet.com" landline="+91 44 22431215" fax="+91 44 22431216"
+		web_url="www.adventnet.com" />
+	<AaaPostalAddress postaladdr_id="AaaPostalAddress:postaladdr_id:0"
+		door_no="11" street="sarathy nagar" location="vijaya nagar, Velachery"
+		landmark="Vijayanagar Bus Terminus" city="chennai" postalcode="600042"
+		state="TamilNadu" country="India" />
+	<AaaOrganization org_id="AaaOrganization:org_id:0"
+		name="AdventNet">
+		<AaaOrgDetail legalname="AdventNet Development Centre (I) Pvt Ltd"
+			alias="AdventNet" emp_count="400" />
+		<AaaOrgContactInfo contactinfo_id="AaaContactInfo:contactinfo_id:0" />
+		<AaaOrgPostalAddr postaladdr_id="AaaPostalAddress:postaladdr_id:0" />
+	</AaaOrganization>
+
+	<!-- Admin User -->
+	<AaaUser user_id="AaaUser:user_id:0" first_name="Administrator">
+		<AaaUserContactInfo contactinfo_id="AaaContactInfo:contactinfo_id:0" />
+		<AaaUserPostalAddr postaladdr_id="AaaPostalAddress:postaladdr_id:0" />
+		<AaaOrgUser org_id="AaaOrganization:org_id:0" />
+		<AaaOrgContactUser org_id="AaaOrganization:org_id:0" />
+		<AaaLogin login_id="AaaLogin:login_id:0" name="admin" />
+		<AaaUserProfile gh_id="AaaGenderHonorific:gh_id:0"
+			timezone="IST" language_code="en" country_code="US" />
+	</AaaUser>
+	<AaaAccount account_id="AaaAccount:account_id:0" login_id="AaaLogin:login_id:0"
+		service_id="System" accountprofile_id="AaaAccAdminProfile:accountprofile_id:1">
+		<AaaPassword password_id="AaaPassword:password_id:0"
+			password="Ok6/FqR5WtJY5UCLrnvjQQ==" algorithm="MD5" salt="12345678"
+			passwdprofile_id="AaaPasswordProfile:passwdprofile_id:1"
+			passwdrule_id="AaaPasswordRule:passwdrule_id:0" />
+		<AaaAccPassword password_id="AaaPassword:password_id:0" />
+		<AaaAccOwnerProfile allowed_subaccount="-1" />
+	</AaaAccount>
+
+	<!-- Guest User -->
+	<AaaContactInfo contactinfo_id="AaaContactInfo:contactinfo_id:1"
+		emailid="guest@adventnet.com" landline="+91 44 22431215" fax="+91 44 22431216"
+		web_url="www.adventnet.com" />
+	<AaaUser user_id="AaaUser:user_id:1" first_name="Guest">
+		<AaaUserPostalAddr postaladdr_id="AaaPostalAddress:postaladdr_id:0" />
+		<AaaOrgUser org_id="AaaOrganization:org_id:0" />
+		<AaaLogin login_id="AaaLogin:login_id:1" name="guest" />
+		<AaaUserContactInfo contactinfo_id="AaaContactInfo:contactinfo_id:1" />
+		<AaaUserProfile gh_id="AaaGenderHonorific:gh_id:0"
+			timezone="Asia/Singapore" language_code="en" country_code="AU" />
+	</AaaUser>
+	<AaaAccount account_id="AaaAccount:account_id:1" login_id="AaaLogin:login_id:1"
+		service_id="System" accountprofile_id="AaaAccAdminProfile:accountprofile_id:1">
+		<AaaPassword password_id="AaaPassword:password_id:1"
+			password="MbTFw0OVLeXyb6oIe9Z+GQ==" algorithm="MD5" salt="87654321"
+			passwdprofile_id="AaaPasswordProfile:passwdprofile_id:1"
+			passwdrule_id="AaaPasswordRule:passwdrule_id:0" />
+		<AaaAccPassword password_id="AaaPassword:password_id:1" />
+		<AaaAccOwnerProfile allowed_subaccount="0" />
+	</AaaAccount>
+
+</auth-conf>

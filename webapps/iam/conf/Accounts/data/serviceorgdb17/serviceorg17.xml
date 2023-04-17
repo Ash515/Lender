@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="streamlinesorgzaid" account_name="Zoho streamline Service Org">
+		<IAMAccountDomain domain="streamlinesorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="emailvalidatorsorgzaid" account_name="Zoho EmailValidator Service Org">
+		<IAMAccountDomain domain="emailvalidatorsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="trendssorgzaid" account_name="Zoho Trends Service Org">
+		<IAMAccountDomain domain="trendssorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="domainssorgzaid" account_name="Zoho Domains Service Org">
+		<IAMAccountDomain domain="domainssorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="bdaassorgzaid" account_name="Zoho BDaaS Service Org">
+		<IAMAccountDomain domain="bdaassorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

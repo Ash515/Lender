@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$ -->
+<formviews>
+
+	<ACElement name="DefaultInputElement" uicreator="com.adventnet.client.components.form.web.InputElementCreator">
+		<ACElementAttr attrname = "type" attrvalue="text"/>
+	</ACElement>	
+
+	<ACElement name="SimpleTextInput" uicreator="com.adventnet.client.components.form.web.InputElementCreator" validationmethod="isNotEmpty" alertmessage="Please enter value for ${COLUMNALIAS}">
+		<ACElementAttr attrname = "type" attrvalue="text"/>
+	</ACElement>	
+
+	<ACElement name="SimpleHiddenInput" uicreator="com.adventnet.client.components.form.web.InputElementCreator">
+		<ACElementAttr attrname = "type" attrvalue="hidden"/>
+	</ACElement>	
+
+	<ACElement name="MultipleRadioButtons" uicreator="com.adventnet.client.components.form.web.BooleanElementCreator" type="Radio">
+    <ACElementAttr attrname="type" attrvalue="radio"/>
+  </ACElement>
+	
+	<ACElement name="ApplyButton" uicreator="com.adventnet.client.components.form.web.ButtonElementCreator">
+    <ACElementAttr attrname="value" attrvalue="Apply"/>
+    <ACElementAttr attrname="type" attrvalue="submit"/>
+  </ACElement>
+	
+	<ACElement name="CreateButton" uicreator="com.adventnet.client.components.form.web.ButtonElementCreator">
+    <ACElementAttr attrname="value" attrvalue="Create"/>
+    <ACElementAttr attrname="type" attrvalue="submit"/>
+    <ACElementAttr attrname="name" attrvalue="Create"/>
+  </ACElement>
+
+	<ACElement name="CancelButton" uicreator="com.adventnet.client.components.form.web.ButtonElementCreator">
+    <ACElementAttr attrname="value" attrvalue="Cancel"/>
+		<ACElementAttr attrname="onClick" attrvalue="executeElementCall('disableEditMode', this)"/>
+  </ACElement>
+	
+	<ACElement name="ResetButton" uicreator="com.adventnet.client.components.form.web.ButtonElementCreator">
+    <ACElementAttr attrname="value" attrvalue="Reset"/>
+		<ACElementAttr attrname="onClick" attrvalue="executeElementCall('resetForm', this)"/>
+  </ACElement>
+
+  <ACElement name="SelectElement" uicreator="com.adventnet.client.components.form.web.SelectElementCreator" type="Select">
+		<!--ACElementAttr attrname="onChange" attrvalue="executeElementCall('handleOnChangeEvent', this)"/-->
+	</ACElement>
+
+	<ACElement name="TextAreaElement" uicreator="com.adventnet.client.components.form.web.TextAreaElementCreator">
+    <ACElementAttr attrname="rows" attrvalue="6"/>
+    <ACElementAttr attrname="cols" attrvalue="20"/>
+  </ACElement>
+
+	<ACElement name="NumericTextInput" uicreator="com.adventnet.client.components.form.web.InputElementCreator" validationmethod="isNumeric" alertmessage="Please enter numeric value for ${COLUMNALIAS}">
+		<ACElementAttr attrname = "type" attrvalue="text"/>
+	</ACElement>	
+
+	<ACElement name="EmailTextInput" uicreator="com.adventnet.client.components.form.web.InputElementCreator" validationmethod="isEmailId">
+		<ACElementAttr attrname = "type" attrvalue="text"/>
+	</ACElement>	
+
+	<ACElement name="StringTextInput" uicreator="com.adventnet.client.components.form.web.InputElementCreator" validationmethod="isValidString">
+		<ACElementAttr attrname = "type" attrvalue="text"/>
+	</ACElement>	
+
+	<ACElement name="UpdateCancelButton" uicreator="com.adventnet.client.components.form.web.ButtonPanelCreator">
+		<ACPanelElement childelement = "ApplyButton" buttonIndex="0"/>
+		<ACPanelElement childelement = "CancelButton" buttonIndex="1"/>
+	</ACElement>
+
+	<ACElement name="ResetCreateCancelButton" uicreator="com.adventnet.client.components.form.web.ButtonPanelCreator">
+		<ACPanelElement childelement = "CreateButton" buttonIndex="2"/>
+		<ACPanelElement childelement = "ResetButton" buttonIndex="1"/>
+		<ACPanelElement childelement = "CancelButton" buttonIndex="3"/>
+	</ACElement>
+
+</formviews>

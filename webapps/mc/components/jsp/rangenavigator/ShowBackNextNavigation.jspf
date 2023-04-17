@@ -1,0 +1,28 @@
+<%-- $Id$ --%>
+
+<%@ page import = "java.util.List, com.adventnet.client.components.rangenavigator.web.NavigationConfig" %>
+<%@ page import = "com.adventnet.i18n.I18N" %>
+<% 
+NavigationConfig nc = viewModel.getNavigationConfig();
+if(nc != null) 
+{%>
+	<table cellspacing="0" width="100%" cellpadding="0" class="botNavBg">
+	<tr>
+	<td class="botNavText">Showing 
+	<%out.print(nc.getFromIndex());//NO OUTPUTENCODING%> - <%out.print(nc.getToIndex());//NO OUTPUTENCODING%> of <%out.print(nc.getTotalRecords());//NO OUTPUTENCODING%></td><%--NO OUTPUTENCODING --%>
+	<td class="botNavLinks">
+ <% if(nc.getPageNumber() > 1){%>
+<span class="topnavilinks"><a href="javascript:showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>','<%out.print(nc.getPreviousPageIndex());//NO OUTPUTENCODING%>','<%out.print(nc.getPageNumber() - 1);//NO OUTPUTENCODING%>')">Back</a> |</span><%--NO OUTPUTENCODING --%>
+<% } else {%>
+<span class="topnavilinks"><%=IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.Back"))%> |</span>
+<% } %>
+<% if(nc.getPageNumber() < nc.getTotalPages()){%>
+<span class="topnavilinks"><a href="javascript:showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>', '<%out.print(nc.getNextPageIndex());//NO OUTPUTENCODING%>','<%out.print(nc.getPageNumber() + 1);//NO OUTPUTENCODING%>')">Next</a></span><%--NO OUTPUTENCODING --%>
+<% } else { %>
+<span class="topnavilinks"><%=IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.Next"))%></span>
+<% } %></span>
+ </td>
+</tr>
+</table>
+<% }%>
+

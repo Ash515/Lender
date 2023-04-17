@@ -1,0 +1,308 @@
+<?xml version="1.0"?>
+<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd">
+<!--<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd"> -->
+<data-dictionary name="Accounts">
+    <table name="IAMAccessControlProperties" display-name="ACP">
+        <description>Access Control configuration policy for a given resource and its respective owner . The list of users/groups allowed to access this resource will be added as Access Control Entry (ACE)s under this ACP</description>
+        <columns>
+            <column name="ACP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMAccessControlProperties.ACP_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="APP_ACCOUNT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="ACP_ID">
+                <description>
+                    Zoho ACP Identifier
+                </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RESOURCE_TYPE">
+                <description>The resource to be access controlled. For example "Document"</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&resource-name;</pattern>
+                </allowed-values>
+            </column>
+            <column name="RESOURCE_ID">
+                <description>Unique identifier of the instance of the resource, for example, a document named bio-data. 
+                    The default value "#ALL#" indicates the ACP is added for the resource type and is applicable for all instances.
+                    NOTE: NULL value cannot be used for this as UK constraint does not handle NULL as a unique value
+                    TODO: The Empty default values may create issues when migrated to  databases other than mysql.TBA
+                </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <default-value>ALL</default-value>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="INHERITANCE_FLAGS">
+                <description>Defines the inheritance policy from URI/resource parent ACPs based on bit flags 
+                    {ALLOW_INHERITANCE(Bit 0),INHERITANCE_ONLY(Bit 1)}
+                </description>
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+            </column>
+            <column name="OWNER_ZUID">
+                <description>Owner user , assigned by the user who creates the resource </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="OWNER_ZGID">
+                <description>Owner group/approle , assigned by the user who creates the resource </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ALLOW_ATTRIBUTES">
+                <description>The list of column indexes in the given table that can be specified in the ACEs by users who have modify permission on this ACP . IMPORTANT NOTE: This is dependant on the table column order</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>dontdisturb</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccessControlProperties_PK">
+            <primary-key-column>ACP_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccessControlProperties_FK1" reference-table-name="IAMAppAccount">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>APP_ACCOUNT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>APP_ACCOUNT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMAccessControlProperties_UK1">
+                <unique-key-column>ACP_ID</unique-key-column>
+            </unique-key>
+            <unique-key name="IAMAccessControlProperties_UK2">
+                <unique-key-column>APP_ACCOUNT_AUTO_ID</unique-key-column>
+                <unique-key-column>RESOURCE_TYPE</unique-key-column>
+                <unique-key-column>RESOURCE_ID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+
+    <table name="IAMAccessControlEntry" display-name="ACE">
+        <description>Specifies the respective resource access privileges granted /denied for a given user/group</description>
+        <columns>
+            <column name="ACP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ACE_INDEX">
+                <description>ACEs will be processed in this order.</description>
+                <data-type>INTEGER</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ACE_TYPE">
+                <description>Allow or deny access{ALLOW (1),  DENY (0)}</description>
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+                <nullable>false</nullable>
+            </column>
+            <column name="PRIVILEGE">
+                <description>
+                    Defines the access privileges based on bit flags  
+                    {GET(0),UPDATE(1),CREATE(2),DELETE(3),ALL(4)}
+                </description>
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+                <nullable>false</nullable>
+            </column>
+            <column name="ZID">
+                <description>Identifies the user who is granted/denied this privilege.
+                    Can be ZUID, ZGID, ZARID , ZAID , ZAAID (part of user credential)
+                    (or) Template ZIDs {self_zid , iam_zid , acp_secretkey_zid }
+                </description> 
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ATTRIBUTES">
+                <description>The list of column indexes in the given table for the scope of this ACE . 
+                    IMPORTANT NOTE: This is dependant on the table column order 
+                </description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>dontdisturb</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMAccessControlEntry_PK">
+            <primary-key-column>ACP_AUTO_ID</primary-key-column>
+            <primary-key-column>ACE_INDEX</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMAccessControlEntry_FK1" reference-table-name="IAMAccessControlProperties" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACP_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACP_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="IAMACPSecretKey" display-name="AcpSecret">
+        <description>Secret Key needed to access resource defined by ACP if "secret_key_zid" is defined in the respedtive ACP/ACE.</description>
+        <columns>
+            <column name="ACP_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="SECRET_KEY">
+                <description>The secret key to be matched against the one present in the AuthHeader</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&digest;</pattern>
+                </allowed-values>
+            </column>
+        </columns>
+        <primary-key name="IAMACPSecretKey_PK">
+            <primary-key-column>ACP_AUTO_ID</primary-key-column>
+            <primary-key-column>SECRET_KEY</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMACPSecretKey_FK" reference-table-name="IAMAccessControlProperties">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ACP_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ACP_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMACPSecretKey_UK">
+                <unique-key-column>SECRET_KEY</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>       
+        
+    <table name="IAMRoleAccessCheck" display-name="RoleAccessCheck">
+        <description>Roles with permitted resources</description>
+        <columns>
+            <column name="ROLE_AUTO_ID">
+                <data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+                    <generator-name>IAMRoleAccessCheck.ROLE_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="ROLE">
+                <description>The role of the person who is going to access </description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMRoleAccessCheck_PK">
+            <primary-key-column>ROLE_AUTO_ID</primary-key-column>
+        </primary-key>
+        <unique-keys>
+            <unique-key name="IAMRoleAccessCheck_UK">
+                <unique-key-column>ROLE</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+    
+        <table name="IAMRoleResourceMappings" display-name="RoleResourceMappings">
+        <description>Roles with permitted resources</description>
+        <columns>
+            <column name="ROLE_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>                
+            </column>
+            <column name="RESOURCE">
+                <description>The name of the resource which is going to changed </description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="OPERATIONS_ALLOWED">
+				<description>the set of comma seperated operations allowed of a particular resource for a particular</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <default-value>NONE</default-value>
+            </column>
+            <column name="INHERIT_ALLOWED">
+                <description>Will be set to false if the operation on child resources shouldn't be inherited from root resource</description>
+                <data-type>BOOLEAN</data-type>
+                <default-value>true</default-value>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMRoleResourceMappings_PK">
+            <primary-key-column>ROLE_AUTO_ID</primary-key-column>
+            <primary-key-column>RESOURCE</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMRoleResourceMappings_FK" reference-table-name="IAMRoleAccessCheck">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ROLE_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ROLE_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+</data-dictionary>

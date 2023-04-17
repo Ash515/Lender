@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Default ACP/ACE configuration entries to be loaded during every new account creation
+-->
+
+<IAMAccounts>
+    <IAMAccount zaid="referenceaccount" account_name="Reference Account">   
+        <!-- IAMAppAccount.ROLE_HIERRACHY ID has to be set  -->
+	<!-- IAMAppAccount.RESOURCE_HIERARCHY_ID="za_resource_hid" to be set by
+	     app account owner independently -->
+        <IAMAppAccount app_name="AaaServer" ZAAID="referencezaaid"   ROLE_HIERARCHY_ID="role_hid">
+    
+ <!-- ACP for ACP Type . This is independant and has no instance -->
+  <IAMAccessControlProperties RESOURCE_TYPE="acp" OWNER_ZGID="superadmin_role_zarid"  ACP_ID="acp-acp">
+      <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="1" ZID="user_role_zarid"/>
+      <IAMAccessControlEntry ACE_INDEX="1"  ACE_TYPE="1" PRIVILEGE="7" ZID="admin_role_zarid"/>
+    </IAMAccessControlProperties>
+    
+    <!-- ACCOUNT tree start -->
+    <IAMAccessControlProperties RESOURCE_TYPE="account" OWNER_ZGID="superadmin_role_zarid"  ACP_ID="account-acp">
+      <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="1" ZID="user_role_zarid"/>
+      <IAMAccessControlEntry ACE_INDEX="1"  ACE_TYPE="1" PRIVILEGE="7" ZID="admin_role_zarid"/>
+      <IAMAccessControlEntry ACE_INDEX="2"  ACE_TYPE="1" PRIVILEGE="4" ZID="captcha_validated_zid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="domain" ACP_ID="domain-acp" OWNER_ZGID="superadmin_role_zarid">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="invitation" ACP_ID="invitation-acp" OWNER_ZGID="superadmin_role_zarid">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="location" ACP_ID="location-acp" OWNER_ZGID="superadmin_role_zarid">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+    </IAMAccessControlProperties>
+
+    <IAMAccessControlProperties RESOURCE_TYPE="usage" ACP_ID="usage-acp" INHERITANCE_FLAGS="0">
+      <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="1" ZID="user_role_zarid"/>
+      <IAMAccessControlEntry ACE_INDEX="1"  ACE_TYPE="1" PRIVILEGE="1" ZID="admin_role_zarid"/>
+      <IAMAccessControlEntry ACE_INDEX="2"  ACE_TYPE="1" PRIVILEGE="1" ZID="superadmin_role_zarid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="announcements" ACP_ID="announcements-acp" OWNER_ZGID="superadmin_role_zarid" >
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>        
+       <IAMAccessControlEntry ACE_INDEX="1"  ACE_TYPE="1" PRIVILEGE="1" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+
+    <IAMAccessControlProperties RESOURCE_TYPE="policy" ACP_ID="policy-acp" OWNER_ZGID="superadmin_role_zarid" INHERITANCE_FLAGS="0">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+       <IAMAccessControlEntry ACE_INDEX="1"  ACE_TYPE="1" PRIVILEGE="1" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+ 
+    <IAMAccessControlProperties RESOURCE_TYPE="accountconfiguration" ACP_ID="accountconfiguration-acp" OWNER_ZGID="superadmin_role_zarid" INHERITANCE_FLAGS="0">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+    </IAMAccessControlProperties>
+
+    <IAMAccessControlProperties RESOURCE_TYPE="authdomain" ACP_ID="authdomain-acp" OWNER_ZGID="superadmin_role_zarid" INHERITANCE_FLAGS="0">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+    </IAMAccessControlProperties>
+  
+    <IAMAccessControlProperties RESOURCE_TYPE="userdomain" ACP_ID="userdomain-acp" OWNER_ZGID="superadmin_role_zarid" INHERITANCE_FLAGS="0">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>      
+       <IAMAccessControlEntry ACE_INDEX="1"  ACE_TYPE="1" PRIVILEGE="1" ZID="self_zid"/>      
+    </IAMAccessControlProperties>
+  
+    <IAMAccessControlProperties RESOURCE_TYPE="openid" ACP_ID="openid-acp" INHERITANCE_FLAGS="0">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="9" ZID="superadmin_role_zarid"/>    
+       <IAMAccessControlEntry ACE_INDEX="1"  ACE_TYPE="1" PRIVILEGE="9" ZID="admin_role_zarid"/>
+       <IAMAccessControlEntry ACE_INDEX="2"  ACE_TYPE="1" PRIVILEGE="9" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+
+    <IAMAccessControlProperties RESOURCE_TYPE="openidconsumer" ACP_ID="openidconsumer-acp" OWNER_ZGID="superadmin_role_zarid" INHERITANCE_FLAGS="0">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+    </IAMAccessControlProperties>
+
+    <IAMAccessControlProperties RESOURCE_TYPE="openidassoc" ACP_ID="openidassoc-acp" OWNER_ZGID="superadmin_role_zarid" INHERITANCE_FLAGS="0">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+    </IAMAccessControlProperties>
+
+    <IAMAccessControlProperties RESOURCE_TYPE="tag"  OWNER_ZGID="superadmin_role_zarid"  ACP_ID="tag-acp">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="self_zid"/>
+       <IAMAccessControlEntry ACE_INDEX="1"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+       <IAMAccessControlEntry ACE_INDEX="2"  ACE_TYPE="1" PRIVILEGE="1" ZID="user_role_zarid"/>
+    </IAMAccessControlProperties>
+ 
+    <IAMAccessControlProperties RESOURCE_TYPE="customfields"  OWNER_ZGID="superadmin_role_zarid" ACP_ID="customfields-acp">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="1" ZID="self_zid"/>
+       <IAMAccessControlEntry ACE_INDEX="1"  ACE_TYPE="1" PRIVILEGE="1" ZID="user_role_zarid"/>
+       <IAMAccessControlEntry ACE_INDEX="2"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+    </IAMAccessControlProperties>
+ 
+
+  <!-- Deny access for these resources  -->
+    <IAMAccessControlProperties RESOURCE_TYPE="mailstatusqueue" ACP_ID="mailstatusqueue-acp" INHERITANCE_FLAGS="0"/>
+    <IAMAccessControlProperties RESOURCE_TYPE="accounttemplate" ACP_ID="accounttemplate-acp" INHERITANCE_FLAGS="0"/>
+    <IAMAccessControlProperties RESOURCE_TYPE="abusecomplaint" ACP_ID="abusecomplaint-acp" INHERITANCE_FLAGS="0"/>
+    <IAMAccessControlProperties RESOURCE_TYPE="smsactivity" ACP_ID="smsactivity-acp" INHERITANCE_FLAGS="0"/>
+    <IAMAccessControlProperties RESOURCE_TYPE="smsbalance" ACP_ID="smsbalance-acp" INHERITANCE_FLAGS="0"/>
+    <IAMAccessControlProperties RESOURCE_TYPE="smsaudit" ACP_ID="smsaudit-acp" INHERITANCE_FLAGS="0"/>
+    <IAMAccessControlProperties RESOURCE_TYPE="secretkey" ACP_ID="secretkey-acp" INHERITANCE_FLAGS="0"/>
+    <IAMAccessControlProperties RESOURCE_TYPE="captcha" ACP_ID="captcha-acp" INHERITANCE_FLAGS="0"/>
+    <IAMAccessControlProperties RESOURCE_TYPE="verificationcode" ACP_ID="verificationcode-acp" INHERITANCE_FLAGS="0"/>
+   
+ <!-- User tree START --> 
+    <IAMAccessControlProperties RESOURCE_TYPE="user"  OWNER_ZGID="superadmin_role_zarid" ACP_ID="user-acp">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="self_zid"/>
+       <IAMAccessControlEntry ACE_INDEX="1"  ACE_TYPE="1" PRIVILEGE="1" ZID="user_role_zarid"/>
+       <IAMAccessControlEntry ACE_INDEX="2"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="screenname" ACP_ID="screenname-acp" OWNER_ZGID="superadmin_role_zarid">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="useremail" ACP_ID="useremail-acp" OWNER_ZGID="superadmin_role_zarid" ALLOW_ATTRIBUTES="0,2">
+       <IAMAccessControlEntry ACE_INDEX="1"  ACE_TYPE="1" PRIVILEGE="15" ATTRIBUTES="0,2" ZID="admin_role_zarid"/>
+       <IAMAccessControlEntry ACE_INDEX="2"  ACE_TYPE="1" PRIVILEGE="15" ATTRIBUTES="0,2" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="address" ACP_ID="address-acp" OWNER_ZGID="superadmin_role_zarid">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="properties" ACP_ID="properties-acp" OWNER_ZGID="superadmin_role_zarid">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="passwordhistory" ACP_ID="passwordhistory-acp" INHERITANCE_FLAGS="0"/>  
+    <IAMAccessControlProperties RESOURCE_TYPE="securityqa" ACP_ID="securityqa-acp" INHERITANCE_FLAGS="0"/>  
+    <IAMAccessControlProperties RESOURCE_TYPE="preference" ACP_ID="preference-acp" INHERITANCE_FLAGS="0"/>  
+  
+
+      <!-- Overrides higher ACP's by setting inhertance flag to false for password-->
+    <IAMAccessControlProperties RESOURCE_TYPE="password"  ALLOW_ATTRIBUTES="0" ACP_ID="password-acp"  INHERITANCE_FLAGS="0">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ATTRIBUTES="0" ZID="admin_role_zarid"/>
+       <IAMAccessControlEntry ACE_INDEX="1"  ACE_TYPE="1" PRIVILEGE="15" ATTRIBUTES="0" ZID="superadmin_role_zarid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="usermobile" ACP_ID="usermobile-acp" OWNER_ZGID="superadmin_role_zarid">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="usercustomfield" ACP_ID="usercustomfield-acp" OWNER_ZGID="superadmin_role_zarid">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="attribute" ACP_ID="attribute-acp" OWNER_ZGID="superadmin_role_zarid">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="userphoto" ACP_ID="userphoto-acp" OWNER_ZGID="superadmin_role_zarid">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+            
+    <IAMAccessControlProperties RESOURCE_TYPE="userauthorizedip" ACP_ID="userauthorizedip-acp" OWNER_ZGID="superadmin_role_zarid" INHERITANCE_FLAGS="0">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+       <IAMAccessControlEntry ACE_INDEX="1"  ACE_TYPE="1" PRIVILEGE="15" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="authtoken" ACP_ID="authtoken-acp"  INHERITANCE_FLAGS="0">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+            
+    <IAMAccessControlProperties RESOURCE_TYPE="oauthaccessgrant"  OWNER_ZGID="superadmin_role_zarid"  ACP_ID="oauthaccessgrant-acp" >
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="self_zid"/>
+       <IAMAccessControlEntry ACE_INDEX="1"  ACE_TYPE="1" PRIVILEGE="15" ZID="user_role_zarid"/>
+    </IAMAccessControlProperties>
+
+    <IAMAccessControlProperties RESOURCE_TYPE="trusteddomain"  ACP_ID="trusteddomain-acp"  INHERITANCE_FLAGS="0">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+
+<!-- User tree END -->
+
+<!--  Group tree START-->
+    <IAMAccessControlProperties RESOURCE_TYPE="group" ACP_ID="group-acp"  OWNER_ZGID="superadmin_role_zarid">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="groupinvitation" ACP_ID="groupinvitation-acp"  OWNER_ZGID="superadmin_role_zarid">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="1" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="groupproperties" ACP_ID="groupproperties-acp"  OWNER_ZGID="superadmin_role_zarid">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="1" ZID="self_zid"/>
+    </IAMAccessControlProperties>
+    
+    <IAMAccessControlProperties RESOURCE_TYPE="groupmember" ACP_ID="groupmember-acp" INHERITANCE_FLAGS="0">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="1" ZID="user_role_zarid"/>
+    </IAMAccessControlProperties>            
+<!-- Group tree END-->
+            
+    <IAMAccessControlProperties RESOURCE_TYPE="hierarchy" ACP_ID="hierarchy-acp"  OWNER_ZGID="superadmin_role_zarid" INHERITANCE_FLAGS="0">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+    </IAMAccessControlProperties>
+
+    <IAMAccessControlProperties RESOURCE_TYPE="logo" ACP_ID="logo-acp" OWNER_ZGID="superadmin_role_zarid">
+       <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+    </IAMAccessControlProperties>
+
+       <!--  "appaccount" tree START-->
+     <IAMAccessControlProperties RESOURCE_TYPE="appaccount" OWNER_ZGID="superadmin_role_zarid"  ACP_ID="appaccount-acp">
+        <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="1" ZID="user_role_zarid"/>
+        <IAMAccessControlEntry ACE_INDEX="1"  ACE_TYPE="1" PRIVILEGE="15" ZID="admin_role_zarid"/>
+     </IAMAccessControlProperties>
+     
+     <IAMAccessControlProperties RESOURCE_TYPE="rebrand" ACP_ID="rebrand-acp" INHERITANCE_FLAGS="0">
+        <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="1" ZID="user_role_zarid"/>
+     </IAMAccessControlProperties>
+      
+     <IAMAccessControlProperties RESOURCE_TYPE="rebrandl10n" ACP_ID="rebrandl10n-acp" INHERITANCE_FLAGS="0">
+        <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="1" ZID="user_role_zarid"/>
+     </IAMAccessControlProperties>
+      
+     <IAMAccessControlProperties RESOURCE_TYPE="license" ACP_ID="license-acp" INHERITANCE_FLAGS="0">
+        <IAMAccessControlEntry ACE_INDEX="0"  ACE_TYPE="1" PRIVILEGE="1" ZID="user_role_zarid"/>
+     </IAMAccessControlProperties>
+     <!-- DENY access to these resources -->
+     <IAMAccessControlProperties RESOURCE_TYPE="appusage" ACP_ID="appusage-acp" INHERITANCE_FLAGS="0"/>  
+     <IAMAccessControlProperties RESOURCE_TYPE="userusage" ACP_ID="userusage-acp" INHERITANCE_FLAGS="0"/>
+     <IAMAccessControlProperties RESOURCE_TYPE="accountattribute" ACP_ID="accountattribute-acp" INHERITANCE_FLAGS="0"/>  
+     <IAMAccessControlProperties RESOURCE_TYPE="accountresource" ACP_ID="accountresource-acp" INHERITANCE_FLAGS="0"/>  
+    <!--  "appaccount" tree END-->
+  <!-- ACCOUNT tree END -->
+   </IAMAppAccount>
+    </IAMAccount>
+</IAMAccounts>

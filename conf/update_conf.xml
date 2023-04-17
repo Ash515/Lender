@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id$ -->
+<properties>
+	<property name="ProductName" value="AdventNetMickeyLite" />
+	<property name="SubProductName" value="SERVER" />
+	<property name="ProductVersion" value="1.0.0" />
+	<property name="HelpXmlFilePath" value="help/updatehelp.xml" />
+	<property name="HelpHtmlFilePath" value="help/updatehelp.html" />
+	<!--Specify the Font here -->
+	<property name="Font" value="Arial" />
+	<!--Specify the Language here -->
+	<property name="Language" value="en" />
+	<!--Specify the Country here -->
+	<property name="Country" value="US" />
+	<!--Specify the properties file here -->
+	<property name="PropertiesFileName" value="resources/UpdateManagerResources" />
+	<!--Specify true to enable deployment tool -->
+	<property name="EnableDeploymentTool" value="false" />
+	<Log>
+		<!-- Implementaion class of UpdateManagerLogInterface -->
+		<Class>com.adventnet.tools.update.installer.log.UpdateManagerLogImpl</Class>
+		<property name="FileName" value="updatemgrlog.txt" />
+		<property name="MaxLines" value="1000" />
+		<property name="FileCount" value="10" />
+		<property name="MaxLinesCached" value="0" />
+		<property name="LogsDirectory" value="logs" />
+		<property name="UseTimeStamp" value="false" />
+	</Log>
+</properties>

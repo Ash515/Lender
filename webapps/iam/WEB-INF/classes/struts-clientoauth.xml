@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- $Id: $ -->
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+  "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+ 	<package name="clientoauth" namespace="/clientoauth" extends="struts-default">
+		<action name="v2/{pid:[0-9]+}/auth" class="com.zoho.accounts.actions.oauth2.client.ClientUserOAuth" method="handelGetRequest" >
+		 	<result name="success">/oauth/jsp/ui/showGrantPage.jsp</result>
+			<result name="error">/oauth/jsp/ui/showErrorPage.jsp</result>
+			<result name="redirect">/oauth/jsp/ui/redirectToPage.jsp</result>
+		</action>
+		
+		<action name="v2/{pid:[0-9]+}/mobile/auth" class="com.zoho.accounts.actions.oauth2.client.ClientUserOAuth" method="handelMobileAppGetRequest" />
+		
+		<action name="v2/{pid:[0-9]+}/default/mobile/auth" class="com.zoho.accounts.actions.oauth2.OAuthMobileAction" method="handelClientPortalMobileAppGetRequest" >
+			<result name="success">/oauth/jsp/ui/showGrantPage.jsp</result>
+			<result name="error">/oauth/jsp/ui/showErrorPage.jsp</result>
+			<result name="redirect">/oauth/jsp/ui/redirectToPage.jsp</result>
+			</action>
+		
+		<action name="v2/{pid:[0-9]+}/mobile/remote/auth" class="com.zoho.accounts.actions.oauth2.client.ClientUserOAuth" method="handelMobileAppRemoteLogin" />
+
+		<action name="v2/{pid:[0-9]+}/token" class="com.zoho.accounts.actions.oauth2.client.ClientUserOAuth" method="handelAccessTokenRequest" />
+		<action name="v2/{pid:[0-9]+}/getcertificates" class="com.zoho.accounts.actions.oauth2.client.ClientUserOAuth" method="getCertificate" />
+		<action name="v2/{pid:[0-9]+}/token/revoke" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="revokeToken" />
+
+		<action name="v2/{pid:[0-9]+}/approve" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelAppove" />
+		<action name="v2/{pid:[0-9]+}/reject" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelReject" />
+				
+		<action name="v2/{pid:[0-9]+}/remote/auth" class="com.zoho.accounts.actions.oauth2.client.ClientUserOAuth" method="handelClientTokenRemoteLogin" />
+		<action name="v2/{pid:[0-9]+}/auth/refresh">
+			<result>/oauth/jsp/ui/showImplicitTokenRefresh.jsp</result>
+		</action>
+		<action name="v2/{pid:[0-9]+}/token/scopeenhance" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="handelUserUpdateScopeRequest"/>
+		<action name="v2/{pid:[0-9]+}/token/addextrascope" class="com.zoho.accounts.actions.oauth2.OAuthUserAction" method="enhanceUserTokenScopes">
+			<result name="success">/oauth/jsp/ui/showGrantPage.jsp</result>
+			<result name="error">/oauth/jsp/ui/showErrorPage.jsp</result>
+			<result name="redirect">/oauth/jsp/ui/redirectToPage.jsp</result>
+		</action>
+		<action name="v2/{pid:[0-9]+}/authtooauth" class="com.zoho.accounts.actions.oauth2.client.ClientUserOAuth" method="handelAuthToOAuth"/>
+		<action name="v2/{pid:[0-9]+}/native/token" class="com.zoho.accounts.actions.oauth2.client.ClientUserOAuth" method="handelNativeMobileAppToken"/> 
+		<action name="v2/{pid:[0-9]+}/user/info" class="com.zoho.accounts.actions.oauth2.client.ClientUserOAuth" method="getProfileInfo"/> 
+		<!-- <action name="v3/device">
+			<result>/oauth/jsp/ui/showdevice.jsp</result>
+		</action>
+		<action name="v3/device/approve/sucess">
+			<result>/oauth/jsp/ui/showapprovesucess.jsp</result>
+		</action>
+		<action name="v3/device/reject/sucess">
+			<result>/oauth/jsp/ui/showrejectsucess.jsp</result>
+		</action> 
+		<action name="v3/{pid:[0-9]+}/device/approve" class="com.zoho.accounts.actions.oauth2.client.ClientUserOAuth" method="handelDeviceAppove" />
+		<action name="v3/{pid:[0-9]+}/device/reject" class="com.zoho.accounts.actions.oauth2.client.ClientUserOAuth" method="handelDeviceReject" />
+		<action name="v3/{pid:[0-9]+}/device/token" class="com.zoho.accounts.actions.oauth2.client.ClientUserOAuth" method="handelPollResponse" /> -->
+	</package>
+</struts>

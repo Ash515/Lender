@@ -1,0 +1,188 @@
+<%-- $Id$--%>
+<%@page import="com.zoho.accounts.AccountsConfiguration"%>
+<%@page import="com.adventnet.iam.servlet.Confirmation"%>
+<%@page import="com.zoho.accounts.AccountsConstants"%>
+<%@page import="com.zoho.accounts.AccountsConstants.AccountType"%>
+<%@page import="com.zoho.accounts.Accounts"%>
+<%@page import="com.zoho.accounts.internal.OpenIDUtil"%>
+<%@page import="com.zoho.accounts.Accounts.AccountURI"%>
+<%@page import="com.zoho.accounts.AccountsProto.Account"%>
+<%@page import="com.zoho.accounts.AccountsProto.Account.User"%>
+<%@page import="com.adventnet.iam.Service"%>
+<%@page import="com.adventnet.iam.internal.EnterpriseUtil"%>
+<%@page import="com.adventnet.iam.EnterpriseDomain"%>
+<%@page import="com.adventnet.iam.IAMUtil"%>
+<%@page import="com.adventnet.iam.UserEmail"%>
+<%@page import="com.adventnet.iam.internal.Util"%>
+<%@page import="com.zoho.iam2.rest.CSPersistenceAPIImpl"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.logging.Logger"%>
+<%@page import="java.util.logging.Level"%>
+<%@page import="org.json.JSONObject"%>
+<%!
+    //IMPORTANT NOTES:
+    //1. " This is to be accessed only via internal IPS. So "internal"="true" MUST be added
+    // for this URL in security-internal.xml.
+    //2. DO NOT insert this feature into sso.zp as it is accesed via external domains
+    Logger logger  = Logger.getLogger("internal.sso.zp");
+%>
+<%
+    // Check if matches expected ipaddress
+    String ipAddress = request.getRemoteAddr();
+    if(!IAMUtil.isPrivateIP(ipAddress)) {
+        sendError("IP Not Allowed :" + ipAddress, response);
+        return;
+    }
+
+    String apikey = request.getParameter("apikey");
+    String operation = request.getParameter("operation");
+    if(!Util.isValid(apikey) && !"adddomain".equals(operation)) {
+        sendError("APIKey parameter missing", response);
+        return;
+    }
+
+    if(!Util.isValid(operation)) {
+        sendError("Operation parameter missing", response);
+        return;
+    }
+
+    //Domain entry checked for given APIKey.
+    EnterpriseDomain etrDomain = EnterpriseUtil.getEnterpriseDomainByApikey(apikey.trim());
+    if(etrDomain == null || (etrDomain.getEDType() != EnterpriseDomain.SSOP && etrDomain.getEDType() != EnterpriseDomain.ZOHO_API)) {
+        sendError("Invalid APIKey", response);
+        return;
+    }
+
+    //Domain status checked for requested APIKey.
+    if(!etrDomain.isActive()) {
+        sendError("APIKey not active", response);
+        return;
+    }
+
+    String customerDomain = etrDomain.getDomainName();
+    try {
+    	String clientZaid = request.getParameter("client"); /* Will be passed for client users. If sent the user will be added in the client space*/
+		if(clientZaid != null && !clientZaid.isEmpty()) {
+			String acpSecret = request.getParameter("acpsecret");
+			CSPersistenceAPIImpl.ssopHandleClientUser(clientZaid, request, response, acpSecret, etrDomain);
+			return;
+		}
+    
+        if(operation.equals("signup")) {
+            String loginName = request.getParameter("login_name");
+            String emailId = request.getParameter("email");
+            String password = request.getParameter("password");
+            String firstName = request.getParameter("full_name");
+            String tenantid = request.getParameter("tid");
+            if(IAMUtil.isValid(tenantid)){
+            try{
+            User.Builder userBuilder = User.newBuilder().setIdp(AccountsConstants.IdentityProvider.AZURE.dbValue());
+            User user = userBuilder.build();
+            Account account = Account.newBuilder().setAccountType(AccountType.PERSONAL.name()).addUser(user).build();
+            AccountURI accuri = Accounts.getAccountURI().POST(account);
+            String zaid = accuri.getResourceInstance();
+            User cuser = Accounts.getUserURI(zaid).GET();
+        	String zuid = cuser.getZuid();
+	        OpenIDUtil.addOpenId(zaid, zuid, tenantid, tenantid, AccountsConstants.IdentityProvider.AZURE.dbValue());
+            JSONObject json = new JSONObject();
+            json.put("zuid", zuid);
+            sendSuccessResponseData(json,response);
+            return;
+            } catch (Exception e) {
+                sendError(e, response);
+                return;
+            }
+            }
+            
+            if(!Util.isValid(emailId) && !Util.isValid(firstName)) {
+                sendError("Invalid Input", response);
+                return;
+            }
+            if(!IAMUtil.isValidEmailId(emailId)) {
+                sendError("Invalid EmailId", response);
+                return;
+            }
+            if(Util.isValid(password) && (password.length() < Util.getUserPasswordDefaultMinLength() || password.length() > Util.getUserPasswordDefaultMaxLength())) {
+            	sendError("Password length should be " + Util.getUserPasswordDefaultMinLength() + " to " + Util.getUserPasswordDefaultMaxLength() + " characters", response); //NO OUTPUTENCODING //No I18N
+            	return;
+            }
+            
+			String language = request.getParameter("language");
+			language = Util.isValid(language) ? language.trim() : null;
+			String country = request.getParameter("country");
+			country = Util.isValid(country) ? country.trim() : null;
+			String timezone = request.getParameter("timezone");
+			timezone = Util.isValid(timezone) ? timezone.trim() : null;
+            String remoteIPAddress = IAMUtil.getRemoteUserIPAddress(request);
+            try {
+                    String res = null;
+                    if(etrDomain.getEDType() == EnterpriseDomain.ZOHO_API) {
+						//Added this to add each users in separate account space. mainly for payments reseller account creation flow
+						res = Util.addPersonalUser(emailId, loginName, password, firstName, firstName, country, language, timezone, remoteIPAddress, customerDomain, request.getHeader("User-Agent"));
+						if(res.startsWith("SUCCESS") && Util.isValid(password)) {
+							try {
+							if("true".equalsIgnoreCase(AccountsConfiguration.getConfiguration("partner.send.confirmation", "false"))){
+							    language = language == null ? Util.getSupportedLanguageCode(language) : language;
+								Confirmation.SEND(emailId, language, ipAddress);
+								}else{
+								CSPersistenceAPIImpl.changeUserEmailStatus(emailId, UserEmail.CONFIRMED_PRIMARY);
+								}
+							}catch(Exception e) {
+								logger.log(Level.WARNING, null, e);
+							}
+						}
+                    } 
+                    if(res.startsWith("SUCCESS")) {
+                    	sendSuccessResponse(response);
+                    } else {
+                        sendError(res, response);
+                    }
+                    return;
+            } catch (Exception e) {
+                sendError(e, response);
+                return;
+            }
+        } else {
+        	sendError("Unsupported operation specified", response);
+        }
+       } finally {
+    }
+%>
+<%!
+    
+    public void sendSuccessResponse(HttpServletResponse response){
+        Map m  = new HashMap();
+        m.put("result", "success");
+        sendResult(m, response);
+    }
+
+    public void sendError(Throwable t, HttpServletResponse response){
+        logger.log(Level.WARNING, null, t);
+        String cause = t == null ? "unknown" : t.getMessage();
+        sendError(cause, response);
+    }
+
+    public void sendError(String cause, HttpServletResponse response){
+        Map m  = new HashMap();
+        m.put("result", "failure");
+        m.put("cause", cause);
+        sendResult(m, response);
+    }
+
+    public void sendResult(Map m , HttpServletResponse response){
+        try{
+            response.getWriter().println(new JSONObject(m).toString());
+        }catch(Exception e){
+            logger.log(Level.WARNING, null, e);
+        }
+        return;
+    }
+    
+    public void sendSuccessResponseData(JSONObject data, HttpServletResponse response){
+        Map m  = new HashMap();
+        m.put("data",data);
+        m.put("result", "success");
+        sendResult(m, response);
+    }
+%>

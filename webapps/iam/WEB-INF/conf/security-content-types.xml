@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security.xsd">
+
+	<!-- It contains a group of relevant, safe and use-case specific content-types together. -->
+
+	<content-types>
+	
+		<content-type name="zsec-browser-supported-safe-image-files">
+			<value>image/png</value>
+			<value>image/gif</value>
+			<value>image/tiff</value>
+			<value>image/bmp</value>
+			<value>image/jpeg</value>
+			<value>image/jpm</value>
+			<value>image/jpx</value>
+			<value>image/jp2</value>
+			<value>image/x-jp2-container</value>
+			<value>image/x-jp2-codestream</value>
+			<value>image/vnd.microsoft.icon</value>
+			<value>image/webp</value>
+		</content-type>
+		
+		<content-type name="zsec-safe-image-files" extends="zsec-browser-supported-safe-image-files">
+			<value>image/aces</value>
+			<value>image/cgm</value>
+			<value>image/emf</value>
+			<value>image/fits</value>
+			<value>image/wmf</value>
+			<value>image/emf</value>
+			<value>image/wmf</value>
+			<value>image/vnd.adobe.photoshop</value>
+			<value>image/vnd.djvu</value>
+			<value>image/vnd.dwg</value>
+			<value>image/vnd.ms-modi</value>
+			<value>image/vnd.zbrush.pcx</value>
+			<value>image/g3fax</value>
+			<value>image/ief</value>
+			<value>image/vnd.dxf</value>
+			<value>image/vnd.fastbidsheet</value>
+			<value>image/vnd.fpx</value>
+			<value>image/vnd.fst</value>
+			<value>image/vnd.fujixerox.edmics-mmr</value>
+			<value>image/vnd.fujixerox.edmics-rlc</value>
+			<value>image/vnd.net-fpx</value>
+			<value>image/vnd.wap.wbmp</value>
+			<value>image/vnd.xiff</value>
+			<value>image/prs.btif</value>
+			<value>image/vnd.dxf; format=ascii</value>
+			<value>image/webp</value>
+			<value>image/x-bpg</value>
+			<value>image/x-pict</value>
+			<value>image/x-xcf</value>
+			<value>image/x-freehand</value>
+			<value>image/x-tga</value>
+			<value>image/icns</value>
+			<value>image/x-rgb</value>
+			<value>image/x-portable-graymap</value>
+			<value>image/nitf</value>
+			<value>image/vnd.dxf; format=binary</value>
+			<value>image/x-portable-bitmap</value>
+			<value>image/x-dpx</value>
+			<value>image/x-portable-pixmap</value>
+			<value>image/x-niff</value>
+			<value>image/x-xbitmap</value>
+			<value>image/x-jbig2</value>
+			<value>image/vnd.zbrush.dcx</value>
+			<value>image/vnd.adobe.premiere</value>
+			<value>image/vnd.dxb</value>
+			<value>image/x-raw-fuji</value>
+			<value>image/x-raw-mamiya</value>
+			<value>image/x-raw-rawzor</value>
+			<value>image/x-raw-pentax</value>
+			<value>image/x-raw-kodak</value>
+			<value>image/x-raw-canon</value>
+			<value>image/x-raw-adobe</value>
+			<value>image/x-raw-leaf</value>
+			<value>image/x-raw-sigma</value>
+			<value>image/x-emf-compressed</value>
+			<value>image/x-raw-casio</value>
+			<value>image/x-xwindowdump</value>
+			<value>image/x-raw-imacon</value>
+			<value>image/x-cmu-raster</value>
+			<value>image/x-raw-epson</value>
+			<value>image/x-raw-red</value>
+			<value>image/x-raw-panasonic</value>
+			<value>image/x-raw-minolta</value>
+			<value>image/x-portable-anymap</value>
+			<value>image/x-raw-phaseone</value>
+			<value>image/x-xpixmap</value>
+			<value>image/x-cmx</value>
+			<value>image/x-raw-nikon</value>
+			<value>image/x-raw-sony</value>
+			<value>image/x-raw-olympus</value>
+			<value>image/x-raw-hasselblad</value>
+			<value>image/x-raw-logitech</value>
+		</content-type>
+		
+		<content-type name="zsec-safe-audio-files">
+			<value>audio/amr</value>
+			<value>audio/amr-wb</value>
+			<value>audio/basic</value>
+			<value>audio/mp4</value>
+			<value>audio/mpeg</value>
+			<value>audio/opus</value>
+			<value>audio/prs.sid</value>
+			<value>audio/speex</value>
+			<value>audio/vorbis</value>
+			<value>audio/ogg</value>
+			<value>audio/vnd.digital-winds</value>
+			<value>audio/vnd.dts</value>
+			<value>audio/vnd.dts.hd</value>
+			<value>audio/vnd.lucent.voice</value>
+			<value>audio/vnd.ms-playready.media.pya</value>
+			<value>audio/vnd.nuera.ecelp4800</value>
+			<value>audio/vnd.nuera.ecelp7470</value>
+			<value>audio/vnd.nuera.ecelp9600</value>
+			<value>audio/x-flac</value>
+			<value>audio/x-aiff</value>
+			<value>audio/x-oggpcm</value>
+			<value>audio/x-adpcm</value>
+			<value>audio/x-dec-basic</value>
+			<value>audio/midi</value>
+			<value>audio/x-dec-adpcm</value>
+			<value>audio/x-aac</value>
+			<value>audio/x-mod</value>
+			<value>audio/x-pn-realaudio</value>
+			<value>audio/x-ms-wma</value>
+			<value>audio/x-mpegurl</value>
+			<value>audio/x-oggflac</value>
+			<value>audio/x-caf</value>
+			<value>audio/vnd.wave</value>
+			<value>audio/x-matroska</value>
+			<value>audio/vnd.adobe.soundbooth</value>
+			<value>audio/x-pn-realaudio-plugin</value>
+			<value>audio/adpcm</value>
+			<value>audio/x-ms-wax</value>
+		</content-type>
+		
+		<content-type name="zsec-safe-video-files">
+			<value>video/3gpp</value>
+			<value>video/3gpp2</value>
+			<value>video/mj2</value>
+			<value>video/mp4</value>
+			<value>video/mpeg</value>
+			<value>video/quicktime</value>
+			<value>video/h261</value>
+			<value>video/h263</value>
+			<value>video/h264</value>
+			<value>video/jpeg</value>
+			<value>video/ogg</value>
+			<value>video/vnd.fvt</value>
+			<value>video/vnd.mpegurl</value>
+			<value>video/vnd.ms-playready.media.pyv</value>
+			<value>video/vnd.vivo</value>
+			<value>video/x-ogguvs</value>
+			<value>video/x-ms-asf</value>
+			<value>video/x-mng</value>
+			<value>video/x-oggrgb</value>
+			<value>video/x-matroska</value>
+			<value>video/x-jng</value>
+			<value>video/x-ms-wmv</value>
+			<value>video/x-oggyuv</value>
+			<value>video/x-flv</value>
+			<value>video/x-ogm</value>
+			<value>video/x-msvideo</value>
+			<value>video/x-m4v</value>
+			<value>video/x-sgi-movie</value>
+			<value>video/daala</value>
+			<value>video/x-dirac</value>
+			<value>video/theora</value>
+			<value>video/x-f4v</value>
+			<value>video/x-ms-wvx</value>
+			<value>video/x-flc</value>
+			<value>video/x-fli</value>
+			<value>video/x-ms-wmx</value>
+			<value>video/webm</value>
+			<value>video/x-ms-wm</value>
+		</content-type>
+
+	</content-types>
+</security>

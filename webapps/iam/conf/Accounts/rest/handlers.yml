@@ -1,0 +1,1605 @@
+## Extended Handler Details are captured in this document.
+## Column Level handler will have DOT + Column Name (DOT in the beginning of the column name) as identifier.
+## Table Name will be the identifier for the Table Level handler.
+## Table Name and Column Name handler identifier will have DOT in between Table / Column name.
+## Eg:-
+##    Column Name Level handler       = `.REGISTERED_TIME`
+##    Table Level handler             = `IAMUser`
+##    Table and Column Level handler  = `IAMUserPassword.SALT`
+---
+name: HandlerDetails
+
+classes :
+    - com.zoho.accounts.handler.ZIDGenerationHandler
+    - com.zoho.accounts.handler.AutoPermaLinkHandler
+    - com.zoho.accounts.handler.LoginNameHandler
+    - com.zoho.accounts.handler.TimestampHandler
+    - com.zoho.accounts.handler.DomainNameHandler
+    - com.zoho.accounts.handler.SegmentationHandler
+    - com.zoho.accounts.handler.AppAccountHandler
+    - com.zoho.accounts.handler.PasswordHandler
+    - com.zoho.accounts.handler.EmailHandler
+    - com.zoho.accounts.handler.AccountHandler
+    - com.zoho.accounts.handler.GroupHandler
+    - com.zoho.accounts.handler.TokenHandler
+    - com.zoho.accounts.handler.SecretKeyHandler
+    - com.zoho.accounts.handler.UserHandler
+    - com.zoho.accounts.handler.CreatedByHandler
+    - com.zoho.accounts.handler.AccountIDHandler
+    - com.zoho.accounts.handler.CustomFieldHandler
+    - com.zoho.accounts.handler.CommonHandler
+    - com.zoho.accounts.handler.IPHandler
+    - com.zoho.accounts.handler.ReferenceDataHandler
+    - com.zoho.accounts.handler.CodeHandler
+    - com.zoho.accounts.handler.UserMobileHandler
+    - com.zoho.accounts.mail.MailTypeHandler
+    - com.zoho.accounts.handler.OperationHandler
+    - com.zoho.accounts.handler.AutomationHandler
+    - com.zoho.accounts.handler.InvitationHandler
+    - com.zoho.accounts.handler.AppHandler
+    - com.zoho.accounts.handler.UserSystemPropertiesHandler
+    - com.zoho.accounts.handler.UserAgentHandler
+    - com.zoho.accounts.handler.DigestHandler
+    - com.zoho.accounts.handler.LicenseHandler
+    - com.zoho.accounts.handler.AccountJoinRequestsHandler
+    - com.zoho.accounts.handler.OrgPolicyHandler
+    - com.zoho.accounts.handler.AntiSpamHandler
+    - com.zoho.accounts.handler.ServiceOrgHandler
+    - com.zoho.accounts.handler.AuditHandler
+    - com.zoho.accounts.handler.RoleCheckHandler
+    - com.zoho.accounts.handler.AccountsSettingsHandler
+    - com.zoho.accounts.handler.CacheHandler
+    - com.zoho.accounts.handler.AppAccountSyncHandler
+    - com.zoho.accounts.handler.CentralOrgHandler
+    - com.zoho.accounts.handler.GeoDCHandler
+    - com.zoho.accounts.handler.OAuthHandler
+    - com.zoho.accounts.handler.SamlHandler
+    - com.zoho.accounts.handler.ExceptionHandler
+    - com.zoho.accounts.handler.OAuthSyncHandler
+    - com.zoho.accounts.handler.LocationHandler
+    - com.zoho.accounts.handler.OAuthDetailsHandler
+    - com.zoho.accounts.handler.AuthDomainHandler
+    - com.zoho.accounts.handler.UserDeviceHandler
+
+handlers:
+
+  PRE_ACTION:
+
+    .EMAIL_ID:
+      POST:
+        - CommonHandler.toLowerCase
+        - CommonHandler.trim       
+
+      PUT:
+        - CommonHandler.toLowerCase
+        - CommonHandler.trim
+     
+    .SCREEN_NAME:
+      POST:
+        - CommonHandler.toLowerCase
+        - CommonHandler.trim
+        
+      PUT:
+        - CommonHandler.toLowerCase
+        - CommonHandler.trim
+
+    .APP_SCREEN_NAME:
+      POST:
+        - CommonHandler.toLowerCase
+      PUT:
+        - CommonHandler.toLowerCase
+
+    .MODIFIED_TIME:
+      PUT:
+        - TimestampHandler.getCurrentTimeMillis
+
+    .CREATED_BY:
+      POST:
+        - CreatedByHandler.getCurrentUserZUID
+
+    .CREATED_TIME:
+      POST:
+        - TimestampHandler.getCurrentTimeMillis
+
+    .REGISTERED_TIME:
+      POST:
+        - TimestampHandler.getCurrentTimeMillis
+
+    .LANGUAGE_CODE:
+      POST:
+        - CommonHandler.handleLanguageCode
+      PUT:
+        - CommonHandler.handleLanguageCode
+
+    .USER_AGENT:
+      POST:
+        - UserAgentHandler.trimUserAgent
+        
+    .LAST_ACCESSED_TIME:
+      POST:
+        - TimestampHandler.getCurrentTimeMillis
+      PUT:
+        - TimestampHandler.getCurrentTimeMillis
+    .IP_AUDIT_INFO:
+      POST:
+        - CommonHandler.getCurrentIpInfo
+      PUT:
+        - CommonHandler.getCurrentIpInfo
+
+#    Configuration.CONFIG_NAME:
+#      POST:
+#        - CommonHandler.checkSimpleString
+#      PUT:
+#        - CommonHandler.checkSimpleString
+
+    AppAccount:
+      POST:
+        - ZIDGenerationHandler.generateZAAID
+        - AppAccountHandler.setAppAccountScreenName
+        - AppAccountHandler.checkAppAccountPermission
+        - OrgPolicyHandler.checkAllowedAppAccountCount
+        - AppAccountHandler.checkForServiceType
+        - AppAccountSyncHandler.syncAddAppAccountToAppAccService
+        - AppAccountHandler.checkAndPostClientPortalOrgType
+      PUT:
+        - AppAccountHandler.checkForServiceType 
+        
+    AppAccount.PARENT_ZAAID:
+      POST:
+        - AppAccountHandler.handleParentAppAccount
+      PUT:  
+        - AppAccountHandler.handleParentAppAccount
+        
+    AppAccount.DIRECTORY_ZAAID:
+      POST:
+        - AppAccountHandler.handleDirectoryAppAccount 
+      PUT:  
+        - AppAccountHandler.handleDirectoryAppAccount
+    
+    AppAccountService:
+      POST:
+        - AppAccountHandler.checkAppAccountPermission
+        - OrgPolicyHandler.checkAllowedAppAccountCount
+      PUT:
+        - AppAccountHandler.checkAppAccountPermission
+
+    ResourceAction.RESOURCE_ACTION_ID:
+      POST:
+        - ZIDGenerationHandler.handleLongId
+
+    ResourceMapping.RESOURCE_MAPPING_ACTION_ID:
+      POST:
+        - ZIDGenerationHandler.handleLongId
+
+
+    EmailAction.EMAIL_ACTION_ID:
+      POST:
+        - ZIDGenerationHandler.handleLongId
+
+    NotifyAction.URL_ACTION_ID:
+      POST:
+        - ZIDGenerationHandler.handleLongId
+
+    Location.IS_PRIMARY:
+      POST:
+        - LocationHandler.checkPrimaryLocation
+      PUT:
+        - LocationHandler.checkPrimaryLocation
+
+    Location:
+      POST:
+        - AutoPermaLinkHandler.handlePermaLink
+      PUT:
+        - AutoPermaLinkHandler.handlePermaLink
+
+    SecurityQA:
+      POST:
+        - AutoPermaLinkHandler.handlePermaLink
+      PUT:
+        - AutoPermaLinkHandler.handlePermaLink
+
+    OpenId:
+      POST:
+        - AutoPermaLinkHandler.handlePermaLink
+        - GeoDCHandler.addOpenID
+      PUT:
+        - AutoPermaLinkHandler.handlePermaLink
+        
+    OpenId.OPEN_ID:
+      PUT:
+        - GeoDCHandler.updateOpenID
+        
+    ACP.ACP_ID:
+      POST:
+        - ZIDGenerationHandler.handleStringId
+
+    App.APP_ID:
+      POST:
+        - ZIDGenerationHandler.handleStringIdWithMigCheck
+    
+    App.APP_CODE:
+      POST:
+        - AppHandler.setAppCode
+
+    AppAllowedMethods:
+      POST:
+       - AppHandler.hashMethodName
+      PUT:
+       - AppHandler.hashMethodName
+
+    SecretKey:
+      POST:
+        - SecretKeyHandler.generateSecretKey
+      PUT:
+        - SecretKeyHandler.addPreviousSecretKey
+
+    AppSystemRole.ROLE_ID:
+      POST:
+        - CommonHandler.handleRoleId
+
+    Captcha:
+      POST:
+        - CommonHandler.generateCaptcha
+
+    Group:
+      POST:
+        - GroupHandler.groupTypeCheck
+    GroupMember:
+      POST:
+        - GroupHandler.validateGroupTypeForMember
+        - GroupHandler.addUserDetailsToGroupMember
+        - GroupHandler.linkZGIDToParentGroup
+        - GroupHandler.checkForDepartmentGroupType
+
+    GroupMember.IS_MODERATOR:
+      PUT:
+        - GroupHandler.checkForDepartmentGroupType
+
+    GroupInvitation:
+      POST:
+        - GroupHandler.addUserDetailsToGroupInvitation
+      PUT:
+        - GroupHandler.addUserDetailsToGroupInvitation
+
+    GroupProperties:
+      POST:
+        - GroupHandler.checkForGroupProperty
+      PUT:
+        - GroupHandler.checkForGroupProperty
+        
+    Account:
+      POST:
+        - SegmentationHandler.segmentAccount
+        - OrgPolicyHandler.checkOrgAllowedChildOrgs
+      PUT:
+        - OrgPolicyHandler.checkOrgAllowedChildOrgs
+                
+    UserEmail:
+      POST:
+        - AntiSpamHandler.handleAddEmail
+        - EmailHandler.addUserEmail
+        - OrgPolicyHandler.checkAllowedNoOfAliasEmail
+        - GeoDCHandler.addUserEmail
+        - EmailHandler.checkForBlockedDomain        
+      DELETE:
+        - EmailHandler.deleteUserEmail
+
+    UserEmail.EMAIL_ID:
+      POST:
+        - EmailHandler.isValidEmailId
+        - OrgPolicyHandler.isUserAllowedToChangePrimaryOrAddSecondary
+      PUT:
+        - OrgPolicyHandler.isUserAllowedToChangePrimaryOrAddSecondary
+        - EmailHandler.updateUserEmail
+        - GeoDCHandler.updateUserEmail
+        
+    UserEmail.IS_PRIMARY:
+      PUT:
+        - EmailHandler.updatePrimaryEmail
+       
+    Group.ZGID:
+      POST:
+        - ZIDGenerationHandler.generateZGID
+
+    Group.GROUP_TYPE:
+      POST:
+        - GroupHandler.validateGroupType
+      PUT:
+        - GroupHandler.validateGroupType
+
+    AuthToken:
+      POST:
+        - TokenHandler.generateUserToken
+
+    AuthToken.TOKEN_ID:
+      POST:
+        - ZIDGenerationHandler.handleLongIdWithMigCheck
+
+    Scope.SCOPE_ID:
+      POST:
+        - ZIDGenerationHandler.handleStringIdWithMigCheck
+
+    Domain:
+      POST:
+        - DomainNameHandler.handleNewDomain
+        - DomainNameHandler.checkPrimaryDomains
+        - DomainNameHandler.checkParentDomainForAlias
+        - SegmentationHandler.segmentAccountDomain
+        - OrgPolicyHandler.checkAllowedNoOfDomains
+        - AntiSpamHandler.handleAddDomain
+        - GeoDCHandler.addDomain
+      PUT:
+        - DomainNameHandler.checkPrimaryDomains
+        - AntiSpamHandler.handleAddDomain
+      DELETE:
+        - DomainNameHandler.handleDeleteDomain
+         
+    Domain.DOMAIN:
+      PUT:
+        - GeoDCHandler.updateDomain
+
+    Domain.IS_VERIFIED:
+      PUT:
+        - DomainNameHandler.setVerificationDate
+
+    Password:
+      POST:
+        - PasswordHandler.digestUserPassword
+
+    Password.PASSWORD:
+      PUT:
+        - PasswordHandler.digestChangeUserPassword
+
+    Account.ZAID:
+      POST:
+        - ZIDGenerationHandler.generateZIDWithMigCheck
+
+    ScreenName:
+      POST:
+        - AntiSpamHandler.handleAddUserName
+        - GeoDCHandler.addScreenName
+        - LoginNameHandler.handleAddScreenName
+      PUT:
+        - LoginNameHandler.handleUpdateScreenName
+    
+    ScreenName.SCREEN_NAME:
+      PUT:
+        - GeoDCHandler.updateScreenName
+
+    MobileScreenName:
+      POST:
+        - GeoDCHandler.addMobileScreenName
+        - LoginNameHandler.handleAddMobileScreenName
+      PUT:
+        - LoginNameHandler.handleUpdateMobileScreenName
+    
+    MobileScreenName.MOBILE_SCREEN_NAME:
+      PUT:
+        - GeoDCHandler.updateMobileScreenName
+
+    User.USER_STATUS:
+      PUT:
+        - UserHandler.isIAMAdminToActivateSpam
+
+    User:
+      POST:
+        - UserHandler.handleAddUser
+        - AntiSpamHandler.handleAddUser
+      PUT:
+        - AppAccountHandler.checkisAppAccount
+      DELETE:
+        - AppAccountHandler.checkisAppAccount
+        - UserHandler.checkIsUserInPaidSubscription
+        
+    User.COUNTRY_CODE:
+      PUT:
+        - UserHandler.validateCountryCode
+        
+    User.FIRST_NAME:
+      PUT:
+        - OrgPolicyHandler.isUserAllowedToChangeFullName
+        - AntiSpamHandler.handleAddFullName
+        
+    User.REFERRER:
+      PUT:
+        - UserHandler.checkReferrerUpdate
+
+    User.LAST_NAME:
+      PUT:
+        - OrgPolicyHandler.isUserAllowedToChangeFullName
+
+    UserMobile:
+      POST:
+        - UserMobileHandler.setVerificationCode
+        - UserMobileHandler.isUserAllowedToConfigureSMSAuthMode
+        
+    UserMobile.IS_VERIFIED:
+      POST:
+        - UserMobileHandler.checkAddMobileCount
+      PUT:
+        - UserMobileHandler.checkAddMobileCount
+        
+    UserMobile.MODE:
+      PUT:
+        - UserMobileHandler.isUserAllowedToConfigureSMSAuthMode
+
+    UserDevice.SETUP_MODE:
+      POST:
+        - UserMobileHandler.isUserAllowedToConfigureMFAAuthMode
+      PUT:
+        - UserMobileHandler.isUserAllowedToConfigureMFAAuthMode
+
+    UserDevice:
+      POST:
+        - AutoPermaLinkHandler.handlePermaLink
+        - UserDeviceHandler.handleGenerateSecret
+      PUT:
+        - AutoPermaLinkHandler.handlePermaLink
+        - UserDeviceHandler.handleGenerateSecret
+        
+    CustomFields:
+      POST:
+        - CustomFieldHandler.assignNextAvailableColumn
+
+    Role.ZARID:
+      POST:
+        - ZIDGenerationHandler.handleGenerateZID
+
+    UserLocation.ACCOUNT_AUTO_ID:
+      POST:
+        - AccountIDHandler.handleAccountId
+      PUT:
+        - AccountIDHandler.handleAccountId
+
+    User.ZUID:
+      POST:
+        - ZIDGenerationHandler.generateZUID
+        
+    InvitationDetails.APPACCOUNT_INVITATION_ID:
+      POST:
+        - ZIDGenerationHandler.handleStringId
+
+    AppPassword.PASSWORD_ID:
+      POST:
+        - ZIDGenerationHandler.handleStringId
+
+    AppPassword.PASSWORD:
+      POST:
+        - PasswordHandler.digestUserAppPassword
+
+    Listener.LAST_NOTIFIED_TIME:
+      POST:
+        - TimestampHandler.getCurrentTimeMillis
+
+    UserAuthorizedIp:
+      POST:
+        - IPHandler.handleUserAuthorizedIpIpid
+
+    UserAuthorizedIp.MODIFIED_TIME:
+      POST:
+        - TimestampHandler.getCurrentTimeMillis
+      PUT:
+        - TimestampHandler.getCurrentTimeMillis
+    
+    AuthorizedIp:
+      POST:
+        - IPHandler.handleAuthorizedIpIpid
+
+    AuthorizedIp.MODIFIED_TIME:
+      POST:
+        - TimestampHandler.getCurrentTimeMillis
+      PUT:
+        - TimestampHandler.getCurrentTimeMillis
+
+    AuthSecret:
+      POST:
+        - SecretKeyHandler.generateAuthSecretKey
+      DELETE:
+        - SecretKeyHandler.handleDeleteAuthSecretKey
+
+    UserDomain:
+      POST:
+         - CommonHandler.checkUserDomainZIDExists
+        
+    UserDomain.ACCOUNT_AUTO_ID:
+      POST:
+        - AccountIDHandler.handleAccountId
+        
+    ISCTicket:
+      POST:
+        - TokenHandler.handleAddIAMISCUserTicket
+        
+    OrgUPAuthToken:
+      POST:
+        - TokenHandler.handleAddIAMOrgUPAuthToken
+
+    AuthDomainSignup.EMAIL:
+      POST:
+        - CommonHandler.toLowerCase
+      PUT:
+        - CommonHandler.toLowerCase
+
+    AccountCloseAudit.USERNAME:
+      POST:
+        - CommonHandler.toLowerCase
+      PUT:
+        - CommonHandler.toLowerCase
+
+    UserName.USER_NAME:
+      POST:
+        - CommonHandler.toLowerCase
+      PUT:
+        - CommonHandler.toLowerCase
+
+    Partner.PARTNER_EMAILID:
+      POST:
+        - CommonHandler.toLowerCase
+      PUT:
+        - CommonHandler.toLowerCase
+
+    AccountCloseAudit.REGISTERED_TIME:
+      POST:
+        - TimestampHandler.checkAndGetCurrentTimeMillis
+
+    Operation.OPERATION_ID:
+      POST:
+        - ZIDGenerationHandler.handleStringId
+
+    UserVerificationCode.VCID:
+      POST:
+        - ZIDGenerationHandler.handleStringIdWithMigCheck
+
+    RecoveryCode.RECOVERY_CODE:
+      POST:
+        - CodeHandler.generateRecoveryCode
+
+    Invitation.EMAIL_ID:
+      POST:
+        - InvitationHandler.validateInviteEmailId
+        
+    ServiceOrgInvitation.EMAIL_ID:
+      POST:
+        - InvitationHandler.validateInviteEmailId
+
+    Digest:
+      POST:
+        - DigestHandler.handleAddDigest
+      DELETE :
+        - DigestHandler.handleDeleteDigestFromApps
+        - DigestHandler.notifyTeamsForCrossOrg
+        
+    InvitationDetails:
+      POST:
+        - InvitationHandler.validateAppNameandRole
+      PUT:
+        - InvitationHandler.validateAppNameandRole
+        - InvitationHandler.checkInvitationDetailsAndResend
+        - InvitationHandler.increaseInvdetResendLimit
+
+    AccountMember:
+      POST:
+        - LicenseHandler.checkAppAccountLicense
+        - AppAccountHandler.checkParentAccount
+        - AppAccountHandler.checkParentAppAccount
+        - AppAccountHandler.checkUserType
+    
+    AccountMember.USER_TYPE:
+      POST:
+        - AppAccountHandler.verifyMemberUserType
+      PUT:
+        - AppAccountHandler.verifyMemberUserType
+
+    AccountMember.IS_ACTIVE:
+      POST:
+        - AppAccountHandler.verifyMemberStatus
+      PUT:
+        - AppAccountHandler.verifyMemberStatus
+
+    AccountMember.ZARID:
+      POST:
+        - AppAccountHandler.checkZARID
+      PUT:
+        - AppAccountHandler.checkZARID
+
+    AccountMemberRole.ZARID:
+      POST:
+        - AppAccountHandler.checkZARID
+
+    AccountMember.IS_ACTIVE:
+      PUT:
+        - LicenseHandler.checkAppAccountLicenseForUserActivation
+
+    Operation:
+      POST:
+        - OperationHandler.checkOperationalDataExists
+
+    AppPassword:
+      POST:
+        - UserMobileHandler.handleGenerateTFAAppPasswords
+      PUT:
+        - UserMobileHandler.handleGenerateTFAAppPasswords
+
+    RecoveryCode:
+      POST:
+        - UserMobileHandler.handleGenerateTFARecoveryCodes
+      PUT:
+        - UserMobileHandler.handleGenerateTFARecoveryCodes
+
+    AppAccountLicense:
+     POST:
+        - LicenseHandler.checkDataTypeForAppAccountLicense
+     PUT:
+        - LicenseHandler.checkDataTypeForAppAccountLicense
+        - LicenseHandler.checkUserCountForDowngrade
+
+    License:
+     POST:
+        - LicenseHandler.synctoAppAccountLicense
+     PUT:
+        - LicenseHandler.synctoAppAccountLicense
+     DELETE:
+        - LicenseHandler.synctoAppAccountLicense
+
+    UserSecretKey:
+      POST:
+        - UserMobileHandler.isUserAllowedToConfigureGAAuthMode
+
+    UserSecretKey.TOKEN_ID:
+      POST:
+        - ZIDGenerationHandler.handleLongId
+
+    AccountAudit.CREATED_TIME:
+      POST:
+        - TimestampHandler.checkAndGetCurrentTimeMillis
+        
+    AccountAuditTemplate.CREATED_TIME:
+      POST:
+        - TimestampHandler.checkAndGetCurrentTimeMillis
+
+    RegistrationAudit.CREATED_TIME:
+      POST:
+        - TimestampHandler.checkAndGetCurrentTimeMillis
+        
+    RegistrationAuditTemplate.CREATED_TIME:
+      POST:
+        - TimestampHandler.checkAndGetCurrentTimeMillis
+
+    AccountCloseAudit.CREATED_TIME:
+      POST:
+        - TimestampHandler.checkAndGetCurrentTimeMillis
+
+    APIAudit.CREATED_TIME:
+      POST:
+        - TimestampHandler.checkAndGetCurrentTimeMillis
+        
+    APIAuditTemplate.CREATED_TIME:
+      POST:
+        - TimestampHandler.checkAndGetCurrentTimeMillis
+        
+    AccountJoinRequests:
+      POST:
+        - AccountJoinRequestsHandler.checkCurrentUser
+      PUT:
+        - AccountJoinRequestsHandler.checkCurrentUser
+    Invitation:
+      POST:
+        - InvitationHandler.checkCurrentUserIsConfirmed
+        - InvitationHandler.checkAndAddCurrentUserZuid
+        - OrgPolicyHandler.checkOrgAllowedToInviteMoreUsers
+        - RoleCheckHandler.checkAllowedRoleForAccountInvitation
+      PUT:
+        - InvitationHandler.checkCurrentUserIsConfirmed
+        - InvitationHandler.checkInvitationStatusAndResend
+        - InvitationHandler.increaseResendLimit
+    
+    Invitation.ARGS_DATA:
+      POST:
+        - InvitationHandler.removeUnwantedArgsData
+      PUT:
+        - InvitationHandler.removeUnwantedArgsData
+        
+    ServiceOrgInvitation:
+      POST:
+        - InvitationHandler.checkCurrentUserIsConfirmed
+        - InvitationHandler.checkAndAddCurrentUserZuidForSorg
+        - InvitationHandler.increaseSorgInvResendLimit
+      PUT:
+        - InvitationHandler.checkCurrentUserIsConfirmed
+        - InvitationHandler.checkInvitationStatusAndResendForSorg
+        - InvitationHandler.increaseSorgInvResendLimit
+    
+    ServiceOrgInvitation.ARGS_DATA:
+      POST:
+        - InvitationHandler.removeUnwantedArgsData
+      PUT:
+        - InvitationHandler.removeUnwantedArgsData
+        
+    InvitationDetails.ARGS_DATA:
+      POST:
+        - InvitationHandler.removeUnwantedArgsData
+      PUT:
+        - InvitationHandler.removeUnwantedArgsData
+
+    AppAnnouncement.ANNOUNCEMENT_ID:
+      POST:
+        - ZIDGenerationHandler.handleStringIdWithMigCheck
+
+    AppAnnouncement.CLASS_NAME:
+      POST:
+        - CommonHandler.checkClassName
+      PUT:
+        - CommonHandler.checkClassName
+
+    ServiceOrgType.ORG_TYPE:
+      POST:
+        - ServiceOrgHandler.validateOrgType
+      PUT:
+        - ServiceOrgHandler.validateOrgType
+
+    ServiceOrg.ZSOID:
+      POST:
+        - ZIDGenerationHandler.generateZIDWithMigCheck
+
+    ServiceOrg:
+      POST:
+        - ServiceOrgHandler.verifyOwner
+        - ServiceOrgHandler.updateAdminRole
+
+    ServiceOrgSubService.ORG_TYPE:
+      POST:
+        - ServiceOrgHandler.validateOrgOrgSubServiceType
+      PUT:
+        - ServiceOrgHandler.validateOrgType    
+
+    ServiceOrgSubService:
+      POST:
+        - ServiceOrgHandler.verifyOwnerforSubSubService
+        - ServiceOrgHandler.updateAdminRoleforSubSubService
+      PUT:
+        - ServiceOrgHandler.handleCloseServiceOrg
+        
+    ServiceOrgSubService.PARENT_ZAAID:
+      POST:
+        - ServiceOrgHandler.handleParentAppAccount 
+      PUT:  
+        - ServiceOrgHandler.handleParentAppAccount
+
+    ServiceOrgSubService.DIRECTORY_ZAAID:
+      POST:
+        - ServiceOrgHandler.handleDirectoryAppAccount 
+      PUT:  
+        - ServiceOrgHandler.handleDirectoryAppAccount
+    
+    ServiceOrgDomain.ZSOID:
+      POST:
+        - ServiceOrgHandler.verifyZSOID
+      PUT:
+        - ServiceOrgHandler.verifyZSOID
+
+    ServiceOrgDomain.DOMAIN:
+      POST:
+        - ServiceOrgHandler.validateDomain
+      PUT:
+        - ServiceOrgHandler.validateDomain
+
+    ServiceOrgMember:
+      POST:
+        - ServiceOrgHandler.verifyMember
+        - ServiceOrgHandler.checkParentAppAccount
+        - ServiceOrgHandler.addServiceOrgMemberToAppAccount
+        - CentralOrgHandler.validateClosedOrgUserInOtherSOrgs
+
+    ServiceOrgMember.USER_TYPE:
+      POST:
+        - ServiceOrgHandler.verifyMemberUserType
+      PUT:
+        - ServiceOrgHandler.verifyMemberUserType
+
+    ServiceOrgMember.IS_ACTIVE:
+      POST:
+        - ServiceOrgHandler.verifyMemberStatus
+      PUT:
+        - ServiceOrgHandler.verifyMemberStatus
+            
+    ServiceOrgZAID:
+      POST:
+        - ServiceOrgHandler.verifyZAID
+        
+    UserServiceDetails:
+      POST:
+        - UserHandler.checkDefaultAppAccount
+    
+    UserServiceDetails.IS_ACTIVE:
+      POST:
+        - AntiSpamHandler.checkIAMAdminForSpamUserActivation
+      PUT:
+        - AntiSpamHandler.checkIAMAdminForSpamUserActivation
+    
+    Preference.NEWS_LETTER_SUBSCRIPTION:
+      POST:
+        - UserHandler.normaliseNewsletterSubscriptionMode
+      PUT:
+        - UserHandler.normaliseNewsletterSubscriptionMode
+    
+    AccountAudit.TOKEN_DIGEST:
+      POST:
+        - AuditHandler.digestToken
+        
+    AccountAuditTemplate.TOKEN_DIGEST:
+      POST:
+        - AuditHandler.digestToken
+        
+    APIAudit.TOKEN_DIGEST:
+      POST:
+        - AuditHandler.digestToken
+        
+    APIAuditTemplate.TOKEN_DIGEST:
+      POST:
+        - AuditHandler.digestToken
+
+    ServiceOrgAccountMapping.ACCOUNT_ID:
+      POST:
+        - ZIDGenerationHandler.handleLongId
+        
+    AppAccountPreference.SHORT_DATE_FORMAT:
+      POST:
+        - AccountsSettingsHandler.validateDateFormat 
+      PUT:
+        - AccountsSettingsHandler.validateDateFormat 
+
+    AppAccountPreference.MEDIUM_DATE_FORMAT:
+      POST:
+        - AccountsSettingsHandler.validateDateFormat 
+      PUT:
+        - AccountsSettingsHandler.validateDateFormat 
+    
+    AppAccountPreference.LONG_DATE_FORMAT:
+      POST:
+        - AccountsSettingsHandler.validateDateFormat 
+      PUT:
+        - AccountsSettingsHandler.validateDateFormat 
+    
+    AppAccountPreference.SHORT_TIME_FORMAT:
+      POST:
+        - AccountsSettingsHandler.validateTimeFormat 
+      PUT:
+        - AccountsSettingsHandler.validateTimeFormat
+    
+    AppAccountPreference.MEDIUM_TIME_FORMAT:
+      POST:
+        - AccountsSettingsHandler.validateTimeFormat 
+      PUT:
+        - AccountsSettingsHandler.validateTimeFormat
+    
+    AppAccountPreference.LONG_TIME_FORMAT:
+      POST:
+        - AccountsSettingsHandler.validateTimeFormat 
+      PUT:
+        - AccountsSettingsHandler.validateTimeFormat
+        
+    AppAccountFinancialSettings.CURRENCY_CODE:
+      POST:
+        - AccountsSettingsHandler.validateCurrencyCode
+      PUT:
+        - AccountsSettingsHandler.validateCurrencyCode
+    
+    AppAccountFinancialSettings.CURRENCY_FORMAT:
+      POST:
+        - AccountsSettingsHandler.validateCurrencyFormat
+      PUT:
+        - AccountsSettingsHandler.validateCurrencyFormat
+
+    OAuthClient.CLIENT_ZID:
+      POST:
+        - OAuthHandler.generateZIDWithMigCheck
+        
+    OAuthClient.ZID:
+      POST:
+        - OAuthHandler.checkZid
+      PUT:
+        - OAuthHandler.updateZid
+
+    OAuthClient:
+      POST:
+        - OAuthHandler.setClientCredentials
+        - AutoPermaLinkHandler.handlePermaLink
+      PUT:
+        - AutoPermaLinkHandler.handlePermaLink
+        - OAuthHandler.recreateOAuthClientSecret
+        
+
+    OAuthRedirectURL:
+      POST:
+        - AutoPermaLinkHandler.handlePermaLink
+      PUT:
+        - AutoPermaLinkHandler.handlePermaLink
+        
+    OAuthJavaScriptDomains:
+      POST:
+        - AutoPermaLinkHandler.handlePermaLink
+        - OAuthHandler.checkJSDomainPattern
+      PUT:
+        - AutoPermaLinkHandler.handlePermaLink
+        - OAuthHandler.checkJSDomainPattern
+
+    OAuthGrantToken:
+      POST:
+        - OAuthHandler.setGrantTokenInfo
+
+    OAuthRefreshToken:
+      POST:
+        - OAuthHandler.setRefreshTokenInfo
+        - OAuthHandler.checkAndRemoveOldRefreshToken
+      DELETE:
+        - OAuthHandler.auditDeleteRefreshToken
+
+    OAuthAccessToken:
+      POST:
+        - OAuthHandler.setAccessTokenInfo
+        - OAuthHandler.checkLimitForInternal
+      DELETE:
+        - OAuthHandler.decrementCountfromCache
+        
+    OAuthDeviceToken:
+      POST:
+        - OAuthHandler.setDeviceTokenInfo
+
+    OAuthApiToken:
+      POST:
+        - OAuthHandler.setOAuthApiTokenInfo
+        - OAuthHandler.checkLimitOnApiToken
+        
+    OAuthClientScopes:
+      POST:
+        - OAuthHandler.checkIsScopeCompatable
+      PUT:
+        - OAuthHandler.checkIsScopeCompatable
+        
+    OAuthDcDetails:
+      POST:
+        - OAuthHandler.handelPOSTCrossDcSync
+      DELETE:
+        - OAuthHandler.handelDELETECrossDcSync
+        
+    UserAllDomainsToken:
+      DELETE:
+        - TokenHandler.ignoreMonitorTokenPairDeletion
+        
+    UserAllDomainsToken.TOKEN:
+      POST:
+        - TokenHandler.generateADToken
+        
+    UserBaseDomainToken:
+      POST:
+        - TokenHandler.generateBDToken
+        
+    TokenPairAuthToken.AUTH_TOKEN:
+      POST:
+        - TokenHandler.generateTokenPairAuthToken
+    
+    TokenPairAuthToken:
+      DELETE:
+        - TokenHandler.deleteWidgetAccessToken
+        
+    Saml:
+      POST:
+        - OrgPolicyHandler.checkVaildCertificate
+        - OrgPolicyHandler.generateSAMLCertificate
+      PUT:
+        - OrgPolicyHandler.checkVaildCertificate
+        - OrgPolicyHandler.generateSAMLCertificate
+        
+
+    SAMLApp:
+      POST:
+        - OrgPolicyHandler.checkRoleForSAML
+        - SamlHandler.checkZidType
+      PUT:  
+        - OrgPolicyHandler.checkRoleForSAML
+        - SamlHandler.checkZidType
+      DELETE:
+        - OrgPolicyHandler.checkRoleForSAML
+
+    SAMLApp.APP_ID:
+      POST:
+        - ZIDGenerationHandler.generateZIDWithMigCheck
+
+    SAMLSpApp.APP_ID:
+      POST:
+        - ZIDGenerationHandler.generateZIDWithMigCheck
+        
+        
+    SAMLUser:
+      POST:
+        - OrgPolicyHandler.checkRoleForSAML
+        - OrgPolicyHandler.checkOrgOfSamlUser
+      PUT:
+        - OrgPolicyHandler.checkRoleForSAML
+
+    ShortenURL:
+      POST:
+        - CommonHandler.generateShortenURL
+
+    Designations.DESIGNATION_ID:
+      POST:
+        - ZIDGenerationHandler.generateZIDWithMigCheck
+
+    AuthorizedDevices.API_TOKEN:
+      POST:
+        - AuthDomainHandler.generateDeviceAPIToken
+        
+    AuthorizedDevices:
+      PUT:
+        - AuthDomainHandler.regenerateDeviceAPIToken
+    
+    PortalMapping:
+      POST:
+        - AppAccountHandler.verifyType
+        - AppAccountHandler.validateDomain
+        - AppAccountHandler.verifyZAID
+      PUT:
+        - AppAccountHandler.verifyType
+        - AppAccountHandler.validateDomain
+        
+    PortalMapping.ZAAID:
+      POST:
+        - AppAccountHandler.verifyZAAID
+      PUT:
+        - AppAccountHandler.verifyZAAID
+        
+    PortalAccountMapping.ACCOUNT_ID:
+      POST:
+        - ZIDGenerationHandler.handleLongId
+
+    OAuthMobileUserDevice:
+       POST:
+         - OAuthHandler.handelDeviceDetails
+       PUT:
+         - OAuthHandler.handelDeviceDetails
+
+    OneAuthPreference:
+       POST:
+         - PasswordHandler.digestUserPassphrase
+       PUT:
+         - PasswordHandler.digestUserPassphrase
+
+    MFAPolicy.ALLOWED_MODES:
+       POST:
+        - AuthDomainHandler.validateMFAModes
+       PUT:
+        - AuthDomainHandler.validateMFAModes
+
+    SAMLSpAppAttribute:
+      POST:
+        - AutoPermaLinkHandler.handlePermaLink
+      PUT:
+        - AutoPermaLinkHandler.handlePermaLink
+        
+    UserExtendedInfo:
+      POST:
+        - UserHandler.handleUserExtendedInfo
+      PUT:
+        - UserHandler.handleUserExtendedInfo
+
+    JWTConfiguration:
+      POST:
+       - AuthDomainHandler.handleJWTAlgBasedKey
+      PUT:
+       - AuthDomainHandler.handleJWTAlgBasedKey
+
+  POST_ACTION:
+
+    UserSystemProperties.SPAM_CHECK_STATUS:
+      POST:
+        - UserSystemPropertiesHandler.handleServiceDeactivationForSpamUser
+      PUT:
+        - UserSystemPropertiesHandler.handleServiceDeactivationForSpamUser
+
+    ISCTicket:
+      DELETE:
+        - TokenHandler.handleDeleteIAMISCUserTicket
+
+    DCLocation:
+      POST:
+        - GeoDCHandler.generateDCPrivateKey
+        
+    Account:
+      POST:
+        - AccountHandler.handleCreateAccountPostAction
+        - AccountHandler.updateSystemParentZAID
+      PUT:
+        - AccountHandler.updateSystemParentZAID
+      DELETE:
+        - AccountHandler.handlePostDeleteAccount
+        - AccountHandler.handleDeleteAccount
+
+    AppAccount:
+      POST:
+        - AppAccountHandler.auditAppAccountAddition
+        - ReferenceDataHandler.copyDefaultAppAccountData
+        - AppAccountSyncHandler.syncUpdateAppAccountToAppAccService
+      PUT:
+        - AppAccountSyncHandler.syncUpdateAppAccountToAppAccService
+        - AppAccountHandler.clearServiceCacheForAppAccount
+      DELETE:
+        - AppAccountHandler.auditAppAccountDeletion
+        - AppAccountHandler.deleteAppAccount
+        - AppAccountHandler.deleteExternalData
+        - AppAccountHandler.clearServiceCacheForAppAccount
+        
+    Role:
+      POST:
+        - CommonHandler.clearAppRoleCache
+        
+    AppAccountService:
+      PUT:
+        - AppAccountHandler.clearSyncForAppAccountService
+        - AppAccountHandler.clearServiceCacheForAppAccountService
+      DELETE:
+        - AppAccountHandler.clearSyncForAppAccountService
+        - AppAccountHandler.clearServiceCacheForAppAccountService
+
+    AppAccountPolicy:
+      POST:
+        - AppAccountHandler.clearServiceCacheForAppAccountPolicy
+      PUT:
+        - AppAccountHandler.clearServiceCacheForAppAccountPolicy
+      DELETE:
+        - AppAccountHandler.clearServiceCacheForAppAccountPolicy    
+
+    AccountMember:
+      POST:
+        - AppAccountHandler.auditAccountMemberAddition
+        - AppAccountHandler.clearServiceCacheForAccountMember
+        - AppAccountHandler.syncMembersToAppAccount
+        - AppAccountHandler.notifyDirectoryAccountUsers
+      PUT:
+        - AppAccountHandler.clearServiceCacheForAccountMember
+      DELETE:
+        - AppAccountHandler.auditAccountMemberDeletion
+        - AppAccountHandler.clearServiceCacheForAccountMember
+        - AppAccountHandler.deleteInSyncAccountMember
+        - AppAccountHandler.updateDeafaultAppAccount
+
+    AccountMember.ZARID:
+      POST:
+        - AppAccountHandler.populateZARID
+      PUT:
+        - AppAccountHandler.populateZARID
+
+    AccountMemberRole:
+      POST:
+       - AppAccountHandler.updateRoleToAccountMember
+      DELETE:
+       - AppAccountHandler.populateZARID
+       - AppAccountHandler.updateRoleToAccountMember
+
+    AccountMemberRole.ZARID:
+      POST:
+        - AppAccountHandler.populateZARID
+      PUT:
+        - AppAccountHandler.populateZARID
+
+    User:
+      POST:
+        - UserHandler.checkMigrateUser
+        - UserHandler.auditSignUpAccount
+        - UserHandler.autoComputeUsername
+        - MailTypeHandler.sendWelcomeUserMail
+        - UserSystemPropertiesHandler.handleSpamServiceDeactivationUserAdd
+        - AntiSpamHandler.addSpamStaus
+        - UserHandler.syncUserToAppAccount
+        - UserHandler.updateCountryBasedDateFormat
+        - UserHandler.notifyUserTicketClearance
+        - UserHandler.trustSignupLocation
+      PUT:
+        - UserHandler.syncUserDetailsToGroupMember
+        - UserHandler.syncUserDetailsToGroupInvitation
+        - UserHandler.updateToAppAccount
+        - UserHandler.notifyUserTicketClearance
+      DELETE:
+        - UserHandler.handleDeleteUserPostAction
+        - UserHandler.auditCloseAccount
+        - UserHandler.removeUserAnnouncementData
+        - UserHandler.removeUserInAppAccount
+        - UserHandler.removerUserOAuthClients
+        - UserHandler.removeReportingUsers
+        - UserHandler.notifyUserTicketClearanceForDelete
+
+    User.USER_STATUS:
+      PUT:
+        - UserHandler.updateToCrmAccountStatus
+
+    Password:
+      PUT:
+        - DigestHandler.deleteResetPasswordDigestForZUID
+      POST:
+        - DigestHandler.deleteResetPasswordDigestForZUID
+      DELETE:
+        - DigestHandler.deleteResetPasswordDigestForZUID
+
+    Password.PASSWORD:
+      PUT:
+        - PasswordHandler.addPasswordHistory      
+        - PasswordHandler.updatePasswordStrength
+        - PasswordHandler.clearPasswordCache
+      POST:
+        - PasswordHandler.addPasswordHistory
+        - PasswordHandler.updatePasswordStrength
+
+    AppPassword:
+      DELETE:
+        - PasswordHandler.clearPasswordCache
+
+    UserEmail:
+      POST:
+        - MailTypeHandler.sendConfirmMail
+        - GroupHandler.updatePrimaryEmail
+        - EmailHandler.notifyUserCacheClearance
+      PUT:
+        - GroupHandler.updatePrimaryEmail
+        - EmailHandler.notifyUserCacheClearance
+      DELETE:
+        - EmailHandler.deleteUserEmailInSystemSpace
+        - DigestHandler.deleteAccountConfirmationDigestForEmailId
+        - DigestHandler.deleteResetPasswordDigestForEmailId
+        - EmailHandler.pushToCampaignsAndCRMdata
+        - EmailHandler.notifyUserCacheClearance
+        - GeoDCHandler.deleteUserEmail
+            
+    UserEmail.EMAIL_ID:
+      PUT:
+        - GeoDCHandler.updateUserEmail
+      
+    ScreenName:
+      POST:
+        - GroupHandler.updateLoginName
+        - LoginNameHandler.handleAddZohoEmail
+        - UserHandler.notifyUserTicketClearance
+      DELETE:
+        - LoginNameHandler.handleDeleteScreenNameInSystemSpace
+        - UserHandler.notifyUserTicketClearance
+        - GeoDCHandler.deleteScreenName
+        
+    ScreenName.SCREEN_NAME:
+      PUT:
+        - GeoDCHandler.updateScreenName
+    
+    Domain.DOMAIN:
+      PUT:
+        - GeoDCHandler.updateDomain
+        
+    Domain:
+      DELETE:
+        - GeoDCHandler.deleteDomain
+        - DomainNameHandler.handlePostDeleteDomain
+        
+    OpenId.EMAIL_ID:
+      PUT:
+        - GeoDCHandler.updateOpenID
+                        
+    Operation:
+      POST:
+        - OperationHandler.handleOperation
+
+    Preference.NEWS_LETTER_SUBSCRIPTION:
+      POST:
+        - UserHandler.handleUserPreferenceNewsletter
+      PUT:
+        - UserHandler.handleUserPreferenceNewsletter
+      DELETE:
+        - UserHandler.handleDeleteUserPreferenceNewsletter
+        
+    Invitation:
+      POST:
+        - MailTypeHandler.sendAccountInvitation
+
+    ServiceOrgInvitation:
+      POST:
+        - MailTypeHandler.sendSorgInvitation
+      PUT:
+        - MailTypeHandler.sendSorgInvitation
+
+    OpenId:
+      POST:
+        - CommonHandler.handleOpenId
+      PUT:
+        - CommonHandler.handleOpenId
+      DELETE:
+        - CommonHandler.deleteOpenId
+        - GeoDCHandler.deleteOpenID
+
+    UserMobile:
+      POST:
+        - UserMobileHandler.handleAddMobile
+      PUT:
+        - UserMobileHandler.handleUpdateMobile
+      DELETE:
+        - UserMobileHandler.handleDeleteMobile
+
+    App:
+      POST:
+        - AppHandler.addAdminRole
+
+    AppAccountLogo:
+      DELETE:
+        - AppAccountHandler.deleteAppAccountLogo
+
+    UserEmail.IS_VERIFIED:
+      POST:
+        - EmailHandler.updateEmailConfirmation
+      PUT:
+        - EmailHandler.updateEmailConfirmation
+
+    Group:
+      POST:
+        - GroupHandler.linkZGIDToAccount
+      DELETE:
+        - GroupHandler.unlinkZGIDFromAccount
+        - GroupHandler.deleteSOIDGroupAppAccount
+        - GroupHandler.removeGroupMapping
+        - DigestHandler.deleteGroupInvitationDigest
+
+    GroupMember:
+      DELETE:
+        - GroupHandler.deleteSOIDGroupMemberFromAppAccount
+        - GroupHandler.unlinkZGIDFromParentGroup
+
+    ServiceOrg:
+      POST:
+        - ServiceOrgHandler.createServiceOrgService
+      PUT:
+        - ServiceOrgHandler.clearServiceCacheForServiceOrg
+      DELETE:
+        - ServiceOrgHandler.deleteDomains
+        - ServiceOrgHandler.clearServiceCacheForServiceOrg
+        
+    ServiceOrgSubService:
+      POST:
+        - ServiceOrgHandler.auditServiceOrgSubServiceAddition
+        - ServiceOrgHandler.handleDisassociateFromOrg
+      PUT:
+        - ServiceOrgHandler.clearServiceCacheForServiceOrgSubService
+        - ServiceOrgHandler.handleDisassociateFromOrg
+      DELETE:
+        - ServiceOrgHandler.auditServiceOrgSubServiceDeletion
+        - ServiceOrgHandler.deleteServiceOrgAppAccount
+        - ServiceOrgHandler.clearServiceCacheForServiceOrgSubService
+
+    ServiceOrgDomain:
+      POST:
+        - ServiceOrgHandler.updatePrimaryDomain
+        - ServiceOrgHandler.clearServiceCacheForServiceOrgDomain
+      PUT:
+        - ServiceOrgHandler.updatePrimaryDomain
+        - ServiceOrgHandler.clearServiceCacheForServiceOrgDomain
+      DELETE:
+        - ServiceOrgHandler.clearServiceCacheForServiceOrgDomain
+
+
+    ServiceOrgMember:
+      POST:
+        - ServiceOrgHandler.auditServiceOrgMemberAddition
+        - ServiceOrgHandler.clearServiceCacheForServiceOrgMember
+        - ServiceOrgHandler.notifyDirectoryAccountUsers
+      PUT:
+        - ServiceOrgHandler.syncServiceOrgMemberToAppAccount
+        - ServiceOrgHandler.clearServiceCacheForServiceOrgMember
+      DELETE:
+        - ServiceOrgHandler.auditServiceOrgMemberDeletion
+        - ServiceOrgHandler.deleteServiceOrgMemberFromAppAccount
+        - ServiceOrgHandler.clearServiceCacheForServiceOrgMember
+        - ServiceOrgHandler.updateDeafaultServiceOrg
+
+    SecretKey:
+      PUT:
+        - SecretKeyHandler.notifySecretKeyChangeToServices
+
+    UserAllDomainsToken:
+      POST:
+        - TokenHandler.sendSuspiciousAlert
+        - TokenHandler.auditSignInAccountForTokenPair
+        - TokenHandler.incrementTicketCount
+        - TokenHandler.clearPreviousSessions
+      DELETE:
+        - TokenHandler.auditSignOutAccountForTokenPair
+        - TokenHandler.decrementTicketCount
+        
+    TokenPairAuthToken:
+      DELETE:
+        - TokenHandler.handleDeleteTokenPairAuthToken
+
+    OAuthClient:
+      POST:
+        - OAuthHandler.updateDetailsToUser
+        - OAuthSyncHandler.syncOAuthClient
+      PUT:
+        - OAuthHandler.updateDetailsToUser
+        - OAuthSyncHandler.syncOAuthClient
+      DELETE:
+        - OAuthHandler.deleteDetailsFromUser
+
+    OAuthAccessToken:
+      POST:
+        - OAuthHandler.removeOldAccessToken
+
+    OAuthRefreshToken:
+      PUT:
+        - OAuthHandler.removeAllValidAccessToken
+      DELETE:
+        - OAuthHandler.handleDeleteRefreshToken
+        - OAuthHandler.handleDeviceDetailsRemoval
+
+    OAuthAccessGrant:
+      DELETE:
+        - OAuthHandler.handleRevokeFromUser
+    
+    PasswordHistory:
+      POST:
+        - CommonHandler.deleteOldPasswordHistory  
+
+    OAuthRedirectURL:
+      POST:
+        - OAuthSyncHandler.syncOAuthRedirectURLToRemoteDC
+      PUT:
+        - OAuthSyncHandler.syncOAuthRedirectURLToRemoteDC
+      DELETE:
+        - OAuthSyncHandler.syncOAuthRedirectURLToRemoteDC
+        
+    OAuthJavaScriptDomains:
+      POST:
+        - OAuthSyncHandler.syncOAuthJSDomURLToRemoteDC
+      PUT:
+        - OAuthSyncHandler.syncOAuthJSDomURLToRemoteDC
+      DELETE:
+        - OAuthSyncHandler.syncOAuthJSDomURLToRemoteDC
+    
+    OAuthClientScopes:
+      POST:
+        - OAuthSyncHandler.syncOAuthScopesToRemoteDC
+      PUT:
+        - OAuthSyncHandler.syncOAuthScopesToRemoteDC
+      DELETE:
+        - OAuthSyncHandler.syncOAuthScopesToRemoteDC
+
+    OAuthClientProperties:
+      POST:
+        - OAuthSyncHandler.syncOAuthPropertiesToRemoteDC
+      PUT:
+        - OAuthSyncHandler.syncOAuthPropertiesToRemoteDC
+      DELETE:
+        - OAuthSyncHandler.syncOAuthPropertiesToRemoteDC
+
+    UserServiceDetails.IS_ACTIVE:
+      PUT:
+        - AntiSpamHandler.checkAndRemoveSpamEntryUponUserActivation
+
+    MFAPolicy.ENABLE:
+      POST:
+        - UserHandler.resetDisableTFAByAdminPreferences
+      PUT:
+        - UserHandler.resetDisableTFAByAdminPreferences
+        
+    UserRestrictedScope:
+      PUT:
+        - OAuthDetailsHandler.removeRestrictedScopesTokenOfUser
+      DELETE:
+        - OAuthDetailsHandler.removeRestrictedScopesTokenOfUser
+
+    MobileScreenName:
+      POST:
+        - UserMobileHandler.handleAddMobileScreenName
+      PUT:
+        - UserMobileHandler.handleAddMobileScreenName
+      DELETE:
+        - LoginNameHandler.handleDeleteMobileScreenNameInSystemSpace
+        - GeoDCHandler.deleteMobileScreenName
+        
+    OAuthDeviceToken:
+      PUT:
+        - OAuthSyncHandler.syncOAuthDeviceTokenChanges
+        - OAuthHandler.auditOAuthUserLocation
+        
+    OAuthDeviceToken.USER_ZID:
+      PUT:
+        - OAuthHandler.decrementCacheCount
+        
+    AppAccount.PARENT_ZAAID:
+      PUT:  
+        - AppAccountSyncHandler.syncParentAppAccounttoService
+        
+    AppAccount.DIRECTORY_ZAAID: 
+      PUT:  
+        - AppAccountSyncHandler.syncDirectoryAppAccounttoService
+        
+    AppAccount.IS_EXPOSED: 
+      PUT:  
+        - AppAccountSyncHandler.syncIsExposed
+        
+    AppAccount.ENVIRONMENT: 
+      PUT:  
+        - AppAccountSyncHandler.syncEnvironment
+        
+    AppAccountService.PARENT_ZAAID:
+      PUT:  
+        - AppAccountSyncHandler.syncParentAppAccount
+        
+    AppAccountService.DIRECTORY_ZAAID:
+      PUT:  
+        - AppAccountSyncHandler.syncDirectoryAppAccount
+    
+    AppAccount.ZUID:
+      PUT:
+        - AppAccountSyncHandler.syncZuid
+        
+    PortalMapping:
+      POST:
+        - AppAccountHandler.updatePrimaryDomain
+        - AppAccountHandler.clearServiceCacheForServiceOrgDomain
+      PUT:
+        - AppAccountHandler.updatePrimaryDomain
+        - AppAccountHandler.clearServiceCacheForServiceOrgDomain
+      DELETE:
+        - AppAccountHandler.clearServiceCacheForServiceOrgDomain
+        
+    Designations:
+      DELETE:
+        - UserHandler.removeDesigantedUsers
+
+  CACHE_ACTION:
+  
+    .CREATED_TIME:
+      POST:
+        - TimestampHandler.getCurrentTimeMillis
+    
+    .MODIFIED_TIME:
+      PUT:
+        - TimestampHandler.getCurrentTimeMillis
+    
+    .IP_AUDIT_INFO:
+      POST:
+        - CommonHandler.getCurrentIpInfo
+      PUT:
+        - CommonHandler.getCurrentIpInfo
+        
+    AuthToken.TOKEN:
+      POST:
+        - TokenHandler.generateUserTokenForMessage
+        
+    AuthToken.TOKEN_ID:
+      POST:
+        - ZIDGenerationHandler.handleLongId
+        
+    UserVerificationCode.VCID:
+      POST:
+        - ZIDGenerationHandler.handleStringId
+
+    UserAllDomainsToken.TOKEN:
+      POST:
+        - TokenHandler.generateADTokenForMessage
+
+    UserBaseDomainToken.BASE_DOMAIN_TOKEN:
+      POST:
+        - TokenHandler.generateBDTokenForMessage
+
+    TokenPairAuthToken.AUTH_TOKEN:
+      POST:
+        - TokenHandler.generateTokenPairAuthTokenForMessage
+        
+    UserAllDomainsToken:
+      POST:
+        - TokenHandler.sendSuspiciousAlertForMessage
+        - TokenHandler.auditSignInAccountForTokenPairForMessage
+        - TokenHandler.incrementTicketCountForMessage
+      DELETE:
+        - TokenHandler.auditSignOutAccountForTokenPairForMessage
+    PortalMapping:
+      POST:
+        - AppAccountHandler.updatePrimaryDomain
+        - ServiceOrgHandler.clearServiceCacheForServiceOrgDomain
+      PUT:
+        - AppAccountHandler.updatePrimaryDomain
+        - ServiceOrgHandler.clearServiceCacheForServiceOrgDomain
+      DELETE:
+        - ServiceOrgHandler.clearServiceCacheForServiceOrgDomain
+...

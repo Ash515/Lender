@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<!--$Id$-->
+<conf-files> 
+<ConfFile url="layoutdd.xml"/>
+<ConfFile url="chartdd.xml"/>
+<ConfFile url="tabledd.xml"/>
+<ConfFile url="formdd.xml"/>
+<ConfFile url="ajaxandconstantsdd.xml"/>
+<ConfFile url="tmpviewdd.xml"/>
+<ConfFile url="miscellaneousdd.xml"/>
+<ConfFile url="filtersdd.xml"/>
+<ConfFile url="scheduledd.xml"/>
+</conf-files>
+

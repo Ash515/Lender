@@ -1,0 +1,41 @@
+<%--$Id$--%>
+<%if(!Util.isFB()) {%>
+<%-- <div class="footer" style="padding:5px 0px 3px 0px;width:100%;text-align:center;">
+    <ul style="margin:0px; padding:0px; font-size:11px;">
+
+<%if(Util.isFujixerox()) {%>
+
+	<li style="display:inline;"><a href="<%=Util.getI18NMsg(request,"IAM.TERMS.OFSERVICE.LINK")%>" title="<%=Util.getI18NMsg(request,"IAM.SIGNUP.TERMS.OFSERVICE")%>" target="_blank" style="color:#085ddc;"><%=Util.getI18NMsg(request,"IAM.SIGNUP.TERMS.OFSERVICE")%></a></li>&nbsp;&nbsp;|&nbsp;&nbsp;NO OUTPUTENCODING
+	<li style="display:inline;"><a href="<%=Util.getI18NMsg(request,"IAM.PRIVACY.LINK")%>" title="<%=Util.getI18NMsg(request,"IAM.PRIVACY")%>" target="_blank" style="color:#085ddc;"><%=Util.getI18NMsg(request,"IAM.PRIVACY")%></a></li>&nbsp;&nbsp;|&nbsp;&nbsp;NO OUTPUTENCODING
+	<li style="display:inline;"><a href="<%=Util.getI18NMsg(request,"IAM.CONTACT.LINK")%>" title="<%=Util.getI18NMsg(request,"IAM.CONTACT.US")%>" target="_blank" style="color:#085ddc;"><%=Util.getI18NMsg(request,"IAM.CONTACT.US")%></a></li>NO OUTPUTENCODING
+
+<%} else {%>
+	<% if(!Util.isHidePartnerHeader()){%>
+	<li style="display:inline;padding:0px 0px 0px 10px;"><a href="<%=Util.getI18NMsg(request,"IAM.HOME.LINK")%>" title="<%=Util.getI18NMsg(request,"IAM.ZOHO.HOME")%>" target="_blank" style="font-size:11px;color:#085ddc;"><%=Util.getI18NMsg(request,"IAM.ZOHO.HOME")%></a></li>NO OUTPUTENCODING
+	<li style="display:inline;padding:0px 0px 0px 10px;"><a href="<%=Util.getI18NMsg(request,"IAM.PRIVACY.LINK")%>" title="<%=Util.getI18NMsg(request,"IAM.PRIVACY")%>" target="_blank" style="font-size:11px;color:#085ddc;"><%=Util.getI18NMsg(request,"IAM.PRIVACY")%></a></li>NO OUTPUTENCODING
+	<li style="display:inline;padding:0px 0px 0px 10px;"><a href="<%=Util.getI18NMsg(request,"IAM.CONTACT.LINK")%>" title="<%=Util.getI18NMsg(request,"IAM.CONTACT.US")%>" target="_blank" style="font-size:11px;color:#085ddc;"><%=Util.getI18NMsg(request,"IAM.CONTACT.US")%></a></li>NO OUTPUTENCODING
+	<li style="display:inline;padding:0px 0px 0px 10px;"><a href="<%=Util.getI18NMsg(request,"IAM.ABOUT.US.LINK")%>" title="<%=Util.getI18NMsg(request,"IAM.ABOUT.US")%>" target="_blank" style="font-size:11px;color:#085ddc;"><%=Util.getI18NMsg(request,"IAM.ABOUT.US")%></a></li>NO OUTPUTENCODING
+	<%}%>
+<%}%>
+
+    </ul>
+</div> --%>
+
+<div style="font-size:10px;text-align:center;padding:5px 0px;">
+
+<%
+if(!Util.isFujixerox()) {
+	if(Util.isZoho()) { 
+%>
+    &copy;&nbsp;<%=Util.getCopyRightYear()%>,&nbsp;<a href="<%=Util.getI18NMsg(request,"IAM.ZOHOCORP.LINK")%>" title="<%=Util.getI18NMsg(request,"IAM.ZOHOCORP")%>" target="_blank" style="font-size:11px;color:#085ddc;"><%=Util.getI18NMsg(request,"IAM.ZOHOCORP")%></a>&nbsp;<%=Util.getI18NMsg(request,"IAM.ADVENTNET.ALL.RIGHTS.RESERVED")%><%-- NO OUTPUTENCODING --%><%--No I18N--%>
+<%
+	} else { 
+%>
+	&copy;&nbsp;<%=Util.getCopyRightYear()%>,&nbsp;<a href="<%=Util.getI18NMsg(request,"IAM.HOME.LINK")%>" title="<%=Util.getI18NMsg(request,"IAM.ZOHO")%>" target="_blank" style="font-size:11px;color:#085ddc;"><%=Util.getI18NMsg(request,"IAM.ZOHO")%></a>&nbsp;<%=Util.getI18NMsg(request,"IAM.ADVENTNET.ALL.RIGHTS.RESERVED")%><%-- NO OUTPUTENCODING --%><%--No I18N--%>
+<%
+	}
+}
+%>
+
+</div>
+<%}%>

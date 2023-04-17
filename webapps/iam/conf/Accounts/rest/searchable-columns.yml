@@ -1,0 +1,78 @@
+# List of Searchable columns of a resource. To avoid indexing them and relax the indexed column check.
+# Guidelines :
+#         Add Column Names in UPPERCASE
+---
+AccountAudit:
+  ALLOW:
+    - OPERATION
+    
+AccountAuditTemplate:
+  ALLOW:
+    - OPERATION
+  
+App:
+  ALLOW:
+    - LISTING_ORDER
+
+AppSystemRole:
+  ALLOW:
+    - ROLE_ID
+
+AuthorizedIp:
+  ALLOW:
+    - TO_IP
+
+AuthToken:
+  ALLOW:
+    - PARENT_TOKEN_ID
+    - TOKEN_TYPE
+
+Captcha:
+  ALLOW:
+    - CAPTCHA_TEXT
+
+Domain:
+  ALLOW:
+    - IS_PRIMARY
+    - IS_REGISTERED_BY_ZOHO
+    - VERIFICATION_CODE
+
+Group:
+  ALLOW:
+    - CREATED_TIME
+
+GroupInvitation:
+  ALLOW:
+    - ZUID
+    - INVITE_STATUS
+
+Invitation:
+  ALLOW:
+    - INVITE_STATUS
+
+ScreenName:
+  ALLOW:
+    - IS_LOGIN_NAME
+
+User:
+  ALLOW:
+    - IDP
+    - USER_STATUS
+    - CREATED_TIME
+
+UserAuthorizedIp:
+  ALLOW:
+    - TO_IP
+
+UserEmail:
+  ALLOW:
+    - IS_PRIMARY
+
+ZAID:
+  ALLOW:
+    - AUTH_TYPE
+
+ZUID:
+  ALLOW:
+    - AUTH_TYPE
+    - PRIMARY_ZUID

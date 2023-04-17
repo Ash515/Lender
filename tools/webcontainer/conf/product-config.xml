@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--$Id$ -->
+<extended-configurations>
+	<configuration name="DBName" value="mysql" />
+	<configuration name="ECTag" value="904b4abda1a845bb" />
+	<configuration name="DSAdapter" value="mysql" />
+</extended-configurations>

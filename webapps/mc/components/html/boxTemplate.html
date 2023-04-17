@@ -1,0 +1,167 @@
+
+$Id$
+<html>
+<body>
+
+
+	
+<!--TPL-start-DefaultBox_Prefix--> 
+<TABLE  cellspacing='0' class='DefaultBox' boxid=${BOXID} id=${BOXID}><TR><TD class='boxHeader'><div  class='boxTitleDiv' onClick="changeBoxState(this)">${TITLE}</div></TD><TD class='boxCtrlButtonPane' nowrap>${TOOLBAR}  &nbsp;<input type='button' class='${MINBTNCLASS}' childtype='minbtn' onClick = "changeBoxState(this)" /><input type='button' class='${MAXBTNCLASS}' childtype='maxbtn' onClick = "changeBoxState(this)"/></TD></TR><TR><TD colspan='3' childtype='content' class='${BOXCONTENTCLASS}'>
+<!--TPL-end-DefaultBox_Prefix--> 
+
+
+
+<!--TPL-start-DefaultBox_Suffix--> 
+</TD></TR></TABLE> 
+<!--TPL-end-DefaultBox_Suffix--> 
+
+
+
+<!--TPL-start-DefaultBoxPaneLeft_Prefix--> 
+<TABLE  class='DefaultBoxPaneLeft' boxid=${BOXID} id=${BOXID}><TR><TD class='boxHeader'><div class='boxTitleDiv' onClick="javascript:changeBoxState(this)">${TITLE}</div></TD><TD class='boxCtrlButtonPane' nowrap>${TOOLBAR} <input type='button' class='${MINBTNCLASS}' childtype='minbtn' onClick = "changeBoxState(this)" /><input type='button' class='${MAXBTNCLASS}' childtype='maxbtn' onClick = "changeBoxState(this)"/></TD></TR><TR><TD colspan='2' childtype='content' class='${BOXCONTENTCLASS}'>
+<!--TPL-end-DefaultBoxPaneLeft_Prefix--> 
+
+
+
+
+<!--TPL-start-DefaultBoxPaneLeft_Suffix--> 
+</TD></TR></TABLE> 
+<!--TPL-end-DefaultBoxPaneLeft_Suffix--> 
+
+
+
+
+<!--TPL-start-BridgeBox_Prefix--> 
+<TABLE  cellspacing='0' boxid=${BOXID} class='BridgeBox' id=${BOXID}><TR><TD class='boxTL'>&nbsp;</TD><TD class='boxHeader'><div class='boxTitleDiv' onClick="changeBoxState(this)">${TITLE}</div></TD><TD class='boxCtrlButtonPane' nowrap>${TOOLBAR} <input type='button' class='${MINBTNCLASS}' childtype='minbtn' onClick = "changeBoxState(this)" /><input type='button' class='${MAXBTNCLASS}' childtype='maxbtn' onClick = "changeBoxState(this)"/></TD><TD class='boxTR'>&nbsp;</TD></TR><TR><TD colspan='4' childtype='content' class='${BOXCONTENTCLASS}'>
+<!--TPL-end-BridgeBox_Prefix--> 
+
+
+
+<!--TPL-start-BridgeBox_Suffix--> 
+</TD></TR><TR><TD class='boxBL'>&nbsp;</td><TD colspan='2' class='boxBC'>&nbsp;</TD><TD class='boxBR'>&nbsp;</TD></TR></TABLE>
+<!--TPL-end-BridgeBox_Suffix--> 
+
+
+
+<!--TPL-start-DialogBox_Prefix--> 
+
+<table cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td height="100%" style="display: block;">
+<table class="DialogBox" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td class="boxTL"/>
+<td class="boxHeader drag" onmousedown="captureDialog(event)"></td>
+<td class="boxCtrlButtonPane">
+<input class="closeButton" type="button" onclick="closeDialog()"/>
+</td>
+<td class="boxTR"/>
+</tr>
+<tr>
+<td class="boxContent" colspan="4">
+
+<!--TPL-end-DialogBox_Prefix--> 
+
+
+
+<!--TPL-start-DialogBox_Suffix--> 
+
+</td>
+</tr>
+<tr>
+<td class="boxBL"/>
+<td class="boxBC" colspan="2"/>
+<td class="boxBR"/>
+</tr>
+</tbody>
+</table>
+
+<!--TPL-end-DialogBox_Suffix--> 
+
+
+
+<!--TPL-start-IslandBox_Prefix--> 
+<TABLE  cellspacing='0' boxid=${BOXID}class='IslandBox' id=${BOXID}><TR><TD class='boxTL'></TD><TD class='boxHeader'><div class='boxTitleDiv' onClick="changeBoxState(this)">${TITLE}</div></TD><TD class='boxCtrlButtonPane' nowrap>${TOOLBAR} <input type='button' class='${MINBTNCLASS}' childtype='minbtn' onClick = "changeBoxState(this)" /><input type='button' class='${MAXBTNCLASS}' childtype='maxbtn' onClick = "changeBoxState(this)"/></TD><TD class='boxTR'>&nbsp;</TD></TR><TR><TD class='boxML'>&nbsp;</TD><TD colspan='2' childtype='content' class='${BOXCONTENTCLASS}'>
+<!--TPL-end-IslandBox_Prefix--> 
+
+
+
+<!--TPL-start-IslandBox_Suffix--> 
+</TD><TD class='boxMR'>&nbsp;</TD></TR><TR><TD class='boxBL'>&nbsp;</TD><TD colspan='2' class='boxBC'>&nbsp;</TD><TD class='boxBR'>&nbsp;</TD></TR></TABLE>
+<!--TPL-end-IslandBox_Suffix--> 
+
+
+
+
+<!--TPL-start-Box_Prefix--> 
+<TABLE  cellspacing='0' class='Box' boxid=${BOXID} id=${BOXID}><TR><TD class='boxHeader'><div  class='boxTitleDiv' onClick="changeBoxState(this)">${TITLE}</div></TD><TD class='boxCtrlButtonPane' nowrap>${TOOLBAR}  &nbsp;<input type='button' class='${MINBTNCLASS}' childtype='minbtn' onClick = "changeBoxState(this)" /><input type='button' class='${MAXBTNCLASS}' childtype='maxbtn' onClick = "changeBoxState(this)"/></TD></TR><TR><TD colspan='3' childtype='content' class='${BOXCONTENTCLASS}'>
+<!--TPL-end-Box_Prefix--> 
+
+
+
+<!--TPL-start-Box_Suffix--> 
+</TD></TR></TABLE> 
+<!--TPL-end-Box_Suffix--> 
+
+
+<!--TPL-start-NavigationBox_Prefix--> 
+<TABLE  cellspacing='0' boxid=${BOXID} class='NavigationBox'  id=${BOXID}><TR><TD class="boxTL"></TD><TD class='boxHeader'><div  class='boxTitleDiv' onClick="changeBoxState(this)">${TITLE}</div></TD><TD class='boxCtrlButtonPane' nowrap>${TOOLBAR} &nbsp;<input type='button' class='${MINBTNCLASS}' childtype='minbtn' onClick = "changeBoxState(this)" /><input type='button' class='${MAXBTNCLASS}' childtype='maxbtn' onClick = "changeBoxState(this)"/></TD><TD class="boxTR"></TD></TR><TR><TD colspan='3' childtype='content' class='${BOXCONTENTCLASS}'>
+<!--TPL-end-NavigationBox_Prefix-->
+
+
+
+<!--TPL-start-NavigationBox_Suffix--> 
+</TD></TR><TR><TD class='boxBL'>&nbsp;</td><TD colspan='2' class='boxBC'>&nbsp;</TD><TD class='boxBR'>&nbsp;</TD></TR></TABLE>
+<!--TPL-end-NavigationBox_Suffix--> 
+
+
+<!--TPL-start-PrimaryBox_Prefix--> 
+<TABLE  cellspacing='0' showmethod="Effect.BlindDown" hidemethod="Effect.BlindUp" 
+effectduration="0.5" class='PrimaryBox' boxid=${BOXID} id=${BOXID}><TR><TD class='boxHeader'><div  class='boxTitleDiv' onClick="changeBoxState(this)">${TITLE}</div></TD><TD class='boxCtrlButtonPane' nowrap>${TOOLBAR}&nbsp;<input type='button' class='${MINBTNCLASS}' childtype='minbtn' onClick = "changeBoxState(this)" /><input type='button' class='${MAXBTNCLASS}' childtype='maxbtn' onClick = "changeBoxState(this)"/></TD></TR><TR><TD colspan='4' childtype='content' class='${BOXCONTENTCLASS}'>
+<!--TPL-end-PrimaryBox_Prefix--> 
+
+
+
+
+<!--TPL-start-PrimaryBox_Suffix--> 
+</TD></TR></TABLE> 
+<!--TPL-end-PrimaryBox_Suffix--> 
+
+
+
+<!--TPL-start-SecondaryBox_Prefix--> 
+<TABLE  cellspacing='0' boxid=${BOXID} class='SecondaryBox' id=${BOXID}><TR><TD class='boxTL'>&nbsp;</TD><TD class='boxHeader'><div class='boxTitleDiv' onClick="changeBoxState(this)">${TITLE}</div></TD><TD class='boxCtrlButtonPane' nowrap>${TOOLBAR} <input type='button' class='${MINBTNCLASS}' childtype='minbtn' onClick = "changeBoxState(this)" /><input type='button' class='${MAXBTNCLASS}' childtype='maxbtn' onClick = "changeBoxState(this)"/></TD><TD class='boxTR'>&nbsp;</TD></TR><TR><TD colspan='4' childtype='content' class='${BOXCONTENTCLASS}'>
+<!--TPL-end-SecondaryBox_Prefix--> 
+
+
+
+<!--TPL-start-SecondaryBox_Suffix--> 
+</TD></TR><TR><TD class='boxBL'>&nbsp;</td><TD colspan='2' class='boxBC'>&nbsp;</TD><TD class='boxBR'>&nbsp;</TD></TR></TABLE>
+<!--TPL-end-SecondaryBox_Suffix--> 
+
+
+
+<!--TPL-start-AccordianBox_Prefix--> 
+<TABLE  cellspacing="0" cellpadding="0" class='AccordianBox' showmethod="Effect.SlideDown" hidemethod="Effect.SlideUp" 
+effectduration="0.5" AutoSlideUp="true" boxid=${BOXID} id=${BOXID}>
+<TR>
+<TD class="boxHeader">
+<div  onclick="changeBoxState(this)" class="boxTitleDiv">${TITLE}</div>
+</TD>
+</TR>
+<TR>
+<TD childtype='content'  class='${BOXCONTENTCLASS}'>
+<!--TPL-end-AccordianBox_Prefix--> 
+
+<!--TPL-start-AccordianBox_Suffix--> 
+</TD>
+</TR>
+</TABLE>
+<!--TPL-end-AccordianBox_Suffix--> 
+
+
+
+</body>
+</html>

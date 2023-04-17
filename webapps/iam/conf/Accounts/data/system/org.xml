@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id $ -->
+<!-- 
+Entries needed for IAM system and also for testing AccessControl processing
+-->
+
+<IAMAccounts>
+    <IAMAccount zaid="system" account_name="Zoho System" zoid="1">
+        <IAMAccountDomain domain="system" is_registered_by_zoho="1"/>
+        <IAMAccountSecretKey key_label="photo" key_algorithm="AES" validity_period="30" key_length="128" />
+        <IAMAccountSecretKey key_label="group" key_algorithm="AES" validity_period="30" key_length="128" />
+        <IAMAccountSecretKey key_label="signin" key_algorithm="AES" validity_period="30" key_length="128" />
+        <IAMAccountSecretKey key_label="openid" key_algorithm="AES" validity_period="30" key_length="128" />
+        <IAMAccountSecretKey key_label="verify" key_algorithm="AES" validity_period="30" key_length="128" />
+        <IAMAccountSecretKey key_label="aaaserver_secret" key_algorithm="AES" validity_period="60" key_length="128" />
+        <IAMAccountSecretKey key_label="iamsecret" key_algorithm="AES" validity_period="30" key_length="128" />
+        <IAMAccountSecretKey key_label="recovery_secret" key_algorithm="AES" validity_period="2000" key_length="128" />
+        <IAMAccountSecretKey key_label="tfasecret" key_algorithm="AES" validity_period="30" key_length="128" />
+        <IAMCustomDomainCode custom_domain="mail.zohousercontent.com" custom_domain_code="zmusrcont" />
+        <IAMAccountSecretKey key_label="accounts.ear.secret.label" key_algorithm="AES" validity_period="60" key_length="128" />
+        <IAMLocation location_name="default">
+        </IAMLocation>
+	 <!-- NOTE: Retain only one user at a time as populate fails corrupting password entries of both users.
+	 The second user's password is populated directly without digesting 
+	 TODO: To be Fixed-->
+         <IAMUser user_auto_id="t:c:user2" zuid="system_zuid" first_name="system" user_role="1" user_status="0">
+         </IAMUser>
+    </IAMAccount>
+</IAMAccounts>

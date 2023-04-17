@@ -1,0 +1,17 @@
+<!--$Id$-->
+<% FilterModel fm = (FilterModel)viewContext.getTransientState("FILTERMODEL");%>
+
+<select name="selectedfilter" onChange="selectFilter('<%=IAMEncoder.encodeJavaScript(uniqueId)%>',this.value);">
+<%
+while(fm.next())
+{ 
+  if(fm.isNewGroup())
+  { 
+   String groupTitle =  fm.getGroupTitle();
+   if(groupTitle != null)
+   {%>
+  <optgroup label="<%=IAMEncoder.encodeHTMLAttribute(I18N.getMsg(groupTitle))%>"  class="select" style="border:none">  
+  <% }} %>
+  <option value="<%=IAMEncoder.encodeHTMLAttribute(I18N.getMsg(fm.getFilterName()))%>" <%=(fm.isSelected())?"selected":""%>><%=IAMEncoder.encodeHTML(I18N.getMsg(fm.getFilterTitle()))%></option>
+
+<%}%>

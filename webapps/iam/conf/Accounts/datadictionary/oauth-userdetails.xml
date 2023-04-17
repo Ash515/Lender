@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<!-- $Id $ -->
+<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd">
+<!--<!DOCTYPE data-dictionary PUBLIC "-//ZOHO Corp.//DTD Data Dictionary 1.0//EN" "http://cm/cgi-bin2/cvsweb.cgi/~checkout~/internal_packages/mickeylite/dd2html/data-dictionary.dtd"> -->
+<!--  tables for users/org oauth information to be stored  -->
+<data-dictionary name="Accounts">
+
+	<table name="IAMOAuthZID" display-name="OAuthZID">
+		<description>
+			The ID(user/org) for which tokens are created.  
+		</description>
+		<columns>
+			<column name="OAUTH_ZID_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthZID.OAUTH_ZID_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="ZID">
+				<description>
+					User/Org Zid
+				</description>
+				<data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+			</column>
+			<column name="ZID_TYPE">
+				<description>
+					User / App Account/ Service Org = OAuthToken.ZidType 
+				</description>
+				<data-type>INTEGER</data-type>
+                <nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ZID_ORG_TYPE">
+                <description>The Account ID/ App Account Type/ Service Org Type </description>
+                <data-type>INTEGER</data-type>
+                <default-value>-1</default-value>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthZID_PK">
+			<primary-key-column>OAUTH_ZID_AUTO_ID</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="IAMOAuthZID_UK">
+				<unique-key-column>ZID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	
+	<table name="IAMUserRestrictedScope" display-name="UserRestrictedScope">
+    	<description>OAuth Restricted scopes. Previlage will be given to org admin to user to access certain apis</description>
+    	<columns>
+    		<column name="OAUTH_ZID_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SCOPE_ID">
+				<description>
+					ID of the scope
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="APPROVED_ZUID">
+				<description>
+					ZUID of the user who gave previlage to user
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ALLOWED_OPERATIONS">
+                <data-type>INTEGER</data-type>
+            </column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMUserRestrictedScope_PK">
+           	<primary-key-column>OAUTH_ZID_AUTO_ID</primary-key-column>
+       	</primary-key>
+       	<foreign-keys>
+           	<foreign-key name="IAMUserRestrictedScope_FK1" reference-table-name="IAMOAuthZID" >
+               	<fk-columns>
+                   	<fk-column>
+                       	<fk-local-column>OAUTH_ZID_AUTO_ID</fk-local-column>
+	                    <fk-reference-column>OAUTH_ZID_AUTO_ID</fk-reference-column>
+    	            </fk-column>
+                </fk-columns>
+            	<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+	    	</foreign-key>
+        </foreign-keys>
+        <unique-keys>
+        	<unique-key name="IAMUserRestrictedScope_UK1">
+                <unique-key-column>OAUTH_ZID_AUTO_ID</unique-key-column>
+                <unique-key-column>SCOPE_ID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+	
+	<!-- Single token per device -->
+	<table name="IAMOAuthMobileUserDevice" display-name="OAuthMobileUserDevice">
+		<description>
+			Unique id for every mobile device. This ID will be stored in device and will be applicable to all mobile apps
+		</description>
+		<columns>
+			<column name="OAUTH_MOBILE_USER_DEVICE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthMobileUserDevice.OAuthMobileUserDevice</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="DEVICE_ID">
+				<description>
+					Unique Id
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DEVICE_NAME">
+				<description>
+					Name of the device assigned by user
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DEVICE_MODEL">
+				<description>
+					Device Model
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DEVICE_TYPE">
+				<description>
+					AccountsInternalConst.MobileDevicesType enum 
+				</description>
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			
+			<column name="MDM_TOKEN">
+				<description>
+					MDM Token
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthMobileUserDevice_PK">
+			<primary-key-column>OAUTH_MOBILE_USER_DEVICE_AUTO_ID</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="IAMOAuthMobileUserDevice_UK">
+				<unique-key-column>DEVICE_ID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	
+	<table name="IAMOAuthMobileUserDeviceClients" display-name="OAuthMobileUserDeviceClients">
+		<description>
+			Apps being used in the device
+		</description>
+		<columns>
+			<column name="OAUTH_MOBILE_USER_DEVICE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="OAUTH_MOBILE_USER_DEVICE_CLIENT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthMobileUserDeviceClients.OAuthMobileUserDeviceClients</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="CLIENT_ZID">
+				<description>
+					Client Zid
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<allowed-values>
+					<pattern>&clientzid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="USER_ZUID">
+				<description>
+					zuid of the user using the app
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="REFRESH_TOKEN">
+				<description>
+					Refresh Token - Mainly for uninstall cases, so clean up when the user is trying to access.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthMobileUserDeviceClients_PK">
+			<primary-key-column>OAUTH_MOBILE_USER_DEVICE_CLIENT_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthMobileUserDeviceClients_FK" reference-table-name="IAMOAuthMobileUserDevice">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_MOBILE_USER_DEVICE_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_MOBILE_USER_DEVICE_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMOAuthMobileUserDeviceClients_UK">
+				<unique-key-column>OAUTH_MOBILE_USER_DEVICE_AUTO_ID</unique-key-column>
+				<unique-key-column>CLIENT_ZID</unique-key-column>
+				<unique-key-column>USER_ZUID</unique-key-column>
+			</unique-key>
+			<unique-key name="IAMOAuthMobileUserDeviceClients_UK1">
+				<unique-key-column>REFRESH_TOKEN</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	
+	<table name="IAMOAuthMobileUserDeviceSubClients" display-name="OAuthMobileUserDeviceSubClients">
+		<description>
+			Clinets using One Auth App
+		</description>
+		<columns>
+			<column name="OAUTH_MOBILE_USER_DEVICE_CLIENT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CLIENT_ZID">
+				<description>
+					Client Zid
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<allowed-values>
+					<pattern>&clientzid;</pattern>
+				</allowed-values>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthMobileUserDeviceSubClients_PK">
+			<primary-key-column>OAUTH_MOBILE_USER_DEVICE_CLIENT_AUTO_ID</primary-key-column>
+			<primary-key-column>CLIENT_ZID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthMobileUserDeviceSubClients_FK" reference-table-name="IAMOAuthMobileUserDeviceClients">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_MOBILE_USER_DEVICE_CLIENT_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_MOBILE_USER_DEVICE_CLIENT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	
+</data-dictionary>

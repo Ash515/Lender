@@ -1,0 +1,32 @@
+	<%-- $Id$ --%>
+<%@ page import = "com.adventnet.idioms.tablenavigator.TableNavigatorModel,com.adventnet.client.view.*,com.adventnet.client.components.table.web.*,java.util.HashMap,javax.swing.table.TableModel, com.adventnet.persistence.*"%>
+		<%
+		TableViewModel viewModel = (TableViewModel) viewContext.getViewModel();
+		TableModel tableModel = (TableModel) viewModel.getTableModel();
+		TableTransformerContext transformerContext = viewModel.getTableTransformerContext();
+		TableIterator tableIter = viewModel.getTableIterator();
+        transformerContext.setPageContext(pageContext);
+		HashMap props = null;
+		HashMap colwidth = new HashMap(15,0.75f);
+			int colCount=0;  
+			boolean isScrollEnabled=(Boolean)(viewModel.getTableViewConfigRow().get("ISSCROLLENABLED"));
+			boolean isDynamicTable=false; 
+			int initialFetchedRows=-1;
+			if(request.getAttribute("initialFetchedRows")!=null)
+			{
+				initialFetchedRows=Integer.parseInt((String)request.getAttribute("initialFetchedRows"));
+			}
+			if(initialFetchedRows!=-1)
+			{
+				isDynamicTable=true;
+				
+			}
+			
+			RowTransformer  rowtrans = viewModel.getRowTransformer();
+			if(rowtrans != null)
+			{
+				rowtrans.setRowSelectionDetails(((ArrayList)(viewContext.getStateParameter("_RS"))),transformerContext);
+			}
+			
+			
+		%>

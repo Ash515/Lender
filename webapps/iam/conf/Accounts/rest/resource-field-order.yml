@@ -1,0 +1,2789 @@
+# Guidelines :
+#     1) Don't change the value in "idx" of the existing resource.
+#     2) Always add new column @ the end of the "attrs" list.
+App:
+  idx: 1
+  attrs:
+    - app_id
+    - app_name
+    - default_sub_domain
+    - display_name
+    - description
+    - home_page
+    - allow_registration
+    - auto_registration
+    - service_type
+    - listing_enabled
+    - listing_order
+    - enable_ssticket
+    - logo_url
+    - is_loginname_required
+    - rest_api_path
+    - rest_server
+    - modified_time
+    - created_time
+    - default_ro_sub_domain
+    - app_code
+    - alias_name
+    - service
+Configuration:
+  idx: 2
+  attrs:
+    - config_name
+    - config_value
+    - data_type
+    - default_value
+    - modified_time
+    - created_time
+    - config_ro_value
+Role:
+  idx: 3
+  attrs:
+    - zarid
+    - role_name
+    - created_time
+    - modified_time
+AppSystemRole:
+  idx: 4
+  attrs:
+    - role_id
+    - system_role_name
+    - description
+    - created_time
+UserSystemRoles:
+  idx: 5
+  attrs:
+    - zuid
+    - modified_time
+    - created_time
+    - expiry_time
+ResourceType:
+  idx: 6
+  attrs:
+    - resource_type
+    - parent_resource_type
+    - modified_time
+    - created_time
+ResourceOperation:
+  idx: 7
+  attrs:
+    - resource_type
+    - operation_name
+    - operation_bit_index
+    - operation_description
+    - is_default
+    - auth_type
+    - modified_time
+    - created_time
+AppUserAttribute:
+  idx: 8
+  attrs:
+    - attribute_name
+    - data_type
+    - attribute_regex
+    - nullable
+    - default_value
+    - modified_time
+    - created_time
+PolicyConfig:
+  idx: 9
+  attrs:
+    - policy_name
+    - data_type
+    - policy_regex
+    - default_value
+    - policy_description
+    - modified_time
+    - created_time
+AppRebrand:
+  idx: 10
+  attrs:
+    - rebrand_attribute_name
+    - rebrand_attribute_type
+    - rebrand_attribute_regex
+    - default_value
+    - modified_time
+    - created_time
+AppLicense:
+  idx: 13
+  attrs:
+    - license_attribute_key
+    - default_value
+    - data_type
+    - modified_time
+    - created_time
+HierarchyResourceGroup:
+  idx: 14
+  attrs:
+    - resource_group_name
+    - resource_name
+OAuthClient:
+  idx: 15
+  attrs:
+    - client_name
+    - client_id
+    - client_secret
+    - client_zid
+    - client_domain
+    - client_uri
+    - status
+    - created_by
+    - created_time
+    - zid
+    - zid_type
+    - modified_time
+    - is_internal
+    - client_type
+    - primary_dc
+    - last_primary_sync_time
+    - is_restricted
+    - home_page_url
+    - description
+Scope:
+  idx: 16
+  attrs:
+    - scope_id
+    - scope
+    - description
+    - parent_scope_id
+    - internal
+    - created_time
+    - exposed
+    - operation_type
+ZAID:
+  idx: 17
+  attrs:
+    - zaid
+    - auth_type
+AccountName:
+  idx: 18
+  attrs:
+    - account_name
+    - zaid
+ZUID:
+  idx: 19
+  attrs:
+    - zuid
+    - zaid
+    - primary_zuid
+    - user_deleted_time
+    - auth_type
+ZGID:
+  idx: 20
+  attrs:
+    - zgid
+    - zaid
+ZAAID:
+  idx: 21
+  attrs:
+    - zaaid
+    - zaid
+Email:
+  idx: 22
+  attrs:
+    - email_id
+    - zuid
+UserName:
+  idx: 23
+  attrs:
+    - user_name
+    - zuid
+UniqueId:
+  idx: 25
+  attrs:
+    - name
+    - batch_size
+    - reserved_upto
+    - reserved_by_ip
+    - unique_id_range_name
+    - current_range_max_value
+DomainVsAuthSecret:
+  idx: 26
+  attrs:
+    - auth_secret
+    - account_name
+    - zaid
+Partner:
+  idx: 29
+  attrs:
+    - partner_domain
+    - partner_zuid
+    - partner_name
+    - partner_emailid
+    - partner_status
+    - created_time
+ISCTicket:
+  idx: 32
+  attrs:
+    - isc_ticket
+    - cs_ticket
+    - zuid
+    - display_name
+    - internal
+    - is_enabled
+    - validity_period
+    - ip_address
+    - created_time
+    - ip_audit_info
+ISCTicketScope:
+  idx: 33
+  attrs:
+    - isc_ticket
+    - scope_id
+OrgUPAuthToken:
+  idx: 34
+  attrs:
+    - zuid
+    - zaid
+    - auth_token
+    - cs_auth_token
+    - validity_upto
+    - created_time
+    - modified_time
+SystemOpenId:
+  idx: 37
+  attrs:
+    - open_id_apl
+    - open_id
+    - zuid
+    - email_id
+    - idp
+    - created_time
+Account:
+  idx: 38
+  attrs:
+    - zaid
+    - parent_zaid
+    - account_name
+    - display_name
+    - is_enabled
+    - account_type
+    - created_by
+    - created_time
+    - modified_time
+Domain:
+  idx: 39
+  attrs:
+    - domain
+    - is_primary
+    - is_registered_by_zoho
+    - created_time
+    - verification_code
+    - verification_mode
+    - is_verified
+    - verification_date
+    - verified_by
+    - modified_time
+    - parent_domain
+Invitation:
+  idx: 40
+  attrs:
+    - email_id
+    - invite_status
+    - send_mail
+    - from_url
+    - ip_address
+    - created_time
+    - modified_time
+    - idp
+    - args_data
+    - invited_by
+    - first_name
+    - last_name
+    - resend_limit
+Location:
+  idx: 41
+  attrs:
+    - location_name_apl
+    - location_name
+    - post_box
+    - street_address
+    - city
+    - state
+    - country
+    - postal_code
+    - latitude
+    - longitude
+    - phone
+    - mobile
+    - fax
+    - timezone
+    - language
+    - website_url
+    - blog_url
+    - twitter_url
+    - linkedin_url
+    - flickr_url
+    - delicious_url
+    - amazon_url
+    - modified_time
+    - is_primary
+    - address_type
+Announcements:
+  idx: 43
+  attrs:
+    - announcement_id
+    - title
+    - expiry_date
+    - content
+    - announcement_owner
+    - announcement_owner_resource
+    - announcement_status
+    - created_by
+    - created_time
+    - modified_time
+MailStatusQueue:
+  idx: 44
+  attrs:
+    - queue_id
+    - type
+    - send_by
+    - app_name
+    - zaid
+    - email_id
+    - mobile
+    - fail_count
+    - status
+    - language_code
+    - created_time
+    - modified_time
+    - data
+Policy:
+  idx: 46
+  attrs:
+    - policy_key
+    - policy_value
+    - modified_time
+AccountConfiguration:
+  idx: 47
+  attrs:
+    - config_name
+    - config_value
+    - modified_time
+    - created_time
+AuthDomain:
+  idx: 53
+  attrs:
+    - domain_name
+    - allowed_auth_types
+    - allowed_failed_login_attempts
+    - lock_period
+    - is_enabled
+    - created_time
+    - modified_time
+    - display_name
+    - duration
+AuthDomainSignup:
+  idx: 54
+  attrs:
+    - provision_type
+    - send_welcome_mail
+    - email
+    - mobile
+    - first_name
+    - last_name
+    - locale
+    - forgot_password
+    - terms_of_service
+    - privacy_policy
+    - created_time
+    - modified_time
+AuthSecret:
+  idx: 55
+  attrs:
+    - auth_secret
+    - is_internal
+    - service_name
+    - modified_time
+Saml:
+  idx: 56
+  attrs:
+    - saml_login_url
+    - saml_logout_url
+    - saml_password_url
+    - public_key
+    - algorithm
+    - cert_type
+    - modified_time
+    - is_saml_logout_enabled
+    - is_saml_enabled
+    - is_domainless
+    - saml_service
+    - sp_certificate
+    - sp_private_key
+    - issuer
+    - sp_certificate_expiry_time
+    - jit_attributes
+    - is_new_saml_config
+    - other_signin_allowed
+AuthorizedIp:
+  idx: 59
+  attrs:
+    - ipid
+    - from_ip
+    - to_ip
+    - from_ip_in_bytes
+    - to_ip_in_bytes
+    - modified_time
+    - name
+    - user_agent
+PasswordPolicy:
+  idx: 60
+  attrs:
+    - min_len
+    - max_len
+    - min_special_chars
+    - min_numeric_chars
+    - mixed_case
+    - pass_expiry
+    - password_history
+    - modified_time
+    - password_minimum_age
+SecretKey:
+  idx: 61
+  attrs:
+    - key_label
+    - secret_key
+    - previous_secret_key
+    - validity_period
+    - key_algorithm
+    - key_length
+    - created_time
+    - modified_time
+Captcha:
+  idx: 62
+  attrs:
+    - captcha_digest
+    - captcha_text
+    - difficulty_level
+    - created_time
+    - modified_time
+User:
+  idx: 63
+  attrs:
+    - zuid
+    - first_name
+    - last_name
+    - display_name
+    - user_status
+    - user_role
+    - user_type
+    - gender
+    - country_code
+    - language_code
+    - language_variant
+    - timezone
+    - date_of_birth
+    - date_of_joining
+    - about_me
+    - idp
+    - registration_ip_address
+    - referrer
+    - skype_id
+    - auth_type
+    - created_time
+    - modified_time
+UserLocation:
+  idx: 64
+  attrs:
+    - location_name_apl
+    - zuid
+    - created_time
+ScreenName:
+  idx: 65
+  attrs:
+    - screen_name
+    - is_login_name
+    - created_time
+    - modified_time
+    - is_zoho_email_id
+UserEmail:
+  idx: 66
+  attrs:
+    - email_id
+    - is_verified
+    - is_primary
+    - verification_code
+    - created_time
+    - modified_time
+Password:
+  idx: 67
+  attrs:
+    - password
+    - salt
+    - is_password_expired
+    - is_one_time_password
+    - modified_time
+SecurityQA:
+  idx: 68
+  attrs:
+    - question_apl
+    - question
+    - answer
+    - modified_time
+Preference:
+  idx: 69
+  attrs:
+    - theme
+    - date_format
+    - font
+    - always_secure
+    - news_letter_subscription
+    - notify_me_by
+    - modified_time
+    - created_time
+    - user_tfa_status
+    - tfa_pref_option
+    - password_expiry_notification
+    - announcement_skip_status
+    - announcement_reset_time
+Address:
+  idx: 70
+  attrs:
+    - address_type
+    - company_name
+    - job_title
+    - location_name
+    - post_box
+    - street_address
+    - city
+    - state
+    - country
+    - postal_code
+    - latitude
+    - longitude
+    - phone
+    - extension
+    - mobile
+    - fax
+    - seating_location
+    - timezone
+    - language
+    - website_url
+    - blog_url
+    - twitter_url
+    - linkedin_url
+    - flickr_url
+    - delicious_url
+    - amazon_url
+    - modified_time
+    - created_time
+    - facebook_url
+    - googleplus_url
+Properties:
+  idx: 71
+  attrs:
+    - prop_name
+    - prop_value
+    - modified_time
+    - created_time
+TrustedDomain:
+  idx: 72
+  attrs:
+    - trusted_domain
+    - created_time
+    - ip_address
+    - ip_audit_info
+    - user_agent
+UserMobile:
+  idx: 73
+  attrs:
+    - mobile
+    - country_code
+    - is_verified
+    - verification_code
+    - created_time
+    - modified_time
+    - is_primary
+    - verify_type
+    - mode
+UserDomain:
+  idx: 74
+  attrs:
+    - zuid
+    - modified_time
+    - zid_type
+    - is_excluded
+OpenId:
+  idx: 75
+  attrs:
+    - open_id_apl
+    - open_id
+    - email_id
+    - idp
+    - created_time
+    - modified_time
+    - ip_audit_info
+    - user_agent
+PasswordHistory:
+  idx: 76
+  attrs:
+    - password
+    - salt
+    - modified_time
+UserAuthorizedIp:
+  idx: 77
+  attrs:
+    - ipid
+    - from_ip
+    - to_ip
+    - from_ip_in_bytes
+    - to_ip_in_bytes
+    - modified_time
+    - ip_name
+    - created_time
+    - ip_audit_info
+    - user_agent
+Tag:
+  idx: 78
+  attrs:
+    - tag_name
+    - tag_type
+    - created_time
+    - modified_time
+TagItem:
+  idx: 79
+  attrs:
+    - resource_id
+    - resource_type
+    - resource_url
+    - created_time
+    - modified_time
+CustomFields:
+  idx: 80
+  attrs:
+    - custom_field_id
+    - custom_field_name
+    - data_type
+    - nullable
+    - default_value
+    - column_number
+    - created_time
+    - modified_time
+UserCustomField:
+  idx: 81
+  attrs:
+    - zuid
+    - c_1
+    - c_2
+    - c_3
+    - c_4
+    - c_5
+    - c_6
+    - c_7
+    - c_8
+    - c_9
+    - c_10
+    - c_11
+    - c_12
+    - c_13
+    - c_14
+    - c_15
+    - c_16
+    - c_17
+    - c_18
+    - c_19
+    - c_20
+    - c_21
+    - c_22
+    - c_23
+    - c_24
+    - c_25
+    - c_26
+    - c_27
+    - c_28
+    - c_29
+    - c_30
+Group:
+  idx: 82
+  attrs:
+    - zgid
+    - group_name
+    - group_screen_name
+    - group_description
+    - group_type
+    - is_active
+    - created_by
+    - created_time
+    - modified_time
+    - department_head
+GroupInvitation:
+  idx: 83
+  attrs:
+    - invite_email_id
+    - invite_zuid
+    - invite_status
+    - full_name
+    - display_name
+    - login_name
+    - created_time
+    - modified_time
+GroupProperties:
+  idx: 84
+  attrs:
+    - prop_name
+    - prop_value
+    - modified_time
+    - created_time
+GroupMember:
+  idx: 85
+  attrs:
+    - zuid
+    - is_active
+    - is_moderator
+    - full_name
+    - display_name
+    - login_name
+    - created_time
+    - modified_time
+    - type
+Hierarchy:
+  idx: 86
+  attrs:
+    - zhid
+    - hierarchy_screen_name
+    - hierarchy_display_name
+    - resource_group_name
+    - created_time
+    - modified_time
+HierarchyNode:
+  idx: 87
+  attrs:
+    - zhid
+    - node_screen_name
+    - node_unique_id
+    - node_type
+    - parent_node_unique_id
+    - path_from_root
+    - move_with_parent
+    - modified_time
+Logo:
+  idx: 88
+  attrs:
+    - view_permission
+    - modified_time
+    - created_time
+UserPhoto:
+  idx: 89
+  attrs:
+    - view_permission
+    - is_photo_exists
+    - modified_time
+    - created_time
+GroupLogo:
+  idx: 90
+  attrs:
+    - view_permission
+    - modified_time
+    - created_time
+AppAccount:
+  idx: 91
+  attrs:
+    - app_name
+    - screen_name
+    - zuid
+    - zaaid
+    - resource_hierarchy_id
+    - role_hierarchy_id
+    - description
+    - account_status
+    - created_time
+    - modified_time
+    - display_name
+    - parent_zaaid
+    - directory_zaaid
+    - is_exposed
+    - service_type
+    - parent_org_type
+    - environment
+AppAccountMember:
+  idx: 92
+  isdeprecated: true
+  attrs:
+    - zid
+    - zid_type
+    - zarid
+    - is_active
+    - created_time
+    - modified_time
+Rebrand:
+  idx: 93
+  attrs:
+    - rebrand_attribute_key
+    - rebrand_attribute_value
+    - modified_time
+RebrandL10n:
+  idx: 94
+  attrs:
+    - rebrand_attribute_name
+    - rebrand_attribute_value
+    - created_time
+    - modified_time
+License:
+  idx: 95
+  attrs:
+    - license_attribute_key
+    - license_attribute_value
+    - modified_time
+Attribute:
+  idx: 97
+  attrs:
+    - zuid
+    - user_attribute_key
+    - user_attribute_value
+    - modified_time
+AccountAttribute:
+  idx: 99
+  attrs:
+    - attribute_key
+    - attribute_value
+    - modified_time
+AccountResource:
+  idx: 100
+  attrs:
+    - zrid
+    - zaaid
+    - resource_name
+    - resource_label
+    - parent_zrid
+    - path_from_root
+    - move_with_parent
+    - created_time
+    - modified_time
+ResourceProperties:
+  idx: 101
+  attrs:
+    - zrid
+    - resource_prop_name
+    - resource_prop_value
+    - modified_time
+ACP:
+  idx: 102
+  attrs:
+    - acp_id
+    - resource_type
+    - resource_id
+    - inheritance_flags
+    - owner_zuid
+    - owner_zgid
+    - allow_attributes
+    - created_time
+    - modified_time
+ACE:
+  idx: 103
+  attrs:
+    - ace_index
+    - ace_type
+    - privilege
+    - zid
+    - attributes
+    - created_time
+    - modified_time
+AcpSecret:
+  idx: 104
+  attrs:
+    - secret_key
+AuthToken:
+  idx: 105
+  attrs:
+    - token
+    - token_id
+    - token_type
+    - parent_token_id
+    - service_domain
+    - ip_address
+    - user_agent
+    - created_time
+    - validity_period
+    - idle_period
+    - is_one_time_token
+    - modified_time
+OAuthAccessGrant:
+  idx: 106
+  attrs:
+    - client_zid
+    - scope
+    - zuid
+    - ip_address
+    - user_agent
+    - created_time
+AuthTokenScope:
+  idx: 107
+  attrs:
+    - scope_id
+    - created_time
+AccountAudit:
+  idx: 108
+  attrs:
+    - zaid
+    - zuid
+    - app_name
+    - screen_name
+    - operation
+    - ip_address
+    - referrer
+    - token_digest
+    - user_agent
+    - created_time
+    - arid
+    - app_id
+    - operation_id
+ResourceAudit:
+  idx: 109
+  attrs:
+    - zaid
+    - zuid
+    - app_name
+    - request_id
+    - resource_type
+    - operation
+    - old_data
+    - new_data
+    - rest_url
+    - token_digest
+    - thread_id
+    - app_ip
+    - remote_ip
+    - user_agent
+    - audited_time
+    - arid
+    - owner_zuid
+Listener:
+  idx: 110
+  attrs:
+    - name
+    - resource_type_pattern
+    - last_notified_time
+    - last_updated_time
+    - created_time
+RegistrationAudit:
+  idx: 111
+  attrs:
+    - zaid
+    - reg_id
+    - app_ip
+    - remote_ip
+    - user_agent
+    - referrer
+    - app_name
+    - status
+    - errors
+    - zuid_after_reg
+    - current_zuid
+    - get_count
+    - email_id
+    - idp
+    - created_time
+    - end_time
+    - arid
+AccountCloseAudit:
+  idx: 112
+  attrs:
+    - zaid
+    - zuid
+    - used_services
+    - comments
+    - username
+    - reason
+    - registered_time
+    - created_time
+AccountUpdateAudit:
+  idx: 113
+  attrs:
+    - zaid
+    - zuid
+    - control_query_string
+    - response_status
+    - created_time
+    - arid
+APIAudit:
+  idx: 115
+  attrs:
+    - zaid
+    - zuid
+    - app_name
+    - screen_name
+    - operation
+    - ip_address
+    - referrer
+    - token_digest
+    - user_agent
+    - created_time
+    - arid
+Statement:
+  idx: 116
+  attrs:
+    - statement_id
+    - statement
+    - modified_time
+    - created_time
+    - param_metadata
+AppKeyStore:
+  idx: 117
+  attrs:
+    - label
+    - public_key
+    - created_time
+    - modified_time
+AppAccountLogo:
+  idx: 118
+  attrs:
+    - view_permission
+    - modified_time
+    - created_time
+Lang:
+  idx: 119
+  attrs:
+    - language_code
+    - modified_time
+    - created_time
+Template:
+  idx: 120
+  attrs:
+    - template_name
+    - template_auto_id
+    - description
+    - subject
+    - template_html
+    - template_type
+    - modified_time
+    - created_time
+    - from_address
+    - reply_to_address
+    - overridable
+    - plain_text
+I18n:
+  idx: 121
+  attrs:
+    - i18n_attribute_name
+    - is_file
+    - i18n_attribute_value
+    - modified_time
+    - created_time
+Digest:
+  idx: 122
+  attrs:
+    - digest
+    - uri
+    - created_time
+    - zid
+    - digest_type
+    - service_url
+    - args_data
+    - expiry_time
+    - app_name
+    - zid_type
+    - email_id
+    - is_validated
+Operation:
+  idx: 123
+  attrs:
+    - operation_id
+    - operation_name
+    - resource_uri
+    - operation_params
+    - operation_status
+    - modified_time
+    - created_time
+AppAccountAddress:
+  idx: 124
+  attrs:
+    - address_type
+    - name
+    - location_name
+    - post_box
+    - street_address
+    - city
+    - state
+    - country
+    - postal_code
+    - latitude
+    - longitude
+    - phone
+    - extension
+    - mobile
+    - fax
+    - timezone
+    - language
+    - website_url
+    - blog_url
+    - twitter_url
+    - linkedin_url
+    - flickr_url
+    - delicious_url
+    - amazon_url
+    - modified_time
+    - created_time
+UniqueIdRange:
+  idx: 125
+  attrs:
+    - unique_id_range_name
+    - range_size
+    - range_reset_threshold
+    - reserved_upto
+    - dc_range_reset_threshold
+    - dc_reserved_upto
+UniqueIdRangeGenerationAudit:
+  idx: 126
+  attrs:
+    - uagid
+    - unique_id_range_name
+    - unique_id_name
+    - reserved_from
+    - reserved_to
+    - reserved_by_ip
+    - created_time
+ISDCode:
+   idx: 127
+   attrs:
+   - country_code
+   - country_name
+   - dialing_code
+   - created_time
+   - modified_time
+   - newsletter_subscription_mode
+   - is_excluded
+RecoveryCode:
+   idx: 128
+   attrs:
+   - recovery_code
+   - created_time
+TelesignLanguage:
+   idx: 129
+   attrs:
+   - lang_code
+   - lang_name
+   - created_time
+   - modified_time
+AuthTokenDetails:
+   idx: 130
+   attrs:
+   - details
+   - created_time
+   - modified_time
+AppPassword:
+  idx: 131
+  attrs:
+    - password
+    - password_id
+    - key_label
+    - ip_address
+    - created_time
+    - modified_time
+    - ip_audit_info
+    - user_agent
+UserSecretKey:
+  idx: 132
+  attrs:
+    - secret_key
+    - key_label
+    - type
+    - time_period
+    - code_size
+    - is_verified
+    - hmac_algorithm
+    - created_time
+    - modified_time
+    - token_id
+    - is_primary
+    - key_type
+Register:
+  idx: 133
+  attrs:
+    - portal
+    - account_type
+    - first_name
+    - last_name
+    - username
+    - email
+    - password
+    - country
+    - language
+    - timezone
+    - accept_tos
+    - newsletter
+    - resource_params
+    - zaid
+    - zuid
+    - authtoken
+    - token_type
+    - redirect_uri
+    - token_params
+    - oauthorize_uri
+    - mobile
+    - recovery_mobile
+    - showconfirmpage
+    - country_state
+UserSystemProperties:
+  idx: 134
+  attrs:
+    - last_login_time
+    - captcha_entered_status
+    - spam_check_status
+    - mailbox_exist
+    - signup_country
+    - modified_time
+    - created_time
+    - ip_info
+UserAgentAudit:
+  idx: 135
+  attrs:
+    - device_type
+    - device_name
+    - browser
+    - browser_major_version
+    - browser_minor_version
+    - os
+    - os_major_version
+    - os_minor_version
+    - product
+    - product_version
+    - created_date
+AccountJoinRequests :
+  idx: 136
+  attrs:
+    - zuid
+    - status
+    - ip_address
+    - args_data
+    - created_time
+    - modified_time
+Automation:
+  idx: 137
+  attrs:
+    - automation_name
+    - description
+    - resource_to_listen
+    - child_resources_to_include
+    - criteria
+    - type
+    - operation
+    - created_time
+    - modified_time
+ResourceAction:
+  idx: 138
+  attrs:
+    - resource_action_id
+    - resource_uri_to_update
+    - resource_operation
+    - resource_criteria
+    - created_time
+    - modified_time
+ResourceMapping:
+  idx: 139
+  attrs:
+    - resource_action_id
+    - resource_mapping_action_id
+    - destination_column_name
+    - src_column_name
+    - default_value
+    - created_time
+    - modified_time
+EmailAction:
+  idx: 140
+  attrs:
+    - email_action_id
+    - email action
+    - email_ids
+    - email_template_uri
+    - created_time
+    - modified_time
+NotifyAction:
+  idx: 141
+  attrs:
+    - url_action_id
+    - notification action
+    - uri_to_notify
+    - created_time
+    - modified_time
+AuditZAID:
+  idx: 142
+  attrs:
+    - zaid
+ZAIDSMSAudit:
+  idx: 143
+  attrs:
+    - zaid
+    - zid
+    - mobile_no
+    - type
+    - usecase
+    - language_code
+    - response
+    - created_time
+TFAAudit:
+  idx: 144
+  attrs:
+  - tfaaudit_id
+  - zaid
+  - zid
+  - operation
+  - status
+  - errors
+  - user_agent
+  - referrer
+  - started_time
+  - altered_time
+  - app_name
+SSLCustomDomain:
+  idx: 164
+  attrs:
+    - domain
+    - requested_mailid
+    - created_time
+    - approver
+SSLNotifyServices:
+  idx: 165
+  attrs:
+    - status
+    - created_time
+    - modified_time
+AppAnnouncement:
+  idx: 167
+  attrs:
+    - announcement_id
+    - name
+    - class_name
+    - is_enabled
+    - announcement_type
+    - period_of_days
+    - url
+    - created_time
+    - modified_time
+    - skip_mobile_version
+    - priority
+ServiceOrgType:
+  idx: 170
+  attrs:
+    - service_name
+    - org_type
+ServiceOrgDomain:
+  idx: 171
+  attrs:
+    - zsoid
+    - domain
+    - is_primary
+    - modified_time
+    - created_time
+ServiceOrg:
+  idx: 172
+  attrs:
+    - zsoid
+    - org_name
+    - is_enabled
+    - created_by
+    - migrated_to_org
+    - created_time
+    - description
+    - modified_time
+    - parent_zaaid
+    - parent_org_type
+    - directory_zaaid
+    - is_exposed
+    - environment
+ServiceOrgMember:
+  idx: 173
+  attrs:
+    - zuid
+    - is_active
+    - user_role
+    - modified_time
+    - created_time
+    - user_type
+    - service_org_auto_id
+ServiceOrgProperties:
+  idx: 174
+  attrs:
+    - prop_name
+    - prop_value
+    - modified_time
+    - created_time
+ServiceOrgZAID:
+  idx: 175
+  attrs:
+    - zaid
+    - created_time
+ServiceOrgZAID:
+  idx: 176
+  attrs:
+    - zaid
+    - created_time
+ServiceOrgLogo:
+  idx: 177
+  attrs:
+    - view_permission
+    - modified_time
+    - created_time
+UserServiceDetails:
+  idx: 178
+  attrs:
+    - app_id
+    - is_active
+    - initial_access_time
+    - modified_time
+    - created_time
+    - default_app_account
+SignInFailedAudit:
+  idx: 179
+  attrs:
+    - signinfailed_audit_auto_id
+    - login_id
+    - zuid
+    - ip_address
+    - app_name
+    - referrer
+    - user_agent
+    - created_time
+    - error_code
+    - country
+    - request_type
+    - signin_id
+    - arid
+UserVerificationCode:
+  idx: 181
+  attrs:
+    - vcid
+    - mobile_no
+    - verification_code
+    - created_time
+ParentZAID:
+  idx: 182
+  attrs:
+    - parent_zaid
+    - zaid
+UserAnnouncementStatus:
+  idx: 185
+  attrs:
+    - zuid
+    - announcement_id
+    - arid
+    - status
+    - visited_time
+UserAccountsProperties:
+  idx: 186
+  attrs:
+   - last_login_time
+   - password_strength
+   - last_login_country
+   - last_password_verified_time
+   - last_api_access_time
+ISCUserTicketUsage:
+  idx: 190
+  attrs:
+    - isc_ticket
+    - scope_id
+    - token_created_time
+    - token_accessed_ip
+    - token_accessed_time
+    - user_agent
+ServiceOrgAccountMapping:
+  idx: 191
+  attrs:
+    - account_id
+    - account_type
+    - account_name
+    - created_time
+DeploymentConfig:
+  idx: 192
+  attrs:
+    - deployment_name
+    - config_name
+    - config_value
+CacheCluster:
+  idx: 193
+  attrs:
+    - cluster_name
+    - sync_cluster_name
+    - is_sync_enabled
+    - is_sync_enabled_for_get
+ClusterNode:
+  idx: 194
+  attrs:
+     - node_name
+     - cache_type
+     - server_ip_port
+     - is_enabled
+     - cache_properties
+NodeRange:
+  idx: 195
+  attrs:
+     - range_name
+     - start
+     - end
+ServiceOrgAddress:
+  idx: 198
+  attrs:
+    - address_type
+    - name
+    - post_box
+    - street_address
+    - city
+    - state
+    - country
+    - postal_code
+    - latitude
+    - longitude
+    - phone
+    - extension
+    - mobile
+    - fax
+    - timezone
+    - language
+    - website_url
+    - blog_url
+    - twitter_url
+    - linkedin_url
+    - flickr_url
+    - delicious_url
+    - amazon_url
+    - modified_time
+    - created_time
+AppAccountService:
+  idx: 199
+  attrs:
+    - app_name
+    - zuid
+    - resource_hierarchy_id
+    - role_hierarchy_id
+    - description
+    - account_status
+    - created_time
+    - sub_service_type
+    - parent_zaaid
+    - directory_zaaid
+    - is_exposed
+    - environment
+    - parent_org_type
+    - modified_time
+AccountMember:
+  idx: 200
+  attrs:
+    - zid
+    - zid_type
+    - zarid
+    - is_active
+    - created_time
+    - modified_time
+    - user_type
+AppAccountLicense:
+  idx: 201
+  attrs:
+    - license_attribute_key
+    - license_attribute_value
+    - modified_time
+InvitationDetails:
+  idx: 202
+  attrs:
+    - appaccount_invitation_id
+    - zaaid
+    - app_name
+    - role_name
+    - invited_by
+    - accept_url
+    - reject_url
+    - args_data
+    - created_time
+    - modified_time
+    - status
+    - org_role
+    - resend_limit
+    - reject_status
+OAuthClientScopes:
+  idx: 203
+  attrs:
+    - scope_id
+    - allowed_operations
+    - created_time
+    - scope_type
+OAuthRedirectURL:
+  idx: 204
+  attrs:
+    - redirect_url
+    - redirect_url_apl
+    - redirect_url_type
+    - created_time
+OAuthRefreshToken:
+  idx: 205
+  attrs:
+    - user_zid
+    - zid_type
+    - refresh_token
+    - created_time
+    - device_name
+    - is_active
+    - ip_audit_info
+    - modified_time
+    - org_type
+OAuthRefreshTokenScopes:
+  idx: 206
+  attrs:
+    - scope_id
+    - allowed_operations
+    - created_time
+OAuthAccessToken:
+  idx: 207
+  attrs:
+    - user_zid
+    - zid_type
+    - refresh_token
+    - access_token
+    - expiry_time
+    - created_time
+OAuthAccessTokenScopes:
+  idx: 208
+  attrs:
+    - scope_id
+    - allowed_operations
+    - created_time
+OAuthGrantToken:
+  idx: 209
+  attrs:
+    - user_zid
+    - zid_type
+    - grant_token
+    - grant_type
+    - redirect_url
+    - access_type
+    - created_time
+    - expiry_time
+    - grant_token_info
+    - org_type
+OAuthGrantTokenScopes:
+  idx: 210
+  attrs:
+    - scope_id
+    - allowed_operations
+    - created_time
+OAuthKeys:
+  idx: 211
+  attrs:
+    - key_id
+    - public_key
+    - private_key
+    - created_time
+OAuthAccessGrantScopes:
+  idx: 212
+  attrs:
+    - scope_id
+    - allowed_operations
+    - created_time
+OAuthRefreshTokenKey:
+  idx: 213
+  attrs:
+    - key_name
+    - key_value
+    - created_time
+DCLocation:
+  idx: 214
+  attrs:
+    - location
+    - server_url
+    - salt
+    - symmetric_key
+    - description
+    - basedomain
+    - is_prefixed
+    - equivalent_basedomains
+    - time_zones
+DCDigest:
+  idx: 215
+  attrs:
+    - digest
+    - location
+    - email_id
+    - is_validated
+    - valid_upto
+    - created_time
+InvitedUserDetails:
+   idx: 216
+   attrs:
+     - invited_user_autoid
+     - email_id
+     - org_id
+     - org_type
+     - invitation_time
+     - status
+     - args_data
+OAuthAudit:
+  idx: 217
+  attrs:
+    - arid
+    - zaid
+    - zid
+    - app_name
+    - client_zid
+    - operation
+    - ip_address
+    - referrer
+    - token_digest
+    - parent_token_digest
+    - user_agent
+    - added_time
+OAuthTokenUsage:
+  idx: 218
+  attrs:
+    - client_id
+    - user_id
+    - client_approved_time
+    - client_accessed_ip
+    - client_accessed_time
+    - user_agent
+AppAccountPolicy:
+  idx: 219
+  attrs:
+    - policy_key
+    - policy_value
+    - created_time
+    - modified_time
+OAuthMobileAppDetails:
+  idx: 220
+  attrs:
+    - app_name
+    - package_name
+    - signature
+    - app_client_id
+    - project_id
+    - oauth_client_id
+    - audience_group_id
+    - created_time
+    - modified_time
+OAuthMobileAudience:
+  idx: 221
+  attrs:
+    - audience_id
+    - audience_group_id
+    - audience_email_id
+    - created_time
+    - modified_time
+AppAccountPreference:
+  idx: 222
+  attrs:
+    - daylight_saving_enabled
+    - week_starts_on
+    - name_format
+    - short_date_format
+    - medium_date_format
+    - long_date_format
+    - short_time_format
+    - medium_time_format
+    - long_time_format
+    - use_24hr_time
+    - created_time
+    - modified_time
+AppAccountFinancialSettings:
+  idx: 223
+  attrs:
+    - fiscal_year_start_month
+    - tax_basis
+    - currency_code
+    - currency_symbol
+    - currency_format
+    - created_time
+    - modified_time
+UserAllDomainsToken:
+  idx: 224
+  attrs:
+    - token
+    - ip_address
+    - validity_period
+    - user_agent
+    - created_time
+    - ip_audit_info
+    - signin_info
+UserBaseDomainToken:
+  idx: 225
+  attrs:
+    - token
+    - created_domain
+    - created_time
+    - base_domain_token
+TokenPairAuthToken:
+  idx: 226
+  attrs:
+    - auth_token
+    - created_domain
+    - type
+    - created_time
+DCCustomDomains:
+  idx: 227
+  attrs:
+    - entity_name
+    - original_basedomain
+    - transformed_basedomain
+UserDevice:
+  idx: 228
+  attrs:
+    - device_os_version
+    - device_info
+    - device_type
+    - setup_mode
+    - device_token
+    - device_name
+    - public_key
+    - location
+    - is_verified
+    - is_locked
+    - created_time
+    - modified_time
+    - is_primary
+    - app_id
+    - apns_mode
+    - refresh_token
+    - app_version
+    - mode
+    - pref_option
+    - secret_key
+    - bio_type
+    - device_token_apl
+MFAAudit:
+  idx: 229
+  attrs:
+    - mfaaudit_id
+    - zuid
+    - operation
+    - status
+    - errors
+    - user_agent
+    - device_token
+    - device_name
+    - location
+    - referrer
+    - started_time
+    - altered_time
+MobileScreenName:
+  idx: 230
+  attrs:
+    - mobile_screen_name
+    - user_mobile_status
+    - created_time
+    - modified_time    
+OAuthDeviceToken:
+  idx: 231
+  attrs:
+    - user_zid
+    - zid_type
+    - device_token
+    - grant_type
+    - verification_code
+    - verification_status
+    - access_type
+    - created_time
+    - user_location
+OAuthDeviceTokenScopes:
+  idx: 232
+  attrs:
+    - scope_id
+    - allowed_operations
+    - created_time
+AppAccountConfiguration:
+  idx: 233
+  attrs:
+    - config_name
+    - config_value
+    - modified_time
+    - created_time
+OAuthAppGroup:
+  idx: 234
+  attrs:
+    - oauth_app_group_id
+    - oauth_app_group_name
+    - description
+    - modified_time
+    - created_time
+UserOAuthApps:
+  idx: 235
+  attrs:
+    - app_client_zid
+    - ip_address
+    - created_time
+OAuthApiToken:
+  idx: 236
+  attrs:
+    - zid
+    - zid_type
+    - api_key
+    - description
+    - created_time
+    - is_active
+OAuthApiTokenScopes:
+  idx: 237
+  attrs:
+    - scope_id
+    - allowed_operations
+    - created_time
+ZIDAudit:
+  idx: 238
+  attrs:
+    - zid
+    - type
+    - created_time
+OAuthClientProperties:
+  idx: 241
+  attrs:
+    - prop_name
+    - prop_value
+    - modified_time
+    - created_time
+OAuthInternalToken:
+  idx: 242
+  attrs:
+    - token_name
+    - token_value
+    - created_time
+OAuthDCDigest:
+  idx: 243
+  attrs:
+    - digest
+    - location
+    - is_validated
+    - valid_upto
+    - created_time
+OAuthDcDetails:
+  idx: 244
+  attrs:
+    - dc_location
+    - is_enabled
+    - created_time
+    - modified_time
+ScopeDescriptions:
+  idx: 245
+  attrs:
+    - operation_type
+    - description
+    - is_i18n
+    - created_time
+    - modified_time
+SubScopes:
+  idx: 246
+  attrs:
+    - scope_id
+    - created_time
+SAMLApp:
+  idx: 247
+  attrs:
+    - app_name
+    - description
+    - acs_url
+    - identifier
+    - name_id_field
+    - app_id
+    - sign_in_url
+    - public_key
+    - private_key
+    - default_relay_state
+    - idp_mode_supported
+    - zid
+    - zid_type
+    - is_enabled
+    - enable_logout
+    - logout_url
+    - created_time
+    - modified_time
+    - certificate_expiry_time
+SAMLAttribute:
+  idx: 248
+  attrs:
+    - attribute_name
+    - attribute_value
+    - created_time
+    - modified_time
+SAMLAppLogo:
+  idx: 249
+  attrs:
+    - created_time
+    - modified_time
+SAMLUser:
+  idx: 250
+  attrs:
+    - zid
+    - is_enabled
+    - created_time
+    - modified_time
+OAuthGrantTokenOrgInfo:
+  idx: 251
+  attrs:
+    - zid
+    - zidtype
+    - service_name
+    - created_time
+OAuthAccessTokenOrgInfo:
+  idx: 252
+  attrs:
+    - zid
+    - zidtype
+    - service_name
+    - created_time
+OAuthRefreshTokenOrgInfo:
+  idx: 253
+  attrs:
+    - zid
+    - zidtype
+    - service_name
+    - created_time
+OAuthDeviceTokenOrgInfo:
+  idx: 254
+  attrs:
+    - zid
+    - zidtype
+    - service_name
+    - created_time
+ServiceOrgSubService:
+  idx: 255
+  attrs:
+    - app_id
+    - zuid
+    - description
+    - account_status
+    - created_time
+    - sub_org_type
+    - migrated_to_org
+    - parent_zaaid
+    - directory_zaaid
+    - is_exposed
+    - parent_org_type
+    - environment
+    - modified_time
+MailDetails:
+  idx: 256
+  attrs:
+    - connector_name
+    - connector_key
+    - connector_id
+    - default_mail_from
+    - mail_sender_type
+    - modified_time
+    - created_time
+MailTypes:
+  idx: 257
+  attrs:
+    - mail_type_name
+    - mail_type_description
+    - modified_time
+    - created_time
+MailSender:
+  idx: 258
+  attrs:
+    - mail_sender
+    - connector_name
+    - modified_time
+    - created_time
+AuthDomainPolicy:
+  idx: 259
+  attrs:
+    - policy_key
+    - policy_value
+    - modified_time
+MFAPolicy:
+  idx: 260
+  attrs:
+    - enable
+    - allowed_modes
+    - restrict_backup
+    - restrict_change_mode
+    - modified_time
+    - restrict_trust_mfa_session
+    - is_password_less_enabled
+    - trust_mfa_session_validity
+ShortenURL:
+  idx: 261
+  attrs:
+    - shorten_id
+    - url
+    - created_time
+    - expiry_time
+TemplateImage:
+   idx: 262
+   attrs:
+     - image_name_apl
+     - dfs_location
+     - transmail_id
+     - transmail_status
+MailClientAudit:
+   idx: 263
+   attrs:
+     - zuid
+     - email_id
+     - app_name
+     - ip_address
+     - user_agent
+     - audited_time
+UserTokenPairDetails:
+   idx: 265
+   attrs:
+     - details
+     - idle_session_timeout
+OAuthJavaScriptDomains:
+  idx: 266
+  attrs:
+    - domain
+    - domain_apl
+    - created_time
+UserApp:
+  idx: 267
+  attrs:
+    - app_id
+    - zuid
+    - ip_address
+    - created_time
+RoleAccessCheck:
+  idx: 268
+  attrs:
+    - role
+    - created_time
+    - modified_time
+RoleResourceMappings:
+  idx: 269
+  attrs:
+    - resource
+    - operations_allowed
+    - inherit_allowed
+    - created_time
+    - modified_time
+OAuthAllowedClients:
+  idx: 270
+  attrs:
+    - allowed_client_zid
+    - created_time
+CPortalAdmin:
+  idx: 271
+  attrs:
+    - zuid
+    - role
+    - created_time
+    - modified_time
+MobileCount:
+  idx: 272
+  attrs:
+    - mobile
+    - count
+    - zuids
+UserGDPRDetails:
+  idx: 273
+  attrs:
+    - dpa_status
+    - email_id
+ParentGroup:
+  idx: 274
+  attrs:
+    - parent_zgid
+    - created_time
+UserServicePreference :
+  idx: 275
+  attrs:
+    - preference_key
+    - preference_value
+    - created_time
+    - modified_time
+Designations:
+  idx: 276
+  attrs:
+    - designation_id
+    - display_name
+    - created_time
+    - modified_time
+UserExtendedInfo:
+  idx: 277
+  attrs:
+    - manager_zuid
+    - employee_id
+    - designation_id
+    - created_time
+    - modified_time
+    - locked_until
+UserSigninLocation:
+  idx: 278
+  attrs:
+    - location
+    - latitude
+    - longitude
+UserSigninUserAgent:
+  idx: 279
+  attrs:
+    - user_agent_id
+    - device
+    - browser
+    - user_agent
+    - last_accessed_time
+    - user_agent    
+MailClientAuditTemplate:
+   idx: 280
+   attrs:
+     - zuid
+     - email_id
+     - app_name
+     - ip_address
+     - user_agent
+     - audited_time
+     - arid
+OAuthZID:
+  idx: 281
+  attrs:
+    - zid
+    - zid_type
+    - zid_org_type
+    - created_time
+UserRestrictedScope:
+  idx: 282
+  attrs:
+    - scope_id
+    - approved_zuid
+    - allowed_operations
+    - created_time
+AppRoleOperations:
+  idx: 284
+  attrs:
+     - operation
+AppAllowedMethods:
+  idx: 285
+  attrs:
+     - method_name
+     - is_allowed
+     - is_acl_enabled
+     - method_id
+     - created_time
+     - modified_time
+UserExpiry:
+   idx: 286
+   attrs:
+     - zuid
+     - expiry_time
+AuthtoOAuth:
+   idx: 287
+   attrs:
+     - client_id
+     - authtokenscopes
+     - oauthtokenscopes
+     - client_status
+     - created_time
+     - expiry_time
+     - token_expiry_time
+AuthTokenDeletion:
+   idx: 288
+   attrs:
+     - isc_ticket
+     - expiry_time
+AccountAuditTemplate:
+  idx: 289
+  attrs:
+    - zaid
+    - zuid
+    - screen_name
+    - ip_address
+    - referrer
+    - token_digest
+    - user_agent
+    - created_time
+    - arid
+    - app_id
+    - operation_id
+ResourceAuditTemplate:
+  idx: 290
+  attrs:
+    - zaid
+    - zuid
+    - app_id
+    - request_id
+    - resource_type
+    - operation
+    - old_data
+    - new_data
+    - rest_url
+    - token_digest
+    - thread_id
+    - app_ip
+    - remote_ip
+    - user_agent
+    - audited_time
+    - arid
+    - owner_zuid
+RegistrationAuditTemplate:
+  idx: 291
+  attrs:
+    - zaid
+    - reg_id
+    - app_ip
+    - remote_ip
+    - user_agent
+    - referrer
+    - app_id
+    - status
+    - errors
+    - zuid_after_reg
+    - current_zuid
+    - get_count
+    - email_id
+    - idp
+    - created_time
+    - end_time
+    - arid
+AccountUpdateAuditTemplate:
+  idx: 292
+  attrs:
+    - zaid
+    - zuid
+    - control_query_string
+    - response_status
+    - created_time
+    - arid
+APIAuditTemplate:
+  idx: 293
+  attrs:
+    - zaid
+    - zuid
+    - app_id
+    - screen_name
+    - operation_id
+    - ip_address
+    - referrer
+    - token_digest
+    - user_agent
+    - created_time
+    - arid
+ZAIDSMSAuditTemplate:
+  idx: 294
+  attrs:
+    - zaid
+    - zid
+    - mobile_no
+    - type
+    - usecase
+    - language_code
+    - response
+    - created_time
+TFAAuditTemplate:
+  idx: 295
+  attrs:
+  - tfaaudit_id
+  - zaid
+  - zid
+  - operation_id
+  - status
+  - errors
+  - user_agent
+  - referrer
+  - started_time
+  - altered_time
+  - app_id
+SignInFailedAuditTemplate:
+  idx: 296
+  attrs:
+    - signinfailed_audit_auto_id
+    - login_id
+    - zuid
+    - ip_address
+    - app_id
+    - referrer
+    - user_agent
+    - created_time
+    - error_code
+    - country
+    - request_type
+    - signin_id
+    - arid
+OAuthAuditTemplate:
+  idx: 297
+  attrs:
+    - arid
+    - zaid
+    - zid
+    - app_id
+    - client_zid
+    - operation_id
+    - ip_address
+    - token_digest
+    - parent_token_digest
+    - user_agent
+    - added_time
+MFAAuditTemplate:
+  idx: 298
+  attrs:
+    - mfaaudit_id
+    - zuid
+    - operation_id
+    - status
+    - errors
+    - user_agent
+    - device_token
+    - device_name
+    - location
+    - referrer
+    - started_time
+    - altered_time
+UserMailFetchLocation:
+  idx: 300
+  attrs:
+    - location_id
+    - location
+    - latitude
+    - longitude
+    - created_time
+AuthorizedDevices:
+  idx: 301
+  attrs:
+    - api_token
+    - mdm_token
+    - zuid
+    - status
+    - created_time
+    - modified_time
+OAuthMobileAppService:
+  idx: 302
+  attrs:
+    - service_name
+OAuthMobileAppName:
+  idx: 303
+  attrs:
+    - mobile_app_name
+    - app_logo
+    - description
+    - app_type
+    - display_name
+    - unique_id
+OAuthMobileDevices:
+  idx: 304
+  attrs:
+    - package_name
+    - oauth_client_id
+    - client_type
+    - app_type
+    - signature
+    - created_time
+    - modified_time
+    - client_zid
+OAuthMobileDevicesDetails:
+  idx: 305
+  attrs:
+    - app_client_id
+    - project_id
+    - audience_group_id
+    - audience_id
+BreachedPassword:
+  idx: 306
+  attrs:
+    - password
+    - count
+SAMLSpApp:
+  idx: 307
+  attrs:
+    - app_name
+    - description
+    - acs_url
+    - identifier
+    - name_id_field
+    - app_id
+    - sign_in_url
+    - public_key
+    - private_key
+    - default_relay_state
+    - idp_mode_supported
+    - is_enabled
+    - enable_logout
+    - logout_url
+    - created_time
+    - modified_time
+    - certificate_expiry_time
+    - idp_issuer
+    - name_id
+SAMLSpAppAttribute:
+  idx: 308
+  attrs:
+    - attribute_name
+    - attribute_value
+    - created_time
+    - modified_time
+    - custom_attribute_value
+    - attribute_name_apl
+SAMLSpAppLogo:
+  idx: 309
+  attrs:
+    - created_time
+    - modified_time
+SAMLSpUser:
+  idx: 310
+  attrs:
+    - zid
+    - is_enabled
+    - created_time
+    - modified_time
+    - zid_type
+AccountRemoteAuthConf:
+  idx: 311
+  attrs:
+    - remote_auth_name
+    - remote_auth_type
+    - secret_key
+    - verification_url
+    - default_service_name
+    - created_time
+    - modified_time
+WebSignInFailedAudit:
+  idx: 312
+  attrs:
+    - websigninfailed_audit_auto_id
+    - arid
+    - login_id
+    - zuid
+    - error_code
+    - ip_address
+    - user_agent
+    - country
+    - signin_id
+    - created_time
+UserThirdPartySecretKeys:
+   idx: 313
+   attrs:
+     - app_name
+     - label
+     - app_secret
+     - created_time
+     - modified_time
+     - durations
+SigninPreference:
+   idx: 314
+   attrs:
+     - default_preference
+     - created_time
+     - modified_time
+ServiceOrgKYC:
+  idx: 315
+  attrs:
+    - zuid
+    - reference_zsoid
+    - reference_org_type
+    - employee_count
+    - industry
+    - org_contact_emailid
+    - organisation_name
+    - first_name
+    - last_name
+    - mobile_number
+    - designation
+ServiceOrgKYCContact:
+  idx: 316
+  attrs:
+    - email_id
+    - first_name
+    - last_name
+    - data_protection_officer
+    - privacy_representative
+    - account_dispute_resolution
+    - breach_notification
+    - subprocessor_notification
+YubikeyRegistrationData:
+   idx: 317
+   attrs:
+     - yubikey_id
+     - client_data
+     - public_key
+     - keyhandle
+     - counter
+     - is_primary
+     - created_time
+ClientPortalOrgType:
+   idx: 318
+   attrs:
+     - org_type
+     - created_time
+PortalMapping:
+   idx: 319
+   attrs:
+     - mapping_key
+     - mapping_type
+     - mapping_value
+     - zaaid
+     - created_time
+     - modified_time
+PortalAccountMapping:
+   idx: 320
+   attrs:
+    - account_id
+    - account_type
+    - account_name
+    - created_time
+OAuthInternalApiToken:
+   idx: 321
+   attrs:
+    - token_name
+    - token_value
+    - created_time
+OAuthMobileUserDevice:
+   idx: 322
+   attrs:
+    - device_id
+    - device_name
+    - device_model
+    - device_type
+    - mdm_token
+OAuthMobileUserDeviceClients:
+    idx: 323
+    attrs:
+     - client_zid
+     - user_zuid
+     - refresh_token
+OAuthMobileUserDeviceSubClients:
+    idx: 324
+    attrs:
+      - client_zid
+AccountKYC:
+  idx: 325
+  attrs:
+    - zuid
+    - organisation_name
+    - industry
+    - employee_count
+    - org_contact_emailid
+    - first_name
+    - last_name
+    - mobile_number
+    - designation
+AccountKYCContact:
+  idx: 326
+  attrs:
+    - email_id
+    - first_name
+    - last_name
+    - data_protection_officer
+    - privacy_representative
+    - account_dispute_resolution
+    - breach_notification
+    - subprocessor_notification
+SamlAppSessionIndex:
+  idx: 327
+  attrs:
+    - app_id
+    - session_index
+OAuthOpenId:
+  idx: 328
+  attrs:
+    - open_id
+    - zid
+    - created_time
+ServiceOrgOAuthAccessGrant:
+  idx: 329
+  attrs:
+    - client_zid
+    - ip_address
+    - user_agent
+    - created_time
+AccountOAuthAccessGrant:
+  idx: 330
+  attrs:
+    - client_zid
+    - ip_address
+    - user_agent
+    - created_time
+AccountMemberRole:
+  idx: 331
+  attrs:
+    - zarid
+    - created_time
+    - modified_time
+OneAuthPreference:
+  idx: 332
+  attrs:
+    - secret_key
+    - pass_phrase
+    - restrict_signin
+    - tp_secret_sync
+    - created_time
+    - modified_time
+    - pass_phrase_time
+SOOAuthAccessGrantScopes:
+  idx: 333
+  attrs:
+    - scope_id
+    - allowed_operations
+    - created_time
+AccountOAuthAccessGrantScopes:
+  idx: 334
+  attrs:
+    - scope_id
+    - allowed_operations
+    - created_time
+UserInfo:
+  idx: 335
+  attrs:
+    - state
+    - modified_time
+OAuthSessionGrant:
+  idx: 336
+  attrs:
+    - client_zid
+    - type
+    - org_info
+ServiceOrgMemberRole:
+  idx: 337
+  attrs:
+    - zarid
+    - created_time
+    - modified_time
+PrivacyCertificateAudit:
+  idx: 338
+  attrs:
+    - arid    
+    - email_id
+    - certificate_type
+    - created_time
+CacheDataStore:
+  idx: 339
+  attrs:
+    - key
+    - value
+    - expiry_time
+    - created_time
+JWTConfiguration:
+  idx: 340
+  attrs:
+    - jwt
+    - is_enabled
+    - login_url
+    - logout_url
+    - algorithm
+    - key
+    - modified_time
+JWTParams:
+  idx: 341
+  attrs:
+    - request_type
+    - param_name
+    - param_value
+AccountScheduleDetails:
+  idx: 342
+  attrs:
+    - jobid
+    - operation_data
+    - scheduler_type
+    - status
+    - expiry_time
+    - created_time
+    - modified_time
+ServiceOrgInvitation:
+  idx: 343
+  attrs:
+    - email_id
+    - status
+    - user_role
+    - user_type
+    - send_mail
+    - resend_limit
+    - accept_url
+    - reject_url
+    - ip_address
+    - idp
+    - args_data
+    - invited_by
+    - first_name
+    - last_name
+    - created_time
+    - modified_time
+InvitedOrgDetails:
+  idx: 344
+  attrs:
+    - invited_user_autoid
+    - email_id
+    - org_id
+    - org_type
+    - invitation_time
+    - status
+    - args_data
+    - modified_time

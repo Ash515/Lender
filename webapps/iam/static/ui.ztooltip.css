@@ -1,0 +1,99 @@
+/** $Id$*/
+.ui-ztooltip {
+	position:absolute;
+	background: #222;
+	color: #FFFFFF;
+	z-index:400000;
+	opacity: 0.9;
+	display: none;
+	border-radius: 2px;
+}
+.ui-ztooltip-header {
+	font-weight:bold;
+	display:none;
+	height:16px;
+}
+.ui-ztooltip-close {
+	background-position: -291px -28px;
+	margin: 0px;
+	position: absolute;
+	cursor: pointer;
+	right: 0px;
+	top: 1px;
+}
+.ui-ztooltip-callout {
+	width:20px;
+	height:20px;
+	position:absolute;
+}
+.ui-ztooltip-contentwithclose {
+	padding-right:15px;
+	max-width:250px;
+}
+.ui-ztooltip-content {
+	word-wrap: break-word;
+	max-width:1620px;
+	font-size: 12px;
+}
+.ui-ztooltip-title {
+	margin:3px 0px 6px 0px;
+	font-size: 12px;
+}
+.ui-ztooltip-overlaydiv {
+	padding: 4px 8px 5px 8px;
+	font-weight: normal;
+	border-radius: 2px;
+}
+.ui-ztooltip-img {
+	width:32px;
+	height:32px;
+	display:none;
+	margin:5px 10px 0px 0px;
+	float:left;
+}
+.ui-ztooltip-callout-bottom, .ui-ztooltip-callout-bottom span, .ui-ztooltip-callout-top, .ui-ztooltip-callout-top span, .ui-ztooltip-callout-right, .ui-ztooltip-callout-right span, .ui-ztooltip-callout-left, .ui-ztooltip-callout-left span {
+	display:block;
+	width:0px;
+	height:0px;
+	border:6px solid;
+}
+.ui-ztooltip-callout-bottom, .ui-ztooltip-callout-bottom span {
+	border-color:#222 transparent transparent transparent !important;
+	border-bottom:1px solid;
+}
+.ui-ztooltip-callout-top, .ui-ztooltip-callout-top span {
+	border-color:transparent transparent #222 transparent !important;
+	border-top:1px solid;
+}
+.ui-ztooltip-callout-right, .ui-ztooltip-callout-right span {
+	border-color:transparent transparent transparent #222 !important;
+	border-right:1px solid;
+}
+.ui-ztooltip-callout-left, .ui-ztooltip-callout-left span {
+	border-color:transparent #222 transparent transparent !important;
+	border-left:1px solid;
+}
+.ui-ztooltip-callout-bottom span, .ui-ztooltip-callout-top span, .ui-ztooltip-callout-right span, .ui-ztooltip-callout-left span {
+	border-width:7px;
+	position:relative;
+}
+.ui-ztooltip-callout-bottom span {
+	top:-10px;
+	left:-9px;
+	border-bottom:1px solid;
+}
+.ui-ztooltip-callout-top span {
+	top:2px;
+	left:-9px;
+	border-top:1px solid;
+}
+.ui-ztooltip-callout-right span {
+	top:-9px;
+	left:-10px;
+	border-right:1px solid;
+}
+.ui-ztooltip-callout-left span {
+	top:-7px;
+	left:0px;
+	border-left:1px solid;
+}

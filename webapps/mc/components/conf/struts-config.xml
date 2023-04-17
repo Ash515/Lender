@@ -1,0 +1,40 @@
+<!-- $Id$ -->
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+  <global-forwards>
+      <forward name="mcReloadParentWindow" path="/components/jsp/ReloadParentWindow.jsp" />
+  </global-forwards>
+
+    <action-mappings>
+
+        <action path="/applyTheme" type="com.adventnet.client.themes.web.ApplyThemeAction" />
+        
+        <action path="/ChangeTheme" forward="/components/jsp/ChangeTheme.jsp" />
+        
+        <action path="/ChangeThemeCSS" forward="/components/jsp/ChangeThemeCSS.jsp" />
+        
+	<action path="/AddTab" forward="/components/jsp/tab/AddTab.jsp" />
+       
+	<action path="/Feedback" forward="/components/jsp/InstantFeedback.jsp" />
+		
+	<action path="/Mailer" forward="/components/jsp/Mailer.jsp" />
+		
+	<action path="/InstantFeedbackThanks" forward="/components/jsp/instantFeedbackThanks.jsp" />
+		
+       <action path="/columnChooserSelect" forward="/components/jsp/columnchooser/chooserSelectType.jsp" />
+        
+	<action path="/Logout" type="com.adventnet.client.components.action.web.LogoutAction"/>
+      
+        <action path="/mcReloadParentWindow" forward="/components/jsp/ReloadParentWindow.jsp" />
+    
+    </action-mappings>
+
+    <controller />
+        
+  <!--error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/viewError.do</location>
+  </error-page-->
+
+</struts-config>

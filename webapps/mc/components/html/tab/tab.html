@@ -1,0 +1,285 @@
+<!-- $Id$ -->
+<div  viewname="ExampleTabs" componentname="ACTab">
+
+
+
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+		
+		<td>
+           	<ul class="plaintab">
+		
+         		<li mc:tab="1" class="selected">
+                          <a href='javascript:tabSelected()'>
+		 	    
+          		     Main Docs</a>
+			</li>
+
+		
+         		<li mc:tab="2" class="notselected">
+                          <a href='javascript:tabSelected()'>
+		 	    
+          		     Table Examples</a>
+			</li>
+		
+         		<li mc:tab="3" class="notselected">
+                          <a href='javascript:tabSelected()'>
+		 	    
+          		     Actions</a>
+			</li>
+
+		
+         		<li mc:tab="4" class="notselected">
+                          <a href='javascript:tabSelected()'>
+		 	    
+          		     Default Views</a>
+			</li>
+		
+         		<li mc:tab="5" class="notselected">
+                          <a href='javascript:tabSelected()'>
+		 	    
+          		     Form Examples</a>
+			</li>
+
+		
+         		<li mc:tab="6" class="notselected">
+                          <a href='javascript:tabSelected()'>
+		 	    
+          		     Document</a>
+			</li>
+
+		
+		</ul>
+		</td>
+                
+                
+		</tr>
+	</table>	
+
+
+
+</div>
+
+<div  viewname="ExampleForTemplateTab" componentname="ACTab">
+
+
+
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+		<tbody><tr>
+		
+		<td>
+           	<ul class="DropDownTab">
+		
+         		<li mc:tab="1" class="notselected">
+                          <a href='javascript:tabSelected()' id="link">
+		 	    
+          		     Simple Jsp Page</a><input class="maxButton" id="link2" type="button">
+          		     <div style="display: none; z-index: 1000; position: absolute; left: 183px; top: 45px;" id="div">
+          		     <table class="DropTable" cellspacing="0" cellpadding="0">
+
+          		     <tbody><tr>
+          		     <td class="element"><a href="#" onclick="updateViewInCA('MenuInTable',null,null,'ExampleForTemplateTab_DAC',0,null,null,null);
+          ">Menu in Table</a></td>
+          		     </tr>
+          		     <tr>
+          		     <td class="element"><a href="#" onclick="updateViewInCA('MCTAjaxTable',null,null,'ExampleForTemplateTab_DAC',0,null,null,null);
+          ">Ajax in Table</a></td>
+          			</tr>
+          			 <tr>
+          		     <td class="element"><a href="#" onclick="updateViewInCA('GridExample',null,null,'ExampleForTemplateTab_DAC',0,null,null,null);
+          ">Grid Example</a></td>
+
+          			</tr>
+          		      <tr>
+          		     <td class="element"><a href="#" onclick="updateViewInCA('testaccordian',null,null,'ExampleForTemplateTab_DAC',0,null,null,null);
+          ">Accordian</a></td>
+          			</tr>
+          		 
+          		     
+          		     </tbody></table>
+          		     </div>
+			</li>
+
+		
+         		<li mc:tab="2" class="notselected">
+
+                   <a href='javascript:tabSelected()'>
+		 	    
+          		    Normal Table</a><input class="maxButton" id="link1" type="button">
+          		          <div style="display: none; z-index: 1000; position: absolute; left: 283px; top: 48px;" id="div1">
+          		     <table class="DropTable" cellspacing="0" cellpadding="0">
+          		     <tbody><tr>
+          		     <td class="element"><a href="#" onclick="updateViewInCA('NormalTable',null,null,'ExampleForTemplateTab_DAC',0,null,null,null);
+          ">Normal Table</a></td>
+          		     </tr>
+          		     <tr>
+
+          		     <td class="element"><a href="#" onclick="updateViewInCA('HorizontalTable',null,null,'ExampleForTemplateTab_DAC',0,null,null,null);
+          ">Sorting In Table</a></td>
+          			</tr>
+          			 <tr>
+          		     <td class="element"><a href="#" onclick="updateViewInCA('NavigatorAtTop',null,null,'ExampleForTemplateTab_DAC',0,null,null,null);
+          ">Table With Navigator In Top</a></td>
+          			</tr>
+          		      <tr>
+          		     <td class="element"><a href="#" onclick="updateViewInCA('VerticalTable',null,null,'ExampleForTemplateTab_DAC',0,null,null,null);
+          ">Vertical Table</a></td>
+
+          			</tr>
+          		 <tr>
+          		     <td class="element"><a href="#" onclick="updateViewInCA('PropertySheetTable',null,null,'ExampleForTemplateTab_DAC',0,null,null,null);
+          ">Property Sheet Table</a></td>
+          			</tr>
+          		     
+          		     </tbody></table>
+          		     </div>
+			</li>
+		
+         		<li mc:tab="3" class="notselected">
+
+                          <a href='javascript:tabSelected()'>
+		 	    
+          		     Mail Settings</a>
+			</li>
+
+		
+         		<li mc:tab="4" class="selected">
+                          <a href='javascript:tabSelected()'>
+		 	    
+          		     Simple Form</a>
+			</li>
+
+		
+         		<li mc:tab="5" class="notselected">
+                          <a href='javascript:tabSelected()'>
+		 	    
+          		     App Template</a>
+			</li>
+
+	
+		</ul>
+		</td>
+                
+                
+		</tr>
+	</tbody></table>	
+		<script>
+			new Tooltip("link1","div1",
+					{hideEvent:"none",
+					effect:"none",
+					offsetLeft: -100, offsetTop: 0,
+					duration:0.5,
+					displayAt:"linkPosition"});
+			new Tooltip("link2","div",
+					{hideEvent:"none",
+					effect:"none",
+					offsetLeft: -100, offsetTop: 0,
+					duration:0.5,
+					displayAt:"linkPosition"});
+		
+		</script>
+	
+
+	<style type="text/css">
+	
+.DropDownTab {
+	float: left;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	border: none;
+	width: 100%;
+	font-size: 11px;
+	font-weight: bold;
+	font-family: "Open Sans", Arimo, Roboto;
+	line-height: 17px;
+}
+	
+ul.DropDownTab li {
+	float: left;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	padding: 2px 15px 2px 15px;
+}
+
+ul.DropDownTab a{
+
+	font-size: 11px;
+}
+
+ul.DropDownTab li.selected a {
+
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	padding: 2px 15px 2px 15px;
+	text-decoration: none;
+}
+
+ul.DropDownTab li.notSelected a {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	padding: 2px 15px 2px 15px;
+	text-decoration: none;
+}
+ul.DropDownTab li.selected {
+	background: #ADD8E6;
+	border-left: 1px solid #ffffff;
+	border-top: 1px solid #ffffff;
+	border-right: 1px solid #333333;
+}
+ul.DropDownTab li.notSelected {
+	background: #90EE90;
+	border-left: 1px solid #ffffff;
+	border-top: 1px solid #ffffff;
+	border-right: 1px solid #333333;
+}
+
+ul.DropDownTab li.notSelected a:hover{
+	text-decoration: underline;
+}
+
+ul.DropDownTab li.selected a:hover{
+	text-decoration: underline;
+}
+
+ul.DropDownTab li.selected table.DropTable{
+	float: left;
+	list-style: none;
+	border-left: 1px solid #333333;
+	border-right: 1px solid #333333;
+	border-top: 1px solid #333333;
+	border-bottom: 1px solid #333333;
+	
+	}
+	ul.DropDownTab li.notSelected table.DropTable{
+	float: left;
+	list-style: none;
+	border-left: 1px solid #333333;
+	border-right: 1px solid #333333;
+	border-top: 1px solid #333333;
+	border-bottom: 1px solid #333333;
+	
+	}
+ul.DropDownTab li.selected td.element{
+ 
+  background-color:#FBF5E6;
+  font-size: 11px;
+  font-weight: bold; 
+}
+
+ul.DropDownTab li.notSelected td.element{
+
+  background-color:#FBF5E6;
+  font-size: 11px;
+  font-weight: bold; 
+}
+
+</style>
+
+</div>

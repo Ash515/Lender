@@ -1,0 +1,156 @@
+<!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd">
+<?xml-stylesheet type="text/xsl" href="data-dictionary-transform.xsl"?>
+<!--$Id$ -->
+
+<data-dictionary name="ClientComponents">
+
+	<table name="ScheduledReports">
+		<columns>
+			<column name="SCH_ID">
+				<description>Schedule ID:</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>ScheduledReports.SCH_ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="FORMAT">
+				<description>format of sending pdf,csv,xlsx</description>
+				<data-type>CHAR</data-type>
+				<default-value>pdf</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="SEND_TYPE">
+				<description>how to send mail,ftp,save local send link</description>
+				<data-type>CHAR</data-type>
+				<default-value>mail</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="SUBJECT">
+				<description>message subject</description>
+				<data-type>CHAR</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="MESSAGE">
+				<description>user message</description>
+				<data-type>CHAR</data-type>
+				<max-size>500</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ATTACHMENT_NAME">
+				<description>attachment name</description>
+				<data-type>CHAR</data-type>
+				<max-size>500</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="PARAMETER_NAMES">
+				<description>list of parameter names will be ','seperated </description>
+				<data-type>CHAR</data-type>
+				<max-size>500</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="PARAMETER_VALUES">
+				<description>list of parameter values will be ','seperated in same
+					order as above.(parameter_names)</description>
+				<data-type>CHAR</data-type>
+				<max-size>500</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="MAIL_CONTEXT_NAME">
+				<description>mail context name in ACMailConfig table.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="TOADDRESS">
+				<description>To address in case schedule is mail type.</description>
+				<data-type>CHAR</data-type>
+				<max-size>500</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="SCHEDULEINFO">
+				<description>User can store some info about schedule.</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="MAXFILESIZE">
+				<description>Maximum file size above which it will be send as a
+					link.</description>
+				<data-type>INTEGER</data-type>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="ScheduledReports_PK">
+			<primary-key-column>SCH_ID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="Schedule_View">
+		<columns>
+			<column name="ID">
+				<description>ID</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>Schedule_View.ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="SCHEDULE_NAME">
+				<description>schedule name</description>
+				<data-type>CHAR</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="VIEWNAME">
+				<description>view name</description>
+				<data-type>CHAR</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="Schedule_View_PK">
+			<primary-key-column>ID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="ACFtpDetails">
+		<columns>
+			<column name="ID">
+				<description>ID:</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>ACFtpDetails.ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="SCHEDULE_NAME">
+				<description>schedule name</description>
+				<data-type>CHAR</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="SERVER">
+				<description>server name</description>
+				<data-type>CHAR</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="USERNAME">
+				<description>user name</description>
+				<data-type>CHAR</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="PASSWORD">
+				<description>password</description>
+				<data-type>CHAR</data-type>
+				<nullable>true</nullable>
+			</column>
+			<column name="REMOTE_DIRECTORY">
+				<description>directory name</description>
+				<data-type>CHAR</data-type>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACFtpDetails_PK">
+			<primary-key-column>ID</primary-key-column>
+		</primary-key>
+	</table>
+
+</data-dictionary>

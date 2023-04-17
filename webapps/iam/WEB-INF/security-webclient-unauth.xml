@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id$ -->
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security-accounts.xsd">
+	<param-groups>
+	   <param-group name="newloginparams">
+		   	<param name="captcha" regex="hipstring" max-len="8" />
+		   	<param name="digest" regex="digest" max-len="2000" max-occurrences="1"/>
+		   	<param name="cdigest" regex="digest" max-len="500" max-occurrences="1"/>
+			<param name="IAM_CID" regex="iam_client_id" max-len="512" />
+			<param name="cli_time" type="long" />
+		   	<param name="token" regex="digest" max-len="500" max-occurrences="1"/>
+	    </param-group>
+    </param-groups>
+	<urls>
+		
+		<url path="/v2/components/images/fonts/AccountsUI.ttf"/>
+	    <url path="/v2/components/images/fonts/AccountsUI.woff"/>
+	    <url path="/v2/components/images/fonts/AccountsUI.eot"/>
+	    <url path="/v2/components/images/fonts/AccountsUI.svg"/>
+	    
+		 <url path="/v2/components/images/robotomedium/font.woff"/>
+		 <url path="/v2/components/images/robotomedium/font.woff2"/>
+		 <url path="/v2/components/images/robotoregular/font.woff2"/>
+		 
+		 <url path="/v2/components/images/robotolight/font.woff"/>
+		 <url path="/v2/components/images/robotolight/font.woff2"/>
+		 <url path="/v2/components/images/robotolight/font.eot"/>
+		 <url path="/v2/components/images/robotolight/font.svg"/>
+		 
+		 <url path="/v2/components/images/robotobold/font.woff"/>
+		 <url path="/v2/components/images/robotobold/font.woff2"/>
+		 <url path="/v2/components/images/robotobold/font.eot"/>
+		 <url path="/v2/components/images/robotobold/font.svg"/>
+		 
+		 
+		 <url path="/v2/components/images/montserratregular/font.woff2"/>
+		 <url path="/v2/components/images/montserratregular/font.woff"/>
+		 <url path="/v2/components/images/montserratregular/font.ttf"/>
+		 
+		 <url path="/v2/components/images/montserratsemibold/font.woff2"/>
+		 <url path="/v2/components/images/montserratsemibold/font.woff"/>
+		 <url path="/v2/components/images/montserratsemibold/font.ttf"/>
+		 
+		 <url path="/v2/components/images/montserratbold/font.woff2"/>
+		 <url path="/v2/components/images/montserratbold/font.woff"/>
+		 <url path="/v2/components/images/montserratbold/font.ttf"/>
+	     
+ 		 <url path="/v2/components/images/opensanssemibold/font.woff2"/>
+ 		 <url path="/v2/components/images/opensans/font.woff2"/>
+ 		 
+	    <url path="/v2/components/images/opensans/font.woff"/>
+	    <url path="/v2/components/images/group_2.png"/>
+ 		 
+	    
+	    <url path="/v2/components/images/fonts/unauth_icon.ttf"/>
+   	    <url path="/v2/components/images/fonts/unauth_icon.woff"/>
+	    <url path="/v2/components/images/fonts/unauth_icon.eot"/>
+	    <url path="/v2/components/images/fonts/unauth_icon.svg"/>
+	     <url path="/v2/components/images/fonts/signin.ttf"/>
+   	    <url path="/v2/components/images/fonts/signin.woff"/>
+	    <url path="/v2/components/images/fonts/signin.eot"/>
+	    <url path="/v2/components/images/fonts/signin.svg"/>
+	    <url path="/v2/components/images/bg.svg"/>
+	    <url path="/v2/components/images/UpdateLocale.svg"/>
+	    <url path="/v2/components/images/PopBgRed.svg"/>
+	    <url path="/v2/components/images/PopBgGreen.svg"/>
+	    <url path="/v2/components/images/Approved.svg"/>
+	    <url path="/v2/components/images/Push.svg"/>
+	    <url path="/v2/components/images/SCANQR_Verify.svg"/>
+	    <url path="/v2/components/images/Prompt.svg"/>
+	    <url path="/v2/components/images/TOTP_Verify.svg"/>
+
+    	<url path="/g/invitation/accept" method="POST" csrf="true">
+    		<param name="DIGEST" regex="digest" max-len="500" />
+		    <param name="PASSWORD" regex="oldpassword" max-len="250" min-occurrences="1" secret="true" />
+    	</url>
+
+		<url path="/mfaenforcement"  description="mfa enforcement template"/>
+
+		<url path="/webclient/v1/resetpassword/${digest_in_url}" method="get" url-type='multiple' description="fetch reset password digest details"/>
+		
+		<url path="/webclient/v1/resetpassword/${digest_in_url}" method="put" url-type='multiple' lock-period="15" duration="10" threshold="10" description="Password reset" csrf="true">
+			<inputstream type="JSONObject" template="resetpassword_json" max-len="-1" />
+		</url>
+		
+		<url path="/invitation/group/${digest_in_url}" authentication="optional" description="Group invitation reject"/>
+				
+		<url path="/webclient/v1/ginvitation/${digest_in_url}" method="put" url-type='multiple' description="Group invitation accept" csrf="true" duration="15" threshold="10" lock-period="15">
+			<inputstream type="JSONObject" template="ginvitation_json" max-len="-1" />
+		</url>
+		
+		<url path="/webclient/v1/ginvitation/${digest_in_url}" method="delete" url-type='multiple' description="Group invitation reject" csrf="true" duration="15" threshold="10" lock-period="15"/>
+
+		<url path="/webclient/v1/confirmation/${digest_in_url}" method="put" url-type='multiple' authentication="optional" csrf="true" description="Confirms account">
+			<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+			<inputstream type="JSONObject" template="confirmation_json" max-len="-1" />
+		</url>
+
+		<!-- mfa announcement resources url config-->
+	    <!-- mobile sms -->
+		<url path="/webclient/v1/announcement/pre/mfa/self/mobile" sl_auth="pa_required" csrf="true" method="post">
+			<inputstream type="JSONObject" template="add_mobile_e"/>
+		</url>
+		<url path="/webclient/v1/announcement/pre/mfa/self/mobile/${iambase64}" url-type="multiple" sl_auth="pa_required" csrf="true" method="put">
+			<inputstream type="JSONObject" template="verify_mobile_e"/>
+		</url>
+
+		<!-- authendicator -->
+		<url path="/webclient/v1/announcement/pre/mfa/self/totp" sl_auth="pa_required" csrf="true" method="post">
+		</url>
+		<url path="/webclient/v1/announcement/pre/mfa/self/totp/${iambase64}" url-type="multiple" sl_auth="pa_required" csrf="true"  method="put">
+			<inputstream type="JSONObject" template="gauth_verify_e" max-len="-1"/>
+		</url>
+
+		<!-- yubikey -->
+		<url path="/webclient/v1/announcement/pre/mfa/self/yubikey" sl_auth="pa_required" csrf="true" method="post">
+		</url>
+		<url path="/webclient/v1/announcement/pre/mfa/self/yubikey/[a-zA-Z0-9_\-]+" url-type="multiple" sl_auth="pa_required" csrf="true" method="put">
+			<inputstream type="JSONObject" template="yubikey_verify_e" max-len="-1" />
+		</url>
+		
+		<!-- Add login screen resources url config -->
+		<url path="/v2/ui/announcement/AddMobileScreenName.jsp" sl_auth="pa_required" method="get"/>
+		<url path="/webclient/v1/announcement/pre/loginmobile" url-type="multiple" sl_auth="pa_required" csrf="true" method="post">
+				<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+				<inputstream type="JSONObject" template="addloginmobile_e"/>
+		</url>
+
+		<url path="/webclient/v1/announcement/pre/loginmobile/${iambase64}" url-type="multiple" sl_auth="pa_required" csrf="true" method="put">
+			<throttles key="url.path+user.remoteip+url.dynamic_key" window="ROLLING" scope="APPSERVER" name="add_login_mobile">
+				<throttle duration="20" threshold="10" lock-period="300" />
+			</throttles>
+			<inputstream type="JSONObject" template="verifyloginmobile_e"/>
+		</url>
+		
+		<url path="/webclient/v1/captcha" method="post" duration="5" threshold="100" lock-period="10" dos-cookie="true">
+			<response>
+			    <headers>
+			          <header name="Access-Control-Allow-Origin" value="trusted">
+			               <!-- coheader only will get set if the origin is trusted. check AccountsSecurityProvider.isTrusted() -->
+			               <coheader>
+			                <header name="Access-Control-Allow-Credentials" value="true"/>
+			               <header name="Access-Control-Allow-Methods" value="POST"/>
+			               <header name="Access-Control-Allow-Headers" value="Content-Type,X-ZCSRF-TOKEN"/>
+			               </coheader>
+			          </header>
+			    </headers>
+			</response>
+			<inputstream type="JSONObject" template="captcha_json" max-len="-1" />
+		</url>
+		
+		<url path="/webclient/v1/captcha/${digest_in_url}" method="get"/>
+		
+		<!-- need to add csrf and thresholds -->
+	
+		<url path="/webclient/v1/register/initiate" method="POST" description="this wil process and decide between otp based or normal" >
+		<!-- need to talk about throttling -->
+			<response>
+	    	<!-- This is defined for cors request. if this is configured no need to configure option method in url attribute, security team will handle it
+	    		 below header will be set for cors request.
+	    		 refere:https://intranet.wiki.zoho.com/security/Cross-Origin-Resource-Sharing-Guidelines.html-->
+		    	<headers>
+		               <header name="Access-Control-Allow-Origin" value="trusted">
+		               <!-- coheader only will get set if the origin is trusted. check AccountsSecurityProvider.isTrusted() -->
+			               <coheader>
+			               	 <header name="Access-Control-Allow-Credentials" value="true"/>
+		              		 <header name="Access-Control-Allow-Methods" value="POST"/>
+		              		 <header name="Access-Control-Allow-Headers" value="Content-Type"/>
+			               </coheader>
+		               </header>
+		        </headers>
+	        </response>
+			<inputstream type="JSONObject" template="signup" max-len="-1" />
+			<!-- <throttles window="ROLLING" scope="SERVICE" key="url.path+user.remoteip">
+				<throttle duration="30m" threshold="10" hip="true"/>
+			</throttles> -->
+		</url>
+		
+		<url path="/webclient/v1/register/field/validate" method="POST" description="Signup field Validate" >
+			<response>
+	    	<!-- This is defined for cors request. if this is configured no need to configure option method in url attribute, security team will handle it
+	    		 below header will be set for cors request.
+	    		 refere:https://intranet.wiki.zoho.com/security/Cross-Origin-Resource-Sharing-Guidelines.html-->
+		    	<headers>
+		               <header name="Access-Control-Allow-Origin" value="trusted">
+		               <!-- coheader only will get set if the origin is trusted. check AccountsSecurityProvider.isTrusted() -->
+			               <coheader>
+			               	 <header name="Access-Control-Allow-Credentials" value="true"/>
+		              		 <header name="Access-Control-Allow-Methods" value="POST"/>
+		              		 <header name="Access-Control-Allow-Headers" value="Content-Type"/>
+			               </coheader>
+		               </header>
+		        </headers>
+	        </response>
+			<inputstream type="JSONObject" template="signupvalidate" max-len="-1" />
+		</url>
+		
+		<url path="/webclient/v1/register/otp/verify" method="POST" duration="1" threshold="10" lock-period="30" description="This validate the otp and proceed furthur with signup" >
+			<response>
+	    	<!-- This is defined for cors request. if this is configured no need to configure option method in url attribute, security team will handle it
+	    		 below header will be set for cors request.
+	    		 refere:https://intranet.wiki.zoho.com/security/Cross-Origin-Resource-Sharing-Guidelines.html-->
+		    	<headers>
+		               <header name="Access-Control-Allow-Origin" value="trusted">
+		               <!-- coheader only will get set if the origin is trusted. check AccountsSecurityProvider.isTrusted() -->
+			               <coheader>
+			               	 <header name="Access-Control-Allow-Credentials" value="true"/>
+		              		 <header name="Access-Control-Allow-Methods" value="POST"/>
+		              		 <header name="Access-Control-Allow-Headers" value="Content-Type,Z-Authorization"/>
+			               </coheader>
+		               </header>
+		        </headers>
+	        </response>
+			<inputstream type="JSONObject" template="signupotpverify" max-len="-1" />
+		</url>
+		
+		<url path="/webclient/v1/register/otp/resend"  method="POST" duration="1" threshold="10" lock-period="30" description="this will resend the otp code to the respective id" >
+			<response>
+	    	<!-- This is defined for cors request. if this is configured no need to configure option method in url attribute, security team will handle it
+	    		 below header will be set for cors request.
+	    		 refere:https://intranet.wiki.zoho.com/security/Cross-Origin-Resource-Sharing-Guidelines.html-->
+		    	<headers>
+		               <header name="Access-Control-Allow-Origin" value="trusted">
+		               <!-- coheader only will get set if the origin is trusted. check AccountsSecurityProvider.isTrusted() -->
+			               <coheader>
+			               	 <header name="Access-Control-Allow-Credentials" value="true"/>
+		              		 <header name="Access-Control-Allow-Methods" value="POST"/>
+		              		 <header name="Access-Control-Allow-Headers" value="Content-Type,Z-Authorization"/>
+			               </coheader>
+		               </header>
+		        </headers>
+	        </response>
+		</url>
+	
+	</urls>
+	
+	
+	<urls prefix="(/accounts/p/[0-9]+)?" path-regex="true">
+		    
+	    <url path="/signin/v2/lookup/${ciphertext_or_email}" method="post" csrf="true" xss="false">
+			<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+			<param name="captcha" regex="hipstring" max-len="8" />
+			<param name="cdigest" regex="digest" max-len="500" max-occurrences="1"/>
+			<param name="token" regex="digest" max-len="500" max-occurrences="1"/> 
+			<param name="mode" regex="[a-zA-z]+"/>
+			<param name="portal_id" type="long"/>
+			<param name="portal_domain" regex="domain"/>
+			<param name="IAM_CID" regex="iam_client_id" max-len="512" />
+			<param name="cli_time" type="long" />
+    	</url>
+    
+    	<url path="/signin/v2/primary/${ZID}/password" method="post" csrf="true">
+			<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+			<param-group name="newloginparams"/>
+    	    <inputstream type="JSONObject" template="pwd_data" max-len="-1" />
+	    </url>
+    
+    	<url path="/signin/v2/primary/${ZID}/otp/${ciphertext}" method="post" csrf="true">
+			<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+    	    <param-group name="newloginparams"/>
+	    </url>
+	    
+	    <url path="/signin/v2/primary/${ZID}/otp/${ciphertext}" method="put" csrf="true">
+			<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+	        <inputstream type="JSONObject" template="otp_data" max-len="-1" />
+    	    <param-group name="newloginparams"/>
+	    </url>
+    
+    	<url path="/signin/v2/primary/${ZID}/device/${ciphertext}" method="post" csrf="true">
+    		<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+			<inputstream type="JSONObject" template="device_data" max-len="-1" />
+			<param-group name="newloginparams"/>
+    	</url>
+    	
+    	<url path="/signin/v2/primary/${ZID}/device/${ciphertext}" method="put" csrf="true" operation-param="polling" operation-value="false">
+			<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+			<inputstream type="JSONObject" template="non_polling_device_data" max-len="-1" />
+			<param-group name="newloginparams"/>
+    	</url>
+    	
+    	<url path="/signin/v2/primary/${ZID}/device/${ciphertext}" method="put" csrf="true" operation-param="polling" operation-value="true">
+			<inputstream type="JSONObject" template="device_data" max-len="-1" />
+			<param-group name="newloginparams"/>
+    	</url>
+
+	    <url path="/signin/v2/secondary/${ZID}/otp/${ciphertext}" method="post" csrf="true">
+			<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+			<param-group name="newloginparams"/>
+    	</url>
+    	
+    	<url path="/signin/v2/secondary/${ZID}/otp/${ciphertext}" method="put" csrf="true">
+			<throttles key="url.path+user.remoteip+url.dynamic_key" window="ROLLING" scope="APPSERVER" name="mfa_otp_signin">
+				<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+			</throttles>
+			<inputstream type="JSONObject" template="otp_sec_data" max-len="-1" />
+			<param-group name="newloginparams"/>
+    	</url>
+    
+	    <url path="/signin/v2/secondary/${ZID}/device/${ciphertext}" method="post" csrf="true">
+			<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+			<inputstream type="JSONObject" template="device_sec_data" max-len="-1" />
+			<param-group name="newloginparams"/>
+    	</url>
+    	
+    	<url path="/signin/v2/secondary/${ZID}/device/${ciphertext}" method="put" csrf="true" operation-param="polling" operation-value="true">
+			<inputstream type="JSONObject" template="device_sec_data" max-len="-1" />
+			<param-group name="newloginparams"/>
+    	</url>
+    	
+    	<url path="/signin/v2/secondary/${ZID}/device/${ciphertext}" method="put" csrf="true" operation-param="polling" operation-value="false">
+    		<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+			<inputstream type="JSONObject" template="non_polling_device_sec_data" max-len="-1" />
+			<param-group name="newloginparams"/>
+    	</url>
+    
+	    <url path="/signin/v2/secondary/${ZID}/oneauth/${ciphertext}" method="post" csrf="true">
+	    	<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+			<inputstream type="JSONObject" template="oneauth_sec_data" max-len="-1" />
+			<param-group name="newloginparams"/>
+    	</url>
+    	
+    	<url path="/signin/v2/secondary/${ZID}/oneauth/${ciphertext}" method="put" csrf="true" operation-param="polling" operation-value="false">
+			<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+			<inputstream type="JSONObject" template="non_polling_oneauth_sec_data" max-len="-1" />
+			<param-group name="newloginparams"/>
+    	</url>
+    	
+    	<url path="/signin/v2/secondary/${ZID}/oneauth/${ciphertext}" method="put" csrf="true" operation-param="polling" operation-value="true">
+	    	<inputstream type="JSONObject" template="oneauth_sec_data" max-len="-1" />
+			<param-group name="newloginparams"/>
+    	</url>
+    	    
+	    <url path="/signin/v2/secondary/${ZID}/totp" method="post" csrf="true">
+			<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+			<inputstream type="JSONObject" template="totp_sec_data" max-len="-1" />
+			<param-group name="newloginparams"/>
+    	</url>
+    
+	    <url path="/signin/v2/secondary/${ZID}/yubikey/[0-9a-zA-Z_\-\+\.\$@\?\,\:\'\/\!\[\]\|&amp;\P{InBasicLatin}\s\%]+" method="post,put" csrf="true">
+    		<inputstream type="JSONObject" template="yubikey_sec_data" max-len="-1" />
+    		<param name="captcha" regex="hipstring" max-len="8" />
+  		</url>
+  		
+  		<url path="/signin/v2/secondary/${ZID}/recovery" method="post" csrf="true">
+			<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+			<inputstream type="JSONObject" template="recovery_sec_data" max-len="-1" />
+			<param-group name="newloginparams"/>
+    	</url>
+		<url path="/signin/v2/secondary/${ZID}/passphrase" method="post" csrf="true">
+			<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+			<inputstream type="JSONObject" template="passphrase_sec_data" max-len="-1" />
+			<param-group name="newloginparams"/>
+		</url>
+    	<url path="/signin/v2/secondary/${ZID}/exostar" method="post" csrf="true">
+			<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+			<inputstream type="JSONObject" template="exostar_sec_data" max-len="-1" />
+			<param-group name="newloginparams"/>
+    	</url>
+    	<url path="/signin/v2/secondary/${ZID}/trust" method="post" csrf="true">
+			<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+        	<inputstream type="JSONObject" template="trust_sec_data" max-len="-1" />
+        </url>
+        <url path="/signin/v2/password/${ZID}/expiry" method="post" csrf="true">
+			<throttle duration="5m" threshold="10" lock-period="15m" watch-time="1H" violation-limit="2" lock-factor="2"/>
+        	<inputstream type="JSONObject" template="pwd_expiry_sec_data" max-len="-1" />
+        </url>
+	</urls>
+	
+	<jsontemplates>
+    	<jsontemplate name="resetpassword_json">
+			<key name="resetpassword" type="JSONObject" template="resetpassword_format" max-len="-1" />
+		</jsontemplate>
+		<jsontemplate name="resetpassword_format">
+			<key name="pwd" regex="password" max-len="250" secret="true" min-occurrences="1"/>
+			<key name="rds" type="boolean"/>
+			<key name="rws" type="boolean"/>
+			<key name="ans" regex="iamcleartextpattern" />
+		</jsontemplate>
+		
+	    <jsontemplate name="ginvitation_json">
+			<key name="ginvitation" type="JSONObject" template="ginvitation_format" max-len="-1" min-occurrences="1"/>
+		</jsontemplate>
+		<jsontemplate name="ginvitation_format">
+			<key name="password" regex="password" max-len="250" secret="true" min-occurrences="1"/>
+			<key name="newsletter" type="boolean" min-occurrences="1"/>
+			<key name="firstname" max-len="100" regex="iamcleartextpattern" trim="true" min-occurrences="1" />
+			<key name="lastname" max-len="100" regex="iamcleartextpattern" trim="true" min-occurrences="1"/>
+			<key name="country" regex="country" min-occurrences="1"/>
+		</jsontemplate>
+    	<jsontemplate name="pwd_data">
+   			<key name="passwordauth" type="JSONObject" template="pwd_keys" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="pwd_keys">
+   			<key name="password" regex="oldpassword" max-len="250" min-len="1" secret="true"/>
+    	</jsontemplate>
+    	<jsontemplate name="otp_data">
+   			<key name="mobileauth" type="JSONObject" template="otp_keys" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="otp_sec_data">
+   			<key name="mobilesecauth" type="JSONObject" template="otp_keys" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="otp_keys">
+   			<key name="code" regex="[0-9]+" secret="true"/>
+   			<key name="mdigest" regex="ciphertext"/>
+    	</jsontemplate>
+    	<jsontemplate name="device_data">
+   			<key name="deviceauth" type="JSONObject" template="device_keys" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="non_polling_device_data">
+   			<key name="deviceauth" type="JSONObject" template="non_polling_device_keys" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="device_sec_data">
+   			<key name="devicesecauth" type="JSONObject" template="device_keys" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="non_polling_device_sec_data">
+   			<key name="devicesecauth" type="JSONObject" template="non_polling_device_keys" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="oneauth_sec_data">
+   			<key name="oneauthsec" type="JSONObject" template="device_keys" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="non_polling_oneauth_sec_data">
+   			<key name="oneauthsec" type="JSONObject" template="non_polling_device_keys" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="device_keys">
+   			<key name="devicepref" regex="devicepref"/>
+    	</jsontemplate>
+    	<jsontemplate name="non_polling_device_keys">
+   			<key name="code" regex="[0-9]+" secret="true"/>
+   			<key name="devicepref" regex="devicepref"/>
+    	</jsontemplate>
+    	<jsontemplate name="totp_sec_data">
+   			<key name="totpsecauth" type="JSONObject" template="totp_keys" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="totp_keys">
+   			<key name="code" regex="[0-9]+" secret="true"/>
+    	</jsontemplate>
+		<jsontemplate name="recovery_sec_data">
+   			<key name="recoverycodesecauth" type="JSONObject" template="recovery_keys" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="recovery_keys">
+			<key name="code" regex="[a-zA-Z0-9]{12}" secret="true"/>
+    	</jsontemplate>
+		<jsontemplate name="passphrase_sec_data">
+			<key name="passphrasesecauth" type="JSONObject" template="passphrase_keys" max-len="-1"/>
+		</jsontemplate>
+		<jsontemplate name="passphrase_keys">
+			<key name="pass_phrase" regex="oldpassword" max-len="250" min-len="1" secret="true"/>
+		</jsontemplate>
+    	<jsontemplate name="yubikey_sec_data">
+			<key name="yubikeysecauth" type="JSONObject" template="yubikey_keys" max-len="-1"/>
+		</jsontemplate>
+		<jsontemplate name="yubikey_keys">
+			<key name="keyHandle" regex="iambase64" min-occurrences="1" max-len="-1"/>
+			<key name="clientData" regex="iambase64" min-occurrences="1" max-len="-1"/>
+			<key name="signatureData" regex="iambase64" min-occurrences="1" max-len="-1"/>
+		</jsontemplate>
+		<jsontemplate name="exostar_sec_data">
+   			<key name="exostarsecauth" type="JSONObject" template="exostar_keys" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="exostar_keys">
+   			<key name="code" regex="[a-zA-Z0-9]+" secret="true"/>
+   			<key name="type" regex="[a-zA-Z]+"/>
+   		</jsontemplate>
+		<jsontemplate name="trust_sec_data">
+   			<key name="trustmfa" type="JSONObject" template="trust_keys" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="trust_keys">
+   			<key name="trust" type="boolean"/>
+    	</jsontemplate>
+    	<jsontemplate name="pwd_expiry_sec_data">
+   			<key name="expiry" type="JSONObject" template="pwd_expiry_keys" max-len="-1"/>
+    	</jsontemplate>
+    	<jsontemplate name="pwd_expiry_keys">
+   			<key name="newpwd" regex="password" max-len="250" secret="true" />
+   			<key name="clear_web_sessions" type="boolean"/>
+			<key name="clear_app_sessions" type="boolean"/>
+			<key name="clear_api_tokens" type="boolean"/>
+    	</jsontemplate>
+		<jsontemplate name="confirmation_json">
+			<key name="confirmation" type="JSONObject" template="confirmation_format" max-len="-1" />
+		</jsontemplate>
+		<jsontemplate name="confirmation_format">
+			<key name="password" regex="password" secret="true" min-len="8" max-len="250" min-occurrences="1" />
+		</jsontemplate>
+
+		<!-- mfa announcement resources -->
+		<!-- mobile sms -->
+		<jsontemplate name="add_mobile_e">
+			<key name="enforcedmfamobile"  type="JSONObject" template="add_mobile_template_e" max-len="-1" min-occurrences="1"/>
+		</jsontemplate>
+		<jsontemplate name="add_mobile_template_e">
+			<key name="mobile" regex="phone_numbers" />
+			<key name="countrycode" regex="^[A-Z]+$" />
+		</jsontemplate>
+
+		<jsontemplate name="verify_mobile_e">
+			<key name="enforcedmfamobile"  type="JSONObject" template="verify_mobile_template_e" max-len="-1" min-occurrences="1"/>
+		</jsontemplate>
+		<jsontemplate name="verify_mobile_template_e">
+			<key name="code" regex="[0-9]{7}" secret="true"/>
+		</jsontemplate>
+
+		<!-- authendicator -->
+		<jsontemplate name="gauth_verify_e">
+			<key name="enforcedmfatotp"  type="JSONObject" template="gauth_verify_template_e" max-len="-1" min-occurrences="1"/>
+		</jsontemplate>
+		<jsontemplate name="gauth_verify_template_e">
+			<key name="code" regex="[0-9]{6}" secret="true"  min-occurrences="1" />
+		</jsontemplate>
+
+		<!-- yubikey -->
+		<jsontemplate name="yubikey_verify_e">
+			<key name="enforcedmfayubikey" template="yubikey_verify_template_e" type="JSONObject" max-len="-1" ></key>
+		</jsontemplate>
+		<jsontemplate name="yubikey_verify_template_e">
+			<key name="appId"  regex="url"  min-occurrences="1" ></key>
+			<key name="clientData"  regex="iambase64"  min-occurrences="1" max-len="-1"></key>
+			<key name="registrationData"  regex="iambase64"  min-occurrences="1" max-len="-1"></key>
+		</jsontemplate>
+		
+		<!-- mobile screen name -->
+		<jsontemplate name="addloginmobile_e">
+			<key name="enforcedloginmobile"  type="JSONObject" template="add_mobile_template_e" max-len="-1"/>
+		</jsontemplate>
+		
+		<jsontemplate name="verifyloginmobile_e">
+			<key name="enforcedloginmobile"  type="JSONObject" template="verify_mobile_template_e" max-len="-1"/>
+		</jsontemplate>
+
+		<!--  Captcha Reload API -->
+		<jsontemplate name="captcha_json">
+			<key name="captcha" template="captcha_template" type="JSONObject" max-len="-1" ></key>
+		</jsontemplate>
+		<jsontemplate name="captcha_template">
+			<key name="digest" regex="digest" max-len="500" min-occurrences="1" ></key>  <!-- Remove existing captcha digest before reloading-->
+			<key name="usecase" regex="iamcleartextpattern" max-len="50" min-occurrences="1" ></key>
+			<key name="servicename" regex="servicename" />
+		</jsontemplate>
+		<jsontemplate name="signup">
+   			<key name="signup"  type="JSONObject" template="SignupJsonTemplate" max-len="-1" />   
+    	</jsontemplate>
+    	<jsontemplate name="signupvalidate">
+   			<key name="signupvalidate"  type="JSONObject" template="SignupJsonTemplate" max-len="-1" />   
+    	</jsontemplate>
+    	<jsontemplate name="signupotpverify">
+   			<key name="signupotpverify"  type="JSONObject" template="SignupJsonTemplate" max-len="-1" />   
+    	</jsontemplate>
+    	<jsontemplate name="signupxfieldaudit">
+   			<key name="signupxfieldaudit"  type="JSONObject" template="SignupJsonTemplate" max-len="-1" />   
+    	</jsontemplate>
+    	
+    	<!-- this is common for signup process -->
+    	<jsontemplate name="SignupJsonTemplate">
+			<key name="accountType" regex="CLIENT|ORG" trim="true" />
+			<key name="portalname" max-len="100" regex="iamcleartextpattern" trim="true" />
+			<key name="firstname" max-len="100" regex="iamcleartextpattern" trim="true" />
+			<key name="lastname" max-len="100" regex="iamcleartextpattern" trim="true" />
+			<key name="repassword" regex="password" max-len="250" secret="true" />
+			<key name="cdigest" regex="digest" max-len="512" />
+			<key name="captcha" regex="hipstring" max-len="10" />
+			<key name="zaid" max-len="100" regex="simplestring" />
+			<key name="language" regex="language" />
+			<key name="country" regex="country" />
+			<key name="confirm_country_code" regex="country" />
+			<key name="timezone" regex="timezone" />
+			<key name="newsletter" type="boolean" />
+			<key name="otp" regex="[0-9]{7}" />
+			<key name="scopes" regex="scope_with_servicename" split="," max-occurrences="20" />
+			<key name="appname" regex="iamcleartextpattern" />
+			<key name="tos" type="boolean" />
+			<key name="tos_required" type="boolean" />
+			<key name="mode" regex="[01234]{2}" />
+			<key name="load_country" type="boolean" description="To disable load country optiones"/>
+			<key name="stop_ufields" type="boolean" description="To disable custom field update action"/>
+			<key name="use_ott" type="boolean" description="To check whether to use one Time token"/>
+			<key name="temp_redirect" type="boolean" description="For Temporary Redirect. Safari not allowing cookie set"/>
+   			<key name="mobile" regex="phone" />
+   			<key name="rmobile" regex="phone" />
+   			<key name="country_code" regex="countrycode" />
+   			<key name="serviceurl" regex="serviceurl" max-len="50000"/>
+   			<key name="servicename" regex="servicename" />
+   			<key name="email" regex="email"/>
+   			<key name="username" regex="username"/>
+   			<key name="password" regex="password" secret="true"/>
+   			<key name="country_state" regex="iamcleartextpattern" />
+   			<key name="emailormobile" regex="^([\p{L}\p{M}\p{N}\_]([\p{L}\p{M}\p{N}\_\+\-\.\'&amp;]*)@(?=.{4,256}$)(([\p{L}\p{N}\p{M}]+)(([\-\_]*[\p{L}\p{N}\p{M}])*)[\.])+[\p{L}\p{M}]{2,22})|(^[0-9]{5,14})$" />
+    		<key name="portal" max-len="100" regex="iamcleartextpattern" trim="true" />
+    		<key name="r_.*" max-len="500" name-regex="true" xss="antisamyfilter" description="Resource specific fields" max-occurrences="10" trim="true" />
+       		<key name="x_.*" max-len="1000" name-regex="true" xss="antisamyfilter" description="Service teams custom fields" max-occurrences="10" />
+       		<key name="service_language" regex="en|ja|zh|tr|hu|de|es|fr|it|nl|pt|sv" />
+       		<key name="ref_value" description="To Store and retrieve reference value during signup" max-len="1000" xss="antisamyfilter"/>
+    	</jsontemplate>
+	</jsontemplates>
+</security>

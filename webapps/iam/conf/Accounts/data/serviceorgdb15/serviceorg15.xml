@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="notebookorgzaid" account_name="Zoho Notebook -Account- Service Org">
+		<IAMAccountDomain domain="notebookorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="webinarsorgzaid" account_name="Zoho ZohoWebinar -Account- Service Org">
+		<IAMAccountDomain domain="webinarsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="cloudwatchsorgzaid" account_name="Zoho CloudWatch -Account- Service Org">
+		<IAMAccountDomain domain="cloudwatchsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="backofficesorgzaid" account_name="Zoho BackOffice -Account- Service Org">
+		<IAMAccountDomain domain="backofficesorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

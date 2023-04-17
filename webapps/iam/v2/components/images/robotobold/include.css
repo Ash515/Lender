@@ -1,0 +1,12 @@
+/*$Id$*/
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    src:url('font.eot');
+    src:url('font.eot?#iefix') format('eot'),
+        url('font.woff2') format('woff2'), 
+        url('font.woff') format('woff'), 
+        url('font.ttf') format('truetype'),
+        url('font.svg#Roboto-Bold') format('svg');
+}

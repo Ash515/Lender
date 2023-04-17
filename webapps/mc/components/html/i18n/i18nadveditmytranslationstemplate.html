@@ -1,0 +1,28 @@
+<!--$Id$-->
+<td>
+<table class="translationsTable" id="rowodd">
+      <tr> 
+        <td rowspan="3" align="left" valign="top" id="tcount"></td>
+        <td align="left" id="theading">My translation in ${{LANGUAGE_NAME}}<br>
+          <span id="normaltext"><strong>${{PERCENTAGE}}% complete</strong> 
+        Last modified on : ${{LAST_MODIFIED_ON}}
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+            Last 
+          Published on ${{PUBLISHED_ON}}
+        &nbsp;&nbsp;
+            [&nbsp; <a href="javascript:AjaxAPI.sendRequest({URL:'I18nMakePublicTranslation.ma',PARAMETERS:'locale_id=${{CREATEDBYLID}}',FORWARDURL:'I18nAdvancedEditTop.cc',TARGET:'_view_I18nAdvancedEditTop'})" title="To share your translations with others you gotta Publish it">Publish now!</a>&nbsp;]
+          </span></td>
+      </tr>
+      <tr> 
+        <td align="left" id="tlinks"><a href="javascript:editTranslation(${{CREATEDBYLID}});" title="Edit translation">Edit On-Screen</a> 
+          &nbsp;&nbsp;|&nbsp;&nbsp; <a href="javascript:previewTranslation(${{CREATEDBYLID}});" title="Preview translated version">Preview</a> 
+          &nbsp;&nbsp;|&nbsp;&nbsp; <a href="javascript:void(0);" onclick="installTranslation(${{ID_NO}});" title="Install translated version, You should have logged into ServiceDesk plus already">Install 
+          translation</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="I18nDeleteTranslation.ma?locale_id=${{CREATEDBYLID}}" title="Delete this translation">Delete</a></td>
+      </tr>
+      <tr> 
+        <td align="left" valign="top">${{DESCRIPTION}} &nbsp;&nbsp;&nbsp;<br>
+<a href="javascript:void(0)"  onclick="showEditCommentsDialog('${{CREATEDBYLID}}', '${{DESCRIPTION}}');" title="edit comments" style="color:#999" >Edit 
+          comments</a></td>
+      </tr>
+</table>
+</td>

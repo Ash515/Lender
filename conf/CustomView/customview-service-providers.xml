@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id: customview-service-providers.xml,v 1.6 2006/02/02 07:06:41 vinod Exp $ -->
+<customview-service-providers>
+    <CustomViewServiceProviders cvtypeid="CustomViewServiceProviders:cvtypeid:DEFAULT" cvtype="DEFAULT" coreclientservice="com.adventnet.customview.service.DefaultClientServiceProvider" coreserverservice="com.adventnet.customview.service.DefaultServerServiceProvider">
+        <ModeSpecificServiceProvidersList>
+            <ModeSpecificServiceProviders comm_mode="2">
+                <ClientServiceProvidersList>
+                    <ClientServiceProviders serviceprovider="com.adventnet.customview.service.DefaultClientServiceProvider" spindex="0"/>
+                </ClientServiceProvidersList>
+                <ServerServiceProvidersList>
+                    <ServerServiceProviders serviceprovider="com.adventnet.customview.service.DefaultClientServiceProvider" spindex="0"/>
+                </ServerServiceProvidersList>
+            </ModeSpecificServiceProviders>
+            <ModeSpecificServiceProviders comm_mode="1">
+                <ClientServiceProvidersList>
+                    <ClientServiceProviders serviceprovider="com.adventnet.customview.service.DefaultClientServiceProvider" spindex="0"/>
+                </ClientServiceProvidersList>
+                <ServerServiceProvidersList>
+                    <ServerServiceProviders serviceprovider="com.adventnet.customview.service.DefaultClientServiceProvider" spindex="0"/>
+                </ServerServiceProvidersList>
+            </ModeSpecificServiceProviders>
+        </ModeSpecificServiceProvidersList>
+    </CustomViewServiceProviders>
+    <CustomViewServiceProviders cvtypeid="CustomViewServiceProviders:cvtypeid:Table" cvtype="Table" coreclientservice="com.adventnet.customview.service.DefaultClientServiceProvider" coreserverservice="com.adventnet.customview.table.TableModelCoreServiceProvider">
+        <ModeSpecificServiceProvidersList>
+            <ModeSpecificServiceProviders comm_mode="2">
+                <ClientServiceProvidersList>
+                    <ClientServiceProviders serviceprovider="com.adventnet.customview.service.i18n.I18nServiceProvider" spindex="0"/>
+                    <!--	<ClientServiceProviders serviceprovider="com.adventnet.customview.table.update.ClientTableUpdateServiceProvider" spindex="1"/>-->
+                </ClientServiceProvidersList>
+                <ServerServiceProvidersList>
+                    <ServerServiceProviders serviceprovider="com.adventnet.customview.service.SQTemplateValuesServiceProvider" spindex="0"/>
+                    <ServerServiceProviders serviceprovider="com.adventnet.customview.service.authorization.TableModelScopingProvider" spindex="1"/>
+                    <!--                   <ServerServiceProviders serviceprovider="com.adventnet.customview.service.segmentation.TableModelSegmentationProvider" spindex="2"/>
+                    <ServerServiceProviders serviceprovider="com.adventnet.customview.table.update.ServerTableUpdateServiceProvider" spindex="3"/>-->
+                </ServerServiceProvidersList>
+            </ModeSpecificServiceProviders>
+            <ModeSpecificServiceProviders comm_mode="1">
+                <ClientServiceProvidersList>
+                    <ClientServiceProviders serviceprovider="com.adventnet.customview.service.i18n.I18nServiceProvider" spindex="0"/>
+                    <!--		<ClientServiceProviders serviceprovider="com.adventnet.customview.table.update.ClientTableUpdateServiceProvider" spindex="1"/>-->
+                </ClientServiceProvidersList>
+                <ServerServiceProvidersList>
+                    <ServerServiceProviders serviceprovider="com.adventnet.customview.service.SQTemplateValuesServiceProvider" spindex="0"/>
+                    <ServerServiceProviders serviceprovider="com.adventnet.customview.service.authorization.TableModelScopingProvider" spindex="1"/>
+                    <!-- <ServerServiceProviders serviceprovider="com.adventnet.customview.service.segmentation.TableModelSegmentationProvider" spindex="2"/>
+                    <ServerServiceProviders serviceprovider="com.adventnet.customview.table.update.ServerTableUpdateServiceProvider" spindex="3"/>-->
+                </ServerServiceProvidersList>
+            </ModeSpecificServiceProviders>
+        </ModeSpecificServiceProvidersList>
+    </CustomViewServiceProviders>
+
+    <!-- Below is for MDS Table Configuration  -->
+    <CustomViewServiceProviders cvtypeid="CustomViewServiceProviders:cvtypeid:MDSTABLE" cvtype="MDSTABLE" coreclientservice="com.adventnet.customview.service.DefaultClientServiceProvider" coreserverservice="com.adventnet.customview.table.MDSTableModelCoreServiceProvider">
+        <ModeSpecificServiceProvidersList>
+            <ModeSpecificServiceProviders comm_mode="2">
+                <ClientServiceProvidersList>
+                    <ClientServiceProviders serviceprovider="com.adventnet.customview.service.i18n.I18nServiceProvider" spindex="0"/>
+                </ClientServiceProvidersList>
+                <ServerServiceProvidersList>
+                    <ServerServiceProviders serviceprovider="com.adventnet.customview.service.SQTemplateValuesServiceProvider" spindex="0"/>
+                </ServerServiceProvidersList>
+            </ModeSpecificServiceProviders>
+            <ModeSpecificServiceProviders comm_mode="1">
+                <ClientServiceProvidersList>
+                    <ClientServiceProviders serviceprovider="com.adventnet.customview.service.i18n.I18nServiceProvider" spindex="0"/>
+                </ClientServiceProvidersList>
+                <ServerServiceProvidersList>
+                    <ServerServiceProviders serviceprovider="com.adventnet.customview.service.SQTemplateValuesServiceProvider" spindex="0"/>
+                </ServerServiceProvidersList>
+            </ModeSpecificServiceProviders>
+        </ModeSpecificServiceProvidersList>
+    </CustomViewServiceProviders>
+
+    <CustomViewServiceProviders cvtypeid="CustomViewServiceProviders:cvtypeid:Tree" cvtype="Tree" coreclientservice="com.adventnet.customview.service.DefaultClientServiceProvider" coreserverservice="com.adventnet.model.tree.TreeModelCoreServiceProvider">
+        <ModeSpecificServiceProvidersList>
+            <ModeSpecificServiceProviders comm_mode="2">
+                <ClientServiceProvidersList>
+                    <!--ClientServiceProviders serviceprovider="com.adventnet.customview.tree.ClientTreeUpdateServiceProvider" spindex="0"/-->
+                </ClientServiceProvidersList>
+                <ServerServiceProvidersList>
+                    <ServerServiceProviders serviceprovider="com.adventnet.model.tree.TreeModelBaseServiceProvider" spindex="0"/>
+                    <!--					<ServerServiceProviders serviceprovider="com.adventnet.customview.tree.ServerTreeUpdateServiceProvider" spindex="1"/>
+                    <ServerServiceProviders serviceprovider="com.adventnet.customview.service.authorization.TreeModelScopingProvider" spindex="2"/>
+                    <ServerServiceProviders serviceprovider="com.adventnet.customview.service.segmentation.TreeModelSegmentationProvider" spindex="3"/>-->
+                </ServerServiceProvidersList>
+            </ModeSpecificServiceProviders>
+            <ModeSpecificServiceProviders comm_mode="1">
+                <ClientServiceProvidersList>
+                    <!--ClientServiceProviders serviceprovider="com.adventnet.customview.tree.ClientTreeUpdateServiceProvider" spindex="0"/-->
+                </ClientServiceProvidersList>
+                <ServerServiceProvidersList>
+                    <ServerServiceProviders serviceprovider="com.adventnet.model.tree.TreeModelBaseServiceProvider" spindex="0"/>
+                    <!--					<ServerServiceProviders serviceprovider="com.adventnet.customview.tree.ServerTreeUpdateServiceProvider" spindex="1"/>
+                    <ServerServiceProviders serviceprovider="com.adventnet.customview.service.authorization.TreeModelScopingProvider" spindex="2"/>
+                    <ServerServiceProviders serviceprovider="com.adventnet.customview.service.segmentation.TreeModelSegmentationProvider" spindex="3"/>-->
+                </ServerServiceProvidersList>
+            </ModeSpecificServiceProviders>
+        </ModeSpecificServiceProvidersList>
+    </CustomViewServiceProviders>
+
+</customview-service-providers>
+

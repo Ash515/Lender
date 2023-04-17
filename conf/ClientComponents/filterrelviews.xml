@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+
+<views>
+  
+    <ViewConfiguration title="Add/Edit Filter" viewname="FilterCreateForm">
+        <WebViewConfig url="/components/jsp/filter/FilterCreation.jsp" viewcontroller="com.adventnet.client.components.filter.web.FilterCreateEditController"/>
+        <TemplateViewParams mandatory="true" paramname="VIEWNAME"/>
+        <ACAjaxForm formname="CVCreationForm" validatefunc="validateForm"/>
+    </ViewConfiguration>
+
+    
+</views>

@@ -1,0 +1,572 @@
+<!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd">
+<!-- $Id: data-dictionary.xml,v 1.22 2011/06/29 06:20:06 vinod Exp $ -->
+<data-dictionary name="Audit">
+	<table name="AuditRecord">
+		<columns>
+			<column name="AUDITID">
+				<description>Unique Identifier of the record</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>AuditRecord.AUDITID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="PRINCIPAL">
+				<description>Name of the principal performing the operation</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="TIMESTAMP">
+				<description>Time of creation of AuditRecord: This is meta
+					information about AuditRecord and other application specific time
+					details can be captured in extended record</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="RECORDTYPE">
+				<description>enumerated value of type of the extended audit record:
+					for example, 'OperationAuditRecord', 'AlertAuditRecord' and so on</description>
+				<data-type>CHAR</data-type>
+				<max-size>25</max-size>
+				<default-value>OperationAuditRecord</default-value>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="AuditRecord_PK">
+			<primary-key-column>AUDITID</primary-key-column>
+		</primary-key>
+	</table>
+
+	<table name="OperationAuditRecord">
+		<columns>
+			<column name="AUDITID">
+				<description>Unique Identifier of the record</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="HOSTNAME">
+				<description>Name of the application to which the audit record
+					belongs</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="RESOURCENAME">
+				<description>Name of the resource</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="OPERATIONNAME">
+				<description>Name of the operation</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="STARTTIME">
+				<description>Time at which the operation is requested from
+					AAAInterceptor</description>
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="COMPLETIONTIME">
+				<description>Time of completion of the operation</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="RESULT">
+				<description>Result of the operation(success or failure)</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="SEVERITY">
+				<description>Severity of this audit record. Depends on principal,
+					operation and resource </description>
+				<data-type>CHAR</data-type>
+				<max-size>25</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="OperationAuditRecord_PK">
+			<primary-key-column>AUDITID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="OperationAuditRecord_FK"
+				reference-table-name="AuditRecord" isbidirectional="true">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>AUDITID</fk-local-column>
+						<fk-reference-column>AUDITID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AuditUserProperty">
+		<columns>
+			<column name="AUDITID">
+				<description>Unique Identifier of the record</description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<default-value></default-value>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="PROPERTYNAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="PROPERTYVALUE">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="AuditUserProperty_PK">
+			<primary-key-column>AUDITID</primary-key-column>
+			<primary-key-column>PROPERTYNAME</primary-key-column>
+			<!--primary-key-column>PROPERTYVALUE</primary-key-column -->
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AuditUserProperty_FK"
+				reference-table-name="OperationAuditRecord" isbidirectional="true">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>AUDITID</fk-local-column>
+						<fk-reference-column>AUDITID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AuditOperProperty">
+		<columns>
+			<column name="AUDITID">
+				<description>Unique Identifier of the record</description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<default-value></default-value>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="PROPERTYNAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="PROPERTYVALUE">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="AuditOperProperty_PK">
+			<primary-key-column>AUDITID</primary-key-column>
+			<primary-key-column>PROPERTYNAME</primary-key-column>
+			<!--primary-key-column>PROPERTYVALUE</primary-key-column -->
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AuditOperProperty_FK"
+				reference-table-name="OperationAuditRecord" isbidirectional="true">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>AUDITID</fk-local-column>
+						<fk-reference-column>AUDITID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AuditResultProperty">
+		<columns>
+			<column name="AUDITID">
+				<description>Unique Identifier of the record</description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<default-value></default-value>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="PROPERTYNAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="PROPERTYVALUE">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="AuditResultProperty_PK">
+			<primary-key-column>AUDITID</primary-key-column>
+			<primary-key-column>PROPERTYNAME</primary-key-column>
+			<!--primary-key-column>PROPERTYVALUE</primary-key-column -->
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AuditResultProperty_FK"
+				reference-table-name="OperationAuditRecord" isbidirectional="true">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>AUDITID</fk-local-column>
+						<fk-reference-column>AUDITID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AuditResourceProp">
+		<columns>
+			<column name="AUDITID">
+				<description>Unique Identifier of the record</description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<default-value></default-value>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="PROPERTYNAME">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="PROPERTYVALUE">
+				<description></description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="AuditResourceProp_PK">
+			<primary-key-column>AUDITID</primary-key-column>
+			<primary-key-column>PROPERTYNAME</primary-key-column>
+			<!--primary-key-column>PROPERTYVALUE</primary-key-column -->
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AuditResourceProp_FK"
+				reference-table-name="OperationAuditRecord" isbidirectional="true">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>AUDITID</fk-local-column>
+						<fk-reference-column>AUDITID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AuditConfig">
+		<columns>
+			<column name="ID">
+				<description>Unique identifier for AuditConfiguration</description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<default-value></default-value>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>AuditConfig.ID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="MODULE_ID">
+				<description>Id of the module</description>
+				<data-type>BIGINT</data-type>
+				<max-size>19</max-size>
+			</column>
+			<column name="CUSTOMPROVIDER">
+				<description>Fully qualified name of the application class extending
+					CustomAuditProvider interface</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="CURRENTLEVEL">
+				<description>Current Level used by the application for auditing</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="DISABLEALLAUDIT">
+				<description>Flag used to disable auditing completely for the
+					application</description>
+				<data-type>BOOLEAN</data-type>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="ENABLECRITERIA">
+				<description>Conditions for which auditing will be done</description>
+				<data-type>CHAR</data-type>
+				<max-size>200</max-size>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="AuditConfig_PK">
+			<primary-key-column>ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AuditConfig_FK" reference-table-name="Module"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>MODULE_ID</fk-local-column>
+						<fk-reference-column>MODULE_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AuditLevel">
+		<columns>
+			<column name="AUDITCONFIG_ID">
+				<description>Unique identifier for AuditConfiguration</description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<default-value></default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="LEVELNAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="AuditLevel_PK">
+			<primary-key-column>AUDITCONFIG_ID</primary-key-column>
+			<primary-key-column>LEVELNAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AuditLevel_FK" reference-table-name="AuditConfig"
+				isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>AUDITCONFIG_ID</fk-local-column>
+						<fk-reference-column>ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AuditTableConfig">
+		<columns>
+			<column name="AUDITCONFIG_ID">
+				<description>Unique identifier for AuditConfiguration</description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<default-value></default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="AUDITTABLENAME">
+				<description>Name of extended audit table</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<default-value></default-value>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="BUFFERSIZE">
+				<description>Size of in-memory buffer for this table's audit records</description>
+				<data-type>INTEGER</data-type>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="BATCHSIZE">
+				<description>Size of the batch in which audit records are stored</description>
+				<data-type>INTEGER</data-type>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="AuditTableConfig_PK">
+			<primary-key-column>AUDITCONFIG_ID</primary-key-column>
+			<primary-key-column>AUDITTABLENAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AuditTableConfig_FK"
+				reference-table-name="AuditConfig" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>AUDITCONFIG_ID</fk-local-column>
+						<fk-reference-column>ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AuditConfigProperty">
+		<columns>
+			<column name="AUDITCONFIG_ID">
+				<description>Unique identifier for AuditConfiguration</description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<default-value></default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="PROPERTYNAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="PROPERTYTYPE">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="AuditConfigProperty_PK">
+			<primary-key-column>AUDITCONFIG_ID</primary-key-column>
+			<primary-key-column>PROPERTYNAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AuditConfigProperty_FK"
+				reference-table-name="AuditConfig" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>AUDITCONFIG_ID</fk-local-column>
+						<fk-reference-column>ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AuditNotifyCriteria">
+		<columns>
+			<column name="AUDITCONFIG_ID">
+				<description>Unique identifier for AuditConfiguration</description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<default-value></default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="CRITERIA">
+				<data-type>CHAR</data-type>
+				<max-size>188</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="REPEATCOUNT">
+				<description>The number of times the condition can be repeated
+					before being notified</description>
+				<data-type>INTEGER</data-type>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="REPEATINTERVAL">
+				<description>The number of minutes within which the condition can be
+					repeated</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>true</unique>
+			</column>
+		</columns>
+		<primary-key name="AuditNotifyCriteria_PK">
+			<primary-key-column>AUDITCONFIG_ID</primary-key-column>
+			<primary-key-column>CRITERIA</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AuditNotifyCriteria_FK"
+				reference-table-name="AuditConfig" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>AUDITCONFIG_ID</fk-local-column>
+						<fk-reference-column>ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AuditSeverityLevel">
+		<columns>
+			<column name="AUDITCONFIG_ID">
+				<description>Unique identifier for AuditConfiguration</description>
+				<data-type>BIGINT</data-type>
+				<max-size></max-size>
+				<default-value></default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="SEVERITY">
+				<description>Severity of the audit record determined by the criteria</description>
+				<data-type>CHAR</data-type>
+				<max-size>25</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="CRITERIA">
+				<description>Criteria formed with audit record fields, resource
+					properties, result properties, operation name and user properties.</description>
+				<data-type>CHAR</data-type>
+				<max-size>200</max-size>
+				<nullable>false</nullable>
+				<unique>false</unique>
+			</column>
+		</columns>
+		<primary-key name="AuditSeverityLevel_PK">
+			<primary-key-column>AUDITCONFIG_ID</primary-key-column>
+			<primary-key-column>SEVERITY</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="AuditSeverityLevel_FK"
+				reference-table-name="AuditConfig" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>AUDITCONFIG_ID</fk-local-column>
+						<fk-reference-column>ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+</data-dictionary>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: dynamic-value-handlers.xml,v 1.2 2005/10/20 08:36:07 vaseekaranb 
+	Exp $ -->
+
+<dynamic-value-handlers>
+	<DynamicValueHandler tablename="AaaAuthorizedRole"
+		columnname="ACCOUNT_ID" class="com.adventnet.authorization.AuthRoleValueHandler">
+	</DynamicValueHandler>
+
+	<DynamicValueHandler tablename="AaaDisableAuth"
+		columnname="MODULE_ID" class="com.adventnet.persistence.xml.SQLDynamicValueHandler">
+		<DVPHParameterList>
+			<DVPHParameter name="criteria-column" value="MODULENAME" />
+			<DVPHParameter name="criteria-comparator" value="equals" />
+			<DVPHParameter name="referred-table" value="Module" />
+			<DVPHParameter name="referred-column" value="MODULE_ID" />
+		</DVPHParameterList>
+	</DynamicValueHandler>
+
+</dynamic-value-handlers>

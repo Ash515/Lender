@@ -1,0 +1,13 @@
+<!-- $Id$ -->
+<%
+  String menuId =  (String)viewContext.getModel().getViewConfiguration().getFirstValue("ViewConfiguration","MENUID");
+  Boolean rendererMenu =  (Boolean)viewContext.getModel().getViewConfiguration().getFirstValue("ACTableViewConfig","RENDERMENU");
+  if((menuId != null) && (rendererMenu != null) && (rendererMenu.booleanValue()))
+  {
+%>
+<table class='hide'><tr><td><act:ShowMenu menuId="<%=menuId%>" uniqueId='<%=uniqueId%>' type="button"/></td></tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" table_el="COMMONDETAILS"><tr rowidx="-1" style="display:none"><td></td></tr></table>
+<%
+ }
+%>

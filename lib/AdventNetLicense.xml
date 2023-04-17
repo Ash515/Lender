@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<License>
+	<!--Please do not edit this license file. Editing this file will make the 
+		license invalid. -->
+	<Users>
+		<UserInfo Name="Evaluation User" CompanyName="AdventNet, Inc."
+			EmailID="mickey@adventnet.com" ACNTRL="NO" LicenseType="Free"
+			Key="fPJ3fNTnJN7TQ7lPnPV7x7x3Gdb91dxnnza9S7lKdVAynfb7JzaG1NRyndP7yTSPJpb9KbDcfpa7SNDndNKSAPlTnub7xPJV">
+			<ID>ID</ID>
+		</UserInfo>
+	</Users>
+	<LicenseeDetails ID="ID">
+		<Product Name="AdventNet MicKeyLite" Version="1.0.0"
+			Type="Remote Management" Category="OEM" />
+	</LicenseeDetails>
+	<LicenseKey>MgO4NvmviXNXMsv4jmvr0I0I1v48lkvzY8Ms4vn4Nv3GAdjdj</LicenseKey>
+</License>
+<!-- $Id$ -->

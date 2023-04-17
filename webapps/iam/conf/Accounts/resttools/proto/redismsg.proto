@@ -1,0 +1,14 @@
+syntax = "proto2";
+package resource.redis;
+
+option java_package = "com.zoho.resource";
+option java_outer_classname = "RedisMessageProto";
+
+message IAMNotification {
+required string source =1;
+required string	destination =2;
+required string message =3;
+required string handler =4;
+required int64 createdtime =5;
+required string method = 6;
+}

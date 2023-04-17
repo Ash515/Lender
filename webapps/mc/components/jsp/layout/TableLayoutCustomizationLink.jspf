@@ -1,0 +1,30 @@
+<%-- $Id$ --%>
+	<%
+String currentView = viewContext.getModel().getViewName();
+	if(PersonalizationUtil.isCustomizable(request, viewContext)){
+		if(model.getChildCount() > 0){	
+			%>
+			<table class="customize" cellspacing="0" cellpadding="0" border="0">
+				<tr>
+					<td align = "right">
+						<button onClick="javascript:window.open('TableLayoutCustomization.cc?VIEWNAME=<%=IAMEncoder.encodeJavaScript(currentView)%>&UNIQUEID=<%=IAMEncoder.encodeJavaScript(uniqueId)%>', null, 'height=675,width=1000,scrollbars=1,resizable=1,status=yes')" class="customizeButton" onMouseOver="return showBorder('<%=IAMEncoder.encodeJavaScript(referenceId)%>')" onMouseOut="return hideBorder('<%=IAMEncoder.encodeJavaScript(referenceId)%>')">Customize Layout</button>
+					</td>
+				</tr>
+			</table>
+			<%
+		}
+		else {
+			%>
+			<table class="customize subTitle" cellspacing="0" cellpadding="10" border="0" width="100%">
+				<tr>
+					<td valign="middle" align="center">
+						<span class="subTitle">[&nbsp;<%out.print(viewContext.getParentContext().getModel().getViewConfiguration().getFirstValue("ViewConfiguration", "TITLE"));//NO OUTPUTENCODING%>&nbsp;]</span> <%--NO OUTPUTENCODING --%><br><br>
+						<button onClick="javascript:window.open('TableLayoutCustomization.cc?VIEWNAME=<%=IAMEncoder.encodeJavaScript(currentView)%>&UNIQUEID=<%=IAMEncoder.encodeJavaScript(uniqueId)%>', null, 'height=675,width=1000,scrollbars=1,resizable=1,status=yes')" class="customizeButton" onMouseOver="return showBorder('<%=IAMEncoder.encodeJavaScript(referenceId)%>')" onMouseOut="return hideBorder('<%=IAMEncoder.encodeJavaScript(referenceId)%>')">Customize Layout</button>
+					</td>
+				</tr>
+			</table>
+			<%
+		}
+	}
+	%>
+

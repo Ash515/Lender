@@ -1,0 +1,104 @@
+<%--$Id$--%>
+<%
+boolean isSearchValPresent = transformerContext.isSearchValuePresent();
+boolean isSearchPresent = transformerContext.isSearchEnabled();
+%>
+<TR table_el='SEARCHROW' alerttype='Custom'
+<%if(!isSearchValPresent){%>
+  class='searchRow hide'
+<%}else{%>
+ class='searchRow'
+<%}%>
+>
+<%
+if(!("NONE".equals(enableRowSelection))) 
+{
+	if(enableRow.indexOf("CHECKBOX")!=-1)
+	{
+%>
+		<TH>&nbsp;</TH>
+   <%}
+   else if(enableRow.indexOf("RADIO")!=-1)
+   {
+%>
+	<TH>&nbsp;</TH>
+ <%}
+}%>
+
+<components:column viewContext="<%=viewContext%>">
+	<components:cell viewContext="<%=viewContext%>" type = "Header">
+
+<%
+String searchValue = IAMEncoder.encodeJavaScript(transformerContext.getSearchValue());
+// value is getting assigned in javascript function TableHandling.showOptions so encodeJavascript is called
+String selectedComboValue = transformerContext.getSearchComboValue();
+String headerClass = "tableHeader";
+TableViewModel tableViewModel = (TableViewModel) viewContext.getViewModel();
+String  columnName = transformerContext.getPropertyName();
+String aliasName = uniqueId +"_"+columnName;
+String columnType = transformerContext.getSQLDataType();
+if(columnName != null && columnName.equals(tableViewModel.getSortedColumn()))
+{
+    headerClass = "sortedTableHeader"; // NO OUTPUTENCODING
+}
+HashMap prop = transformerContext.getRenderedAttributes();%>
+
+	<TH class='<%out.print(headerClass);//NO OUTPUTENCODING%>'><%--NO OUTPUTENCODING --%>
+
+	<form name='UserForm' method='post' onSubmit='return validateForm(this)' alerttype='Custom'>
+		<p class='paraSpotSearch'>
+			<%if(tableIter.isLastColumn()){%>
+				<TABLE class='colSpotSearch'><TR class='cellSpotSearch'><TD class='cellSpotSearch'>
+			<%}%>
+
+			<%String inputFormat="";%>
+			<%
+			if(transformerContext.isSearchEnabled())
+			{	
+				ColumnTransformer ctObj = tableIter.getColumnTransformer(); 
+				SearchOperator[] criOps = ctObj.getSearchOperators(transformerContext);
+				String errMsg = ctObj.getErrorMsg(transformerContext);
+				String validateMethod= ctObj.getValidateJSFunction(transformerContext);
+				inputFormat=ctObj.getInputFormat(transformerContext);
+			%>
+
+				<input type='text' class='tableSpotSearch' name='<%out.print(IAMEncoder.encodeHTMLAttribute(columnName));//NO OUTPUTENCODING%>' id="<%out.print(IAMEncoder.encodeHTMLAttribute(aliasName));//NO OUTPUTENCODING%>txt"  onkeypress='return TableDOMModel.searchEnterKeyLis(this,event)' isnullable='true' validateMethod='<%out.print(IAMEncoder.encodeHTMLAttribute(validateMethod));//NO OUTPUTENCODING%>' errormsg='<%out.print(IAMEncoder.encodeHTMLAttribute(errMsg));//NO OUTPUTENCODING%>' coltype='<%out.print(IAMEncoder.encodeHTMLAttribute(columnType));//NO OUTPUTENCODING%>' onblur="showFormat('<%out.print(IAMEncoder.encodeJavaScript(aliasName));//NO OUTPUTENCODING%>',this.value)" onkeydown="hideFormat('<%out.print(IAMEncoder.encodeJavaScript(aliasName));//NO OUTPUTENCODING%>')" onkeyup="showFormat('<%out.print(IAMEncoder.encodeJavaScript(aliasName));//NO OUTPUTENCODING%>',this.value)"/><%--NO OUTPUTENCODING --%>	
+
+				<span id="<%out.print(IAMEncoder.encodeHTMLAttribute(aliasName));//NO OUTPUTENCODING%>sp" class='spanSpotSearch' onclick="setTextFocus('<%out.print(IAMEncoder.encodeJavaScript(aliasName));//NO OUTPUTENCODING%>')"><%out.print(inputFormat);//NO OUTPUTENCODING%></span><%--NO OUTPUTENCODING --%>
+				<%if(isSearchValPresent && searchValue!=null)
+				{
+					%>
+					<script>showOptions("<%out.print(IAMEncoder.encodeJavaScript(aliasName));//NO OUTPUTENCODING%>","<%out.print(searchValue);//NO OUTPUTENCODING%>");</script><%--NO OUTPUTENCODING --%>
+					<%
+				}
+				else if(searchValue == null)
+				{
+					%>
+					<script>
+						var selectEle = document.getElementById("<%=IAMEncoder.encodeJavaScript(aliasName)%>sel");
+						if(selectEle){
+							var selectedIndex = selectEle.selectedIndex;
+							selectEle.options[selectedIndex].click();
+						}
+					</script>
+					<%
+				}
+			}
+			else{%>
+				&nbsp;
+			<%}%>
+		</p>
+	</form>
+	<%if(tableIter.isLastColumn()){%>
+	<script>
+		adjustOption("<%=IAMEncoder.encodeJavaScript(aliasName)%>");
+	</script>
+	</TD>
+	<TD align='right' valign='top' width='5px'><input type='button' name='searchSubmit' class='tableSearchGoButton' onClick='fetchSpotSearchData(this);'></TD>
+
+	</TR></TABLE>
+	<%}%>
+	</TH>
+	</components:cell>
+</components:column>
+</TR>

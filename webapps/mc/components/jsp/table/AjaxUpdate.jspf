@@ -1,0 +1,28 @@
+<!--$Id$-->
+<%
+int rowCounter=0;
+int colCounter=0;
+
+%>
+<div>
+	<%rowCounter=0; %>
+   <components:row viewContext="<%=viewContext%>" javaScriptRow = "true" dynamicUpdate="true">
+  	<div>
+  	<%colCounter=0; 
+  	
+  	%>
+  	<components:column viewContext="<%=viewContext%>">
+   	<span id='<%out.print(uniqueId+"_"+rowCounter+"_"+colCounter+"_content");//NO OUTPUTENCODING%>' ><%--NO OUTPUTENCODING --%>
+   	<components:cell viewContext="<%=viewContext%>">
+   	<%
+   	props = transformerContext.getRenderedAttributes();
+	%>
+   	<%@ include file='CellRenderer.jspf'%> 
+   	</components:cell>
+   	<%colCounter++; %>
+  	</span>
+  	</components:column>
+  	<%rowCounter++; %>
+   </div>
+   </components:row>
+   </div> 

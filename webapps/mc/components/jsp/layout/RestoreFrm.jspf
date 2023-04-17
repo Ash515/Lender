@@ -1,0 +1,14 @@
+<%-- $Id$ --%>
+<%
+DataObject dataObject = ViewContext.getViewContext(custView, custView,request).getModel().getViewConfiguration();
+Row vcRow = dataObject.getFirstRow("ViewConfiguration");
+if(vcRow.get("ACCOUNT_ID") == null){
+%>
+<form name="RestoreDefaultsForm">
+	<input name="Restore" type="submit" class="btn" value="Default Settings"> 
+	<input type="hidden" name="VIEWNAME" value='<%=IAMEncoder.encodeHTMLAttribute(custView)%>'/>
+	<input type="hidden" name="RESTORE" value='true'/>
+</form>
+<%
+}
+%>

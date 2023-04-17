@@ -1,0 +1,78 @@
+package $pkg;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+import com.zoho.security.eventfw.EventDataProcessor;
+import com.zoho.security.eventfw.EventCallerInferrer;
+import com.zoho.security.eventfw.ExecutionTimer;
+
+public final class ZSEC_$eventName
+{ 
+  private static final String EVENTNAME = "$eventName";
+  private static final String EVENTTYPE = "$eventType";
+  
+#macro (pushDataMethodGeneration $params $methodName $description)
+/*
+ *  $description  "$eventName"
+ * 
+ #foreach( $p in $params)
+ * @param $p.getName()
+ #end
+*/
+  public static void $methodName(#set( $count = 1)#foreach($p in $params)$p.getType() $p.getName()#if( $count < $params.size() ), #set( $count = $count + 1)#end#end #if( $params.size()>0),#end ExecutionTimer timer) {
+  EventDataProcessor.stopRunningTimer(timer);
+  Map<String,Object> dataMap = new HashMap<String, Object>();
+  #foreach( $p in $params)
+  dataMap.put("$p.getName()",$p.getName());
+  #end
+  EventDataProcessor.pushData(EVENTNAME, EVENTTYPE, dataMap, EventCallerInferrer.inferClass(EVENTNAME, "$methodName"), timer);    
+   }
+#end
+
+#if($eventType!="event" &&  $eventType!="anomaly" )
+#set( $method = "pushInfo")
+#if($eventType=="statistic")
+ #set( $method = "record")
+#end
+#pushDataMethodGeneration($params.getDataFields() $method "$method the $eventType")
+#end
+
+
+#if($eventType=="event" || $eventType=="anomaly")
+#macro (methodGeneration $map $eventstatus $prefix)
+#foreach ($mapEntry in $map.entrySet())
+#set($methodName = $mapEntry.key)
+/*
+ * $prefix$methodName of the event "$eventName"
+ #foreach( $p in $mapEntry.value.getDataFields())
+ * @param $p.getName()
+ #end
+*/
+  public static void $prefix$methodName(#set( $count = 1)#foreach($p in $mapEntry.value.getDataFields())$p.getType() $p.getName()#if( $count < $mapEntry.value.getDataFields().size() ), #set( $count = $count + 1)#end#end#if($mapEntry.value.getDataFields().size()>0), #end  ExecutionTimer timer) {
+  EventDataProcessor.stopRunningTimer(timer);
+  Map<String,Object> dataMap = null;
+  #if($mapEntry.value.getDataFields().size() > 0)
+  dataMap =new HashMap<String, Object>();
+  #foreach( $p in $mapEntry.value.getDataFields())
+  dataMap.put("$p.getName()",$p.getName());
+  #end
+  #if($eventstatus=="exception" || $eventstatus=="error" )
+dataMap.put("EVENT_STATUS","$eventstatus");
+  #end
+dataMap.put("MODULE","$methodName");
+  #end
+EventDataProcessor.pushData(EVENTNAME, EVENTTYPE, dataMap, EventCallerInferrer.inferClass(EVENTNAME, "push$methodName"), timer);    
+  }
+#end
+#end
+#if($eventType=="event")
+#methodGeneration($params.getSuccessEventFields() "success" "push")
+#methodGeneration($params.getExceptionFields() "exception" "push")
+#methodGeneration($params.getErrorFields() "error" "push")
+#end
+#if($eventType=="anomaly")
+#methodGeneration($params.getSubAnomalyFields() "anomaly" "record" )
+#end
+#end
+}

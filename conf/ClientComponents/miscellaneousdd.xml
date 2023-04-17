@@ -1,0 +1,485 @@
+ <!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd">
+<?xml-stylesheet type="text/xsl" href="data-dictionary-transform.xsl"?>
+<!--$Id$-->
+
+<data-dictionary name="ClientComponents">
+
+	<table name="ACContextHelp">
+		<description>Bookmarks a URL by giving a specific name or 'TARGET'</description>
+		<columns>
+			<column name="TARGET_NO">
+				<description>Auto-generated Unique ID</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>ACContextHelp.TARGET_NO</generator-name>
+					<name-column>TARGET</name-column>
+				</uniquevalue-generation>
+			</column>
+			<column name="TARGET">
+				<description>Unique name to identify this bookmark</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="URL">
+				<description>URL path to be bookmarked</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACContextHelp_PK">
+			<primary-key-column>TARGET_NO</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="ACContextHelp_UK1">
+				<unique-key-column>TARGET</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="ACSQLString">
+		<description>Stores all the SQL queries in String format, which are used to fetch the required data for a View.</description>
+		<columns>
+			<column name="QUERYID">
+				<description>Maps the SQL query string with the SELECTQUERY Table</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SQL">
+				<description>The SQL query in String format.</description>
+				<data-type>CHAR</data-type>
+				<max-size>-1</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="GROUPBYUSED">
+				<description>Set true, if the query contains GROUPBY Clause. It assists in the evaluation of total count.</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+				<nullable>false</nullable>
+			</column>
+            <column name="ISUNION">
+                <description>Set true, in case the main query contains union clause. This is needed to set the proper range for union query.</description>
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+                <nullable>false</nullable>
+            </column>
+		</columns>
+		<primary-key name="ACSQLString_PK">
+			<primary-key-column>QUERYID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACSQLString_FK" reference-table-name="SelectQuery">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>QUERYID</fk-local-column>
+						<fk-reference-column>QUERYID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	<table name="ACCountSQLString">
+		<description>Stores all the Count SQL queries in String format, to fetch the total no. of records.</description>
+		<columns>
+			<column name="QUERYID">
+				<description>Maps the Count SQL query string with the SELECTQUERY Table</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SQL">
+				<description>The Count SQL query in String format.</description>
+				<data-type>CHAR</data-type>
+				<max-size>4000</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACCountSQLString_PK">
+			<primary-key-column>QUERYID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACCountSQLString_FK" reference-table-name="SelectQuery">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>QUERYID</fk-local-column>
+						<fk-reference-column>QUERYID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACSumSQLString">
+		<columns>
+			<column name="QUERYID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SQL">
+				<description>The SQL String.</description>
+				<data-type>CHAR</data-type>
+				<max-size>4000</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACSumSQLString_PK">
+			<primary-key-column>QUERYID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="ACSumSQLString_FK" reference-table-name="SelectQuery" isbidirectional="false">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>QUERYID</fk-local-column>
+						<fk-reference-column>QUERYID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACDropDown">
+		<columns>
+			<column name="NAME_NO">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>ACDropDown.NAME_NO</generator-name>
+					<name-column>NAME</name-column>
+				</uniquevalue-generation>
+			</column>
+			<column name="NAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="CVNAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+			</column>
+			<column name="COLUMNFORSERVER">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLUMNFORCLIENT">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="TABLENAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="DEFAULTVALUE">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="SELECTEDKEY">
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="ONSELECTMETHODNAME">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACDropDown_PK">
+			<primary-key-column>NAME_NO</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="ACDropDown_UK1">
+				<unique-key-column>NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+ 	<table name="ACDropDownParams">
+		<columns>
+			<column name="NAME">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<unique>true</unique>
+			</column>
+			<column name="PARAMNAME">
+				<description>The name of the property (parameter) to be passed in. </description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="MANDATORY">
+				<description>Value associated with the property name specified.</description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACDropDownParams_PK">
+			<primary-key-column>NAME</primary-key-column>
+			<primary-key-column>PARAMNAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACDDParams_FK" reference-table-name="ACDropDown">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>NAME</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ACInstantFeedBack">
+		<columns>
+			<column name="USERNAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="FROMADDRESS">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="TOADDRESS">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="SUBJECT">
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="COMMENTS">
+				<data-type>CHAR</data-type>
+				<max-size>4000</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="STACKTRACE">
+				<data-type>CHAR</data-type>
+				<max-size>4000</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="CLIENTSTATE">
+				<data-type>CHAR</data-type>
+				<max-size>4000</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="MESSAGETIME_NO">
+				<description>Time of the message was added</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>AACInstantFeedBack.MESSAGETIME_NO</generator-name>
+					<name-column>MESSAGETIME</name-column>
+				</uniquevalue-generation>
+			</column>
+			<column name="MESSAGETIME">
+				<description>Time of the message was added</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="STATUS">
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+				<nullable>true</nullable>
+				<unique>false</unique>
+			</column>
+			<column name="REPLYTO">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="CONTEXT_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACInstantFeedBack_PK">
+			<primary-key-column>MESSAGETIME_NO</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="ACInstantFeedBack_UK1">
+				<unique-key-column>MESSAGETIME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+  	<table name="ACFeedBackProperties">
+		<columns>
+			<column name="MESSAGETIME">
+				<description>Time of the message was added</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="PROPERTY_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="PROPERTY_VALUE">
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACFeedBackProps_PK">
+			<primary-key-column>MESSAGETIME</primary-key-column>
+			<primary-key-column>PROPERTY_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ACFeedBackProps_FK" reference-table-name="ACInstantFeedBack">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>MESSAGETIME</fk-local-column>
+						<fk-reference-column>MESSAGETIME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+ 	<table name="ACMailConfig">
+		<columns>
+			<column name="CONTEXT_NAME_NO">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>ACMailConfig.CONTEXT_NAME_NO</generator-name>
+					<name-column>CONTEXT_NAME</name-column>
+				</uniquevalue-generation>
+			</column>
+			<column name="CONTEXT_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="FROMADDRESS">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="TOADDRESS">
+				<data-type>CHAR</data-type>
+				<max-size>500</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="SERVER">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="USERNAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="PASSWORD">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+			<column name="PORT">
+				<data-type>INTEGER</data-type>
+				<default-value>25</default-value>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACMailConfig_PK">
+			<primary-key-column>CONTEXT_NAME_NO</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="ACMailConfig_UK1">
+				<unique-key-column>CONTEXT_NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+ 	<table name="ACTemplateHandler">
+		<description>Provides a handler which dynamically replaces the template in the SQL. Template Syntax: ${&amp;lt;HANDLERNAME&amp;gt;:&amp;lt;PARAMNAME&amp;gt;:&amp;lt;DEFAULTVALUE&amp;gt;}</description>
+		<columns>
+			<column name="ID">
+				<description>Unique ID to identify the ACTemplateHandler</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>ACTemplateHandler.ID</generator-name>
+					<name-column>HANDLERNAME</name-column>
+				</uniquevalue-generation>
+			</column>
+			<column name="HANDLERNAME">
+				<description>Name of the template handler</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="CLASSNAME">
+				<description>Fully qualified name of a class which handles the replacement of the template using PARAMNAME. This must be a child of {@link com.adventnet.client.tpl.TemplateAPI.VariableHandler}</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="ACTemplateHandler_PK">
+			<primary-key-column>ID</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="ACTemplateHandler_UK1">
+				<unique-key-column>HANDLERNAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="TemplateFiles">
+		<description>Holds the template file names.</description>
+		<columns>
+			<column name="FILE_NO">
+				<description>Unique ID of the file</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>TemplateFiles.FILE_NO</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="FILE_NAME">
+				<description>Name of Template File with relative path</description>
+				<data-type>CHAR</data-type>
+				<max-size>255</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="TemplateFiles_PK">
+			<primary-key-column>FILE_NO</primary-key-column>
+		</primary-key>
+	</table>
+    
+	<table name="TableTemplateFiles">
+		<description>Holds the template file names for tables and tabs in specific.</description>
+		<columns>
+			<column name="FILE_NO">
+				<description>Unique ID of the file</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>TableTemplateFiles.FILE_NO</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="FILE_NAME">
+				<description>Name of Template File with relative path for tables and tabs</description>
+				<data-type>CHAR</data-type>
+				<max-size>255</max-size>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="TableTemplateFiles_PK">
+			<primary-key-column>FILE_NO</primary-key-column>
+		</primary-key>
+	</table>
+
+</data-dictionary>

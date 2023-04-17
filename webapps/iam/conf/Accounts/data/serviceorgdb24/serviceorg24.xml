@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="murphysorgzaid" account_name="Zoho Murphy Service Org">
+		<IAMAccountDomain domain="murphysorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="mapssorgzaid" account_name="Zoho Maps Service Org">
+		<IAMAccountDomain domain="mapssorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="zohoimsorgzaid" account_name="Zoho IM Service Org">
+		<IAMAccountDomain domain="zohoimsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="slatesorgzaid" account_name="Zoho Slate Service Org">
+		<IAMAccountDomain domain="slatesorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

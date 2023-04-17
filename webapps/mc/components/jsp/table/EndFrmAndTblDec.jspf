@@ -1,0 +1,10 @@
+<%-- $Id$ --%>
+
+  </table>
+<%@ include file="/components/jsp/rangenavigator/SliderNavigation.jspf"%>
+<script defer>
+if(window["RowSelection"]==true)
+{
+	selectRowsInStack("<%=IAMEncoder.encodeJavaScript(viewContext.getUniqueId())%>");
+}
+</script>

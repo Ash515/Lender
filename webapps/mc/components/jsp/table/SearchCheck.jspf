@@ -1,0 +1,18 @@
+<%-- $Id$--%>
+
+  <components:column viewContext="<%=viewContext%>">
+	<components:cell viewContext="<%=viewContext%>" type = "Header">
+	<%
+	   
+		if(transformerContext.isSearchEnabled()&& transformerContext.getSearchValue()!=null && transformerContext.getSearchValue()!="")
+		{
+			String displayName=transformerContext.getDisplayName();
+			String viewname=transformerContext.getViewContext().getUniqueId();
+		}
+	
+	 
+	%>
+
+	</components:cell>
+	</components:column>
+  

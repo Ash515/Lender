@@ -1,0 +1,853 @@
+Test_App:
+  AuthToken:
+    - cosserver.clientcos
+  OAuthToken:
+    - CosServer.Test.READ
+    - AaaServer.profile.READ
+    
+DESK_APP:
+  AuthToken:
+    - zohosupport.supportapi
+    - zohomobileproxy.mobileapi
+    - zohocontacts.photoapi
+    - zohosearch.searchapi
+    - jproxy.jmobileapi
+  OAuthToken:
+    - ZohoMobileProxy.mobileapi.ALL
+    - ZohoSupport.tickets.ALL
+    - Zohoprofile.userphoto.READ
+    - ZohoSupport.feeds.ALL
+    - ZohoSupport.settings.ALL
+    - ZohoSupport.contacts.ALL 
+    - Zohosearch.securesearch.READ
+    - AaaServer.profile.READ
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+    - ZohoSupport.basic.READ
+    - ZohoSupport.basic.CREATE
+   
+zsocial:
+  AuthToken:
+    - jproxy.jmobileapi
+    - zohocontacts.photoapi
+    - zohosocial.socialclientapi
+  OAuthToken:
+    - Zohoprofile.userphoto.READ
+    - ZohoSocial.client.ALL
+    - AaaServer.profile.READ
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+
+Zoho_Creator:
+  AuthToken:
+    - zohocreator.creatorapi
+    - zohocontacts.photoapi
+    - zohocrm.crmapi
+  OAuthToken:
+    - aaaserver.profile.READ
+    - Zohoprofile.userphoto.READ
+    - ZohoCreator.meta.READ
+    - ZohoCreator.data.READ
+    - ZohoCreator.meta.CREATE
+    - ZohoCreator.data.CREATE
+    - ZohoContacts.contactapi.READ
+    - ZohoCRM.modules.leads.READ
+    - ZohoCRM.modules.accounts.READ
+    - ZohoCRM.modules.deals.READ
+    - ZohoCRM.modules.contacts.READ
+    - ZohoCRM.modules.campaigns.READ
+    - ZohoCRM.modules.cases.READ
+    - ZohoCRM.modules.solutions.READ
+    - ZohoCRM.modules.products.READ
+    - ZohoCRM.modules.pricebooks.READ
+    - ZohoCRM.modules.quotes.READ
+    - ZohoCRM.modules.vendors.READ
+    - ZohoCRM.modules.purchaseorders.READ
+    - ZohoCRM.modules.salesorders.READ
+    - ZohoCRM.modules.invoices.READ
+    - ZOHOCRM.users.READ
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+    - sheetapp.ConvertAPI.READ
+    
+ZohoCampaigns:
+  AuthToken:
+    - zohocampaigns.campaignsapi
+    - zohomobileproxy.mobileapi
+    - zohocontacts.photoapi
+  OAuthToken:
+    - aaaserver.profile.READ
+    - Zohoprofile.userphoto.READ
+    - ZohoMobileProxy.mobileapi.ALL
+    - ZohoCampaigns.campaign.READ
+    - ZohoCampaigns.campaign.UPDATE
+    - ZohoCampaigns.campaign.CREATE
+    - ZohoCampaigns.contact.READ
+    - ZohoCampaigns.contact.CREATE
+    - ZohoCampaigns.userinfo.READ
+    - ZohoContacts.contactapi.ALL
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+
+Pulse:
+  AuthToken:
+    - zohopulse.pulseapi
+    - zohocreator.creatorapi
+    - zohosearch.searchapi
+    - zohocontacts.photoapi
+    - zohochat.internalapi
+  OAuthToken:
+    - aaaserver.profile.READ
+    - Zohoprofile.userphoto.READ
+    - ZohoPulse.networklist.ALL
+    - ZohoPulse.grouplist.ALL
+    - ZohoPulse.feedList.ALL
+    - ZohoPulse.attachments.ALL
+    - ZohoPulse.userDetail.ALL
+    - ZohoPulse.connectNotifications.ALL
+    - ZohoPulse.pagelist.ALL
+    - ZohoPulse.chatrooms.ALL
+    - ZohoPulse.blogs.ALL
+    - ZohoPulse.tasks.ALL
+    - ZohoCliq.Channels.ALL
+    - ZohoChat.Chats.ALL
+    - ZohoCreator.meta.READ
+    - ZohoPulse.customapps.ALL
+    - ZohoCreator.meta.CREATE
+    - ZohoPulse.events.ALL
+    - ZohoPulse.forums.ALL
+    - ZohoPulse.wikis.ALL
+    - ZohoPulse.gamification.ALL
+    - ZohoPC.files.READ
+    - Zohosearch.securesearch.READ
+    - ZohoCliq.Channels.READ
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+
+ZohoWriter:
+  AuthToken:
+    - zohowriter.dataapi
+    - zohopc.docsapi
+    - zohocontacts.photoapi
+    - zohocontacts.contactapi
+  OAuthToken:
+    - aaaserver.profile.READ
+    - Zohoprofile.userphoto.READ
+    - ZohoWriter.documenteditor.ALL
+    - ZohoPc.files.ALL
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+    
+NoteBook:
+  AuthToken:
+    - notebook.notebookapi
+    - zohopc.docsapi
+    - zohocontacts.photoapi
+    - zohosearch.searchapi
+  OAuthToken:
+    - Notebook.notebook.ALL
+    - ZohoPC.files.ALL
+    - Zohosearch.securesearch.READ
+    - ZohoWriter.documentEditor.ALL
+    - ZohoFiles.files.ALL
+    - aaaserver.profile.READ
+    - Zohoprofile.userphoto.READ
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+    
+CardScanner:
+  AuthToken:
+    - zohocrm.crmapi
+    - zohoinvoice.invoiceapi
+    - zohobooks.booksapi
+    - zohocontacts.photoapi
+    - zohocontacts.contactapi
+    - zohocontactmanager.contactmanagerapi
+    - zohocampaigns.campaignsapi
+    - zohosupport.supportapi
+    - zohosearch.searchapi
+  OAuthToken:
+    - ZohoCRM.modules.leads.ALL
+    - ZohoCRM.modules.contacts.ALL
+    - ZohoCRM.modules.attachments.ALL
+    - ZohoCRM.modules.tasks.ALL
+    - ZohoCRM.modules.notes.ALL
+    - ZohoCRM.modules.campaigns.ALL
+    - ZohoContactManager.contacts.ALL
+    - ZohoBooks.contacts.ALL
+    - ZohoInvoice.contacts.ALL
+    - ZohoContacts.contactapi.CREATE
+    - ZohoContacts.photoapi.CREATE
+    - ZohoCRM.modules.search.ALL
+    - ZohoSupport.basic.READ
+    - ZohoSupport.tickets.READ
+    - MobileSync.mobilesync.ALL
+    - ZohoSearch.securesearch.READ
+    - ZohoCRM.settings.fields.ALL
+    - zlabsml.mltools.all
+    - ZohoBooks.settings.ALL
+    - ZohoCRM.crmapi.ALL
+    - ZohoCRM.users.ALL
+    - ZohoContacts.contactapi.UPDATE
+    - ZohoInvoice.settings.ALL
+    - aaaserver.profile.READ
+    - Zohoprofile.userphoto.READ
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+    
+Leads:
+  AuthToken:
+    - zohocrm.crmapi
+  OAuthToken:
+    - ZohoCRM.modules.leads.ALL
+    - ZohoCRM.modules.contacts.ALL
+    - ZohoCRM.modules.attachments.ALL
+    - ZohoCRM.modules.tasks.ALL
+    - ZohoCRM.modules.notes.ALL
+    - ZohoCRM.modules.campaigns.ALL
+    - ZohoCRM.modules.search.ALL
+    - MobileSync.mobilesync.ALL
+    - ZohoSearch.securesearch.READ
+    - ZohoCRM.settings.fields.ALL
+    - zlabsml.mltools.all
+    - aaaserver.profile.READ
+    - Zohoprofile.userphoto.READ
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+
+Inventory:
+  AuthToken:
+    - zohoinventory.inventoryapi
+    - zohodirectory.directoryapi
+    - zohocontacts.photoapi
+  OAuthToken:
+    - ZohoInventory.accountants.ALL
+    - ZohoInventory.bills.ALL
+    - ZohoInventory.compositeitems.ALL
+    - ZohoInventory.contacts.ALL
+    - ZohoInventory.customerpayments.ALL
+    - ZohoInventory.export.ALL
+    - ZohoInventory.import.ALL
+    - ZohoInventory.integrations.ALL
+    - ZohoInventory.inventoryadjustments.ALL
+    - ZohoInventory.invoices.ALL
+    - ZohoInventory.items.ALL
+    - ZohoInventory.packages.ALL
+    - ZohoInventory.purchasereceives.ALL
+    - ZohoInventory.reports.ALL
+    - ZohoInventory.salesorders.ALL
+    - ZohoInventory.settings.ALL
+    - ZohoInventory.shipmentorders.ALL
+    - ZohoInventory.transferorders.ALL
+    - ZohoInventory.vendorpayments.ALL
+    - ZohoInventory.warehouses.ALL
+    - aaaserver.profile.READ
+    - Zohoprofile.userphoto.READ
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+    
+VaultSaml:
+  AuthToken:
+    - zohovault.vaultapi
+  OAuthToken:
+    - ZohoVault.user.ALL
+    - ZohoVault.secrets.ALL
+    - AaaServer.profile.READ
+    - Zohoprofile.userphoto.READ
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+    - Zohovault.others.ALL
+    
+Vault:
+  AuthToken:
+    - zohovault.vaultapi
+    - zohocontacts.photoapi
+  OAuthToken:
+    - ZohoVault.user.ALL
+    - ZohoVault.secrets.ALL
+    - AaaServer.profile.READ
+    - Zohoprofile.userphoto.READ
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+    - Zohovault.others.ALL
+
+MailAdmin:
+  AuthToken:
+    - jproxy.jmobileapi
+    - virtualoffice.zohomailapi
+    - zohocontacts.photoapi
+  OAuthToken:
+    - VirtualOffice.organization.accounts.ALL
+    - VirtualOffice.organization.subscriptions.ALL
+    - VirtualOffice.organization.spam.ALL
+    - VirtualOffice.organization.domains.ALL
+    - VirtualOffice.organization.groups.ALL
+    - VirtualOffice.accounts.ALL
+    - VirtualOffice.mobile.ALL
+    - JProxy.jmobileapi.ALL
+    - VirtualOffice.partner.organization.READ
+    - aaaserver.profile.READ
+    - Zohoprofile.userphoto.READ
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+    
+ZohoForms:
+  AuthToken:
+    - zohoforms.formsapi
+    - zohocontacts.photoapi
+    - zohopayments.paymentsinternalapi
+  OAuthToken:
+    - aaaserver.profile.READ
+    - Zohoprofile.userphoto.READ
+    - ZohoForms.feedback.CREATE
+    - ZohoForms.notification.READ
+    - ZohoForms.app.READ
+    - ZohoForms.app.CREATE
+    - ZohoForms.portal.READ
+    - ZohoForms.portal.UPDATE
+    - ZohoForms.users.ALL
+    - ZohoForms.forms.listing.READ
+    - ZohoForms.forms.builder.ALL
+    - ZohoForms.forms.live.READ
+    - ZohoForms.forms.live.CREATE
+    - ZohoForms.forms.share.ALL
+    - ZohoForms.forms.records.ALL
+    - ZohoForms.reports.listing.READ
+    - ZohoForms.reports.builder.ALL
+    - ZohoForms.reports.live.ALL
+    - ZohoForms.reports.share.READ
+    - ZohoForms.reports.share.CREATE
+    - ZohoForms.reports.share.DELETE
+    - ZohoForms.reports.approvals.ALL
+    - ZohoForms.integration.webhooks.READ
+    - ZohoForms.integration.webhooks.CREATE
+    - ZohoForms.integration.webhooks.UPDATE
+    - ZohoForms.forms.approvals.ALL
+    - ZohoPayments.MobileSubscription.READ
+    - ZohoPayments.MobileSubscription.CREATE
+    - ZohoPayments.MobileSubscription.UPDATE
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+    - ZohoCRM.modules.ALL
+    - ZohoForms.forms.crm.live.READ
+ 
+ZohoSubscriptions:
+  AuthToken:
+    - zohosubscriptions.subscriptionsapi
+    - zohocontacts.photoapi
+  OAuthToken:
+    - aaaserver.profile.READ
+    - ZohoSubscriptions.addons.ALL
+    - ZohoSubscriptions.coupons.ALL
+    - ZohoSubscriptions.creditnotes.ALL
+    - ZohoSubscriptions.customers.ALL
+    - ZohoSubscriptions.export.ALL
+    - ZohoSubscriptions.hostedpages.ALL
+    - ZohoSubscriptions.import.ALL
+    - ZohoSubscriptions.integrations.ALL
+    - ZohoSubscriptions.invoices.ALL
+    - ZohoSubscriptions.metrics.ALL
+    - ZohoSubscriptions.payments.ALL
+    - ZohoSubscriptions.plans.ALL
+    - ZohoSubscriptions.products.ALL
+    - ZohoSubscriptions.settings.ALL
+    - ZohoSubscriptions.subscriptions.ALL
+    - ZohoSubscriptions.users.ALL
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+    
+ZohoCliq:
+  AuthToken:
+    - zohochat.internalapi
+    - zohocontacts.photoapi
+    - zohosearch.searchapi
+    - zohopulse.pulseapi
+    - zohodirectory.directoryapi
+    - zohocalendar.calendarapi
+  OAuthToken:
+    - DRE.dreapi.ALL
+    - VirtualOffice.organization.subscriptions.READ
+    - ZohoCalendar.calendar.ALL
+    - ZohoCalendar.event.ALL
+    - ZohoChat.Attachments.CREATE
+    - ZohoChat.Attachments.READ
+    - ZohoChat.Bots.ALL
+    - ZohoChat.Buddies.ALL
+    - ZohoChat.Channels.ALL
+    - ZohoChat.Chats.CREATE
+    - ZohoChat.Chats.READ
+    - ZohoChat.Chats.UPDATE
+    - ZohoChat.Commands.READ
+    - ZohoChat.Messageactions.READ
+    - ZohoChat.Messageactions.UPDATE
+    - ZohoChat.Messages.ALL
+    - ZohoChat.Organisation.CREATE
+    - ZohoChat.Organisation.READ
+    - ZohoChat.Organisation.UPDATE
+    - ZohoChat.Reminders.ALL
+    - ZohoChat.Smileys.READ
+    - ZohoChat.Storage.ALL
+    - ZohoChat.StorageData.ALL
+    - ZohoChat.Teams.READ
+    - ZohoChat.mobile.UPDATE
+    - ZohoChat.profile.READ
+    - ZohoChat.profile.UPDATE
+    - ZohoChat.webhooks.CREATE
+    - ZohoDirectory.orgsjoinrequest.CREATE
+    - ZohoDirectory.orgsjoinrequest.DELETE
+    - ZohoDirectory.orgsjoinrequest.READ
+    - ZohoDirectory.users.CREATE
+    - ZohoPC.files.READ
+    - ZohoPeople.employee.READ
+    - ZohoPulse.oembed.READ
+    - ZohoSearch.securesearch.READ
+    - ZohoVideo.videoauthapi.ALL
+    - ZohoVideo.videochatapi.UPDATE
+    - AaaServer.profile.READ
+    - ZohoProfile.userphoto.READ
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+    - ZohoProfile.userphoto.UPDATE
+    
+ZohoReports:
+  AuthToken:
+    - zohoreports.reportsapi
+    - zohomobileproxy.mobileapi
+    - zohocontacts.photoapi
+    - zohocontacts.contactapi
+  OAuthToken:
+    - zohocontacts.contactapi.ALL
+    - zohocontacts.photoapi.READ
+    - zohocontacts.userphoto.ALL
+    - zohomobileproxy.mobileapi.ALL
+    - zohopc.files.ALL
+    - zohopc.license.ALL
+    - zohoreports.metadata.READ
+    - zohoreports.share.CREATE
+    - zohoreports.data.all
+    - AaaServer.profile.READ
+    - Zohoprofile.userphoto.READ
+    - Zohocontacts.userprofilephoto.ALL
+    
+ZohoCRM:
+  AuthToken:
+    - zohomobileproxy.mobileapi
+    - zohocrm.crmapi
+    - virtualoffice.mailapi
+    - zohocontacts.photoapi
+    - zohopc.docsapi
+  OAuthToken:
+    - ZohoCRM.crmapi.ALL
+    - ZohoMobileProxy.mobileapi.ALL
+    - ZohoContacts.contactapi.ALL
+    - ZohoCRM.users.ALL
+    - ZohoCRM.org.ALL
+    - ZohoCRM.settings.ALL
+    - ZohoCRM.modules.ALL
+    - VirtualOffice.accounts.ALL
+    - VirtualOffice.messages.ALL
+    - VirtualOffice.folders.ALL
+    - VirtualOffice.settings.ALL
+    - VirtualOffice.search.Read
+    - VirtualOffice.tags.ALL
+    - VirtualOffice.flags.ALL
+    - VirtualOffice.mobile.ALL
+    - VirtualOffice.attachments.ALL
+    - zohocontacts.photoapi.READ
+    - ZohoPC.files.ALL
+    - ZohoPC.license.ALL
+    - ZohoCRM.uns.ALL
+    - AaaServer.profile.READ
+    - Zohoprofile.userphoto.READ
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+    
+ZohoInvoice:
+  AuthToken:
+    - zohoinvoice.invoiceapi
+    - zohocontacts.photoapi
+  OAuthToken:
+    - aaaserver.profile.READ
+    - aaaserver.profile.UPDATE
+    - Zohocontacts.userphoto.ALL
+    - ZohoInvoice.fullaccess.ALL
+    - Zohoprofile.userphoto.READ
+    - Zohocontacts.userprofilephoto.ALL
+    
+ZohoBooks:
+  AuthToken:
+    - zohobooks.booksapi
+    - zohocontacts.photoapi
+  OAuthToken:
+    - aaaserver.profile.READ
+    - aaaserver.profile.UPDATE
+    - Zohocontacts.userphoto.ALL
+    - ZohoBooks.fullaccess.ALL
+    - Zohoprofile.userphoto.READ
+    - Zohocontacts.userprofilephoto.ALL
+
+ZohoExpense:
+  AuthToken:
+    - zohoexpense.expenseapi
+    - zohocontacts.photoapi
+  OAuthToken:
+    - aaaserver.profile.READ
+    - aaaserver.profile.UPDATE
+    - Zohocontacts.userphoto.ALL
+    - zohoexpense.fullaccess.ALL
+    - Zohoprofile.userphoto.READ
+    - Zohocontacts.userprofilephoto.ALL
+   
+ZohoSubscriptionsAndroid:
+  AuthToken:
+    - zohosubscriptions.subscriptionsapi
+    - zohocontacts.photoapi
+  OAuthToken:
+    - aaaserver.profile.READ
+    - aaaserver.profile.UPDATE
+    - ZohoSubscriptions.fullaccess.ALL
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+    - Zohoprofile.userphoto.READ
+    
+CardScannerAndroid:
+  AuthToken:
+    - zohocrm.crmapi
+    - zohocontacts.photoapi
+    - zohocontacts.contactapi
+    - zohocontactmanager.contactmanagerapi
+  OAuthToken:
+    - ZohoCRM.modules.leads.ALL
+    - ZohoCRM.modules.contacts.ALL
+    - ZohoCRM.modules.attachments.ALL
+    - ZohoCRM.modules.tasks.ALL
+    - ZohoCRM.modules.notes.ALL
+    - ZohoCRM.modules.campaigns.ALL
+    - ZohoContactManager.contacts.ALL
+    - ZohoBooks.contacts.ALL
+    - ZohoInvoice.contacts.ALL
+    - ZohoContacts.contactapi.CREATE
+    - ZohoContacts.photoapi.CREATE
+    - ZohoCRM.modules.search.ALL
+    - ZohoSupport.basic.READ
+    - ZohoSupport.tickets.READ
+    - MobileSync.mobilesync.ALL
+    - ZohoSearch.securesearch.READ
+    - ZohoCRM.settings.fields.ALL
+    - zlabsml.mltools.all
+    - ZohoBooks.settings.ALL
+    - ZohoCRM.crmapi.ALL
+    - ZohoCRM.users.ALL
+    - ZohoContacts.contactapi.UPDATE
+    - ZohoInvoice.settings.ALL
+    - aaaserver.profile.READ
+    - Zohoprofile.userphoto.READ
+    - ZohoContacts.userprofilephoto.ALL
+    - ZohoContacts.userphoto.ALL
+
+ZohoProjects:
+  AuthToken:
+    - zohoprojects.projectsapi
+    - zohomobileproxy.mobileapi
+    - zohocontacts.photoapi
+    - zohopc.docsapi
+    - zohopayments.paymentsinternalapi
+  OAuthToken:
+    - ZohoMobileProxy.mobileapi.ALL
+    - ZohoProjects.portals.ALL
+    - ZohoProjects.projects.ALL
+    - ZohoProjects.milestones.ALL
+    - ZohoProjects.tasks.ALL
+    - ZohoProjects.tasklists.ALL
+    - ZohoProjects.bugs.ALL
+    - ZohoProjects.forums.ALL
+    - ZohoProjects.events.ALL
+    - ZohoProjects.activities.ALL
+    - ZohoProjects.users.ALL
+    - ZohoProjects.timesheets.ALL
+    - ZohoProjects.status.ALL
+    - ZohoProjects.feeds.ALL
+    - ZohoProjects.documents.ALL
+    - ZohoPC.files.ALL
+    - ZohoContacts.userphoto.ALL
+    - ZohoProjects.chats.ALL
+    - aaaserver.profile.READ
+    - Zohoprofile.userphoto.READ
+    - ZohoContacts.userprofilephoto.ALL
+    - ZohoPayments.MobileSubscription.READ
+    - ZohoPayments.MobileSubscription.CREATE
+    - ZohoPayments.MobileSubscription.UPDATE
+    
+ZmailAdmin:
+  AuthToken:
+    - jproxy.jmobileapi
+    - zohocontacts.photoapi
+    - virtualoffice.zohomailapi
+    - virtualoffice.mailapi
+    - virtualoffice.zmstreamsapi
+  OAuthToken:
+    - VirtualOffice.organization.accounts.ALL
+    - VirtualOffice.organization.subscriptions.ALL
+    - VirtualOffice.organization.spam.ALL
+    - VirtualOffice.organization.domains.ALL
+    - VirtualOffice.organization.groups.ALL
+    - VirtualOffice.accounts.ALL
+    - VirtualOffice.mobile.ALL
+    - JProxy.jmobileapi.ALL
+    - VirtualOffice.partner.organization.READ
+    - ZohoContacts.userphoto.ALL
+    - aaaserver.profile.READ
+    - Zohoprofile.userphoto.READ
+    - ZohoContacts.userprofilephoto.ALL
+
+SkyDeskCRM:
+  AuthToken:
+    - zohomobileproxy.mobileapi
+    - skydeskcrm.crmapi
+    - virtualoffice.mailapi
+    - zohocontacts.photoapi
+    - zohopc.docsapi
+  OAuthToken:
+    - SkyDeskCRM.crmapi.ALL
+    - ZohoMobileProxy.mobileapi.ALL
+    - ZohoContacts.contactapi.ALL
+    - SkyDeskCRM.users.ALL
+    - SkyDeskCRM.org.ALL
+    - SkyDeskCRM.settings.ALL
+    - SkyDeskCRM.modules.ALL
+    - VirtualOffice.accounts.ALL
+    - VirtualOffice.messages.ALL
+    - VirtualOffice.folders.ALL
+    - VirtualOffice.settings.ALL
+    - VirtualOffice.search.Read
+    - VirtualOffice.tags.ALL
+    - VirtualOffice.flags.ALL
+    - VirtualOffice.mobile.ALL
+    - VirtualOffice.attachments.ALL
+    - zohocontacts.photoapi.READ
+    - ZohoPC.files.ALL
+    - ZohoPC.license.ALL
+    - SkyDeskCRM.uns.ALL
+    - AaaServer.profile.READ
+    - Zohoprofile.userphoto.READ
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+
+ZohoDocs:
+  AuthToken:
+    - jproxy.jmobileapi
+    - zohopc.docsapi
+    - zohoshow.dataapi
+    - zohowriter.dataapi
+    - zohosheet.dataapi
+    - zohosearch.searchapi
+    - zohocontacts.photoapi
+    - zohocontacts.contactapi
+  OAuthToken:
+    - ZohoPC.files.ALL
+    - ZohoPC.license.ALL
+    - ZohoWriter.documenteditor.ALL
+    - ZohoSearch.securesearch.ALL
+    - ZohoSheet.clientAPI.read
+    - ZohoSearch.securesearch.ALL
+    - zohoshow.showdocslist.ALL
+    - zohoshow.showdocinfo.READ
+    - zohoshow.showslideshow.READ
+    - zohoshow.showedit.ALL
+    - JProxy.jmobileapi.ALL
+    - Zohocontacts.contactapi.READ
+    - AaaServer.profile.READ
+    - Zohoprofile.userphoto.READ
+    - Zohocontacts.userprofilephoto.ALL
+    - Zohocontacts.userphoto.ALL
+
+ZohoMail:
+  AuthToken:
+    - virtualoffice.mailapi
+    - zohomobileproxy.mobileapi
+    - zohocontacts.contactapi
+    - zohocalendar.calendarapi
+  OAuthToken:
+    - VirtualOffice.accounts.READ
+    - VirtualOffice.accounts.UPDATE
+    - VirtualOffice.messages.ALL
+    - VirtualOffice.folders.ALL
+    - VirtualOffice.settings.ALL
+    - VirtualOffice.search.ALL
+    - VirtualOffice.tags.ALL
+    - VirtualOffice.flags.ALL
+    - VirtualOffice.mobile.ALL
+    - VirtualOffice.attachments.READ
+    - VirtualOffice.attachments.UPDATE
+    - VirtualOffice.notify.ALL
+    - VirtualOffice.streams.ALL
+    - VirtualOffice.posts.ALL
+    - VirtualOffice.comments.ALL
+    - ZohoMobileProxy.mobileapi.ALL
+    - ZohoCalendar.settings.ALL
+    - ZohoCalendar.calendar.ALL
+    - ZohoCalendar.event.ALL
+    - ZohoCalendar.reminder.ALL
+    - ZohoCalendar.freebusy.ALL
+    - ZohoCalendar.notification.READ
+    - ZohoCalendar.search.READ
+    - ZohoCalendar.group.READ
+    - ZohoCalendar.group.UPDATE
+    - ZohoCalendar.orgsettings.READ
+    - ZohoCalendar.orgsettings.UPDATE
+    - ZohoPayments.MobileSubscription.READ
+    - ZohoPayments.MobileSubscription.CREATE
+    - ZohoPayments.MobileSubscription.UPDATE
+    - ZohoContacts.photoapi.ALL
+    - ZohoContacts.contactapi.ALL
+    - ZohoPC.files.ALL
+    - ZohoPC.license.ALL
+    - ZohoCRM.crmdataaccess.READ
+    - ZohoCRM.crmdataaccess.UPDATE
+    - ZohoCRM.crmapi.ALL
+    - ZohoCRM.Users.ALL
+    - ZohoCRM.settings.ALL
+    - ZohoCRM.org.ALL
+    - ZohoCRM.modules.ALL
+    - ZohoCRM.files.READ
+    - ZMIntegration.plugins.READ
+    - ZMIntegration.internalintegapps.ALL
+    - ZMProcessors.plugins.READ
+    - ZMProcessors.internalintegapps.ALL
+    - ZohoRecruit.modules.ALL
+    - ZohoRecruit.setup.all
+    - Desk.search.READ
+    - Desk.tickets.ALL
+    - Desk.contacts.ALL
+    - Desk.basic.READ
+    - Desk.basic.CREATE
+    - Desk.tasks.ALL
+    - Desk.settings.READ
+    - ZohoVault.user.READ
+    - ZohoVault.secrets.ALL
+    - AaaServer.profile.READ
+    - ZohoContacts.userphoto.ALL
+
+ZohoMailAndroid:
+  AuthToken:
+    - virtualoffice.mailapi
+    - zohomobileproxy.mobileapi
+    - zohocontacts.contactapi
+    - zohocalendar.calendarapi
+  OAuthToken:
+    - VirtualOffice.accounts.READ
+    - VirtualOffice.accounts.UPDATE
+    - VirtualOffice.messages.ALL
+    - VirtualOffice.folders.ALL
+    - VirtualOffice.settings.ALL
+    - VirtualOffice.search.READ
+    - VirtualOffice.tags.ALL
+    - VirtualOffice.flags.ALL
+    - VirtualOffice.mobile.ALL
+    - VirtualOffice.attachments.READ
+    - VirtualOffice.attachments.UPDATE
+    - VirtualOffice.streams.READ
+    - VirtualOffice.streams.UPDATE
+    - VirtualOffice.posts.ALL
+    - VirtualOffice.comments.ALL
+    - VirtualOffice.notify.ALL
+    - ZohoMobileProxy.mobileapi.ALL
+    - ZohoCalendar.settings.ALL
+    - ZohoCalendar.calendar.ALL
+    - ZohoCalendar.event.ALL
+    - ZohoCalendar.reminder.ALL
+    - ZohoCalendar.freebusy.ALL
+    - ZohoPC.files.All
+    - ZohoPC.license.All
+    - ZohoCRM.crmdataaccess.READ
+    - ZohoCRM.crmdataaccess.UPDATE
+    - ZohoCRM.crmapi.ALL
+    - ZohoCRM.Users.ALL
+    - ZohoCRM.settings.ALL
+    - ZohoCRM.org.ALL
+    - aaaserver.profile.READ
+    - ZohoContacts.photoapi.ALL
+    - ZohoContacts.userphoto.ALL
+    - ZohoContacts.contactapi.ALL
+  
+ZohoSalesIQ:
+  AuthToken:
+    - livedesk.internalapi
+    - livedesk.settings
+  OAuthToken:
+    - LiveDesk.conversations.ALL
+    - LiveDesk.portals.ALL
+    - LiveDesk.visitors.ALL
+    - LiveDesk.operators.ALL
+    - LiveDesk.departments.ALL
+    - LiveDesk.cannedmessages.ALL
+    - LiveDesk.embeds.ALL
+    - LiveDesk.blockedips.ALL
+    - LiveDesk.apps.ALL
+    - LiveDesk.integrations.READ
+    - LiveDesk.integrations.UPDATE
+    - LiveDesk.tracking.READ
+    - LiveDesk.media.CREATE
+    - LiveDesk.media.UPDATE
+    - LiveDesk.media.DELETE
+    - LiveDesk.chatmonitors.ALL
+    - LiveDesk.uploads.CREATE
+    - ZohoPayments.MobileSubscription.READ
+    - LiveDesk.downloads.READ
+    - ZohoPayments.MobileSubscription.CREATE
+    - ZohoPayments.MobileSubscription.UPDATE
+    - ZohoGadgets.translateSync.CREATE
+    - ZohoGadgets.translateSync.READ
+    - AaaServer.profile.READ
+    - ZohoProfile.userphoto.READ
+    - ZohoContacts.userprofilephoto.ALL
+    - ZohoContacts.userphoto.ALL
+    
+InboxInsight:
+  AuthToken:
+    - jproxy.jmobileapi
+    - zohocontacts.contactapi
+    - zohocontacts.photoapi
+    - virtualoffice.mailAPI
+    - virtualoffice.zmstreamsapi
+  OAuthToken:
+    - aaaserver.profile.READ
+    - zohocontacts.userphoto.READ
+    - zohocontacts.contactapi.READ
+    - JProxy.jmobileapi.ALL
+    - VirtualOffice.accounts.ALL
+    - VirtualOffice.messages.ALL
+    - VirtualOffice.flags.ALL
+    - VirtualOffice.folders.ALL
+    - VirtualOffice.tags.ALL
+    - VirtualOffice.search.ALL
+    - VirtualOffice.settings.ALL
+    - VirtualOffice.attachments.ALL
+    - VirtualOffice.mobile.ALL
+    - VirtualOffice.streams.ALL
+    - VirtualOffice.posts.ALL
+    - VirtualOffice.comments.ALL
+    - VirtualOffice.notify.ALL
+    - VirtualOffice.links.ALL
+    
+ZohoDocsSync:
+  AuthToken:
+    - zohopc.docsapi
+  OAuthToken:
+    - ZohoPC.files.ALL
+    - ZohoPC.license.ALL
+    - ZohoFiles.files.ALL
+    - zohocontacts.userphoto.READ
+    - aaaserver.profile.READ
+    - zohocontacts.contactapi.READ
+    
+charmhealth:
+  AuthToken:
+    - charmhealth.charmehrapi
+  OAuthToken:
+    - charmhealth.patient.fullaccess.ALL
+    - charmhealth.defaults.READ
+    - charmhealth.user.fullaccess.ALL
+    - zohocontacts.userphoto.READ
+    - aaaserver.profile.READ
+    - zohocontacts.userphoto.UPDATE

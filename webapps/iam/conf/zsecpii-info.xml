@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pii-detector xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="zsecpii-info.xsd">
+	<piis>
+		<!-- inside the data tag attribute value is case sensitivity -->
+		<pii category="Personal">
+			<datas sensitivity="Medium">
+				<data detectionType="Dictionary" value="PersonName" />
+				<data detectionType="Machine_Learning" value="PersonML" />
+				<data detectionType="Machine_Learning" value="DateML" />
+				<data detectionType="Regex" value="Date" />
+			</datas>
+		</pii>
+
+		<pii category="Place">
+			<datas sensitivity="Medium">
+				<data detectionType="Dictionary" value="Place" />
+				<data detectionType="Dictionary" value="Region" />
+				<data detectionType="Dictionary" value="Ethnicity" />
+				<data detectionType="Dictionary" value="City" />
+				<data detectionType="Dictionary" value="Country" />
+				<data detectionType="Dictionary" value="CountryCode" />
+				<data detectionType="Dictionary" value="Pincode" />
+				<data detectionType="Machine_Learning" value="LocationML" />
+			</datas>
+			<datas sensitivity="Low">
+				<data detectionType="Dictionary" value="State" />
+			</datas>
+		</pii>
+		<pii category="Education_And_Work">
+			<datas sensitivity="Medium">
+				<data detectionType="Dictionary" value="Degree" />
+				<data detectionType="Dictionary" value="Occupation" />
+				<data detectionType="Dictionary" value="Org" />
+				<data detectionType="Machine_Learning" value="OrganizationML" />
+			</datas>
+		</pii>
+		<pii category="Authentication_And_Authorization">
+			<datas sensitivity="High">
+				<data detectionType="Regex" value="Password" />
+				<!-- <data detectionType="Regex" value="Username" /> -->
+			</datas>
+		</pii>
+
+		<pii category="ZOHOPII">
+			<datas sensitivity="High">
+				<data detectionType="Regex" value="ISCTicket/AuthenToken" />
+				<data detectionType="Regex" value="IAMADT/IAMBDT" />
+				<data detectionType="Regex" value="Access/RefreshToken" />
+				<data detectionType="Regex" value="ISCSignature" />
+				<data detectionType="Regex" value="Session_ID" />
+				<data detectionType="Regex" value="ClientID" />
+				<data detectionType="Regex" value="ClientToken" />
+			</datas>
+		</pii>
+		<pii category="Identity">
+			<datas sensitivity="Medium">
+				<data detectionType="Regex_And_Dictionary" value="ArgentinaNationalIdentityNumber" />
+				<data detectionType="Regex_And_Dictionary" value="AustraliaPassportNumber" />
+				<data detectionType="Regex_And_Dictionary" value="BelgiumNationalNumber" />
+				<data detectionType="Regex_And_Dictionary" value="BrazilNationalIDCard" />
+				<data detectionType="Regex_And_Dictionary" value="CanadaHealthServiceNumber" />
+				<data detectionType="Regex_And_Dictionary" value="CanadaPassportNumber" />
+				<data detectionType="Regex_And_Dictionary" value="CanadaPersonalHealthServiceNumber" />
+				<data detectionType="Regex_And_Dictionary" value="ChileIdentityCardNumber" />
+				<data detectionType="Regex_And_Dictionary" value="ChinaResidentIdentityCardNumber" />
+				<data detectionType="Regex_And_Dictionary" value="CrotiaIdentityCardNumber" />
+				<data detectionType="Regex_And_Dictionary" value="CrotiaPersonalIdentificationNumber" />
+				<data detectionType="Regex_And_Dictionary" value="CzechNationalIdentityCardNumber" />
+				<data detectionType="Regex_And_Dictionary" value="DenmarkDenmarkPersonalIdentificationNumber" />
+				<data detectionType="Regex_And_Dictionary" value="FinlandNationalID" />
+				<data detectionType="Regex_And_Dictionary" value="FinlandPassportNumber" />
+				<data detectionType="Regex_And_Dictionary" value="FranceNationalIDCardNumber" />
+				<data detectionType="Regex_And_Dictionary" value="FrancePassportNumber" />
+				<data detectionType="Regex_And_Dictionary" value="FranceSocialSecurityNumber" />
+				<data detectionType="Regex_And_Dictionary" value="GermanyIdentityCardNumber" />
+				<data detectionType="Regex_And_Dictionary" value="GermanyPassportNumber" />
+				<data detectionType="Regex_And_Dictionary" value="GreeceNationalIDCard" />
+				<data detectionType="Regex_And_Dictionary" value="HongkongIdentityCardNumber" />
+				<data detectionType="Regex_And_Dictionary" value="IndiaAadhaar" />
+				<data detectionType="Regex_And_Dictionary" value="IndiaPermanentAccountNumber" />
+				<data detectionType="Regex_And_Dictionary" value="IndonesiaKTP" />
+				<data detectionType="Regex_And_Dictionary" value="IrelandPPSN" />
+				<data detectionType="Regex_And_Dictionary" value="IsraelIsrealNationalID" />
+				<data detectionType="Regex_And_Dictionary" value="JapanPassportNumber" />
+				<data detectionType="Regex_And_Dictionary" value="JapanResidentRegistrationNumber" />
+				<data detectionType="Regex_And_Dictionary" value="MalaysiaIdentityCard" />
+				<data detectionType="Regex_And_Dictionary" value="NetherlandsCitizenServiceNumber" />
+				<data detectionType="Regex_And_Dictionary" value="NewzealandMinistryOfHealthNumber" />
+				<data detectionType="Regex_And_Dictionary" value="NorwayIdentityNumber" />
+				<data detectionType="Regex_And_Dictionary" value="PhilippinesUnifiedMultipurposeIDNumber" />
+				<data detectionType="Regex_And_Dictionary" value="PolandIdentityCard" />
+				<data detectionType="Regex_And_Dictionary" value="PolandPassport" />
+				<data detectionType="Regex_And_Dictionary" value="PolandPESEL" />
+				<data detectionType="Regex_And_Dictionary" value="PortugalCitizenCardNumber" />
+				<data detectionType="Regex_And_Dictionary" value="SaudiarabiaNationalId" />
+				<data detectionType="Regex_And_Dictionary" value="SingaporeNationalRegistrationIdentityCardNumber" />
+				<data detectionType="Regex_And_Dictionary" value="SouthafricaIdentificationNumber" />
+				<data detectionType="Regex_And_Dictionary" value="SouthkoreaResidentRegistrationNumber" />
+				<data detectionType="Regex_And_Dictionary" value="SpainSocialSecurityNumber" />
+				<data detectionType="Regex_And_Dictionary" value="SwedenNationalIDNumber" />
+				<data detectionType="Regex_And_Dictionary" value="SwedenPassportNumber" />
+				<data detectionType="Regex_And_Dictionary" value="TaiwanNationalID" />
+				<data detectionType="Regex_And_Dictionary" value="TaiwanPassportNumber" />
+				<data detectionType="Regex_And_Dictionary" value="TaiwanResidentCertificate" />
+				<data detectionType="Regex_And_Dictionary" value="UkNationalHealthServiceNumber" />
+				<data detectionType="Regex_And_Dictionary" value="UkPassportNumber" />
+				<data detectionType="Regex_And_Dictionary" value="UsDEANumber" />
+				<data detectionType="Regex_And_Dictionary" value="UsSocialSecurityNumber" />
+				<data detectionType="Regex_And_Dictionary" value="BrazilLegalEntityNumber" />
+			</datas>
+			<datas sensitivity="Low">
+				<data detectionType="Regex_And_Dictionary" value="AustraliaDriverLicenseNumber" />
+				<data detectionType="Regex_And_Dictionary" value="CanadaDrivingLicenseNumber" />
+				<data detectionType="Regex_And_Dictionary" value="FranceDriverLicenseNumber" />
+				<data detectionType="Regex_And_Dictionary" value="GermanyDriverLicense" />
+				<data detectionType="Regex_And_Dictionary" value="ItalyDriverLicenseNumber" />
+				<data detectionType="Regex_And_Dictionary" value="JapanDriverLicenseNumber" />
+				<data detectionType="Regex_And_Dictionary" value="UkDriverLicenseNumber" />
+				<data detectionType="Regex_And_Dictionary" value="UkElectoralRollNumber" />
+				<data detectionType="Regex_And_Dictionary" value="UsDriverLicenseNumber" />
+			</datas>
+		</pii>
+
+		<pii category="Account">
+			<datas sensitivity="Medium">
+				<data detectionType="Regex_And_Dictionary" value="AustraliaMedicalAccountNumber" />
+			</datas>
+			<datas sensitivity="High">
+				<data detectionType="Regex_And_Dictionary" value="CanadaBankAccountNumber" />
+				<data detectionType="Regex_And_Dictionary" value="AustraliaBankAccountNumber" />
+				<data detectionType="Regex_And_Dictionary" value="InternationalIBAN" />
+				<data detectionType="Regex_And_Dictionary" value="IsraelIsrealBankAccountNumber" />
+				<data detectionType="Regex_And_Dictionary" value="JapanBankAccountNumber" />
+				<data detectionType="Regex_And_Dictionary" value="UsBankAccountNumber" />
+			</datas>
+		</pii>
+
+		<pii category="Financial">
+			<datas sensitivity="Medium">
+				<data detectionType="Regex_And_Dictionary" value="BrazilCPFNumber" />
+				<data detectionType="Regex_And_Dictionary" value="AustraliaTaxFileNumber" />
+				<data detectionType="Regex_And_Dictionary" value="CanadaSocialInsuranceNumber" />
+				<data detectionType="Regex_And_Dictionary" value="InternationalSWIFTCode" />
+				<data detectionType="Regex_And_Dictionary" value="JapanSocialInsuranceNumber" />
+				<data detectionType="Regex_And_Dictionary" value="UkNINO" />
+				<data detectionType="Regex_And_Dictionary" value="UsABARoutingNumber" />
+				<data detectionType="Regex_And_Dictionary" value="UsTaxpayerIdentificationINumber" />
+			</datas>
+			<datas sensitivity="High">
+				<data detectionType="Regex_And_Dictionary" value="ChinaCreditCardNumber" />
+				<data detectionType="Regex_And_Dictionary" value="EuDebitCard" />
+				<data detectionType="Regex" value="Currency" />
+				<data detectionType="Machine_Learning" value="MoneyML" />
+			</datas>
+		</pii>
+
+		<pii category="Device_Information">
+			<datas sensitivity="High">
+				<data detectionType="Regex" value="UUID" />
+				<data detectionType="Regex" value="IMEI" />
+				<data detectionType="Regex" value="MAC" />
+			</datas>
+		</pii>
+
+		<pii category="Internet_And_Telecommunication">
+			<datas sensitivity="High">
+				<data detectionType="Regex" value="Email" />
+			</datas>
+			<datas sensitivity="Medium">
+				<data detectionType="Regex_And_Dictionary" value="InternationalIP" />
+				<data detectionType="Regex_And_Dictionary" value="IsraelIBA" />
+				<data detectionType="Regex" value="PhoneNumber" />
+				<data detectionType="Regex" value="URL" />
+			</datas>
+			<datas sensitivity="Low">
+				<data detectionType="Regex" value="Domain" />
+			</datas>
+		</pii>
+		<pii category="Others">
+			<datas sensitivity="Medium">
+				<data detectionType="Machine_Learning" value="TimeML" />
+				<data detectionType="Machine_Learning" value="PercentageML" />
+				<data detectionType="Regex" value="Time" />
+			</datas>
+		</pii>
+	</piis>
+	<models>
+		<model name="MLMODEL" model-type="Machine_Learning" class-name="com.zoho.security.zsecpiidetector.finder.NameFinderMLModel" />
+		<model name="CITY" model-type="Dictionary" class-name="com.zlabs.pii.models.ZCityModel" />
+		<model name="CONTEXT" model-type="Regex_And_Dictionary" class-name="com.zlabs.pii.models.ZContextModel" />
+		<model name="COUNTRYCODE" model-type="Dictionary" class-name="com.zlabs.pii.models.ZCountryCodeModel" />
+		<model name="COUNTRY" model-type="Dictionary" class-name="com.zlabs.pii.models.ZCountryModel" />
+		<model name="DEGREE" model-type="Dictionary" class-name="com.zlabs.pii.models.ZDegreeModel" />
+		<model name="ETHNICITY" model-type="Dictionary" class-name="com.zlabs.pii.models.ZEthnicityModel" />
+		<model name="ISO" model-type="Dictionary" class-name="com.zlabs.pii.models.ZISOModel" />
+		<!-- <model name="AREA" model-type="Dictionary" class-name="com.zlabs.pii.models.ZAreaModel"/> -->
+		<!-- <model name="LEMMATIZER" model-type="Common" class-name="com.zlabs.pii.models.ZLemmatizerModel" /> -->
+		<model name="OCCUPATION" model-type="Dictionary" class-name="com.zlabs.pii.models.ZOccupationModel" />
+		<model name="ORG" model-type="Dictionary" class-name="com.zlabs.pii.models.ZOrgModel" />
+		<!-- <model name="POS" model-type="Common" class-name="com.zlabs.pii.models.ZPartsOfSpeechModel" /> -->
+		<model name="PERSON" model-type="Dictionary" class-name="com.zlabs.pii.models.ZPersonModel" />
+		<model name="PINCODE" model-type="Dictionary" class-name="com.zlabs.pii.models.ZPincodeModel" />
+		<model name="PLACE" model-type="Dictionary" class-name="com.zlabs.pii.models.ZPlaceModel" />
+		<model name="REGION" model-type="Dictionary" class-name="com.zlabs.pii.models.ZRegionModel" />
+		<!-- <model name="SENTENCER" model-type="Common" class-name="com.zlabs.pii.models.ZSentencerModel" />-->
+		<model name="STATE" model-type="Dictionary" class-name="com.zlabs.pii.models.ZStateModel" />
+		<model name="TOKENIZER" model-type="Common" class-name="com.zlabs.pii.models.ZTokenizerModel" />
+	</models>
+	<regexes>
+		<!-- extra attribute 'score'. It used to provide confidence of match(e.g phone number = 0.2 -->
+		<!-- Probability score value Definite=0.6 Maybe=0.4 Not=0.2 -->
+		<!-- max and min length value taken based on analysis -->
+
+
+		<!-- Refer: https://i.stack.imgur.com/g4nRy.gif -->
+		<regex name="Email" value="[\w]([\w\-\.\+\'\/]*)@([\w\-\.]*)(\.[a-zA-Z]{2,22}(\.[a-zA-Z]{2}){0,2})" score="0.4" min-len="20" max-len="30" />
+
+		<!-- Refer: https://www.furaffinity.net/view/3132351/ -->
+		<regex name="Username" value="(([\p{L}\p{N}\p{M}\_\.\-]+)|[\p{L}\p{N}\_\p{M}]([\p{L}\p{M}\p{N}\_\+\-\.\'&amp;]*)@(?=.{4,256}$)(([\p{L}\p{N}\p{M}]+)(([\-\_]*[\p{L}\p{N}\p{M}])*)[\.])+[\p{L}\p{M}]{2,22})" score="0.2" min-len="4" max-len="20" />
+
+		<regex name="ISCTicket/AuthenToken" value="[a-f0-9]{32}" score="0.6" min-len="32" max-len="32" />
+		<regex name="IAMADT/IAMBDT" value="[a-f0-9]{128}" score="0.6" min-len="128" max-len="128" />
+		<regex name="Access/RefreshToken" value="[0-9]{4}\.[a-f0-9]{32}\.[a-f0-9]{32}" score="0.6" min-len="70" max-len="70" />
+		<regex name="ISCSignature" value="[a-zA-Z0-9]+\-[0-9]{13}\-[a-f0-9]{128}" score="0.4" min-len="143" max-len="160" /> <!-- samples of iscsignature -->
+		<regex name="ClientToken" value="[0-9]{1,8}\-[a-f0-9]{8}\-[a-f0-9]{32}" score="0.6" min-len="43" max-len="50" />
+
+		<!-- session id -->
+		<regex name="Session_ID" value="[A-Z0-9]{32}" score="0.6" min-len="32" max-len="32" />
+
+		<!-- cookies -->
+		<!-- <regex name="google_utma_regex" value="((\.)?([0-9]{1,32}))+" /> detects all number like phone number -->
+
+		<!--<regex name="IAMTicket" value="(?:[a-z0-9\.\-])+" score="0.2" min-len="10" max-len="30"/> samples of iamticket -->
+
+		<!-- <regex name="encapiKey" value="[0-9a-zA-Z&quot;\{\}_\-\+\.\$@\?\,\:=\'\/\!\[\]\|&amp;\P{InBasicLatin}\s]+"/> detects any char -->
+
+		<!-- https://wrightimc.com/using-page-research-content-strategy/ -->
+		<regex name="URL" value="(ht|f)tp(s?)\:\/\/[-.\w]*(\/?)([a-zA-Z0-9\*\-\.\?\,\:\'\/\\\+=&amp;%\$#_@]*)?" score="0.4" min-len="50" max-len="150" />
+
+		<!-- <regex name="ipaddress" value="(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)" /> -->
+		<regex name="ClientID" value="([0-9]+[.][A-Z0-9]+)+" score="0.4" min-len="30" max-len="60" /> <!-- need samples -->
+
+		<!-- Reger domain Probability distribution: https://websitesetup.org/wp-content/uploads/2019/05/Domain-name-lenght-distribution.jpg -->
+		<regex name="Domain" value="([\p{L}\p{M}\p{N}]([\p{L}\p{M}\p{N}\-]{0,61}[\p{L}\p{M}\p{N}])?\.)+[\p{L}\p{M}]{2,22}" score="0.4" min-len="8" max-len="16" />
+
+		<!-- time //can detect by ML -->
+
+		<!-- Standard Grade(A A- B+ B B- C+ C C- D+ D D- F SF NF W (SF - Stopped Attending F) (NF - Never Attended F) (W - Withdraw)) -->
+		<!-- Refer:http://regexlib.com/REDetails.aspx?regexp_id=2027 -->
+		<!-- <regex name="grade" value="A-?|[BCD][+-]?|[SN]?F|W" score="0.4" min-len="1" max-len="2"/> -->
+
+
+		<!-- UUID number. -->
+		<!-- Refer: https://en.wikipedia.org/wiki/Universally_unique_identifier#Format -->
+		<regex name="UUID" value="[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}" score="0.6" min-len="36" max-len="36"></regex>
+
+		<!-- MAC Address -->
+		<regex name="MAC" value="((([a-zA-z0-9]{2}[-:]){5}([a-zA-z0-9]{2}))|(([a-zA-z0-9]{2}:){5}([a-zA-z0-9]{2})))" score="0.6" min-len="17" max-len="17"></regex>
+
+		<!-- https://www.passcape.com/index.php?section=blog&cmd=details&id=25 -->
+		<!-- https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a -->
+		<!-- matches password format -->
+		<!-- Performance issue: <regex name="Password" value="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&#38;*-]).{4,}" score="0.2" min-len="6" max-len="10" /> -->
+
+		<!-- https://www.schneier.com/blog/archives/2006/12/realworld_passw.html -->
+		<regex name="Password" value="(?=[a-zA-Z0-9#$^+=!*()@%&#38;]*[A-Z])(?=[a-zA-Z0-9#$^+=!*()@%&#38;]*[a-z])(?=[a-zA-Z0-9#$^+=!*()@%&#38;]*\d)(?=[a-zA-Z0-9#$^+=!*()@%&#38;]*[#$^+=!*()@%&#38;])[a-zA-Z0-9#$^+=!*()@%&#38;]{4,32}" score="0.2" min-len="6" max-len="10" />
+
+		<!--<regex name="creditcard" value="(\d{4}[- ]?){3}\d{4}" /> NOTE:dictionary can detect -->
+		<!--<regex name="ssn" value="(?!000)([0-6]\d{2}|7([0-6]\d|7[012]))([ -]?)(?!00)\d\d\3(?!0000)\d{4}" /> NOTE: dictionary can detect -->
+
+		<!-- below regex needs to create regex class -->
+
+		<!-- IMEI number. Feature: Detect both IMEI and IMEISV. -->
+		<!-- Advance: can increase prediction by checking checksum of last digit in the IMEI with Luhn formula -->
+		<!-- Refer: https://en.wikipedia.org/wiki/International_Mobile_Equipment_Identity -->
+		<regex name="IMEI" value="\d{2}\-\d{6}\-\d{6}-\d{1,2}" score="0.6" min-len="18" max-len="19" />
+		<!-- salary detection min and max depends on limit of money transfer Feature:thousand separator,cents detection,two digit fractional NOTE:currently US (123,456.78) & EU(123.456,78) -->
+		<!-- Refer:https://stackoverflow.com/questions/354044/what-is-the-best-u-s-currency-regex -->
+		<!-- max-len=10 assumption of maximum amount is $10,000.00 -->
+		<regex name="Currency" value="\$[+-]?[0-9]{1,3}(?:[0-9]*(?:[.,][0-9]{2})?|(?:,[0-9]{3})*(?:\.[0-9]{2})?|(?:\.[0-9]{3})*(?:,[0-9]{2})?)" score="0.2" min-len="2" max-len="10"></regex>
+
+		<!-- date DD(-/.)MMM(-/.)YY(YY) -->
+		<!-- check min year and max year but its not give an general format for xml so skip -->
+		<regex name="Date" value="(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})|(?:29(\/|-|\.)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))|(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})" score="0.6" min-len="8" max-len="11"></regex>
+		<regex name="Time" value="(?:0?[1-9]|1[0-9]|2[0-3]):(?:[0-5][0-9])(?::(?:[0-5]\d|\d))?" score="0.6" min-len="3" max-len="8" />
+		<regex name="PhoneNumber" value="(?:\+?(\d{1,3})[-. (]*)?(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?" score="0.4" min-len="10" max-len="14" />
+	</regexes>
+</pii-detector>

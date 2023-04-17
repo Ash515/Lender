@@ -1,0 +1,12 @@
+/*$Id$*/
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    src:url('font.eot');
+    src:url('font.eot?#iefix') format('eot'),
+        url('font.woff2') format('woff2'), 
+        url('font.woff') format('woff'), 
+        url('font.ttf') format('truetype'),
+        url('font.svg#Montserrat-SemiBold') format('svg');
+}

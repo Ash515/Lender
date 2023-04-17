@@ -1,0 +1,53 @@
+<%-- $Id$ --%>
+<%@page import="com.adventnet.client.view.web.WebViewAPI" %>
+
+<%if(request.getAttribute("STATUS_DIV_ADDED") == null){ %>
+<div id='mc_msg' style="width:100%" class="hide">
+     <table width="95%">
+            <tr>
+                <td align="right"><input type="button" class="msgTypeBtn"/></td>
+                <td><div id="mc_msg_txt" class="msgTextDiv"></div></td>
+                <td align="left"><input type="button" class='closeMsg' onClick="return StatusMsgAPI.removeMsg('mc_msg');"/></td>
+            </tr>
+     </table>
+</div><%--NO OUTPUTENCODING --%>
+
+<%if(request.getAttribute("STATUS_MESSAGE") != null){%>
+ <script  <%out.print(WebViewAPI.isAjaxRequest(request)?"" : "defer=\"defer\"");//NO OUTPUTENCODING%> ><%--NO OUTPUTENCODING --%>
+
+<%
+
+String fadeout = (String) request.getAttribute("fadeout");
+if(fadeout == null)
+{
+	fadeout = "true";
+}
+
+%>
+
+var fadeout = <%=IAMEncoder.encodeJavaScript(fadeout)%>;
+
+ <%
+ if(WebViewAPI.isAjaxRequest(request))
+ {
+	 %>
+
+ StatusMsgAPI.showMsg('<%out.print( IAMEncoder.encodeJavaScript((String)request.getAttribute("STATUS_MESSAGE")));//NO OUTPUTENCODING%>',<%out.print(request.getAttribute("RESPONSE_STATUS"));//NO OUTPUTENCODING%>, fadeout);//NO OUTPUTENCODING 
+	 <%
+ }
+ else
+ {
+  %>
+ var status_message = "<%= IAMEncoder.encodeJavaScript((String)request.getAttribute("STATUS_MESSAGE"))%>";
+ var resp_status = <%out.print( request.getAttribute("RESPONSE_STATUS"));//NO OUTPUTENCODING%>;//NO OUTPUTENCODING
+ setTimeout("StatusMsgAPI.showMsg(\'"+ status_message + "\'," +  resp_status + "," + fadeout + ")",500); 
+<%
+ }
+ %>
+  </script>
+<%}%>
+
+<%
+ request.setAttribute("STATUS_DIV_ADDED","DONE");
+}%>
+

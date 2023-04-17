@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!-- $Id$ -->
+    <views>
+        <CustomViewConfiguration cvid="CustomViewConfiguration:cvid:ListViewConfigurationsCV" cvname="ListViewConfigurationsCV" queryid="SelectQuery:queryid:1" />
+        <SelectQuery numofobjects="6" queryid="SelectQuery:queryid:1" startindex="1">
+            <SelectTableList>
+                <SelectTable tablealias="ViewConfiguration" tablename="ViewConfiguration">
+                    <SelectColumnList>
+                        <SelectColumn columnalias="Title" columnindex="0" columnname="TITLE" />
+                        <SelectColumn columnalias="Description" columnindex="1" columnname="DESCRIPTION" />
+                        <SelectColumn columnalias="IconFile" columnindex="2" columnname="ICONFILE" />
+                    </SelectColumnList>
+                </SelectTable>
+                <SelectTable tablealias="ACViewToGroupMapping" tablename="ACViewToGroupMapping">
+                    <SelectColumnList>
+                        <SelectColumn columnalias="ViewName" columnindex="3" columnname="VIEWNAME" />
+                        <SelectColumn columnalias="GroupName" columnindex="4" columnname="GROUPNAME" />
+                    </SelectColumnList>
+                    <SortColumnList>
+                        <SortColumn ascending_order="true" columnname="GROUPNAME" sortindex="0" />
+                        <SortColumn ascending_order="true" columnname="VIEWNAME" sortindex="1" />
+                    </SortColumnList>
+                    <JoinTable jointype="2" referencedtable="ViewConfiguration">
+                        <JoinColumnsList>
+                            <JoinColumns basetablecolumn="VIEWNAME_NO" referencedtablecolumn="VIEWNAME" />
+                        </JoinColumnsList>
+                    </JoinTable>
+                </SelectTable>
+            </SelectTableList>
+        </SelectQuery>
+        <CustomViewConfiguration cvid="CustomViewConfiguration:cvid:TabChildCV" cvname="TabChildCV" queryid="SelectQuery:queryid:2" />
+        <SelectQuery numofobjects="25" queryid="SelectQuery:queryid:2" startindex="1">
+            <SelectTableList>
+                <SelectTable tablealias="ViewConfiguration" tablename="ViewConfiguration">
+                    <SelectColumnList>
+                        <SelectColumn columnalias="ViewName" columnindex="0" columnname="VIEWNAME" />
+                        <SelectColumn columnalias="Title" columnindex="1" columnname="TITLE" />
+                        <SelectColumn columnalias="ViewNameNo" columnindex="2" columnname="VIEWNAME_NO" />
+                    </SelectColumnList>
+                </SelectTable>
+                <SelectTable tablealias="ACTabChildConfig" tablename="ACTabChildConfig">
+                    <SelectColumnList>
+                        <SelectColumn columnalias="ChildViewName" columnindex="3" columnname="CHILDVIEWNAME" />
+                        <SelectColumn columnalias="ChildIndex" columnindex="4" columnname="CHILDINDEX" />
+                    </SelectColumnList>
+                    <SortColumnList>
+                        <SortColumn ascending_order="true" columnname="CHILDINDEX" sortindex="0" />
+                    </SortColumnList>
+                    <JoinTable jointype="1" referencedtable="ViewConfiguration">
+                        <JoinColumnsList>
+                            <JoinColumns basetablecolumn="VIEWNAME_NO" referencedtablecolumn="CHILDVIEWNAME" />
+                        </JoinColumnsList>
+                    </JoinTable>
+                </SelectTable>
+            </SelectTableList>
+            <CriteriaList>
+                <Criteria criteriaid="Criteria:criteriaid:2" logicalrepresentation="1">
+                    <RelationalCriteriaList>
+                        <RelationalCriteria columnname="VIEWNAME" comparator="0" relationalcriteriaid="1" tablealias="ACTabChildConfig" value="${CUSTOMIZEVIEW}" />
+                    </RelationalCriteriaList>
+                </Criteria>
+            </CriteriaList>
+        </SelectQuery>
+        <CustomViewConfiguration cvid="CustomViewConfiguration:cvid:GridChildCV" cvname="GridChildCV" queryid="SelectQuery:queryid:3" />
+        <SelectQuery numofobjects="25" queryid="SelectQuery:queryid:3" startindex="1">
+            <SelectTableList>
+                <SelectTable tablealias="ViewConfiguration" tablename="ViewConfiguration">
+                    <SelectColumnList>
+                        <SelectColumn columnalias="ViewName" columnindex="0" columnname="VIEWNAME" />
+                        <SelectColumn columnalias="Title" columnindex="1" columnname="TITLE" />
+                        <SelectColumn columnalias="ViewNameNo" columnindex="2" columnname="VIEWNAME_NO" />
+                    </SelectColumnList>
+                </SelectTable>
+                <SelectTable tablealias="ACGridLayoutChildConfig" tablename="ACGridLayoutChildConfig">
+                    <SelectColumnList>
+                        <SelectColumn columnalias="ChildViewName" columnindex="3" columnname="CHILDVIEWNAME" />
+                        <SelectColumn columnalias="ChildIndex" columnindex="4" columnname="CHILDINDEX" />
+                    </SelectColumnList>
+                    <SortColumnList>
+                        <SortColumn ascending_order="true" columnname="CHILDINDEX" sortindex="0" />
+                    </SortColumnList>
+                    <JoinTable jointype="1" referencedtable="ViewConfiguration">
+                        <JoinColumnsList>
+                            <JoinColumns basetablecolumn="VIEWNAME_NO" referencedtablecolumn="CHILDVIEWNAME" />
+                        </JoinColumnsList>
+                    </JoinTable>
+                </SelectTable>
+            </SelectTableList>
+            <CriteriaList>
+                <Criteria criteriaid="Criteria:criteriaid:3" logicalrepresentation="1">
+                    <RelationalCriteriaList>
+                        <RelationalCriteria columnname="VIEWNAME" comparator="0" relationalcriteriaid="1" tablealias="ACGridLayoutChildConfig" value="${CUSTOMIZEVIEW}" />
+                    </RelationalCriteriaList>
+                </Criteria>
+            </CriteriaList>
+        </SelectQuery>
+        <CustomViewConfiguration cvid="CustomViewConfiguration:cvid:TableChildCV" cvname="TableChildCV" queryid="SelectQuery:queryid:4" />
+        <SelectQuery numofobjects="25" queryid="SelectQuery:queryid:4" startindex="1">
+            <SelectTableList>
+                <SelectTable tablealias="ViewConfiguration" tablename="ViewConfiguration">
+                    <SelectColumnList>
+                        <SelectColumn columnalias="ViewName" columnindex="0" columnname="VIEWNAME" />
+                        <SelectColumn columnalias="Title" columnindex="1" columnname="TITLE" />
+                        <SelectColumn columnalias="Description" columnindex="10" columnname="DESCRIPTION" />
+                        <SelectColumn columnalias="ViewNameNo" columnindex="11" columnname="VIEWNAME_NO" />
+                    </SelectColumnList>
+                </SelectTable>
+                <SelectTable tablealias="ACTableLayoutChildConfig" tablename="ACTableLayoutChildConfig">
+                    <SelectColumnList>
+                        <SelectColumn columnalias="ChildViewName" columnindex="2" columnname="CHILDVIEWNAME" />
+                        <SelectColumn columnalias="RowIndex" columnindex="3" columnname="ROWINDEX" />
+                        <SelectColumn columnalias="ColumnIndex" columnindex="4" columnname="COLUMNINDEX" />
+                        <SelectColumn columnalias="RowSpan" columnindex="5" columnname="ROWSPAN" />
+                        <SelectColumn columnalias="ColumnSpan" columnindex="6" columnname="COLSPAN" />
+                        <SelectColumn columnalias="Width" columnindex="7" columnname="WIDTH" />
+                        <SelectColumn columnalias="Height" columnindex="8" columnname="HEIGHT" />
+                        <SelectColumn columnalias="ShowInBox" columnindex="9" columnname="SHOWINBOX" />
+                    </SelectColumnList>
+                    <SortColumnList>
+                        <SortColumn ascending_order="true" columnname="ROWINDEX" sortindex="0" />
+                        <SortColumn ascending_order="true" columnname="COLUMNINDEX" sortindex="1" />
+                    </SortColumnList>
+                    <JoinTable jointype="1" referencedtable="ViewConfiguration">
+                        <JoinColumnsList>
+                            <JoinColumns basetablecolumn="VIEWNAME_NO" referencedtablecolumn="CHILDVIEWNAME" />
+                        </JoinColumnsList>
+                    </JoinTable>
+                </SelectTable>
+            </SelectTableList>
+            <CriteriaList>
+                <Criteria criteriaid="Criteria:criteriaid:4" logicalrepresentation="1">
+                    <RelationalCriteriaList>
+                        <RelationalCriteria columnname="VIEWNAME" comparator="0" relationalcriteriaid="1" tablealias="ACTableLayoutChildConfig" value="${CUSTOMIZEVIEW}" />
+                    </RelationalCriteriaList>
+                </Criteria>
+            </CriteriaList>
+        </SelectQuery>
+        <CustomViewConfiguration cvid="CustomViewConfiguration:cvid:PSCV" cvname="PSCV" queryid="SelectQuery:queryid:5" />
+        <SelectQuery numofobjects="125" queryid="SelectQuery:queryid:5" startindex="1">
+            <SelectTableList>
+                <SelectTable tablealias="ACPSConfiguration" tablename="ACPSConfiguration">
+                    <SelectColumnList>
+                        <SelectColumn columnalias="ConfigName" columnindex="0" columnname="CONFIGNAME" />
+                        <SelectColumn columnalias="RowIndex" columnindex="1" columnname="ROWINDEX" />
+                        <SelectColumn columnalias="ColumnIndex" columnindex="2" columnname="COLUMNINDEX" />
+                        <SelectColumn columnalias="RowSpan" columnindex="3" columnname="ROWSPAN" />
+                        <SelectColumn columnalias="ColumnSpan" columnindex="4" columnname="COLSPAN" />
+                        <SelectColumn columnalias="DataType" columnindex="5" columnname="DATATYPE" />
+                        <SelectColumn columnalias="DataValue" columnindex="6" columnname="DATAVALUE" />
+                        <SelectColumn columnalias="Width" columnindex="7" columnname="WIDTH" />
+                        <SelectColumn columnalias="Height" columnindex="8" columnname="HEIGHT" />
+                        <SelectColumn columnalias="CreatorConfig" columnindex="9" columnname="CREATORCONFIG" />
+                    </SelectColumnList>
+                    <SortColumnList>
+                        <SortColumn ascending_order="true" columnname="ROWINDEX" sortindex="0" />
+                        <SortColumn ascending_order="true" columnname="COLUMNINDEX" sortindex="1" />
+                    </SortColumnList>
+                </SelectTable>
+            </SelectTableList>
+        </SelectQuery>
+        <ACElement name="DefaultUICreator" uicreator="com.adventnet.client.components.web.DefaultUICreator" />
+        <ACColumnConfigurationList name="TableLayoutConfig">
+            <ACColumnConfiguration columnalias="ViewName" columnindex="0" displayname="View Name" visible="false" />
+            <ACColumnConfiguration columnalias="ChildViewName" columnindex="1" displayname="Child ViewName" visible="true" />
+            <ACColumnConfiguration columnalias="RowIndex" columnindex="2" displayname="Row Index" visible="false" />
+            <ACColumnConfiguration columnalias="ColumnIndex" columnindex="3" displayname="Column Index" visible="false" />
+            <ACColumnConfiguration columnalias="RowSpan" columnindex="4" displayname="Row Span" visible="false" />
+            <ACColumnConfiguration columnalias="ColumnSpan" columnindex="5" displayname="Column Span" visible="false" />
+            <ACColumnConfiguration columnalias="Width" columnindex="6" displayname="Width" visible="false" />
+            <ACColumnConfiguration columnalias="Height" columnindex="7" displayname="Height" visible="false" />
+            <ACColumnConfiguration columnalias="Title" columnindex="8" displayname="Title" visible="false" />
+            <ACColumnConfiguration columnalias="ShowInBox" columnindex="9" displayname="ShowInBox" visible="false" />
+            <ACColumnConfiguration columnalias="Description" columnindex="10" displayname="Description" visible="false" />
+        </ACColumnConfigurationList>
+        <ACColumnConfigurationList name="CustomizationConfig">
+            <ACColumnConfiguration columnalias="ChildViewName" columnindex="0" displayname="View Name" visible="false" />
+            <ACColumnConfiguration columnalias="Title" columnindex="1" displayname="Title" visible="true" />
+        </ACColumnConfigurationList>
+        <ACColumnConfigurationList name="ListViewConfig">
+            <ACColumnConfiguration columnalias="ViewName" columnindex="0" displayname=" " visible="false" />
+            <ACColumnConfiguration columnalias="GroupName" columnindex="1" displayname=" " visible="false" />
+            <ACColumnConfiguration columnalias="IconFile" columnindex="2" displayname=" " visible="false" />
+            <ACColumnConfiguration columnalias="Title" columnindex="3" displayname="Title" visible="true" />
+            <ACColumnConfiguration columnalias="Description" columnindex="4" displayname=" " visible="false" />
+        </ACColumnConfigurationList>
+        <ViewConfiguration componentname="ACListTable" title="Available View Configurations" viewname="ListViewConfigurations">
+            <ACTableViewConfig columnconfiglist="ListViewConfig" cvname="ListViewConfigurationsCV" empty_table_message="No Views Available" navigationconfig="Normal_Top_25_50" />
+        </ViewConfiguration>
+        <ViewConfiguration viewname="TabCustomization">
+            <WebViewConfig url="/components/jsp/layout/TabLayoutCustomization.jsp" viewcontroller="com.adventnet.client.components.tab.web.TabPersonalizationController" />
+            <TemplateViewParams mandatory="true" paramname="VIEWNAME" />
+            <ACTableViewConfig columnconfiglist="CustomizationConfig" cvname="TabChildCV" name="TabCustomization" />
+            <ACAjaxForm formname="TableLayoutForm" />
+            <ACAjaxForm formname="RestoreDefaultsForm" />
+        </ViewConfiguration>
+        <ViewConfiguration viewname="GridCustomization">
+            <TemplateViewParams mandatory="true" paramname="VIEWNAME" />
+            <ACTableViewConfig columnconfiglist="CustomizationConfig" cvname="GridChildCV" />
+            <WebViewConfig url="/components/jsp/layout/GridLayoutCustomization.jsp" viewcontroller="com.adventnet.client.components.layout.grid.web.GridLayoutPersController" />
+            <ACAjaxForm formname="TableLayoutForm" />
+            <ACAjaxForm formname="RestoreDefaultsForm" />
+        </ViewConfiguration>
+        <ViewConfiguration viewname="TableLayoutCustomization">
+            <WebViewConfig url="/components/jsp/layout/TableLayoutCustomization.jsp" viewcontroller="com.adventnet.client.components.table.web.TablePersonalizationRetrieverAction" />
+            <TemplateViewParams mandatory="true" paramname="VIEWNAME" />
+            <ACTableViewConfig columnconfiglist="TableLayoutConfig" cvname="TableChildCV" />
+            <ACAjaxForm formname="TableLayoutForm" />
+            <ACAjaxForm formname="RestoreDefaultsForm" />
+        </ViewConfiguration>
+ 
+         <ViewConfiguration title="Select Type" viewname="ChooserSelectType">
+            <WebViewConfig url="/components/jsp/columnchooser/chooserSelectType.jsp" />
+        </ViewConfiguration>
+        <ViewConfiguration title="Select Type" viewname="ChooserSelectTypeInline">
+            <WebViewConfig url="/components/jsp/columnchooser/chooserSelectTypeInline.jsp" />
+        </ViewConfiguration>
+        <ViewConfiguration title="List Type" viewname="ChooserListType">
+            <WebViewConfig url="/components/jsp/columnchooser/chooserListType.jsp" />
+        </ViewConfiguration>
+        <ViewConfiguration title="List Type" viewname="ChooserListTypeInline">
+            <WebViewConfig url="/components/jsp/columnchooser/chooserListTypeInline.jsp" />
+        </ViewConfiguration>
+        <ViewConfiguration title="Active Directory Configuration" viewname="ADConfiguration">
+            <WebViewConfig url="/components/jsp/ad/ADConfiguration.jsp" viewcontroller="com.adventnet.client.components.ad.web.ADConfigController" />
+            <ACAjaxForm formname="ADConfiguration" />
+        </ViewConfiguration>
+        <!-- New Addition - Start -->
+        <CustomViewConfiguration cvid="CustomViewConfiguration:cvid:MDSCV" cvname="MDSCV" queryid="SelectQuery:queryid:17">
+            <SelectQuery numofobjects="20" queryid="SelectQuery:queryid:17" startindex="1">
+                <SelectTableList>
+                    <SelectTable tablealias="SB_Applications" tablename="SB_Applications">
+                        <SelectColumnList>
+                            <SelectColumn columnalias="APPL_ID" columnindex="0" columnname="APPL_ID" />
+                            <SelectColumn columnalias="APPL_NAME" columnindex="1" columnname="APPL_NAME" />
+                        </SelectColumnList>
+                    </SelectTable>
+                    <SelectTable tablealias="DataSource" tablename="DataSource">
+                        <SelectColumnList>
+                            <SelectColumn columnalias="DSNAME" columnindex="2" columnname="DSNAME" />
+                        </SelectColumnList>
+                        <JoinTable jointype="2" referencedtable="SB_Applications">
+                            <JoinColumnsList>
+                                <JoinColumns basetablecolumn="APPL_NAME" referencedtablecolumn="DSNAME" />
+                            </JoinColumnsList>
+                        </JoinTable>
+                    </SelectTable>
+                </SelectTableList>
+            </SelectQuery>
+        </CustomViewConfiguration>
+ 
+         <ACDropDown columnforclient="APPL_NAME" columnforserver="APPL_ID" defaultvalue="All" name="ApplicationDropDown" onselectmethodname="updateApplicationID" selectedkey="APP_ID" tablename="SB_Applications" />
+        <ACDropDown columnforclient="APPL_NAME" columnforserver="APPL_ID" cvname="MDSCV" name="MDSApplicationDropDown" onselectmethodname="updateApplicationID" selectedkey="APP_ID" />
+        <ACDropDown columnforserver="MENUID" columnforclient="MENUID" tablename="Menu" name="MENUID" onselectmethodname="updateMenuForColumn" />
+        <ACDropDown columnforserver="NAME" columnforclient="NAME" tablename="ACNavigationConfiguration" name="NAVIGATIONCONFIG" onselectmethodname="updatePropsForTable" defaultvalue="---- None ----" />
+        <!-- New Addition - End -->
+        <SelectQuery numofobjects="25" queryid="SelectQuery:queryid:301" startindex="0">
+            <CustomViewConfiguration cvid="CustomViewConfiguration:cvid:ADList" cvname="ADList" />
+            <SelectTable tablealias="ActiveDirectoryInfo" tablename="ActiveDirectoryInfo">
+                <SelectColumn columnalias="AD_ID" columnindex="0" columnname="AD_ID" />
+                <SelectColumn columnalias="ActiveDirectoryInfo_SERVERNAME" columnindex="1" columnname="SERVERNAME" />
+                <SelectColumn columnalias="ActiveDirectoryInfo_DEFAULTDOMAIN" columnindex="2" columnname="DEFAULTDOMAIN" />
+                <SelectColumn columnalias="ActiveDirectoryInfo_USERNAME" columnindex="3" columnname="USERNAME" />
+                <SelectColumn columnalias="ActiveDirectoryInfo_PASSWORD" columnindex="4" columnname="PASSWORD" />
+            </SelectTable>
+        </SelectQuery>
+        <ViewConfiguration componentname="ACTable" description="ADList" title="ADList" viewname="ADList" menuid="ADConfiguration">
+            <ACTableViewConfig columnconfiglist="ADList" cvname="ADList" empty_table_message="No Records Found" enablerowselection="NONE" navigationconfig="Normal_Top_10_20" RENDERMENU="TRUE" sortcolumn="AD_ID" />
+        </ViewConfiguration>
+        <ACColumnConfigurationList name="ADList">
+            <ACColumnConfiguration columnalias="ActiveDirectoryInfo_DEFAULTDOMAIN" columnindex="1" displayname="Domain Name" isnullable="true" searchenabled="true" />
+            <ACColumnConfiguration actionname="ADDetails" columnalias="Edit" columnindex="3" displayname="Edit" isnullable="true" sortenabled="false" static_text="Edit">
+                <ACLinkParams name="AD_ID" scope="DATAMODEL" value="AD_ID" />
+            </ACColumnConfiguration>
+            <ACColumnConfiguration columnalias="ActiveDirectoryInfo_SERVERNAME" columnindex="0" displayname="AD Server" isnullable="true" searchenabled="true" />
+            <ACColumnConfiguration columnalias="ActiveDirectoryInfo_USERNAME" columnindex="2" displayname="User Name" isnullable="true" searchenabled="true" />
+            <ACColumnConfiguration columnindex="4" columnalias="Delete" displayname="Delete" sortenabled="false" actionname="ADDelete" static_text="Delete" isnullable="true">
+                <ACLinkParams name="AD_ID" value="AD_ID" scope="DATAMODEL" />
+            </ACColumnConfiguration>
+        </ACColumnConfigurationList>
+        <ViewConfiguration title="Authenticate" viewname="Authenticate">
+            <WebViewConfig url="/components/jsp/Authenticate.jsp" />
+        </ViewConfiguration>
+
+        <ViewConfiguration title="Add/Edit Filter" viewname="EmberFilterCreateForm">
+            <WebViewConfig viewcontroller="com.adventnet.client.components.filter.web.EmberFilterCreateEditController" />
+            <TemplateViewParams mandatory="true" paramname="VIEWNAME" />
+        </ViewConfiguration>
+
+        <!--ViewConfiguration imagefile="/components/images/mysql.gif" title="Database Console" viewname="DBConsoleView">
+		<WebViewConfig url="/components/jsp/tools/ExecuteQuery.jsp" viewcontroller="com.adventnet.client.components.tools.web.ExecuteQueryController"/>
+	</ViewConfiguration-->
+        <!-- Normal Navigation with range as 10,20,....-->
+        <ACNavigationConfiguration name="Normal_Top_10_20" navigationtype="NORMAL" orientation="TOP">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Normal_Bottom_10_20" navigationtype="NORMAL" orientation="BOTTOM">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Normal_Both_10_20" navigationtype="NORMAL" orientation="BOTH">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <!-- Select Navigation with range as 10,20,....-->
+        <ACNavigationConfiguration name="Select_Top_10_20" navigationtype="SELECT" orientation="TOP">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Select_Bottom_10_20" navigationtype="SELECT" orientation="BOTTOM">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Select_Both_10_20" navigationtype="SELECT" orientation="BOTH">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <!-- Normal Navigation with range as 25,50,....-->
+        <ACNavigationConfiguration name="Normal_Top_25_50_100" navigationtype="NORMAL" orientation="TOP">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="100" />
+            <ACPageLengthConfig pagelength="250" />
+            <ACPageLengthConfig pagelength="500" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Normal_Top_1000_10000" navigationtype="SELECT" orientation="TOP">
+            <ACPageLengthConfig pagelength="1000" />
+            <ACPageLengthConfig pagelength="2000" />
+            <ACPageLengthConfig pagelength="3000" />
+            <ACPageLengthConfig pagelength="4000" />
+            <ACPageLengthConfig pagelength="5000" />
+            <ACPageLengthConfig pagelength="6000" />
+            <ACPageLengthConfig pagelength="7000" />
+            <ACPageLengthConfig pagelength="8000" />
+            <ACPageLengthConfig pagelength="9000" />
+            <ACPageLengthConfig pagelength="10000" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Normal_Top_25_50" navigationtype="NORMAL" orientation="TOP">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Normal_Bottom_25_50" navigationtype="NORMAL" orientation="BOTTOM">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Normal_Both_25_50" navigationtype="NORMAL" orientation="BOTH">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <!-- Select Navigation with range as 25,50,....-->
+        <ACNavigationConfiguration name="Select_Top_25_50" navigationtype="SELECT" orientation="TOP">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Select_Bottom_25_50" navigationtype="SELECT" orientation="BOTTOM">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Select_Both_25_50" navigationtype="SELECT" orientation="BOTH">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <!-- Back Next Navigation -->
+        <ACNavigationConfiguration name="BackNext_Top" navigationtype="BACKNEXT" orientation="TOP">
+            <ACPageLengthConfig pagelength="10" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="BackNext_Bottom" navigationtype="BACKNEXT" orientation="BOTTOM">
+            <ACPageLengthConfig pagelength="10" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="BackNext_Both" navigationtype="BACKNEXT" orientation="BOTH">
+            <ACPageLengthConfig pagelength="10" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="ShowBackNext_Bottom" navigationtype="SHOWBACKNEXT" orientation="BOTTOM">
+            <ACPageLengthConfig pagelength="10" />
+        </ACNavigationConfiguration>
+        <!-- Compact Select Navigation -->
+        <ACNavigationConfiguration name="CompactSelect_Both_10_20" navigationtype="COMPACTSELECT" orientation="BOTH">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="CompactSelect_Both_25_50" navigationtype="COMPACTSELECT" orientation="BOTH">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="CompactSelect_Bottom_10_20" navigationtype="COMPACTSELECT" orientation="BOTTOM">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="CompactSelect_Bottom_25_50" navigationtype="COMPACTSELECT" orientation="BOTTOM">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="CompactSelect_Top_10_20" navigationtype="COMPACTSELECT">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="CompactSelect_Top_25_50" navigationtype="COMPACTSELECT">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <!-- START : NocountOnDemand Navigation with count on demand -->
+        <ACNavigationConfiguration name="NocountOnDemand_Top_10_20" navigationtype="NOCOUNTONDEMAND" orientation="TOP" nocount="true">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="NocountOnDemand_Bottom_10_20" navigationtype="NOCOUNTONDEMAND" orientation="BOTTOM" nocount="true">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="NocountOnDemand_Both_10_20" navigationtype="NOCOUNTONDEMAND" orientation="BOTH" nocount="true">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <!--NocountOnDemand Navigation range 25-50  -->
+        <ACNavigationConfiguration name="NocountOnDemand_Top_25_50" navigationtype="NOCOUNTONDEMAND" orientation="TOP" nocount="true">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="NocountOnDemand_Bottom_25_50" navigationtype="NOCOUNTONDEMAND" orientation="BOTTOM" nocount="true">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="NocountOnDemand_Both_25_50" navigationtype="NOCOUNTONDEMAND" orientation="BOTH" nocount="true">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="NocountOnDemand_Top_25_50_100" navigationtype="NOCOUNTONDEMAND" orientation="TOP" nocount="true">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="100" />
+            <ACPageLengthConfig pagelength="250" />
+            <ACPageLengthConfig pagelength="500" />
+        </ACNavigationConfiguration>
+        <!-- END : NocountOnDemand Navigation with count on demand -->
+        <!--Navigation without count query  -->
+        <ACNavigationConfiguration name="Nocount_Top_10_20" navigationtype="NOCOUNT" orientation="TOP" nocount="true">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Nocount_Bottom_10_20" navigationtype="NOCOUNT" orientation="BOTTOM" nocount="true">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Nocount_Both_10_20" navigationtype="NOCOUNT" orientation="BOTH" nocount="true">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <!--Nocount Navigation range 25-50  -->
+        <ACNavigationConfiguration name="Nocount_Top_25_50" navigationtype="NOCOUNT" orientation="TOP" nocount="true">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Nocount_Bottom_25_50" navigationtype="NOCOUNT" orientation="BOTTOM" nocount="true">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Nocount_Both_25_50" navigationtype="NOCOUNT" orientation="BOTH" nocount="true">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Nocount_Top_25_50_100" navigationtype="NOCOUNT" orientation="TOP" nocount="true">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="100" />
+            <ACPageLengthConfig pagelength="250" />
+            <ACPageLengthConfig pagelength="500" />
+        </ACNavigationConfiguration>
+        <!-- For side navigation -->
+        <ACNavigationConfiguration name="SlideBar" navigationtype="SLIDEBAR" orientation="TOP" />
+        <!--for scroll table-->
+        <ACNavigationConfiguration name="ScrollNavigation_Top" navigationtype="SCROLL" orientation="TOP" />
+        <ACNavigationConfiguration name="ScrollNavigation_Bottom" navigationtype="SCROLL" orientation="BOTTOM" />
+        <!-- Nocount with Normal Navigation -->
+        <ACNavigationConfiguration name="NocountNormal_Top_10_20" navigationtype="NORMAL" orientation="TOP" nocount="true">
+            <ACPageLengthConfig pagelength="10" />
+            <ACPageLengthConfig pagelength="20" />
+            <ACPageLengthConfig pagelength="30" />
+            <ACPageLengthConfig pagelength="40" />
+            <ACPageLengthConfig pagelength="50" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="NocountNormal_Top_25_50" navigationtype="NORMAL" orientation="TOP" nocount="true">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="75" />
+            <ACPageLengthConfig pagelength="100" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="Normal_Top_100_500" navigationtype="NORMAL" orientation="TOP">
+            <ACPageLengthConfig pagelength="100" />
+            <ACPageLengthConfig pagelength="200" />
+            <ACPageLengthConfig pagelength="300" />
+            <ACPageLengthConfig pagelength="400" />
+            <ACPageLengthConfig pagelength="500" />
+        </ACNavigationConfiguration>
+        <ACNavigationConfiguration name="NocountNormal_Top_25_50_100" navigationtype="NORMAL" orientation="TOP" nocount="true">
+            <ACPageLengthConfig pagelength="25" />
+            <ACPageLengthConfig pagelength="50" />
+            <ACPageLengthConfig pagelength="100" />
+            <ACPageLengthConfig pagelength="250" />
+            <ACPageLengthConfig pagelength="500" />
+        </ACNavigationConfiguration>
+    </views>

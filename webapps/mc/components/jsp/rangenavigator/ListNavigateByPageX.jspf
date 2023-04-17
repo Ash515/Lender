@@ -1,0 +1,29 @@
+<%-- $Id$ --%>
+<%@ page import = "java.util.List, com.adventnet.client.components.rangenavigator.web.NavigationConfig" %>
+<%@ page import = "com.adventnet.i18n.I18N" %>
+<%
+NavigationConfig navigationConfig = viewModel.getNavigationConfig();
+if(navigationConfig != null)
+{
+%>
+<tr>
+	<td class="navBar"> 
+		<%
+		if(navigationConfig.getPageNumber() > 1){
+		%>
+			<a href="javascript:showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>','<%out.print(navigationConfig.getPreviousPageIndex());//NO OUTPUTENCODING%>','<%out.print(navigationConfig.getPageNumber() - 1);//NO OUTPUTENCODING%>')"><%out.print(IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.prev")));//NO OUTPUTENCODING%></a><%--NO OUTPUTENCODING --%>
+		<% } else { %>
+			<%=IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.prev"))%>
+		<% } %>
+		<span class="sep">|</span>
+		<%
+		if(navigationConfig.getPageNumber() < navigationConfig.getTotalPages()){
+			%>
+			<a href="javascript:showRange('<%out.print(IAMEncoder.encodeJavaScript(uniqueId));//NO OUTPUTENCODING%>', '<%out.print(navigationConfig.getNextPageIndex());//NO OUTPUTENCODING%>','<%out.print(navigationConfig.getPageNumber() + 1);//NO OUTPUTENCODING%>')"><%out.print(IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.next")));//NO OUTPUTENCODING%></a><%--NO OUTPUTENCODING --%>
+			<% } else { %>
+			<%=IAMEncoder.encodeHTML(I18N.getMsg("mc.components.rangenavigator.next"))%>
+			<% } %>
+	</td>
+</tr>
+<% } %>
+

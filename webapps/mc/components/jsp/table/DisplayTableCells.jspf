@@ -1,0 +1,157 @@
+<%-- $Id$ --%>
+<%@page import="com.adventnet.client.util.web.WebClientUtil" %>
+<script>
+var <%="array_"+IAMEncoder.encodeJavaScript(viewContext.getUniqueId())%>=new Array();
+</script>
+<%
+
+if(isScrollEnabled){ 
+ 
+%>
+</table></td></tr><tr><td>
+<table class="tableComponent" cellspacing="0" border="0" cellpadding="0" align="center">
+<tr>
+<td>
+<div class="ScrollDiv" width="100%" id='<%=IAMEncoder.encodeHTMLAttribute(viewContext.getUniqueId())+"_scrolldiv" %>'
+<%if(isDynamicTable){%> onscroll="startFetching(100,'<%out.print(IAMEncoder.encodeJavaScript(viewContext.getUniqueId()) );//NO OUTPUTENCODING%>','<%out.print(initialFetchedRows );//NO OUTPUTENCODING%>')"<%}%>><%--NO OUTPUTENCODING --%>
+<%@ include file = "/components/jsp/table/DisplayNoRowsMessage.jspf" %>
+
+<table width="100%" class="RowTable" cellspacing="0" border="0" cellpadding="0" align="center" id="<%=IAMEncoder.encodeHTMLAttribute(uniqueId)%>_ROWSTABLE">
+
+<%} 
+int count=0;
+int rowCounter=0;
+%>
+<components:row viewContext="<%=viewContext%>" javaScriptRow = "true">
+<%
+boolean selectRow = false;
+
+if(rowtrans != null)
+{
+	selectRow = rowtrans.canSelectRow(transformerContext);
+}
+boolean onClickRowSelection=false;
+if(enableRowSelection.indexOf("ONCLICK")!=-1) 
+{
+	onClickRowSelection=true;
+}
+if(transformerContext.isEnableRowHover()){
+%>
+<tr onMouseOver="TableDOMModel.rowHover(this, true)" onMouseOut="TableDOMModel.rowHover(this,false)" 
+    rowidx="<%out.print(transformerContext.getRowIndex());//NO OUTPUTENCODING%>"  <%if(onClickRowSelection){ out.print("rowSel='"+ ((enableRowSelection.indexOf("CHECKBOX")!=-1)?"checkbox":"radio") +"'");}%> <%if(onClickRowSelection)out.print("onclick=selectRow(event,this)"); %>><%--NO OUTPUTENCODING --%>
+<%
+}
+else{
+%>
+ <tr rowidx="<%out.print(transformerContext.getRowIndex());//NO OUTPUTENCODING%>"  <%if(onClickRowSelection){ out.print("rowSel='"+ ((enableRowSelection.indexOf("CHECKBOX")!=-1)?"checkbox":"radio") +"'");}%>    <% if(selectRow)out.print("class=\"selected\"") ;%> <%if(onClickRowSelection)out.print("onclick=selectRow(event,this)"); %> ><%--NO OUTPUTENCODING --%>
+  <%
+}
+  if(!enableRowSelection.equals("NONE"))
+  {
+	  String pkcol = ((ViewModel) viewContext.getModel()).getFeatureValue("PKCOL");
+   %>
+   <td class="<%out.print(((enableRowSelection.indexOf("NONE")!=-1)?"hide":transformerContext.getColumnCSS(true)));//NO OUTPUTENCODING%>" width="2%" align="center" nowrap><input  <%if(pkcol !=null){%> pkcol="<%out.print(transformerContext.getAssociatedPropertyValue(pkcol) );//NO OUTPUTENCODING%>" <%} %>  <%--NO OUTPUTENCODING --%>
+   <% if(selectRow){out.print("checked ");
+   out.print("id='"+pkcol+"_"+transformerContext.getAssociatedPropertyValue(pkcol)+"'");//NO OUTPUTENCODING
+   } %> class="radiobutton" name="rowSelection" type="<%out.print((enableRowSelection.indexOf("RADIO")!=-1)?"RADIO":"CHECKBOX");//NO OUTPUTENCODING%>" value="<%out.print(transformerContext.getRowIndex());//NO OUTPUTENCODING%>" onclick="selectRow(event,this)"/>&nbsp;</td><%--NO OUTPUTENCODING --%>
+  
+   <%
+   if(selectRow){
+	   %>
+	   
+	   <script>
+	   window["RowSelection"] =true;
+	   <%out.print("array_"+IAMEncoder.encodeJavaScript(viewContext.getUniqueId()));//NO OUTPUTENCODING%>[<%out.print("array_"+IAMEncoder.encodeJavaScript(viewContext.getUniqueId()));//NO OUTPUTENCODING%>.length]="<%out.print(pkcol+"_"+transformerContext.getAssociatedPropertyValue(pkcol));//NO OUTPUTENCODING%>";//NO OUTPUTENCODING
+	   </script>
+	   
+	   <%
+   }
+  }
+  %>
+  <components:column viewContext="<%=viewContext%>">
+   <components:cell viewContext="<%=viewContext%>">
+    <%
+    
+    props = transformerContext.getRenderedAttributes();
+    %>
+   		 <td class="<%out.print(transformerContext.getColumnCSS(true));//NO OUTPUTENCODING%>" colidx="<%out.print(transformerContext.getViewIndexForCol());//NO OUTPUTENCODING%>" id="<%out.print(uniqueId);//NO OUTPUTENCODING%>_r_<%out.print(rowCounter);//NO OUTPUTENCODING%>_<%out.print(count);//NO OUTPUTENCODING%>" > <%--NO OUTPUTENCODING --%>
+ 		  <% 
+  		 count++;
+    %>
+    
+     <%@ include file='CellRenderer.jspf'%> 
+     </td>
+   </components:cell>
+  </components:column>
+ </tr>
+ <%
+   count=0;
+   rowCounter++;	
+ %>
+</components:row>
+
+<%
+//Code block to fill up with empty rows, if the row count got from db is less that the page length provided in configuration
+String spln = viewContext.getModel().getFeatureValue(WebClientUtil.SPANTOPAGELENGTH);
+if(spln != null && spln.equals("true"))
+{
+	long tempplen = 0;
+	NavigationConfig nc =  viewModel.getNavigationConfig();
+	if(nc != null)
+	{
+		tempplen = nc.getPageLength();	
+	}
+	else
+	{
+		tempplen = ((com.adventnet.idioms.tablenavigator.TableNavigatorModel)viewModel.getTableModel()).getPageLength();
+	}
+int tempnavplen = ((javax.swing.table.TableModel)viewModel.getTableModel()).getRowCount();
+boolean norows=false;
+if(tempplen > tempnavplen)
+{
+	tempplen = tempplen - tempnavplen;
+	if(tempnavplen==0)
+	{
+		norows=true;
+	}
+	for(int p = 0 ; p < tempplen ; p++)
+	{
+		String classN="";
+		if((tempnavplen+p)%2==1)
+		{
+			classN="oddRow";
+		}
+		else
+		{
+			classN="evenRow";
+		}
+		int counter=0;
+	%>
+	<tr>
+  <components:column>	
+  <%counter++;%>
+  </components:column>	
+  <td  class="<%out.print(classN);//NO OUTPUTENCODING%>" colspan="<%out.print(counter);//NO OUTPUTENCODING%>" ><%--NO OUTPUTENCODING --%>
+  <%if(norows && p==0)
+	  {
+	  request.setAttribute("NO_NOROW","true");
+	  %>
+		<%=IAMEncoder.encodeHTML((String)viewModel.getTableViewConfigRow().get("EMPTY_TABLE_MESSAGE"))%>
+		<%
+	  }
+  else{%>
+  &nbsp;  <%}%></td>
+	</tr>
+	<%
+	}
+}
+}
+//end of SPANTOPAGELENGTH code block
+%>
+
+<%if(isScrollEnabled)
+{
+	%></table></div></td></tr></table></td></tr><%
+}
+%>
+

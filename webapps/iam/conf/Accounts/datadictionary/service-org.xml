@@ -1,0 +1,1278 @@
+<?xml version="1.0"?>
+<!-- $Id: $ -->
+<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd">
+<data-dictionary name="Accounts">
+	<table name="IAMServiceOrgType" display-name="ServiceOrgType">
+		<columns>
+			<column name="SERVICE_ORG_TYPE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>IAMServiceOrgType.SERVICE_ORG_TYPE_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="SERVICE_NAME">
+				<description>Name of the Service Type which will be used just for the reference (ex: CRM, ContactManager, Support, etc.) </description>
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="ORG_TYPE">
+				<description>Type of the SOID. The type is differentiated per service</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+		</columns>
+		<primary-key name="IAMServiceOrgType_PK">
+			<primary-key-column>SERVICE_ORG_TYPE_AUTO_ID</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="IAMServiceOrgType_UK1">
+				<unique-key-column>ORG_TYPE</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	
+	<table name="IAMServiceOrgDomain" display-name="ServiceOrgDomain">
+		<columns>
+			<column name="SERVICE_ORG_TYPE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ZSOID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DOMAIN">
+				<description>Portal / Domain Name of the Service Org</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&accountname;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IS_PRIMARY">
+				<description>Make this Domain as Default Domain for the Service Org</description>
+				<data-type>BOOLEAN</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMServiceOrgDomain_PK">
+			<primary-key-column>SERVICE_ORG_TYPE_AUTO_ID</primary-key-column>
+			<primary-key-column>DOMAIN</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMServiceOrgDomain_FK1" reference-table-name="IAMServiceOrgType">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ORG_TYPE_AUTO_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ORG_TYPE_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<indexes>
+            <index name="IAMServiceOrgDomain_ZSOIDndx">
+                <index-column>ZSOID</index-column>
+            </index>
+        </indexes>
+	</table>
+
+	<table name="IAMServiceOrg" display-name="ServiceOrg">
+		<columns>
+			<column name="SERVICE_ORG_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>IAMServiceOrg.SERVICE_ORG_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="SERVICE_ORG_TYPE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ZSOID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ORG_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DESCRIPTION">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+			<column name="IS_ENABLED">
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+			</column>
+			<column name="CREATED_BY">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>-1</default-value>
+				<allowed-values>
+					<pattern>&createdby;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MIGRATED_TO_ORG">
+				<data-type>BOOLEAN</data-type>
+			</column>
+			<column name="PARENT_ZAAID">
+				<description>ZAAID / ZSOID of Parent Account. `MIGRATED_TO_ORG` will be changed to `true` if parent account is AppAccount type.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DIRECTORY_ZAAID">
+				<description>ZAAID of Directory Account. `MIGRATED_TO_ORG` will be changed to `true`.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IS_EXPOSED">
+				<description>1 - External, 2 - Internal</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="PARENT_ORG_TYPE">
+				<description>Type of the SOID / AppAccount. Value `16` represents AppAccount or org type of respective SOID services.</description>
+				<data-type>INTEGER</data-type>
+			</column>
+			<column name="ENVIRONMENT">
+				<description>1 - Production, 2 - Sandbox, 3- Development</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMServiceOrg_PK">
+			<primary-key-column>SERVICE_ORG_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMServiceOrg_FK1" reference-table-name="IAMServiceOrgType">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ORG_TYPE_AUTO_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ORG_TYPE_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMServiceOrg_UK1">
+				<unique-key-column>ZSOID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	
+	<table name="IAMServiceOrgSubService" display-name="ServiceOrgSubService">
+        <description>This will conatin Zoho App for which the members are belongs. </description>
+        <columns>
+            <column name="SERVICE_ORG_SUB_SERV_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMServiceOrgSubService.SERVICE_ORG_SUB_SERV_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="SERVICE_ORG_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="SUB_ORG_TYPE">
+				<description>Sub type of the SOID. The type is differentiated per service and will contain sub service's org type</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+			</column>
+            <column name="ZUID">
+                <description>The creator of this account</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="DESCRIPTION">
+                <description>A short description about this account. Used for display purpose</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="ACCOUNT_STATUS">
+                <description>Current status of the account Active - 1, Inactive - 0, Closed - 2</description>
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+            </column>
+            <column name="MIGRATED_TO_ORG">
+				<data-type>BOOLEAN</data-type>
+			</column>
+			<column name="PARENT_ZAAID">
+				<description>ZAAID / ZSOID of Parent Account. `MIGRATED_TO_ORG` will be changed to `true` if parent account is AppAccount type.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DIRECTORY_ZAAID">
+				<description>ZAAID of Directory Account. `MIGRATED_TO_ORG` will be changed to `true`.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IS_EXPOSED">
+				<description>1 - External, 2 - Internal</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="PARENT_ORG_TYPE">
+				<description>Type of the SOID / AppAccount. Value `16` represents AppAccount or org type of respective SOID services.</description>
+				<data-type>INTEGER</data-type>
+			</column>
+			<column name="ENVIRONMENT">
+				<description>1 - Production, 2 - Sandbox, 3- Development</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMSunSorSer_PK">
+        	<primary-key-column>SERVICE_ORG_SUB_SERV_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMSunSorSer_FK1" reference-table-name="IAMServiceOrg" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>SERVICE_ORG_AUTO_ID</fk-local-column>
+                        <fk-reference-column>SERVICE_ORG_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMSunSorSer_UK2">
+                <unique-key-column>SERVICE_ORG_AUTO_ID</unique-key-column>
+                <unique-key-column>SUB_ORG_TYPE</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMSunSorSer_SOTidx">
+                <index-column>SUB_ORG_TYPE</index-column>
+            </index>
+        </indexes>
+    </table>
+    
+    <table name="IAMServiceOrgOAuthAccessGrant" display-name="ServiceOrgOAuthAccessGrant">
+        <description>SO Admin granting access to third party apps to use an OrgOAuthToken on behalf of him/her serviceorg</description>
+        <columns>
+			<column name="SERVICE_ORG_SUB_SERV_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ACCESS_GRANT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMServiceOrgOAuthAccessGrant.ACCESS_GRANT_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="CLIENT_ZID">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&clientzid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IP_ADDRESS">
+                <description>The IP Address of the user at the time of this access grant.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_AGENT">
+                <description>Using which browser or device the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:throwerror</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <description>The time at which the grant is given</description>
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMServiceOrgOAuthAccessGrant_PK">
+            <primary-key-column>ACCESS_GRANT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMServiceOrgOAuthAccessGrant_FK1" reference-table-name="IAMServiceOrgSubService" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>SERVICE_ORG_SUB_SERV_AUTO_ID</fk-local-column>
+                        <fk-reference-column>SERVICE_ORG_SUB_SERV_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMServiceOrgOAuthAccessGrant_UK1">
+                <unique-key-column>SERVICE_ORG_SUB_SERV_AUTO_ID</unique-key-column>
+                <unique-key-column>CLIENT_ZID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+    
+    <table name="IAMSOOAuthAccessGrantScopes" display-name="SOOAuthAccessGrantScopes">
+		<description> This table will contain default/allowed scopes for the particular serviceorg.
+		</description>
+		<columns>
+			<column name="ACCESS_GRANT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SCOPE_ID">
+				<description>
+					ID of the scope required. Will have from App.SCOPE_ID
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ALLOWED_OPERATIONS">
+                <data-type>INTEGER</data-type>
+            </column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMSOOAuthAccessGrantScopes_PK">
+			<primary-key-column>ACCESS_GRANT_AUTO_ID</primary-key-column>
+			<primary-key-column>SCOPE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMSOOAuthAccessGrantScopes_FK" reference-table-name="IAMServiceOrgOAuthAccessGrant">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>ACCESS_GRANT_AUTO_ID</fk-local-column>
+						<fk-reference-column>ACCESS_GRANT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	
+	<table name="IAMServiceOrgMember" display-name="ServiceOrgMember">
+		<description>Members belong to a Service Org</description>
+		<columns>
+			<column name="SERVICE_ORG_MEMBER_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+                    <generator-name>IAMServiceOrgMember.SERVICE_ORG_MEMBER_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+			</column>
+			<column name="SERVICE_ORG_SUB_SERV_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<default-value>-1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="ZUID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IS_ACTIVE">
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+			</column>
+			<column name="USER_ROLE">
+				<description>0 - Normal User, 1 - Moderator, 2 - Admin</description>
+				<data-type>INTEGER</data-type>
+				<max-size>2</max-size>
+				<default-value>0</default-value>
+			</column>
+			<column name="USER_TYPE">
+				<description>1 - Normal, 2 - Free User</description>
+				<data-type>INTEGER</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMServiceOrgMember_PK">
+			<primary-key-column>SERVICE_ORG_MEMBER_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMServiceOrgMember_FK2" reference-table-name="IAMServiceOrgSubService">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ORG_SUB_SERV_AUTO_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ORG_SUB_SERV_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+            <unique-key name="IAMServiceOrgMember_UK">
+                <unique-key-column>SERVICE_ORG_SUB_SERV_AUTO_ID</unique-key-column>
+                <unique-key-column>ZUID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+		<indexes>
+            <index name="IAMServiceOrgMember_ZUIDndx">
+                <index-column>ZUID</index-column>
+            </index>
+            <index name="IAMServiceOrgMember_SERVICE_ORG_MEMBER_AUTO_IDndx">
+                <index-column>SERVICE_ORG_MEMBER_AUTO_ID</index-column>
+            </index>
+        </indexes>
+	</table>
+	
+	<table name="IAMServiceOrgMemberRole" display-name="ServiceOrgMemberRole">
+	<description>Service org members role</description>
+	<columns>
+		<column name="SERVICE_ORG_MEMBER_AUTO_ID">
+			<data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="ZARID">
+                <description>Service Org Member roles</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+    	</columns>
+    	<primary-key name="IAMServiceOrgMemberRole_PK">
+            <primary-key-column>SERVICE_ORG_MEMBER_AUTO_ID</primary-key-column>
+            <primary-key-column>ZARID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMServiceOrgMemberRole_FK1" reference-table-name="IAMServiceOrgMember">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>SERVICE_ORG_MEMBER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>SERVICE_ORG_MEMBER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+	<table name="IAMServiceOrgProperties" display-name="ServiceOrgProperties">
+		<description>Properties for a Service Org. </description>
+		<columns>
+			<column name="SERVICE_ORG_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="PROP_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&config-name;</pattern>
+				</allowed-values>
+			</column>
+			<column name="PROP_VALUE">
+				<data-type>CHAR</data-type>
+				<max-size>256</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMServiceOrgProperties_PK">
+			<primary-key-column>SERVICE_ORG_AUTO_ID</primary-key-column>
+			<primary-key-column>PROP_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMServiceOrgProperties_FK1" reference-table-name="IAMServiceOrg">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ORG_AUTO_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ORG_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="IAMServiceOrgZAID" display-name="ServiceOrgZAID">
+		<columns>
+			<column name="SERVICE_ORG_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="SERVICE_ORG_TYPE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ZAID">
+				<description>The Account ID which are mapped to the Service Org. Ex: ZAID of the Client Portal Account. </description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMServiceOrgZAID_PK">
+			<primary-key-column>SERVICE_ORG_AUTO_ID</primary-key-column>
+			<primary-key-column>ZAID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMServiceOrgZAID_FK1" reference-table-name="IAMServiceOrg">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ORG_AUTO_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ORG_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key name="IAMServiceOrgZAID_FK2" reference-table-name="IAMServiceOrgType">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ORG_TYPE_AUTO_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ORG_TYPE_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMServiceOrgZAID_UK">
+				<unique-key-column>SERVICE_ORG_TYPE_AUTO_ID</unique-key-column>
+				<unique-key-column>ZAID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	
+	<table name="IAMServiceOrgAccountMapping" display-name="ServiceOrgAccountMapping">
+		<description>Service team what to store some unique data such Facebook App Id(LiveDesk), Twitter Profile ID(Support), etc associated with a ServiceOrg. Those data has to be unique and they should able to identify ZSOID based on that property</description>
+		<columns>
+			<column name="SERVICE_ORG_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ACCOUNT_ID">
+				<description>Unique Identifier</description>
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ACCOUNT_TYPE">
+				<description>Constants defined by Service to identify the Account.</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ACCOUNT_NAME">
+				<description>Uniuqe Account Name such as Facebook App Id, Twitter Profile ID, etc.</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&config-name;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMSOrgAccountMapping_PK">
+			<primary-key-column>SERVICE_ORG_AUTO_ID</primary-key-column>
+			<primary-key-column>ACCOUNT_TYPE</primary-key-column>
+			<primary-key-column>ACCOUNT_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMSOrgAccountMapping_FK" reference-table-name="IAMServiceOrg">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ORG_AUTO_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ORG_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMSOrgAccountMapping_UK">
+				<unique-key-column>ACCOUNT_ID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="IAMServiceOrgAddress" display-name="ServiceOrgAddress">
+		<description>The address of the ServiceOrg.</description>
+		<columns>
+			<column name="SERVICE_ORG_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ADDRESS_TYPE">
+				<description>1 - Work (2^0), 2 - Residential current(2^1), 4 - Residential permanent(2^2), 8 - KYC Address(2^3)</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="NAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="POST_BOX">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="STREET_ADDRESS">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="CITY">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="STATE">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="COUNTRY">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&country-code;</pattern>
+				</allowed-values>
+			</column>
+			<column name="POSTAL_CODE">
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="LATITUDE">
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<allowed-values>
+					<pattern>&float;</pattern>
+				</allowed-values>
+			</column>
+			<column name="LONGITUDE">
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<allowed-values>
+					<pattern>&float;</pattern>
+				</allowed-values>
+			</column>
+			<column name="PHONE">
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="EXTENSION">
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="MOBILE">
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="FAX">
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="TIMEZONE">
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="LANGUAGE">
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<allowed-values>
+					<pattern>&language-code;</pattern>
+				</allowed-values>
+			</column>
+			<column name="WEBSITE_URL">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&non-strict-url;</pattern>
+				</allowed-values>
+			</column>
+			<column name="BLOG_URL">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&non-strict-url;</pattern>
+				</allowed-values>
+			</column>
+			<column name="TWITTER_URL">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&non-strict-url;</pattern>
+				</allowed-values>
+			</column>
+			<column name="LINKEDIN_URL">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&non-strict-url;</pattern>
+				</allowed-values>
+			</column>
+			<column name="FLICKR_URL">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&non-strict-url;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DELICIOUS_URL">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&non-strict-url;</pattern>
+				</allowed-values>
+			</column>
+			<column name="AMAZON_URL">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&non-strict-url;</pattern>
+				</allowed-values>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMServiceOrgAddress_PK">
+			<primary-key-column>SERVICE_ORG_AUTO_ID</primary-key-column>
+			<primary-key-column>ADDRESS_TYPE</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMServiceOrgAddress_FK1" reference-table-name="IAMServiceOrg">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ORG_AUTO_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ORG_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	
+	<table name="IAMServiceOrgKYC" display-name="ServiceOrgKYC">
+		<description>The KYC deatils for the serviceorg</description>
+		<columns>
+			<column name="SERVICE_ORG_KYC_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>IAMServiceOrgKYC.SERVICE_ORG_KYC_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="SERVICE_ORG_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="ZUID">
+				<description>The zuid of the serviceorg admin</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="EMPLOYEE_COUNT">
+				<description>The employess count of the organisation</description>
+				<data-type>INTEGER</data-type>
+				<default-value>-1</default-value>
+			</column>
+			<column name="ORGANISATION_NAME">
+				<description>Name of the Organisation</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="INDUSTRY">
+				<description>The type of industory/sector</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="ORG_CONTACT_EMAILID">
+				<description>The Email id of the org contact</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&email;</pattern>
+				</allowed-values>
+			</column>
+			<column name="FIRST_NAME">
+				<description>The First Name of the org contact</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="LAST_NAME">
+				<description>The Last Name of the org contact</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>			
+			<column name="MOBILE_NUMBER">
+				<description>The Mobile Number of the org contact</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="DESIGNATION">
+				<description>The Designation of the org contact</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+		</columns>
+		<primary-key name="IAMServiceOrgKYC_PK">
+			<primary-key-column>SERVICE_ORG_KYC_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMServiceOrgKYC_FK1" reference-table-name="IAMServiceOrg">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ORG_AUTO_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ORG_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMServiceOrgKYC_UK1">
+				<unique-key-column>SERVICE_ORG_AUTO_ID</unique-key-column>
+				<unique-key-column>ZUID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	
+	<table name="IAMServiceOrgKYCContact" display-name="ServiceOrgKYCContact">
+		<description>The contact information of the serviceorg admin</description>
+		<columns>
+			<column name="SERVICE_ORG_KYC_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="EMAIL_ID">
+				<description>The EMAIl ID of the contact person</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&email;</pattern>
+                </allowed-values>
+            </column>
+			<column name="FIRST_NAME">
+				<description>The First Name of the contact person</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="LAST_NAME">
+				<description>The Last Name of the contact person</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="DATA_PROTECTION_OFFICER">
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="PRIVACY_REPRESENTATIVE">
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="ACCOUNT_DISPUTE_RESOLUTION">
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+            <column name="BREACH_NOTIFICATION">
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+             <column name="SUBPROCESSOR_NOTIFICATION">
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+		</columns>
+		<primary-key name="IAMServiceOrgKYCContact_PK">
+			<primary-key-column>SERVICE_ORG_KYC_AUTO_ID</primary-key-column>
+			<primary-key-column>EMAIL_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMServiceOrgKYCContact_FK1" reference-table-name="IAMServiceOrgKYC">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ORG_KYC_AUTO_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ORG_KYC_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="IAMServiceOrgInvitation" display-name="ServiceOrgInvitation">
+		<description>Member Invitation</description>
+		<columns>
+			<column name="SERVICE_ORG_SUB_SERV_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<default-value>-1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="SERVICE_ORG_INVITATION_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMServiceOrgInvitation.SERVICE_ORG_INVITATION_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+			<column name="EMAIL_ID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="STATUS">
+				<description>0 - PENDING, 1 - Accepted, 2 - REJECTED</description>
+				<data-type>INTEGER</data-type>
+				<max-size>2</max-size>
+				<default-value>0</default-value>
+			</column>
+			<column name="USER_ROLE">
+				<description>0 - Normal User, 1 - Moderator, 2 - Admin</description>
+				<data-type>INTEGER</data-type>
+				<max-size>2</max-size>
+				<default-value>0</default-value>
+			</column>
+			<column name="USER_TYPE">
+				<description>1 - Normal, 2 - Free User</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="SEND_MAIL">
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+			</column>
+			<column name="RESEND_LIMIT">
+				<description>Restriction Limit for resending account invitation</description>
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+			</column>
+			<column name="ACCEPT_URL">
+				<description>Url to be redirected on accept</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<allowed-values>
+					<pattern>&url;</pattern>
+				</allowed-values>
+			</column>
+			<column name="REJECT_URL">
+				<description>Url to be redirected on reject</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<allowed-values>
+					<pattern>&url;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IP_ADDRESS">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<allowed-values>
+					<pattern>&ipaddress;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IDP">
+				<description>Used to invoke directly to idp openid not to accounts register page.</description>
+				<data-type>INTEGER</data-type>
+				<max-size>2</max-size>
+				<default-value>0</default-value>
+			</column>
+			<column name="ARGS_DATA">
+				<description>Other data used in digest is stored as JSON object.</description>
+				<data-type>CHAR</data-type>
+				<max-size>500</max-size>
+			</column>
+			<column name="INVITED_BY">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="FIRST_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="LAST_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>xss:throwerror</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMServiceOrgInvitation_PK1">
+			<primary-key-column>SERVICE_ORG_INVITATION_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMServiceOrgInvitation_FK1" reference-table-name="IAMServiceOrgSubService">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ORG_SUB_SERV_AUTO_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ORG_SUB_SERV_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMServiceOrgInvitation_UK1">
+				<unique-key-column>SERVICE_ORG_SUB_SERV_AUTO_ID</unique-key-column>
+				<unique-key-column>EMAIL_ID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+		<indexes>
+			<index name="IAMServiceOrgInvitation_EMLndx">
+				<index-column>EMAIL_ID</index-column>
+			</index>
+		</indexes>
+	</table>
+
+	<table name="IAMInvitedOrgDetails" display-name="InvitedOrgDetails">
+		<description>Auditing invited users</description>
+		<columns>
+			<column name="SERVICE_ORG_TYPE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="INVITED_USER_AUTOID">
+				<description>Unique Identifier of this announcement audit record</description>
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMInvitedOrgDetails.INVITED_USER_AUTOID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="EMAIL_ID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&email;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ORG_ID">
+				<description>Invited org id(ZSOID or ZAAID)</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ORG_TYPE">
+				<description>The type is differentiated per service for sub service
+					case</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="STATUS">
+				<description>0 - Inactive, 1 - Active</description>
+				<data-type>TINYINT</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="ARGS_DATA">
+				<description>Other data used in digest is stored as JSON object.</description>
+				<data-type>CHAR</data-type>
+				<max-size>500</max-size>
+			</column>
+			<column name="INVITATION_TIME">
+				<description>User invitation time</description>
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMInvitedOrgDetails_PK">
+			<primary-key-column>EMAIL_ID</primary-key-column>
+			<primary-key-column>ORG_ID</primary-key-column>
+			<primary-key-column>ORG_TYPE</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMInvitedOrgDetails_FK1" reference-table-name="IAMServiceOrgType">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>SERVICE_ORG_TYPE_AUTO_ID</fk-local-column>
+						<fk-reference-column>SERVICE_ORG_TYPE_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMInvitedOrgDetails_UK1">
+				<unique-key-column>INVITED_USER_AUTOID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+		<indexes>
+			<index name="IAMInvitedOrgDetails_EMAILIDndx">
+				<index-column>SERVICE_ORG_TYPE_AUTO_ID</index-column>
+				<index-column>EMAIL_ID</index-column>
+			</index>
+			<index name="IAMInvitedOrgDetails_ZSOIDndx">
+				<index-column>SERVICE_ORG_TYPE_AUTO_ID</index-column>
+				<index-column>ORG_ID</index-column>
+			</index>
+		</indexes>
+	</table>
+
+</data-dictionary>

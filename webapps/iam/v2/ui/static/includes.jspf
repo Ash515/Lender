@@ -1,0 +1,38 @@
+<%-- $Id$ --%>
+<%@page import="com.zoho.accounts.webclient.util.WebClientUtil"%>
+<%@page import="com.adventnet.iam.IdentityProvider"%>
+<%@page import="com.adventnet.iam.Service"%>
+<%@page import="com.adventnet.iam.IAMProxy"%>
+<%@page import="com.adventnet.iam.security.SecurityUtil"%>
+<%@page import="com.adventnet.iam.IAMUtil"%>
+<%@page import="com.adventnet.iam.User"%>
+<%@page import="com.adventnet.iam.VO"%>
+<%@page import="com.adventnet.iam.internal.PartnerAccountUtil"%>
+<%@page import="com.adventnet.iam.PartnerAccount"%>
+<%@page import="com.zoho.accounts.AccountsConfiguration"%>
+<%@ page import="com.adventnet.iam.internal.Util" %>
+<%@ page import="com.adventnet.iam.xss.IAMEncoder"%>
+
+<%!
+public String getHTML(String value) {
+    if(value!=null && !value.trim().equals("")){
+	value = value.replaceAll("\n", "&lt;br&gt;"); // No I18N
+	value = value.replaceAll("\"","&quot;"); //No I18N
+    	value = value.replaceAll("\'", "&#39;");
+	value = value.replaceAll("<","&lt;");
+    	value = value.replaceAll(">","&gt;");
+    }
+    return value;
+}
+%>
+<%
+	boolean isStatic = "true".equals(AccountsConfiguration.getConfiguration("iam.static.newui", "false"));
+    String cPath = request.getContextPath();
+    String cssurl = isStatic ? WebClientUtil.getCSSURL(request) : cPath+"/v2/components/css"; //No I18N
+    String jsurl = isStatic ? WebClientUtil.getJSURL(request) : cPath+"/v2/components/js"; //No I18N
+    String imgurl = isStatic ? WebClientUtil.getIMGURL(request) : cPath+"/v2/components/images"; //No I18N
+    String tpkgurl = isStatic ? WebClientUtil.getTPJSURL(request) : cPath+"/v2/components/tp_pkg"; //No I18N
+    String wmsjsurl = isStatic ? WebClientUtil.getWMSJSURL(request) : "/wms/javascript"; //No I18N
+    response.setHeader("Pragma", "no-cache"); // No I18N
+   	response.setHeader("Cache-Control", "no-store, no-cache"); // No I18N
+%>

@@ -1,0 +1,18 @@
+<!--$Id$-->
+
+<!-- Things within tag with id TableStatus will be hidden while ajax update.
+	 Things within tag with id AjaxUpdateStatus will be shown while ajax update.
+	 Tag with id totalRows will be updated with total rows.
+ 	 Tag with id fetchedRows will be updated with fetched rows.
+	-->
+<table cellspacing="0" cellpadding="0" class="dynamicTableStatus" align="center">
+<tr style="height:18px;">
+<td class="navigatorLinksColumn" width="75%"nowrap=""> 
+&nbsp;
+</td>
+<td style="display:block;align:right;text-align:right;" id="tableStatus" class="status" width="25%" nowrap="">Showing&nbsp;<span id="fetchedRows"></span>&nbsp;rows of&nbsp;<span id="totalRows"></span>.</td>
+
+<td style="display:none;align:right;text-align:right;" id="ajaxUpdateStatus" class="status" width="25%"  nowrap=""><img src="themes/wifi/images/process.gif"></img>&nbsp;Fetching more rows...</td>
+</tr>
+</table>
+

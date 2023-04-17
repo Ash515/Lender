@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+W3C rules retrieved from:
+http://www.w3.org/TR/html401/struct/global.html
+Zoho Enhancements : 
+		* This policy file contains,
+				- Tags and attributes of HTML4 and HTML5, properties and selectors of CSS2 and CSS3 and it's relevant configuration. For safe HTML5 tags and attributes please refer -> https://intranet.wiki.zoho.com/security/HTML5-Supports-In-Antisamy-Policy-File.html
+				- Integrated all configuration from 'antisamy-myspace-1.4.4.xml'
+		* If teams need to extend antisamy policy file please refer -> https://intranet.wiki.zoho.com/security/How-to-extend-antisamy-policy-file.html     
+-->
+<anti-samy-rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="antisamy.xsd">
+	<include href="antisamy-common-rules.xml" />
+	<include href="antisamy-css2-policy.xml" />
+	<include href="antisamy-css3-policy.xml" />
+	<include href="antisamy-html4-policy.xml" />
+	<include href="antisamy-html5-policy.xml" />
+</anti-samy-rules>

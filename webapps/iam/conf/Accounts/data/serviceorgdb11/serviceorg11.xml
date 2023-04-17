@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="cidesorgzaid" account_name="Zoho CIDE Service Org">
+		<IAMAccountDomain domain="cidesorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="signsorgzaid" account_name="Zoho SIGN Service Org">
+		<IAMAccountDomain domain="signsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="creatorsorgzaid" account_name="Zoho Creator Service Org">
+		<IAMAccountDomain domain="creatorsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="repositorysorgzaid" account_name="Zoho Repository Service Org">
+		<IAMAccountDomain domain="repositorysorgzaid" />
+	</IAMAccount>
+</IAMAccounts>

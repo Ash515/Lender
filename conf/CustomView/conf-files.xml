@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<conf-files>
+    <!--ConfFile url="conf/cis.xml" handlerclass="com.adventnet.persistence.xml.DataAccessPopulationHandler" /-->
+    <ConfFile url="customview-service-providers.xml" />
+    <ConfFile url="bean.xml" />
+</conf-files>

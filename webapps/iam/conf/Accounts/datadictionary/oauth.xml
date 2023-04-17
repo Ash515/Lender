@@ -1,0 +1,2277 @@
+<?xml version="1.0"?>
+<!-- $Id $ -->
+<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd">
+<!--<!DOCTYPE data-dictionary PUBLIC "-//ZOHO Corp.//DTD Data Dictionary 
+	1.0//EN" "http://cm/cgi-bin2/cvsweb.cgi/~checkout~/internal_packages/mickeylite/dd2html/data-dictionary.dtd"> -->
+<data-dictionary name="Accounts">
+
+	<table name="IAMOAuthAppGroup" display-name="OAuthAppGroup">
+		<description>
+			The Segrigate space for OAuth users.  
+		</description>
+		<columns>
+			<column name="OAUTH_APP_GROUP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthAppGroup.OAUTH_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="OAUTH_APP_GROUP_ID">
+				<description>
+					ID of the third party Space created
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="OAUTH_APP_GROUP_NAME">
+				<description>
+					Name of the third party Space created
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DESCRIPTION">
+                <description>A short description about this Oauth type.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthAppGrp_PK">
+			<primary-key-column>OAUTH_APP_GROUP_AUTO_ID</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="IAMOAuthAppGrp_UK">
+				<unique-key-column>OAUTH_APP_GROUP_ID</unique-key-column>
+			</unique-key>
+			<unique-key name="IAMOAuthAppGrp_UK2">
+				<unique-key-column>OAUTH_APP_GROUP_NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	<table name="IAMOAuthClient" display-name="OAuthClient">
+		<description>
+			The list of OAuth clients registerd to Zoho
+		</description>
+		<columns>
+			<column name="OAUTH_CLIENT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthClient.OAUTH_CLIENT_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="OAUTH_APP_GROUP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CLIENT_NAME">
+				<description>
+					Name of the third party client or Zoho Service
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CLIENT_ID">
+				<description>
+					An unique ID for the client genrated by Zoho. This will
+					be exposed to the client.
+					The clinet communicates with Zoho using
+					this ID. This ID can be exposed by the clinet. This is not a secret
+					value
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CLIENT_SECRET">
+				<description>
+					This is the client secret. The value of this should be kept secret by the client. This will be used on token exchange on web-server profile.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&digest;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CLIENT_ZID">
+				<description>
+					This is for internal purpose. The AccessGrant table in "Account" space will have a mapping of this CLIENT_ZID. We cannot put CLIENT_ID or AUTO_ID as they may be changeable
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&clientzid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CLIENT_DOMAIN">
+				<description>
+					Domain used by the client. The token will be sent only to the registered domain. It can be a regular expression for ZohoService.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<allowed-values>
+					<pattern>&domain;</pattern>
+				</allowed-values>
+			</column><!-- <column name="CLIENT_URI"> <description> The default redirect 
+				URI of the client. If the domain is not specified the oAuth redirect_uri 
+				param will be verified with the CLIENT_URI </description> <data-type>CHAR</data-type> 
+				<max-size>200</max-size> <allowed-values> <pattern>&url;</pattern> </allowed-values> 
+				</column> -->
+			<column name="ZID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ZID_TYPE">
+				<description>1- User , 2- appaccount , 3 - serviceOrg</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="STATUS">
+				<description>
+					The status of the client. Can be 1 - Enabled, 0 - Disabled
+				</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="CLIENT_TYPE">
+				<description>1- External User , 2- SSO Mobile App , 3 - Mobile App, 4- Internal Org App</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="IS_RESTRICTED">
+				<description>0-normal client, 1-org client  2-restricted org client </description>
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+			</column>
+			<column name="HOME_PAGE_URL">
+				<description>
+					HomePageURl used by the client
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<allowed-values>
+					<pattern>&domain;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_BY">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DESCRIPTION">
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>			
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="PRIMARY_DC">
+				<description>Comma seperated dc like us,eu like</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="LAST_PRIMARY_SYNC_TIME">
+				<description>Last time at which the data is synced from primary DC. This is to avoid any sync missmatch sue to communication error.</description>
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthClient_PK">
+			<primary-key-column>OAUTH_CLIENT_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthAppGrp_FK" reference-table-name="IAMOAuthAppGroup">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_APP_GROUP_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_APP_GROUP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMOAuthClient_UK">
+				<unique-key-column>CLIENT_ID</unique-key-column>
+			</unique-key>
+			<unique-key name="IAMOAuthClient_UK2">
+				<unique-key-column>CLIENT_ZID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	<table name="IAMAuthtoOAuth" display-name="AuthtoOAuth">
+		<description> This table will contain authscopes to oauthscopes mapping for external client.
+		</description>
+		<columns>
+			<column name="CLIENT_ID">
+				<description>
+					An unique ID for the client genrated by Zoho. This will
+					be exposed to the client.
+					The clinet communicates with Zoho using
+					this ID. This ID can be exposed by the clinet. This is not a secret
+					value
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="AUTHTOKENSCOPES">
+				<description>
+					comma separated Authtoken scopes
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>1000</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="OAUTHTOKENSCOPES">
+                <description>
+					comma separated OAuthtoken scopes
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>1000</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+            </column>
+            <column name="CLIENT_STATUS">
+				<description>
+					Client status - blocked/allowed , blocked - 0, allowed - 1
+				</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>			
+			<column name="EXPIRY_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="TOKEN_EXPIRY_TIME">
+			    <description>
+					ISC/AUTHTOKEN EXPIRY TIME IN NUMBER OF DAYS - allowed range 1 to 7
+				</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+		</columns>
+		<primary-key name="IAMAuthtoOAuth_PK">
+			<primary-key-column>CLIENT_ID</primary-key-column>
+		</primary-key>		
+	</table>
+	
+	<table name="IAMAuthTokenDeletion" display-name="AuthTokenDeletion">
+		<description>  Once auth to oauth mapping is done this table will contain authtoken and its expired value.
+		</description>
+		<columns>
+			 <column name="ISC_TICKET">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&iamticket;</pattern>
+                </allowed-values>
+            </column>
+			<column name="EXPIRY_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMAuthTokenDeletion_PK">
+            <primary-key-column>ISC_TICKET</primary-key-column>
+        </primary-key>
+	</table>
+	
+	<table name="IAMOAuthClientScopes" display-name="OAuthClientScopes">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_CLIENT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SCOPE_ID">
+				<description>
+					ID of the scope required. Will have from App.SCOPE_ID
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ALLOWED_OPERATIONS">
+                <data-type>INTEGER</data-type>
+            </column>
+            <column name="SCOPE_TYPE">
+           		 <description>
+					User for identifing the group scope. 1 - service scope. 2 - Group scope   
+				</description>
+                <data-type>INTEGER</data-type>
+            </column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthClientScopes_PK">
+			<primary-key-column>OAUTH_CLIENT_AUTO_ID</primary-key-column>
+			<primary-key-column>SCOPE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthClientScopes_FK" reference-table-name="IAMOAuthClient">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_CLIENT_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_CLIENT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	<table name="IAMOAuthOpenId" display-name="OAuthOpenId">
+		<description> OAuth Open Id for email scope
+		</description>
+		<columns>
+			<column name="OAUTH_CLIENT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="OPEN_ID">
+				<description>
+				Unique ID for User for Client
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+           <column name="ZID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthOpenId_PK">
+			<primary-key-column>OAUTH_CLIENT_AUTO_ID</primary-key-column>
+			<primary-key-column>ZID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthOpenId_FK" reference-table-name="IAMOAuthClient">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_CLIENT_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_CLIENT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	<table name="IAMOAuthClientRedirectURL" display-name="OAuthRedirectURL">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_CLIENT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="REDIRECT_URL">
+				<description>
+					The redirect URI of the client. If the domain is not specified the oAuth redirect_uri param will be verified with the REDIRECT_URI
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="REDIRECT_URL_APL">
+				<description>
+					Redirect URI's APL.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&apl;</pattern>
+				</allowed-values>
+			</column>
+			<column name="REDIRECT_URL_TYPE">
+				<description>
+					Type of the URI, wheather it is javascript uri or Applocation redirect URI. 
+					1- server Url, 2 - javascript url
+				</description>
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthClienturi_PK">
+			<primary-key-column>OAUTH_CLIENT_AUTO_ID</primary-key-column>
+			<primary-key-column>REDIRECT_URL_APL</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthClienturi_FK"
+				reference-table-name="IAMOAuthClient">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_CLIENT_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_CLIENT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	<table name="IAMOAuthGrantToken" display-name="OAuthGrantToken">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_CLIENT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="OAUTH_GRANT_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthGrantToken.OAUTH_GRANT_TOKEN_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="USER_ZID">
+				<description>
+					Token's Owner ZID.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ZID_TYPE">
+				<description>1- User , 2- appaccount , 3 - serviceOrg</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="GRANT_TOKEN">
+				<description>
+					Grant token for getting access token.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&apl;</pattern>
+				</allowed-values>
+			</column>
+			<column name="GRANT_TYPE">
+				<description>
+					Type of the Grand token.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&apl;</pattern>
+				</allowed-values>
+			</column>
+			<column name="REDIRECT_URL">
+				<description>
+					Redirect URL used to generate grant token.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ACCESS_TYPE">
+				<description>
+					The status of the client. Can be 1 - Ofline access, 0 - accessTokenAlone
+				</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="EXPIRY_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="GRANT_TOKEN_INFO">
+				<description>
+					Used to store other information about the grant Token.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>2000</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ORG_TYPE">
+                <description>OrgType for OrgOAuthToken Management</description>
+                <data-type>INTEGER</data-type>
+            </column>
+		</columns>
+		<primary-key name="IAMOAuthGrntToken_PK">
+			<primary-key-column>OAUTH_GRANT_TOKEN_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthGrndToken_FK"
+				reference-table-name="IAMOAuthClient">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_CLIENT_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_CLIENT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMOAuthGrndToken_UK">
+				<unique-key-column>GRANT_TOKEN</unique-key-column>
+			</unique-key>
+		</unique-keys>
+		<indexes>
+            <index name="IAMOAuthGrndToken_exptime">
+                <index-column>EXPIRY_TIME</index-column>
+            </index>
+        </indexes>
+	</table>
+	<table name="IAMOAuthGrantTokenScopes" display-name="OAuthGrantTokenScopes">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_GRANT_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SCOPE_ID">
+				<description>
+					ID of the scope required. Will have from App.SCOPE_ID
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ALLOWED_OPERATIONS">
+                <data-type>INTEGER</data-type>
+            </column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthGrntTokenScopes_PK">
+			<primary-key-column>OAUTH_GRANT_TOKEN_AUTO_ID</primary-key-column>
+			<primary-key-column>SCOPE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthGrntTokenScopes_FK" reference-table-name="IAMOAuthGrantToken">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_GRANT_TOKEN_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_GRANT_TOKEN_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	<table name="IAMOAuthGrantTokenOrgInfo" display-name="OAuthGrantTokenOrgInfo">
+		<description> This table will contain default/allowed ServiceOrg/App-Account details  for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_GRANT_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="ZID">
+				<description>
+					Store ZSOID or ZAAID depending on the user.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ZIDTYPE">
+				<description>
+					Service-Org=0, App-Account=1
+				</description>
+				<data-type>INTEGER</data-type>
+			</column>
+			<column name="SERVICE_NAME">
+				<description>Service name of the ZID</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthGrntTokenOrgInfo_PK">
+			<primary-key-column>OAUTH_GRANT_TOKEN_AUTO_ID</primary-key-column>
+			<primary-key-column>ZID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthGrntTokenOrgInfo_FK" reference-table-name="IAMOAuthGrantToken">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_GRANT_TOKEN_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_GRANT_TOKEN_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	<table name="IAMOAuthRefreshToken" display-name="OAuthRefreshToken">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_CLIENT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="OAUTH_REFRESH_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthRefreshToken.OAUTH_REFRESH_TOKEN_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="USER_ZID">
+				<description>
+					Token's Owner ZID
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ZID_TYPE">
+				<description>1- User , 2- appaccount , 3 - serviceOrg</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="REFRESH_TOKEN">
+				<description>
+					Refresh token of the user for this client
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&apl;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+				<default-value>-1</default-value>
+			</column>
+			<column name="DEVICE_NAME">
+                <description>For mobile clients. Used for display purpose</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IS_ACTIVE">
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+            </column>
+            <column name="IP_AUDIT_INFO">
+                <description>iplocation info will be stored as JSON object.</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+            </column>
+            <column name="ORG_TYPE">
+                <description>OrgType for OrgOAuthToken Management</description>
+                <data-type>INTEGER</data-type>
+            </column>
+		</columns>
+		<primary-key name="IAMOAuthRefreshToken_PK">
+			<primary-key-column>OAUTH_REFRESH_TOKEN_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthRefreshToken_FK"
+				reference-table-name="IAMOAuthClient">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_CLIENT_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_CLIENT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMOAuthRefreshToken_UK">
+				<unique-key-column>REFRESH_TOKEN</unique-key-column>
+			</unique-key>
+		</unique-keys>
+		<indexes>
+            <index name="IAMOAuthRefreshToken_uzuid">
+                <index-column>USER_ZID</index-column>
+            </index>
+            <index name="IAMOAuthRefreshToken_crtime">
+                <index-column>CREATED_TIME</index-column>
+            </index>
+        </indexes>
+	</table>
+	<table name="IAMOAuthRefreshTokenScopes" display-name="OAuthRefreshTokenScopes">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_REFRESH_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SCOPE_ID">
+				<description>
+					ID of the scope required. Will have from App.SCOPE_ID
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ALLOWED_OPERATIONS">
+                <data-type>INTEGER</data-type>
+            </column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthRefTokenScopes_PK">
+			<primary-key-column>OAUTH_REFRESH_TOKEN_AUTO_ID</primary-key-column>
+			<primary-key-column>SCOPE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthRefTokenScopes_FK" reference-table-name="IAMOAuthRefreshToken">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_REFRESH_TOKEN_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_REFRESH_TOKEN_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	<table name="IAMOAuthRefreshTokenOrgInfo" display-name="OAuthRefreshTokenOrgInfo">
+		<description> 
+			This table will contain default/allowed ServiceOrg/App-Account details for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_REFRESH_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="ZID">
+				<description>
+					Store ZSOID or ZAAID depending on the user.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ZIDTYPE">
+				<description>
+					Service-Org=0, App-Account=1
+				</description>
+				<data-type>INTEGER</data-type>
+			</column>
+			<column name="SERVICE_NAME">
+				<description>Service name of the ZID</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthRefTokenOrgInfo_PK">
+			<primary-key-column>OAUTH_REFRESH_TOKEN_AUTO_ID</primary-key-column>
+			<primary-key-column>ZID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthRefTokenOrgInfo_FK" reference-table-name="IAMOAuthRefreshToken">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_REFRESH_TOKEN_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_REFRESH_TOKEN_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	<table name="IAMOAuthRefreshTokenKey" display-name="OAuthRefreshTokenKey">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_REFRESH_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="KEY_NAME">
+				<description>
+					Key id to identify the key.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="KEY_VALUE">
+				<description>
+					Key value to do operation.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>1000</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthRefTokenKey_PK">
+			<primary-key-column>OAUTH_REFRESH_TOKEN_AUTO_ID</primary-key-column>
+			<primary-key-column>KEY_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthRefTokenKey_FK" reference-table-name="IAMOAuthRefreshToken">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_REFRESH_TOKEN_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_REFRESH_TOKEN_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	
+	<table name="IAMOAuthAccessToken" display-name="OAuthAccessToken">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_CLIENT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="OAUTH_ACCESS_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthAccessToken.OAUTH_ACCESS_TOKEN_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="USER_ZID">
+				<description>
+					Token's Owner ZID.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ZID_TYPE">
+				<description>1- User , 2- appaccount , 3 - serviceOrg</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="REFRESH_TOKEN">
+				<description>
+					Refresh token of the user for this client
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<allowed-values>
+					<pattern>&apl;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ACCESS_TOKEN">
+				<description>
+					Access token for getting access to the client resource.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&apl;</pattern>
+				</allowed-values>
+			</column>
+			<column name="EXPIRY_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthAccToken_PK">
+			<primary-key-column>OAUTH_ACCESS_TOKEN_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthAccToken_FK"
+				reference-table-name="IAMOAuthClient">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_CLIENT_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_CLIENT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMOAuthAccToken_UK">
+				<unique-key-column>ACCESS_TOKEN</unique-key-column>
+			</unique-key>
+		</unique-keys>
+		<indexes>
+            <index name="IAMOAuthAccToken_Rfndx">
+                <index-column>REFRESH_TOKEN</index-column>
+            </index>
+            <index name="IAMOAuthAccToken_uzuid">
+                <index-column>USER_ZID</index-column>
+            </index>
+            <index name="IAMOAuthAccToken_crtime">
+                <index-column>CREATED_TIME</index-column>
+            </index>
+            <index name="IAMOAuthAccToken_extime">
+                <index-column>EXPIRY_TIME</index-column>
+            </index>
+        </indexes>
+	</table>
+	<table name="IAMOAuthAccessTokenScopes" display-name="OAuthAccessTokenScopes">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_ACCESS_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SCOPE_ID">
+				<description>
+					ID of the scope required. Will have from App.SCOPE_ID
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ALLOWED_OPERATIONS">
+                <data-type>INTEGER</data-type>
+            </column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthAccTokenScopes_PK">
+			<primary-key-column>OAUTH_ACCESS_TOKEN_AUTO_ID</primary-key-column>
+			<primary-key-column>SCOPE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthAccTokenScopes_FK" reference-table-name="IAMOAuthAccessToken">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_ACCESS_TOKEN_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_ACCESS_TOKEN_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+</table>
+	<table name="IAMOAuthAccessTokenOrgInfo" display-name="OAuthAccessTokenOrgInfo">
+		<description> This table will contain default/allowed ServiceOrg/App-Account details  for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_ACCESS_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="ZID">
+				<description>
+					Store ZSOID or ZAAID depending on the user. 
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ZIDTYPE">
+				<description>
+					Service-Org=0, App-Account=1
+				</description>
+                <data-type>INTEGER</data-type>
+            </column>
+           	<column name="SERVICE_NAME">
+				<description>Service name of the ZID</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthAccTokenOrgInfo_PK">
+			<primary-key-column>OAUTH_ACCESS_TOKEN_AUTO_ID</primary-key-column>
+			<primary-key-column>ZID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthAccTokenOrgInfo_FK" reference-table-name="IAMOAuthAccessToken">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_ACCESS_TOKEN_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_ACCESS_TOKEN_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="IAMOAuthDeviceToken" display-name="OAuthDeviceToken">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_CLIENT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="OAUTH_DEVICE_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthDeviceToken.OAUTH_DEVICE_TOKEN_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="USER_ZID">
+				<description>
+					Token's Owner ZID. Will be updated during verify code.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ZID_TYPE">
+				<description>1- User , 2- appaccount , 3 - serviceOrg</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="DEVICE_TOKEN">
+				<description>
+					Grant token for getting access token.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&apl;</pattern>
+				</allowed-values>
+			</column>
+			<column name="GRANT_TYPE">
+				<description>
+					Type of the Grand token.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&apl;</pattern>
+				</allowed-values>
+			</column>
+			<column name="VERIFICATION_CODE">
+				<description>
+					Verification code shown to the user.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="VERIFICATION_STATUS">
+				<description>
+					Indicates wheather the code is verified or not. 0 - pending, 1- approved, 2 - denied
+				</description>
+				<data-type>INTEGER</data-type>
+				<default-value>0</default-value>
+			</column>
+			<column name="ACCESS_TYPE">
+				<description>
+					The status of the client. Can be 1 - Ofline access, 0 - accessTokenAlone
+				</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="USER_LOCATION">
+				<description>
+					For cross dc handling. location will be updated only on success
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>20</max-size>
+				<default-value>NULL</default-value>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthDevToken_PK">
+			<primary-key-column>OAUTH_DEVICE_TOKEN_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthDevToken_FK" reference-table-name="IAMOAuthClient">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_CLIENT_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_CLIENT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+		<unique-key name="IAMOAuthDevToken_UK1">
+				<unique-key-column>DEVICE_TOKEN</unique-key-column>
+			</unique-key>
+			<unique-key name="IAMOAuthDevToken_UK2">
+				<unique-key-column>VERIFICATION_CODE</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	<table name="IAMOAuthDeviceTokenScopes" display-name="OAuthDeviceTokenScopes">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_DEVICE_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SCOPE_ID">
+				<description>
+					ID of the scope required. Will have from App.SCOPE_ID
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ALLOWED_OPERATIONS">
+                <data-type>INTEGER</data-type>
+            </column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthDevTokenScopes_PK">
+			<primary-key-column>OAUTH_DEVICE_TOKEN_AUTO_ID</primary-key-column>
+			<primary-key-column>SCOPE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthDevTokenScopes_FK" reference-table-name="IAMOAuthDeviceToken">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_DEVICE_TOKEN_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_DEVICE_TOKEN_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	<table name="IAMOAuthDeviceTokenOrgInfo" display-name="OAuthDeviceTokenOrgInfo">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_DEVICE_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="ZID">
+				<description>
+					Store ZSOID or ZAAID depending on the user. 
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ZIDTYPE">
+				<description>
+					Service-Org=0, App-Account=1
+				</description>
+                <data-type>INTEGER</data-type>
+            </column>
+           	<column name="SERVICE_NAME">
+				<description>Service name of the ZID</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthDevTokenOrgInfo_PK">
+			<primary-key-column>OAUTH_DEVICE_TOKEN_AUTO_ID</primary-key-column>
+			<primary-key-column>ZID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthDevTokenOrgInfo_FK" reference-table-name="IAMOAuthDeviceToken">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_DEVICE_TOKEN_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_DEVICE_TOKEN_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="IAMOAuthKeys" display-name="OAuthKeys">
+		<description>
+			The list of OAuth Keys used for for signing.
+		</description>
+		<columns>
+			<column name="OAUTH_KEYS_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthKeys.OAUTH_KEYS_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="KEY_ID">
+				<description>
+					Name of the third party client or Zoho Service
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="PUBLIC_KEY">
+				<description>
+					Public key to share to user.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>850</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="PRIVATE_KEY">
+				<description>
+					Private key to sign/encrypt.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>850</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&digest;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthKeys_PK">
+			<primary-key-column>OAUTH_KEYS_AUTO_ID</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="IAMOAuthKeys_UK">
+				<unique-key-column>KEY_ID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	<!--  To be removed tables -->
+	<table name="IAMOAuthMobileAppDetails" display-name="OAuthMobileAppDetails">
+		<description>
+			The list of Mobile devices used for sso.
+		</description>
+		<columns>
+			<column name="OAUTH_APP_DETAILS_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthMobileAppDetails.OAuthMobileAppDetails</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="APP_NAME">
+				<description>
+					Mobile app name
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="PACKAGE_NAME">
+				<description>
+					Package name under which mobile is released
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="SIGNATURE">
+				<description>
+					Signature of the mobile app.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="APP_CLIENT_ID">
+				<description>
+					Google/Ios Client Id given to an app.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="PROJECT_ID">
+				<description>
+					Devlepor console Id used for reference.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="OAUTH_CLIENT_ID">
+				<description>
+					ID under which App is registered under OAuth.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="AUDIENCE_GROUP_ID">
+				<description>
+					Audience group Id from OAuthMobileAudience for verifing OTP with google for Android.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<allowed-values>
+					<pattern>&digest;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthMobAppDet_PK">
+			<primary-key-column>OAUTH_APP_DETAILS_AUTO_ID</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="IAMOAuthMobAppDet_UK">
+				<unique-key-column>APP_NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	<table name="IAMOAuthMobileAudience" display-name="OAuthMobileAudience">
+		<description>
+			The list of OAuth Keys used for for signing.
+		</description>
+		<columns>
+			<column name="AUDIENCE_ID">
+				<description>
+					Registerted AUDIENCE ID from google.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="AUDIENCE_GROUP_ID">
+				<description>
+					Used to group mobile apps for a single audiance.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="AUDIENCE_EMAIL_ID">
+				<description>
+					Email id used to register an audiance
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&email;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthMobAud_PK">
+			<primary-key-column>AUDIENCE_ID</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="IAMOAuthMobAud_UK">
+				<unique-key-column>AUDIENCE_GROUP_ID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	<!-- Tables for API  -->
+	<table name="IAMOAuthApiToken" display-name="OAuthApiToken">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_CLIENT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="OAUTH_API_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthApiToken.OAUTH_API_TOKEN_AUTO_ID</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="ZID">
+				<description>
+					Token's Owner ZID.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ZID_TYPE">
+				<description>1- User , 2- appaccount , 3 - serviceOrg</description>
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+			</column>
+			<column name="API_KEY">
+				<description>
+					Grant token for getting access token.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&apl;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DESCRIPTION">
+				<description>
+					Describtion of token generated.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&apl;</pattern>
+				</allowed-values>
+			</column>
+			<column name="IS_ACTIVE">
+                <data-type>INTEGER</data-type>
+                <default-value>1</default-value>
+            </column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthApiToken_PK">
+			<primary-key-column>OAUTH_API_TOKEN_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthApiToken_FK" reference-table-name="IAMOAuthClient">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_CLIENT_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_CLIENT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMOAuthApiToken_UK1">
+				<unique-key-column>API_KEY</unique-key-column>
+			</unique-key>
+		</unique-keys>
+		<indexes>
+            <index name="IAMOAuthApiToken_uzid">
+                <index-column>ZID</index-column>
+            </index>
+        </indexes>
+	</table>
+	<table name="IAMOAuthApiTokenScopes" display-name="OAuthApiTokenScopes">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_API_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="SCOPE_ID">
+				<description>
+					ID of the scope required. Will have from App.SCOPE_ID
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="ALLOWED_OPERATIONS">
+                <data-type>INTEGER</data-type>
+            </column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthApiTokenScopes_PK">
+			<primary-key-column>OAUTH_API_TOKEN_AUTO_ID</primary-key-column>
+			<primary-key-column>SCOPE_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthApiTokenScopes_FK" reference-table-name="IAMOAuthApiToken">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_API_TOKEN_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_API_TOKEN_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	<table name="IAMOAuthInternalApiToken" display-name="OAuthInternalApiToken">
+		<description> This table will contain internal api token details like handeshakeid for inactive apikey creation.
+		</description>
+		<columns>
+			<column name="OAUTH_API_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="TOKEN_NAME">
+				<description>
+					Key id to identify the key.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="TOKEN_VALUE">
+				<description>
+					Key value to do operation.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthIntApiToken_PK">
+			<primary-key-column>OAUTH_API_TOKEN_AUTO_ID</primary-key-column>
+			<primary-key-column>TOKEN_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthIntApiToken_FK" reference-table-name="IAMOAuthApiToken">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_API_TOKEN_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_API_TOKEN_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMOAuthIntApiToken_UK">
+				<unique-key-column>TOKEN_VALUE</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	<table name="IAMOAuthClientProperties" display-name="OAuthClientProperties">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_CLIENT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="PROP_NAME">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PROP_VALUE">
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&cleartext;</pattern>
+                </allowed-values>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+		<primary-key name="IAMOAuthClientProp_PK">
+			<primary-key-column>OAUTH_CLIENT_AUTO_ID</primary-key-column>
+			<primary-key-column>PROP_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthClientProp_FK" reference-table-name="IAMOAuthClient">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_CLIENT_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_CLIENT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	
+	<table name="IAMOAuthInternalToken" display-name="OAuthInternalToken">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_REFRESH_TOKEN_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="TOKEN_NAME">
+				<description>
+					Key id to identify the key.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="TOKEN_VALUE">
+				<description>
+					Key value to do operation.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthIntToken_PK">
+			<primary-key-column>OAUTH_REFRESH_TOKEN_AUTO_ID</primary-key-column>
+			<primary-key-column>TOKEN_NAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthIntToken_FK" reference-table-name="IAMOAuthRefreshToken">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_REFRESH_TOKEN_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_REFRESH_TOKEN_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMOAuthIntToken_UK">
+				<unique-key-column>TOKEN_VALUE</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	<table name="IAMOAuthDcDigest" display-name="OAuthDCDigest">
+        <description>Holds digests that help authenticate openid/oauth users across different data centers </description>
+        <columns>
+       		 <column name="OAUTH_CLIENT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+            <column name="DIGEST">
+                <description>The digest generated for this particular open id</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="LOCATION">
+                <description>The location returned from DL server</description>
+                <data-type>CHAR</data-type>
+                <max-size>20</max-size>
+                <nullable>false</nullable>
+            </column>
+			<column name="VALID_UPTO">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+            </column>
+			<column name="IS_VALIDATED">
+                <data-type>BOOLEAN</data-type>
+                <default-value>false</default-value>
+            </column>
+        </columns>
+        <primary-key name="IAMOAuthDcDigest_PK">
+        	<primary-key-column>DIGEST</primary-key-column>
+        </primary-key> 
+        <foreign-keys>
+            <foreign-key name="IAMOAuthDcDigest_FK" reference-table-name="IAMOAuthClient" >
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>OAUTH_CLIENT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>OAUTH_CLIENT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+	<table name="IAMOAuthDcDetails" display-name="OAuthDcDetails">
+		<description>Holds API enbaled in various data center for this Users</description>
+		<columns>
+			<column name="OAUTH_CLIENT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="DC_LOCATION">
+				<description>The digest generated for this particular open id</description>
+				<data-type>CHAR</data-type>
+				<max-size>200</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="IS_ENABLED">
+				<data-type>BOOLEAN</data-type>
+				<default-value>true</default-value>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthDcDetails_PK">
+			<primary-key-column>OAUTH_CLIENT_AUTO_ID</primary-key-column>
+			<primary-key-column>DC_LOCATION</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthDcDetails_FK"
+				reference-table-name="IAMOAuthClient">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_CLIENT_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_CLIENT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	<table name="IAMOAuthJavaScriptDomains" display-name="OAuthJavaScriptDomains">
+		<description> This table will contain default/allowed scopes for the particular project.
+		</description>
+		<columns>
+			<column name="OAUTH_CLIENT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="DOMAIN">
+				<description>
+					The redirect URI of the client. If the domain is not specified the oAuth redirect_uri param will be verified with the REDIRECT_URI
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DOMAIN_APL">
+				<description>
+					Redirect URI's APL.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&apl;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthJSDomains_PK">
+			<primary-key-column>OAUTH_CLIENT_AUTO_ID</primary-key-column>
+			<primary-key-column>DOMAIN_APL</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthJSDomains_FK"
+				reference-table-name="IAMOAuthClient">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_CLIENT_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_CLIENT_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+	<!--  New tables for OAuth Mobile Apps  -->
+	<table name="IAMOAuthMobileAppService" display-name="OAuthMobileAppService">
+		<description>
+			Mobile App Service Name
+		</description>
+		<columns>
+			<column name="OAUTH_MOBILE_APP_SERVICE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthMobileAppService.OAuthMobileAppService</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="SERVICE_NAME">
+				<description>
+					Mobile App Service Name
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthMobileAppService_PK">
+			<primary-key-column>OAUTH_MOBILE_APP_SERVICE_AUTO_ID</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="IAMOAuthMobileAppService_UK">
+				<unique-key-column>SERVICE_NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	<table name="IAMOAuthMobileAppName" display-name="OAuthMobileAppName">
+		<description>
+			Mobile App Name
+		</description>
+		<columns>
+			<column name="OAUTH_MOBILE_APP_SERVICE_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="OAUTH_MOBILE_APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthMobileAppName.OAuthMobileAppName</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="MOBILE_APP_NAME">
+				<description>
+					Mobile App Name
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="APP_LOGO">
+				<description>
+					Logo of app
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DESCRIPTION">
+				<description>
+					Description to be shown to user from ZOHO ONE app
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="APP_TYPE">
+				<description>
+					Catagorizing the app to MobileAppType 
+				</description>
+				<data-type>INTEGER</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="DISPLAY_NAME">
+				<description>
+					Mobile App Display Name
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="UNIQUE_ID">
+				<description>
+					Unique Id for Cross DC Sync
+				</description>
+				<data-type>INTEGER</data-type>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+		</columns>
+		<primary-key name="OAuthMobileAppName_PK">
+			<primary-key-column>OAUTH_MOBILE_APP_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthMobAppSer_FK" reference-table-name="IAMOAuthMobileAppService">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_MOBILE_APP_SERVICE_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_MOBILE_APP_SERVICE_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="OAuthMobileAppName_UK">
+				<unique-key-column>MOBILE_APP_NAME</unique-key-column>
+			</unique-key>
+			<unique-key name="OAuthMobileAppName1_UK">
+				<unique-key-column>UNIQUE_ID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	<table name="IAMOAuthMobileDevices" display-name="OAuthMobileDevices">
+		<description>
+			list of mobile devices in different platforms
+		</description>
+		<columns>
+			<column name="OAUTH_MOBILE_APP_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="OAUTH_MOBILE_APP_DEVICES_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthMobileDevices.OAuthMobileDevices</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="PACKAGE_NAME">
+				<description>
+					Package name under which mobile is released
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="OAUTH_CLIENT_ID">
+				<description>
+					ID under which App is registered under OAuth.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CLIENT_ZID">
+				<description>
+					For ARM to fetch client details via IAM3 api call
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&clientzid;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CLIENT_TYPE">
+				<description>
+					Development = 0, Production = 1, MDM = 2 
+				</description>
+				<data-type>INTEGER</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="APP_TYPE">
+				<description>
+					Android=0 , IOS=1 , Windows=2
+				</description>
+				<data-type>INTEGER</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="SIGNATURE">
+				<description>
+					Signature of the mobile app.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="CREATED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="MODIFIED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthMobAppDevices_PK">
+			<primary-key-column>OAUTH_MOBILE_APP_DEVICES_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthMobAppDevices_FK" reference-table-name="IAMOAuthMobileAppName">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_MOBILE_APP_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_MOBILE_APP_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+		<unique-keys>
+			<unique-key name="IAMOAuthMobApps_UK">
+				<unique-key-column>OAUTH_CLIENT_ID</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+	<table name="IAMOAuthMobileDevicesDetails" display-name="OAuthMobileDevicesDetails">
+		<description>
+			mobile app device details
+		</description>
+		<columns>
+			<column name="OAUTH_MOBILE_APP_DEVICES_AUTO_ID">
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="OAUTH_MOBILE_APP_DEVICE_DETAILS_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>IAMOAuthMobileDevicesDetails.OAuthMobileDevicesDetails</generator-name>
+					<generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+				</uniquevalue-generation>
+			</column>
+			<column name="APP_CLIENT_ID">
+				<description>
+					Google/Ios Client Id given to an app.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="PROJECT_ID">
+				<description>
+					Devlepor console Id used for reference.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+			<column name="AUDIENCE_GROUP_ID">
+				<description>
+					Audience group Id from OAuthMobileAudience for verifing OTP with google for Android.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+				<allowed-values>
+					<pattern>&digest;</pattern>
+				</allowed-values>
+			</column>
+			<column name="AUDIENCE_ID">
+				<description>
+					Registerted AUDIENCE ID from google.
+				</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>&cleartext;</pattern>
+				</allowed-values>
+			</column>
+		</columns>
+		<primary-key name="IAMOAuthMobileDevicesDetails_PK">
+			<primary-key-column>OAUTH_MOBILE_APP_DEVICE_DETAILS_AUTO_ID</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key name="IAMOAuthMobAppDevicesDetails_FK" reference-table-name="IAMOAuthMobileDevices">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>OAUTH_MOBILE_APP_DEVICES_AUTO_ID</fk-local-column>
+						<fk-reference-column>OAUTH_MOBILE_APP_DEVICES_AUTO_ID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+</data-dictionary>

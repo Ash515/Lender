@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: bean.xml,v 1.5 2006/01/04 14:15:42 saranbabu Exp $ -->
+<beans>
+
+    <Bean bean_id="Bean:bean_id:TableViewManager"
+        bean_name="TableViewManager"
+        module_id="CustomView"
+		transaction_type="1"
+		classname="com.adventnet.customview.CustomViewManagerImpl">
+        <BeanProperties beanprop_id="BeanProperties:beanprop_id:TableViewManager-CustomViewType" property="CustomViewType" value="Table"/>
+		<BeanProperties beanprop_id="BeanProperties:beanprop_id:TableViewManager-CommunicationMode" property="CommunicationMode" value="1"/>
+	</Bean>
+    <Bean bean_id="Bean:bean_id:MDSTableViewManager"
+        bean_name="MDSTableViewManager"
+        module_id="CustomView"
+		transaction_type="1"
+		classname="com.adventnet.customview.CustomViewManagerImpl">
+        <BeanProperties beanprop_id="BeanProperties:beanprop_id:MDSTableViewManager-CustomViewType" property="CustomViewType" value="MDSTable"/>
+		<BeanProperties beanprop_id="BeanProperties:beanprop_id:MDSTableViewManager-CommunicationMode" property="CommunicationMode" value="1"/>
+	</Bean>
+    <Bean bean_id="Bean:bean_id:TreeViewManager"
+        bean_name="TreeViewManager"
+        module_id="CustomView"
+		transaction_type="1"
+		classname="com.adventnet.customview.CustomViewManagerImpl">
+        <BeanProperties beanprop_id="BeanProperties:beanprop_id:TreeViewManager-CustomViewType" property="CustomViewType" value="Tree"/>
+		<BeanProperties beanprop_id="BeanProperties:beanprop_id:TreeViewManager-CommunicationMode" property="CommunicationMode" value="1"/>
+	</Bean>
+
+	<!-- The below beans are not implemented yet -->
+	
+</beans>
+

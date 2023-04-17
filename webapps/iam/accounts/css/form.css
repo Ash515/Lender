@@ -1,0 +1,219 @@
+/* $Id: $ */
+@CHARSET "UTF-8";
+/********************
+$GENERIC
+********************/
+::-webkit-input-placeholder {
+	color: #A5A0A0;
+}
+
+:-moz-placeholder {
+	color: #A5A0A0;
+}
+
+:-ms-input-placeholder {
+	color: #A5A0A0;
+}
+/******************************
+$FORM_FIELDS
+*******************************/
+.form dl {
+	margin: 0 0 12px 0;
+}
+
+.form dt {
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 3px;
+}
+
+.form dd {
+	margin: 0;
+}
+
+.form input[type=text],.form input[type=email],.form input[type=password] {
+	font-size: 14px;
+}
+/********************
+$FIELD_MESSAGE
+********************/
+.field-msg {
+	font-size: 11px;
+	width: 360px; /* Same as input field size (width + padding) */
+}
+
+.field-msg .note {
+	color: #999;
+	display: inline-block;
+	padding: 1px 5px 2px; /*1px padding-top to compensate -1px margin-top of '.form dd .error' #to_avoid_jerk */
+}
+
+.field-msg .error {
+	display: none;
+	padding: 2px 5px;
+	border-radius: 0 0 5px 5px;
+	margin-top: -1px;
+	background-color: #F2DEDE;
+	border-color: #EED3D7;
+	color: #B94A48;
+}
+
+/* Fix: To avoid displaying dummy error without message */
+.field-msg .jqval-error {
+	display: none !important;
+}
+
+.field-valid input,.field-error input {
+	background: transparent url("../images/sprite.png") no-repeat 310px -106px;
+	padding-right: 22px !important;
+	width: 333px !important;
+}
+
+.field-error input {
+	border-color: #EED3D7 !important;
+	box-shadow: 0 0 3px #F2DEDE !important;
+	border-radius: 5px 5px 5px 0 !important;
+	background-position: 310px -148px;
+}
+
+.field-error .password-strength,.field-valid .password-strength {
+	left: 287px; /* left position is relative to the input box width (input.width - password_strength.width) */
+}
+
+.field-error .error {
+	display: inline-block !important;
+}
+
+/* Hide Notes while displaying error */
+.field-error .note {
+	display: none;
+}
+
+.form>.field-msg .error {
+	border-radius: 5px;
+	padding: 5px;
+	margin: 0 0 12px;
+	text-align: center;
+}
+
+/********************
+$LABEL ????
+********************/
+form>label {
+	display: block;
+	margin-bottom: 10px;
+}
+/********************
+$PASSWORD_STRENGTH
+********************/
+.password-strength {
+	border-radius: 5px;
+	background-color: #EEE;
+	position: absolute;
+	/* left position is relative to the input box width (input.width - password_strength.width) */
+	left: 305px;
+	top: 10px;
+	height: 11px;
+	width: 50px;
+	overflow: hidden;
+	display: none;
+}
+
+.password-strength div {
+	border-radius: 5px;
+	height: 11px;
+	-webkit-transition: width 0.5s ease-in 0s;
+	-moz-transition: width 0.5s ease-in;
+	-o-transition: width 0.5s ease-in 0s;
+	-ms-transition: width 0.5s ease-in 0s;
+}
+/********************
+$BUTTONS
+********************/
+.btn {
+	font-family: "Open Sans";
+	color: #222;
+	background: #DBDBDB;
+	background: -moz-linear-gradient(#FCFCFC, #DBDBDB);
+	background: -webkit-linear-gradient(#FCFCFC, #DBDBDB);
+	background: -ms-linear-gradient(#FCFCFC, #DBDBDB);
+	background: -o-linear-gradient(#FCFCFC, #DBDBDB);
+	border: 1px solid #A0A0A0;
+	border-radius: 3px;
+	padding: 4px 14px;
+	margin: 0px;
+	text-shadow: 0 2px 0 #fff;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	cursor: pointer;
+}
+
+.big-btn {
+	font-size: 120%;
+	font-weight: bold;
+}
+
+.btn[disabled] {
+	cursor: default !important;
+	filter: alpha(opacity =               50%);
+	opacity: 0.5;
+}
+
+.btn.primary {
+	background: #60B044;
+	background: -moz-linear-gradient(#8ADD6D, #60B044);
+	background: -webkit-linear-gradient(#8ADD6D, #60B044);
+	background: -ms-linear-gradient(#8ADD6D, #60B044);
+	background: -o-linear-gradient(#8ADD6D, #60B044);
+	color: #FFFFFF;
+	text-shadow: 0 0 0 #FFF;
+}
+
+.btn:hover,.btn:focus {
+	border-color: #666;
+}
+
+.btn:active {
+	background: -moz-linear-gradient(#DBDBDB, #FCFCFC);
+	background: -webkit-linear-gradient(#DBDBDB, #FCFCFC);
+	background: -ms-linear-gradient(#DBDBDB, #FCFCFC);
+	background: -o-linear-gradient(#DBDBDB, #FCFCFC);
+}
+
+.btn.primary:active {
+	background: -moz-linear-gradient(#60B044, #8ADD6D);
+	background: -webkit-linear-gradient(#60B044, #8ADD6D);
+	background: -ms-linear-gradient(#60B044, #8ADD6D);
+	background: -o-linear-gradient(#60B044, #8ADD6D);
+}
+
+.btn-drp {
+	padding-right: 10px;
+}
+
+.btn-drp span {
+	padding-left: 12px;
+	background-position: -50px -46px;
+}
+
+.containerbox {
+	margin: 76px 0 0 0;
+	padding: 10px;
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid #BBBBBB;
+	border-radius: 5px 5px 5px 5px;
+	box-shadow: 0 0 3px #AAAAAA;
+	float: left;
+	padding: 40px 40px;
+}
+.hrTop {
+	border-top: 1px dashed #dadadb;
+}
+
+.head {
+	font-size: 20px;
+	margin-left: 15px;
+	padding-bottom: 10px;
+}
+.margin {
+	margin: 15px;
+}

@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security-accounts.xsd">
+    <urls>
+    	<url path="/oauth/v2/auth" authentication="optional" method="get,post" >
+    		 <param-group name="clientrequest"/>
+    		 <param name="logout" type="boolean"/>
+    		 <param name="forcelogout" type="boolean"/>
+    		 <param name="env" regex="iamcleartextpattern" split="," max-occurrences="10"/>
+    		 <param name="soid" regex="iamcleartextpattern" split="," max-occurrences="10"/>
+    		 <param name="requestApp" regex="iamcleartextpattern"/>
+    		 <param name="skiporg" type="boolean"/>
+    		 <param name="skipappl" type="boolean"/>
+    	</url>
+    	<url path="/oauth/v2/mobile/auth" authentication="optional" reauth="true" method="get" mobile="true" time="300">
+    		 <param-group name="clientrequest"/>
+    		 <param-group name="mobilerequest"/>
+    		 <param name="newtheme" type="boolean" />
+			 <param name="hidetwitter" type="boolean"/>
+			 <param name="hideazure" type="boolean"/>
+			 <param name="hide_gsignup" type="boolean" />
+			 <param name="signOps" regex="iamcleartextpattern"/>
+			 <param name="hidelinkedin" type="boolean"/>
+			 <param name="forcelogout" type="boolean"/>
+			 <param name="login_id" regex="username_or_email" />
+			 <param name="fs_token" regex="[a-zA-Z0-9\-_=\.\/,]+" max-len="1000"/>
+      		 <param name="u_readonly" type="boolean" description="To set readonly mode to loginId field"/>
+			 <param name="is_android" type="boolean"/>
+			 <param name="oneauth_present" type="boolean"/>
+			 <param name="mdmToken" regex="iambase64"/>
+    	</url>
+    	<url path="/oauth/v2/approve" authentication="required" method="post" csrf="true" >
+    		 <param name="logout" type="boolean"/>
+    		 <param-group name="clientrequest"/>
+    		 <param name="approvedScope" regex="^[\w\/,\.]+$" split="," max-occurrences="1000"/>
+    		 <param name="is_ajax" type="boolean" />
+    		 <param name="approvedOrgs" regex="^[\w\/,\.]+$" split="," max-occurrences="100"/>
+    		 <param-group name="mobilerequest"/>
+    		 <param name="forcelogout" type="boolean"/>
+    		 <param name="implicitGranted" type="boolean" />
+    		 <param name="applicationSelected" type="JSONObject" template="application"/>
+    	</url>
+    	<url path="/oauth/v2/org/approve" authentication="required" method="post" csrf="true" >
+    		 <param name="logout" type="boolean"/>
+    		 <param-group name="clientrequest"/>
+    		 <param name="approvedScope" regex="^[\w\/,\.]+$" split="," max-occurrences="1000"/>
+    		 <param name="is_ajax" type="boolean" />
+    		 <param name="approvedOrgs" regex="^[\w\/,\.]+$" split="," max-occurrences="100"/>
+    		 <param name="forcelogout" type="boolean"/>
+    		 <param name="implicitGranted" type="boolean" />
+    	</url>
+    	<url path="/oauth/v2/reject" authentication="required" method="post" csrf="true" >
+    		<param name="client_id" regex="iamcleartextpattern" max-len="1000"/>
+    		<param-group name="clientrequest"/>
+    		<param name="approvedScope" regex="^[\w\/,\.]+$" split="," max-occurrences="1000"/>
+    		<param name="is_ajax" type="boolean" />
+			<param-group name="mobilerequest"/>
+			<param name="forcelogout" type="boolean"/>
+    	</url>
+    	<url path="/oauth/v2/token" method="post" csrf="false">
+    		<param-group name="clientrequest"/>
+    		<param name="sso_reg" type="boolean"/>
+    		<param name="mzuid" type="long"/>
+    		<param name="soid" regex="iamcleartextpattern" split="," max-occurrences="10"/>
+    	</url>
+    	
+    	<url path="/oauth/v2/token/access" sl_auth="mobileLogin_required" method="post" csrf="false">
+    		 <param-group name="clientrequest"/>
+    		 <param name="access_token" regex="iamcleartextpattern" max-len="1000"/>
+    		 <param name="deviceType" regex="0|1|2"/>
+    		 <param name="device_verify_token" regex="iambase64" max-len="-1"/>
+    		 <param name="ts" type="long"/>
+    		 <param name="ver" regex="os_version"/>
+    		 <param name="mode" regex="client_name"/>
+    		 <param name="devname" type="String" />
+    		 <param name="devmodel" type="String" />
+    	</url>
+        
+    	<url path="/oauth/user/info" authentication="required" oauthscope="profile" duration="1" threshold="10"  user="true" lock-period="5" description="to get profile information using Oauth token." operation-type="READ" method="post,get"/>
+    	<url path="/oauth/v2/getcertificates" duration="2" threshold="40" lock-period="5" description="to get public key for JWT" method= "get" />
+    	<url path="/oauth/v2/approve/internal" authentication="optional" method="post" csrf="false" https="true">
+    		<param name="cPass" regex="oldpassword" max-len="250" min-len="1" secret="true" />
+    		<param-group name="clientrequest"/>
+    	</url>
+    	<url path="/oauth/v2/token/addscope" authentication="optional" duration="10" threshold="40" https="true" user="true" lock-period="5" description="To add scope to old refresh token."  method= "get">
+    		 <param-group name="clientrequest"/>
+    		 <param name="scope_token" regex="iamcleartextpattern" max-len="250" min-len="1" secret="true" />
+    	</url>
+    	<url path="/oauth/v2/int/file" authentication="optional" duration="20" threshold="40" lock-period="5" method="get">
+    		<param name="zuid" regex="long"/>
+    	</url>
+    	<url path="/oauth/v2/mob/getdetails" duration="20" threshold="40" lock-period="5" https="true" >
+    		<param name="tt_tok" regex="iamcleartextpattern" max-len="350" min-len="1" secret="true" />
+    	</url>
+    	<url path="/oauth/v2/token/revoke" duration="20" threshold="40" lock-period="5" https="true" method="post,get">
+    		<param name="token" regex="iamcleartextpattern" max-len="350" min-len="1" secret="true"/>
+    	</url>
+    	
+    	<url path="/oauth/v2/apitoken/revoke" duration="20" threshold="40" lock-period="5" https="true" method="post,get">
+    		<param name="token" regex="iamcleartextpattern" max-len="350" min-len="1" secret="true" />
+    	</url>
+    	
+    	<url path="/oauth/v3/device/code"  method="post" csrf="false" description="To generate device code.">
+    		 <param-group name="clientrequest"/>
+    	</url>
+    	<url path="/oauth/v3/device/verify"  authentication="required" method="post" https="true" csrf="true" description="To add scope to old refresh token.">
+    		 <param name="Vcode" regex="iamcleartextpattern" max-len="350" min-len="1" secret="true" />
+    		 
+    	</url>
+    	<url path="/oauth/v3/device/setCode"  authentication="required" https="true" description="To redirect from device." method="get">
+    		 <param name="devcode" regex="iambase64" max-len="350" min-len="1" secret="true" />
+    		  <param name= "closebrswr" type= "boolean" />
+    	</url>
+
+    	<url path="/oauth/v3/device/approve"  authentication="required" method="post" csrf="true">
+    		<param-group name="clientrequest"/>
+    		<param name="approvedScope" regex="^[\w\/,\.]+$" split="," max-occurrences="1000"/> 
+    		<param name="is_ajax" type="boolean" />
+    		<param name="approvedOrgs" regex="^[\w\/,\.]+$" split="," max-occurrences="100" />
+    		 <param name= "Vcode" regex= "[A-Z0-9\-a-z]+" max-len= "20" />
+    		 <param name="applicationSelected" type="JSONObject" template="application"/>
+    	</url>
+    	<url path="/oauth/v3/device/reject"  authentication="required" method="post" csrf="true">
+    		<param-group name="clientrequest"/>
+    		<param name="is_ajax" type="boolean" />
+    		<param name= "Vcode" regex= "[A-Z0-9\-a-z]+" max-len= "20" />
+    	</url>
+    	<url path="/oauth/v3/device/token"  method="post" csrf="false" description="to get response for the give device token.">
+    		<param-group name="clientrequest"/>
+    	</url>
+    	<url path="/oauth/v3/device" authentication="required" description="To show device verify code." method="get"/>
+    	<url path="/device" authentication="required" description="To redirect to device page." redirect="/oauth/v3/device" />
+
+    	<url path="/oauth/v3/device/approve/sucess"  description="To show sucess on approve." />
+    	<url path="/oauth/v3/device/reject/sucess"  description="To show sucess on reject" />
+    	<url path="/accounts/resource/accounts/(oauthappgroup|oauthmobileappdetails|oauthmobileaudience|oauthmobileappservice)((/.*)|(\..+))?" internal="true" scoped-services="DLServer,ZohoARM" method="get,post,delete,put" csrf="false">
+    		<param-group name="restapi_params" />
+    	</url>
+    	<url path="/oauth/dc/addclient" authentication="required" description="To add client to remote DC." method="post" csrf="true" >
+    		<param name="location" regex="iamcleartextpattern" max-len="350" min-len="1" />
+    		<param name="client_type" regex="iamcleartextpattern" max-len="350" min-len="1" />
+    		<param name="client_id" regex="iamcleartextpattern" max-len="1000" />
+    	</url>
+    	
+    	<url path="/oauth/dc/getRemoteSecret" authentication="required" description="To get client secret from remote server to show in UI." method="post" csrf="true"  >
+    		<param name="location" regex="iamcleartextpattern" max-len="350" min-len="1" />
+    		<param name="client_type" regex="iamcleartextpattern" max-len="350" min-len="1" />
+    		<param name="client_id" regex="iamcleartextpattern" max-len="1000" />
+    	</url>
+    	<url path="/oauth/dc/deleteClient" authentication="required" description="To get client secret from remote server to show in UI." method="post" csrf="true"  >
+    		<param name="location" regex="iamcleartextpattern" max-len="350" min-len="1" />
+    		<param name="client_type" regex="iamcleartextpattern" max-len="350" min-len="1" />
+    		<param name="client_id" regex="iamcleartextpattern" max-len="1000" />
+    	</url>
+    	
+    	<url path="/oauth/v2/self/token/generate"  authentication="required" method="post" csrf="true">
+    		<param-group name="clientrequest"/>
+    		<param name="approvedScope" regex="^[\w\/,\.]+$" split="," max-occurrences="1000"/>
+    		<param name="expiry" type="int" />
+    	</url>
+    	
+    	
+	    <url path="/developerconsole" authentication="required" method="get"/>
+		<url path="/ui/dconsole/api-clients.jsp" operation-param="action"
+			operation-value="addclient" authentication="required" method="post"
+			csrf="true" duration="1" lock-period="20" threshold="20" user="true"
+			description="To add new API client">
+			<param name="client_id" regex="^[0-9\.a-zA-Z]+$" />
+			<param name="client_name" regex="iamcleartextpattern" />
+			<param name="client_domain" regex="^((ht|f)tp(s?)\:\/\/[-.\w]*)?[0-9\.a-zA-Z\:\/]+$" />
+			<param name="client_redirect_uri" regex="client_redirect_url" max-len="300"/>
+			<param name="old_client_redirect_uri" regex="client_redirect_url" max-len="300"/>
+			<param name="client_js_domain" regex="serviceurl" split="," max-occurrences="100"/>
+			<param name="clientType" regex="WEB|Mobile|JS" />
+		</url>
+		<url path="/ui/dconsole/api-clients.jsp" operation-param="action" operation-value="deleteclient" authentication="required" method="post" csrf="true" description="To add new API client">
+			<param name="client_zid" regex="^[0-9\.a-zA-Z]+$" />
+		</url>
+		<url path="/ui/dconsole/api-clients.jsp" authentication="required" csrf="false" method="post">
+			<param name="mode" regex="addclient|viewclient|multidcsupport|selfclient" />
+			<param name="client_zid" regex="^[0-9\.]+$" />
+			<param name="client_js_domain" regex="serviceurl" split="," max-occurrences="100"/> 
+		</url>
+		
+		<url path="/oauth/v2/token/relogin/show" authentication="required" description="To show password vericy page UI." method="get" >
+    		<param name="location" regex="iamcleartextpattern" max-len="350" min-len="1" />
+    		<param name="client_type" regex="iamcleartextpattern" max-len="350" min-len="1" />
+    		<param name="client_id" regex="iamcleartextpattern" max-len="1000" />
+    		<param name="logout" type="boolean" />
+    	</url>
+    	<url path="/oauth/v2/token/relogin" authentication="required" https="true" description="To show password vericy page UI." csrf="true" method="post">
+    		<param name="cPass" regex="oldpassword" max-len="250" min-len="1" secret="true" />
+    	</url>
+    	
+    	<url path="/oauth/v2/token/internal/getextrascopes" description="To get missed scope for mobile app."  method="post" >
+    		<param-group name="clientrequest"/>
+    		<param name="device_verify_token" regex="iambase64" max-len="-1"/>
+    		 <param name="deviceType" regex="0|1|2"/>
+    	</url>
+    	<url path="/oauth/v2/mobile/internal/getremoteloginkey" description="To get  Key for remote login." method="post" >
+    		<param-group name="clientrequest"/>
+    	</url>
+    	<url path="/oauth/v2/mobile/internal/[0-9a-zA-Z\.]+/getremoteuser" https="true" description="To get remote user for login"  url-type="dynamic" method="get" duration="10" threshold="40" lock-period="5" >
+    		<param name="user_token" regex="iambase64" max-len="1000" secret="true" />
+    	</url>
+    	<url path="/oauth/v2/token/external/authtooauth" description="To migrate AuthToken To OAuth for external clients." method="post" >
+    	<param-group name="clientrequest"/>
+    	<param name="soid" regex="iamcleartextpattern" split="," max-occurrences="10"/>
+    	<throttles window="ROLLING" scope="APPSERVER" key="url.path+user.remoteip">
+    	  <throttle duration="1m" threshold="60" lock-period="1m"/>
+    	  <throttle duration="1h" threshold="100" lock-period="1m"/>
+    	</throttles>
+    	</url>
+    	<url path="/oauth/v2/token/internal/web/authtooauth" description="To migrate AuthToken To OAuth for internal integration clients." method="post" internal="true" scoped-services="all" >
+    	<param-group name="clientrequest"/>
+    	<param name="soid" regex="iamcleartextpattern" split="," max-occurrences="10"/>
+    	</url>
+    	<url path="/oauth/v2/token/self/authtooauth" description="To migrate AuthToken To OAuth for self clients." method="post" >
+    	<param-group name="clientrequest"/>
+    	<param name="soid" regex="iamcleartextpattern" split="," max-occurrences="10"/>
+    	<throttles window="ROLLING" scope="APPSERVER" key="url.path+user.remoteip">
+    	  <throttle duration="1m" threshold="25" lock-period="1m"/>
+    	  <throttle duration="1h" threshold="60" lock-period="1m"/>
+    	</throttles>
+    	</url>
+    	<url path="/oauth/v2/token/internal/authtooauth" description="To migrate AuthToken To OAuth." method="post" >
+    		<param name="ss_id" regex="device_token" xss="throwerror" max-len="1000"/>
+    		<param name="client_id" regex="iamcleartextpattern" max-len="1000" />
+    		<param name="enc_token" regex="iambase64" max-len="1000" />
+    		<param name="token"  regex= "[a-zA-Z0-9]+" xss="throwerror" max-len="1000"/>
+    		<param name="instcook" regex="device_token" xss="throwerror" max-len="1000"/>
+    		<param name="is_android" type="boolean"/>
+    	</url>
+    	
+    	<!--  OAuth Restricted Clients -->
+    	<url path="/oauth/create/client" description="To create restricted client" https="true" authentication="required" csrf="false" method="get,post">
+    		<param name="restrictedType" regex="0|1|2"/>
+    		<param name="clientType" regex="MOBILE|JS|WEB"/>
+    		<param name="servicename" regex="servicename" min-occurrences="1" max-occurrences="1"/>
+    		<param name="serviceurl" regex="serviceurl" min-occurrences="1" max-occurrences="1"/>
+    		<param name="redirect_uri" regex="serviceurl" max-len="300" />
+    	</url>
+    	<url path="/oauth/v2/create/restrictedclient" description="To create restricted client" https="true" authentication="required" method="post" csrf="true">
+    		<param name="restricted_type" regex="0|1|2"/>
+    		<param name="client_type" regex="MOBILE|JS|WEB"/>
+    		<param name="client_redirect_uri" regex="serviceurl"  max-len="300"/>
+    		<param name="client_name" regex="iamcleartextpattern"/>
+    		<param name="client_domain" regex="^((ht|f)tp(s?)\:\/\/[-.\w]*)?[0-9\.a-zA-Z\:\/]+$" />
+    		<param name="client_js_domain" regex="serviceurl" split="," max-occurrences="100"/>
+    	</url>
+    	<url path="/oauth/v2/auth/refresh" description="To create accesstoken for implicit token flow" method="get" user="true" authentication="required" xframe-type="none">
+    		 <param-group name="clientrequest"/> 
+    	</url>
+    	<url path="/oauth/access/oauthclient/user" authentication="required" description="add restricted oauthclients to user" https="true" internal="true" scoped-services="ZohoCRM" method="post" csrf="false" api="true">
+    		<param name="client_zid" regex="iamcleartextpattern"/>
+    		<param name="zuid" type="long" split="," max-occurrences="100"/>
+    	</url>
+    	<url path="/oauth/remove/oauthclient/user" authentication="required" description="remove restricted oauthclients to user" https="true" internal="true" scoped-services="ZohoCRM" method="post" csrf="false" api="true">
+    		<param name="client_zid" regex="iamcleartextpattern"/>
+    		<param name="zuid" type="long" split="," max-occurrences="100"/>
+    	</url>
+    	<url path="/oauth/v2/getClientDetails" authentication="required" description="give basic details for oauth client, ZES Feature" https="true" internal="true" scoped-services="ZohoCRM" method="post" csrf="false" api="true">
+    		<param name="client_zid" regex="iamcleartextpattern" split="," max-occurrences="100"/>
+    	</url>
+    	<url path="/oauth/v2/add/redirecturl" authentication="required" description="give basic details for oauth client, ZES Feature" https="true" internal="true" scoped-services="ZohoCRM" method="post" csrf="false" api="true">
+    		<param name="uri" regex="serviceurl" max-len="300" />
+    		<param name="client_zid" regex="iamcleartextpattern"/>
+    		<param name="client_type" regex="0|1"/>
+    	</url>
+
+		<url path="/oauth/serverinfo" description="To get data center details." method="get,post" />
+
+		<url path="/oauth/v2/native/init" method="post" csrf="false" description="To get information for native token to login via oauth" >
+    		<param name="provider" regex="location" max-occurrences="1" min-occurrences="1"/>
+    		<param name="id_data" xss="antisamyfilter" max-len="5000"  />
+    		<param name="custom_info" type="JSONObject" template="custom_info" max-len="-1"  />
+    	</url>
+    	
+    	<url path="/oauth/v2/mobile/unconfirmed" method="get" csrf="false" description="To Show confirmation page for unconfirmed users" >
+    		<param name="unc_token" regex="iamcleartextpattern" max-len="350" min-len="1" secret="true"/>
+    		<param name="redirect_uri" regex="serviceurl" max-len="1000" />
+    	</url>
+    	
+    	<!-- External User Scope Enhancement -->
+    	<url path="/oauth/v2/token/scopeenhance" description="To create a temp token for scope enhancement" method="post" csrf="false">
+    		<param-group name="clientrequest"/>
+    	</url>
+    	
+    	<url path="/oauth/v2/token/addextrascope" description="To update the scopes of refreshToken" method="get" authentication="optional">
+    		<param-group name="clientrequest"/>
+    		<param name="enhance_token" regex="iamcleartextpattern" max-len="1000" secret="true"/>
+    		 <param name="logout" type="boolean"/>
+    		 <param name="forcelogout" type="boolean"/>
+    	</url>
+    	<!-- end -->
+    	
+    	<!--  saml case mobile scope enhancement -->
+    	<url path="/oauth/v2/mobile/scopeenhancement" sl_auth="customauth_optional" reauth="true" description="To update the scopes of refreshToken for mobile SAML case" method="get" mobile="true">
+    		 <param name="logout" type="boolean"/>
+    		 <param name="forcelogout" type="boolean"/>
+    	</url>
+    	<!-- end -->
+    	
+    	<!-- Dre case : internal external case client id creation -->
+    	<url path="/oauth/prompt/createClient" description="prompting user to create an OAuth client" https="true" authentication="required" method="get">
+    		<param name="servicename" regex="servicename" min-occurrences="1" max-occurrences="1"/>
+    		<param name="serviceurl" regex="serviceurl" min-occurrences="1" max-occurrences="1" max-len="1000"/>
+    		<param name="client_type" type="int"/>
+    	</url>
+    	<url path="/oauth/v2/create/OAuthClient" description="On User accepting to create an oauth client" https="true" authentication="required" method="post" csrf="true">
+    		<param name="client_type" type="int"/>
+    	</url>
+    	
+    	<url path="/oauth/v2/updateAndGetOAuthClient" description="get client id and client secret from client Zid" https="true" authentication="required" method="post" api="true"  internal="true" scoped-services="all" >
+    		<param name="client_zid" regex="iamcleartextpattern"/>
+    		<param name="redirect_uri" regex="serviceurl" max-len="300" />
+    		<param name="client_name" regex="iamcleartextpattern"/>
+    	</url>
+    	<!--  end -->
+    	<url path="/oauth/v2/mobile/inactive/token" description="To Load Activate page" https="true" method="get">	
+    		<param name="inc_token" regex="iamcleartextpattern" max-len="400" />
+    	</url>
+    	<url path="/oauth/v2/mobile/inactive/token/activate" description="activate master refresh token" https="true" sl_auth="actrefToken_optional" method="post" csrf="true">
+    		<param name="pass" regex="oldpassword" max-len="250" min-len="1" secret="true" />
+    	</url>
+    	
+    	<!-- activate internal inactive refresh token -->
+    	<url path="/oauth/inactivetoken/handshakeId" description="temporary authtoken for activating internal inactive token" https="true" method="post">
+    		<param name="client_zid" regex="iamcleartextpattern"/>
+    		<param name="device_verify_token" regex="iambase64" max-len="-1"/>
+    		<param name="deviceType" regex="0|1|2"/>
+    	</url>
+    	
+    	<url path="/oauth/v2/internal/inactive/token" description="To Load Activate page" https="true" method="get">	
+    		<param name="handshakeId" regex="iamcleartextpattern" max-len="400" />
+    	</url>
+    	<url path="/oauth/v2/internal/inactive/token/activate" description="activate internal refresh token created for the user" https="true" sl_auth="actrefToken_optional" method="post" csrf="true">
+    		<param name="pass" regex="oldpassword" max-len="250" min-len="1" secret="true" />
+    		<param name="action" regex="accept|reject" />
+    	</url>
+    	<!-- end -->
+    	
+    	<url path="/oauth/fetch/application" authentication="required" description="get the applications from service team to get the  details" method="post" csrf="true">
+    		<param name="servicename" regex="servicename" min-occurrences="1" max-occurrences="1"/>
+    	</url>
+
+    	<url path="/oauth/crossorg/invitation" description="cross org integration invitation request" https="true" authentication="required" method="get" trusted="true">
+    		<param name="DIGEST" regex="digest" max-len="100" min-occurrences="1" max-occurrences="1"/>
+    		<param name="zidType" type="int" min-occurrences="1" max-occurrences="1"/>
+    	</url>
+    	<url path="/oauth/crossorg/invitation/action" description = "user action for cross org integration invitation request" https="true" authentication="required" method="post" csrf="true">
+    		<param name="action" type="boolean"/>
+    		<param name="id" type="long"/>
+    		<param name="DIGEST" regex="digest" max-len="100"/>
+    		<param name="isOrg" type="boolean"/>
+    	</url>
+    	<url path="/oauth/sso/userSignOut" description="sso sign in to new app" sl_auth="oauth_required" https="true" method="post" api="true">
+    		<param name="clientId" regex="client_id" min-occurrences="1"/>
+    		<param name="deviceId" regex="iamcleartextpattern" min-occurrences="1"/>
+    	</url>
+    	<url path="/oauth/device/modify" description="change of device Name for deviceID modification" sl_auth="oauth_required" https="true" api="true" method="post">
+    		<param name="deviceDetails" min-occurrences="1" type="JSONObject" template="notification_json"/>
+    	</url>
+    	<url path="/oauth/dc/sync/mobileappcategory" authentication="required" roles="IAMAdmininistrator,OAuthAdmin" method="post" csrf="true">
+    		<param name="serviceName" regex="servicename" max-len="50" />
+    		<param name="mobileAppName" regex="iamcleartextpattern" />
+    		<param name="selectedDc" split="," regex="[A-Za-z0-9]+" max-occurrences="10"/>
+    		<param name="type" regex="mobileappcategory|mobileapp"/>
+    	</url>
+    	<url path="/oauth/dc/sync/interdcsignature" authentication="required" roles="IAMAdmininistrator,IAMServiceAdmin" method="post" csrf="true">
+    		<param name="serviceName" regex="servicename" max-len="50" />
+    		<param name="selectedDc" split="," regex="[A-Za-z0-9]+" max-occurrences="10"/>
+    		<param name="method" regex="get|post"/>
+    	</url>
+    	<!--  External OrgOAuth -->  	
+    	<url path="/oauth/v2/org/auth" authentication="optional" method="get,post" >
+    		 <param-group name="clientrequest"/>
+    		 <param name="logout" type="boolean"/>
+    		 <param name="forcelogout" type="boolean"/>
+    	</url>
+    	<!--  end -->
+    </urls> 
+
+   	<regexes>
+		<regex name="app_id" value="^[0-9\.a-zA-Z]+$" />
+		<regex name="client_redirect_url" value="[a-zA-Z0-9\-_]*\:\/\/[-.\w]*(\/?)([a-zA-Z0-9\-\.\?\,\:\'\/\\\+=&amp;%\$#_@]*)?$" />
+		<regex name="client_name" value="[a-zA-Z]+"/>
+		<regex name="client_domain" value="[a-zA-Z.]+"/>
+		<regex name="location" value="[a-zA-Z0-9]+"/>
+		<regex name="client_id" value="[0-9]+[.][A-Za-z0-9]+"/>
+		<regex name="jwt" value="[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]+$"/>
+	</regexes>
+	<param-groups>
+		<param-group name="clientrequest">
+			<param name="client_id" regex="iamcleartextpattern" max-len="1000" />
+			<param name="app_signature" regex="iambase64" max-len="1000" />
+			<param name="key" regex="iambase64" max-len="1000" />
+			<param name="caller_signature" regex="iambase64" max-len="1000" />
+			<param name="token" regex="iamcleartextpattern" max-len="1000" />
+			<param name="redirect_uri" regex="serviceurl" max-len="1000" />
+			<param name="access_type" regex="iamcleartextpattern" max-len="100" />
+			<param name="state" xss="throwerror" max-len="100000" />
+			<param name="response_type" regex="iamcleartextpattern" max-len="100" />
+			<param name="grant_type" regex="iamcleartextpattern" max-len="50" />
+			<param name="client_secret" regex="iambase64" max-len="500" secret="true"/>
+			<param name="code" regex="iamcleartextpattern" max-len="1000"/>
+			<param name="refresh_token" regex="iamcleartextpattern" max-len="1000" secret="true"/>
+			<param name="temp_token" regex="iamcleartextpattern" max-len="1000" secret="true"/>
+			<param name="appid" max-len="50" regex="app_id"/>
+			<param name="apnsmode" max-len="20" regex="apns_mode"/>
+			<param name="devicetoken" max-len="250" regex="iambase64"/>
+			<param name="rt_hash" max-len="250" regex="iambase64"/>
+			 <param name="id_token_hint" regex="jwt" max-len="10000"/>
+		</param-group>
+		<param-group name="mobilerequest">
+			<param name="ss_id" regex="device_token" xss="throwerror" max-len="1000"/>
+			<param name="rook_cook" regex="device_token" xss="throwerror" max-len="1000"/>
+			<param name="app_verify" regex="device_token" max-len="1000"/>
+			<param name="instcook" regex="device_token" xss="throwerror" max-len="1000"/>
+			<param name="token" regex="plain_str" xss="throwerror" max-len="1000"/>
+		</param-group>
+	</param-groups>
+	
+	 <jsontemplates>
+	 	<jsontemplate name="application">
+	 		<key name="servicename" name-regex="true" regex="iamcleartextpattern"/>
+	 	</jsontemplate>
+	 	<jsontemplate name="notification_json">
+	 		<key name="deviceName" name-regex="true" type="String"/>
+	 		<key name="deviceId" name-regex="true" regex="iamcleartextpattern"/>
+	 		<key name="deviceModel" name-regex="true" type="String"/>
+	 	</jsontemplate>
+	 	<jsontemplate name="custom_info">
+	 		<key name="name" type="JSONObject" template="name_json"/>
+	 	</jsontemplate>
+	 	<jsontemplate name="name_json">
+	 		<key name="firstName" regex="iamcleartextpattern"/>
+	 		<key name="lastName" regex="iamcleartextpattern"/>
+	 	</jsontemplate>
+	 </jsontemplates>
+</security>

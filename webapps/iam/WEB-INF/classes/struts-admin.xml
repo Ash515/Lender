@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- $Id: $ -->
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+  "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="admin" namespace="/accounts" extends="struts-default">
+		<action name="admin/view-clustercache.jsp">
+			<result>/accounts/jsp/admin/view-clustercache.jsp</result>
+		</action>
+		<action name="admin/redis-stats.jsp">
+			<result>/accounts/jsp/admin/redis-stats.jsp</result>
+		</action>
+		<action name="admin/stats">
+			<result>/accounts/jsp/admin/stats-ajax.jsp</result>
+		</action>
+		<action name="admin/rcstats.jsp">
+			<result>/accounts/jsp/admin/rcstats.jsp</result>
+		</action>
+		<action name="admin/rcdash.jsp">
+			<result>/accounts/jsp/admin/rcdash.jsp</result>
+		</action>
+		<action name="admin/rcrangevis.jsp">
+			<result>/accounts/jsp/admin/rcrangevis.jsp</result>
+		</action>
+		<action name="admin/cache-mon.jsp">
+			<result>/accounts/jsp/admin/cache-mon.jsp</result>
+		</action>
+	</package>
+</struts>

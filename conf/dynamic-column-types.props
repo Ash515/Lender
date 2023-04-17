@@ -1,0 +1,28 @@
+defaultdc.dcadapter = com.adventnet.db.adapter.DefaultDCAdapter
+defaultdc.dcsqlgenerator = com.adventnet.db.adapter.DefaultDCSQLGenerator
+defaultdc.dcmhandler = com.adventnet.db.migration.handler.DefaultDCMigrationHandler
+defaultdc.postgres.dcadapter = com.adventnet.db.adapter.DefaultDCAdapter
+defaultdc.postgres.dcsqlgenerator = com.adventnet.db.adapter.postgres.PostgresDefaultDCSQLGenerator
+defaultdc.postgres.dcmhandler = com.adventnet.db.migration.handler.DefaultDCMigrationHandler
+
+#jsondc.postgres.dcadapter = com.adventnet.db.adapter.postgres.PostgresJSONDCAdapter
+#jsondc.postgres.dcsqlgenerator = com.adventnet.db.adapter.postgres.PostgresJSONDCSQLGenerator
+#jsondc.postgres.dcmhandler = com.adventnet.db.migration.handler.PostgresJSONDCMigrationHandler
+
+#If teams have to write their own dynamic column handler, then they should either write handlers for adapter and sql generator specific to the db as specified in (##1) or common to all dbs as specified in (##2).
+
+##1 DB Specific Handling
+#productdc1.mysql.dcadapter =
+#productdc1.mysql.dcsqlgenerator =
+#productdc1.mysql.dcmhandler =
+#productdc1.postgres.dcadapter =
+#productdc1.postgres.dcsqlgenerator =
+#productdc1.postgres.dcmhandler =
+#productdc1.mssql.dcadapter =
+#productdc1.mssql.dcsqlgenerator =
+#productdc1.mssql.dcmhandler =
+
+##2 Common Handling for all DBs
+#productdc2.dcadapter =
+#productdc2.dcsqlgenerator =
+#productdc2.dcmhandler =

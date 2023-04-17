@@ -1,0 +1,8 @@
+var $attribute = $default_value;
+this.set$mnamesuffix = function($attribute) { 
+    this.$attribute = $attribute;
+    return this;
+};
+this.get$mnamesuffix = function() {
+    return this.$attribute;
+};

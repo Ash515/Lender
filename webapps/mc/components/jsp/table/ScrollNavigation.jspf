@@ -1,0 +1,4 @@
+<!--$Id$-->
+<div id="<%out.print(uniqueId );//NO OUTPUTENCODING%>_statusbar"><%--NO OUTPUTENCODING --%> 
+<%@ include file='/components/jsp/table/TableAjaxUpdateStatus.jspf'%>
+</div>

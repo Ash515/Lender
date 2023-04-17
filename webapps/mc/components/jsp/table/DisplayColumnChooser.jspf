@@ -1,0 +1,12 @@
+<%-- $Id$ --%>
+<%
+String menuItem = (String) viewModel.getTableViewConfigRow().get("COLUMNCHOOSERMENUITEM");
+if(menuItem != null)
+{
+	// Menu based implementation to be added.
+	%>
+	<a href='javascript:void(null)' onClick="javascript:window.open('columnChooserSelect.do?viewName=<%out.print(viewContext.getModel().getViewName());//NO OUTPUTENCODING%>&UNIQUEID=<%out.print(uniqueId);//NO OUTPUTENCODING%>', null, 'height=300,width=350,scrollbars=0,resizable=0')" ><img src="<%out.print(request.getContextPath());//NO OUTPUTENCODING%>/themes/common/images/columnedit.gif" onMouseOver="return showBorder('<%out.print(referenceId);//NO OUTPUTENCODING%>')" onMouseOut="return hideBorder('<%out.print(referenceId);//NO OUTPUTENCODING%>')"></a><%--NO OUTPUTENCODING --%>
+	<%
+}
+%>
+

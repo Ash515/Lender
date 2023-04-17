@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--		
+	W3C rules retrieved from:		
+	http://www.w3.org/TR/html401/struct/global.html		
+	-->
+<!-- ZOHO Enhancement : 
+		* This policy file contains basic rules(Integrated basic configuration from 'antisamy-myspace-1.4.4.xml'), fixes to prevent some issues like high-cpu issue due to malicious HTML content.  
+		* If teams need to extend antisamy policy file please refer -> https://intranet.wiki.zoho.com/security/How-to-extend-antisamy-policy-file.html     
+ -->
+<anti-samy-rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="antisamy.xsd">
+	<directives>
+		<directive name="omitXmlDeclaration" value="true" />
+		<directive name="omitDoctypeDeclaration" value="true" />
+		<directive name="maxInputSize" value="524288000" />
+		<directive name="useXHTML" value="true" />
+		<directive name="formatOutput" value="true" />
+		<!--
+		remember, this won't work for relative URIs - AntiSamy doesn't
+		know anything about the URL or your web structure
+		-->
+		<directive name="embedStyleSheets" value="false" />
+		<directive name="connectionTimeout" value="5000" />
+		<directive name="maxStyleSheetImports" value="3" />
+		<!-- Zoho directives 
+		https://intranet.wiki.zoho.com/security/XSSFilters.html  > Supported directives 
+		-->
+		<!-- Number of attributes to be scanned for a tag  -->
+		<directive name="attributeLimit" value="1000" />
+		<!-- To enable/disable zoho url validator -->
+		<directive name="urlvalidation-enable" value="true" />
+		<!-- List of attributes to be supported with zoho url validator -->
+		<directive name="urlvalidation-attributes" value="href, xlink:href, action, src" />
+		<!-- list of allowed schemes to be supported with zoho url validator -->
+		<directive name="urlvalidation-allowedSchemes" value="http, https, ftp, mailto, tel" />
+		<!-- max length of the data URI to be supported with zoho url validator-->
+		<directive name="urlvalidation-dataURIMaxLength" value="2000"/>
+		<!-- Used to avoid decoding of &amp;nbsp; to space -->
+		<directive name="encodeNonBreakingSpace" value="true" />
+		<!-- To allow/disallow @import css -->
+		<directive name="allowAtImport" value="false" />
+	</directives>
+	<common-regexps>		
+		<!--
+		From W3C:
+		This attribute assigns a class name or set of class names to an
+		element. Any number of elements may be assigned the same class
+		name or names. Multiple class names must be separated by white
+		space characters.
+		-->
+ 		<!-- ZOHO: As per the latest html color specification, 140 colors supported in all browser
+                Refer : http://www.w3schools.com/colors/colors_names.asp  -->
+		<regexp name="colorName" value="[a-zA-Z]{0,50}"/>               
+		<!-- HTML/CSS Spec allows 3 or 6 digit hex to specify color -->
+		<regexp name="colorCode" value="((\s)*#?([0-9a-fA-F]{6}|[0-9a-fA-F]{3}))"/>
+		<regexp name="anything" value=".*"/>
+		<regexp name="numberOrPercent" value="(\d)+(%{0,1})"/>
+		<regexp name="paragraph" value="([\p{L}\p{N},'\.\s\-_\(\)]|&amp;[0-9]{2};)*"/>
+		<regexp name="htmlId" value="[a-zA-Z0-9\:\-_\.]+"/>
+		<regexp name="htmlTitle" value="[\p{L}\p{N}\s\-_',:\[\]!\./\\\(\)&amp;]*"/> <!-- force non-empty with a '+' at the end instead of '*' -->
+		<regexp name="htmlClass" value="[a-zA-Z0-9\s,\-_]+"/>
+		<regexp name="onsiteURL" value="([\p{L}\p{N}\\\.\#@\$%\+&amp;\-_~,\?=/!]+|\#(\w)+)"/>
+		<!-- Default regex provided by antisamy for offsite url
+                 regexp name="offsiteURL" value="((ht|f)tp(s?)://|mailto:)[\p{L}\p{N}]+[\p{L}\p{N}\p{Zs}\.\#@\$%\+&amp;:\-_~,\?=/!\(\)]*(\s)*"/-->
+		<regexp name="offsiteURL" value="(\s)*((ht|f)tp(s?)://|mailto:)[\p{L}\p{N}]+[0-9a-zA-Z\.\#@\$%\+&amp;:\-_~,\?=/!\(\)\P{InBasicLatin}]*(\s)*"/>
+		<regexp name="boolean" value="(true|false)"/>
+		<regexp name="singlePrintable" value="[a-zA-Z0-9]{1}"/> <!-- \w allows the '_' character -->
+		<!-- This is for elements (ex: elemName { ... }) -->
+		<regexp name="cssElementSelector" value="[a-zA-Z0-9\-_]+|\*"/>
+		<!--  This is to list out any element names that are *not* valid -->
+		<regexp name="cssElementExclusion" value=""/>
+		<!--  This if for classes (ex: .className { ... }) -->
+		<regexp name="cssClassSelector" value="\.[a-zA-Z0-9\-_]+"/>
+		<!--  This is to list out any class names that are *not* valid -->
+		<regexp name="cssClassExclusion" value=""/>
+		<!--  This is for ID selectors (ex: #myId { ... } -->
+		<regexp name="cssIDSelector" value="#[a-zA-Z0-9\-_]+"/>
+		<!--  This is to list out any IDs that are *not* valid - FIXME: What should the default be to avoid div hijacking? *? -->
+		<regexp name="cssIDExclusion" value=""/>
+		<!--  This is for pseudo-element selector (ex. foo:pseudo-element { ... } -->
+		<regexp name="cssPseudoElementSelector" value=":[a-zA-Z0-9\-_]+"/>
+		<!--  This is to list out any psuedo-element names that are *not* valid -->
+		<regexp name="cssPsuedoElementExclusion" value=""/>
+		<!--  This is for attribute selectors (ex. foo[attr=value] { ... } -->
+		<regexp name="cssAttributeSelector" value="\[[a-zA-Z0-9\-_]+((=|~=|\|=){1}[a-zA-Z0-9\-_]+){1}\]"/>
+		<!--  This is to list out any attribute names that are *not* valid -->
+		<regexp name="cssAttributeExclusion" value=""/>
+		<!--  This is for resources referenced from CSS (such as background images and other imported stylesheets) -->
+		<regexp name="cssOnsiteUri" value="url\(([\p{L}\p{N}\\/\.\?=\#&amp;;\-_~]+|\#(\w)+)\)"/>
+		<regexp name="cssOffsiteUri" value="url\((\s)*((ht|f)tp(s?)://)[\p{L}\p{N}]+[~\p{L}\p{N}\p{Zs}\-_\.@#$%&amp;;:,\?=/\+!]*(\s)*\)"/>
+		<!--  This if for CSS Identifiers -->
+		<regexp name="cssIdentifier" value="[a-zA-Z0-9\-_]+"/>
+		<!--  This is for comments within CSS (ex. /* comment */) -->
+		<regexp name="cssCommentText" value="[\p{L}\p{N}\-_,\/\\\.\s\(\)!\?\=\$#%\^&amp;:&quot;']+"/>
+		<regexp name="integer" value="(-|\+)?[0-9]+"/>
+		<regexp name="positiveInteger" value="(\+)?[0-9]+"/>
+		<regexp name="number" value="(-|\+)?([0-9]+(\.[0-9]+)?)"/>
+		<regexp name="angle" value="(-|\+)?([0-9]+(\.[0-9]+)?)(deg|grads|rad)"/>
+		<regexp name="time" value="([0-9]+(\.[0-9]+)?)(ms|s)"/>
+		<regexp name="frequency" value="([0-9]+(\.[0-9]+)?)(hz|khz)"/>
+                <!-- ZOHO CHANGE : updated css3 units (ex vh, vmin)-->
+		<regexp name="length" value="((-|\+)?0|(-|\+)?([0-9]+(\.[0-9]+)?)(%|px|rem|vw|vh|vmin|vmax|em|ex|in|cm|mm|pt|pc))"/>
+		<regexp name="positiveLength" value="((\+)?0|(\+)?([0-9]+(\.[0-9]+)?)(rem|vw|vh|vmin|vmax|em|ex|px|in|cm|mm|pt|pc))"/>
+		<regexp name="percentage" value="(-|\+)?([0-9]+(\.[0-9]+)?)%"/>
+		<regexp name="positivePercentage" value="(\+)?([0-9]+(\.[0-9]+)?)%"/>
+		<regexp name="absolute-size" value="(xx-small|x-small|small|medium|large|x-large|xx-large)"/>
+		<regexp name="relative-size" value="(larger|smaller)"/>
+		<!-- Used for CSS Color specifications (complex regexp expresses integer values of 0-255) -->
+		<regexp name="rgbCode" value="rgb\(([1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])%?,([1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])%?,([1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])%?\)"/>        
+		<!-- CSS2 Allowed System Color Values -->
+		<regexp name="systemColor" value="(activeborder|activecaption|appworkspace|background|buttonface|buttonhighlight|buttonshadow|buttontext|captiontext|graytext|highlight|highlighttext|inactiveborder|inactivecaption|inactivecaptiontext|infobackground|infotext|menu|menutext|scrollbar|threeddarkshadow|threedface|threedhighlight|threedlightshadow|threedshadow|window|windowframe|windowtext)"/>
+		<regexp name="emptyValue" value="" />
+		<!-- The 'measurements' regex is the simplification of the following regex,
+			1. numberOrPercent
+			2. integer
+			3. positiveInteger
+	        	4. number
+			 5. length
+			 6. positiveLength
+			 7. percentage
+			 8. positivePercentage
+		-->
+		<regexp name="measurements" value="(\+|-)?\d+(\.[0-9]{1,5})?(%|rem|vw|vh|vmin|vmax|em|ex|px|in|cm|mm|pt|pc)?" description="Customized:Regex" />
+	</common-regexps>
+	<!--		
+			
+		Tag.name = a, b, div, body, etc.		
+		Tag.action = filter: remove tags, but keep content, validate: keep content as long as it passes rules, remove: remove tag and contents		
+		Attribute.name = id, class, href, align, width, etc.		
+		Attribute.onInvalid = what to do when the attribute is invalid, e.g., remove the tag (removeTag), remove the attribute (removeAttribute), filter the tag (filterTag)		
+		Attribute.description = What rules in English you want to tell the users they can have for this attribute. Include helpful things so they'll be able to tune their HTML		
+			
+		 -->
+	<!--		
+		Some attributes are common to all (or most) HTML tags. There aren't many that qualify for this. You have to make sure there's no		
+		collisions between any of these attribute names with attribute names of other tags that are for different purposes.		
+		-->
+	<common-attributes>
+		<!-- Common to all HTML tags  -->
+		<attribute name="id" description="The 'id' of any HTML attribute should not contain anything besides letters and numbers">
+			<regexp-list>
+				<regexp name="htmlId" />
+			</regexp-list>
+		</attribute>
+		<attribute name="class" description="The 'class' of any HTML attribute is usually a single word, but it can also be a list of class names separated by spaces">
+			<regexp-list>
+				<regexp name="htmlClass" />
+			</regexp-list>
+		</attribute>
+		<attribute name="lang" description="The 'lang' attribute tells the browser what language the element's attribute values and content are written in">
+			<regexp-list description="Customized:Regex-Based on the 'w3schools.com', character ',' and '-' added in the existing 'lang' regex.Reference:https://www.w3schools.com/tags/ref_language_codes.asp">
+				<regexp value="[a-zA-Z\-,]{2,20}" />
+			</regexp-list>
+		</attribute>
+		<attribute name="title" description="The 'title' attribute provides text that shows up in a 'tooltip' when a user hovers their mouse over the element">
+			<regexp-list>
+				<regexp name="htmlTitle" />
+			</regexp-list>
+		</attribute>
+		<attribute name="alt" description="The 'alt' attribute provides alternative text to users when its visual representation is not available">
+			<regexp-list>
+				<regexp name="paragraph" />
+			</regexp-list>
+		</attribute>
+		<!-- the "style" attribute will be validated by an inline stylesheet scanner, so no need to define anything here - i hate having to special case this but no other choice -->
+		<attribute name="style" description="The 'style' attribute provides the ability for users to change many attributes of the tag's contents using a strict syntax" />
+		<attribute name="media">
+			<regexp-list>
+				<regexp value="[a-zA-Z0-9,\-\s]+" />
+			</regexp-list>
+			<literal-list>
+				<literal value="screen" />
+				<literal value="tty" />
+				<literal value="tv" />
+				<literal value="projection" />
+				<literal value="handheld" />
+				<literal value="print" />
+				<literal value="braille" />
+				<literal value="aural" />
+				<literal value="all" />
+			</literal-list>
+		</attribute>
+		<!-- Anchor related -->
+		<!--  onInvalid="filterTag" has been removed as per suggestion at OWASP SJ 2007 - just "name" is valid -->
+		<attribute name="href">
+			<regexp-list>
+				<regexp name="onsiteURL" />
+				<regexp name="offsiteURL" />
+			</regexp-list>
+		</attribute>
+		<attribute name="name">
+			<regexp-list>
+				<regexp value="[a-zA-Z0-9\-_\$]+" />
+				<!--
+		 		have to allow the $ for .NET controls - although,
+		 		will users be supplying input that has server-generated
+		 		.NET control names? methinks not, but i want to pass my
+		 		test cases
+		 		-->
+			</regexp-list>
+		</attribute>
+		<attribute name="shape" description="The 'shape' attribute defines the shape of the selectable area">
+			<literal-list>
+				<literal value="default" />
+				<literal value="rect" />
+				<literal value="circle" />
+				<literal value="poly" />
+			</literal-list>
+		</attribute>
+		<!--  Table attributes  -->
+		<attribute name="border">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="cellpadding">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="cellspacing">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="colspan">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="rowspan">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="background">
+			<regexp-list>
+				<regexp name="onsiteURL" />
+			</regexp-list>
+		</attribute>
+		<attribute name="bgcolor">
+			<regexp-list>
+				<regexp name="colorName" />
+				<regexp name="colorCode" />
+			</regexp-list>
+		</attribute>
+		<attribute name="abbr">
+			<regexp-list>
+				<regexp name="paragraph" />
+			</regexp-list>
+		</attribute>
+		<attribute name="headers" description="The 'headers' attribute is a space-separated list of cell IDs">
+			<regexp-list>
+				<regexp value="[a-zA-Z0-9\s*]*" />
+			</regexp-list>
+		</attribute>
+		<attribute name="charoff">
+			<regexp-list>
+				<regexp value="numberOrPercent" />
+			</regexp-list>
+		</attribute>
+		<attribute name="char">
+			<regexp-list>
+				<regexp value=".{0,1}" />
+			</regexp-list>
+		</attribute>
+		<attribute name="axis" description="The 'headers' attribute is a comma-separated list of related header cells">
+			<regexp-list>
+				<regexp value="[a-zA-Z0-9\s*,]*" />
+			</regexp-list>
+		</attribute>
+		<attribute name="nowrap" description="The 'nowrap' attribute tells the browser not to wrap text that goes over one line">
+			<regexp-list>
+				<regexp name="anything" />
+				<!-- <regexp value="(nowrap){0,1}"/>  -->
+			</regexp-list>
+		</attribute>
+		<!--  Common positioning attributes  -->
+		<attribute name="width">
+			<regexp-list>
+				<regexp name="numberOrPercent" />
+				<!-- ZOHO UPDATE : Based on the creator log, 'width' attribute with the lexical unit px is valid. -->
+				<regexp name="length" description="Customized:Regex-Based on the creator log, 'width' attribute with the lexical unit 'px' and float numbers is valid.Reference:https://intranet.wiki.zoho.com/security/HTML---and---CSS---Antisamy---behaviour---creator---log---analysis---6---march---2017.html" />
+			</regexp-list>
+		</attribute>
+		<attribute name="height">
+			<regexp-list>
+				<!-- ZOHO UPDATE : Based on the creator log, 'height' attribute with the lexical unit px is valid. -->
+				<regexp name="numberOrPercent" />
+				<regexp name="length" />
+			</regexp-list>
+		</attribute>
+		<attribute name="align" description="The 'align' attribute of an HTML element is a direction word, like 'left', 'right' or 'center'">
+			<literal-list>
+				<literal value="center" />
+				<literal value="middle" />
+				<literal value="left" />
+				<literal value="right" />
+				<literal value="justify" />
+				<literal value="char" />
+			</literal-list>
+		</attribute>
+		<attribute name="valign" description="The 'valign' attribute of an HTML attribute is a direction word, like 'baseline','bottom','middle' or 'top'">
+			<literal-list>
+				<literal value="baseline" />
+				<literal value="bottom" />
+				<literal value="middle" />
+				<literal value="top" />
+			</literal-list>
+		</attribute>
+		<!-- Intrinsic JavaScript Events -->
+		<attribute name="onFocus" description="The 'onFocus' event is executed when the control associated with the tag gains focus">
+			<literal-list>
+				<literal value="javascript:void(0)" />
+				<literal value="javascript:history.go(-1)" />
+			</literal-list>
+		</attribute>
+		<attribute name="onBlur" description="The 'onBlur' event is executed when the control associated with the tag loses focus">
+			<literal-list>
+				<literal value="javascript:void(0)" />
+				<literal value="javascript:history.go(-1)" />
+			</literal-list>
+		</attribute>
+		<attribute name="onClick" description="The 'onClick' event is executed when the control associated with the tag is clicked">
+			<literal-list>
+				<literal value="javascript:void(0)" />
+				<literal value="javascript:history.go(-1)" />
+			</literal-list>
+		</attribute>
+		<attribute name="onDblClick" description="The 'onDblClick' event is executed when the control associated with the tag is clicked twice immediately">
+			<literal-list>
+				<literal value="javascript:void(0)" />
+				<literal value="javascript:history.go(-1)" />
+			</literal-list>
+		</attribute>
+		<attribute name="onMouseDown" description="The 'onMouseDown' event is executed when the control associated with the tag is clicked but not yet released">
+			<literal-list>
+				<literal value="javascript:void(0)" />
+				<literal value="javascript:history.go(-1)" />
+			</literal-list>
+		</attribute>
+		<attribute name="onMouseUp" description="The 'onMouseUp' event is executed when the control associated with the tag is clicked after the button is released">
+			<literal-list>
+				<literal value="javascript:void(0)" />
+				<literal value="javascript:history.go(-1)" />
+			</literal-list>
+		</attribute>
+		<attribute name="onMouseOver" description="The 'onMouseOver' event is executed when the user's mouse hovers over the control associated with the tag">
+			<literal-list>
+				<literal value="javascript:void(0)" />
+				<literal value="javascript:history.go(-1)" />
+			</literal-list>
+		</attribute>
+		<attribute name="scope" description="The 'scope' attribute defines what's covered by the header cells">
+			<literal-list>
+				<literal value="row" />
+				<literal value="col" />
+				<literal value="rowgroup" />
+				<literal value="colgroup" />
+			</literal-list>
+		</attribute>
+		<!-- If you want users to be able to mess with tabindex, uncomment this -->
+		<!--
+		 <attribute name="tabindex" description="...">
+		 	<regexp-list>
+		 		<regexp name="number"/>
+		 	</regexp-list>
+		 </attribute>
+		  -->
+		<!-- Input/form related common attributes -->
+		<attribute name="disabled">
+			<regexp-list>
+				<regexp name="anything" />
+			</regexp-list>
+		</attribute>
+		<attribute name="readonly">
+			<regexp-list>
+				<regexp name="anything" />
+			</regexp-list>
+		</attribute>
+		<attribute name="accesskey">
+			<regexp-list>
+				<regexp name="anything" />
+			</regexp-list>
+		</attribute>
+		<attribute name="size">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="autocomplete">
+			<literal-list>
+				<literal value="on" />
+				<literal value="off" />
+			</literal-list>
+		</attribute>
+		<attribute name="rows">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+		<attribute name="cols">
+			<regexp-list>
+				<regexp name="number" />
+			</regexp-list>
+		</attribute>
+	</common-attributes>
+	<!--
+	This requires normal updates as browsers continue to diverge from the W3C and each other. As long as the browser wars continue
+	this is going to continue. I'm not sure war is the right word for what's going on. Doesn't somebody have to win a war after
+	a while? Even wars of attrition, surely?
+	 -->
+	<global-tag-attributes>
+		<!-- Not valid in base, head, html, meta, param, script, style, and title elements. -->
+		<attribute name="id" />
+		<attribute name="style" />
+		<attribute name="title" />
+		<attribute name="class" />
+		<!-- Not valid in base, br, frame, frameset, hr, iframe, param, and script elements.  -->
+		<attribute name="lang" />
+	</global-tag-attributes>
+	<tags-to-encode>
+		<tag>g</tag>
+		<tag>grin</tag>
+	</tags-to-encode>
+</anti-samy-rules>

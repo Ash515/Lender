@@ -1,0 +1,860 @@
+<?xml version="1.0" ?>
+<!-- $Id$ -->
+<!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd">
+<data-dictionary name="TaskEngine">
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- Start Schedule Definition -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->                      <table name="Schedule">
+		<columns>
+			<column name="SCHEDULE_ID">
+				<data-type>BIGINT</data-type>
+				<max-size>20</max-size>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>SCHEDULEID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="SCHEDULE_NAME">
+				<data-type>NCHAR</data-type>
+				<max-size>150</max-size>
+				<nullable>false</nullable>
+				<unique>true</unique>
+			</column>
+			<column name="DESCRIPTION">
+				<data-type>NCHAR</data-type>
+				<max-size>150</max-size>
+				<default-value>No Description</default-value>
+				<nullable>false</nullable>            
+			</column>
+		</columns>
+		<primary-key name="Schedule_PK">
+			<primary-key-column>SCHEDULE_ID</primary-key-column>
+		</primary-key>
+	</table>      
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- End Schedule Definition -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->                                                    
+
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- Start PeriodicSchedule Definition -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->                                                    
+
+	<table name="Periodic">
+		<columns>
+			<column name="SCHEDULE_ID">
+				<data-type>BIGINT</data-type>
+				<max-size>20</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="START_DATE">
+				<data-type>DATETIME</data-type>
+				<!--max-size>20</max-size-->
+			<nullable>true</nullable>
+		</column>
+		<column name="END_DATE">
+			<data-type>DATETIME</data-type>
+			<!--max-size>20</max-size-->
+		<nullable>true</nullable>
+	</column>
+	<column name="TIME_PERIOD">    
+		<data-type>BIGINT</data-type>
+		<max-size>20</max-size>
+		<default-value>5</default-value>
+		<nullable>false</nullable>                
+	</column>
+	<column name="UNIT_OF_TIME">
+		<data-type>CHAR</data-type>
+		<max-size>20</max-size>
+		<default-value>minutes</default-value>
+		<nullable>false</nullable>                
+	</column>
+	<column name="EXECUTE_IMMEDIATELY">
+		<data-type>BOOLEAN</data-type>
+		<max-size>5</max-size>
+		<default-value>false</default-value>
+		<nullable>false</nullable>
+	</column>
+</columns>
+<primary-key name="Periodic_PK">
+	<primary-key-column>SCHEDULE_ID</primary-key-column>
+</primary-key>
+<foreign-keys>
+	<foreign-key name="Periodic_FK" reference-table-name="Schedule" isbidirectional="false">
+		<fk-columns>
+			<fk-column>
+				<fk-local-column>SCHEDULE_ID</fk-local-column>
+				<fk-reference-column>SCHEDULE_ID</fk-reference-column>
+			</fk-column>
+		</fk-columns>
+		<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+	</foreign-key>
+</foreign-keys>
+</table>          
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- End PeriodicSchedule Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->                                                    
+
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- Start CalendarSchedule Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->                                                    
+<table name="Calendar">
+	<columns>
+		<column name="SCHEDULE_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>
+		</column>
+		<column name="REPEAT_FREQUENCY">
+			<data-type>CHAR</data-type>
+			<max-size>20</max-size>
+			<default-value>NONE</default-value>
+			<nullable>false</nullable>                                
+		</column>
+		<column name="TIME_OF_DAY">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<default-value>0</default-value>
+			<nullable>false</nullable>                
+		</column>
+		<column name="UNIT_OF_TIME">
+			<data-type>CHAR</data-type>
+			<max-size>20</max-size>
+			<default-value>seconds</default-value>
+			<nullable>false</nullable>                
+		</column>
+		<column name="DAY_OF_WEEK">    
+			<data-type>INTEGER</data-type>
+			<max-size>2</max-size>
+			<default-value>-1</default-value>
+			<nullable>false</nullable>                
+		</column>
+		<column name="WEEK">    
+			<data-type>BIGINT</data-type>
+			<max-size>2</max-size>
+			<default-value>-1</default-value>
+			<nullable>false</nullable>                
+		</column>
+		<column name="DATE_OF_MONTH">
+			<data-type>INTEGER</data-type>
+			<max-size>2</max-size>
+			<default-value>-1</default-value>
+			<nullable>false</nullable>            
+		</column>
+		<column name="MONTH_OF_YEAR">
+			<data-type>INTEGER</data-type>
+			<max-size>2</max-size>
+			<default-value>-1</default-value>                
+			<nullable>false</nullable>
+		</column>
+		<column name="YEAR_OF_DECADE">
+			<data-type>INTEGER</data-type>
+			<max-size>2</max-size>
+			<default-value>-1</default-value>                
+			<nullable>false</nullable>
+		</column>
+		<column name="TZ">
+			<data-type>CHAR</data-type>
+			<max-size>50</max-size>
+			<nullable>true</nullable>
+        </column>
+        <column name="SKIP_FREQUENCY">
+            <data-type>INTEGER</data-type>
+            <default-value>0</default-value>
+            <nullable>false</nullable>
+        </column>
+		<column name="USE_DATE_IN_REVERSE">
+			<data-type>BOOLEAN</data-type>
+			<default-value>false</default-value>
+			<nullable>false</nullable>                
+		</column>
+		<column name="FIRST_DAY_OF_WEEK">
+			<data-type>INTEGER</data-type>
+			<max-size>2</max-size>
+			<default-value>-1</default-value>                
+			<nullable>false</nullable>
+		</column>
+    </columns>
+	<primary-key name="Calendar_PK">
+		<primary-key-column>SCHEDULE_ID</primary-key-column>
+	</primary-key>
+	<foreign-keys>
+		<foreign-key name="Calendar_FK" reference-table-name="Schedule" isbidirectional="false">
+			<fk-columns>
+				<fk-column>
+					<fk-local-column>SCHEDULE_ID</fk-local-column>
+					<fk-reference-column>SCHEDULE_ID</fk-reference-column>
+				</fk-column>
+			</fk-columns>
+			<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+		</foreign-key>          
+	</foreign-keys>
+</table>        
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- End CalendarSchedule Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->                                                            
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- Start CompositeSchedule Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->                                                    
+
+<table name="Composite">
+	<columns>
+		<column name="SCHEDULE_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>
+		</column>
+		<column name="SUB_SCHEDULE_ID1">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>
+		</column>
+		<column name="OPERATOR">
+			<data-type>CHAR</data-type>
+			<max-size>150</max-size>
+			<nullable>false</nullable>
+		</column>
+		<column name="SUB_SCHEDULE_ID2">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>
+		</column>
+	</columns>
+	<primary-key name="Composite_PK">
+		<primary-key-column>SCHEDULE_ID</primary-key-column>
+	</primary-key>
+	<foreign-keys>
+		<foreign-key name="Composite_FK1" reference-table-name="Schedule" isbidirectional="false">
+			<fk-columns>
+				<fk-column>
+					<fk-local-column>SCHEDULE_ID</fk-local-column>
+					<fk-reference-column>SCHEDULE_ID</fk-reference-column>
+				</fk-column>
+			</fk-columns>
+			<fk-constraints>ON-DELETE-CASCADE</fk-constraints> 
+		</foreign-key>
+		<foreign-key name="Composite_FK2" reference-table-name="Schedule" isbidirectional="false">
+			<fk-columns>
+				<fk-column>
+					<fk-local-column>SUB_SCHEDULE_ID1</fk-local-column>
+					<fk-reference-column>SCHEDULE_ID</fk-reference-column>
+				</fk-column>
+			</fk-columns>
+			<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+		</foreign-key>
+		<foreign-key name="Composite_FK3" reference-table-name="Schedule" isbidirectional="false">      
+			<fk-columns> 
+				<fk-column>
+					<fk-local-column>SUB_SCHEDULE_ID2</fk-local-column>
+					<fk-reference-column>SCHEDULE_ID</fk-reference-column>
+				</fk-column>                
+			</fk-columns>
+			<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+		</foreign-key>
+	</foreign-keys>
+</table>                        
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- End CompositeSchedule Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->                                                    
+
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- Start TaskEngine_Task Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<table name = "TaskEngine_Task">
+	<columns>
+		<column name = "TASK_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size> 
+			<nullable>false</nullable>
+			<uniquevalue-generation>
+				<generator-name>TASKID</generator-name>
+			</uniquevalue-generation>
+		</column>
+		<column name = "TASK_NAME">
+			<data-type>CHAR</data-type>
+			<max-size>250</max-size>
+			<nullable>false</nullable>
+			<unique>true</unique>
+		</column>
+		<column name = "CLASS_NAME">
+			<data-type>CHAR</data-type>
+			<max-size>250</max-size>
+			<nullable>false</nullable>
+		</column>
+	</columns>
+	<primary-key name = "TaskEngine_Task_PK">
+		<primary-key-column>TASK_ID</primary-key-column>
+	</primary-key>
+</table>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- Start ScheduledTask Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->                                                    
+
+
+<table name="Scheduled_Task">
+	<columns>
+		<column name="SCHEDULE_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>
+		</column>
+		<column name="TASK_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>
+		</column>
+		<column name="OFFSET_MS">
+                        <description>
+                            It is the Time in Millisecond which will be multiplied by a factor and added to the SCHEDULE TIME for a particular Task_Input (task instance). This is done inorder to keep the worker threads available for various kinds of TaskInstances(i.e. different SCHEDULE_ID/TASK_ID combinations) at a particular time.
+                        </description>
+			<data-type>INTEGER</data-type>
+			<max-size>5</max-size>
+			<default-value>100</default-value>
+			<nullable>false</nullable>                
+		</column>
+		<column name="SCHEDULE_MODE">
+			<data-type>INTEGER</data-type>
+			<max-size>2</max-size>
+			<default-value>2</default-value>
+			<nullable>false</nullable>                
+		</column>                
+		<column name="ADMIN_STATUS">
+			<data-type>INTEGER</data-type>
+			<max-size>2</max-size>
+			<default-value>3</default-value>
+			<nullable>false</nullable>                
+		</column>
+		<column name="AUDIT_FLAG">
+			<data-type>BOOLEAN</data-type>
+			<max-size>5</max-size>
+			<default-value>false</default-value>
+			<nullable>false</nullable>                
+		</column>
+		<column name="TRANSACTION_TIME">
+			<data-type>INTEGER</data-type>
+			<max-size>20</max-size>
+			<default-value>0</default-value>
+			<nullable>false</nullable>                
+		</column>
+		<column name="RETRY_SCHEDULE_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>true</nullable>                
+		</column>        
+		<column name="SKIP_MISSED_SCHEDULE">
+			<data-type>BOOLEAN</data-type>
+			<max-size>5</max-size>
+			<default-value>false</default-value>
+			<nullable>false</nullable>
+		</column>
+		<column name="REMOVE_ON_EXPIRY">
+			<data-type>BOOLEAN</data-type>
+			<max-size>5</max-size>
+			<default-value>false</default-value>
+			<nullable>false</nullable>
+        </column>
+        <column name="RETRY_HANDLER">
+            <data-type>CHAR</data-type>
+            <max-size>250</max-size>
+        </column>
+        <column name="REMIND_BEFORE">
+			<data-type>INTEGER</data-type>
+			<max-size>20</max-size>
+			<default-value>-1</default-value>
+			<nullable>false</nullable>                
+		</column>
+		<column name="MAX_REMINDER_COUNT">
+			<data-type>INTEGER</data-type>
+			<default-value>-1</default-value>
+			<nullable>false</nullable>                
+		</column>
+		<column name="REMINDED_COUNT">
+			<data-type>INTEGER</data-type>
+			<default-value>0</default-value>
+			<nullable>false</nullable>                
+		</column>
+		<column name="EXECUTE_WITHIN">
+			<data-type>INTEGER</data-type>
+			<default-value>-1</default-value>
+			<nullable>false</nullable>
+		</column> 
+	</columns>
+	<primary-key name="ScheduledTask_PK">
+		<primary-key-column>SCHEDULE_ID</primary-key-column>
+		<primary-key-column>TASK_ID</primary-key-column>                    
+	</primary-key>
+	<foreign-keys>
+		<foreign-key name="ScheduledTask_FK1" reference-table-name="Schedule" isbidirectional="false">
+			<fk-columns>
+				<fk-column>
+					<fk-local-column>SCHEDULE_ID</fk-local-column>
+					<fk-reference-column>SCHEDULE_ID</fk-reference-column>
+				</fk-column>   
+			</fk-columns>
+			<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+		</foreign-key>
+		<foreign-key name="ScheduledTask_FK2" reference-table-name="TaskEngine_Task" isbidirectional="false">
+			<fk-columns>
+				<fk-column>
+					<fk-local-column>TASK_ID</fk-local-column>
+					<fk-reference-column>TASK_ID</fk-reference-column>
+				</fk-column>
+			</fk-columns>
+			<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+		</foreign-key>
+		<foreign-key name="ScheduledTask_FK3" reference-table-name="Schedule" isbidirectional="false">
+			<fk-columns>
+				<fk-column>
+					<fk-local-column>RETRY_SCHEDULE_ID</fk-local-column>
+					<fk-reference-column>SCHEDULE_ID</fk-reference-column>
+				</fk-column>   
+			</fk-columns>
+			<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+		</foreign-key>
+	</foreign-keys>
+</table>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- End ScheduleTask Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->                                                    
+<table name="ScheduledTask_Retry">
+    <columns>
+        <column name="SCHEDULE_ID">
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="TASK_ID">
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+        </column>
+        <column name="RETRY_COUNT">
+            <description></description>
+            <data-type>INTEGER</data-type>
+            <default-value>0</default-value>
+            <nullable>false</nullable>
+        </column>
+        <column name="RETRY_TIME_PERIOD">
+            <data-type>BIGINT</data-type>
+            <default-value>5</default-value>
+            <nullable>false</nullable>
+        </column>
+        <column name="RETRY_UNIT_OF_TIME">
+            <data-type>CHAR</data-type>
+            <default-value>minutes</default-value>
+            <nullable>false</nullable>
+            <allowed-values>
+                <value>minutes</value>
+                <value>hours</value>
+                <value>seconds</value>
+            </allowed-values>
+        </column>
+        <column name="RETRY_FACTOR">
+            <data-type>INTEGER</data-type>
+            <default-value>1</default-value>
+            <nullable>false</nullable>
+        </column>
+        <column name="RETRIED_COUNT">
+            <description></description>
+            <data-type>INTEGER</data-type>
+            <default-value>0</default-value>
+            <nullable>false</nullable>
+        </column>
+	</columns>
+	<primary-key name="ScheduledTask_Retry_PK">
+		<primary-key-column>SCHEDULE_ID</primary-key-column>
+		<primary-key-column>TASK_ID</primary-key-column>
+	</primary-key>
+	<foreign-keys>
+		<foreign-key name="ScheduledTask_Retry_FK1" reference-table-name="Scheduled_Task" isbidirectional="false">
+			<fk-columns>
+				<fk-column>
+					<fk-local-column>SCHEDULE_ID</fk-local-column>
+					<fk-reference-column>SCHEDULE_ID</fk-reference-column>
+				</fk-column>
+				<fk-column>
+					<fk-local-column>TASK_ID</fk-local-column>
+					<fk-reference-column>TASK_ID</fk-reference-column>
+				</fk-column>    
+			</fk-columns>
+			<fk-constraints>ON-DELETE-CASCADE</fk-constraints>  
+		</foreign-key>
+	</foreign-keys>
+</table>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- Start TaskInput Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->                                                    
+
+<table name="Task_Input">
+	<columns>
+		<column name="INSTANCE_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>
+			<uniquevalue-generation>
+				<generator-name>TASK_INPUT_ID</generator-name>
+			</uniquevalue-generation>
+		</column>
+		<column name="SCHEDULE_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>
+		</column>
+		<column name="SCHEDULE_TIME">
+			<data-type>DATETIME</data-type>
+			<default-value>0</default-value>
+			<nullable>true</nullable>
+		</column> 
+		<column name="ADMIN_STATUS">
+			<data-type>INTEGER</data-type>
+			<max-size>2</max-size>
+			<default-value>3</default-value>
+			<nullable>false</nullable>                
+		</column>
+		<column name="TASK_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>
+        </column>
+        <column name="POOL_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>true</nullable>			
+		</column>
+		<column name="EXECUTION_START_TIME">
+            <data-type>DATETIME</data-type>
+            <nullable>true</nullable>
+        </column> 
+        <column name="EXECUTION_FINISH_TIME">
+            <data-type>DATETIME</data-type>
+            <nullable>true</nullable>
+        </column>  
+        <column name="ACTUAL_SCHEDULED_TIME">
+			<data-type>DATETIME</data-type>
+			<default-value>0</default-value>
+			<nullable>true</nullable>
+		</column>  
+		<column name="LAST_REMINDER_STATUS">
+			<data-type>INTEGER</data-type>
+			<default-value>-1</default-value>
+			<nullable>false</nullable>                
+		</column>
+	</columns>
+	<primary-key name="Task_Input_PK">
+		<primary-key-column>INSTANCE_ID</primary-key-column>
+	</primary-key>
+	<foreign-keys>
+		<foreign-key name="Task_Input_FK1" reference-table-name="Scheduled_Task" isbidirectional="true">
+			<fk-columns>
+				<fk-column>
+					<fk-local-column>SCHEDULE_ID</fk-local-column>
+					<fk-reference-column>SCHEDULE_ID</fk-reference-column>
+				</fk-column>
+				<fk-column>
+					<fk-local-column>TASK_ID</fk-local-column>
+					<fk-reference-column>TASK_ID</fk-reference-column>
+				</fk-column>    
+			</fk-columns>
+			<fk-constraints>ON-DELETE-CASCADE</fk-constraints>  
+		</foreign-key>
+	</foreign-keys>
+</table>             
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- End TaskInput Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->                                                    
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- Start DefaultTaskInput Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->                                                    
+
+<table name="Default_Task_Input">
+	<columns>
+		<column name="INSTANCE_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>
+		</column>
+		<column name="VARIABLE_NAME">
+			<data-type>CHAR</data-type>
+			<max-size>100</max-size>
+			<nullable>true</nullable>                
+		</column>     
+		<column name="VARIABLE_TYPE">
+			<data-type>CHAR</data-type>
+			<max-size>50</max-size>
+			<nullable>true</nullable>                
+		</column>     
+		<column name="VARIABLE_VALUE">
+			<data-type>CHAR</data-type>
+			<max-size>300</max-size>
+			<nullable>true</nullable>                
+		</column>
+	</columns>
+	<primary-key name="Default_Task_Input_PK">
+		<primary-key-column>INSTANCE_ID</primary-key-column>
+		<primary-key-column>VARIABLE_NAME</primary-key-column>
+	</primary-key>
+	<foreign-keys>
+		<foreign-key name="Default_Task_Input_FK1" reference-table-name="Task_Input" isbidirectional="false">
+			<fk-columns>
+				<fk-column>
+					<fk-local-column>INSTANCE_ID</fk-local-column>
+					<fk-reference-column>INSTANCE_ID</fk-reference-column>
+				</fk-column>
+			</fk-columns>
+			<fk-constraints>ON-DELETE-CASCADE</fk-constraints>  
+		</foreign-key>
+	</foreign-keys>
+</table>             
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- End Default TaskInput Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->                                                    
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- Start Schedule Audit Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<table name="Schedule_Audit">
+	<columns>
+		<column name="AUDIT_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>
+			<uniquevalue-generation>
+				<generator-name>Schedule_Audit.AUDIT_ID</generator-name>
+			</uniquevalue-generation>
+		</column>
+		<column name="SCHEDULE_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+		</column>
+		<column name="SCHEDULE_NAME">
+			<data-type>NCHAR</data-type>
+			<max-size>150</max-size>
+			<nullable>false</nullable>            
+		</column>
+		<column name="TASK_INPUT_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+		</column>
+		<column name="SCHEDULE_START_TIME">
+			<data-type>DATETIME</data-type>
+			<!--max-size>20</max-size-->
+			<nullable>false</nullable>            
+		</column>
+		<column name="SCHEDULE_FINISH_TIME">
+			<data-type>DATETIME</data-type>
+			<!--max-size>20</max-size-->
+			<nullable>false</nullable>            
+		</column>
+		<column name="TASK_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+		</column>
+		<column name="TASK_NAME">
+			<data-type>CHAR</data-type>
+			<max-size>150</max-size>
+			<nullable>false</nullable>
+		</column>
+		<column name="TASK_EXECUTION_STATUS">
+			<data-type>CHAR</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>            
+        </column>
+        <column name="STATUS_MESSAGE">
+            <data-type>NCHAR</data-type>
+            <max-size>255</max-size>
+        </column>
+        <column name="SCHEDULED_TIME">
+            <data-type>DATETIME</data-type>
+        </column>
+	</columns>        
+	<primary-key name="Schedule_Audit_PK">
+		<primary-key-column>AUDIT_ID</primary-key-column>
+	</primary-key>    
+</table>
+
+<table name="Reminder_Audit">
+	<columns>
+		<column name="AUDIT_ID">
+			<data-type>BIGINT</data-type>
+			<nullable>false</nullable>
+			<uniquevalue-generation>
+				<generator-name>Reminder_Audit.AUDIT_ID</generator-name>
+			</uniquevalue-generation>
+		</column>
+		<column name="TASK_INPUT_ID">
+			<data-type>BIGINT</data-type>
+		</column>
+		<column name="SCHEDULE_ID">
+			<data-type>BIGINT</data-type>
+		</column>
+		<column name="TASK_ID">
+			<data-type>BIGINT</data-type>
+		</column>
+		<column name="SCHEDULED_TIME">
+			<data-type>DATETIME</data-type>
+			<nullable>false</nullable>            
+		</column>
+		<column name="REMINDER_EXECUTED_TIME">
+			<data-type>DATETIME</data-type>
+			<nullable>false</nullable>            
+		</column>
+		<column name="RESCHEDULE_TIME">
+			<data-type>DATETIME</data-type>
+			<nullable>true</nullable>            
+		</column>
+	</columns>        
+	<primary-key name="Reminder_Audit_PK">
+		<primary-key-column>AUDIT_ID</primary-key-column>
+	</primary-key>    
+</table>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- Start Working_Hours Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<table name="Working_Hours">
+	<columns>
+		<column name="WORKING_HOURS_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>
+			<uniquevalue-generation>
+				<generator-name>Working_Hours.WORKING_HOURS_ID</generator-name>
+				<name-column>WORKING_HOURS_NAME</name-column>
+			</uniquevalue-generation>
+		</column>
+		<column name="WORKING_HOURS_NAME">
+			<data-type>CHAR</data-type>
+			<max-size>150</max-size>
+			<nullable>false</nullable>
+		</column>
+		<column name="START_TIME">    
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>                
+		</column>
+		<column name="UNIT_OF_START_TIME">
+			<data-type>CHAR</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>                
+		</column>
+		<column name="END_TIME">    
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>                
+		</column>
+		<column name="UNIT_OF_END_TIME">
+			<data-type>CHAR</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>                
+		</column>
+	</columns>
+	<primary-key name="Working_Hours_PK">
+		<primary-key-column>WORKING_HOURS_ID</primary-key-column>
+	</primary-key>
+	<unique-keys>
+		<unique-key name="Working_Hours_UK">
+			<unique-key-column>WORKING_HOURS_NAME</unique-key-column>
+		</unique-key>
+	</unique-keys>
+</table>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- End of Working_Hours Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- Start Calendar_Periodicity Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<table name="Calendar_Periodicity">
+	<columns>
+		<column name="SCHEDULE_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>
+		</column>
+		<column name="WORKING_HOURS_ID">
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<nullable>false</nullable>
+		</column>
+		<column name="PERIODICITY">    
+			<data-type>BIGINT</data-type>
+			<max-size>20</max-size>
+			<default-value>1</default-value>
+			<nullable>false</nullable>                
+		</column>
+		<column name="UNIT_OF_PERIODICITY">
+			<data-type>CHAR</data-type>
+			<max-size>20</max-size>
+			<default-value>hour</default-value>
+			<nullable>false</nullable>                
+		</column>
+	</columns>
+	<primary-key name="Calendar_Periodicity_PK">
+		<primary-key-column>SCHEDULE_ID</primary-key-column>
+	</primary-key>
+	<foreign-keys>
+		<foreign-key name="Calendar_Periodicity_FK1" reference-table-name="Calendar" isbidirectional="false">
+			<fk-columns>
+				<fk-column>
+					<fk-local-column>SCHEDULE_ID</fk-local-column>
+					<fk-reference-column>SCHEDULE_ID</fk-reference-column>
+				</fk-column>   
+			</fk-columns>
+			<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+		</foreign-key>
+		<foreign-key name="Calendar_Periodicity_FK2" reference-table-name="Working_Hours" isbidirectional="false">
+			<fk-columns>
+				<fk-column>
+					<fk-local-column>WORKING_HOURS_ID</fk-local-column>
+					<fk-reference-column>WORKING_HOURS_ID</fk-reference-column>
+				</fk-column>   
+			</fk-columns>
+			<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+		</foreign-key>
+	</foreign-keys>
+</table>
+<table name="ThreadPool">
+		<columns>
+			<column name="THREADPOOL_ID">
+				<data-type>BIGINT</data-type>
+				<max-size>20</max-size>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>THREADPOOLID</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="THREADPOOL_NAME">
+				<data-type>CHAR</data-type>
+				<max-size>150</max-size>
+			    <nullable>false</nullable>
+		    </column>
+		    <column name="THREADPOOL_SIZE">
+			    <data-type>INTEGER</data-type>
+		        <default-value>3</default-value>
+			    <nullable>false</nullable>
+	        </column>
+	        <column name="ACTIVE">    
+	        	<data-type>BOOLEAN</data-type>
+		        <default-value>true</default-value>
+				<nullable>false</nullable>               
+			</column>
+		</columns>
+			<primary-key name="ThreadPool_PK">
+				<primary-key-column>THREADPOOL_ID</primary-key-column>
+			</primary-key>
+		
+</table>			
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- End of Calendar_Periodicity Definition -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+</data-dictionary>

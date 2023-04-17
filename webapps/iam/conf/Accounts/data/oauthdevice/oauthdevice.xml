@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<IAMOAuthAppGroups>
+<IAMOAuthAppGroup OAUTH_APP_GROUP_AUTO_ID="1004" OAUTH_APP_GROUP_ID="1004" OAUTH_APP_GROUP_NAME="oauthdevice" DESCRIPTION="Oauth for Non Browser" />
+
+</IAMOAuthAppGroups>

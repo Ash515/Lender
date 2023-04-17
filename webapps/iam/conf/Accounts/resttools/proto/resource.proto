@@ -1,0 +1,81 @@
+syntax = "proto2";
+package resource;
+
+option java_package = "com.zoho.resource";
+option java_outer_classname = "ResourceProto";
+
+//Represents meta data of a particular resource type
+message ResourceMetaData {
+
+    required string resourceName = 1;
+    optional string description = 2;
+    optional string tableName = 3;
+    optional string parentResourceName = 4;
+    optional string leftParentResourceName = 5; //in case of 1:N and M:N relationship tables
+    optional string identifier = 6; //the name of the attribute which identifies an instance of this resource uniquely
+    optional string className = 7;
+    optional int32 storageSize = 8;
+    optional string shortestPathToRoot = 9;
+    repeated string indexedAttribute = 10;
+    repeated Attribute attribute = 11;
+    repeated ChildResource childResource = 12;
+    optional int32 index = 13;
+    optional bool isCustom = 14;
+    optional bool isDeprecated = 15;
+    optional bool isTemplate = 16;
+    optional string baseTableName = 17;
+
+
+    //Represents meta data of a particular attribute.
+    message Attribute {
+        required string attributeName = 1;
+        optional string description = 2;
+        required bool nullable = 3 [ default = true ];
+        required string dataType = 4;
+        optional string defaultValue = 5;
+        optional int32 maxSize = 6;
+        optional AllowedValue allowedValue = 7;
+        optional bool searchable = 8;
+        optional int32 index = 9;
+
+        //Allowed value for an Attribute.
+        message AllowedValue {
+            optional ValueRange range = 1;
+            repeated string value = 2;
+            optional string pattern = 3;
+
+            message ValueRange {
+                required string from = 1;
+                optional string to = 2;
+            }
+        }
+    }
+
+    //Represents relationship with other resoruces
+
+    message ChildResource {
+        required string resourceName = 1;
+        required bool isMultiVaued = 2;
+    }
+}
+//Represents a resource on response to a http request
+message HttpRepresentation{
+
+    required string resourceType = 1;
+    optional int32 httpResponseCode = 2;
+    optional string errorCause = 3;
+    repeated ResponseHeader responseHeader = 4 ; // in case of resource update or creation location header will be present; cache settings, etc.,
+    optional CountRange currentRange = 5;
+    optional int64 totalCount = 6;
+    repeated bytes representation = 7;
+
+    //Required while fetching collection URI
+    message CountRange {
+        required int32 start = 1;
+        required int32 end   = 2;
+    }
+    message ResponseHeader {
+        required string headerName = 1;
+        required string headerValue = 2;
+    }
+}	

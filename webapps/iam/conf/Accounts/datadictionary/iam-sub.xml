@@ -1,0 +1,249 @@
+<?xml version="1.0" ?>
+<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd">
+<data-dictionary name="Accounts">
+	
+	<table name="IAMUserAnnouncementStatus" display-name="UserAnnouncementStatus">
+    	<description>Auditing user announcement status</description>
+    	<columns>
+    		<column name="ZUID">
+                <description>Unique Identifier of the user</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+    		<column name="ANNOUNCEMENT_ID">
+		       	<data-type>CHAR</data-type>
+		        <max-size>50</max-size>
+		        <allowed-values>
+		         	<pattern>&audit;</pattern>
+		        </allowed-values>
+    		</column>
+    		<column name="ARID">
+                <description>Unique Identifier of this announcement audit record</description>
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMUserAnnouncementStatus.ARID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+    		<column name="STATUS">
+    			<data-type>INTEGER</data-type>
+    			<default-value>0</default-value>
+    		</column>
+    		<column name="VISITED_TIME">
+    			<data-type>BIGINT</data-type>
+    		</column>
+    	</columns>
+    	<primary-key name="IAMUserAnnouncementStatus_PK">
+    		<primary-key-column>ZUID</primary-key-column>
+    		<primary-key-column>ANNOUNCEMENT_ID</primary-key-column>
+    	</primary-key>
+    	<unique-keys>
+            <unique-key name="IAMUserAnnouncementStatus_UK1">
+                <unique-key-column>ARID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+    <table name="IAMUserExpiry" display-name="UserExpiry">
+    	<description>Maintaining user expiry time set by org admin</description>
+    	<columns>
+    		<column name="ZUID">
+                <description>Unique Identifier of the user</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+    		<column name="EXPIRY_TIME">
+    			<data-type>BIGINT</data-type>
+    		</column>
+    	</columns>
+    	<primary-key name="IAMUserExpiry_PK">
+    		<primary-key-column>ZUID</primary-key-column>
+    	</primary-key>
+    </table>
+    <table name="IAMISCUserTicketUsage" display-name="ISCUserTicketUsage">
+        <columns>
+            <column name="ISC_TICKET">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&iamticket;</pattern>
+                </allowed-values>
+            </column>
+            <column name="SCOPE_ID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>-1</default-value>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+            </column>
+            <column name="TOKEN_CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="TOKEN_ACCESSED_IP">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+			<column name="TOKEN_ACCESSED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+            <column name="USER_AGENT">
+                <description>Using which browser or device the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+		</columns>
+        <primary-key name="IAMISCUserTicketUsage_PK">
+            <primary-key-column>ISC_TICKET</primary-key-column>
+        </primary-key>
+    </table>
+    <table name="IAMInvitedUserDetails" display-name="InvitedUserDetails">
+    	<description>Auditing invited users</description>
+    	<columns>
+    	   <column name="INVITED_USER_AUTOID">
+                <description>Unique Identifier of this announcement audit record</description>
+                <data-type>BIGINT</data-type>
+                <uniquevalue-generation>
+                    <generator-name>IAMInvitedUsers.INVITED_USER_AUTOID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+    	     <column name="EMAIL_ID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&email;</pattern>
+                </allowed-values>
+            </column>
+    		<column name="ORG_ID">
+                <description>Invited org id(ZSOID or ZAAID)</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&zid;</pattern>
+                </allowed-values>
+            </column>
+    		<column name="ORG_TYPE">
+				<description>The type is differentiated per service</description>
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+    		<column name="STATUS">
+                <description>0 - Inactive, 1 - Active</description>
+                <data-type>TINYINT</data-type>
+                <default-value>1</default-value>
+            </column>
+            <column name="ARGS_DATA">
+                <description>Other data used in digest is stored as JSON object.</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+            </column>
+    		<column name="INVITATION_TIME">
+    		    <description>User invitation time</description> 
+    			<data-type>BIGINT</data-type>
+    		</column>
+    	</columns>
+    	<primary-key name="IAMInvitedUsers_PK">
+    		<primary-key-column>EMAIL_ID</primary-key-column>
+    		<primary-key-column>ORG_ID</primary-key-column>
+    	</primary-key>
+    	<unique-keys>
+            <unique-key name="IAMInvitedUserOrg_UK1">
+                <unique-key-column>INVITED_USER_AUTOID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+    <table name="IAMOAuthTokenUsage" display-name="OAuthTokenUsage">
+        <columns>
+            <column name="CLIENT_ID">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&iamticket;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_ID">
+				<data-type>CHAR</data-type>
+				<max-size>100</max-size>
+				<default-value>-1</default-value>
+				<allowed-values>
+					<pattern>&zid;</pattern>
+				</allowed-values>
+            </column>
+            <column name="CLIENT_APPROVED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CLIENT_ACCESSED_IP">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+			<column name="CLIENT_ACCESSED_TIME">
+				<data-type>BIGINT</data-type>
+			</column>
+            <column name="USER_AGENT">
+                <description>Using which browser or device the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>&audit;</pattern>
+                </allowed-values>
+            </column>
+		</columns>
+        <primary-key name="IAMOAuthTokenUsage_PK">
+            <primary-key-column>CLIENT_ID</primary-key-column>
+            <primary-key-column>USER_ID</primary-key-column>
+        </primary-key>
+        <indexes>
+            <index name="IAMOAuthTokenUsage_indx">
+                <index-column>USER_ID</index-column>
+            </index>
+        </indexes>
+    </table>
+     <table name="IAMCacheDataStore" display-name="CacheDataStore">
+        <description>Database Cache data</description>
+        <columns>
+            <column name="KEY">
+                <data-type>CHAR</data-type>
+                <max-size>128</max-size>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="VALUE">
+                <description>value</description>
+                <data-type>CHAR</data-type>
+                <max-size>-1</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="EXPIRY_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMCacheDataStore_PK">
+            <primary-key-column>KEY</primary-key-column>
+        </primary-key>
+        
+    </table>
+    
+</data-dictionary>

@@ -1,0 +1,492 @@
+<?xml version="1.0"?>
+<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd">
+<!--<!DOCTYPE data-dictionary SYSTEM "../dtd/cs-dd.dtd"> -->
+<data-dictionary name="Accounts">
+    <description>This module contains tables that are related to token (session) management.</description>
+    <table name="IAMUserToken" display-name="AuthToken">
+        <description>Represents an authenticated session of a user. An AuthToken is must to access resources stored under an Account.</description>
+        <columns>
+            <column name="TOKEN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMUserToken.TOKEN_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="TOKEN">
+                <description>SHA-512 digest of the ZUID and a random number. This token will be exposed to the user browser or any external third party applications.</description>
+                <data-type>CHAR</data-type>
+                <max-size>255</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&csticket;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TOKEN_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="TOKEN_TYPE">
+                <description>Can be a API Token or Temporary token or a SS Ticket or ISC Ticket</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <default-value>ticket</default-value>
+                <allowed-values>
+                    <pattern>&simple-string;</pattern>
+                </allowed-values>
+            </column>
+            <column name="PARENT_TOKEN_ID">
+                <description>The original token id used to create this token. This token should be valid only till the parent token is valid</description>
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="SERVICE_DOMAIN">
+                <description>Server Domain for which the token is created (For Service Specific Ticket)</description>
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <allowed-values>
+                    <pattern>&domain;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IP_ADDRESS">
+                <description>The IP Address of the user at the time of this token is generated.</description>
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="USER_AGENT">
+                <description>Using which browser or devide the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:htmlfilter</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <description>The time at which the token is generated</description>
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="VALIDITY_PERIOD">
+                <description>How long the token is valid, in milli seconds i.e expiry time</description>
+                <data-type>BIGINT</data-type>
+                <default-value>0</default-value>
+            </column>
+            <column name="IDLE_PERIOD">
+                <description>How long the token can be idle, in seconds</description>
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="IS_ONE_TIME_TOKEN">
+                <description>If it is a one time token, the token will be deleted on the first GET operation itself</description>
+                <data-type>BOOLEAN</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserToken_PK">
+            <primary-key-column>TOKEN_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserToken_FK" reference-table-name="IAMUser">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMUserToken_UK">
+                <unique-key-column>TOKEN</unique-key-column>
+            </unique-key>
+        </unique-keys>
+        <indexes>
+            <index name="IAMUserToken_CreatedTimeIdx">
+                <index-column>CREATED_TIME</index-column>
+            </index>
+        </indexes>
+    </table>
+
+    <table name="IAMUserTokenScope" display-name="AuthTokenScope">
+        <description>Access to Account resources using an AuthToken can be restricted to limited operations. For example, "access using an AuthToken can be scoped to perform read operation on Organization owned documents"</description>
+        <columns>
+            <column name="TOKEN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="SCOPE_ID">
+                <description>The scope id from the IAMScope table.</description>
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserTokenScope_PK">
+            <primary-key-column>TOKEN_AUTO_ID</primary-key-column>
+            <primary-key-column>SCOPE_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserTokenScope_FK" reference-table-name="IAMUserToken">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>TOKEN_AUTO_ID</fk-local-column>
+                        <fk-reference-column>TOKEN_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <indexes>
+            <index name="IAMUserTokenScope_SIDndx">
+                <index-column>SCOPE_ID</index-column>
+            </index>
+        </indexes>
+    </table>
+    
+    <table name="IAMUserTokenDetails" display-name="AuthTokenDetails">
+        <description>Access to Account resources using an AuthToken can be restricted to limitted operations. For example, "access using an AuthToken can be scoped to perform read operation on Organization owned documents"</description>
+        <columns>
+            <column name="TOKEN_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="DETAILS">
+                <description>The token details will be encrypted value.</description>
+                <data-type>CHAR</data-type>
+                <max-size>1000</max-size>
+                <nullable>false</nullable>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="MODIFIED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserTokenDetails_PK">
+            <primary-key-column>TOKEN_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserTokenDetails_FK" reference-table-name="IAMUserToken">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>TOKEN_AUTO_ID</fk-local-column>
+                        <fk-reference-column>TOKEN_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    <table name="IAMUserAllDomainsToken" display-name="UserAllDomainsToken">
+        <description>This is the table to maintain the base raw tokens which is for all the domains</description>
+        <columns>
+            <column name="ADT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+                <nullable>false</nullable>
+                <uniquevalue-generation>
+                    <generator-name>IAMUserAllDomainsToken.ADT_AUTO_ID</generator-name>
+                    <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+                </uniquevalue-generation>
+            </column>
+            <column name="USER_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="TOKEN">
+                <description>Raw base token for the all the domains.</description>
+                <data-type>CHAR</data-type>
+                <max-size>255</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&csticket;</pattern>
+                </allowed-values>
+            </column>
+            <column name="IP_ADDRESS">
+                <data-type>CHAR</data-type>
+                <max-size>50</max-size>
+                <allowed-values>
+                    <pattern>&ipaddress;</pattern>
+                </allowed-values>
+            </column>
+            <column name="VALIDITY_PERIOD">
+                <description>How long the token is valid, in milli seconds i.e expiry time</description>
+                <data-type>BIGINT</data-type>
+                <default-value>0</default-value>
+            </column>
+            <column name="USER_AGENT">
+                <description>Using which browser or devide the access has been made.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+                <allowed-values>
+                    <pattern>xss:htmlfilter</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="IP_AUDIT_INFO">
+                <description>iplocation info will be stored as JSON object.</description>
+                <data-type>CHAR</data-type>
+                <max-size>500</max-size>
+            </column>
+            <column name="SIGNIN_INFO">
+                <description>Information about user got signed in to their account.</description>
+                <data-type>CHAR</data-type>
+                <max-size>250</max-size>
+            </column>
+        </columns>
+        <primary-key name="IAMUserAllDomainsRawToken_PK">
+            <primary-key-column>ADT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserAllDomainsRawToken_FK" reference-table-name="IAMUser">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>USER_AUTO_ID</fk-local-column>
+                        <fk-reference-column>USER_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+        <unique-keys>
+            <unique-key name="IAMUserAllDomainsToken_UK1">
+                <unique-key-column>USER_AUTO_ID</unique-key-column>
+                <unique-key-column>TOKEN</unique-key-column>
+            </unique-key>
+        </unique-keys>
+    </table>
+    
+    <table name="IAMUserBaseDomainToken" display-name="UserBaseDomainToken">
+        <description>This is the table to maintain the base domain tokens digest</description>
+        <columns>
+            <column name="ADT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="BASE_DOMAIN_TOKEN">
+                <description>Base domain digest token</description>
+                <data-type>CHAR</data-type>
+                <max-size>255</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&csticket;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_DOMAIN">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&domain;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserBaseDomainToken_PK">
+            <primary-key-column>BASE_DOMAIN_TOKEN</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserBaseDomainToken_FK" reference-table-name="IAMUserAllDomainsToken">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ADT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ADT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+     <table name="IAMUserTokenPairDetails" display-name="UserTokenPairDetails">
+        <description>This is the table to maintain the base domain tokens digest</description>
+        <columns>
+            <column name="ADT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+             <column name="DETAILS">
+                <description>The token details will be encrypted value.</description>
+                <data-type>CHAR</data-type>
+                <max-size>300</max-size>
+                <nullable>true</nullable>
+            </column>
+            <column name="IDLE_SESSION_TIMEOUT">
+                <description>If session is not active for the mentioned amount of time, session should be cleared. This value is based on Auth Domain Policy</description>
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+            </column>
+        </columns>
+        <primary-key name="IAMUserTokenPairDetails_PK">
+            <primary-key-column>ADT_AUTO_ID</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserTokenPairDetails_FK" reference-table-name="IAMUserAllDomainsToken">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ADT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ADT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+    
+    
+    <table name="IAMUserTokenPairAuthToken" display-name="TokenPairAuthToken">
+        <description>This is the table to maintain the temporary tokens to set ADT and BDT tokens for the other zoho service and custom domains.</description>
+        <columns>
+            <column name="ADT_AUTO_ID">
+                <data-type>BIGINT</data-type>
+            </column>
+            <column name="AUTH_TOKEN">
+                <description>Temp and API tokens for ADT and BDT tokens</description>
+                <data-type>CHAR</data-type>
+                <max-size>255</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&csticket;</pattern>
+                </allowed-values>
+            </column>
+            <column name="CREATED_DOMAIN">
+                <data-type>CHAR</data-type>
+                <max-size>100</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&domain;</pattern>
+                </allowed-values>
+            </column>
+            <column name="TYPE">
+                <description>To differentiate tickets in token pair 0-temporary, 1-apitoken</description>
+                <data-type>INTEGER</data-type>
+                <default-value>0</default-value>
+            </column>
+            <column name="CREATED_TIME">
+                <data-type>BIGINT</data-type>
+            </column>
+        </columns>
+        <primary-key name="IAMUserTokenPairAuthToken_PK">
+            <primary-key-column>AUTH_TOKEN</primary-key-column>
+        </primary-key>
+        <foreign-keys>
+            <foreign-key name="IAMUserTokenPairAuthToken_FK" reference-table-name="IAMUserAllDomainsToken">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ADT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ADT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+    </table>
+
+	<table name="IAMSamlAppSessionIndex" display-name="SamlAppSessionIndex">
+		<description>This table is to maintain the Session index give to Service Porvider .</description>
+		<columns>
+			<column name="ADT_AUTO_ID">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="APP_ID">
+				<data-type>CHAR</data-type>
+                <max-size>100</max-size>
+				<nullable>false</nullable>
+			</column>
+            <column name="SESSION_INDEX">
+                <description>SAML Session index</description>
+                <data-type>CHAR</data-type>
+                <max-size>200</max-size>
+                <nullable>false</nullable>
+                <allowed-values>
+                    <pattern>&csticket;</pattern>
+                </allowed-values>
+            </column>
+		</columns>
+		<primary-key name="IAMSamlAppSessionIndex_PK">
+			<primary-key-column>ADT_AUTO_ID</primary-key-column>
+            <primary-key-column>APP_ID</primary-key-column>
+            <primary-key-column>SESSION_INDEX</primary-key-column>
+        </primary-key>
+		<foreign-keys>
+            <foreign-key name="IAMSamlAppSessionIndex_FK1" reference-table-name="IAMUserAllDomainsToken">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ADT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ADT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+	</table>
+	
+		
+	<table name="IAMOAuthSessionGrant" display-name="OAuthSessionGrant">
+		<description>This table is to maintain the OAuth Client details specific to a user session</description>
+	    <columns>
+	     <column name="OAUTH_SESSION_GRANT_AUTO_ID">
+            <data-type>BIGINT</data-type>
+            <nullable>false</nullable>
+            <uniquevalue-generation>
+              <generator-name>IAMOAuthSessionGrant.OAUTH_SESSION_GRANT_AUTO_ID</generator-name>
+              <generator-class>com.zoho.accounts.internal.LongSequenceGenerator</generator-class>
+            </uniquevalue-generation>
+         </column>
+	     <column name="ADT_AUTO_ID">
+	        <data-type>BIGINT</data-type>
+			<nullable>false</nullable>
+	     </column>
+         <column name="CLIENT_ZID">
+             <data-type>CHAR</data-type>
+             <max-size>50</max-size>
+             <nullable>false</nullable>
+              <allowed-values>
+                 <pattern>&clientzid;</pattern>
+              </allowed-values>
+         </column>
+         <column name="TYPE">
+			<data-type>INTEGER</data-type>
+			<default-value>1</default-value>
+		</column>
+		<column name="ORG_INFO">
+		    <description>
+				comma separated servicename.zsoid/zaaid
+			</description>
+            <data-type>CHAR</data-type>
+            <max-size>500</max-size>
+            <allowed-values>
+				<pattern>&cleartext;</pattern>
+			</allowed-values>
+        </column>
+	    </columns>
+	    <primary-key name="IAMOAuthSessionGrant_PK">
+            <primary-key-column>OAUTH_SESSION_GRANT_AUTO_ID</primary-key-column>
+        </primary-key>
+	    <foreign-keys>
+            <foreign-key name="IAMOAuthSessionGrant_FK1" reference-table-name="IAMUserAllDomainsToken">
+                <fk-columns>
+                    <fk-column>
+                        <fk-local-column>ADT_AUTO_ID</fk-local-column>
+                        <fk-reference-column>ADT_AUTO_ID</fk-reference-column>
+                    </fk-column>
+                </fk-columns>
+                <fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+            </foreign-key>
+        </foreign-keys>
+         <unique-keys>
+            <unique-key name="IAMOAuthSessionGrant_UK1">
+                <unique-key-column>ADT_AUTO_ID</unique-key-column>
+                <unique-key-column>CLIENT_ZID</unique-key-column>
+            </unique-key>
+        </unique-keys>
+	</table>
+</data-dictionary>

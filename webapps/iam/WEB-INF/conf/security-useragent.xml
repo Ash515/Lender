@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id$ -->
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="security.xsd">
+	
+	<default-request-headers>
+	 	<headers>
+	 	 	<user-agent>
+               	<browser regex="browser_regex" />
+               	
+               	<!--  sample configuration 
+	               	<browser regex="browser_regex" major="60" minor="4"  />
+    	           	<os regex="os_regex" major="16" minor="4"  />
+        	       	<device regex="device_regex" family="device_family"/>
+            	-->
+            
+            </user-agent>
+	    </headers>
+	</default-request-headers>
+	
+						<!-- user-agent -->
+	<regexes>
+		<regex name="browser_regex" value="^[\w- ]{1,15}$" />
+		<regex name="device_regex" value="^[\w- ]{1,25}$" />
+		<regex name="device_family" value="^(MOBILE|TABLET|TV|BOT|DESKTOP)$" />
+		<regex name="os_regex" value="^(HbbTV|Windows|Ubuntu|Linux|Samsung|FireHbbTV|Android|Mac OS|iOS|ATV OS X|Chrome OS|Symbian|Debian|CentOS|Fedora|Arch Linux|BlackBerry|Firefox|Solaris|webOS|OpenBSD|FreeBSD|NetBSD|PCLinuxOS|Slackware|BackTrack|Red Hat)([ .\w]+)?" />
+	</regexes>
+
+</security>

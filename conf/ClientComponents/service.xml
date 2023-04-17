@@ -1,0 +1,7 @@
+<!-- $Id$ -->
+
+<data>
+
+	<Service service_id="Service:service_id:TemplateService" module_id="ClientComponents" service_name="TemplateService" classname="com.adventnet.client.components.tpl.service.TplTablePopulator"/>
+	<Service service_id="Service:service_id:TableTemplateService" module_id="ClientComponents" service_name="TableTemplateService" classname="com.adventnet.client.components.tpl.service.TemplateTablePopulator"/>
+</data>

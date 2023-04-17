@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Document : bean.xml Created on : August 12, 2010, 4:40 PM Author : manikandanmg 
+	Description: Purpose of the document follows. -->
+
+<beans>
+	<!-- Every HTTP operation brought in to one transation boundary  -->
+	<Bean   bean_name="Transferer" bean_id="Bean:bean_id:TransfererBean"
+                module_id="Accounts" transaction_type="1"
+                classname="com.zoho.resource.internal.LocalTransferer">
+        </Bean>
+    <Bean bean_name="CollaborationBean"
+        bean_id="Bean:bean_id:CollaborationBean"
+        module_id="Accounts"
+        transaction_type="1"
+        classname="com.zoho.accounts.onpremise.CollaborationBean">
+    </Bean>
+    
+    <Bean bean_id="Bean:bean_id:DataSourceBean" bean_name="DataSourceBean" module_id="Persistence" classname="com.adventnet.ds.DataSourceBeanImpl" transaction_type="3">
+    </Bean>
+</beans>

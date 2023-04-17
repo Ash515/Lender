@@ -1,0 +1,16 @@
+<!-- $Id$ -->
+
+<data>
+	<TemplateFiles FILE_NO="TemplateFiles:FILE_NO:boxTemplate" FILE_NAME="components/html/boxTemplate.html"/>
+	<TemplateFiles FILE_NO="TemplateFiles:FILE_NO:tooltipTemplate" FILE_NAME="components/html/tooltipTemplate.html"/>
+	<TemplateFiles FILE_NO="TemplateFiles:FILE_NO:dialogTemplate" FILE_NAME="components/html/dialogTemplate.html"/>
+	<TemplateFiles FILE_NO="TemplateFiles:FILE_NO:TableExportProperties" FILE_NAME="components/html/table/TableExportProperties.html"/>
+	<TemplateFiles FILE_NO="TemplateFiles:FILE_NO:NavigatorTemplate" FILE_NAME="components/html/table/Navigation/NavigatorTemplate.html"/>
+	<TemplateFiles FILE_NO="TemplateFiles:FILE_NO:searchhighlightTemplate" FILE_NAME="components/html/table/searchhighlightTemplate.html"/>
+	<TemplateFiles FILE_NO="TemplateFiles:FILE_NO:menutemplate" FILE_NAME="components/html/menutemplate.html"/>
+	<TemplateFiles FILE_NO="TemplateFiles:FILE_NO:FilterCreateForm" FILE_NAME="components/html/table/filter/FilterCreateForm.html"/>
+	<TemplateFiles FILE_NO="TemplateFiles:FILE_NO:CriteriaTemplates" FILE_NAME="components/jsp/cvtab/CriteriaTemplates.tpl"/>
+	<TableTemplateFiles FILE_NO="TableTemplateFiles:FILE_NO:tab" FILE_NAME="components/html/tab/tab.html"/>
+	<TableTemplateFiles FILE_NO="TableTemplateFiles:FILE_NO:table" FILE_NAME="components/html/template-table/table.html"/>
+	<TableTemplateFiles FILE_NO="TableTemplateFiles:FILE_NO:genericTableTemplate" FILE_NAME="components/html/template-table/genericTableTemplate.html"/>
+</data>

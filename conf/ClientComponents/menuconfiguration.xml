@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<menuconfiguration>
+
+	<Menu menuid="ADConfiguration" displayname="AD Configuration">
+   		 <MenuAndMenuItem menuitemid="ADConfig" menuitemindex="0"/>
+	</Menu>
+	
+	<MenuItem description="This menu can be used for updating user preference." displayname="Update User Preference" image="/images/icon_remove.gif" menuitemid="UpdateUserPreference">
+		<WebMenuItem target="_self">
+		</WebMenuItem>
+		<Action type="com.adventnet.client.components.userpreference.web.UpdateUserPreferenceAction"/>
+	</MenuItem>
+
+	<MenuItem description="This action can be used to set the selected  theme for the current user." displayname="Change Theme" image="/images/icon_remove.gif" menuitemid="ChangeThemeAction">
+		<WebMenuItem target="_self">
+		</WebMenuItem>
+		<Action type="com.adventnet.client.themes.web.ApplyThemeAction"/>
+	</MenuItem>
+
+	<!-- ################################ ColumnChooser Menu ##################################### -->
+
+	<MenuItem description="This action can be used to change the columns displayed for a table." displayname="Select Type" image="/images/columnedit.gif" menuitemid="CCSelect">
+		<WebMenuItem actionlink="ChooserSelectType.cc" target="_ccSelect" winparams="height=300,width=450,scrollbars=0,resizable=1"/>
+	</MenuItem>
+
+	<MenuItem description="This action can be used to change the columns displayed for a table." displayname="Select Type" image="/images/columnedit.gif" menuitemid="CCSelectInline">
+		<WebMenuItem actionlink="ChooserSelectTypeInline.cc" winparams="position=relative, title=Columns, transitionType=boxIn, transitionInterval=1,width=300,height=300"/>
+           <JavaScriptAction jsmethodname="displayColumnChooser"/>
+	</MenuItem>
+
+	<MenuItem description="This action can be used to change the columns displayed for a table." displayname="List Type" image="/images/columnedit.gif" menuitemid="CCList">
+		<WebMenuItem actionlink="ChooserListType.cc" target="_ccList" winparams="height=300,width=450,scrollbars=0,resizable=1"/>
+	</MenuItem>
+
+    <MenuItem description="This action can be used to change the
+        columns displayed for a table." displayname="List Type"
+        image="/images/columnedit.gif" menuitemid="CCListInline">
+        <WebMenuItem actionlink="ChooserListTypeInline.cc" winparams="position=relative, title=Columns, transitionType=boxIn, transitionInterval=0.0,width=210,closePrevious=false"/>
+           <JavaScriptAction jsmethodname="displayColumnChooser"/>
+    </MenuItem>
+
+	<!-- ################################ Context Sensitive Menu ##################################### -->
+
+	<MenuItem description="This action can be used to show context specific         help." displayname="Context Help" menuitemid="ACContextHelp">
+		<WebMenuItem target="HELP">
+		</WebMenuItem>
+		<Action type="com.adventnet.client.components.cthelp.web.CTHelpActionHandler"/>
+	</MenuItem>
+
+	<MenuItem menuitemid="ADDetails" displayname="AD Details"> 
+    <WebMenuItem/>
+    <ACParams name="AD_ID" value="AD_ID" scope="DATAMODEL"/>
+<OpenViewInContentArea addtolist="true" retrieveparamsfromreq="false" viewname="ADConfiguration"/>
+</MenuItem>
+
+
+<MenuItem menuitemid="ADDelete" displayname="ADDelete">
+    <WebMenuItem/>
+    <Action type="com.adventnet.client.components.ad.web.DeleteADAction"/>
+    <ACParams name="AD_ID" value="AD_ID" scope="DATAMODEL"/>
+    <ACParams name="EVENT_TYPE" value="DELETE" scope="STATIC"/>
+
+</MenuItem>
+
+<MenuItem menuitemid="ADConfig" displayname="AD Configuration">
+    <ACParams name="AD_Details" value="" scope="DATAMODEL"/>
+    <OpenViewInContentArea viewname="ADConfiguration" retrieveparamsfromreq="false"/>
+</MenuItem>
+
+<MenuItem menuitemid="RePopulateTemplateHashAction" displayname="Re Populate Template Hash Action">
+    <WebMenuItem/>
+    <Action type="com.adventnet.client.components.tpl.RePopulateTemplateHashAction"/>
+</MenuItem>
+
+</menuconfiguration>

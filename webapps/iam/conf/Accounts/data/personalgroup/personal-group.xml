@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id $ -->
+<IAMAccounts>
+    <IAMAccount zaid="personalgroup" account_name="Zoho Personal Group" zoid="201">
+	<IAMAccountDomain domain="personalgroup"/>
+    </IAMAccount>
+</IAMAccounts>

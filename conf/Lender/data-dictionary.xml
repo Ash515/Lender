@@ -1,0 +1,82 @@
+<!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd">
+<data-dictionary name="Lender">
+	<table name="Lender">
+		<!-- <columns>
+			<column name="ROLL_NO">
+				<data-type>BIGINT</data-type>
+				<uniquevalue-generation>
+					<generator-name>Lender.ROLL_NO</generator-name>
+				</uniquevalue-generation>
+			</column>
+			<column name="STUDENT_NAME">
+				<data-type>CHAR</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="DOB">
+				<data-type>DATE</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="DEPT">
+				<data-type>CHAR</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="YEAR">
+				<data-type>INTEGER</data-type>
+				<default-value>1</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="EMAIL_ID">
+				<data-type>CHAR</data-type>
+				<max-size>30</max-size>
+				<default-value>student@clg.in</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<pattern>^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$</pattern>
+                        </allowed-values>
+			</column>
+		</columns>
+		
+		<primary-key name="Students_PK">
+				<primary-key-column>ROLL_NO</primary-key-column>
+		</primary-key> -->
+
+
+
+<columns>
+<column name="ADHAAR_NO">
+<data-type>BIGINT</data-type>
+
+</column>
+
+<column name="PEOPLE_NAME">
+				<data-type>CHAR</data-type>
+				<nullable>false</nullable>
+</column>
+<column name="PEOPLE_NUMBER">
+				<data-type>CHAR</data-type>
+				<nullable>false</nullable>
+</column>
+<column name="BOOK_ISSUE_DATE">
+				<data-type>DATE</data-type>
+				<nullable>false</nullable>
+</column>
+<column name="BOOK_RETURN_DATE">
+				<data-type>DATE</data-type>
+				<nullable>false</nullable>
+</column>
+<column name="FINE_AMT">
+				<data-type>CHAR</data-type>
+				<nullable>false</nullable>
+</column>
+</columns>
+
+<primary-key name="Lender_PK">
+  <primary-key-column>ADHAAR_NO</primary-key-column>
+</primary-key>
+
+
+
+	</table>
+	
+	
+</data-dictionary>

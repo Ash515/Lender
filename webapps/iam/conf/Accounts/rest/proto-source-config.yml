@@ -1,0 +1,98 @@
+#This will used only in build script to generate proto files
+#Generated multi files instead of generate single proto file to avoid memory issues while init single proto file.
+---
+resource-groups:
+  Accounts:
+    resources:
+        - Account
+        - Register
+ 
+#This is Temp resource used to bundle.        
+#  AccountsTemp:
+#    resources:
+#        - Validate
+#        - UserAppAccountDetails
+#        - TokenDetails
+
+
+  AppResource:
+    resources:
+        - App
+        - Operation
+        - DeploymentConfig
+        - CacheCluster
+
+  AgentResource:
+    resources:
+        - ZAID
+
+  AccountsInternal:
+    resources:
+        - ServiceOrgType
+        - ISCUserTicketUsage
+        - InvitedUserDetails
+        - OAuthTokenUsage
+        - RoleAccessCheck
+        - CacheDataStore
+  OAuthResource:
+    resources:
+        - OAuthAppGroup
+        - OAuthKeys
+        - OAuthMobileAppDetails
+        - OAuthMobileAudience
+        - OAuthZID
+        - AuthtoOAuth
+        - AuthTokenDeletion
+        - OAuthMobileAppService
+        - OAuthMobileUserDevice
+
+  SystemResource:
+    resources:
+        - Listener
+        - Partner
+        - ISDCode
+        - TelesignLanguage
+        - UniqueId
+        - UniqueIdRange
+        - UserAnnouncementStatus
+        - DCLocation
+        - ShortenURL
+        - UserApp
+        - MobileCount
+        - UserExpiry
+        - BreachedPassword
+  AuditResource:
+    resources:
+        - AccountAudit
+        - ResourceAudit
+        - RegistrationAudit
+        - AccountCloseAudit
+        - AccountUpdateAudit
+        - APIAudit
+        - MailStatusQueue
+        - SignInFailedAudit
+        - WebSignInFailedAudit
+        - OAuthAudit
+        - MFAAudit
+        - ZIDAudit
+        - ZAIDSMSAudit
+        - TFAAudit
+        - MailClientAudit
+        - MailClientAuditTemplate
+        - AccountAuditTemplate
+        - ResourceAuditTemplate
+        - RegistrationAuditTemplate
+        - AccountUpdateAuditTemplate
+        - APIAuditTemplate
+        - ZAIDSMSAuditTemplate
+        - TFAAuditTemplate
+        - MFAAuditTemplate
+        - SignInFailedAuditTemplate
+        - OAuthAuditTemplate
+        - PrivacyCertificateAudit
+
+docs-exclude-pattern: UniqueId|ISCTicket|OrgUPAuthToken|ISCUserTicketUsage
+
+docs-root-resources: App,Account,OAuthAppGroup,OAuthZID,Operation,DeploymentConfig,CacheCluster,ZAID,ServiceOrgType,ISCUserTicketUsage,InvitedUserDetails,OAuthTokenUsage,RoleAccessCheck,OAuthKeys,OAuthMobileAppDetails,OAuthMobileAudience,AuthtoOAuth,AuthTokenDeletion,OAuthMobileAppService,Listener,Partner,ISDCode,TelesignLanguage,UniqueId,UniqueIdRange,UserAnnouncementStatus,DCLocation,ShortenURL,UserApp,MobileCount,UserExpiry,BreachedPassword,AccountAudit,ResourceAudit,RegistrationAudit,AccountCloseAudit,AccountUpdateAudit,APIAudit,MailStatusQueue,SignInFailedAudit,WebSignInFailedAudit,OAuthAudit,MFAAudit,ZIDAudit,ZAIDSMSAudit,TFAAudit,MailClientAudit,MailClientAuditTemplate,AccountAuditTemplate,ResourceAuditTemplate,RegistrationAuditTemplate,AccountUpdateAuditTemplate,APIAuditTemplate,ZAIDSMSAuditTemplate,TFAAuditTemplate,MFAAuditTemplate,SignInFailedAuditTemplate,OAuthAuditTemplate,OAuthMobileUserDevice,PrivacyCertificateAudit
+
+exclude-resources: SSLCustomDomain|SSLNotifyServices|AuditZAID|ResourceType|ResourceOperation|AppUserAttribute|PolicyConfig|AppRebrand|HierarchyResourceGroup|Hierarchy|HierarchyNode|AccountResource|ResourceProperties

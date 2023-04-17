@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: $ -->
+<IAMApps>
+    <IAMApp APP_NAME="AaaServer" APP_CODE="ACC" DEFAULT_SUB_DOMAIN="https://localhost:8443" HOME_PAGE="/home"
+            ALLOW_REGISTRATION="1" AUTO_REGISTRATION="1"
+            SERVICE_TYPE="1" LISTING_ENABLED="0" LISTING_ORDER="0"
+            LOGO_URL="/favicon.ico"
+            REST_API_PATH="/resource/accounts"
+            ENABLE_SSTICKET="0">
+
+		<IAMAppSystemRole system_role_name="IAMAdmininistrator">
+			<IAMUserSystemRoles zuid="2" />
+		</IAMAppSystemRole>
+
+		<IAMAppRole role_name="SuperAdmin" zarid="superadmin_role_zarid" />
+		<IAMAppRole role_name="Admin" zarid="admin_role_zarid" />
+		<IAMAppRole role_name="User" zarid="user_role_zarid" />
+
+		<IAMAppConfiguration config_name="cs.server" config_value="http://localhost:8080/accounts" />
+		<IAMAppConfiguration config_name="iam.server.url" config_value="https://localhost:8443" />
+		<IAMAppConfiguration config_name="iam.service.name" config_value="AaaServer" />
+		<IAMAppConfiguration config_name="audit.enabled" config_value="true" />
+		<IAMAppConfiguration config_name="memcache.enabled" config_value="false" />
+		<IAMAppConfiguration config_name="login.page" config_value="/accounts/signin" />
+		<IAMAppConfiguration config_name="admin.emailid" config_value="accounts@zaopcorp.com" />
+		<IAMAppConfiguration config_name="confirmation.period" config_value="7" />
+		<IAMAppConfiguration config_name="spam.suspended.limit" config_value="10" />
+		<IAMAppConfiguration config_name="iam.cookie.name" config_value="IAMAGENTTICKET" />
+		<IAMAppConfiguration config_name="disable.audit" config_value="false" />
+		<IAMAppConfiguration config_name="resource.disable.audit" config_value="listener_.*|uniqueid_.*|accountaudit_.*|resourceaudit_.*|registrationaudit_.*|accountcloseaudit_.*|accountupdateaudit_.*|mailstatusqueue_.*|authtoken_.*|apiaudit_.*|iscticket_.*|authtokenscope_.*|iscticketscope_.*|usage_.*|captcha_.*|tfaaudit_.*|zaidsmsaudit_.*|authtokendetails_.*|userannouncementstatus_.*|signinfailedaudit_.*|mailclientaudit_.*|mailclientaudittemplate_.*|accountaudittemplate_.*|resourceaudittemplate_.*|registrationaudittemplate_.*|accountupdateaudittemplate_.*|apiaudittemplate_.*|zaidsmsaudittemplate_.*|tfaaudittemplate_.*|mfaaudittemplate_.*|signinfailedaudittemplate_.*|oauthaudittemplate_.*" />
+		<IAMAppConfiguration config_name="resource.disable.memcache" config_value="AccountAudit|RegistrationAudit|AccountUpdateAudit|AccountCloseAudit|ResourceAudit|Listener|APIAudit|SignInFailedAudit" />
+		<IAMAppConfiguration config_name="resourcespace.disable.audit" config_value="" />
+        <IAMAppConfiguration config_name="trusted.domain.check" config_value="true" />
+		<IAMAppConfiguration config_name="trusted.domain.pattern" config_value=".*\.zoho\.com|zoho\.com" />
+        <IAMAppConfiguration config_name="trusted.cssdomain.check" config_value="true" />
+        <IAMAppConfiguration config_name="trusted.cssdomain.pattern" config_value=".*\.zoho\.com|zoho\.com|.*\.zohostatic\.com|zohostatic\.com" />
+		<IAMAppConfiguration config_name="admin.ip" config_value=".*" />
+		<IAMAppConfiguration config_name="contacts.server.url" config_value="http://localhost:8080" />
+		<IAMAppConfiguration config_name="feedback.server.url" config_value="http://localhost:8080" />
+		<IAMAppConfiguration config_name="photo.server.url" config_value="http://localhost:8080/photo" />
+		<IAMAppConfiguration config_name="internal.iam.server.url" config_value="http://localhost:8080" />
+		<IAMAppConfiguration config_name="internal.contacts.server.url" config_value="http://localhost:8080" />
+		<IAMAppConfiguration config_name="internal.photo.server.url" config_value="http://localhost:8080/photo" />
+		<IAMAppConfiguration config_name="iam.static" config_value="false" />
+		<IAMAppConfiguration config_name="iam.static.version" config_value="v1" />
+		<IAMAppConfiguration config_name="iam.static.js.domain" config_value="js.zohostatic.com" />
+		<IAMAppConfiguration config_name="iam.static.css.domain" config_value="css.zohostatic.com" />
+		<IAMAppConfiguration config_name="iam.static.img.domain" config_value="img.zohostatic.com" />
+		<IAMAppConfiguration config_name="oauth.contacts" config_value="false" />
+		<IAMAppConfiguration config_name="apikey.default.allowedmethods" config_value="com.adventnet.iam.VOgetIAMAppConfiguration,com.adventnet.iam.ServicegetServicejava.lang.String,com.adventnet.iam.IAMSecretKeygetSecretKeyjava.lang.String,com.adventnet.iam.UsergetISCTicketUserjava.lang.Stringlongjava.lang.String,booleanisTrustedIPjava.lang.String,com.adventnet.iam.UsergetUserjava.lang.String,java.util.ListgetUserGroupslong,java.util.ListgetUserGroupsForSharinglong,java.util.ListgetUserGroupsForShareListinglong,com.adventnet.iam.OrggetOrglong,com.adventnet.iam.OrgPolicygetOrgPolicylong" />
+		<IAMAppConfiguration config_name="captcha.referrer.pattern" config_value=".*" />
+		<IAMAppConfiguration config_name="cs.use.memcache" config_value="false" />
+		<IAMAppConfiguration config_name="enable.memcacheaudit" config_value="false" />
+		<IAMAppConfiguration config_name="iam.ssticket.enabled" config_value="false" />
+		<IAMAppConfiguration config_name="audit.ds" config_value="iamaudit" />
+		<IAMAppConfiguration config_name="audit.available.since" config_value="1201803777593" />
+		<IAMAppConfiguration config_name="saml.provider.name" config_value="Zoho" />
+		<IAMAppConfiguration config_name="saml.issuer.domain" config_value="zaop.com" />
+		<IAMAppConfiguration config_name="iam.cert.alias" config_value="1" />
+		<IAMAppConfiguration config_name="blocked.user.pattern" config_value="abuse" />
+		<IAMAppConfiguration config_name="hide.headerlinks" config_value="false" />
+		<IAMAppConfiguration config_name="support.emailid" config_value="support@zaopaccounts.com" />
+		<IAMAppConfiguration config_name="default.dateformat" config_value="MMM d, yyyy HH:mm:ss a" />
+		<IAMAppConfiguration config_name="block.emaildomain" config_value="@zaop.com" />
+		<IAMAppConfiguration config_name="block.unconfirmeduser" config_value="false" />
+		<IAMAppConfiguration config_name="antispam.pattern" config_value="SPAM,POSSIBLESPAM" />
+		<IAMAppConfiguration config_name="antispam.action.url" config_value="http://localas.zaop.com/af/fraudcheck.af" />
+		<IAMAppConfiguration config_name="hide.services" config_value="false" />
+		<IAMAppConfiguration config_name="show.iam.authsites" config_value="true" />
+		<IAMAppConfiguration config_name="auth.prefix" config_value="Zoho" />
+		<IAMAppConfiguration config_name="domain" config_value="zaop.com" />
+		<IAMAppConfiguration config_name="event.interval.ms" config_value="60000" />
+		<IAMAppConfiguration config_name="listenerid.cache.duration" config_value="1800000" />
+        <IAMAppConfiguration config_name="readonly.resource.pattern" config_value="authtoken|uniqueid|uniqueidrange|uniqueidrangegenerationaudit|verificationcode|authtokendetails|accountaudit|apiaudit" />
+        <IAMAppConfiguration config_name="iam.signup.passwordstrength" config_value="true" />
+        <IAMAppConfiguration config_name="iam.signup.domaincheck" config_value="true" />
+		<IAMAppConfiguration config_name="agent.transferer.enable" config_value="true" />
+		<IAMAppConfiguration config_name="agent.disable.resource" config_value="AccountAudit|RegistrationAudit|AccountUpdateAudit|AccountCloseAudit|ResourceAudit|Listener|APIAudit|SignInFailedAudit" />
+        <IAMAppConfiguration config_name="enable.secure.cookie" config_value="true" />
+        <IAMAppConfiguration config_name="enable.user.registration" config_value="true" />
+        <IAMAppConfiguration config_name="enable.samlauth.redirection" config_value="true" />
+        <IAMAppConfiguration config_name="username.availability.enabled" config_value="true" />
+        <IAMAppConfiguration config_name="allowed.resource.param.pattern" config_value="account\.account_name|user\.gender|user\.about_me|address\/[0-9]+\..*" />
+        <IAMAppConfiguration config_name="iam.app.ips" config_value="127.0.0.1" />
+        <IAMAppConfiguration config_name="iam.domain.suggestion" config_value="gmail.com,yahoo.com,google.com,hotmail.com,me.com,aol.com,yahoo.co.in,yahoo.co.uk,googlemail.com,live.com,msn.com ,hotmail.co.uk,facebook.com,gmx.com,163.com,126.com,sina.com,sina.com.cn,yahoo.com.cn,139.com,51.com,qq.com,chinaren.com,renren.com"/>
+        <IAMAppConfiguration config_name="resetpassword.url.expiry.hours" config_value="6" />
+        <IAMAppConfiguration config_name="notify.email" config_value="iam-team@zaopcorp.com" />
+        <IAMAppConfiguration config_name="zpfs.server.name" config_value="zohopublic.com" />
+        <IAMAppConfiguration config_name="iam.dlserver.location" config_value="dev" />
+
+		<IAMAppStatement STATEMENT_ID="search.mail.orggroups" STATEMENT="select ia.ZAID as ZOID, ig.ZGID, ig.GROUP_NAME, ig.GROUP_TYPE, ig.GROUP_DESCRIPTION, ig.IS_ACTIVE, ig.CREATED_TIME, ig.MODIFIED_TIME as LAST_MODIFIED_TIME, ifnull(ig.CREATED_BY, -1) as OWNER_ZUID, COUNT(igm.ZUID) as MEMBERCOUNT from IAMGroup ig inner join IAMAccount ia using(ACCOUNT_AUTO_ID) left join IAMGroupMember igm using(GROUP_AUTO_ID) where ia.ZAID = ? and ig.GROUP_NAME like ? GROUP BY ig.ZGID order by ig.GROUP_NAME limit ?,?" />
+		<IAMAppStatement STATEMENT_ID="search.user.all" STATEMENT="select DISTINCT(iu.ZUID) from IAMUser iu join IAMAccount ia using(ACCOUNT_AUTO_ID) left join IAMUserEmail iue using (USER_AUTO_ID) left join IAMUserScreenName iusn using(USER_AUTO_ID) where ia.ZAID = ? and ((((iu.USER_STATUS = 0 or iu.USER_STATUS = 1) or iu.USER_STATUS = 5) or iu.USER_STATUS = 6) or iu.USER_STATUS = 7) and (iue.EMAIL_ID LIKE ? or iusn.SCREEN_NAME like ?) limit ?, ?" />
+		<IAMAppStatement STATEMENT_ID="search.user.role" STATEMENT="select DISTINCT(iu.ZUID) from IAMUser iu join IAMAccount ia using(ACCOUNT_AUTO_ID) left join IAMUserEmail iue using(USER_AUTO_ID) left join IAMUserScreenName iusn using(USER_AUTO_ID) left join IAMUserProps iup using(USER_AUTO_ID) left join IAMUserAddress iua using(USER_AUTO_ID) where ia.ZAID = ? and ((((iu.USER_STATUS = 0 or iu.USER_STATUS = 1) or iu.USER_STATUS = 5) or iu.USER_STATUS = 6) or iu.USER_STATUS = 7) and iu.USER_ROLE RLIKE ? and (iue.EMAIL_ID LIKE ? or iusn.SCREEN_NAME LIKE ? or concat(iu.FIRST_NAME, iu.LAST_NAME) like ? or iu.DISPLAY_NAME like ? or iup.PROP_NAME like ? or iup.PROP_VALUE like ? or iua.COMPANY_NAME LIKE ? or iua.JOB_TITLE LIKE ? or iua.LOCATION_NAME LIKE ? or iua.POST_BOX LIKE ? or iua.STREET_ADDRESS LIKE ? or iua.CITY LIKE ? or iua.STATE LIKE ? or iua.COUNTRY LIKE ? or iua.POSTAL_CODE LIKE ? or iua.LATITUDE LIKE ? or iua.LONGITUDE LIKE ? or iua.PHONE LIKE ? or iua.EXTENSION LIKE ? or iua.MOBILE LIKE ? or iua.FAX LIKE ? or iua.SEATING_LOCATION LIKE ? or iua.TIMEZONE LIKE ? or iua.LANGUAGE LIKE ? or iua.WEBSITE_URL LIKE ? or iua.BLOG_URL LIKE ? or iua.TWITTER_URL LIKE ? or iua.LINKEDIN_URL LIKE ? or iua.FLICKR_URL LIKE ? or iua.DELICIOUS_URL LIKE ? or iua.AMAZON_URL LIKE ?)" />
+		<IAMAppStatement STATEMENT_ID="zsearch.org.user.allfield" STATEMENT="select DISTINCT(iu.ZUID) from IAMUser iu join IAMAccount ia using(ACCOUNT_AUTO_ID) left join IAMUserEmail iue using(USER_AUTO_ID) left join IAMUserScreenName iusn using(USER_AUTO_ID) left join IAMUserProps iup using(USER_AUTO_ID) left join IAMUserAddress iua using(USER_AUTO_ID) where ia.ZAID = ? and ((((iu.USER_STATUS = 0 or iu.USER_STATUS = 1) or iu.USER_STATUS = 5) or iu.USER_STATUS = 6) or iu.USER_STATUS = 7) and (iue.EMAIL_ID LIKE ? or iusn.SCREEN_NAME LIKE ? or concat(iu.FIRST_NAME, iu.LAST_NAME) like ? or iu.DISPLAY_NAME like ? or iup.PROP_NAME like ? or iup.PROP_VALUE like ? or iua.COMPANY_NAME LIKE ? or iua.JOB_TITLE LIKE ? or iua.LOCATION_NAME LIKE ? or iua.POST_BOX LIKE ? or iua.STREET_ADDRESS LIKE ? or iua.CITY LIKE ? or iua.STATE LIKE ? or iua.COUNTRY LIKE ? or iua.POSTAL_CODE LIKE ? or iua.LATITUDE LIKE ? or iua.LONGITUDE LIKE ? or iua.PHONE LIKE ? or iua.EXTENSION LIKE ? or iua.MOBILE LIKE ? or iua.FAX LIKE ? or iua.SEATING_LOCATION LIKE ? or iua.TIMEZONE LIKE ? or iua.LANGUAGE LIKE ? or iua.WEBSITE_URL LIKE ? or iua.BLOG_URL LIKE ? or iua.TWITTER_URL LIKE ? or iua.LINKEDIN_URL LIKE ? or iua.FLICKR_URL LIKE ? or iua.DELICIOUS_URL LIKE ? or iua.AMAZON_URL LIKE ?) order by ? limit ?,?" />
+		<IAMAppStatement STATEMENT_ID="zsearch.org.user.allfield.accountmember" STATEMENT="select DISTINCT(iu.ZUID) from IAMUser iu join IAMAccount ia using(ACCOUNT_AUTO_ID) left join IAMUserEmail iue using(USER_AUTO_ID) left join IAMUserScreenName iusn using(USER_AUTO_ID) left join IAMUserProps iup using(USER_AUTO_ID) left join IAMUserAddress iua using(USER_AUTO_ID) where ia.ZAID = ? and ((((iu.USER_STATUS = 0 or iu.USER_STATUS = 1) or iu.USER_STATUS = 5) or iu.USER_STATUS = 6) or iu.USER_STATUS = 7) and (iue.EMAIL_ID LIKE ? or iusn.SCREEN_NAME LIKE ? or concat(iu.FIRST_NAME, iu.LAST_NAME) like ? or iu.DISPLAY_NAME like ? or iup.PROP_NAME like ? or iup.PROP_VALUE like ? or iua.COMPANY_NAME LIKE ? or iua.JOB_TITLE LIKE ? or iua.LOCATION_NAME LIKE ? or iua.POST_BOX LIKE ? or iua.STREET_ADDRESS LIKE ? or iua.CITY LIKE ? or iua.STATE LIKE ? or iua.COUNTRY LIKE ? or iua.POSTAL_CODE LIKE ? or iua.LATITUDE LIKE ? or iua.LONGITUDE LIKE ? or iua.PHONE LIKE ? or iua.EXTENSION LIKE ? or iua.MOBILE LIKE ? or iua.FAX LIKE ? or iua.SEATING_LOCATION LIKE ? or iua.TIMEZONE LIKE ? or iua.LANGUAGE LIKE ? or iua.WEBSITE_URL LIKE ? or iua.BLOG_URL LIKE ? or iua.TWITTER_URL LIKE ? or iua.LINKEDIN_URL LIKE ? or iua.FLICKR_URL LIKE ? or iua.DELICIOUS_URL LIKE ? or iua.AMAZON_URL LIKE ?) and exists (select * from IAMAccount iia inner join IAMAppAccount iiaa on iia.ACCOUNT_AUTO_ID=iiaa.ACCOUNT_AUTO_ID inner join IAMAppAccountService iiaas on iiaa.APP_ACCOUNT_AUTO_ID=iiaas.APP_ACCOUNT_AUTO_ID inner join IAMAccountMember iiam on iiaas.APP_ACCOUNT_SERV_AUTO_ID=iiam.APP_ACCOUNT_SERV_AUTO_ID where iia.ZAID = ? and iiaa.ZAAID= ? and iiaas.APP_NAME = ? and iiam.ZID=iu.ZUID) order by ? limit ?,?" />
+		<IAMAppStatement STATEMENT_ID="zsearch.org.user.count" STATEMENT="select count(DISTINCT(iu.ZUID)) AS COUNT from IAMUser iu join IAMAccount ia using(ACCOUNT_AUTO_ID) left join IAMUserEmail iue using(USER_AUTO_ID) left join IAMUserScreenName iusn using(USER_AUTO_ID) left join IAMUserProps iup using(USER_AUTO_ID) left join IAMUserAddress iua using(USER_AUTO_ID) where ia.ZAID = ? and ((((iu.USER_STATUS = 0 or iu.USER_STATUS = 1) or iu.USER_STATUS = 5) or iu.USER_STATUS = 6) or iu.USER_STATUS = 7) and (iue.EMAIL_ID LIKE ? or iusn.SCREEN_NAME LIKE ? or CONCAT(iu.FIRST_NAME, iu.LAST_NAME) like ? or iu.DISPLAY_NAME like ? or iup.PROP_NAME like ? or iup.PROP_VALUE like ? or iua.COMPANY_NAME LIKE ? or iua.JOB_TITLE LIKE ? or iua.LOCATION_NAME LIKE ? or iua.POST_BOX LIKE ? or iua.STREET_ADDRESS LIKE ? or iua.CITY LIKE ? or iua.STATE LIKE ? or iua.COUNTRY LIKE ? or iua.POSTAL_CODE LIKE ? or iua.LATITUDE LIKE ? or iua.LONGITUDE LIKE ? or iua.PHONE LIKE ? or iua.EXTENSION LIKE ? or iua.MOBILE LIKE ? or iua.FAX LIKE ? or iua.SEATING_LOCATION LIKE ? or iua.TIMEZONE LIKE ? or iua.LANGUAGE LIKE ? or iua.WEBSITE_URL LIKE ? or iua.BLOG_URL LIKE ? or iua.TWITTER_URL LIKE ? or iua.LINKEDIN_URL LIKE ? or iua.FLICKR_URL LIKE ? or iua.DELICIOUS_URL LIKE ? or iua.AMAZON_URL LIKE ?)" />
+		
+		<IAMAppStatement STATEMENT_ID="search.mail.orggroups.byemailorgroupname" STATEMENT="select ia.ZAID as ZOID, ig.ZGID, ig.GROUP_NAME, ig.GROUP_TYPE, ig.GROUP_DESCRIPTION, ig.IS_ACTIVE, ig.CREATED_TIME, ig.MODIFIED_TIME as LAST_MODIFIED_TIME, ifnull(ig.CREATED_BY, -1) as OWNER_ZUID, COUNT(igm.ZUID) as MEMBERCOUNT from IAMGroup ig inner join IAMAccount ia using(ACCOUNT_AUTO_ID) left join IAMGroupMember igm using(GROUP_AUTO_ID) left join IAMUser iu on ig.ZGID = iu.ZUID left join IAMUserEmail iue using(USER_AUTO_ID) left join IAMUserScreenName iusn using(USER_AUTO_ID) where ia.ZAID = ? and (ig.GROUP_NAME like ? or iue.EMAIL_ID like ? or iusn.SCREEN_NAME like ?) GROUP BY ig.ZGID order by ig.GROUP_NAME limit ?,?" />
+		<IAMAppStatement STATEMENT_ID="update.listener.lastupdatedtime" STATEMENT="update IAMAuditListener set last_updated_time = ? where ? RLIKE RESOURCE_TYPE_PATTERN" />
+		<IAMAppStatement STATEMENT_ID="select.resourceaudit" STATEMENT="select * from IAMResourceAuditTemplate%s FORCE INDEX (IAMResourceAudit_ATndx) where CONCAT(RESOURCE_TYPE, '_', OPERATION) RLIKE ? and AUDITED_TIME &gt; ? and AUDITED_TIME &lt; ?" />
+		<IAMAppStatement STATEMENT_ID="select.newsletter.subscribed.users" STATEMENT="select ZUID, concat_ws(' ', FIRST_NAME, ifnull(LAST_NAME, '')) as FULL_NAME, EMAIL_ID, NEWS_LETTER_SUBSCRIPTION from IAMUserPreference inner join IAMUserEmail USING (USER_AUTO_ID) inner join IAMUser USING (USER_AUTO_ID) where NEWS_LETTER_SUBSCRIPTION!=? and IS_PRIMARY=? and IS_VERIFIED = ?" />
+        <IAMAppStatement STATEMENT_ID="select.resourceaudit.changehistory" STATEMENT="SELECT * FROM IAMResourceAuditTemplate%s WHERE OWNER_ZUID = ? AND RESOURCE_TYPE NOT LIKE  ? ORDER BY AUDITED_TIME DESC LIMIT ?,? "/>
+        <IAMAppStatement STATEMENT_ID="iscticket.usagetime.insert.update" STATEMENT="insert into IAMISCUserTicketUsage set ISC_TICKET = ?, SCOPE_ID = ?, TOKEN_CREATED_TIME = ?, TOKEN_ACCESSED_TIME = ?, TOKEN_ACCESSED_IP = ?, USER_AGENT = ? on duplicate key update SCOPE_ID = values(SCOPE_ID), TOKEN_ACCESSED_TIME = values(TOKEN_ACCESSED_TIME), TOKEN_ACCESSED_IP = values(TOKEN_ACCESSED_IP), USER_AGENT = values(USER_AGENT)" />
+        <IAMAppStatement STATEMENT_ID="count.totalfailedsignin.query" STATEMENT="SELECT COUNT(*) AS COUNT FROM tableName_SignInFailedAudit where date_format(from_unixtime(CREATED_TIME/1000),'%Y-%m-%d') = CURRENT_DATE() - INTERVAL 1 DAY" />
+        <IAMAppStatement STATEMENT_ID="count.failedlogin.sucessregistration.query" STATEMENT="Select COUNT(distinct(REG_ID)) AS COUNT from  tableName_AccountRegistrationAudit r left join  tableName_SignInFailedAudit s on r.EMAIL_ID=s.LOGIN_ID where STATUS=0 and ERROR_CODE=10 and date_format(from_unixtime(s.CREATED_TIME/1000),'%Y-%m-%d') = CURRENT_DATE() - INTERVAL 1 DAY " />
+        <IAMAppStatement STATEMENT_ID="count.failed.unique.inactiveusers.verifypassword" STATEMENT="Select COUNT(distinct(LOGIN_ID)) AS COUNT FROM tableName_SignInFailedAudit WHERE REQUEST_TYPE=2 AND ERROR_CODE=3 AND date_format(from_unixtime(CREATED_TIME/1000),'%Y-%m-%d') = CURRENT_DATE() - INTERVAL 1 DAY" />
+        <IAMAppStatement STATEMENT_ID="count.total.verifypassword.inactiveusers" STATEMENT="Select COUNT(*) AS COUNT FROM tableName_SignInFailedAudit WHERE REQUEST_TYPE=2 AND ERROR_CODE=3 AND date_format(from_unixtime(CREATED_TIME/1000),'%Y-%m-%d') = CURRENT_DATE() - INTERVAL 1 DAY" />
+        <IAMAppStatement STATEMENT_ID="count.total.unique.users" STATEMENT="SELECT COUNT(distinct(LOGIN_ID)) AS COUNT from tableName_SignInFailedAudit where date_format(from_unixtime(CREATED_TIME/1000),'%Y-%m-%d') = CURRENT_DATE() - INTERVAL 1 DAY" />
+        <IAMAppStatement STATEMENT_ID="count.failedlogin.query" STATEMENT="SELECT LOGIN_ID,ZUID,GROUP_CONCAT(DISTINCT(IP_ADDRESS))AS IP_ADDRESS,APP_NAME,GROUP_CONCAT(DISTINCT(COUNTRY))AS COUNTRY,REFERRER,USER_AGENT,ERROR_CODE,COUNT(LOGIN_ID) AS COUNT FROM tableName_SignInFailedAudit where date_format(from_unixtime(CREATED_TIME/1000),'%Y-%m-%d') = CURRENT_DATE() - INTERVAL 1 DAY AND REQUEST_TYPE=? GROUP BY LOGIN_ID ORDER BY COUNT DESC limit ?" />
+        <IAMAppStatement STATEMENT_ID="oauth.usagetime.insert.update" STATEMENT="insert into IAMOAuthTokenUsage (CLIENT_ID, USER_ID, CLIENT_APPROVED_TIME, CLIENT_ACCESSED_IP, CLIENT_ACCESSED_TIME, USER_AGENT) values(?,?,?,?,?,?) on duplicate key update CLIENT_ACCESSED_IP = values(CLIENT_ACCESSED_IP), CLIENT_ACCESSED_TIME = values(CLIENT_ACCESSED_TIME), USER_AGENT = values(USER_AGENT)" />
+        <IAMAppStatement STATEMENT_ID="max.activetime.orgusers" STATEMENT="select max(greatest( ifnull(LAST_LOGIN_TIME,0), ifnull(LAST_PASSWORD_VERIFIED_TIME,0), ifnull(LAST_API_ACCESS_TIME,0))) as greatest from IAMUserAccountsProperties inner join IAMUser using (USER_AUTO_ID) inner join IAMAccount using (ACCOUNT_AUTO_ID) where ZAID = ?"/>
+        <IAMAppStatement STATEMENT_ID="max.activetime.user" STATEMENT="select max(greatest( ifnull(LAST_LOGIN_TIME,0), ifnull(LAST_PASSWORD_VERIFIED_TIME,0), ifnull(LAST_API_ACCESS_TIME,0))) as greatest from IAMUserAccountsProperties inner join IAMUser using (USER_AUTO_ID) where ZUID = ?"/>
+        <IAMAppStatement STATEMENT_ID="search.sorgid.byuser" STATEMENT="select so.ZSOID as ZSOID from IAMServiceOrgType as sot inner join IAMServiceOrg as so using (SERVICE_ORG_TYPE_AUTO_ID) inner join IAMServiceOrgMember as som using (SERVICE_ORG_AUTO_ID) where sot.ORG_TYPE = ? and som.ZUID = ?"/>
+        <IAMAppStatement STATEMENT_ID="search.user.bysorgid" STATEMENT="select som.ZUID as ZUID from IAMServiceOrgType as sot inner join IAMServiceOrg as so using (SERVICE_ORG_TYPE_AUTO_ID) inner join IAMServiceOrgMember as som using (SERVICE_ORG_AUTO_ID) where sot.ORG_TYPE = ? and so.ZSOID = ?"/>
+
+		<IAMAppLicense LICENSE_ATTRIBUTE_KEY="NO_OF_CUSTOMERS" DEFAULT_VALUE="5" DATA_TYPE="INTEGER" />
+		<IAMAppLicense LICENSE_ATTRIBUTE_KEY="NO_OF_FREE_USERS" DEFAULT_VALUE="10" DATA_TYPE="INTEGER" />
+		<IAMAppLicense LICENSE_ATTRIBUTE_KEY="IP_RESTRICTION_ENABLED" DEFAULT_VALUE="true" DATA_TYPE="BOOLEAN" />
+		
+		<IAMAppAnnouncement ANNOUNCEMENT_ID="1001" NAME="timezone-update" CLASS_NAME="com.zoho.accounts.internal.announcement.TimeZoneUpdate" ANNOUNCEMENT_TYPE="1" PERIOD_OF_DAYS="1" IS_ENABLED="true"/>
+		<IAMAppAnnouncement ANNOUNCEMENT_ID="1002" NAME="tfa-banner" CLASS_NAME="com.zoho.accounts.internal.announcement.TFAAnnouncement" ANNOUNCEMENT_TYPE="1" PERIOD_OF_DAYS="7" URL="/ui/announcement/tfasetupbanner.jsp" IS_ENABLED="true"/>
+		<IAMAppAnnouncement ANNOUNCEMENT_ID="1003" NAME="tfa-recovery-update" CLASS_NAME="com.zoho.accounts.internal.announcement.TFARecoveryModesUpdate" ANNOUNCEMENT_TYPE="0" PERIOD_OF_DAYS="30" URL="/ui/announcement/tfaupdaterecovery.jsp" IS_ENABLED="true" />
+		<IAMAppAnnouncement ANNOUNCEMENT_ID="1005" NAME="verify-email" CLASS_NAME="com.zoho.accounts.internal.announcement.EmailConfirmationAnnouncement" ANNOUNCEMENT_TYPE="0" PERIOD_OF_DAYS="30" URL="/ui/announcement/confirmrecovery.jsp" IS_ENABLED="true"/>	
+		<IAMAppAnnouncement ANNOUNCEMENT_ID="1006" NAME="sessions-reminder" CLASS_NAME="com.zoho.accounts.internal.announcement.ConcurrentWebSessionsPostAnnouncement" ANNOUNCEMENT_TYPE="4" PERIOD_OF_DAYS="0" URL="/ui/announcement/sessionslimitreminder.jsp" IS_ENABLED="true"/>
+		<IAMAppAnnouncement ANNOUNCEMENT_ID="1007" NAME="block-sessions" CLASS_NAME="com.zoho.accounts.internal.announcement.ConcurrentWebSessionsPreAnnouncement" ANNOUNCEMENT_TYPE="5" PERIOD_OF_DAYS="0" URL="/ui/announcement/blockconcurrentwebsessions.jsp" PRIORITY="2" IS_ENABLED="true"/>
+		<IAMAppAnnouncement ANNOUNCEMENT_ID="1008" NAME="add-recovery" CLASS_NAME="com.zoho.accounts.internal.announcement.AddRecoveryAnnouncement" ANNOUNCEMENT_TYPE="4" PERIOD_OF_DAYS="0" URL="/ui/announcement/addrecovery.jsp" PRIORITY="-1" IS_ENABLED="true"/>
+	    <IAMAppAnnouncement ANNOUNCEMENT_ID="1009" NAME="add-login-mobile" CLASS_NAME="com.zoho.accounts.internal.announcement.AddMobileScreenNameAnnouncement" ANNOUNCEMENT_TYPE="5" PERIOD_OF_DAYS="-1" IS_ENABLED="true" URL="/v2/ui/announcement/AddMobileScreenName.jsp"/>
+		<IAMAppAnnouncement ANNOUNCEMENT_ID="1010" NAME="block-unconfirmed" CLASS_NAME="com.zoho.accounts.internal.announcement.BlockUnconfirmedPreAnnouncement" ANNOUNCEMENT_TYPE="5" PERIOD_OF_DAYS="-1" URL="/ui/announcement/blockunconfirmedpa.jsp" PRIORITY="1" IS_ENABLED="true"/>
+		<IAMAppAnnouncement ANNOUNCEMENT_ID="1012" NAME="signin-block" CLASS_NAME="com.zoho.accounts.internal.announcement.AccountLockPostAnnouncement" ANNOUNCEMENT_TYPE="4" IS_ENABLED="true"/>
+		<IAMAppAnnouncement ANNOUNCEMENT_ID="1013" NAME="oneauth-banner" CLASS_NAME="com.zoho.accounts.internal.announcement.OneAuthBanner" ANNOUNCEMENT_TYPE="1" PERIOD_OF_DAYS="30" IS_ENABLED="true"/>
+	    <IAMAppAnnouncement ANNOUNCEMENT_ID="1015" NAME="dc-pp-update" CLASS_NAME="com.zoho.accounts.internal.announcement.DCPolicyAnnouncement" ANNOUNCEMENT_TYPE="5" PERIOD_OF_DAYS="30" IS_ENABLED="true"/>
+	    <IAMAppAnnouncement ANNOUNCEMENT_ID="1016" NAME="tfa-enforcement" CLASS_NAME="com.zoho.accounts.internal.announcement.UserTFASetupAnnouncement" ANNOUNCEMENT_TYPE="5" PERIOD_OF_DAYS="-1" PRIORITY="4" IS_ENABLED="true"/>
+	    <IAMAppAnnouncement ANNOUNCEMENT_ID="1017" NAME="domain-verify" CLASS_NAME="com.zoho.accounts.internal.announcement.DomainVerificationAnnouncement" ANNOUNCEMENT_TYPE="4" PERIOD_OF_DAYS="-1" IS_ENABLED="true"/>
+	    
+	</IAMApp>
+</IAMApps>

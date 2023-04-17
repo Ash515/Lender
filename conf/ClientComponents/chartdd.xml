@@ -1,0 +1,393 @@
+<!DOCTYPE data-dictionary SYSTEM "data-dictionary.dtd">
+<?xml-stylesheet type="text/xsl" href="data-dictionary-transform.xsl"?>
+<!--$Id$ -->
+
+<data-dictionary name="ClientComponents">
+	<table name="ChartPropertySet">
+		<columns>
+			<column name="NAME_NO">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>ChartPropertySet.NAME_NO</generator-name>
+					<name-column>NAME</name-column>
+				</uniquevalue-generation>
+			</column>
+			<column name="NAME">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="PARENTSET">
+				<description>Indicates the parent property set. First parent will be
+					applied and then child
+					.</description>
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="ChartPropertySet_PK">
+			<primary-key-column>NAME_NO</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="ChartPropertySet_UK1">
+				<unique-key-column>NAME</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="ChartPropKey">
+		<columns>
+			<column name="CKEY_NO">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+				<uniquevalue-generation>
+					<generator-name>ChartPropKey.CKEY_NO</generator-name>
+					<name-column>CKEY</name-column>
+				</uniquevalue-generation>
+			</column>
+			<column name="CKEY">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="DESCRIPTION">
+				<data-type>CHAR</data-type>
+				<max-size>300</max-size>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="ChartPropKey_PK">
+			<primary-key-column>CKEY_NO</primary-key-column>
+		</primary-key>
+		<unique-keys>
+			<unique-key name="ChartPropKey_UK1">
+				<unique-key-column>CKEY</unique-key-column>
+			</unique-key>
+		</unique-keys>
+	</table>
+
+	<table name="ChartProperty">
+		<columns>
+			<column name="PROPID">
+				<data-type>INTEGER</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="PROPSET">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="NAME">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="GRAPHTYPE">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<default-value>ALL</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>ALL</value>
+					<!-- start categorical -->
+					<value>PIE</value>
+					<value>PIE3D</value>
+					<value>AREA</value>
+					<value>BAR</value>
+					<value>BAR3D</value>
+					<value>CATLINE</value>
+					<value>STACKEDAREA</value>
+					<value>STACKEDBAR</value>
+					<value>STACKEDBAR3D</value>
+					<value>SPIDERWEB</value>
+					<value>POLAR</value>
+					<!-- End categorical -->
+					<!-- start interval components -->
+					<value>BARCLUSTER</value>
+					<value>BAROVERLAID</value>
+					<value>YRANGELINE</value>
+					<!-- end interval components -->
+					<!-- start XY components -->
+					<value>XYAREA</value>
+					<value>XYLINE</value>
+					<value>SCATTER</value>
+					<value>STEPCHART</value>
+					<value>XYSTACKEDAREA</value>
+					<!-- end XY components -->
+					<!-- start XYZ components -->
+					<value>BUBBLECHART</value>
+					<value>CONTOURCHART</value>
+					<!-- end XYZ components -->
+					<!-- Start Financial -->
+					<value>BOXANDWHISKER</value>
+					<!-- end financial -->
+				</allowed-values>
+			</column>
+			<column name="VALUE">
+				<description>value to be associated. In case of contradicting
+					property say a both color and gradient paint can be applicable in
+					that case use different property name say _BG_COLOR _BG_GRAD_COLOR</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="SCOPE">
+				<description>Scope to be used. IF static value will be used as
+					property value. Otherwise correponding scopes will be used to fetch
+					prop value by using value as key</description>
+				<data-type>CHAR</data-type>
+				<max-size>7</max-size>
+				<default-value>STATIC</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>STATIC</value>
+					<value>REQUEST</value>
+					<value>STATE</value>
+					<value>SESSION</value>
+				</allowed-values>
+			</column>
+			<column name="DEFAULTVALUE">
+				<description>If Scope is given and the value is not present in scope
+					then default value will be used.</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="ChartProperty_PK">
+			<primary-key-column>PROPID</primary-key-column>
+			<primary-key-column>PROPSET</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ChartProperty_FK1"
+				reference-table-name="ChartPropertySet">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PROPSET</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ChartProperty_FK2"
+				reference-table-name="ChartPropKey">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>NAME</fk-local-column>
+						<fk-reference-column>CKEY_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="ChartViewConfig">
+		<columns>
+			<column name="VIEWNAME">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="CVNAME">
+				<description>Indicates the id of the CustomViewConfiguration that
+					should be used to fetch data for this chart.</description>
+				<data-type>BIGINT</data-type>
+			</column>
+			<column name="GRAPHTYPE">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<!-- start categorical -->
+					<value>PIE</value>
+					<value>PIE3D</value>
+					<value>AREA</value>
+					<value>BAR</value>
+					<value>BAR3D</value>
+					<value>CATLINE</value>
+					<value>STACKEDAREA</value>
+					<value>STACKEDBAR</value>
+					<value>STACKEDBAR3D</value>
+					<value>SPIDERWEB</value>
+					<value>POLAR</value>
+					<!-- End categorical -->
+					<!-- start interval components -->
+					<value>BARCLUSTER</value>
+					<value>BAROVERLAID</value>
+					<value>YRANGELINE</value>
+					<!-- end interval components -->
+					<!-- start XY components -->
+					<value>XYAREA</value>
+					<value>XYLINE</value>
+					<value>SCATTER</value>
+					<value>STEPCHART</value>
+					<value>XYSTACKEDAREA</value>
+					<!-- end XY components -->
+					<!-- start XYZ components -->
+					<value>BUBBLECHART</value>
+					<value>CONTOURCHART</value>
+					<!-- end XYZ components -->
+					<!-- Start Financial -->
+					<value>BOXANDWHISKER</value>
+					<!-- end financial -->
+				</allowed-values>
+			</column>
+			<column name="PROPSET">
+				<data-type>BIGINT</data-type>
+				<nullable>true</nullable>
+			</column>
+			<!--column name="ORIENTATION"><description>X stands for horizontal and 
+				y for vertical</description><data-type>CHAR</data-type><max-size>1</max-size><default-value>X</default-value><nullable>false</nullable><allowed-values><value>X</value><value>Y</value></allowed-values></column -->
+			<column name="ISXAXIS_TIME">
+				<description>Is Time </description>
+				<data-type>BOOLEAN</data-type>
+				<default-value>false</default-value>
+				<nullable>true</nullable>
+			</column>
+			<column name="URLVALUE">
+				<description>value to be associated. In case of contradicting
+					property say a both color and gradient paint can be applicable in
+					that case use different property name say _BG_COLOR _BG_GRAD_COLOR</description>
+				<data-type>CHAR</data-type>
+				<max-size>250</max-size>
+				<default-value>URL</default-value>
+				<nullable>false</nullable>
+			</column>
+			<column name="URLSCOPE">
+				<description>Scope to be used. IF static value will be used as
+					property value. Otherwise correponding scopes will be used to fetch
+					prop value by using value as key</description>
+				<data-type>CHAR</data-type>
+				<max-size>7</max-size>
+				<default-value>STATE</default-value>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>STATIC</value>
+					<value>REQUEST</value>
+					<value>STATE</value>
+					<value>SESSION</value>
+				</allowed-values>
+			</column>
+		</columns>
+		<primary-key name="ChartViewConfig_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="ChartViewConfig_FK1"
+				reference-table-name="ViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ChartViewConfig_FK2"
+				reference-table-name="CustomViewConfiguration">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>CVNAME</fk-local-column>
+						<fk-reference-column>CVID</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+			<foreign-key isbidirectional="false" name="ChartViewConfig_FK3"
+				reference-table-name="ChartPropertySet">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>PROPSET</fk-local-column>
+						<fk-reference-column>NAME_NO</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="AxisColumn">
+		<columns>
+			<column name="VIEWNAME">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLUMNTYPE">
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+				<allowed-values>
+					<value>ZAXIS</value>
+					<value>XAXIS</value>
+					<value>YAXIS</value>
+					<value>SERIES</value>
+					<value>XRANGESTART</value>
+					<value>XRANGEEND</value>
+					<value>YRANGESTART</value>
+					<value>YRANGEEND</value>
+					<value>COLOR</value>
+				</allowed-values>
+			</column>
+			<column name="DATACOLUMN">
+				<description>Column to be considered for view</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="AxisColumn_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+			<primary-key-column>COLUMNTYPE</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="AxisColumn_FK"
+				reference-table-name="ChartViewConfig">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+	<table name="YSeriesColumn">
+		<columns>
+			<column name="VIEWNAME">
+				<data-type>BIGINT</data-type>
+				<nullable>false</nullable>
+			</column>
+			<column name="DATACOLUMN">
+				<description>Column to be considered for view</description>
+				<data-type>CHAR</data-type>
+				<max-size>50</max-size>
+				<nullable>false</nullable>
+			</column>
+			<column name="COLORINHEX">
+				<description>give color for the series in hexa decimal format say
+					ff00ff</description>
+				<data-type>CHAR</data-type>
+				<max-size>6</max-size>
+				<nullable>true</nullable>
+			</column>
+		</columns>
+		<primary-key name="YSeriesColumn_PK">
+			<primary-key-column>VIEWNAME</primary-key-column>
+			<primary-key-column>DATACOLUMN</primary-key-column>
+		</primary-key>
+		<foreign-keys>
+			<foreign-key isbidirectional="false" name="YSeriesColumn_FK"
+				reference-table-name="ChartViewConfig">
+				<fk-columns>
+					<fk-column>
+						<fk-local-column>VIEWNAME</fk-local-column>
+						<fk-reference-column>VIEWNAME</fk-reference-column>
+					</fk-column>
+				</fk-columns>
+				<fk-constraints>ON-DELETE-CASCADE</fk-constraints>
+			</foreign-key>
+		</foreign-keys>
+	</table>
+
+</data-dictionary>

@@ -1,0 +1,38 @@
+<!-- $Id$ -->
+
+
+<!--TPL-start-FilterCreateForm-->
+ 
+<form method="post" action="${UNIQUEID}.ve" alerttype="Complete" name="CVCreationForm"
+ onSubmit="return AjaxAPI.submit(this);" tableview='${VIEWNAME}' onsuccessfunc="filterSaved" validatefunc="validateForm"> 
+<input type="hidden" name="VIEWNAME" value="${VIEWNAME}"/>
+<input type="hidden" name="EVENT_TYPE" value="${EVENTTYPE}"/>
+<input type="hidden" name="LISTID" value="${LISTID}"/> 
+<input type="hidden" name="FILTERNAME" value="${FILTERNAME}"/> 
+
+<table><tr><td class="crTitleTD">Name: <input class="crTxtFld" type="text" name="FILTERTITLE" value="${DISPLAYNAME}" validateMethod="isAlphaNumericWithMinusAndSpace" errormsg="Specify Filter Name"/><div style="padding-left:20px;display:inline;text-align:left"><input type="radio" id="ViewEditCriteria_and" name="booleanoperator" value="and"  checked onclick="cr.changeMatch(this.value);">Match all <input type="radio" id="ViewEditCriteria_or" name="booleanoperator" value="or"  onclick="cr.changeMatch(this.value)">Match any. 
+</div></td></tr>
+<tr><td colspan="2">
+<table style="width:100%">
+<tbody id="ViewEditCriteria">
+</table>
+</td></tr>
+<tr>
+<td>
+  <input name="addrowbtn"  class="crMoreBtn" onclick="javascript:cr.addDefaultRow();" value="More" type="button">
+</td>
+</tr>
+<tr>
+<td colspan="2" style="align:left;padding-left:130px">
+<input type="submit" name="Save" value="Save" class="button"/>
+<input type="button" name="Cancel" value="Cancel"  class="button" onClick="closeFilter('${VIEWNAME}');"/>
+</td>
+</tr>
+</table>
+</form>
+
+<script>
+cr.create(crList);
+</script>
+
+<!--TPL-end-FilterCreateForm-->

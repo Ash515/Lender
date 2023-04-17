@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IAMAccounts>
+	<IAMAccount zaid="shiftsorgzaid" account_name="Shift Service Org">
+		<IAMAccountDomain domain="shiftsorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="zmspamgatewaysorgzaid" account_name="ZM Spame Gateway Service Org">
+		<IAMAccountDomain domain="zmspamgatewaysorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="screenplaysorgzaid" account_name="Screenplay Service Org">
+		<IAMAccountDomain domain="screenplaysorgzaid" />
+	</IAMAccount>
+	<IAMAccount zaid="labelsorgzaid" account_name="Label Service Org">
+		<IAMAccountDomain domain="labelsorgzaid" />
+	</IAMAccount>
+</IAMAccounts>
