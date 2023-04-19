@@ -3,10 +3,10 @@
 <web-app>
 	<distributable/>
 	
-	<servlet-mapping>
+	<!-- <servlet-mapping>
  
     <url-pattern>*.png</url-pattern>
-</servlet-mapping>
+</servlet-mapping> -->
 	
 	<welcome-file-list>
 		<welcome-file>/index.html</welcome-file>

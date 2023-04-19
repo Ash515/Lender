@@ -1,0 +1,28 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgba(0, 255, 255, 0.641);
+}
+
+.nav-bar-a{
+    text-align: center;
+    background-color: indigo;
+    color:white;
+    height: 50px;
+    padding: 5px 0px 0px 0px;
+    font-size: 18px;
+    
+}
+.nav-bar-b{
+    display: inline-flex;
+}
+
+#logout-bar{
+    margin-left: 250px;
+}
+
+#logout-button{
+    color:white;
+    text-align: center;
+    font-size: 14px;
+    background-color: rgba(255, 0, 0, 0.445);
+}
