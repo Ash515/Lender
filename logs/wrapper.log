@@ -52,3 +52,30 @@ INFO   | jvm 1    | 2023/04/19 14:33:25 |
 INFO   | jvm 1    | 2023/04/19 14:33:25 | Server started in :: [26330 ms]
 INFO   | jvm 1    | 2023/04/19 14:33:25 | 
 INFO   | jvm 1    | 2023/04/19 14:33:25 | Connect to: [ http://localhost:8080 ]
+STATUS | wrapper  | 2023/04/19 20:20:16 | CTRL-C trapped.  Shutting down.
+INFO   | jvm 1    | 2023/04/19 20:20:18 | System going to Shutdown --- received process interrupt
+INFO   | jvm 1    | 2023/04/19 20:20:18 | Shutting down the JVM now!
+INFO   | jvm 1    | 2023/04/19 20:20:18 | Stopping Services
+INFO   | jvm 1    | 2023/04/19 20:20:18 | TableTemplateService                              [ STOPPED ]
+INFO   | jvm 1    | 2023/04/19 20:20:18 | TemplateService                                   [ STOPPED ]
+INFO   | jvm 1    | 2023/04/19 20:20:18 | ClientFrameworkService                            [ STOPPED ]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | WebService                                        [ STOPPED ]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | TaskEngineService                                 [ STOPPED ]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | AuthorizationService                              [ STOPPED ]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | AuthenticationService                             [ STOPPED ]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | PatchUpdaterService                               [ STOPPED ]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | CacheService                                      [ STOPPED ]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | Destroying Services
+INFO   | jvm 1    | 2023/04/19 20:20:19 | TableTemplateService                              [DESTROYED]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | TemplateService                                   [DESTROYED]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | ClientFrameworkService                            [DESTROYED]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | WebService                                        [DESTROYED]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | TaskEngineService                                 [DESTROYED]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | AuthorizationService                              [DESTROYED]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | AuthenticationService                             [DESTROYED]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | PatchUpdaterService                               [DESTROYED]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | CacheService                                      [DESTROYED]
+INFO   | jvm 1    | 2023/04/19 20:20:19 | Stopping Module processors
+INFO   | jvm 1    | 2023/04/19 20:20:19 | 
+INFO   | jvm 1    | 2023/04/19 20:20:19 | ModuleStopProcess:: Persistence::DBAUDIT     [ STOPPED ]
+STATUS | wrapper  | 2023/04/19 20:20:20 | <-- Wrapper Stopped

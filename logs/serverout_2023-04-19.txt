@@ -1,0 +1,279 @@
+[14:32:58:909]|[04-19-2023]|[com.adventnet.mfw.logging.LogsArchiver]|[INFO]|[14]: isArchive enabled for handler com.adventnet.mfw.logging.DefaultFileHandler ::: false|
+[14:32:58:913]|[04-19-2023]|[com.adventnet.mfw.logging.LogsArchiver]|[INFO]|[14]: isArchive enabled for handler com.adventnet.mfw.logging.DefaultFileHandler ::: false|
+[14:32:58:914]|[04-19-2023]|[com.adventnet.mfw.logging.LogsArchiver]|[INFO]|[14]: isArchive enabled for handler com.adventnet.mfw.logging.DefaultFileHandler ::: false|
+[14:32:58:914]|[04-19-2023]|[com.adventnet.mfw.logging.LogsArchiver]|[INFO]|[14]: isArchive enabled for handler com.adventnet.mfw.logging.DefaultFileHandler ::: false|
+[14:32:58:915]|[04-19-2023]|[com.adventnet.mfw.logging.LogsArchiver]|[INFO]|[14]: isArchive enabled for handler com.adventnet.mfw.logging.DefaultFileHandler ::: false|
+[14:32:58:916]|[04-19-2023]|[com.adventnet.mfw.logging.LogsArchiver]|[INFO]|[14]: isArchive enabled for handler com.adventnet.mfw.logging.DefaultFileHandler ::: false|
+[14:32:58:916]|[04-19-2023]|[com.adventnet.mfw.logging.LogsArchiver]|[INFO]|[14]: isArchive enabled for handler com.adventnet.mfw.logging.DefaultFileHandler ::: false|
+[14:32:58:917]|[04-19-2023]|[com.adventnet.mfw.logging.LogsArchiver]|[INFO]|[14]: isArchive enabled for handler com.adventnet.mfw.logging.DefaultFileHandler ::: false|
+[14:32:58:917]|[04-19-2023]|[com.adventnet.mfw.logging.LogsArchiver]|[INFO]|[14]: isArchive enabled for handler com.adventnet.mfw.logging.DefaultFileHandler ::: false|
+[14:32:59:021]|[04-19-2023]|[com.zoho.framework.utils.DefaultFileCleanUpTracker]|[INFO]|[20]: [] are failed to delete.|
+[14:32:59:023]|[04-19-2023]|[com.adventnet.mfw.logging.LoggerUtil]|[INFO]|[20]: Reinitializing logging.properties|
+[14:32:59:024]|[04-19-2023]|[com.adventnet.mfw.logging.LoggerUtil]|[INFO]|[20]: ..\conf\dynamic-logging.properties|
+[14:32:59:024]|[04-19-2023]|[com.adventnet.mfw.logging.LoggerUtil]|[INFO]|[20]: dynamic-logging.properties not exist hence reinitialize logger properties ignored|
+[14:32:59:028]|[04-19-2023]|[com.adventnet.mfw.PatchUpdater]|[WARNING]|[20]: The 'fixes' directory is missing. Product loads the jar(s) without PATCH|
+[14:32:59:152]|[04-19-2023]|[com.zoho.mickey.startup.MEServer]|[INFO]|[20]: Creating new Server instance|
+[14:32:59:183]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Inside Entity Resolver|
+[14:32:59:183]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: D:\MickeyLite\Applications\LenderB\bin\..\conf\product-config.xml doesnt exists, hence it is skipped|
+[14:32:59:183]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Inside Entity Resolver|
+[14:32:59:184]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Processing D:\MickeyLite\Applications\LenderB\bin\..\conf\customer-config.xml|
+[14:32:59:390]|[04-19-2023]|[com.zoho.net.handshake.HandShakeServer]|[INFO]|[22]: Starting HandShakeServer...|
+[14:32:59:405]|[04-19-2023]|[com.zoho.net.handshake.HandShakeServer]|[INFO]|[22]: Writing HandShakeServer port [62456] in .lock file|
+[14:32:59:406]|[04-19-2023]|[com.zoho.net.handshake.HandShakeServer]|[INFO]|[22]: HandShakeServer listening port :: 62456|
+[14:33:00:210]|[04-19-2023]|[com.zoho.net.handshake.HandShakeServer]|[INFO]|[22]: Waiting for client connection...|
+[14:33:00:256]|[04-19-2023]|[com.zoho.net.handshake.HandShakeUtil]|[INFO]|[20]: Started HandShakeServer successfully.|
+[14:33:00:286]|[04-19-2023]|[com.adventnet.iam.security.SecurityUtil]|[WARNING]|[20]: Unable to Load LogClientThreadLocalClass . Class Name : com.zoho.logs.logclient.LogClientThreadLocal, Exception java.lang.ClassNotFoundException: com.zoho.logs.logclient.LogClientThreadLocal|
+[14:33:00:346]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Inside Entity Resolver|
+[14:33:00:346]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: D:\MickeyLite\Applications\LenderB\bin\..\conf\product-config.xml doesnt exists, hence it is skipped|
+[14:33:00:346]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Inside Entity Resolver|
+[14:33:00:347]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Processing D:\MickeyLite\Applications\LenderB\bin\..\conf\customer-config.xml|
+[14:33:00:357]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Inside Entity Resolver|
+[14:33:00:357]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: D:\MickeyLite\Applications\LenderB\bin\..\conf\product-config.xml doesnt exists, hence it is skipped|
+[14:33:00:358]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Inside Entity Resolver|
+[14:33:00:358]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Processing D:\MickeyLite\Applications\LenderB\bin\..\conf\customer-config.xml|
+[14:33:02:085]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Inside Entity Resolver|
+[14:33:02:085]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: D:\MickeyLite\Applications\LenderB\bin\..\conf\product-config.xml doesnt exists, hence it is skipped|
+[14:33:02:085]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Inside Entity Resolver|
+[14:33:02:086]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Processing D:\MickeyLite\Applications\LenderB\bin\..\conf\customer-config.xml|
+[14:33:02:093]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Inside Entity Resolver|
+[14:33:02:093]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: D:\MickeyLite\Applications\LenderB\bin\..\conf\product-config.xml doesnt exists, hence it is skipped|
+[14:33:02:094]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Inside Entity Resolver|
+[14:33:02:094]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Processing D:\MickeyLite\Applications\LenderB\bin\..\conf\customer-config.xml|
+[14:33:02:096]|[04-19-2023]|[com.zoho.framework.utils.crypto.CryptoUtil]|[INFO]|[20]: Already crypt instance has been set and hence this [com.zoho.framework.utils.crypto.EnDecryptAES256Impl@1df42afc] is ignored|
+[14:33:02:838]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Inside Entity Resolver|
+[14:33:02:838]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: D:\MickeyLite\Applications\LenderB\bin\..\conf\product-config.xml doesnt exists, hence it is skipped|
+[14:33:02:839]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Inside Entity Resolver|
+[14:33:02:839]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Processing D:\MickeyLite\Applications\LenderB\bin\..\conf\customer-config.xml|
+[14:33:02:842]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Inside Entity Resolver|
+[14:33:02:842]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: D:\MickeyLite\Applications\LenderB\bin\..\conf\product-config.xml doesnt exists, hence it is skipped|
+[14:33:02:842]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Inside Entity Resolver|
+[14:33:02:842]|[04-19-2023]|[com.adventnet.persistence.ConfigurationParser]|[INFO]|[20]: Processing D:\MickeyLite\Applications\LenderB\bin\..\conf\customer-config.xml|
+[14:33:02:843]|[04-19-2023]|[com.zoho.framework.utils.crypto.CryptoUtil]|[INFO]|[20]: Already crypt instance has been set and hence this [com.zoho.framework.utils.crypto.EnDecryptAES256Impl@2d1f4bab] is ignored|
+[14:33:03:509]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: Reading ..\conf\database_params.conf |
+[14:33:03:513]|[04-19-2023]|[com.adventnet.persistence.util.DCManager]|[INFO]|[20]: All valid properties are available for dctype :: defaultdc, database :: postgres|
+[14:33:03:513]|[04-19-2023]|[com.adventnet.persistence.util.DCManager]|[INFO]|[20]: dc-types defined in dynamic-column-types.props :: [defaultdc]|
+[14:33:03:513]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: Loading UDTs from directory :: ..\conf\udt|
+[14:33:03:524]|[04-19-2023]|[com.adventnet.db.persistence.metadata.DataTypeManager]|[INFO]|[20]: Loaded data type :: AGE|
+[14:33:03:525]|[04-19-2023]|[com.adventnet.db.persistence.metadata.DataTypeManager]|[INFO]|[20]: Loaded data type :: CURRENCY|
+[14:33:03:526]|[04-19-2023]|[com.adventnet.db.persistence.metadata.DataTypeManager]|[INFO]|[20]: Loaded data type :: CURRENCYSYMBOL|
+[14:33:03:526]|[04-19-2023]|[com.adventnet.db.persistence.metadata.DataTypeManager]|[INFO]|[20]: Loaded data type :: DAYS|
+[14:33:03:527]|[04-19-2023]|[com.adventnet.db.persistence.metadata.DataTypeManager]|[INFO]|[20]: Loaded data type :: GENDER|
+[14:33:03:527]|[04-19-2023]|[com.adventnet.db.persistence.metadata.DataTypeManager]|[INFO]|[20]: Loaded data type :: HONORIFIC|
+[14:33:03:528]|[04-19-2023]|[com.adventnet.db.persistence.metadata.DataTypeManager]|[INFO]|[20]: Loaded data type :: JSONSTRING|
+[14:33:03:528]|[04-19-2023]|[com.adventnet.db.persistence.metadata.DataTypeManager]|[INFO]|[20]: Loaded data type :: LENGTH|
+[14:33:03:528]|[04-19-2023]|[com.adventnet.db.persistence.metadata.DataTypeManager]|[INFO]|[20]: Loaded data type :: MONTHS|
+[14:33:03:533]|[04-19-2023]|[com.adventnet.db.persistence.metadata.DataTypeManager]|[INFO]|[20]: Loaded data type :: UUID|
+[14:33:03:534]|[04-19-2023]|[com.adventnet.db.persistence.metadata.DataTypeManager]|[INFO]|[20]: Loaded data type :: WEIGHT|
+[14:33:03:539]|[04-19-2023]|[com.adventnet.db.persistence.metadata.DataTypeManager]|[INFO]|[20]: Loaded data type :: SERIAL|
+[14:33:03:542]|[04-19-2023]|[com.adventnet.db.persistence.metadata.DataTypeManager]|[INFO]|[20]: Loaded data type :: ZCHAR|
+[14:33:03:542]|[04-19-2023]|[com.adventnet.db.persistence.metadata.DataTypeManager]|[SEVERE]|[20]: DataTypes initialized from :: ..\conf\udt|
+[14:33:03:545]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: Reading ..\conf\database_params.conf |
+[14:33:03:546]|[04-19-2023]|[com.zoho.framework.utils.crypto.EnDecryptAESImpl]|[SEVERE]|[20]: Decryption failed, For input string: "p"|
+[14:33:03:546]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: Driver Name :: org.postgresql.Driver|
+[14:33:03:546]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: Connection URL :: jdbc:postgresql://localhost:5436/lender?charSet=UTF-8|
+[14:33:03:546]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: Username :: postgres|
+[14:33:03:547]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: Min Size :: 1|
+[14:33:03:547]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: Max Size :: 20|
+[14:33:03:547]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: Transaction Isolation :: TRANSACTION_READ_COMMITTED|
+[14:33:03:591]|[04-19-2023]|[com.adventnet.ds.DefaultDataSourcePlugIn]|[INFO]|[20]: DataSourcecom.zoho.cp.TxDataSource@671eedce|
+[14:33:03:591]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: Archive Adapter class ::: com.adventnet.db.archive.DefaultArchiveAdapter|
+[14:33:03:592]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: Storage Adapter class ::: null|
+[14:33:03:596]|[04-19-2023]|[com.adventnet.db.api.RelationalAPI]|[SEVERE]|[20]: haltjvm.on.dbcrash is set to [true]|
+[14:33:03:596]|[04-19-2023]|[com.adventnet.db.adapter.Jdbc20DBAdapter]|[INFO]|[20]: shutDownStrings :: []|
+[14:33:03:601]|[04-19-2023]|[com.adventnet.db.adapter.Jdbc20DBAdapter]|[INFO]|[20]: Loading the function patterns from the file :: [..\conf\Persistence\postgres_functionpatterns.txt]|
+[14:33:03:602]|[04-19-2023]|[com.adventnet.db.adapter.Jdbc20DBAdapter]|[INFO]|[20]: isDBMigration running :: false|
+[14:33:03:602]|[04-19-2023]|[com.adventnet.db.adapter.Jdbc20DBAdapter]|[INFO]|[20]: isDBMigration dest DB :: false|
+[14:33:03:604]|[04-19-2023]|[com.adventnet.db.adapter.postgres.PostgresDBAdapter]|[WARNING]|[20]: Identifier [pgsql_identifiers.txt] file not exist for this database|
+[14:33:03:606]|[04-19-2023]|[com.adventnet.db.adapter.postgres.DefaultPostgresDBInitializer]|[INFO]|[20]: db.home ::: D:\MickeyLite\Applications\LenderB\bin\\..\pgsql|
+[14:33:03:609]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: DataSourcePlugIn is initialized successfully|
+[14:33:03:609]|[04-19-2023]|[com.adventnet.ds.DataSourceManager]|[INFO]|[20]: No additional datasources are defined.|
+[14:33:03:609]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: create.db is :: null|
+[14:33:03:610]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: Template replaced url :: jdbc:postgresql://localhost:5436/lender?charSet=UTF-8|
+[14:33:03:875]|[04-19-2023]|[com.adventnet.db.adapter.postgres.PostgresDBAdapter]|[INFO]|[20]: Postgres version ::: 9.4.26|
+[14:33:03:878]|[04-19-2023]|[com.adventnet.db.adapter.AbstractRestoreHandler]|[INFO]|[20]: Restore process fully completed.|
+[14:33:03:878]|[04-19-2023]|[com.adventnet.db.adapter.Jdbc20DBAdapter]|[INFO]|[20]: splitConnectionURL :: {jdbcurl_props_separator=?, url_props_delimiter=&, Server=localhost, Port=5436, DBName=lender, urlWithoutProps=jdbc:postgresql://localhost:5436/lender}|
+[14:33:03:878]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: Template replaced url :: jdbc:postgresql://localhost:5436/lender?charSet=UTF-8|
+[14:33:03:878]|[04-19-2023]|[com.adventnet.db.adapter.postgres.PostgresDBAdapter]|[INFO]|[20]: Going to create postgres extensions if not exists ...|
+[14:33:03:914]|[04-19-2023]|[com.adventnet.db.adapter.Jdbc20DBAdapter]|[INFO]|[20]: DB Version            :: 9.4.26|
+[14:33:03:915]|[04-19-2023]|[com.adventnet.db.adapter.Jdbc20DBAdapter]|[INFO]|[20]: DB Architecture       :: 64|
+[14:33:03:923]|[04-19-2023]|[com.adventnet.db.adapter.Jdbc20DBAdapter]|[INFO]|[20]: DB Data Directory     :: C:/Program Files/PostgreSQL/9.4/data|
+[14:33:03:925]|[04-19-2023]|[com.adventnet.persistence.xml.DynamicValueHandlerRepositry]|[INFO]|[20]: Going to load DVH :: jar:file:/D:/MickeyLite/Applications/LenderB/bin/../lib/AdvPersistence.jar!/com/adventnet/db/persistence/metadata/conf/dynamic-value-handlers.xml|
+[14:33:03:958]|[04-19-2023]|[com.adventnet.db.persistence.metadata.MetaDataEntityResolver]|[INFO]|[20]: Entered resolveEntity2 :: systemId :: [data-dictionary.dtd], publicId :: [null], name :: [[dtd]], baseURI :: [null]|
+[14:33:03:979]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[INFO]|[20]: Parsing the File :: file:/D:/MickeyLite/Applications/LenderB/bin/../lib/AdvPersistence.jar!/com/adventnet/db/persistence/metadata/conf/meta-dd.xml|
+[14:33:03:998]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[Appl_id]|
+[14:33:04:000]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: Foreign key name Appl_id is same as a column name in the table TableDetails|
+[14:33:04:001]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[ColumnDetails_FK1]|
+[14:33:04:002]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[RangeValues_FK1]|
+[14:33:04:002]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[AllowedValues_FK1]|
+[14:33:04:003]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[AllowedPattern_FK1]|
+[14:33:04:003]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[ConstraintDefinition_FK1]|
+[14:33:04:004]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[UniqueKeyDefinition_FK1]|
+[14:33:04:004]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[UniqueKeyDefinition_FK2]|
+[14:33:04:004]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[PKDefinition_FK1]|
+[14:33:04:004]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[PKDefinition_FK2]|
+[14:33:04:005]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[FKDefinition_FK1]|
+[14:33:04:005]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[FKDefinition_FK2]|
+[14:33:04:006]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[FKColumnDefinition_FK1]|
+[14:33:04:006]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[FKColumnDefinition_FK2]|
+[14:33:04:006]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[FKColumnDefinition_FK3]|
+[14:33:04:006]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[IndexDefinition_FK1]|
+[14:33:04:007]|[04-19-2023]|[com.adventnet.db.persistence.metadata.parser.DataDictionaryParser]|[WARNING]|[20]: The isBidirectional attribute is no longer supported from MICKEYLITE_5000.Please remove this attribute in foreign key[IndexDefinition_FK2]|
+[14:33:04:276]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: loaded the module dd :: Persistence|
+[14:33:04:277]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: persURL :: jar:file:/D:/MickeyLite/Applications/LenderB/bin/../lib/AdvPersistence.jar!/com/adventnet/db/persistence/metadata/conf/personality-configuration.xml|
+[14:33:04:328]|[04-19-2023]|[com.adventnet.persistence.xml.XmlParser]|[INFO]|[20]: Going to parse the XML :: [jar:file:/D:/MickeyLite/Applications/LenderB/bin/../lib/AdvPersistence.jar!/com/adventnet/db/persistence/metadata/conf/personality-configuration.xml]|
+[14:33:04:343]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: No Preprocessor found.|
+[14:33:04:347]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: Going to loadErrorCodes :: [D:\MickeyLite\Applications\LenderB\bin\..\conf\Persistence\error-codes.xml]|
+[14:33:04:348]|[04-19-2023]|[com.adventnet.persistence.xml.XmlParser]|[INFO]|[20]: Going to parse the XML :: [file:/D:/MickeyLite/Applications/LenderB/bin/../conf/Persistence/error-codes.xml]|
+[14:33:04:361]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[SEVERE]|[20]: Already an errorcode [1,217] has been defined, hence over-writing it|
+[14:33:04:361]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[SEVERE]|[20]: Already an errorcode [1,451] has been defined, hence over-writing it|
+[14:33:04:361]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[SEVERE]|[20]: Already an errorcode [547] has been defined, hence over-writing it|
+[14:33:04:362]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: ErrorCodes :: {MySQLErrorCode={1216=1015 - ER_NO_REFERENCED_ROW, 1217=1016 - ER_ROW_IS_REFERENCED, 1058=1008 - ER_WRONG_VALUE_COUNT, 1062=1001 - ER_DUP_ENTRY, 1063=1010 - ER_WRONG_FIELD_SPEC, 1097=1014 - ER_TOO_BIG_SET, 1291=1003 - ER_DUPLICATED_VALUE_IN_TYPE, 1067=1012 - ER_INVALID_DEFAULT, 1451=1016 - ER_ROW_IS_REFERENCED, 1452=1015 - ER_NO_REFERENCED_ROW, 1166=1011 - ER_WRONG_COLUMN_NAME, 1230=1013 - ER_NO_DEFAULT, 1263=1006 - ER_WARN_NULL_TO_NOTNULL, 1231=1017 - ER_WRONG_VALUE_FOR_VAR, 1264=1018 - ER_WARN_DATA_OUT_OF_RANGE, 1232=1019 - ER_WRONG_TYPE_FOR_VAR, 1138=1005 - ER_INVALID_USE_OF_NULL, 1171=1007 - ER_PRIMARY_CANT_HAVE_NULL, 1140=1032 - ER_MIX_OF_GROUP_FUNC_AND_FIELDS, 1205=1024 - ER_LOCK_WAIT_TIMEOUT, 1206=1025 - ER_LOCK_TABLE_FULL, 1111=1031 - ER_INVALID_GROUP_FUNC_USE, 1048=1004 - ER_BAD_NULL_ERROR, 1213=1027 - ER_LOCK_DEADLOCK}, PgSQLErrorCode={23505=1001 - ER_DUP_ENTRY, 42703=1011 - ER_WRONG_COLUMN_NAME, 22001=1018 - ER_WARN_DATA_OUT_OF_RANGE, 22P02=1017 - ER_WRONG_VALUE_FOR_VAR, 22003=1014 - ER_TOO_BIG_SET, 42601=1008 - ER_WRONG_VALUE_COUNT, 23502=1004 - ER_BAD_NULL_ERROR, 23503=1015 - ER_NO_REFERENCED_ROW}, AdventNetErrorCode={1024=1024 - ER_LOCK_WAIT_TIMEOUT, 1025=1025 - ER_LOCK_TABLE_FULL, 1027=1027 - ER_LOCK_DEADLOCK, 1031=1031 - ER_INVALID_GROUP_FUNC_USE, 1032=1032 - ER_MIX_OF_GROUP_FUNC_AND_FIELDS, 1001=1001 - ER_DUP_ENTRY, 1003=1003 - ER_DUPLICATED_VALUE_IN_TYPE, 1004=1004 - ER_BAD_NULL_ERROR, 1005=1005 - ER_INVALID_USE_OF_NULL, 1006=1006 - ER_WARN_NULL_TO_NOTNULL, 1007=1007 - ER_PRIMARY_CANT_HAVE_NULL, 1008=1008 - ER_WRONG_VALUE_COUNT, 1010=1010 - ER_WRONG_FIELD_SPEC, 1011=1011 - ER_WRONG_COLUMN_NAME, 1012=1012 - ER_INVALID_DEFAULT, 1013=1013 - ER_NO_DEFAULT, 1014=1014 - ER_TOO_BIG_SET, 1015=1015 - ER_NO_REFERENCED_ROW, 1016=1016 - ER_ROW_IS_REFERENCED, 1017=1017 - ER_WRONG_VALUE_FOR_VAR, 1018=1018 - ER_WARN_DATA_OUT_OF_RANGE, 1019=1019 - ER_WRONG_TYPE_FOR_VAR}, MsSQLErrorCode={8114=1017 - ER_WRONG_VALUE_FOR_VAR, 2627=1001 - ER_DUP_ENTRY, 515=1004 - ER_BAD_NULL_ERROR, 8115=1014 - ER_TOO_BIG_SET, 547=1016 - ER_ROW_IS_REFERENCED, 8152=1018 - ER_WARN_DATA_OUT_OF_RANGE, 2601=1001 - ER_DUP_ENTRY, 109=1008 - ER_WRONG_VALUE_COUNT, 110=1008 - ER_WRONG_VALUE_COUNT, 207=1011 - ER_WRONG_COLUMN_NAME}}|
+[14:33:04:362]|[04-19-2023]|[com.zoho.mickey.startup.MEServer]|[INFO]|[20]: Checking DBMigration status.|
+[14:33:04:369]|[04-19-2023]|[com.zoho.mickey.startup.MEServer]|[INFO]|[20]: Server startup mode is WARM|
+[14:33:04:370]|[04-19-2023]|[com.zoho.mickey.startup.MEServer]|[INFO]|[20]: status :: 3|
+[14:33:04:370]|[04-19-2023]|[com.zoho.mickey.startup.MEServer]|[INFO]|[20]: DB Server status number :: 3|
+[14:33:04:370]|[04-19-2023]|[com.zoho.mickey.startup.MEServer]|[INFO]|[20]: Server status number :: 1|
+[14:33:04:370]|[04-19-2023]|[com.zoho.mickey.startup.MEServer]|[INFO]|[20]: Updateing status ::::: 1|
+[14:33:04:374]|[04-19-2023]|[com.zoho.cp.TxnTimeOutImpl]|[INFO]|[20]: TransactionTimeout Thread has started.|
+[14:33:04:384]|[04-19-2023]|[com.zoho.mickey.startup.MEServer]|[INFO]|[20]: Normal startup|
+[14:33:04:384]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: Loading the module-startstop-processors.xml ::..\conf\Persistence\module-startstop-processors.xml|
+[14:33:04:385]|[04-19-2023]|[com.adventnet.persistence.xml.XmlParser]|[INFO]|[20]: Going to parse the XML :: [file:/D:/MickeyLite/Applications/LenderB/bin/../conf/Persistence/module-startstop-processors.xml]|
+[14:33:04:387]|[04-19-2023]|[com.adventnet.db.adapter.Jdbc20DBAdapter]|[INFO]|[20]: splitConnectionURL :: {jdbcurl_props_separator=?, url_props_delimiter=&, Server=localhost, Port=5436, DBName=lender, urlWithoutProps=jdbc:postgresql://localhost:5436/lender}|
+[14:33:04:387]|[04-19-2023]|[com.adventnet.db.adapter.postgres.PostgresDBAdapter]|[INFO]|[20]: psql not found at :: D:\MickeyLite\Applications\LenderB\bin\..\pgsql\bin|
+[14:33:04:387]|[04-19-2023]|[com.adventnet.db.adapter.postgres.PostgresDBAdapter]|[INFO]|[20]: isBundled :: false|
+[14:33:04:387]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: Loading the module-startstop-processors.xml ::..\conf\Audit\module-startstop-processors.xml|
+[14:33:04:387]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: No module-startstop-processor specified for the moduleAudit|
+[14:33:04:454]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: loaded the module dd :: Audit|
+[14:33:04:455]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: Loading the module-startstop-processors.xml ::..\conf\Authentication\module-startstop-processors.xml|
+[14:33:04:455]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: No module-startstop-processor specified for the moduleAuthentication|
+[14:33:04:621]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: loaded the module dd :: Authentication|
+[14:33:04:622]|[04-19-2023]|[com.adventnet.persistence.xml.DynamicValueHandlerRepositry]|[INFO]|[20]: Going to load DVH :: file:/D:/MickeyLite/Applications/LenderB/conf/Authentication/dynamic-value-handlers.xml|
+[14:33:04:627]|[04-19-2023]|[com.adventnet.persistence.xml.XmlParser]|[INFO]|[20]: Going to parse the XML :: [file:/D:/MickeyLite/Applications/LenderB/conf/Authentication/personality-configuration.xml]|
+[14:33:04:632]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: Loading the module-startstop-processors.xml ::..\conf\Authorization\module-startstop-processors.xml|
+[14:33:04:633]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: No module-startstop-processor specified for the moduleAuthorization|
+[14:33:04:691]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: loaded the module dd :: Authorization|
+[14:33:04:692]|[04-19-2023]|[com.adventnet.persistence.xml.DynamicValueHandlerRepositry]|[INFO]|[20]: Going to load DVH :: file:/D:/MickeyLite/Applications/LenderB/conf/Authorization/dynamic-value-handlers.xml|
+[14:33:04:696]|[04-19-2023]|[com.adventnet.persistence.xml.XmlParser]|[INFO]|[20]: Going to parse the XML :: [file:/D:/MickeyLite/Applications/LenderB/conf/Authorization/personality-configuration.xml]|
+[14:33:04:706]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: Loading the module-startstop-processors.xml ::..\conf\CustomView\module-startstop-processors.xml|
+[14:33:04:707]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: No module-startstop-processor specified for the moduleCustomView|
+[14:33:04:750]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: loaded the module dd :: CustomView|
+[14:33:04:751]|[04-19-2023]|[com.adventnet.persistence.xml.XmlParser]|[INFO]|[20]: Going to parse the XML :: [file:/D:/MickeyLite/Applications/LenderB/conf/CustomView/personality-configuration.xml]|
+[14:33:04:753]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: Loading the module-startstop-processors.xml ::..\conf\TaskEngine\module-startstop-processors.xml|
+[14:33:04:754]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: No module-startstop-processor specified for the moduleTaskEngine|
+[14:33:04:797]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: loaded the module dd :: TaskEngine|
+[14:33:04:798]|[04-19-2023]|[com.adventnet.persistence.xml.DynamicValueHandlerRepositry]|[INFO]|[20]: Going to load DVH :: file:/D:/MickeyLite/Applications/LenderB/conf/TaskEngine/dynamic-value-handlers.xml|
+[14:33:04:803]|[04-19-2023]|[com.adventnet.persistence.xml.XmlParser]|[INFO]|[20]: Going to parse the XML :: [file:/D:/MickeyLite/Applications/LenderB/conf/TaskEngine/personality-configuration.xml]|
+[14:33:04:806]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: Loading the module-startstop-processors.xml ::..\conf\Tomcat\module-startstop-processors.xml|
+[14:33:04:806]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: No module-startstop-processor specified for the moduleTomcat|
+[14:33:04:808]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: Loading the module-startstop-processors.xml ::..\conf\ClientFramework\module-startstop-processors.xml|
+[14:33:04:809]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: No module-startstop-processor specified for the moduleClientFramework|
+[14:33:04:899]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: loaded the module dd :: ClientFramework|
+[14:33:04:900]|[04-19-2023]|[com.adventnet.persistence.xml.DynamicValueHandlerRepositry]|[INFO]|[20]: Going to load DVH :: file:/D:/MickeyLite/Applications/LenderB/conf/ClientFramework/dynamic-value-handlers.xml|
+[14:33:04:912]|[04-19-2023]|[com.adventnet.persistence.xml.XmlParser]|[INFO]|[20]: Going to parse the XML :: [file:/D:/MickeyLite/Applications/LenderB/conf/ClientFramework/personality-configuration.xml]|
+[14:33:04:947]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: Loading the module-startstop-processors.xml ::..\conf\ClientComponents\module-startstop-processors.xml|
+[14:33:04:947]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: No module-startstop-processor specified for the moduleClientComponents|
+[14:33:05:114]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: loaded the module dd :: ClientComponents|
+[14:33:05:116]|[04-19-2023]|[com.adventnet.persistence.xml.DynamicValueHandlerRepositry]|[INFO]|[20]: Going to load DVH :: file:/D:/MickeyLite/Applications/LenderB/conf/ClientComponents/dynamic-value-handlers.xml|
+[14:33:05:126]|[04-19-2023]|[com.adventnet.persistence.xml.XmlParser]|[INFO]|[20]: Going to parse the XML :: [file:/D:/MickeyLite/Applications/LenderB/conf/ClientComponents/personality-configuration.xml]|
+[14:33:05:178]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: Loading the module-startstop-processors.xml ::..\conf\Lender\module-startstop-processors.xml|
+[14:33:05:179]|[04-19-2023]|[com.adventnet.mfw.modulestartup.ModuleStartStopProcessorUtil]|[INFO]|[20]: No module-startstop-processor specified for the moduleLender|
+[14:33:05:197]|[04-19-2023]|[com.adventnet.persistence.PersistenceInitializer]|[INFO]|[20]: loaded the module dd :: Lender|
+[14:33:05:212]|[04-19-2023]|[com.adventnet.persistence.cache.CacheService]|[INFO]|[20]: CacheRepository com.adventnet.persistence.cache.CacheRepositoryImpl|
+[14:33:05:225]|[04-19-2023]|[com.adventnet.mfw.service.WebService]|[INFO]|[20]: No portInUseHandler has been defined|
+[14:33:05:225]|[04-19-2023]|[com.adventnet.mfw.service.WebService]|[INFO]|[20]: Serverxml type:[ Default ]|
+[14:33:05:274]|[04-19-2023]|[com.adventnet.client.components.tpl.service.TplTablePopulator]|[WARNING]|[20]: this D:\MickeyLite\Applications\LenderBcomponents/html/boxTemplate.html  File can't be read|
+[14:33:05:275]|[04-19-2023]|[com.adventnet.client.components.tpl.service.TplTablePopulator]|[WARNING]|[20]: this D:\MickeyLite\Applications\LenderBcomponents/html/tooltipTemplate.html  File can't be read|
+[14:33:05:275]|[04-19-2023]|[com.adventnet.client.components.tpl.service.TplTablePopulator]|[WARNING]|[20]: this D:\MickeyLite\Applications\LenderBcomponents/html/dialogTemplate.html  File can't be read|
+[14:33:05:275]|[04-19-2023]|[com.adventnet.client.components.tpl.service.TplTablePopulator]|[WARNING]|[20]: this D:\MickeyLite\Applications\LenderBcomponents/html/table/TableExportProperties.html  File can't be read|
+[14:33:05:275]|[04-19-2023]|[com.adventnet.client.components.tpl.service.TplTablePopulator]|[WARNING]|[20]: this D:\MickeyLite\Applications\LenderBcomponents/html/table/Navigation/NavigatorTemplate.html  File can't be read|
+[14:33:05:275]|[04-19-2023]|[com.adventnet.client.components.tpl.service.TplTablePopulator]|[WARNING]|[20]: this D:\MickeyLite\Applications\LenderBcomponents/html/table/searchhighlightTemplate.html  File can't be read|
+[14:33:05:275]|[04-19-2023]|[com.adventnet.client.components.tpl.service.TplTablePopulator]|[WARNING]|[20]: this D:\MickeyLite\Applications\LenderBcomponents/html/menutemplate.html  File can't be read|
+[14:33:05:276]|[04-19-2023]|[com.adventnet.client.components.tpl.service.TplTablePopulator]|[WARNING]|[20]: this D:\MickeyLite\Applications\LenderBcomponents/html/table/filter/FilterCreateForm.html  File can't be read|
+[14:33:05:276]|[04-19-2023]|[com.adventnet.client.components.tpl.service.TplTablePopulator]|[WARNING]|[20]: this D:\MickeyLite\Applications\LenderBcomponents/jsp/cvtab/CriteriaTemplates.tpl  File can't be read|
+[14:33:05:278]|[04-19-2023]|[com.adventnet.client.components.tpl.service.TemplateTablePopulator]|[WARNING]|[20]: this D:\MickeyLite\Applications\LenderBcomponents/html/tab/tab.html  File can't be read|
+[14:33:05:279]|[04-19-2023]|[com.adventnet.client.components.tpl.service.TemplateTablePopulator]|[WARNING]|[20]: this D:\MickeyLite\Applications\LenderBcomponents/html/template-table/table.html  File can't be read|
+[14:33:05:279]|[04-19-2023]|[com.adventnet.client.components.tpl.service.TemplateTablePopulator]|[WARNING]|[20]: this D:\MickeyLite\Applications\LenderBcomponents/html/template-table/genericTableTemplate.html  File can't be read|
+[14:33:05:280]|[04-19-2023]|[com.adventnet.persistence.cache.CacheService]|[INFO]|[20]: Listening for Deployment and DataModel notifications|
+[14:33:05:281]|[04-19-2023]|[com.zoho.mickey.tools.PatchUpdaterService]|[INFO]|[20]: Directory monitoring on fixes directory is not enabled.|
+[14:33:05:367]|[04-19-2023]|[com.adventnet.db.adapter.Jdbc20DBAdapter]|[INFO]|[20]: splitConnectionURL :: {jdbcurl_props_separator=?, url_props_delimiter=&, Server=localhost, Port=5436, DBName=lender, urlWithoutProps=jdbc:postgresql://localhost:5436/lender}|
+[14:33:05:369]|[04-19-2023]|[com.adventnet.db.adapter.Jdbc20DBAdapter]|[INFO]|[20]: splitConnectionURL :: {jdbcurl_props_separator=?, url_props_delimiter=&, Server=localhost, Port=5436, DBName=lender, urlWithoutProps=jdbc:postgresql://localhost:5436/lender}|
+[14:33:05:370]|[04-19-2023]|[com.adventnet.db.adapter.AbstractBackupHandler]|[INFO]|[20]: BackUp/Restore Version handler :::: null|
+[14:33:05:397]|[04-19-2023]|[com.adventnet.mfw.service.WebService]|[INFO]|[20]: ClassLoader set in ThreadContext is java.net.URLClassLoader@5f9e48f5|
+[14:33:05:403]|[04-19-2023]|[com.adventnet.mfw.service.WebService]|[INFO]|[20]: Disabling Catalina's shutdown hook|
+[14:33:11:804]|[04-19-2023]|[com.adventnet.authentication.listener.SessionListener]|[INFO]|[20]: initialized....|
+[14:33:11:829]|[04-19-2023]|[com.adventnet.iam.security.SecurityFilterProperties]|[WARNING]|[20]: SAS Configuration Provider Class Loaded Successfully. Class Name : com.zoho.conf.Configuration |
+[14:33:11:830]|[04-19-2023]|[com.adventnet.iam.security.SecurityFilterProperties]|[INFO]|[20]: Security common configuration files loaded from conf directory :: D:\MickeyLite\Applications\LenderB\bin\..\conf\|
+[14:33:11:830]|[04-19-2023]|[com.adventnet.iam.security.SecurityFilter]|[WARNING]|[20]: null| 
+java.lang.RuntimeException:  File security-safeheaders.xml doesn't exist in D:\MickeyLite\Applications\LenderB\bin\..\conf\
+	at com.adventnet.iam.security.SecurityFilterProperties.addCommonSecurityConfigurationFiles(SecurityFilterProperties.java:765)
+	at com.adventnet.iam.security.SecurityFilterProperties.<init>(SecurityFilterProperties.java:517)
+	at com.adventnet.iam.security.SecurityFilter.init(SecurityFilter.java:67)
+	at org.apache.catalina.core.ApplicationFilterConfig.initFilter(ApplicationFilterConfig.java:270)
+	at org.apache.catalina.core.ApplicationFilterConfig.getFilter(ApplicationFilterConfig.java:251)
+	at org.apache.catalina.core.ApplicationFilterConfig.<init>(ApplicationFilterConfig.java:101)
+	at org.apache.catalina.core.StandardContext.filterStart(StandardContext.java:4613)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5256)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:726)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:698)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:696)
+	at org.apache.catalina.startup.HostConfig.deployDirectory(HostConfig.java:1185)
+	at org.apache.catalina.startup.HostConfig$DeployDirectory.run(HostConfig.java:1933)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:112)
+	at org.apache.catalina.startup.HostConfig.deployDirectories(HostConfig.java:1095)
+	at org.apache.catalina.startup.HostConfig.deployApps(HostConfig.java:477)
+	at org.apache.catalina.startup.HostConfig.start(HostConfig.java:1618)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:319)
+	at org.apache.catalina.util.LifecycleBase.fireLifecycleEvent(LifecycleBase.java:123)
+	at org.apache.catalina.util.LifecycleBase.setStateInternal(LifecycleBase.java:423)
+	at org.apache.catalina.util.LifecycleBase.setState(LifecycleBase.java:366)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:946)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:835)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1396)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1386)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:919)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:263)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:432)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:927)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:772)
+	at com.adventnet.mfw.service.WebService.start(WebService.java:97)
+	at com.adventnet.mfw.service.ServiceStarter.initServices(ServiceStarter.java:170)
+	at com.zoho.mickey.startup.MEServer.startServer(MEServer.java:381)
+	at com.adventnet.mfw.Starter.start(Starter.java:396)
+	at com.adventnet.mfw.Starter.main(Starter.java:727)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:349)
+	at java.lang.Thread.run(Thread.java:750)
+
+[14:33:19:246]|[04-19-2023]|[com.adventnet.authentication.filter.AssociateCredential]|[INFO]|[20]: roleAssociator :: com.adventnet.authentication.DefaultRoleAssociator|
+[14:33:25:342]|[04-19-2023]|[SYSOUT]|[INFO]|[20]: initServices :: createdServices :: [CacheService, PatchUpdaterService, AuthenticationService, AuthorizationService, TaskEngineService, WebService, ClientFrameworkService, TemplateService, TableTemplateService]|
+[14:33:25:342]|[04-19-2023]|[SYSOUT]|[INFO]|[20]: initServices :: startedServices :: [CacheService, PatchUpdaterService, AuthenticationService, AuthorizationService, TaskEngineService, WebService, ClientFrameworkService, TemplateService, TableTemplateService]|
+[14:33:25:342]|[04-19-2023]|[com.zoho.mickey.startup.MEServer]|[INFO]|[20]: Startup Notification Props :: {TopicName=startupNotification, start.type=warm, message=Server Started}|
+[14:33:25:345]|[04-19-2023]|[com.adventnet.db.adapter.postgres.PostgresBackupHandler]|[INFO]|[20]: Entered into the onMessage of serverStartupNotification|
+[14:33:25:345]|[04-19-2023]|[com.adventnet.db.adapter.postgres.PostgresBackupHandler]|[INFO]|[20]: Returning from PostgresBackupHandler onMessage method|
+[14:33:25:352]|[04-19-2023]|[com.adventnet.db.adapter.postgres.PostgresBackupHandler]|[INFO]|[20]: Deleting the touchFiles|
+[14:33:25:353]|[04-19-2023]|[com.zoho.mickey.startup.MEServer]|[INFO]|[20]: DB Server status number :: 1|
+[14:33:25:353]|[04-19-2023]|[com.zoho.mickey.startup.MEServer]|[INFO]|[20]: Server status number :: 2|
+[14:33:25:353]|[04-19-2023]|[com.zoho.mickey.startup.MEServer]|[INFO]|[20]: Updateing status ::::: 2|
+[14:33:25:354]|[04-19-2023]|[SYSOUT]|[INFO]|[20]: Server started in :: [26330 ms]|
+[20:20:18:149]|[04-19-2023]|[com.zoho.mickey.startup.MEServer]|[INFO]|[21]: DB Server status number :: 2|
+[20:20:18:149]|[04-19-2023]|[com.zoho.mickey.startup.MEServer]|[INFO]|[21]: Server status number :: 3|
+[20:20:18:149]|[04-19-2023]|[com.zoho.mickey.startup.MEServer]|[INFO]|[21]: Updateing status ::::: 3|
+[20:20:18:980]|[04-19-2023]|[com.adventnet.authentication.filter.AssociateCredential]|[INFO]|[21]: destroy invoked|
+[20:20:19:106]|[04-19-2023]|[com.zoho.cp.ConnectionPool]|[INFO]|[21]: ClusterIP:localhost Server Id got from the new cluster is0|
+[20:20:19:106]|[04-19-2023]|[com.zoho.cp.ConnectionPool]|[INFO]|[21]: ClusterIP:localhost Server Id got from existing connection is0. Stale Connection found.So Aborting..|
+[20:20:19:106]|[04-19-2023]|[com.zoho.cp.ConnectionPool]|[INFO]|[21]: Stale connections for the clusterIp:localhost were aborted due to cluster Failure.No of connections aborted : 1|
+[20:20:19:106]|[04-19-2023]|[com.zoho.cp.ConnectionPool]|[INFO]|[21]: ClusterIP:localhost no of connections  aborted : 1|

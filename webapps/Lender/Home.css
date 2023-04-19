@@ -15,9 +15,12 @@ body{
 .nav-bar-b{
     display: inline-flex;
 }
-
+#username-bar{
+    margin-left: 50px;
+}
 #logout-bar{
-    margin-left: 250px;
+    margin-left: 850px;
+    margin-right:50px ;
 }
 
 #logout-button{
