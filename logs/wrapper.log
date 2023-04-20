@@ -79,3 +79,517 @@ INFO   | jvm 1    | 2023/04/19 20:20:19 | Stopping Module processors
 INFO   | jvm 1    | 2023/04/19 20:20:19 | 
 INFO   | jvm 1    | 2023/04/19 20:20:19 | ModuleStopProcess:: Persistence::DBAUDIT     [ STOPPED ]
 STATUS | wrapper  | 2023/04/19 20:20:20 | <-- Wrapper Stopped
+STATUS | wrapper  | 2023/04/20 11:27:43 | --> Wrapper Started as Console
+STATUS | wrapper  | 2023/04/20 11:27:43 | Java Service Wrapper Professional Edition 64-bit 3.5.40
+STATUS | wrapper  | 2023/04/20 11:27:43 |   Copyright (C) 1999-2019 Tanuki Software, Ltd. All Rights Reserved.
+STATUS | wrapper  | 2023/04/20 11:27:43 |     http://wrapper.tanukisoftware.com
+STATUS | wrapper  | 2023/04/20 11:27:43 |   Licensed to Zoho Corporation Pvt. Ltd. for MickeyLite
+STATUS | wrapper  | 2023/04/20 11:27:43 | 
+WARN   | wrapper  | 2023/04/20 11:27:43 | Running in a console with QuickEdit Mode. Be careful when selecting text in the
+WARN   | wrapper  | 2023/04/20 11:27:43 |   console as this may cause to block the Java Application.
+WARN   | wrapper  | 2023/04/20 11:27:43 | 
+STATUS | wrapper  | 2023/04/20 11:27:44 | Launching a JVM...
+INFO   | jvm 1    | 2023/04/20 11:27:45 | WrapperManager: Initializing...
+INFO   | jvm 1    | 2023/04/20 11:27:46 | Starting Server from location: D:\MickeyLite\Applications\LenderB
+INFO   | jvm 1    | 2023/04/20 11:27:48 | Free edition...
+INFO   | jvm 1    | 2023/04/20 11:27:48 | 
+INFO   | jvm 1    | 2023/04/20 11:28:04 | Modules already Populated
+INFO   | jvm 1    | 2023/04/20 11:28:04 | 
+INFO   | jvm 1    | 2023/04/20 11:28:04 |      ModulePreStartProcess :: Persistence::DBAUDIT[ STARTED ]
+INFO   | jvm 1    | 2023/04/20 11:28:04 | Persistence                                       [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 11:28:04 |      ModulePostStartProcess:: Persistence::DBAUDIT[ STARTED ]
+INFO   | jvm 1    | 2023/04/20 11:28:05 | Audit                                             [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 11:28:05 | Authentication                                    [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 11:28:05 | Authorization                                     [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 11:28:05 | CustomView                                        [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 11:28:05 | TaskEngine                                        [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 11:28:05 | Tomcat                                            [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 11:28:06 | ClientFramework                                   [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 11:28:06 | ClientComponents                                  [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 11:28:06 | Lender                                            [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 11:28:06 | 
+INFO   | jvm 1    | 2023/04/20 11:28:06 | Creating Services
+INFO   | jvm 1    | 2023/04/20 11:28:06 | CacheService                                      [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 11:28:06 | PatchUpdaterService                               [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 11:28:06 | AuthenticationService                             [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 11:28:06 | AuthorizationService                              [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 11:28:06 | TaskEngineService                                 [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 11:28:06 | WebService                                        [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 11:28:06 | ClientFrameworkService                            [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 11:28:06 | TemplateService                                   [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 11:28:07 | TableTemplateService                              [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 11:28:07 | 
+INFO   | jvm 1    | 2023/04/20 11:28:07 | Starting Services
+INFO   | jvm 1    | 2023/04/20 11:28:07 | CacheService                                      [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 11:28:07 | PatchUpdaterService                               [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 11:28:07 | AuthenticationService                             [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 11:28:07 | AuthorizationService                              [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 11:28:07 | TaskEngineService                                 [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 11:28:58 | WebService                                        [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 11:28:58 | ClientFrameworkService                            [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 11:28:58 | TemplateService                                   [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 11:28:58 | TableTemplateService                              [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 11:28:59 | 
+INFO   | jvm 1    | 2023/04/20 11:28:59 | Server started in :: [72516 ms]
+INFO   | jvm 1    | 2023/04/20 11:28:59 | 
+INFO   | jvm 1    | 2023/04/20 11:28:59 | Connect to: [ http://localhost:8080 ]
+STATUS | wrapper  | 2023/04/20 12:46:35 | --> Wrapper Started as Console
+STATUS | wrapper  | 2023/04/20 12:46:35 | Java Service Wrapper Professional Edition 64-bit 3.5.40
+STATUS | wrapper  | 2023/04/20 12:46:35 |   Copyright (C) 1999-2019 Tanuki Software, Ltd. All Rights Reserved.
+STATUS | wrapper  | 2023/04/20 12:46:35 |     http://wrapper.tanukisoftware.com
+STATUS | wrapper  | 2023/04/20 12:46:35 |   Licensed to Zoho Corporation Pvt. Ltd. for MickeyLite
+STATUS | wrapper  | 2023/04/20 12:46:35 | 
+WARN   | wrapper  | 2023/04/20 12:46:35 | Running in a console with QuickEdit Mode. Be careful when selecting text in the
+WARN   | wrapper  | 2023/04/20 12:46:35 |   console as this may cause to block the Java Application.
+WARN   | wrapper  | 2023/04/20 12:46:35 | 
+STATUS | wrapper  | 2023/04/20 12:46:46 | Launching a JVM...
+INFO   | jvm 1    | 2023/04/20 12:46:47 | WrapperManager: Initializing...
+INFO   | jvm 1    | 2023/04/20 12:46:49 | Starting Server from location: D:\MickeyLite\Applications\LenderB
+INFO   | jvm 1    | 2023/04/20 12:46:51 | Free edition...
+INFO   | jvm 1    | 2023/04/20 12:46:51 | 
+INFO   | jvm 1    | 2023/04/20 12:47:05 | Modules already Populated
+INFO   | jvm 1    | 2023/04/20 12:47:05 | 
+INFO   | jvm 1    | 2023/04/20 12:47:05 |      ModulePreStartProcess :: Persistence::DBAUDIT[ STARTED ]
+INFO   | jvm 1    | 2023/04/20 12:47:05 | Persistence                                       [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 12:47:05 |      ModulePostStartProcess:: Persistence::DBAUDIT[ STARTED ]
+INFO   | jvm 1    | 2023/04/20 12:47:05 | Audit                                             [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 12:47:06 | Authentication                                    [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 12:47:06 | Authorization                                     [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 12:47:06 | CustomView                                        [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 12:47:06 | TaskEngine                                        [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 12:47:06 | Tomcat                                            [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 12:47:06 | ClientFramework                                   [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | ClientComponents                                  [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | Lender                                            [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | 
+INFO   | jvm 1    | 2023/04/20 12:47:07 | Creating Services
+INFO   | jvm 1    | 2023/04/20 12:47:07 | CacheService                                      [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | PatchUpdaterService                               [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | AuthenticationService                             [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | AuthorizationService                              [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | TaskEngineService                                 [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | WebService                                        [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | ClientFrameworkService                            [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | TemplateService                                   [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | TableTemplateService                              [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | 
+INFO   | jvm 1    | 2023/04/20 12:47:07 | Starting Services
+INFO   | jvm 1    | 2023/04/20 12:47:07 | CacheService                                      [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | PatchUpdaterService                               [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | AuthenticationService                             [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | AuthorizationService                              [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 12:47:07 | TaskEngineService                                 [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 12:47:50 | WebService                                        [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 12:47:50 | ClientFrameworkService                            [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 12:47:50 | TemplateService                                   [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 12:47:50 | TableTemplateService                              [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 12:47:50 | 
+INFO   | jvm 1    | 2023/04/20 12:47:50 | Server started in :: [60980 ms]
+INFO   | jvm 1    | 2023/04/20 12:47:50 | 
+INFO   | jvm 1    | 2023/04/20 12:47:50 | Connect to: [ http://localhost:8080 ]
+STATUS | wrapper  | 2023/04/20 13:42:48 | CTRL-C trapped.  Shutting down.
+INFO   | jvm 1    | 2023/04/20 13:42:50 | System going to Shutdown --- received process interrupt
+INFO   | jvm 1    | 2023/04/20 13:42:50 | Shutting down the JVM now!
+INFO   | jvm 1    | 2023/04/20 13:42:50 | Stopping Services
+INFO   | jvm 1    | 2023/04/20 13:42:50 | TableTemplateService                              [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 13:42:50 | TemplateService                                   [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 13:42:50 | ClientFrameworkService                            [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | WebService                                        [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | TaskEngineService                                 [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | AuthorizationService                              [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | AuthenticationService                             [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | PatchUpdaterService                               [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | CacheService                                      [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | Destroying Services
+INFO   | jvm 1    | 2023/04/20 13:42:52 | TableTemplateService                              [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | TemplateService                                   [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | ClientFrameworkService                            [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | WebService                                        [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | TaskEngineService                                 [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | AuthorizationService                              [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | AuthenticationService                             [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | PatchUpdaterService                               [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | CacheService                                      [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 13:42:52 | Stopping Module processors
+INFO   | jvm 1    | 2023/04/20 13:42:52 | 
+INFO   | jvm 1    | 2023/04/20 13:42:52 | ModuleStopProcess:: Persistence::DBAUDIT     [ STOPPED ]
+STATUS | wrapper  | 2023/04/20 13:42:55 | <-- Wrapper Stopped
+STATUS | wrapper  | 2023/04/20 13:43:36 | --> Wrapper Started as Console
+STATUS | wrapper  | 2023/04/20 13:43:36 | Java Service Wrapper Professional Edition 64-bit 3.5.40
+STATUS | wrapper  | 2023/04/20 13:43:36 |   Copyright (C) 1999-2019 Tanuki Software, Ltd. All Rights Reserved.
+STATUS | wrapper  | 2023/04/20 13:43:36 |     http://wrapper.tanukisoftware.com
+STATUS | wrapper  | 2023/04/20 13:43:36 |   Licensed to Zoho Corporation Pvt. Ltd. for MickeyLite
+STATUS | wrapper  | 2023/04/20 13:43:36 | 
+WARN   | wrapper  | 2023/04/20 13:43:37 | Running in a console with QuickEdit Mode. Be careful when selecting text in the
+WARN   | wrapper  | 2023/04/20 13:43:37 |   console as this may cause to block the Java Application.
+WARN   | wrapper  | 2023/04/20 13:43:37 | 
+INFO   | wrapper  | 2023/04/20 13:43:50 | Wrapper Process has not received any CPU time for 11 seconds.  Extending timeouts.
+STATUS | wrapper  | 2023/04/20 13:43:56 | Launching a JVM...
+INFO   | jvm 1    | 2023/04/20 13:44:02 | WrapperManager: Initializing...
+INFO   | jvm 1    | 2023/04/20 13:44:03 | Starting Server from location: D:\MickeyLite\Applications\LenderB
+INFO   | jvm 1    | 2023/04/20 13:44:04 | Free edition...
+INFO   | jvm 1    | 2023/04/20 13:44:04 | 
+INFO   | jvm 1    | 2023/04/20 13:44:25 | Modules already Populated
+INFO   | jvm 1    | 2023/04/20 13:44:25 | 
+INFO   | jvm 1    | 2023/04/20 13:44:25 |      ModulePreStartProcess :: Persistence::DBAUDIT[ STARTED ]
+INFO   | jvm 1    | 2023/04/20 13:44:25 | Persistence                                       [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 13:44:25 |      ModulePostStartProcess:: Persistence::DBAUDIT[ STARTED ]
+INFO   | jvm 1    | 2023/04/20 13:44:25 | Audit                                             [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 13:44:25 | Authentication                                    [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 13:44:25 | Authorization                                     [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 13:44:25 | CustomView                                        [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | TaskEngine                                        [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | Tomcat                                            [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | ClientFramework                                   [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | ClientComponents                                  [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | Lender                                            [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | 
+INFO   | jvm 1    | 2023/04/20 13:44:26 | Creating Services
+INFO   | jvm 1    | 2023/04/20 13:44:26 | CacheService                                      [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | PatchUpdaterService                               [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | AuthenticationService                             [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | AuthorizationService                              [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | TaskEngineService                                 [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | WebService                                        [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | ClientFrameworkService                            [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | TemplateService                                   [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | TableTemplateService                              [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | 
+INFO   | jvm 1    | 2023/04/20 13:44:26 | Starting Services
+INFO   | jvm 1    | 2023/04/20 13:44:26 | CacheService                                      [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 13:44:26 | PatchUpdaterService                               [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 13:44:27 | AuthenticationService                             [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 13:44:27 | AuthorizationService                              [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 13:44:27 | TaskEngineService                                 [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 13:45:19 | WebService                                        [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 13:45:19 | ClientFrameworkService                            [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 13:45:19 | TemplateService                                   [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 13:45:19 | TableTemplateService                              [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 13:45:19 | 
+INFO   | jvm 1    | 2023/04/20 13:45:19 | Server started in :: [76241 ms]
+INFO   | jvm 1    | 2023/04/20 13:45:19 | 
+INFO   | jvm 1    | 2023/04/20 13:45:19 | Connect to: [ http://localhost:8080 ]
+STATUS | wrapper  | 2023/04/20 14:01:56 | CTRL-C trapped.  Shutting down.
+INFO   | jvm 1    | 2023/04/20 14:01:58 | System going to Shutdown --- received process interrupt
+INFO   | jvm 1    | 2023/04/20 14:01:58 | Shutting down the JVM now!
+INFO   | jvm 1    | 2023/04/20 14:01:58 | Stopping Services
+INFO   | jvm 1    | 2023/04/20 14:01:58 | TableTemplateService                              [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:01:58 | TemplateService                                   [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:01:58 | ClientFrameworkService                            [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | WebService                                        [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | TaskEngineService                                 [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | AuthorizationService                              [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | AuthenticationService                             [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | PatchUpdaterService                               [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | CacheService                                      [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | Destroying Services
+INFO   | jvm 1    | 2023/04/20 14:02:00 | TableTemplateService                              [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | TemplateService                                   [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | ClientFrameworkService                            [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | WebService                                        [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | TaskEngineService                                 [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | AuthorizationService                              [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | AuthenticationService                             [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | PatchUpdaterService                               [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | CacheService                                      [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:02:00 | Stopping Module processors
+INFO   | jvm 1    | 2023/04/20 14:02:00 | 
+INFO   | jvm 1    | 2023/04/20 14:02:00 | ModuleStopProcess:: Persistence::DBAUDIT     [ STOPPED ]
+STATUS | wrapper  | 2023/04/20 14:02:04 | <-- Wrapper Stopped
+STATUS | wrapper  | 2023/04/20 14:02:12 | --> Wrapper Started as Console
+STATUS | wrapper  | 2023/04/20 14:02:12 | Java Service Wrapper Professional Edition 64-bit 3.5.40
+STATUS | wrapper  | 2023/04/20 14:02:12 |   Copyright (C) 1999-2019 Tanuki Software, Ltd. All Rights Reserved.
+STATUS | wrapper  | 2023/04/20 14:02:12 |     http://wrapper.tanukisoftware.com
+STATUS | wrapper  | 2023/04/20 14:02:12 |   Licensed to Zoho Corporation Pvt. Ltd. for MickeyLite
+STATUS | wrapper  | 2023/04/20 14:02:12 | 
+WARN   | wrapper  | 2023/04/20 14:02:12 | Running in a console with QuickEdit Mode. Be careful when selecting text in the
+WARN   | wrapper  | 2023/04/20 14:02:12 |   console as this may cause to block the Java Application.
+WARN   | wrapper  | 2023/04/20 14:02:12 | 
+STATUS | wrapper  | 2023/04/20 14:02:23 | Launching a JVM...
+INFO   | jvm 1    | 2023/04/20 14:02:29 | WrapperManager: Initializing...
+INFO   | jvm 1    | 2023/04/20 14:02:30 | Starting Server from location: D:\MickeyLite\Applications\LenderB
+INFO   | jvm 1    | 2023/04/20 14:02:31 | Free edition...
+INFO   | jvm 1    | 2023/04/20 14:02:31 | 
+INFO   | jvm 1    | 2023/04/20 14:02:50 | Modules already Populated
+INFO   | jvm 1    | 2023/04/20 14:02:50 | 
+INFO   | jvm 1    | 2023/04/20 14:02:50 |      ModulePreStartProcess :: Persistence::DBAUDIT[ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:02:50 | Persistence                                       [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:02:50 |      ModulePostStartProcess:: Persistence::DBAUDIT[ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:02:50 | Audit                                             [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:02:51 | Authentication                                    [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:02:51 | Authorization                                     [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:02:51 | CustomView                                        [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:02:51 | TaskEngine                                        [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:02:51 | Tomcat                                            [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | ClientFramework                                   [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | ClientComponents                                  [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | Lender                                            [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | 
+INFO   | jvm 1    | 2023/04/20 14:02:52 | Creating Services
+INFO   | jvm 1    | 2023/04/20 14:02:52 | CacheService                                      [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | PatchUpdaterService                               [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | AuthenticationService                             [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | AuthorizationService                              [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | TaskEngineService                                 [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | WebService                                        [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | ClientFrameworkService                            [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | TemplateService                                   [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | TableTemplateService                              [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | 
+INFO   | jvm 1    | 2023/04/20 14:02:52 | Starting Services
+INFO   | jvm 1    | 2023/04/20 14:02:52 | CacheService                                      [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | PatchUpdaterService                               [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | AuthenticationService                             [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:02:52 | AuthorizationService                              [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:02:53 | TaskEngineService                                 [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:03:56 | WebService                                        [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:03:56 | ClientFrameworkService                            [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:03:56 | TemplateService                                   [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:03:56 | TableTemplateService                              [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:03:56 | 
+INFO   | jvm 1    | 2023/04/20 14:03:56 | Server started in :: [86071 ms]
+INFO   | jvm 1    | 2023/04/20 14:03:56 | 
+INFO   | jvm 1    | 2023/04/20 14:03:56 | Connect to: [ http://localhost:8080 ]
+STATUS | wrapper  | 2023/04/20 14:05:16 | CTRL-C trapped.  Shutting down.
+INFO   | jvm 1    | 2023/04/20 14:05:18 | System going to Shutdown --- received process interrupt
+INFO   | jvm 1    | 2023/04/20 14:05:18 | Shutting down the JVM now!
+INFO   | jvm 1    | 2023/04/20 14:05:18 | Stopping Services
+INFO   | jvm 1    | 2023/04/20 14:05:18 | TableTemplateService                              [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:05:18 | TemplateService                                   [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:05:18 | ClientFrameworkService                            [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | WebService                                        [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | TaskEngineService                                 [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | AuthorizationService                              [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | AuthenticationService                             [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | PatchUpdaterService                               [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | CacheService                                      [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | Destroying Services
+INFO   | jvm 1    | 2023/04/20 14:05:21 | TableTemplateService                              [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | TemplateService                                   [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | ClientFrameworkService                            [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | WebService                                        [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | TaskEngineService                                 [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | AuthorizationService                              [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | AuthenticationService                             [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | PatchUpdaterService                               [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | CacheService                                      [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:05:21 | Stopping Module processors
+INFO   | jvm 1    | 2023/04/20 14:05:21 | 
+INFO   | jvm 1    | 2023/04/20 14:05:21 | ModuleStopProcess:: Persistence::DBAUDIT     [ STOPPED ]
+STATUS | wrapper  | 2023/04/20 14:05:27 | <-- Wrapper Stopped
+STATUS | wrapper  | 2023/04/20 14:05:36 | --> Wrapper Started as Console
+STATUS | wrapper  | 2023/04/20 14:05:36 | Java Service Wrapper Professional Edition 64-bit 3.5.40
+STATUS | wrapper  | 2023/04/20 14:05:36 |   Copyright (C) 1999-2019 Tanuki Software, Ltd. All Rights Reserved.
+STATUS | wrapper  | 2023/04/20 14:05:36 |     http://wrapper.tanukisoftware.com
+STATUS | wrapper  | 2023/04/20 14:05:36 |   Licensed to Zoho Corporation Pvt. Ltd. for MickeyLite
+STATUS | wrapper  | 2023/04/20 14:05:36 | 
+WARN   | wrapper  | 2023/04/20 14:05:36 | Running in a console with QuickEdit Mode. Be careful when selecting text in the
+WARN   | wrapper  | 2023/04/20 14:05:36 |   console as this may cause to block the Java Application.
+WARN   | wrapper  | 2023/04/20 14:05:36 | 
+STATUS | wrapper  | 2023/04/20 14:05:42 | Launching a JVM...
+INFO   | jvm 1    | 2023/04/20 14:05:42 | WrapperManager: Initializing...
+INFO   | jvm 1    | 2023/04/20 14:05:43 | Starting Server from location: D:\MickeyLite\Applications\LenderB
+INFO   | jvm 1    | 2023/04/20 14:05:44 | Free edition...
+INFO   | jvm 1    | 2023/04/20 14:05:44 | 
+INFO   | jvm 1    | 2023/04/20 14:05:53 | Modules already Populated
+INFO   | jvm 1    | 2023/04/20 14:05:53 | 
+INFO   | jvm 1    | 2023/04/20 14:05:53 |      ModulePreStartProcess :: Persistence::DBAUDIT[ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:05:53 | Persistence                                       [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:05:53 |      ModulePostStartProcess:: Persistence::DBAUDIT[ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:05:53 | Audit                                             [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:05:54 | Authentication                                    [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:05:54 | Authorization                                     [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:05:54 | CustomView                                        [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:05:54 | TaskEngine                                        [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:05:54 | Tomcat                                            [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:05:54 | ClientFramework                                   [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | ClientComponents                                  [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | Lender                                            [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | 
+INFO   | jvm 1    | 2023/04/20 14:05:55 | Creating Services
+INFO   | jvm 1    | 2023/04/20 14:05:55 | CacheService                                      [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | PatchUpdaterService                               [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | AuthenticationService                             [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | AuthorizationService                              [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | TaskEngineService                                 [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | WebService                                        [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | ClientFrameworkService                            [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | TemplateService                                   [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | TableTemplateService                              [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | 
+INFO   | jvm 1    | 2023/04/20 14:05:55 | Starting Services
+INFO   | jvm 1    | 2023/04/20 14:05:55 | CacheService                                      [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | PatchUpdaterService                               [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | AuthenticationService                             [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | AuthorizationService                              [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:05:55 | TaskEngineService                                 [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:06:33 | WebService                                        [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:06:33 | ClientFrameworkService                            [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:06:33 | TemplateService                                   [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:06:33 | TableTemplateService                              [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:06:33 | 
+INFO   | jvm 1    | 2023/04/20 14:06:33 | Server started in :: [50411 ms]
+INFO   | jvm 1    | 2023/04/20 14:06:33 | 
+INFO   | jvm 1    | 2023/04/20 14:06:33 | Connect to: [ http://localhost:8080 ]
+STATUS | wrapper  | 2023/04/20 14:13:23 | CTRL-C trapped.  Shutting down.
+INFO   | jvm 1    | 2023/04/20 14:13:24 | System going to Shutdown --- received process interrupt
+INFO   | jvm 1    | 2023/04/20 14:13:24 | Shutting down the JVM now!
+INFO   | jvm 1    | 2023/04/20 14:13:24 | Stopping Services
+INFO   | jvm 1    | 2023/04/20 14:13:24 | TableTemplateService                              [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:13:24 | TemplateService                                   [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:13:24 | ClientFrameworkService                            [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | WebService                                        [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | TaskEngineService                                 [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | AuthorizationService                              [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | AuthenticationService                             [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | PatchUpdaterService                               [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | CacheService                                      [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | Destroying Services
+INFO   | jvm 1    | 2023/04/20 14:13:26 | TableTemplateService                              [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | TemplateService                                   [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | ClientFrameworkService                            [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | WebService                                        [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | TaskEngineService                                 [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | AuthorizationService                              [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | AuthenticationService                             [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | PatchUpdaterService                               [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | CacheService                                      [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:13:26 | Stopping Module processors
+INFO   | jvm 1    | 2023/04/20 14:13:26 | 
+INFO   | jvm 1    | 2023/04/20 14:13:26 | ModuleStopProcess:: Persistence::DBAUDIT     [ STOPPED ]
+STATUS | wrapper  | 2023/04/20 14:13:29 | <-- Wrapper Stopped
+STATUS | wrapper  | 2023/04/20 14:13:42 | --> Wrapper Started as Console
+STATUS | wrapper  | 2023/04/20 14:13:42 | Java Service Wrapper Professional Edition 64-bit 3.5.40
+STATUS | wrapper  | 2023/04/20 14:13:42 |   Copyright (C) 1999-2019 Tanuki Software, Ltd. All Rights Reserved.
+STATUS | wrapper  | 2023/04/20 14:13:42 |     http://wrapper.tanukisoftware.com
+STATUS | wrapper  | 2023/04/20 14:13:42 |   Licensed to Zoho Corporation Pvt. Ltd. for MickeyLite
+STATUS | wrapper  | 2023/04/20 14:13:42 | 
+WARN   | wrapper  | 2023/04/20 14:13:42 | Running in a console with QuickEdit Mode. Be careful when selecting text in the
+WARN   | wrapper  | 2023/04/20 14:13:42 |   console as this may cause to block the Java Application.
+WARN   | wrapper  | 2023/04/20 14:13:42 | 
+STATUS | wrapper  | 2023/04/20 14:13:56 | Launching a JVM...
+INFO   | jvm 1    | 2023/04/20 14:14:01 | WrapperManager: Initializing...
+INFO   | jvm 1    | 2023/04/20 14:14:02 | Starting Server from location: D:\MickeyLite\Applications\LenderB
+INFO   | jvm 1    | 2023/04/20 14:14:03 | Free edition...
+INFO   | jvm 1    | 2023/04/20 14:14:03 | 
+INFO   | jvm 1    | 2023/04/20 14:14:15 | Modules already Populated
+INFO   | jvm 1    | 2023/04/20 14:14:15 | 
+INFO   | jvm 1    | 2023/04/20 14:14:15 |      ModulePreStartProcess :: Persistence::DBAUDIT[ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:14:15 | Persistence                                       [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:14:15 |      ModulePostStartProcess:: Persistence::DBAUDIT[ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:14:15 | Audit                                             [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:14:15 | Authentication                                    [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:14:15 | Authorization                                     [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | CustomView                                        [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | TaskEngine                                        [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | Tomcat                                            [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | ClientFramework                                   [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | ClientComponents                                  [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | Lender                                            [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | 
+INFO   | jvm 1    | 2023/04/20 14:14:16 | Creating Services
+INFO   | jvm 1    | 2023/04/20 14:14:16 | CacheService                                      [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | PatchUpdaterService                               [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | AuthenticationService                             [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | AuthorizationService                              [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | TaskEngineService                                 [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | WebService                                        [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | ClientFrameworkService                            [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | TemplateService                                   [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | TableTemplateService                              [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | 
+INFO   | jvm 1    | 2023/04/20 14:14:16 | Starting Services
+INFO   | jvm 1    | 2023/04/20 14:14:16 | CacheService                                      [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:14:16 | PatchUpdaterService                               [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:14:17 | AuthenticationService                             [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:14:17 | AuthorizationService                              [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:14:17 | TaskEngineService                                 [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:15:04 | WebService                                        [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:15:04 | ClientFrameworkService                            [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:15:04 | TemplateService                                   [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:15:04 | TableTemplateService                              [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:15:04 | 
+INFO   | jvm 1    | 2023/04/20 14:15:04 | Server started in :: [62211 ms]
+INFO   | jvm 1    | 2023/04/20 14:15:04 | 
+INFO   | jvm 1    | 2023/04/20 14:15:04 | Connect to: [ http://localhost:8080 ]
+STATUS | wrapper  | 2023/04/20 14:21:26 | CTRL-C trapped.  Shutting down.
+INFO   | jvm 1    | 2023/04/20 14:21:28 | System going to Shutdown --- received process interrupt
+INFO   | jvm 1    | 2023/04/20 14:21:28 | Shutting down the JVM now!
+INFO   | jvm 1    | 2023/04/20 14:21:28 | Stopping Services
+INFO   | jvm 1    | 2023/04/20 14:21:28 | TableTemplateService                              [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:21:28 | TemplateService                                   [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:21:28 | ClientFrameworkService                            [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | WebService                                        [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | TaskEngineService                                 [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | AuthorizationService                              [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | AuthenticationService                             [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | PatchUpdaterService                               [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | CacheService                                      [ STOPPED ]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | Destroying Services
+INFO   | jvm 1    | 2023/04/20 14:21:30 | TableTemplateService                              [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | TemplateService                                   [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | ClientFrameworkService                            [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | WebService                                        [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | TaskEngineService                                 [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | AuthorizationService                              [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | AuthenticationService                             [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | PatchUpdaterService                               [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | CacheService                                      [DESTROYED]
+INFO   | jvm 1    | 2023/04/20 14:21:30 | Stopping Module processors
+INFO   | jvm 1    | 2023/04/20 14:21:30 | 
+INFO   | jvm 1    | 2023/04/20 14:21:30 | ModuleStopProcess:: Persistence::DBAUDIT     [ STOPPED ]
+STATUS | wrapper  | 2023/04/20 14:21:35 | <-- Wrapper Stopped
+STATUS | wrapper  | 2023/04/20 14:21:46 | --> Wrapper Started as Console
+STATUS | wrapper  | 2023/04/20 14:21:46 | Java Service Wrapper Professional Edition 64-bit 3.5.40
+STATUS | wrapper  | 2023/04/20 14:21:46 |   Copyright (C) 1999-2019 Tanuki Software, Ltd. All Rights Reserved.
+STATUS | wrapper  | 2023/04/20 14:21:46 |     http://wrapper.tanukisoftware.com
+STATUS | wrapper  | 2023/04/20 14:21:46 |   Licensed to Zoho Corporation Pvt. Ltd. for MickeyLite
+STATUS | wrapper  | 2023/04/20 14:21:46 | 
+WARN   | wrapper  | 2023/04/20 14:21:46 | Running in a console with QuickEdit Mode. Be careful when selecting text in the
+WARN   | wrapper  | 2023/04/20 14:21:46 |   console as this may cause to block the Java Application.
+WARN   | wrapper  | 2023/04/20 14:21:46 | 
+STATUS | wrapper  | 2023/04/20 14:21:57 | Launching a JVM...
+INFO   | jvm 1    | 2023/04/20 14:22:00 | WrapperManager: Initializing...
+INFO   | jvm 1    | 2023/04/20 14:22:01 | Starting Server from location: D:\MickeyLite\Applications\LenderB
+INFO   | jvm 1    | 2023/04/20 14:22:02 | Free edition...
+INFO   | jvm 1    | 2023/04/20 14:22:02 | 
+INFO   | jvm 1    | 2023/04/20 14:22:17 | Modules already Populated
+INFO   | jvm 1    | 2023/04/20 14:22:17 | 
+INFO   | jvm 1    | 2023/04/20 14:22:17 |      ModulePreStartProcess :: Persistence::DBAUDIT[ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:22:17 | Persistence                                       [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:22:17 |      ModulePostStartProcess:: Persistence::DBAUDIT[ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:22:17 | Audit                                             [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:22:17 | Authentication                                    [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:22:17 | Authorization                                     [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:22:17 | CustomView                                        [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:22:17 | TaskEngine                                        [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | Tomcat                                            [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | ClientFramework                                   [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | ClientComponents                                  [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | Lender                                            [ LOADED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | 
+INFO   | jvm 1    | 2023/04/20 14:22:18 | Creating Services
+INFO   | jvm 1    | 2023/04/20 14:22:18 | CacheService                                      [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | PatchUpdaterService                               [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | AuthenticationService                             [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | AuthorizationService                              [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | TaskEngineService                                 [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | WebService                                        [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | ClientFrameworkService                            [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | TemplateService                                   [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | TableTemplateService                              [ CREATED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | 
+INFO   | jvm 1    | 2023/04/20 14:22:18 | Starting Services
+INFO   | jvm 1    | 2023/04/20 14:22:18 | CacheService                                      [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | PatchUpdaterService                               [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | AuthenticationService                             [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | AuthorizationService                              [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:22:18 | TaskEngineService                                 [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:23:07 | WebService                                        [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:23:07 | ClientFrameworkService                            [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:23:07 | TemplateService                                   [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:23:07 | TableTemplateService                              [ STARTED ]
+INFO   | jvm 1    | 2023/04/20 14:23:07 | 
+INFO   | jvm 1    | 2023/04/20 14:23:07 | Server started in :: [66180 ms]
+INFO   | jvm 1    | 2023/04/20 14:23:07 | 
+INFO   | jvm 1    | 2023/04/20 14:23:07 | Connect to: [ http://localhost:8080 ]

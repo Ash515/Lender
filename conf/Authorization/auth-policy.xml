@@ -33,17 +33,17 @@ permission_name="accessAllMethods" service_id="System">
 <AaaAce permission_id="AaaPermission:permission_id:2" role_id="AaaRole:role_id:2"
 env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
 
-<!--Principal Role-->
-<AaaRole role_id="4" service_id="System" name="Principal" description="Principal of Institute" />
-<AaaPermission permission_id="4" permission_name="principalPermissions" service_id="System">
+<!--Admin Role-->
+<AaaRole role_id="4" service_id="System" name="Admin" description="Library Admin" />
+<AaaPermission permission_id="4" permission_name="AdminPermissions" service_id="System">
 <AaaTablePermission  table_name="*" access_type="CRUD" />
 </AaaPermission>
 <AaaAce permission_id="4" role_id="4" env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
 
-<!--HOD Role-->
-<AaaRole role_id="5" service_id="System" name="HOD" description="HOD of a dept" />
-<AaaPermission permission_id="51" permission_name="hodpermission1" service_id="System">
-<AaaTablePermission  table_name="Students" access_type="RU" />
+<!--CUSTOMER Role-->
+<AaaRole role_id="5" service_id="System" name="CUSTOMER" description="Customer of library" />
+<AaaPermission permission_id="51" permission_name="customerpermission1" service_id="System">
+<AaaTablePermission  table_name="S" access_type="RU" />
 </AaaPermission>
 <AaaPermission permission_id="52" permission_name="hodPermission2" service_id="System">
 <AaaTablePermission  table_name="Sem1" access_type="CRUD" />
@@ -54,6 +54,30 @@ env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
 <AaaAce permission_id="51" role_id="5" env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
 <AaaAce permission_id="52" role_id="5" env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0" />
 <AaaAce permission_id="53" role_id="5" env_criteria="ALL" expiry_time="0" exclude="false" evaluationorder="0"  />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--Staff Role-->
 <AaaRole role_id="6" service_id="System" name="Staff" description="Staff of a dept" />
 <AaaPermission permission_id="61" permission_name="staffpermission1" service_id="System">

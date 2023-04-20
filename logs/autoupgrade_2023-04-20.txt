@@ -1,0 +1,6 @@
+[11:28:58:927]|[04-20-2023]|[AutoUpgrade]|[INFO]|[20]: disabling autoUpgrade Service|
+[12:47:50:834]|[04-20-2023]|[AutoUpgrade]|[INFO]|[20]: disabling autoUpgrade Service|
+[13:45:19:507]|[04-20-2023]|[AutoUpgrade]|[INFO]|[20]: disabling autoUpgrade Service|
+[14:03:56:409]|[04-20-2023]|[AutoUpgrade]|[INFO]|[20]: disabling autoUpgrade Service|
+[14:06:33:756]|[04-20-2023]|[AutoUpgrade]|[INFO]|[20]: disabling autoUpgrade Service|
+[14:15:04:643]|[04-20-2023]|[AutoUpgrade]|[INFO]|[20]: disabling autoUpgrade Service|

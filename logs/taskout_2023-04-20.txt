@@ -1,0 +1,28 @@
+[11:28:07:025]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: Executor created for PoolName : default, CoreSize : 2, MaxSize : 5|
+[11:28:07:025]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: Executor created for PoolName : asynchThreadPool, CoreSize : 1, MaxSize : 2|
+[11:28:58:943]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: scheduled refreshcontoller and updateController|
+[11:29:08:958]|[04-20-2023]|[com.adventnet.taskengine.util.PersistenceUtil]|[INFO]|[26]: Going to update already started reminder tasks : UPDATE Task_Input SET LAST_REMINDER_STATUS=-1 WHERE ( ( Task_Input.LAST_REMINDER_STATUS = 1 ) )|
+[11:29:08:989]|[04-20-2023]|[com.adventnet.taskengine.internal.RefreshController]|[INFO]|[26]: Added task to TimeMap, InstanceId: 1|
+[11:29:09:020]|[04-20-2023]|[com.adventnet.taskengine.logging.LogArchiveScheduler]|[INFO]|[32]: LogArchive task invoked.... |
+[11:29:09:020]|[04-20-2023]|[com.adventnet.taskengine.logging.LogArchiveScheduler]|[INFO]|[32]: LogArchive task completed.... |
+[11:29:09:036]|[04-20-2023]|[com.adventnet.taskengine.internal.ScheduleExecutor]|[INFO]|[32]: Removing task context from Executing Task list : TaskContext: id:1 ScheduledExecutionTime: 2023-04-20 01:00:00.0 env: null|
+[12:47:07:379]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: Executor created for PoolName : default, CoreSize : 2, MaxSize : 5|
+[12:47:07:379]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: Executor created for PoolName : asynchThreadPool, CoreSize : 1, MaxSize : 2|
+[12:47:50:850]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: scheduled refreshcontoller and updateController|
+[12:48:00:864]|[04-20-2023]|[com.adventnet.taskengine.util.PersistenceUtil]|[INFO]|[26]: Going to update already started reminder tasks : UPDATE Task_Input SET LAST_REMINDER_STATUS=-1 WHERE ( ( Task_Input.LAST_REMINDER_STATUS = 1 ) )|
+[13:44:27:032]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: Executor created for PoolName : default, CoreSize : 2, MaxSize : 5|
+[13:44:27:032]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: Executor created for PoolName : asynchThreadPool, CoreSize : 1, MaxSize : 2|
+[13:45:19:528]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: scheduled refreshcontoller and updateController|
+[13:45:29:542]|[04-20-2023]|[com.adventnet.taskengine.util.PersistenceUtil]|[INFO]|[26]: Going to update already started reminder tasks : UPDATE Task_Input SET LAST_REMINDER_STATUS=-1 WHERE ( ( Task_Input.LAST_REMINDER_STATUS = 1 ) )|
+[14:02:52:897]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: Executor created for PoolName : default, CoreSize : 2, MaxSize : 5|
+[14:02:52:898]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: Executor created for PoolName : asynchThreadPool, CoreSize : 1, MaxSize : 2|
+[14:03:56:432]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: scheduled refreshcontoller and updateController|
+[14:04:06:506]|[04-20-2023]|[com.adventnet.taskengine.util.PersistenceUtil]|[INFO]|[26]: Going to update already started reminder tasks : UPDATE Task_Input SET LAST_REMINDER_STATUS=-1 WHERE ( ( Task_Input.LAST_REMINDER_STATUS = 1 ) )|
+[14:05:55:359]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: Executor created for PoolName : default, CoreSize : 2, MaxSize : 5|
+[14:05:55:359]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: Executor created for PoolName : asynchThreadPool, CoreSize : 1, MaxSize : 2|
+[14:06:33:772]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: scheduled refreshcontoller and updateController|
+[14:06:43:791]|[04-20-2023]|[com.adventnet.taskengine.util.PersistenceUtil]|[INFO]|[26]: Going to update already started reminder tasks : UPDATE Task_Input SET LAST_REMINDER_STATUS=-1 WHERE ( ( Task_Input.LAST_REMINDER_STATUS = 1 ) )|
+[14:14:17:008]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: Executor created for PoolName : default, CoreSize : 2, MaxSize : 5|
+[14:14:17:008]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: Executor created for PoolName : asynchThreadPool, CoreSize : 1, MaxSize : 2|
+[14:15:04:659]|[04-20-2023]|[com.adventnet.taskengine.internal.TaskEngineService]|[INFO]|[20]: scheduled refreshcontoller and updateController|
+[14:15:14:669]|[04-20-2023]|[com.adventnet.taskengine.util.PersistenceUtil]|[INFO]|[26]: Going to update already started reminder tasks : UPDATE Task_Input SET LAST_REMINDER_STATUS=-1 WHERE ( ( Task_Input.LAST_REMINDER_STATUS = 1 ) )|
