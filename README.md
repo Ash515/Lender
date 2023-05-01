@@ -2,5 +2,5 @@
 ## Library Management System for Smart Cities
 
 
-### Developer
+### Developer(s)
 - Ashwin Kumar R 
