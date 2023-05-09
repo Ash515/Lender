@@ -1,5 +1,5 @@
 # Lender 
-## Library Management System for Smart Cities
+## Library Management System for Smart Cities.
 
 
 ### Developer(s)
